@@ -145,6 +145,9 @@ theme_az <- function(base_size = 12, base_family = "") {
     )
 
 }
+
+#' @import ggplot2
+
 theme_qcc <- function(base_size = 12, base_family = "") {
 
   theme_grey(base_size = base_size, base_family = base_family) %+replace%

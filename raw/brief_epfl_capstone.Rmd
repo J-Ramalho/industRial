@@ -124,12 +124,12 @@ To be noted that the examples in the book are not prepared to showcase my own kn
 
 **YAML configuration:**
 
-* rendering in html, my favorite format
+* rendering in html
 * using code in the YAML header (notably the Sys.Date function)
 * dynamic table of contents, unfolding deeper levels on click
-
-* using an external css file for fine tuning page aesthetics, including headers, toc and links
-* enabling referencing in the YAML in order to insert in the text appropriate references to publications, books and packages, that send to the bibliography session at the end of the report 
+* page organisation in the style of Edward Tufte, with images and comments as sidenotes
+* using an external css files for fine tuning page aesthetics, including headers, toc and links
+* references to publications, books and packages, that send to the bibliography session at the end of the report
 
 **r setup and knitr options:**
 

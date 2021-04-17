@@ -1,0 +1,13 @@
+Notes and ideas for the book
+
+what makes this book different from what is on the market:
+
+- no stats or quality theory only case studies
+- all tools have suggested application cases
+- no R theory, only application examples
+- step by step implementation of minimal examples
+- no tentative to make coherent de overall product development or quality approach
+- accompaigns the ggspc and other packages developped by myself
+- examples fully based on tidyverse and broom
+- no reusage of tools from sixsigma, qcc and similar packages
+

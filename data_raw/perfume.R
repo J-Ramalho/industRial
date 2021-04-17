@@ -1,4 +1,4 @@
-## code to prepare `pet_delivery` dataset goes here
+## code to prepare `perfume` dataset goes here
 
 perfume <- readxl::read_xlsx("data_raw/perfume.xlsx")
 

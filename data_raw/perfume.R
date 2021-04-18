@@ -1,5 +1,5 @@
 ## code to prepare `perfume` dataset goes here
 
-perfume <- readxl::read_xlsx("data_raw/perfume.xlsx")
+perfume_doe <- readxl::read_xlsx("data_raw/perfume_doe.xlsx")
 
-usethis::use_data(perfume, overwrite = TRUE)
+usethis::use_data(perfume_doe, overwrite = TRUE)

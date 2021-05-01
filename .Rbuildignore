@@ -2,3 +2,6 @@
 ^\.Rproj\.user$
 ^data_raw$
 ^data-raw$
+^*.pptx
+^*.xlsx
+^*.ods

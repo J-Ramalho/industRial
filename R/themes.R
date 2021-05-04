@@ -171,7 +171,7 @@ theme_industRial <- function (font_size = 14, font_family = "", line_size = 0.5,
                                    "pt"),
       plot.background = element_blank(),
       plot.title = element_text(
-        colour = "#2D708EFF",
+        colour = "#38598CFF",
         face = "bold",
         size = rel(rel_large),
         hjust = 0,

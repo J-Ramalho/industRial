@@ -1,0 +1,190 @@
+---
+title: "industRial practice"
+output: learnr::tutorial
+runtime: shiny_prerendered
+---
+
+```{r setup, include=FALSE}
+library(learnr)
+knitr::opts_chunk$set(echo = FALSE)
+dial_control <- read.csv("data/dial_control.csv")
+```
+
+```{r message=FALSE, warning=FALSE}
+library(tidyverse)
+library(knitr)
+# library(industRial)
+library(qicharts2)
+```
+
+# Design for Six Sigma
+
+## Pareto chart
+
+*Here's a simple exercise with an empty code chunk provided for entering the answer.*
+
+Write the R code required to add two plus two:
+
+```{r two-plus-two, exercise=TRUE}
+
+```
+
+### Exercise with Code
+
+*Here's an exercise with some prepopulated code as well as `exercise.lines = 5` to provide a bit more initial room to work.*
+
+Now write a function that adds any two numbers and then call it:
+
+```{r add-function, exercise=TRUE, exercise.lines = 5}
+add <- function() {
+  
+}
+```
+
+## Topic 2
+
+### Exercise with Hint
+
+*Here's an exercise where the chunk is pre-evaulated via the `exercise.eval` option (so the user can see the default output we'd like them to customize). We also add a "hint" to the correct solution via the chunk immediate below labeled `print-limit-hint`.*
+
+Modify the following code to limit the number of rows printed to 5:
+
+```{r print-limit, exercise=TRUE, exercise.eval=TRUE}
+mtcars
+```
+
+```{r print-limit-hint}
+head(mtcars)
+```
+
+### Quiz
+
+*You can include any number of single or multiple choice questions as a quiz. Use the `question` function to define a question and the `quiz` function for grouping multiple questions together.*
+
+Some questions to verify that you understand the purposes of various base and recommended R packages:
+
+```{r quiz}
+quiz(
+  question("Which package contains functions for installing other R packages?",
+    answer("base"),
+    answer("tools"),
+    answer("utils", correct = TRUE),
+    answer("codetools")
+  ),
+  question("Which of the R packages listed below are used to create plots?",
+    answer("lattice", correct = TRUE),
+    answer("tools"),
+    answer("stats"),
+    answer("grid", correct = TRUE)
+  )
+)
+```
+
+# Pareto chart
+
+
+
+```{r}
+library(shiny)
+
+# Define UI for application that draws a histogram
+# ui <- fluidPage(
+
+    # Application title
+    # titlePanel("Old Faithful Geyser Data"),
+
+    # Sidebar with a slider input for number of bins 
+    sidebarLayout(
+        sidebarPanel(
+            sliderInput("bins",
+                        "Number of bins:",
+                        min = 1,
+                        max = 50,
+                        value = 30)
+        ),
+
+        # Show a plot of the generated distribution
+        mainPanel(
+           plotOutput("distPlot")
+        )
+    )
+# )
+```
+
+```{r, context="server"}
+# Define server logic required to draw a histogram
+# server <- function(input, output) {
+
+    output$distPlot <- renderPlot({
+        # generate bins based on input$bins from ui.R
+        x    <- faithful[, 2]
+        bins <- seq(min(x), max(x), length.out = input$bins + 1)
+
+        # draw the histogram with the specified number of bins
+        hist(x, breaks = bins, col = 'darkgray', border = 'white')
+    })
+# }
+
+# Run the application 
+# shinyApp(ui = ui, server = server)
+```
+
+
+```{r}
+fluidPage(
+  titlePanel("Dial control pareto charts"),
+  sidebarLayout(
+    sidebarPanel(
+      selectInput(
+        inputId = "variable",
+        label = "Select variable",
+        choices = c("Defect", "Location"),
+        selected = "Defect",
+        multiple = FALSE
+      )
+    ),
+    mainPanel(
+      plotOutput("pareto")
+    )
+  )
+)
+```
+
+```{r context="server"}
+output$pareto <- renderPlot({
+  d_type <-
+    dial_control %>% pull(.data[[input$variable]]) %>% as.character()
+  paretochart(
+    d_type,
+    title = "Watch Dial polishing",
+    subtitle = "Pareto chart",
+    ylab = "Percentage of deffects",
+    xlab = "Deffect type",
+    caption = "Source: Dial Production Team"
+  )
+})
+```
+
+
+```{r}
+head(dial_control) %>% 
+  kable(align = "c", 
+        caption = "dial control data", 
+        booktabs = T)
+```
+
+```{r dial, exercise=TRUE, exercise.eval=TRUE}
+d_type <- dial_control %>% pull(Defect) %>% as.character()
+paretochart(
+  d_type, 
+  title = "Watch Dial polishing",
+  subtitle = "Pareto chart", 
+  ylab = "Percentage of deffects",
+  xlab = "Deffect type",
+  caption = "Source: Dial Production Team"
+  )
+```
+
+```{r dial-hint}
+head(mtcars)
+```

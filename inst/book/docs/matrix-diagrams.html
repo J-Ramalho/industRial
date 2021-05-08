@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta property="og:title" content="Matrix Diagrams | industRial data science" />
+<meta property="og:type" content="book" />
+
+<meta property="og:image" content="img/cover3.png" />
+
+<meta name="github-repo" content="J-Ramalho/industRialds" />
+
+<meta name="author" content="João Ramalho" />
+
+<meta name="date" content="2021-03-27" />
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: { equationNumbers: { autoNumber: "AMS" } }
+});
+</script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<meta name="description" content="Matrix Diagrams | industRial data science">
+
+<title>Matrix Diagrams | industRial data science</title>
+
+<script src="libs/header-attrs-2.6/header-attrs.js"></script>
+<link href="libs/tufte-css-2015.12.29/tufte-fonts.css" rel="stylesheet" />
+<link href="libs/tufte-css-2015.12.29/tufte-background.css" rel="stylesheet" />
+<link href="libs/tufte-css-2015.12.29/tufte-italics.css" rel="stylesheet" />
+<link href="libs/tufte-css-2015.12.29/tufte.css" rel="stylesheet" />
+
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+
+</head>
+
+<body>
+
+
+
+<div class="row">
+<div class="col-sm-12">
+<div id="TOC">
+<ul>
+<li class="part"><span><b>I SETUP</b></span></li>
+<li><a href="index.html#welcome">Welcome</a></li>
+<li><a href="foundations.html#foundations">Foundations</a>
+<ul>
+<li><a href="foundations.html#six-sigma">Six Sigma</a></li>
+<li><a href="foundations.html#statistics">Statistics</a></li>
+<li><a href="foundations.html#r-programming">R programming</a></li>
+</ul></li>
+<li class="part"><span><b>II CASE STUDIES</b></span></li>
+<li><a href="s-six-sigma.html#s---six-sigma">6S - Six Sigma</a>
+<ul>
+<li><a href="pareto.html#pareto">Pareto</a></li>
+<li><a href="ishikawa.html#ishikawa">Ishikawa</a></li>
+<li><a href="matrix-diagrams.html#matrix-diagrams">Matrix Diagrams</a>
+<ul>
+<li><a href="matrix-diagrams.html#network-plot">Network plot</a></li>
+<li><a href="matrix-diagrams.html#clustering">Clustering</a></li>
+</ul></li>
+</ul></li>
+<li><a href="DOE.html#DOE">DOE - Design of Experiments</a>
+<ul>
+<li><a href="one-factor-two-levels.html#one-factor-two-levels">One factor two levels</a>
+<ul>
+<li><a href="one-factor-two-levels.html#two-means-comparison">Two means comparison</a></li>
+<li><a href="one-factor-two-levels.html#two-variances-comparison">Two variances comparison</a></li>
+<li><a href="one-factor-two-levels.html#sample-size">Sample size</a></li>
+</ul></li>
+<li><a href="one-factor-multiple-levels.html#one-factor-multiple-levels">One factor multiple levels</a>
+<ul>
+<li><a href="one-factor-multiple-levels.html#linear-regression">Linear regression</a></li>
+<li><a href="one-factor-multiple-levels.html#model-check-residuals">Model check &amp; residuals</a></li>
+<li><a href="one-factor-multiple-levels.html#predict">Prediction</a></li>
+<li><a href="one-factor-multiple-levels.html#multiple-means-comparison">Multiple means comparison</a></li>
+<li><a href="one-factor-multiple-levels.html#pairwise-comparisons">Pairwise comparisons</a></li>
+<li><a href="one-factor-multiple-levels.html#means-comparison-covariance">Means comparison &amp; covariance</a></li>
+</ul></li>
+<li><a href="two-factors-multiple-levels.html#two-factors-multiple-levels">Two factors multiple levels</a>
+<ul>
+<li><a href="two-factors-multiple-levels.html#linear-regression-with-interactions">Linear regression with interactions</a></li>
+<li><a href="two-factors-multiple-levels.html#augmented-model-check">Augmented model check</a></li>
+<li><a href="two-factors-multiple-levels.html#interactionPlot">Interaction plot</a></li>
+<li><a href="two-factors-multiple-levels.html#effects-significance">Effects significance</a></li>
+<li><a href="two-factors-multiple-levels.html#sample-size-calculation">Sample size calculation</a></li>
+<li><a href="two-factors-multiple-levels.html#removing-interaction">Removing interaction</a></li>
+</ul></li>
+<li><a href="multiple-factors.html#multiple-factors">Multiple factors</a>
+<ul>
+<li><a href="multiple-factors.html#main-effects-plots">Main effects plots</a></li>
+<li><a href="multiple-factors.html#model-with-3rd-level-interactions">Model with 3rd level interactions</a></li>
+<li><a href="multiple-factors.html#model-adequacy-check">Model adequacy check</a></li>
+<li><a href="multiple-factors.html#anova-with-3rd-level-interactions">Anova with 3rd level interactions</a></li>
+</ul></li>
+<li><a href="factorial-design.html#factorial-design">2^2 factorial design</a>
+<ul>
+<li><a href="factorial-design.html#linear-model-with-and--">Linear model with + and -</a></li>
+<li><a href="factorial-design.html#anova-with-and--">Anova with + and -</a></li>
+<li><a href="factorial-design.html#interaction-plots-with-sd-bars">Interaction plots with sd bars</a></li>
+<li><a href="factorial-design.html#outputs-correlation">Outputs correlation</a></li>
+<li><a href="factorial-design.html#levels-coding-with-1-and--1">Levels coding with +1 and -1</a></li>
+<li><a href="factorial-design.html#model-with-1-and--1">Model with 1 and -1</a></li>
+<li><a href="factorial-design.html#prediction-with-1-and--1">Prediction with 1 and -1</a></li>
+</ul></li>
+<li><a href="factorial-design-1.html#factorial-design-1">2^3 factorial design</a>
+<ul>
+<li><a href="factorial-design-1.html#main-effects-box-plots">Main effects box plots</a></li>
+<li><a href="factorial-design-1.html#converting-levels-to-numeric">Converting levels to numeric</a></li>
+<li><a href="factorial-design-1.html#model-with-numeric-levels">Model with numeric levels</a></li>
+<li><a href="factorial-design-1.html#prediction-with-numeric-levels">Prediction with numeric levels</a></li>
+<li><a href="factorial-design-1.html#reduced-model-removing-levels">Reduced model (removing levels)</a></li>
+</ul></li>
+<li><a href="k-factorial-design.html#k-factorial-design">2^k factorial design</a>
+<ul>
+<li><a href="k-factorial-design.html#combinations">Combinations</a></li>
+<li><a href="k-factorial-design.html#coded-vs-natural-variables">Coded vs natural variables</a></li>
+</ul></li>
+<li><a href="k-single-replicate-design.html#k-single-replicate-design">2^k single replicate design</a>
+<ul>
+<li><a href="k-single-replicate-design.html#main-effects-data-plots">Main effects data plots</a></li>
+<li><a href="k-single-replicate-design.html#linear-model-single-replicate">Linear model single replicate</a></li>
+<li><a href="k-single-replicate-design.html#anova-single-replicate">Anova single replicate</a></li>
+<li><a href="k-single-replicate-design.html#linear-regression---plot-of-effects">Linear regression - Plot of effects</a></li>
+<li><a href="k-single-replicate-design.html#anova-reduced-model-significant-effects-only">Anova reduced model (significant effects only)</a></li>
+<li><a href="k-single-replicate-design.html#reduced-model">Reduced model</a></li>
+<li><a href="k-single-replicate-design.html#reduced-model-check">Reduced model check</a></li>
+</ul></li>
+</ul></li>
+<li><a href="MSA.html#MSA">MSA - Measurement System Analysis</a>
+<ul>
+<li><a href="robustness.html#robustness">Robustness</a></li>
+<li><a href="linearity.html#linearity">Linearity</a>
+<ul>
+<li><a href="linearity.html#plot-of-bias-data">Plot of bias data</a></li>
+<li><a href="linearity.html#model-of-bias-vs-reference-value">Model of bias vs reference value</a></li>
+<li><a href="linearity.html#model-of-bias-check">Model of bias check</a></li>
+</ul></li>
+<li><a href="trueness.html#trueness">Trueness</a></li>
+<li><a href="precision.html#precision">Precision</a>
+<ul>
+<li><a href="precision.html#base-anova">Base Anova</a></li>
+<li><a href="precision.html#study">Study</a></li>
+<li><a href="precision.html#acceptance-on-variance">Acceptance on Variance</a></li>
+<li><a href="precision.html#acceptance-on-sd">Acceptance on SD</a></li>
+<li><a href="precision.html#interaction-plots">Interaction plots</a></li>
+<li><a href="precision.html#negative-variations">Negative Variations</a></li>
+<li><a href="precision.html#beyond-two-factors">Beyond two factors</a></li>
+<li><a href="precision.html#conclusions">Conclusions</a></li>
+</ul></li>
+<li><a href="uncertainty.html#uncertainty">Uncertainty</a></li>
+</ul></li>
+<li><a href="SPC.html#SPC">SPC - Statistical Process Control</a>
+<ul>
+<li><a href="control-charts.html#control-charts">Control charts</a>
+<ul>
+<li><a href="control-charts.html#xbar-and-r-charts">xbar and R charts</a></li>
+</ul></li>
+<li><a href="process-capability.html#process-capability">Process Capability</a>
+<ul>
+<li><a href="process-capability.html#out-of-specification">Out of specification</a></li>
+<li><a href="process-capability.html#cpk-index">Cpk index</a></li>
+</ul></li>
+</ul></li>
+<li class="part"><span><b>III TOOLBOX</b></span></li>
+<li><a href="r-functions-index.html#r-functions-index">R functions index</a></li>
+<li><a href="r-packages.html#r-packages">R Packages</a>
+<ul>
+<li><a href="installation.html#installation">Installation</a></li>
+<li><a href="domain-packages.html#domain-packages">Domain packages</a>
+<ul>
+<li><a href="domain-packages.html#industrial">industRial</a></li>
+<li><a href="domain-packages.html#six-sigma-1">six sigma</a></li>
+<li><a href="domain-packages.html#qcc">qcc</a></li>
+<li><a href="domain-packages.html#qicharts2">qicharts2</a></li>
+</ul></li>
+<li><a href="other-packages.html#other-packages">Other packages</a></li>
+<li><a href="r-session-info.html#r-session-info">R Session info</a></li>
+</ul></li>
+<li><a href="r-datasets.html#r-datasets">R Datasets</a></li>
+<li><a href="references.html#references">References</a></li>
+</ul>
+</div>
+</div>
+</div>
+<div class="row">
+<div class="col-sm-12">
+<div id="matrix-diagrams" class="section level2">
+<h2>Matrix Diagrams</h2>
+<p>A matrix diagram is a way to discover relationships between groups of items as described by described in the Six Sigma book by <span class="citation"><label for="tufte-mn-4" class="margin-toggle">&#8853;</label><input type="checkbox" id="tufte-mn-4" class="margin-toggle">Roderik A.Munro and J.Zrymiak (2015)<span class="marginnote">Roderik A.Munro, Govindarajan Ramu, and Daniel J.Zrymiak. 2015. <em>The Certified Six Sigma Green Belt Handbook</em>. 2nd ed. Milwaukee, Winsconsin: ASQ Quality Press.</span></span>. A practical application of this concept is in the selection of the input factors for a design of experiments. In an industrial setup the cost of experimenting is often very high and engineers can keep test quantities in control by identifying factors that are strongly correlated.</p>
+<p>We provide here two different approaches one with a tile plot and another with a network plot.</p>
+<div id="network-plot" class="section level3">
+<h3>Network plot</h3>
+<p>In this exercise we explore a more advanced but more powerfull approach using network plots. It provides an automatic clustering of the factors and a specific way to read such clusters.</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="matrix-diagrams.html#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(igraph)</span>
+<span id="cb11-2"><a href="matrix-diagrams.html#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidygraph)</span>
+<span id="cb11-3"><a href="matrix-diagrams.html#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggraph)</span>
+<span id="cb11-4"><a href="matrix-diagrams.html#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readxl)</span>
+<span id="cb11-5"><a href="matrix-diagrams.html#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rcartocolor)</span>
+<span id="cb11-6"><a href="matrix-diagrams.html#cb11-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggforce)</span>
+<span id="cb11-7"><a href="matrix-diagrams.html#cb11-7" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggtext)</span>
+<span id="cb11-8"><a href="matrix-diagrams.html#cb11-8" aria-hidden="true" tabindex="-1"></a>filter <span class="ot">&lt;-</span> dplyr<span class="sc">::</span>filter</span>
+<span id="cb11-9"><a href="matrix-diagrams.html#cb11-9" aria-hidden="true" tabindex="-1"></a>select <span class="ot">&lt;-</span> dplyr<span class="sc">::</span>select</span></code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-11"></span>
+<p class="caption marginnote shownote">
+Figure 3: Parfume destillation equipment
+</p>
+<img src="img/parfum.jpg" alt="Parfume destillation equipment" width="60%"  />
+</div>
+<p>DOEs consist in a series of trials where several inputs are combined in specific levels and important outputs are measured (further details can be seen in the DOE chapter). The case below refers to a DOE on Perfume Formulation Recipe Development. The team would like to understand the impact of the perfum machine parameters variation (e.g. temperature, pressure and others) in typical perfum sensorial characteristics such as the floral notes.</p>
+<p>Typical DOE analysis results linking inputs to outputs are presented with effects plots and interaction plots. Another analysis is the correlation between the outputs, where there is not always necessary a cause effect but where it is interesting to see if groups of outputs move together. This type of analysis is most commonly presented in a tile plot.</p>
+<p>In our case the DOE is not yet executed and just a preparatory session has taken place with the project manager to review the potential outputs and anticipate what will be the DOE results. This allowed to go deeper in the technology understanding and confirm the plan was constructed in a meaning full way. The experts input has been captured in a 1/2 of a two entry table, leading to a weighed non directional network(tbl_graph) object. Several steps of conversion have been required for this approach first with igraph directly and only then to tidygraph. This because the dataloading lead to a matrix data object that had to be converted.</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="matrix-diagrams.html#cb12-1" aria-hidden="true" tabindex="-1"></a>adj_tibble_outputs <span class="ot">&lt;-</span> <span class="fu">read_xlsx</span>(<span class="st">&quot;../industRial/data-raw/doe_network.xlsx&quot;</span>,</span>
+<span id="cb12-2"><a href="matrix-diagrams.html#cb12-2" aria-hidden="true" tabindex="-1"></a>                        <span class="at">sheet =</span> <span class="st">&quot;outputs&quot;</span>)</span>
+<span id="cb12-3"><a href="matrix-diagrams.html#cb12-3" aria-hidden="true" tabindex="-1"></a>                        <span class="co"># range = &quot;A1:AB8&quot;)</span></span>
+<span id="cb12-4"><a href="matrix-diagrams.html#cb12-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-5"><a href="matrix-diagrams.html#cb12-5" aria-hidden="true" tabindex="-1"></a>nodes_names_outputs <span class="ot">&lt;-</span> adj_tibble_outputs<span class="sc">$</span>...<span class="dv">1</span></span>
+<span id="cb12-6"><a href="matrix-diagrams.html#cb12-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-7"><a href="matrix-diagrams.html#cb12-7" aria-hidden="true" tabindex="-1"></a>adj_tibble_outputs[<span class="dv">1</span><span class="sc">:</span><span class="dv">8</span>] <span class="sc">%&gt;%</span></span>
+<span id="cb12-8"><a href="matrix-diagrams.html#cb12-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>(<span class="dv">8</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb12-9"><a href="matrix-diagrams.html#cb12-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable</span>()</span></code></pre></div>
+<table>
+<thead>
+<tr class="header">
+<th align="left">…1</th>
+<th align="right">pw</th>
+<th align="right">w</th>
+<th align="right">pm</th>
+<th align="right">pe</th>
+<th align="right">f</th>
+<th align="right">it</th>
+<th align="right">ew</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">pw</td>
+<td align="right">0</td>
+<td align="right">10</td>
+<td align="right">3</td>
+<td align="right">3</td>
+<td align="right">2</td>
+<td align="right">2</td>
+<td align="right">0</td>
+</tr>
+<tr class="even">
+<td align="left">w</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">3</td>
+<td align="right">3</td>
+<td align="right">2</td>
+<td align="right">2</td>
+<td align="right">0</td>
+</tr>
+<tr class="odd">
+<td align="left">pm</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">6</td>
+<td align="right">6</td>
+<td align="right">0</td>
+<td align="right">0</td>
+</tr>
+<tr class="even">
+<td align="left">pe</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">6</td>
+<td align="right">0</td>
+<td align="right">0</td>
+</tr>
+<tr class="odd">
+<td align="left">f</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">7</td>
+<td align="right">0</td>
+</tr>
+<tr class="even">
+<td align="left">it</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+</tr>
+<tr class="odd">
+<td align="left">ew</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+</tr>
+<tr class="even">
+<td align="left">c</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+</tr>
+</tbody>
+</table>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="matrix-diagrams.html#cb13-1" aria-hidden="true" tabindex="-1"></a>adj_tibble_outputs <span class="ot">&lt;-</span> adj_tibble_outputs <span class="sc">%&gt;%</span></span>
+<span id="cb13-2"><a href="matrix-diagrams.html#cb13-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="fu">all_of</span>(nodes_names_outputs))</span>
+<span id="cb13-3"><a href="matrix-diagrams.html#cb13-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-4"><a href="matrix-diagrams.html#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="fu">row.names</span>(adj_tibble_outputs) <span class="ot">&lt;-</span> nodes_names_outputs</span>
+<span id="cb13-5"><a href="matrix-diagrams.html#cb13-5" aria-hidden="true" tabindex="-1"></a>adj_matrix_outputs <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(adj_tibble_outputs)</span></code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="matrix-diagrams.html#cb14-1" aria-hidden="true" tabindex="-1"></a>network_igraph_outputs <span class="ot">&lt;-</span> <span class="fu">graph_from_adjacency_matrix</span>(adj_matrix_outputs, </span>
+<span id="cb14-2"><a href="matrix-diagrams.html#cb14-2" aria-hidden="true" tabindex="-1"></a>                                                      <span class="at">mode =</span> <span class="st">&quot;undirected&quot;</span>,</span>
+<span id="cb14-3"><a href="matrix-diagrams.html#cb14-3" aria-hidden="true" tabindex="-1"></a>                                                      <span class="at">weighted =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb14-4"><a href="matrix-diagrams.html#cb14-4" aria-hidden="true" tabindex="-1"></a>network_igraph_outputs</span></code></pre></div>
+<pre><code>IGRAPH 2b05dc5 UNW- 22 85 -- 
++ attr: name (v/c), weight (e/n)
++ edges from 2b05dc5 (vertex names):
+ [1] pw--w  pw--pm pw--pe pw--f  pw--it pw--c  pw--t  pw--y  pw--o  pw--oc
+[11] pw--d  pw--bl pw--hp w --pm w --pe w --f  w --it w --c  w --t  w --y 
+[21] w --o  w --oc w --d  w --bl w --hp pm--pe pm--f  pm--c  pm--t  pm--y 
+[31] pm--o  pm--oc pm--d  pm--pd pm--bl pe--f  pe--c  pe--t  pe--y  pe--o 
+[41] pe--oc pe--d  pe--pd pe--bl f --it f --c  f --t  f --y  f --o  f --oc
+[51] f --d  f --bl f --hp it--c  it--t  it--y  it--o  it--oc it--d  it--hp
+[61] c --t  c --y  c --o  c --oc c --d  c --hp t --y  t --o  t --oc t --d 
+[71] t --rg y --o  y --oc y --d  y --rg o --oc o --d  o --rg o --hp oc--d 
++ ... omitted several edges</code></pre>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="matrix-diagrams.html#cb16-1" aria-hidden="true" tabindex="-1"></a>perfum_tg <span class="ot">&lt;-</span> <span class="fu">as_tbl_graph</span>(network_igraph_outputs, <span class="at">add.rownames =</span> <span class="st">&quot;nodes_names&quot;</span>)</span>
+<span id="cb16-2"><a href="matrix-diagrams.html#cb16-2" aria-hidden="true" tabindex="-1"></a>perfum_tg</span></code></pre></div>
+<pre><code># A tbl_graph: 22 nodes and 85 edges
+#
+# An undirected simple graph with 7 components
+#
+# Node Data: 22 x 1 (active)
+  name 
+  &lt;chr&gt;
+1 pw   
+2 w    
+3 pm   
+4 pe   
+5 f    
+6 it   
+# … with 16 more rows
+#
+# Edge Data: 85 x 3
+   from    to weight
+  &lt;int&gt; &lt;int&gt;  &lt;dbl&gt;
+1     1     2     10
+2     1     3      3
+3     1     4      3
+# … with 82 more rows</code></pre>
+<p>As the users provided the correlation strength from 1 to 10 which was easier for the discussion, where here converting it back to the 0 to 1 which is more common in the statistics community. For simplicity, for now negative correlations were not considered just the strength, thus the network being unidirectional.</p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="matrix-diagrams.html#cb18-1" aria-hidden="true" tabindex="-1"></a>perfum_tg <span class="ot">&lt;-</span> perfum_tg <span class="sc">%&gt;%</span></span>
+<span id="cb18-2"><a href="matrix-diagrams.html#cb18-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">activate</span>(edges) <span class="sc">%&gt;%</span></span>
+<span id="cb18-3"><a href="matrix-diagrams.html#cb18-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">weight =</span> weight<span class="sc">/</span><span class="dv">10</span>)</span>
+<span id="cb18-4"><a href="matrix-diagrams.html#cb18-4" aria-hidden="true" tabindex="-1"></a>perfum_tg</span></code></pre></div>
+<pre><code># A tbl_graph: 22 nodes and 85 edges
+#
+# An undirected simple graph with 7 components
+#
+# Edge Data: 85 x 3 (active)
+   from    to weight
+  &lt;int&gt; &lt;int&gt;  &lt;dbl&gt;
+1     1     2    1  
+2     1     3    0.3
+3     1     4    0.3
+4     1     5    0.2
+5     1     6    0.2
+6     1     8    0.8
+# … with 79 more rows
+#
+# Node Data: 22 x 1
+  name 
+  &lt;chr&gt;
+1 pw   
+2 w    
+3 pm   
+# … with 19 more rows</code></pre>
+<p>We represent here various igraph layouts to allow for easier selection:</p>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="matrix-diagrams.html#cb20-1" aria-hidden="true" tabindex="-1"></a>igraph_layouts <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&#39;star&#39;</span>, <span class="st">&#39;circle&#39;</span>, <span class="st">&#39;gem&#39;</span>, <span class="st">&#39;dh&#39;</span>, <span class="st">&#39;graphopt&#39;</span>, <span class="st">&#39;grid&#39;</span>, <span class="st">&#39;mds&#39;</span>, </span>
+<span id="cb20-2"><a href="matrix-diagrams.html#cb20-2" aria-hidden="true" tabindex="-1"></a>                    <span class="st">&#39;randomly&#39;</span>, <span class="st">&#39;fr&#39;</span>, <span class="st">&#39;kk&#39;</span>, <span class="st">&#39;drl&#39;</span>, <span class="st">&#39;lgl&#39;</span>)</span></code></pre></div>
+<p>and do a first network plot to check data upload:</p>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="matrix-diagrams.html#cb21-1" aria-hidden="true" tabindex="-1"></a>perfum_tg <span class="sc">%&gt;%</span> </span>
+<span id="cb21-2"><a href="matrix-diagrams.html#cb21-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggraph</span>(<span class="co"># layout = &quot;stress&quot;, </span></span>
+<span id="cb21-3"><a href="matrix-diagrams.html#cb21-3" aria-hidden="true" tabindex="-1"></a>         <span class="co"># layout = &quot;igraph&quot;, algorithm = &quot;kk&quot;,</span></span>
+<span id="cb21-4"><a href="matrix-diagrams.html#cb21-4" aria-hidden="true" tabindex="-1"></a>         <span class="at">layout =</span> <span class="st">&quot;igraph&quot;</span>, <span class="at">algorithm =</span> igraph_layouts[<span class="dv">5</span>]</span>
+<span id="cb21-5"><a href="matrix-diagrams.html#cb21-5" aria-hidden="true" tabindex="-1"></a>              ) <span class="sc">+</span></span>
+<span id="cb21-6"><a href="matrix-diagrams.html#cb21-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_edge_link</span>(<span class="fu">aes</span>(<span class="at">edge_alpha =</span> weight)) <span class="sc">+</span></span>
+<span id="cb21-7"><a href="matrix-diagrams.html#cb21-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_node_label</span>(<span class="fu">aes</span>(<span class="at">label =</span> name), <span class="at">repel =</span> <span class="cn">TRUE</span>) <span class="sc">+</span></span>
+<span id="cb21-8"><a href="matrix-diagrams.html#cb21-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_graph</span>() <span class="sc">+</span></span>
+<span id="cb21-9"><a href="matrix-diagrams.html#cb21-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_carto_d</span>(<span class="at">palette =</span> <span class="st">&quot;Bold&quot;</span>, <span class="at">guide =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb21-10"><a href="matrix-diagrams.html#cb21-10" aria-hidden="true" tabindex="-1"></a>  <span class="co"># scale_edge_color_brewer(palette = &quot;Set2&quot;, </span></span>
+<span id="cb21-11"><a href="matrix-diagrams.html#cb21-11" aria-hidden="true" tabindex="-1"></a>  <span class="co">#                         direction = 1,</span></span>
+<span id="cb21-12"><a href="matrix-diagrams.html#cb21-12" aria-hidden="true" tabindex="-1"></a>  <span class="co">#                        na.value = &quot;grey&quot;, </span></span>
+<span id="cb21-13"><a href="matrix-diagrams.html#cb21-13" aria-hidden="true" tabindex="-1"></a>  <span class="co">#                        name = &quot;Connection Strength&quot;) +</span></span>
+<span id="cb21-14"><a href="matrix-diagrams.html#cb21-14" aria-hidden="true" tabindex="-1"></a>  <span class="co"># scale_edge_color_manual(values = c(&quot;grey&quot;, &quot;red&quot;),</span></span>
+<span id="cb21-15"><a href="matrix-diagrams.html#cb21-15" aria-hidden="true" tabindex="-1"></a>                          <span class="co"># name = &quot;Correlation Strength&quot;) +</span></span>
+<span id="cb21-16"><a href="matrix-diagrams.html#cb21-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;DOE Perfume Formulation - Inputs&quot;</span>,</span>
+<span id="cb21-17"><a href="matrix-diagrams.html#cb21-17" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="st">&quot;Most important expected correlations&quot;</span>)</span></code></pre></div>
+<p><img src="sixsigma_files/figure-html/unnamed-chunk-17-1.png" width="80%"  /></p>
+<p>Data loading is confirmed to have been done correctly, we can now move into the clustering and analysis.</p>
+</div>
+<div id="clustering" class="section level3">
+<h3>Clustering</h3>
+<p>We use different clusters algorithms like in part 3 to generate the groups:</p>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="matrix-diagrams.html#cb22-1" aria-hidden="true" tabindex="-1"></a>perfum_tg <span class="ot">&lt;-</span> perfum_tg <span class="sc">%&gt;%</span></span>
+<span id="cb22-2"><a href="matrix-diagrams.html#cb22-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">activate</span>(nodes) <span class="sc">%&gt;%</span></span>
+<span id="cb22-3"><a href="matrix-diagrams.html#cb22-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">group_components =</span> <span class="fu">group_components</span>(),</span>
+<span id="cb22-4"><a href="matrix-diagrams.html#cb22-4" aria-hidden="true" tabindex="-1"></a>          <span class="at">group_edge_betweenness =</span> <span class="fu">group_edge_betweenness</span>(),</span>
+<span id="cb22-5"><a href="matrix-diagrams.html#cb22-5" aria-hidden="true" tabindex="-1"></a>          <span class="at">group_fast_greedy =</span> <span class="fu">group_fast_greedy</span>(),</span>
+<span id="cb22-6"><a href="matrix-diagrams.html#cb22-6" aria-hidden="true" tabindex="-1"></a>          <span class="at">group_infomap =</span> <span class="fu">group_infomap</span>(),</span>
+<span id="cb22-7"><a href="matrix-diagrams.html#cb22-7" aria-hidden="true" tabindex="-1"></a>          <span class="at">group_label_prop =</span> <span class="fu">group_label_prop</span>(),</span>
+<span id="cb22-8"><a href="matrix-diagrams.html#cb22-8" aria-hidden="true" tabindex="-1"></a>          <span class="at">group_leading_eigen =</span> <span class="fu">group_leading_eigen</span>(),</span>
+<span id="cb22-9"><a href="matrix-diagrams.html#cb22-9" aria-hidden="true" tabindex="-1"></a>          <span class="at">group_louvain =</span> <span class="fu">group_louvain</span>(),</span>
+<span id="cb22-10"><a href="matrix-diagrams.html#cb22-10" aria-hidden="true" tabindex="-1"></a>          <span class="co"># group_optimal = group_optimal(),</span></span>
+<span id="cb22-11"><a href="matrix-diagrams.html#cb22-11" aria-hidden="true" tabindex="-1"></a>          <span class="co"># group_spinglass = group_spinglass(),</span></span>
+<span id="cb22-12"><a href="matrix-diagrams.html#cb22-12" aria-hidden="true" tabindex="-1"></a>          <span class="at">group_walktrap =</span> <span class="fu">group_walktrap</span>(),</span>
+<span id="cb22-13"><a href="matrix-diagrams.html#cb22-13" aria-hidden="true" tabindex="-1"></a>          <span class="co"># group_biconnected_component = group_biconnected_component()</span></span>
+<span id="cb22-14"><a href="matrix-diagrams.html#cb22-14" aria-hidden="true" tabindex="-1"></a>         )</span></code></pre></div>
+<p>and produce a final plot, selecting group optimal which is the closest one to the original edges network. The correlations strengths are here represented by the edges width for optimal visualization.</p>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="matrix-diagrams.html#cb23-1" aria-hidden="true" tabindex="-1"></a>perfum_tg_2 <span class="ot">&lt;-</span> perfum_tg <span class="sc">%&gt;%</span> </span>
+<span id="cb23-2"><a href="matrix-diagrams.html#cb23-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">activate</span>(edges) <span class="sc">%&gt;%</span> </span>
+<span id="cb23-3"><a href="matrix-diagrams.html#cb23-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">weight2 =</span> <span class="fu">if_else</span>(weight <span class="sc">&gt;=</span> <span class="fl">0.8</span>, <span class="dv">1</span>, <span class="fu">if_else</span>(weight <span class="sc">&gt;=</span> <span class="fl">0.5</span>, <span class="fl">0.5</span>, <span class="fl">0.1</span>)))</span>
+<span id="cb23-4"><a href="matrix-diagrams.html#cb23-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-5"><a href="matrix-diagrams.html#cb23-5" aria-hidden="true" tabindex="-1"></a>my_palette <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;coral1&quot;</span>, <span class="st">&quot;tan3&quot;</span>, </span>
+<span id="cb23-6"><a href="matrix-diagrams.html#cb23-6" aria-hidden="true" tabindex="-1"></a>                <span class="st">&quot;gray40&quot;</span>, <span class="st">&quot;gray40&quot;</span>, <span class="st">&quot;gray40&quot;</span>, <span class="st">&quot;gray40&quot;</span>, </span>
+<span id="cb23-7"><a href="matrix-diagrams.html#cb23-7" aria-hidden="true" tabindex="-1"></a>                <span class="st">&quot;gray40&quot;</span>, <span class="st">&quot;gray40&quot;</span>, <span class="st">&quot;gray40&quot;</span>, <span class="st">&quot;gray40&quot;</span>)</span>
+<span id="cb23-8"><a href="matrix-diagrams.html#cb23-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-9"><a href="matrix-diagrams.html#cb23-9" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">48</span>)</span>
+<span id="cb23-10"><a href="matrix-diagrams.html#cb23-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-11"><a href="matrix-diagrams.html#cb23-11" aria-hidden="true" tabindex="-1"></a>perfum_tg_2 <span class="sc">%&gt;%</span> </span>
+<span id="cb23-12"><a href="matrix-diagrams.html#cb23-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">activate</span>(nodes) <span class="sc">%&gt;%</span> </span>
+<span id="cb23-13"><a href="matrix-diagrams.html#cb23-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">group =</span> group_louvain) <span class="sc">%&gt;%</span> </span>
+<span id="cb23-14"><a href="matrix-diagrams.html#cb23-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(group <span class="sc">%in%</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb23-15"><a href="matrix-diagrams.html#cb23-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggraph</span>(<span class="co"># layout = &quot;stress&quot;, </span></span>
+<span id="cb23-16"><a href="matrix-diagrams.html#cb23-16" aria-hidden="true" tabindex="-1"></a>         <span class="co"># layout = &quot;igraph&quot;, algorithm = &quot;kk&quot;,</span></span>
+<span id="cb23-17"><a href="matrix-diagrams.html#cb23-17" aria-hidden="true" tabindex="-1"></a>         <span class="at">layout =</span> <span class="st">&quot;igraph&quot;</span>, <span class="at">algorithm =</span> igraph_layouts[<span class="dv">9</span>]</span>
+<span id="cb23-18"><a href="matrix-diagrams.html#cb23-18" aria-hidden="true" tabindex="-1"></a>              ) <span class="sc">+</span></span>
+<span id="cb23-19"><a href="matrix-diagrams.html#cb23-19" aria-hidden="true" tabindex="-1"></a>   <span class="fu">geom_mark_hull</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(x, y, </span>
+<span id="cb23-20"><a href="matrix-diagrams.html#cb23-20" aria-hidden="true" tabindex="-1"></a>                               <span class="at">group =</span> <span class="fu">as_factor</span>(group), </span>
+<span id="cb23-21"><a href="matrix-diagrams.html#cb23-21" aria-hidden="true" tabindex="-1"></a>                               <span class="at">fill =</span> <span class="fu">as_factor</span>(group)),</span>
+<span id="cb23-22"><a href="matrix-diagrams.html#cb23-22" aria-hidden="true" tabindex="-1"></a>               <span class="at">concavity =</span> <span class="fl">0.5</span>,</span>
+<span id="cb23-23"><a href="matrix-diagrams.html#cb23-23" aria-hidden="true" tabindex="-1"></a>               <span class="at">expand =</span> <span class="fu">unit</span>(<span class="dv">4</span>, <span class="st">&#39;mm&#39;</span>),</span>
+<span id="cb23-24"><a href="matrix-diagrams.html#cb23-24" aria-hidden="true" tabindex="-1"></a>               <span class="at">alpha =</span> <span class="fl">0.25</span>,</span>
+<span id="cb23-25"><a href="matrix-diagrams.html#cb23-25" aria-hidden="true" tabindex="-1"></a>               <span class="at">colour =</span> <span class="st">&#39;white&#39;</span>,</span>
+<span id="cb23-26"><a href="matrix-diagrams.html#cb23-26" aria-hidden="true" tabindex="-1"></a>               <span class="at">show.legend =</span> <span class="cn">FALSE</span>) <span class="sc">+</span> </span>
+<span id="cb23-27"><a href="matrix-diagrams.html#cb23-27" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_edge_link</span>(<span class="fu">aes</span>(<span class="at">edge_alpha =</span> weight2, <span class="at">edge_width =</span> weight2)) <span class="sc">+</span> </span>
+<span id="cb23-28"><a href="matrix-diagrams.html#cb23-28" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_node_point</span>(<span class="at">size =</span> <span class="dv">3</span>) <span class="sc">+</span></span>
+<span id="cb23-29"><a href="matrix-diagrams.html#cb23-29" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_node_label</span>(<span class="fu">aes</span>(<span class="at">label =</span> name), <span class="at">repel =</span> <span class="cn">TRUE</span>) <span class="sc">+</span></span>
+<span id="cb23-30"><a href="matrix-diagrams.html#cb23-30" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_edge_width</span>(<span class="at">range =</span> <span class="fu">c</span>(<span class="fl">0.2</span>, <span class="dv">1</span>), <span class="at">name =</span> <span class="st">&quot;Correlation strength&quot;</span>) <span class="sc">+</span></span>
+<span id="cb23-31"><a href="matrix-diagrams.html#cb23-31" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_edge_alpha</span>(<span class="at">range =</span> <span class="fu">c</span>(<span class="fl">0.05</span>, <span class="fl">0.2</span>), <span class="at">name =</span> <span class="st">&quot;Correlation strength&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb23-32"><a href="matrix-diagrams.html#cb23-32" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> my_palette) <span class="sc">+</span> </span>
+<span id="cb23-33"><a href="matrix-diagrams.html#cb23-33" aria-hidden="true" tabindex="-1"></a>  <span class="co"># theme_void() +</span></span>
+<span id="cb23-34"><a href="matrix-diagrams.html#cb23-34" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_graph</span>() <span class="sc">+</span></span>
+<span id="cb23-35"><a href="matrix-diagrams.html#cb23-35" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="fu">str_c</span>(<span class="st">&quot;Perfume Formulation - &lt;span style=&#39;color:tan3&#39;&gt;Raw material attributes&lt;/span&gt;</span></span>
+<span id="cb23-36"><a href="matrix-diagrams.html#cb23-36" aria-hidden="true" tabindex="-1"></a><span class="st">                     &quot;</span>, </span>
+<span id="cb23-37"><a href="matrix-diagrams.html#cb23-37" aria-hidden="true" tabindex="-1"></a>                     <span class="st">&quot; and &quot;</span>, </span>
+<span id="cb23-38"><a href="matrix-diagrams.html#cb23-38" aria-hidden="true" tabindex="-1"></a>                     <span class="st">&quot;&lt;span style=&#39;color:coral1&#39;&gt;Distillation parameters&lt;/span&gt;&quot;</span></span>
+<span id="cb23-39"><a href="matrix-diagrams.html#cb23-39" aria-hidden="true" tabindex="-1"></a>                     ),</span>
+<span id="cb23-40"><a href="matrix-diagrams.html#cb23-40" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="st">&quot;Input clusters for DOE01&quot;</span>,</span>
+<span id="cb23-41"><a href="matrix-diagrams.html#cb23-41" aria-hidden="true" tabindex="-1"></a>       <span class="at">caption =</span> <span class="st">&quot;Clustering by multi-level modularity optimisation (louvain)&quot;</span>) <span class="sc">+</span></span>
+<span id="cb23-42"><a href="matrix-diagrams.html#cb23-42" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">plot.title =</span> <span class="fu">element_markdown</span>(<span class="at">family =</span> <span class="st">&quot;Helvetica&quot;</span>,</span>
+<span id="cb23-43"><a href="matrix-diagrams.html#cb23-43" aria-hidden="true" tabindex="-1"></a>                                      <span class="at">size =</span> <span class="dv">14</span>, </span>
+<span id="cb23-44"><a href="matrix-diagrams.html#cb23-44" aria-hidden="true" tabindex="-1"></a>                                      <span class="at">face =</span> <span class="st">&quot;bold&quot;</span>)) </span></code></pre></div>
+<p><img src="sixsigma_files/figure-html/unnamed-chunk-19-1.png" width="80%"  /></p>
+<p><br></p>
+<p>We can see as expected that elements with a very low correlation are put separate from the main clusters. We can also see that the algorithm is grouping elements that have a strong correlation.</p>
+<p>The code presented can now easily be reused once the DOE is executed to compare with the real correlations measured.</p>
+
+</div>
+</div>
+<!-- </div> -->
+<p style="text-align: center;">
+<a href="ishikawa.html"><button class="btn btn-default">Previous</button></a>
+<a href="DOE.html"><button class="btn btn-default">Next</button></a>
+</p>
+</div>
+</div>
+
+
+
+</body>
+</html>

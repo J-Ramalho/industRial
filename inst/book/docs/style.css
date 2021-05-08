@@ -1,0 +1,22 @@
+#TOC ul>li {
+  color: #f5f5f0;
+  background-color: #003300;
+  /* font-family: "Liberation Mono", Arial; */
+
+}
+h1, h2, h3, h4, h5, h6 {
+  font-weight: normal;
+  color: #2e5cb8;
+}
+p {
+  /*font-family: "Liberation Mono", Arial;*/
+  font-family: "Manjari", Arial;
+  font-size: 18px;
+}
+.level1 h1 {
+  border-bottom: 1px solid;
+}
+h1.title {
+  font-weight: 700;
+    color: black;
+}

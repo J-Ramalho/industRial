@@ -1,0 +1,23 @@
+book_filename: "industRialds"
+new_session: yes
+delete_merged_file: true
+language:
+  ui:
+    chapter_name: "Chapter "
+output_dir: "docs"
+
+rmd_files: [
+  "index.Rmd",
+  "R_toolbox.Rmd",
+  "contents.Rmd",
+  "sixsigma.Rmd",
+  "gage_rnR.Rmd",
+  "doe_1F-2L.Rmd",
+  "doe_1F-nL.Rmd",
+  "doe_2F-nL.Rmd",
+  "doe_mF-nL.Rmd",
+  "doe_mF-2L.Rmd",
+  "spc.Rmd",
+  "glossary.Rmd",
+  "references.Rmd"
+]

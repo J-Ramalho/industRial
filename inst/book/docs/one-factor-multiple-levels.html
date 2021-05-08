@@ -1,0 +1,1168 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta property="og:title" content="One factor multiple levels | industRial data science" />
+<meta property="og:type" content="book" />
+
+<meta property="og:image" content="img/cover3.png" />
+
+<meta name="github-repo" content="J-Ramalho/industRialds" />
+
+<meta name="author" content="João Ramalho" />
+
+<meta name="date" content="2021-03-27" />
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: { equationNumbers: { autoNumber: "AMS" } }
+});
+</script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<meta name="description" content="One factor multiple levels | industRial data science">
+
+<title>One factor multiple levels | industRial data science</title>
+
+<script src="libs/header-attrs-2.6/header-attrs.js"></script>
+<link href="libs/tufte-css-2015.12.29/tufte-fonts.css" rel="stylesheet" />
+<link href="libs/tufte-css-2015.12.29/tufte-background.css" rel="stylesheet" />
+<link href="libs/tufte-css-2015.12.29/tufte-italics.css" rel="stylesheet" />
+<link href="libs/tufte-css-2015.12.29/tufte.css" rel="stylesheet" />
+
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+
+</head>
+
+<body>
+
+
+
+<div class="row">
+<div class="col-sm-12">
+<div id="TOC">
+<ul>
+<li class="part"><span><b>I SETUP</b></span></li>
+<li><a href="index.html#welcome">Welcome</a></li>
+<li><a href="foundations.html#foundations">Foundations</a>
+<ul>
+<li><a href="foundations.html#six-sigma">Six Sigma</a></li>
+<li><a href="foundations.html#statistics">Statistics</a></li>
+<li><a href="foundations.html#r-programming">R programming</a></li>
+</ul></li>
+<li class="part"><span><b>II CASE STUDIES</b></span></li>
+<li><a href="s-six-sigma.html#s---six-sigma">6S - Six Sigma</a>
+<ul>
+<li><a href="pareto.html#pareto">Pareto</a></li>
+<li><a href="ishikawa.html#ishikawa">Ishikawa</a></li>
+<li><a href="matrix-diagrams.html#matrix-diagrams">Matrix Diagrams</a>
+<ul>
+<li><a href="matrix-diagrams.html#network-plot">Network plot</a></li>
+<li><a href="matrix-diagrams.html#clustering">Clustering</a></li>
+</ul></li>
+</ul></li>
+<li><a href="DOE.html#DOE">DOE - Design of Experiments</a>
+<ul>
+<li><a href="one-factor-two-levels.html#one-factor-two-levels">One factor two levels</a>
+<ul>
+<li><a href="one-factor-two-levels.html#two-means-comparison">Two means comparison</a></li>
+<li><a href="one-factor-two-levels.html#two-variances-comparison">Two variances comparison</a></li>
+<li><a href="one-factor-two-levels.html#sample-size">Sample size</a></li>
+</ul></li>
+<li><a href="one-factor-multiple-levels.html#one-factor-multiple-levels">One factor multiple levels</a>
+<ul>
+<li><a href="one-factor-multiple-levels.html#linear-regression">Linear regression</a></li>
+<li><a href="one-factor-multiple-levels.html#model-check-residuals">Model check &amp; residuals</a></li>
+<li><a href="one-factor-multiple-levels.html#predict">Prediction</a></li>
+<li><a href="one-factor-multiple-levels.html#multiple-means-comparison">Multiple means comparison</a></li>
+<li><a href="one-factor-multiple-levels.html#pairwise-comparisons">Pairwise comparisons</a></li>
+<li><a href="one-factor-multiple-levels.html#means-comparison-covariance">Means comparison &amp; covariance</a></li>
+</ul></li>
+<li><a href="two-factors-multiple-levels.html#two-factors-multiple-levels">Two factors multiple levels</a>
+<ul>
+<li><a href="two-factors-multiple-levels.html#linear-regression-with-interactions">Linear regression with interactions</a></li>
+<li><a href="two-factors-multiple-levels.html#augmented-model-check">Augmented model check</a></li>
+<li><a href="two-factors-multiple-levels.html#interactionPlot">Interaction plot</a></li>
+<li><a href="two-factors-multiple-levels.html#effects-significance">Effects significance</a></li>
+<li><a href="two-factors-multiple-levels.html#sample-size-calculation">Sample size calculation</a></li>
+<li><a href="two-factors-multiple-levels.html#removing-interaction">Removing interaction</a></li>
+</ul></li>
+<li><a href="multiple-factors.html#multiple-factors">Multiple factors</a>
+<ul>
+<li><a href="multiple-factors.html#main-effects-plots">Main effects plots</a></li>
+<li><a href="multiple-factors.html#model-with-3rd-level-interactions">Model with 3rd level interactions</a></li>
+<li><a href="multiple-factors.html#model-adequacy-check">Model adequacy check</a></li>
+<li><a href="multiple-factors.html#anova-with-3rd-level-interactions">Anova with 3rd level interactions</a></li>
+</ul></li>
+<li><a href="factorial-design.html#factorial-design">2^2 factorial design</a>
+<ul>
+<li><a href="factorial-design.html#linear-model-with-and--">Linear model with + and -</a></li>
+<li><a href="factorial-design.html#anova-with-and--">Anova with + and -</a></li>
+<li><a href="factorial-design.html#interaction-plots-with-sd-bars">Interaction plots with sd bars</a></li>
+<li><a href="factorial-design.html#outputs-correlation">Outputs correlation</a></li>
+<li><a href="factorial-design.html#levels-coding-with-1-and--1">Levels coding with +1 and -1</a></li>
+<li><a href="factorial-design.html#model-with-1-and--1">Model with 1 and -1</a></li>
+<li><a href="factorial-design.html#prediction-with-1-and--1">Prediction with 1 and -1</a></li>
+</ul></li>
+<li><a href="factorial-design-1.html#factorial-design-1">2^3 factorial design</a>
+<ul>
+<li><a href="factorial-design-1.html#main-effects-box-plots">Main effects box plots</a></li>
+<li><a href="factorial-design-1.html#converting-levels-to-numeric">Converting levels to numeric</a></li>
+<li><a href="factorial-design-1.html#model-with-numeric-levels">Model with numeric levels</a></li>
+<li><a href="factorial-design-1.html#prediction-with-numeric-levels">Prediction with numeric levels</a></li>
+<li><a href="factorial-design-1.html#reduced-model-removing-levels">Reduced model (removing levels)</a></li>
+</ul></li>
+<li><a href="k-factorial-design.html#k-factorial-design">2^k factorial design</a>
+<ul>
+<li><a href="k-factorial-design.html#combinations">Combinations</a></li>
+<li><a href="k-factorial-design.html#coded-vs-natural-variables">Coded vs natural variables</a></li>
+</ul></li>
+<li><a href="k-single-replicate-design.html#k-single-replicate-design">2^k single replicate design</a>
+<ul>
+<li><a href="k-single-replicate-design.html#main-effects-data-plots">Main effects data plots</a></li>
+<li><a href="k-single-replicate-design.html#linear-model-single-replicate">Linear model single replicate</a></li>
+<li><a href="k-single-replicate-design.html#anova-single-replicate">Anova single replicate</a></li>
+<li><a href="k-single-replicate-design.html#linear-regression---plot-of-effects">Linear regression - Plot of effects</a></li>
+<li><a href="k-single-replicate-design.html#anova-reduced-model-significant-effects-only">Anova reduced model (significant effects only)</a></li>
+<li><a href="k-single-replicate-design.html#reduced-model">Reduced model</a></li>
+<li><a href="k-single-replicate-design.html#reduced-model-check">Reduced model check</a></li>
+</ul></li>
+</ul></li>
+<li><a href="MSA.html#MSA">MSA - Measurement System Analysis</a>
+<ul>
+<li><a href="robustness.html#robustness">Robustness</a></li>
+<li><a href="linearity.html#linearity">Linearity</a>
+<ul>
+<li><a href="linearity.html#plot-of-bias-data">Plot of bias data</a></li>
+<li><a href="linearity.html#model-of-bias-vs-reference-value">Model of bias vs reference value</a></li>
+<li><a href="linearity.html#model-of-bias-check">Model of bias check</a></li>
+</ul></li>
+<li><a href="trueness.html#trueness">Trueness</a></li>
+<li><a href="precision.html#precision">Precision</a>
+<ul>
+<li><a href="precision.html#base-anova">Base Anova</a></li>
+<li><a href="precision.html#study">Study</a></li>
+<li><a href="precision.html#acceptance-on-variance">Acceptance on Variance</a></li>
+<li><a href="precision.html#acceptance-on-sd">Acceptance on SD</a></li>
+<li><a href="precision.html#interaction-plots">Interaction plots</a></li>
+<li><a href="precision.html#negative-variations">Negative Variations</a></li>
+<li><a href="precision.html#beyond-two-factors">Beyond two factors</a></li>
+<li><a href="precision.html#conclusions">Conclusions</a></li>
+</ul></li>
+<li><a href="uncertainty.html#uncertainty">Uncertainty</a></li>
+</ul></li>
+<li><a href="SPC.html#SPC">SPC - Statistical Process Control</a>
+<ul>
+<li><a href="control-charts.html#control-charts">Control charts</a>
+<ul>
+<li><a href="control-charts.html#xbar-and-r-charts">xbar and R charts</a></li>
+</ul></li>
+<li><a href="process-capability.html#process-capability">Process Capability</a>
+<ul>
+<li><a href="process-capability.html#out-of-specification">Out of specification</a></li>
+<li><a href="process-capability.html#cpk-index">Cpk index</a></li>
+</ul></li>
+</ul></li>
+<li class="part"><span><b>III TOOLBOX</b></span></li>
+<li><a href="r-functions-index.html#r-functions-index">R functions index</a></li>
+<li><a href="r-packages.html#r-packages">R Packages</a>
+<ul>
+<li><a href="installation.html#installation">Installation</a></li>
+<li><a href="domain-packages.html#domain-packages">Domain packages</a>
+<ul>
+<li><a href="domain-packages.html#industrial">industRial</a></li>
+<li><a href="domain-packages.html#six-sigma-1">six sigma</a></li>
+<li><a href="domain-packages.html#qcc">qcc</a></li>
+<li><a href="domain-packages.html#qicharts2">qicharts2</a></li>
+</ul></li>
+<li><a href="other-packages.html#other-packages">Other packages</a></li>
+<li><a href="r-session-info.html#r-session-info">R Session info</a></li>
+</ul></li>
+<li><a href="r-datasets.html#r-datasets">R Datasets</a></li>
+<li><a href="references.html#references">References</a></li>
+</ul>
+</div>
+</div>
+</div>
+<div class="row">
+<div class="col-sm-12">
+<div id="one-factor-multiple-levels" class="section level2">
+<h2>One factor multiple levels</h2>
+<div id="linear-regression" class="section level3">
+<h3>Linear regression</h3>
+<p>We will present here a first example of the utilisation of linear regression techniques and establish a linear model. These models are going to be used extensively in the upcoming cases.</p>
+<p><strong>Plasma etching example</strong></p>
+<p><strong>Data loading</strong></p>
+<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb52-1"><a href="one-factor-multiple-levels.html#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb52-2"><a href="one-factor-multiple-levels.html#cb52-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readxl)</span>
+<span id="cb52-3"><a href="one-factor-multiple-levels.html#cb52-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(janitor)</span>
+<span id="cb52-4"><a href="one-factor-multiple-levels.html#cb52-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(stats)</span>
+<span id="cb52-5"><a href="one-factor-multiple-levels.html#cb52-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(knitr)</span>
+<span id="cb52-6"><a href="one-factor-multiple-levels.html#cb52-6" aria-hidden="true" tabindex="-1"></a>filter <span class="ot">&lt;-</span> dplyr<span class="sc">::</span>filter</span>
+<span id="cb52-7"><a href="one-factor-multiple-levels.html#cb52-7" aria-hidden="true" tabindex="-1"></a>select <span class="ot">&lt;-</span> dplyr<span class="sc">::</span>select</span></code></pre></div>
+<div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb53-1"><a href="one-factor-multiple-levels.html#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Direct copy of the example from the book:</span></span>
+<span id="cb53-2"><a href="one-factor-multiple-levels.html#cb53-2" aria-hidden="true" tabindex="-1"></a>plasma <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&quot;../industRial/data-raw/3-1_plasma_etching.csv&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb53-3"><a href="one-factor-multiple-levels.html#cb53-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">clean_names</span>()</span>
+<span id="cb53-4"><a href="one-factor-multiple-levels.html#cb53-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb53-5"><a href="one-factor-multiple-levels.html#cb53-5" aria-hidden="true" tabindex="-1"></a>plasma_narrow <span class="ot">&lt;-</span> plasma <span class="sc">%&gt;%</span></span>
+<span id="cb53-6"><a href="one-factor-multiple-levels.html#cb53-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(</span>
+<span id="cb53-7"><a href="one-factor-multiple-levels.html#cb53-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">cols =</span> <span class="fu">starts_with</span>(<span class="st">&quot;x&quot;</span>),</span>
+<span id="cb53-8"><a href="one-factor-multiple-levels.html#cb53-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">names_to =</span> <span class="st">&quot;observation&quot;</span>,</span>
+<span id="cb53-9"><a href="one-factor-multiple-levels.html#cb53-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">values_to =</span> <span class="st">&quot;etch_rate&quot;</span></span>
+<span id="cb53-10"><a href="one-factor-multiple-levels.html#cb53-10" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
+<div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb54-1"><a href="one-factor-multiple-levels.html#cb54-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(plasma_narrow) <span class="sc">%&gt;%</span> </span>
+<span id="cb54-2"><a href="one-factor-multiple-levels.html#cb54-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable</span>(<span class="at">align =</span> <span class="st">&quot;c&quot;</span>, </span>
+<span id="cb54-3"><a href="one-factor-multiple-levels.html#cb54-3" aria-hidden="true" tabindex="-1"></a>        <span class="at">caption =</span> <span class="st">&quot;plasma etching experiment data&quot;</span>, </span>
+<span id="cb54-4"><a href="one-factor-multiple-levels.html#cb54-4" aria-hidden="true" tabindex="-1"></a>        <span class="at">booktabs =</span> T)</span></code></pre></div>
+<p><!--
+<caption>--><span class="marginnote shownote">(#tab:tab-plasma_narrow)plasma etching experiment data</span><!--</caption>--></p>
+<table>
+<thead>
+<tr class="header">
+<th align="center">power</th>
+<th align="center">observation</th>
+<th align="center">etch_rate</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">160</td>
+<td align="center">x1</td>
+<td align="center">575</td>
+</tr>
+<tr class="even">
+<td align="center">160</td>
+<td align="center">x2</td>
+<td align="center">542</td>
+</tr>
+<tr class="odd">
+<td align="center">160</td>
+<td align="center">x3</td>
+<td align="center">530</td>
+</tr>
+<tr class="even">
+<td align="center">160</td>
+<td align="center">x4</td>
+<td align="center">539</td>
+</tr>
+<tr class="odd">
+<td align="center">160</td>
+<td align="center">x5</td>
+<td align="center">570</td>
+</tr>
+<tr class="even">
+<td align="center">180</td>
+<td align="center">x1</td>
+<td align="center">565</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Raw data plot</strong></p>
+<div class="sourceCode" id="cb55"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb55-1"><a href="one-factor-multiple-levels.html#cb55-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(plasma_narrow, <span class="fu">aes</span>(<span class="at">x =</span> power, <span class="at">y =</span> etch_rate)) <span class="sc">+</span></span>
+<span id="cb55-2"><a href="one-factor-multiple-levels.html#cb55-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb55-3"><a href="one-factor-multiple-levels.html#cb55-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_light</span>() <span class="sc">+</span></span>
+<span id="cb55-4"><a href="one-factor-multiple-levels.html#cb55-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">&quot;none&quot;</span>) <span class="sc">+</span></span>
+<span id="cb55-5"><a href="one-factor-multiple-levels.html#cb55-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Plasma case study&quot;</span>,</span>
+<span id="cb55-6"><a href="one-factor-multiple-levels.html#cb55-6" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="st">&quot;Raw data plot&quot;</span>,</span>
+<span id="cb55-7"><a href="one-factor-multiple-levels.html#cb55-7" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">&quot;Power&quot;</span>,</span>
+<span id="cb55-8"><a href="one-factor-multiple-levels.html#cb55-8" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">&quot;Etch rate&quot;</span>)</span></code></pre></div>
+<p><img src="one_factor_multiple_levels_files/figure-html/unnamed-chunk-4-1.png" width="80%"  /></p>
+<div id="linearModel" class="section level4">
+<h4>Linear model function</h4>
+<p>Here we’re constructing a linear model of the raw data and not a model of the Anova, thus <em>power</em> has to be as integer and not as a factor, unlike in the Anova model.</p>
+<div class="sourceCode" id="cb56"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb56-1"><a href="one-factor-multiple-levels.html#cb56-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(stats)</span></code></pre></div>
+<div class="sourceCode" id="cb57"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb57-1"><a href="one-factor-multiple-levels.html#cb57-1" aria-hidden="true" tabindex="-1"></a>plasma_lm <span class="ot">&lt;-</span> <span class="fu">lm</span>(etch_rate <span class="sc">~</span> power, <span class="at">data =</span> plasma_narrow)</span>
+<span id="cb57-2"><a href="one-factor-multiple-levels.html#cb57-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(plasma_lm)</span></code></pre></div>
+<pre><code>
+Call:
+lm(formula = etch_rate ~ power, data = plasma_narrow)
+
+Residuals:
+   Min     1Q Median     3Q    Max 
+-43.02 -12.32  -1.21  16.71  33.06 
+
+Coefficients:
+            Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept) 137.6200    41.2108   3.339  0.00365 ** 
+power         2.5270     0.2154  11.731 7.26e-10 ***
+---
+Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+
+Residual standard error: 21.54 on 18 degrees of freedom
+Multiple R-squared:  0.8843,    Adjusted R-squared:  0.8779 
+F-statistic: 137.6 on 1 and 18 DF,  p-value: 7.263e-10</code></pre>
+</div>
+<div id="linear-model-plot" class="section level4">
+<h4>Linear model plot</h4>
+<div class="sourceCode" id="cb59"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb59-1"><a href="one-factor-multiple-levels.html#cb59-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(plasma_narrow, <span class="fu">aes</span>(<span class="at">x =</span> power, <span class="at">y =</span> etch_rate)) <span class="sc">+</span></span>
+<span id="cb59-2"><a href="one-factor-multiple-levels.html#cb59-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb59-3"><a href="one-factor-multiple-levels.html#cb59-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">&quot;lm&quot;</span>) <span class="sc">+</span></span>
+<span id="cb59-4"><a href="one-factor-multiple-levels.html#cb59-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_light</span>() <span class="sc">+</span></span>
+<span id="cb59-5"><a href="one-factor-multiple-levels.html#cb59-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">&quot;none&quot;</span>) <span class="sc">+</span></span>
+<span id="cb59-6"><a href="one-factor-multiple-levels.html#cb59-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Plasma case study&quot;</span>,</span>
+<span id="cb59-7"><a href="one-factor-multiple-levels.html#cb59-7" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="st">&quot;Raw data plot&quot;</span>,</span>
+<span id="cb59-8"><a href="one-factor-multiple-levels.html#cb59-8" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">&quot;Power&quot;</span>,</span>
+<span id="cb59-9"><a href="one-factor-multiple-levels.html#cb59-9" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">&quot;Etch rate&quot;</span>)</span></code></pre></div>
+<p><img src="one_factor_multiple_levels_files/figure-html/unnamed-chunk-7-1.png" width="80%"  /></p>
+</div>
+<div id="linear-model-fixed-effects" class="section level4">
+<h4>Linear model fixed effects</h4>
+<p>Reminder of fixed effects definition:</p>
+<p>Fixed or Random Factor? The statistical model, Equation 3.2, describes two different situations with respect to the treatment effects. First, the a treatments could have been specifically chosen by the experimenter. In this situation, we wish to test hypotheses about the treatment means, and our conclusions will apply only to the factor levels considered in the analysis. The conclusions cannot be extended to similar treatments that were not explicitly considered. We may also wish to estimate the model parameters ($, .i, !2). This is called the fixed effects model. Alternatively, the treatments could be a random sample from a larger population of treatments. In this situation, we should like to be able to extend the conclusions (which are based on the sample of treatments) to all treatments in the population,</p>
+<div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb60-1"><a href="one-factor-multiple-levels.html#cb60-1" aria-hidden="true" tabindex="-1"></a>plasma_narrow_factor <span class="ot">&lt;-</span> plasma_narrow <span class="sc">%&gt;%</span></span>
+<span id="cb60-2"><a href="one-factor-multiple-levels.html#cb60-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">power =</span> <span class="fu">as_factor</span>(power))</span>
+<span id="cb60-3"><a href="one-factor-multiple-levels.html#cb60-3" aria-hidden="true" tabindex="-1"></a>plasma_lm_factor <span class="ot">&lt;-</span> <span class="fu">lm</span>(etch_rate <span class="sc">~</span> power, <span class="at">data =</span> plasma_narrow_factor)</span>
+<span id="cb60-4"><a href="one-factor-multiple-levels.html#cb60-4" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(plasma_lm_factor)</span></code></pre></div>
+<pre><code>
+Call:
+lm(formula = etch_rate ~ power, data = plasma_narrow_factor)
+
+Residuals:
+   Min     1Q Median     3Q    Max 
+ -25.4  -13.0    2.8   13.2   25.6 
+
+Coefficients:
+            Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)  551.200      8.169  67.471  &lt; 2e-16 ***
+power180      36.200     11.553   3.133  0.00642 ** 
+power200      74.200     11.553   6.422 8.44e-06 ***
+power220     155.800     11.553  13.485 3.73e-10 ***
+---
+Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+
+Residual standard error: 18.27 on 16 degrees of freedom
+Multiple R-squared:  0.9261,    Adjusted R-squared:  0.9122 
+F-statistic:  66.8 on 3 and 16 DF,  p-value: 2.883e-09</code></pre>
+</div>
+</div>
+<div id="model-check-residuals" class="section level3">
+<h3>Model check &amp; residuals</h3>
+<p>In order to assess the model performance we’re going to look into the residuals. R provides direct ploting functions with the base and stats packages but in this first example we’re going to break down the analysis and further customise the plots. We are also going to make usage of some additional statistical tests to confirm our observations from the plots. In subsequent chapters we’ll have a more selective approach on a needed basis.</p>
+<p>We start by loading the package broom which will help us retrieving the data from the lm object into a data frame.</p>
+<div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb62-1"><a href="one-factor-multiple-levels.html#cb62-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(broom)</span></code></pre></div>
+<p>Now we build and show below an extract of the “augmented” dataframe</p>
+<div class="sourceCode" id="cb63"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb63-1"><a href="one-factor-multiple-levels.html#cb63-1" aria-hidden="true" tabindex="-1"></a>plasma_aug <span class="ot">&lt;-</span> <span class="fu">augment</span>(plasma_lm_factor) <span class="sc">%&gt;%</span></span>
+<span id="cb63-2"><a href="one-factor-multiple-levels.html#cb63-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">index =</span> <span class="fu">row_number</span>())</span>
+<span id="cb63-3"><a href="one-factor-multiple-levels.html#cb63-3" aria-hidden="true" tabindex="-1"></a>plasma_aug <span class="sc">%&gt;%</span></span>
+<span id="cb63-4"><a href="one-factor-multiple-levels.html#cb63-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb63-5"><a href="one-factor-multiple-levels.html#cb63-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable</span>(<span class="at">align =</span> <span class="st">&quot;c&quot;</span>)</span></code></pre></div>
+<table>
+<thead>
+<tr class="header">
+<th align="center">etch_rate</th>
+<th align="center">power</th>
+<th align="center">.fitted</th>
+<th align="center">.resid</th>
+<th align="center">.hat</th>
+<th align="center">.sigma</th>
+<th align="center">.cooksd</th>
+<th align="center">.std.resid</th>
+<th align="center">index</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">575</td>
+<td align="center">160</td>
+<td align="center">551.2</td>
+<td align="center">23.8</td>
+<td align="center">0.2</td>
+<td align="center">17.57109</td>
+<td align="center">0.1326135</td>
+<td align="center">1.4566455</td>
+<td align="center">1</td>
+</tr>
+<tr class="even">
+<td align="center">542</td>
+<td align="center">160</td>
+<td align="center">551.2</td>
+<td align="center">-9.2</td>
+<td align="center">0.2</td>
+<td align="center">18.67869</td>
+<td align="center">0.0198157</td>
+<td align="center">-0.5630730</td>
+<td align="center">2</td>
+</tr>
+<tr class="odd">
+<td align="center">530</td>
+<td align="center">160</td>
+<td align="center">551.2</td>
+<td align="center">-21.2</td>
+<td align="center">0.2</td>
+<td align="center">17.84638</td>
+<td align="center">0.1052218</td>
+<td align="center">-1.2975161</td>
+<td align="center">3</td>
+</tr>
+<tr class="even">
+<td align="center">539</td>
+<td align="center">160</td>
+<td align="center">551.2</td>
+<td align="center">-12.2</td>
+<td align="center">0.2</td>
+<td align="center">18.53492</td>
+<td align="center">0.0348460</td>
+<td align="center">-0.7466838</td>
+<td align="center">4</td>
+</tr>
+<tr class="odd">
+<td align="center">570</td>
+<td align="center">160</td>
+<td align="center">551.2</td>
+<td align="center">18.8</td>
+<td align="center">0.2</td>
+<td align="center">18.06913</td>
+<td align="center">0.0827465</td>
+<td align="center">1.1506275</td>
+<td align="center">5</td>
+</tr>
+<tr class="even">
+<td align="center">565</td>
+<td align="center">180</td>
+<td align="center">587.4</td>
+<td align="center">-22.4</td>
+<td align="center">0.2</td>
+<td align="center">17.72381</td>
+<td align="center">0.1174708</td>
+<td align="center">-1.3709604</td>
+<td align="center">6</td>
+</tr>
+</tbody>
+</table>
+<p>We can see we’ve obtained detailed model parameters such us fitted values and residuals for each DOE run.</p>
+<div id="time-sequence-plot" class="section level4">
+<h4>Time sequence plot</h4>
+<p>For this plot we need to ensure that the order of plotting in the x axis corresponds exactly to the original data collection order. This plot allows us to assess for strange patterns such as a tendency to have runs of positive of negative results which indicates that the independency assumption does not hold. If patterns emerge then there may be correlation in the residuals.</p>
+<div class="sourceCode" id="cb64"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb64-1"><a href="one-factor-multiple-levels.html#cb64-1" aria-hidden="true" tabindex="-1"></a>plasma_aug <span class="sc">%&gt;%</span></span>
+<span id="cb64-2"><a href="one-factor-multiple-levels.html#cb64-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> index, <span class="at">y =</span> .resid)) <span class="sc">+</span></span>
+<span id="cb64-3"><a href="one-factor-multiple-levels.html#cb64-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb64-4"><a href="one-factor-multiple-levels.html#cb64-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_light</span>() <span class="sc">+</span></span>
+<span id="cb64-5"><a href="one-factor-multiple-levels.html#cb64-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb64-6"><a href="one-factor-multiple-levels.html#cb64-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">&quot;Plasma etching case study&quot;</span>,</span>
+<span id="cb64-7"><a href="one-factor-multiple-levels.html#cb64-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="st">&quot;Linear model - Residuals timeseries&quot;</span>,</span>
+<span id="cb64-8"><a href="one-factor-multiple-levels.html#cb64-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">&quot;Index&quot;</span>,</span>
+<span id="cb64-9"><a href="one-factor-multiple-levels.html#cb64-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">&quot;Fitted values&quot;</span>,</span>
+<span id="cb64-10"><a href="one-factor-multiple-levels.html#cb64-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">caption =</span> <span class="st">&quot;Data source: D.Montgomery DOEs&quot;</span></span>
+<span id="cb64-11"><a href="one-factor-multiple-levels.html#cb64-11" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
+<p><img src="one_factor_multiple_levels_files/figure-html/unnamed-chunk-11-1.png" width="80%"  /></p>
+<p>Nothing strange emerges from the current plot and the design shows as well randomised.</p>
+</div>
+<div id="residualsCorrelation" class="section level4">
+<h4>Autocorrelation test</h4>
+<p>It is always good to keep in mind that all visual observations can be complemented with a statistical test. In this case we’re going to use the durbinWatson test from the car package (Companion to Applied Regression).</p>
+<div class="sourceCode" id="cb65"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb65-1"><a href="one-factor-multiple-levels.html#cb65-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(car)</span></code></pre></div>
+<div class="sourceCode" id="cb66"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb66-1"><a href="one-factor-multiple-levels.html#cb66-1" aria-hidden="true" tabindex="-1"></a><span class="fu">durbinWatsonTest</span>(plasma_lm_factor)</span></code></pre></div>
+<pre><code> lag Autocorrelation D-W Statistic p-value
+   1      -0.5343347      2.960893   0.082
+ Alternative hypothesis: rho != 0</code></pre>
+<p>Although the output shows Autocorrelation of -0.53 we have to consider that the p value is greated than 0.05 thus there is not enough significance to say that there is autocorrelation.</p>
+</div>
+<div id="residuals-vs-fit-plot" class="section level4">
+<h4>Residuals vs fit plot</h4>
+<p>If the model is correct and the assumptions hold, the residuals should be structureless. In particular they should be unrelated to any other variable including the predicted response.</p>
+<div class="sourceCode" id="cb68"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb68-1"><a href="one-factor-multiple-levels.html#cb68-1" aria-hidden="true" tabindex="-1"></a>plasma_aug <span class="sc">%&gt;%</span></span>
+<span id="cb68-2"><a href="one-factor-multiple-levels.html#cb68-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> .fitted, <span class="at">y =</span> .resid)) <span class="sc">+</span></span>
+<span id="cb68-3"><a href="one-factor-multiple-levels.html#cb68-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb68-4"><a href="one-factor-multiple-levels.html#cb68-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_light</span>() <span class="sc">+</span></span>
+<span id="cb68-5"><a href="one-factor-multiple-levels.html#cb68-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">&quot;loess&quot;</span>, <span class="at">se =</span> <span class="cn">FALSE</span>, <span class="at">color =</span> <span class="st">&quot;red&quot;</span>) <span class="sc">+</span></span>
+<span id="cb68-6"><a href="one-factor-multiple-levels.html#cb68-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb68-7"><a href="one-factor-multiple-levels.html#cb68-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">&quot;Plasma etching case study&quot;</span>,</span>
+<span id="cb68-8"><a href="one-factor-multiple-levels.html#cb68-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="st">&quot;Linear model - Residuals vs Fitted values&quot;</span>,</span>
+<span id="cb68-9"><a href="one-factor-multiple-levels.html#cb68-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">&quot;Residuals&quot;</span>,</span>
+<span id="cb68-10"><a href="one-factor-multiple-levels.html#cb68-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">&quot;Fitted values&quot;</span>,</span>
+<span id="cb68-11"><a href="one-factor-multiple-levels.html#cb68-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">caption =</span> <span class="st">&quot;Data source: D.Montgomery DOEs&quot;</span></span>
+<span id="cb68-12"><a href="one-factor-multiple-levels.html#cb68-12" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
+<p><img src="one_factor_multiple_levels_files/figure-html/unnamed-chunk-14-1.png" width="80%"  /></p>
+<p>In this plot we see no variance anomalies such as a higher variance for a certain factor level or other types of skweness.</p>
+</div>
+<div id="barlettTest" class="section level4">
+<h4>Equality of variance test</h4>
+<p>In the plasma etch experiment, the normality assumption is not in question, so we can apply Bartlett’s test to the etch rate data (Bartlett’s test is very sensitive to the normality assumption). Consequently, when the validity of this assumption is doubtful, Bartlett’s test should not be used and in this case use instead the Modified Levene test.</p>
+<div class="sourceCode" id="cb69"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb69-1"><a href="one-factor-multiple-levels.html#cb69-1" aria-hidden="true" tabindex="-1"></a><span class="fu">bartlett.test</span>(etch_rate <span class="sc">~</span> power, <span class="at">data =</span> plasma_narrow_factor)</span></code></pre></div>
+<pre><code>
+    Bartlett test of homogeneity of variances
+
+data:  etch_rate by power
+Bartlett&#39;s K-squared = 0.43349, df = 3, p-value = 0.9332</code></pre>
+<p>The P-value is P = 0.934, so we cannot reject the null hypothesis. There is no evidence to counter the claim that all five variances are the same. This is the same conclusion reached by analyzing the plot of residuals versus fitted values.</p>
+</div>
+<div id="normality-plot" class="section level4">
+<h4>Normality plot</h4>
+<p>As the sample size is relatively small we’re going to use a qq plot instead of an histogram to assess the normality of the residuals.</p>
+<div class="sourceCode" id="cb71"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb71-1"><a href="one-factor-multiple-levels.html#cb71-1" aria-hidden="true" tabindex="-1"></a>plasma_aug <span class="sc">%&gt;%</span></span>
+<span id="cb71-2"><a href="one-factor-multiple-levels.html#cb71-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">sample =</span> .resid)) <span class="sc">+</span></span>
+<span id="cb71-3"><a href="one-factor-multiple-levels.html#cb71-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_qq</span>() <span class="sc">+</span></span>
+<span id="cb71-4"><a href="one-factor-multiple-levels.html#cb71-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_qq_line</span>() <span class="sc">+</span></span>
+<span id="cb71-5"><a href="one-factor-multiple-levels.html#cb71-5" aria-hidden="true" tabindex="-1"></a>  <span class="co"># coord_flip() +</span></span>
+<span id="cb71-6"><a href="one-factor-multiple-levels.html#cb71-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_light</span>() <span class="sc">+</span></span>
+<span id="cb71-7"><a href="one-factor-multiple-levels.html#cb71-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb71-8"><a href="one-factor-multiple-levels.html#cb71-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">&quot;Plasma etching case study&quot;</span>,</span>
+<span id="cb71-9"><a href="one-factor-multiple-levels.html#cb71-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="st">&quot;Linear model - qq plot&quot;</span>,</span>
+<span id="cb71-10"><a href="one-factor-multiple-levels.html#cb71-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">&quot;Residuals&quot;</span>,</span>
+<span id="cb71-11"><a href="one-factor-multiple-levels.html#cb71-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">&quot;Fitted values&quot;</span>,</span>
+<span id="cb71-12"><a href="one-factor-multiple-levels.html#cb71-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">caption =</span> <span class="st">&quot;Data source: D.Montgomery DOEs&quot;</span></span>
+<span id="cb71-13"><a href="one-factor-multiple-levels.html#cb71-13" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
+<p><img src="one_factor_multiple_levels_files/figure-html/unnamed-chunk-16-1.png" width="80%"  /></p>
+<p>The plot suggests normal distribution. We see that the error distribution is aproximately normal. In the fixed effects model we give more importance to the center of the values and here we consider acceptable that the extremes of the data tend to bend away from the straight line.
+The verification can be completed by a test. For populations &lt; 50 use the shapiro-wilk normality test.</p>
+</div>
+<div id="shapiroTest" class="section level4">
+<h4>Shapiro test</h4>
+<div class="sourceCode" id="cb72"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb72-1"><a href="one-factor-multiple-levels.html#cb72-1" aria-hidden="true" tabindex="-1"></a><span class="fu">shapiro.test</span>(plasma_aug<span class="sc">$</span>.resid)</span></code></pre></div>
+<pre><code>
+    Shapiro-Wilk normality test
+
+data:  plasma_aug$.resid
+W = 0.93752, p-value = 0.2152</code></pre>
+<p>p &gt; 0.05 indicates that the residuals do not differ significantly from a normally distributed population.</p>
+</div>
+<div id="std-residuals-vs-fit-plot" class="section level4">
+<h4>Std residuals vs fit plot</h4>
+<p>This specific Standardized residuals graph also help detecting outliers in the residuals (any residual &gt; 3 standard deviations is a potential outlier).</p>
+<div class="sourceCode" id="cb74"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb74-1"><a href="one-factor-multiple-levels.html#cb74-1" aria-hidden="true" tabindex="-1"></a>plasma_aug <span class="sc">%&gt;%</span> </span>
+<span id="cb74-2"><a href="one-factor-multiple-levels.html#cb74-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> .fitted, <span class="at">y =</span> .std.resid)) <span class="sc">+</span></span>
+<span id="cb74-3"><a href="one-factor-multiple-levels.html#cb74-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb74-4"><a href="one-factor-multiple-levels.html#cb74-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_light</span>() <span class="sc">+</span></span>
+<span id="cb74-5"><a href="one-factor-multiple-levels.html#cb74-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">&quot;loess&quot;</span>, <span class="at">se =</span> <span class="cn">FALSE</span>, <span class="at">color =</span> <span class="st">&quot;red&quot;</span>) <span class="sc">+</span></span>
+<span id="cb74-6"><a href="one-factor-multiple-levels.html#cb74-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Plasma etching case study&quot;</span>,</span>
+<span id="cb74-7"><a href="one-factor-multiple-levels.html#cb74-7" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="st">&quot;Linear model - Standardised Residuals vs Fitted values&quot;</span>,</span>
+<span id="cb74-8"><a href="one-factor-multiple-levels.html#cb74-8" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">&quot;Standardised Residuals&quot;</span>,</span>
+<span id="cb74-9"><a href="one-factor-multiple-levels.html#cb74-9" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">&quot;Fitted values&quot;</span>,</span>
+<span id="cb74-10"><a href="one-factor-multiple-levels.html#cb74-10" aria-hidden="true" tabindex="-1"></a>       <span class="at">caption =</span> <span class="st">&quot;Data source: D.Montgomery DOEs&quot;</span>)</span></code></pre></div>
+<p><img src="one_factor_multiple_levels_files/figure-html/unnamed-chunk-18-1.png" width="80%"  /></p>
+<p>The plot shows no outliers to consider in this DOE.</p>
+</div>
+<div id="outlierTest" class="section level4">
+<h4>Outlier test</h4>
+<p>In a case where we were doubtfull we could go further and make a statistical test to assess if a certain value was an outlier. A usefull test is available in the car package.</p>
+<div class="sourceCode" id="cb75"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb75-1"><a href="one-factor-multiple-levels.html#cb75-1" aria-hidden="true" tabindex="-1"></a><span class="fu">outlierTest</span>(plasma_lm_factor)</span></code></pre></div>
+<pre><code>No Studentized residuals with Bonferroni p &lt; 0.05
+Largest |rstudent|:
+   rstudent unadjusted p-value Bonferroni p
+12 1.648813            0.11997           NA</code></pre>
+<p>In this case, the Bonferroni adjusted p value comes as NA confirming that there is no outlier in the data.</p>
+</div>
+<div id="cooks-distance-plot" class="section level4">
+<h4>Cooks distance plot</h4>
+<div class="sourceCode" id="cb77"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb77-1"><a href="one-factor-multiple-levels.html#cb77-1" aria-hidden="true" tabindex="-1"></a>plasma_aug <span class="sc">%&gt;%</span> </span>
+<span id="cb77-2"><a href="one-factor-multiple-levels.html#cb77-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> .cooksd, <span class="at">y =</span> .std.resid)) <span class="sc">+</span></span>
+<span id="cb77-3"><a href="one-factor-multiple-levels.html#cb77-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb77-4"><a href="one-factor-multiple-levels.html#cb77-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="fl">0.5</span>, <span class="at">color =</span> <span class="st">&quot;red&quot;</span>) <span class="sc">+</span></span>
+<span id="cb77-5"><a href="one-factor-multiple-levels.html#cb77-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_light</span>() <span class="sc">+</span></span>
+<span id="cb77-6"><a href="one-factor-multiple-levels.html#cb77-6" aria-hidden="true" tabindex="-1"></a>  <span class="co"># geom_smooth(method = &quot;glm&quot;, se = FALSE, color = &quot;red&quot;) +</span></span>
+<span id="cb77-7"><a href="one-factor-multiple-levels.html#cb77-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Plasma etching case study&quot;</span>,</span>
+<span id="cb77-8"><a href="one-factor-multiple-levels.html#cb77-8" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="st">&quot;Pod L volume linear model - Residuals vs Leverage&quot;</span>,</span>
+<span id="cb77-9"><a href="one-factor-multiple-levels.html#cb77-9" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">&quot;Standardised Residuals&quot;</span>,</span>
+<span id="cb77-10"><a href="one-factor-multiple-levels.html#cb77-10" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">&quot;Cooks distance&quot;</span>,</span>
+<span id="cb77-11"><a href="one-factor-multiple-levels.html#cb77-11" aria-hidden="true" tabindex="-1"></a>       <span class="at">caption =</span> <span class="st">&quot;Data source: D.Montgomery DOEs&quot;</span>)</span></code></pre></div>
+<p><img src="one_factor_multiple_levels_files/figure-html/unnamed-chunk-20-1.png" width="80%"  /></p>
+</div>
+<div id="r-squared" class="section level4">
+<h4>R squared</h4>
+<p>R² the coefficient of determination</p>
+<p>The R square can be extracted from the linear model that has been used to build the Anova model.</p>
+<div class="sourceCode" id="cb78"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb78-1"><a href="one-factor-multiple-levels.html#cb78-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(plasma_lm_factor)<span class="sc">$</span>r.squared</span></code></pre></div>
+<pre><code>[1] 0.9260598</code></pre>
+<p>Thus, in the plasma etching experiment, the factor “power” explains about 88% percent of the variability in etch rate.</p>
+<p>Anova fixed effects assumes that:
+- errors are normally distributed and are independent</p>
+<p>As the number of residuals is too small we’re not checking the normality via the histogram but rather with a a Q-Q plot.</p>
+</div>
+</div>
+<div id="predict" class="section level3">
+<h3>Prediction</h3>
+<p>Here we’re using the model with power as an integer:</p>
+<div class="sourceCode" id="cb80"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb80-1"><a href="one-factor-multiple-levels.html#cb80-1" aria-hidden="true" tabindex="-1"></a>power_new <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">power =</span> <span class="fu">c</span>(<span class="dv">170</span>, <span class="dv">190</span>))</span>
+<span id="cb80-2"><a href="one-factor-multiple-levels.html#cb80-2" aria-hidden="true" tabindex="-1"></a><span class="fu">predict</span>(plasma_lm, <span class="at">newdata =</span> power_new)</span></code></pre></div>
+<pre><code>     1      2 
+567.21 617.75 </code></pre>
+</div>
+<div id="multiple-means-comparison" class="section level3">
+<h3>Multiple means comparison</h3>
+<div class="sourceCode" id="cb82"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb82-1"><a href="one-factor-multiple-levels.html#cb82-1" aria-hidden="true" tabindex="-1"></a>plasma <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&quot;../industRial/data-raw/3-1_plasma_etching.csv&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb82-2"><a href="one-factor-multiple-levels.html#cb82-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">clean_names</span>()</span>
+<span id="cb82-3"><a href="one-factor-multiple-levels.html#cb82-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb82-4"><a href="one-factor-multiple-levels.html#cb82-4" aria-hidden="true" tabindex="-1"></a>plasma_narrow <span class="ot">&lt;-</span> plasma <span class="sc">%&gt;%</span></span>
+<span id="cb82-5"><a href="one-factor-multiple-levels.html#cb82-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(</span>
+<span id="cb82-6"><a href="one-factor-multiple-levels.html#cb82-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">cols =</span> <span class="fu">starts_with</span>(<span class="st">&quot;x&quot;</span>),</span>
+<span id="cb82-7"><a href="one-factor-multiple-levels.html#cb82-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">names_to =</span> <span class="st">&quot;observation&quot;</span>,</span>
+<span id="cb82-8"><a href="one-factor-multiple-levels.html#cb82-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">values_to =</span> <span class="st">&quot;etch_rate&quot;</span></span>
+<span id="cb82-9"><a href="one-factor-multiple-levels.html#cb82-9" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
+<div class="sourceCode" id="cb83"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb83-1"><a href="one-factor-multiple-levels.html#cb83-1" aria-hidden="true" tabindex="-1"></a>plasma_narrow_factor <span class="ot">&lt;-</span> plasma_narrow <span class="sc">%&gt;%</span></span>
+<span id="cb83-2"><a href="one-factor-multiple-levels.html#cb83-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">power =</span> <span class="fu">as_factor</span>(power))</span></code></pre></div>
+<div id="box-plot-of-raw-data" class="section level4">
+<h4>Box plot of raw data</h4>
+<p>We can also compare medians and get a sense of the effect of the treatment levels by looking into the box plot:</p>
+<div class="sourceCode" id="cb84"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb84-1"><a href="one-factor-multiple-levels.html#cb84-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Box plot</span></span>
+<span id="cb84-2"><a href="one-factor-multiple-levels.html#cb84-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(plasma_narrow_factor, <span class="fu">aes</span>(<span class="at">x =</span> power, <span class="at">y =</span> etch_rate)) <span class="sc">+</span></span>
+<span id="cb84-3"><a href="one-factor-multiple-levels.html#cb84-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
+<span id="cb84-4"><a href="one-factor-multiple-levels.html#cb84-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_light</span>() <span class="sc">+</span></span>
+<span id="cb84-5"><a href="one-factor-multiple-levels.html#cb84-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">n.breaks =</span> <span class="dv">20</span>) <span class="sc">+</span></span>
+<span id="cb84-6"><a href="one-factor-multiple-levels.html#cb84-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">&quot;none&quot;</span>) <span class="sc">+</span></span>
+<span id="cb84-7"><a href="one-factor-multiple-levels.html#cb84-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Plasma case study&quot;</span>,</span>
+<span id="cb84-8"><a href="one-factor-multiple-levels.html#cb84-8" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="st">&quot;Raw data plot&quot;</span>,</span>
+<span id="cb84-9"><a href="one-factor-multiple-levels.html#cb84-9" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">&quot;Power&quot;</span>,</span>
+<span id="cb84-10"><a href="one-factor-multiple-levels.html#cb84-10" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">&quot;Etch rate&quot;</span>)</span></code></pre></div>
+<p><img src="one_factor_multiple_levels_files/figure-html/unnamed-chunk-25-1.png" width="80%"  /></p>
+<p>1 factor with severals levels + 1 continuous dependent variable
+Similar to the t-test but extended - this test allows to compare the means between several levels of treatement for a continuous response variable (the t test is only 2 levels at a time, performing all pair wise t-tests would also not be a solution because its a lot of effort and would increase the type I error)</p>
+<p>ANOVA principle: the total variability in the data, as measured by the total corrected sum of squares, can be partitioned into a sum of squares of the differences between the treatment averages and the grand average plus a sum of squares of the differences of observations within treatments from the treatment average</p>
+</div>
+<div id="anova" class="section level4">
+<h4>Anova with effect</h4>
+<p>In R the anova is built by passing the linear model to the anova or aov functions.
+The output of the anova function is just the anova table as shown here for this first example. The output of the aov function is a list.</p>
+<div class="sourceCode" id="cb85"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb85-1"><a href="one-factor-multiple-levels.html#cb85-1" aria-hidden="true" tabindex="-1"></a>plasma_lm_factor <span class="ot">&lt;-</span> <span class="fu">lm</span>(etch_rate <span class="sc">~</span> power, <span class="at">data =</span> plasma_narrow_factor)</span>
+<span id="cb85-2"><a href="one-factor-multiple-levels.html#cb85-2" aria-hidden="true" tabindex="-1"></a>plasma_aov <span class="ot">&lt;-</span> <span class="fu">aov</span>(plasma_lm_factor)</span>
+<span id="cb85-3"><a href="one-factor-multiple-levels.html#cb85-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(plasma_aov)</span></code></pre></div>
+<pre><code>            Df Sum Sq Mean Sq F value   Pr(&gt;F)    
+power        3  66871   22290    66.8 2.88e-09 ***
+Residuals   16   5339     334                     
+---
+Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+<p>Note that the RF power or between-treatment mean square (22,290.18) is many times larger than the within-treatment or error mean square (333.70). This indicates that it is unlikely that the treatment means are equal.
+Also p &lt; 0.05 thus we can reject the null hypothesis and conclude that the means are significantly different.</p>
+</div>
+<div id="anova-with-no-effect" class="section level4">
+<h4>Anova with no effect</h4>
+<p>Anova on plasma etching, modification of the example to achieve a p &gt; 0.05:</p>
+<div class="sourceCode" id="cb87"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb87-1"><a href="one-factor-multiple-levels.html#cb87-1" aria-hidden="true" tabindex="-1"></a>plasma2 <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&quot;../industRial/data-raw/3-1_plasma_etching_2.csv&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb87-2"><a href="one-factor-multiple-levels.html#cb87-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">clean_names</span>()</span>
+<span id="cb87-3"><a href="one-factor-multiple-levels.html#cb87-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb87-4"><a href="one-factor-multiple-levels.html#cb87-4" aria-hidden="true" tabindex="-1"></a>plasma2_narrow <span class="ot">&lt;-</span> <span class="fu">gather</span>(plasma2, </span>
+<span id="cb87-5"><a href="one-factor-multiple-levels.html#cb87-5" aria-hidden="true" tabindex="-1"></a>                         observation, </span>
+<span id="cb87-6"><a href="one-factor-multiple-levels.html#cb87-6" aria-hidden="true" tabindex="-1"></a>                         etch_rate, x1, x2, x3, x4, x5)</span>
+<span id="cb87-7"><a href="one-factor-multiple-levels.html#cb87-7" aria-hidden="true" tabindex="-1"></a>plasma2_narrow_factor <span class="ot">&lt;-</span> plasma2_narrow</span>
+<span id="cb87-8"><a href="one-factor-multiple-levels.html#cb87-8" aria-hidden="true" tabindex="-1"></a>plasma2_narrow_factor<span class="sc">$</span>power <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(plasma2_narrow_factor<span class="sc">$</span>power)</span>
+<span id="cb87-9"><a href="one-factor-multiple-levels.html#cb87-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb87-10"><a href="one-factor-multiple-levels.html#cb87-10" aria-hidden="true" tabindex="-1"></a>plasma2_lm_factor <span class="ot">&lt;-</span> <span class="fu">lm</span>(etch_rate <span class="sc">~</span> power, <span class="at">data =</span> plasma2_narrow_factor)</span>
+<span id="cb87-11"><a href="one-factor-multiple-levels.html#cb87-11" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(plasma2_lm_factor)</span></code></pre></div>
+<pre><code>Analysis of Variance Table
+
+Response: etch_rate
+          Df Sum Sq Mean Sq F value Pr(&gt;F)
+power      3   1476   492.0  1.2015  0.341
+Residuals 16   6552   409.5               </code></pre>
+<div class="sourceCode" id="cb89"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb89-1"><a href="one-factor-multiple-levels.html#cb89-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(plasma2_narrow_factor, <span class="fu">aes</span>(<span class="at">x =</span> power, <span class="at">y =</span> etch_rate)) <span class="sc">+</span></span>
+<span id="cb89-2"><a href="one-factor-multiple-levels.html#cb89-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
+<span id="cb89-3"><a href="one-factor-multiple-levels.html#cb89-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_light</span>() <span class="sc">+</span></span>
+<span id="cb89-4"><a href="one-factor-multiple-levels.html#cb89-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">&quot;none&quot;</span>) <span class="sc">+</span></span>
+<span id="cb89-5"><a href="one-factor-multiple-levels.html#cb89-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Plasma case study&quot;</span>,</span>
+<span id="cb89-6"><a href="one-factor-multiple-levels.html#cb89-6" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="st">&quot;Raw data plot&quot;</span>,</span>
+<span id="cb89-7"><a href="one-factor-multiple-levels.html#cb89-7" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">&quot;Power&quot;</span>,</span>
+<span id="cb89-8"><a href="one-factor-multiple-levels.html#cb89-8" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">&quot;Etch rate&quot;</span>)</span></code></pre></div>
+<p><img src="one_factor_multiple_levels_files/figure-html/unnamed-chunk-28-1.png" width="80%"  /></p>
+<p>P &gt; 0.05 - there is no significant difference between the means</p>
+</div>
+</div>
+<div id="pairwise-comparisons" class="section level3">
+<h3>Pairwise comparisons</h3>
+<div id="tukeyTest" class="section level4">
+<h4>Tukey’s test</h4>
+<p>The Anova may indicate that the treament means differ but it won’t indicate which ones. In this case we may want to compare pairs of means.</p>
+<div class="sourceCode" id="cb90"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb90-1"><a href="one-factor-multiple-levels.html#cb90-1" aria-hidden="true" tabindex="-1"></a>plasma_tukey <span class="ot">&lt;-</span> <span class="fu">TukeyHSD</span>(plasma_aov, <span class="at">ordered =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb91"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb91-1"><a href="one-factor-multiple-levels.html#cb91-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(plasma_tukey<span class="sc">$</span>power) <span class="sc">%&gt;%</span> </span>
+<span id="cb91-2"><a href="one-factor-multiple-levels.html#cb91-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable</span>(<span class="at">align =</span> <span class="st">&quot;c&quot;</span>, </span>
+<span id="cb91-3"><a href="one-factor-multiple-levels.html#cb91-3" aria-hidden="true" tabindex="-1"></a>        <span class="at">caption =</span> <span class="st">&quot;tukey test on plasma experiment&quot;</span>, </span>
+<span id="cb91-4"><a href="one-factor-multiple-levels.html#cb91-4" aria-hidden="true" tabindex="-1"></a>        <span class="at">booktabs =</span> T)</span></code></pre></div>
+<p><!--
+<caption>--><span class="marginnote shownote"><span id="tab:tab-plasmatukey">Table 2: </span>tukey test on plasma experiment</span><!--</caption>--></p>
+<table>
+<thead>
+<tr class="header">
+<th align="left"></th>
+<th align="center">diff</th>
+<th align="center">lwr</th>
+<th align="center">upr</th>
+<th align="center">p adj</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">180-160</td>
+<td align="center">36.2</td>
+<td align="center">3.145624</td>
+<td align="center">69.25438</td>
+<td align="center">0.0294279</td>
+</tr>
+<tr class="even">
+<td align="left">200-160</td>
+<td align="center">74.2</td>
+<td align="center">41.145624</td>
+<td align="center">107.25438</td>
+<td align="center">0.0000455</td>
+</tr>
+<tr class="odd">
+<td align="left">220-160</td>
+<td align="center">155.8</td>
+<td align="center">122.745624</td>
+<td align="center">188.85438</td>
+<td align="center">0.0000000</td>
+</tr>
+<tr class="even">
+<td align="left">200-180</td>
+<td align="center">38.0</td>
+<td align="center">4.945624</td>
+<td align="center">71.05438</td>
+<td align="center">0.0215995</td>
+</tr>
+<tr class="odd">
+<td align="left">220-180</td>
+<td align="center">119.6</td>
+<td align="center">86.545624</td>
+<td align="center">152.65438</td>
+<td align="center">0.0000001</td>
+</tr>
+<tr class="even">
+<td align="left">220-200</td>
+<td align="center">81.6</td>
+<td align="center">48.545624</td>
+<td align="center">114.65438</td>
+<td align="center">0.0000146</td>
+</tr>
+</tbody>
+</table>
+<p>The test provides us a simple direct calculation of the differences between the treatment means and a confidence interval for those. Most importantly it provides us with the p value to help us confirm the significance of the difference and conclude factor level by factor level which differences are significant.</p>
+<p>Additionally we can obtain the related plot with the confidence intervals</p>
+<div class="sourceCode" id="cb92"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb92-1"><a href="one-factor-multiple-levels.html#cb92-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(plasma_tukey)</span></code></pre></div>
+<p><img src="one_factor_multiple_levels_files/figure-html/unnamed-chunk-30-1.png" width="80%"  /></p>
+</div>
+<div id="fisherLSD" class="section level4">
+<h4>Fisher’s LSD</h4>
+<p>Fisher’s Least Significant difference is an alternative to Tuckey’s test.</p>
+<div class="sourceCode" id="cb93"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb93-1"><a href="one-factor-multiple-levels.html#cb93-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(agricolae)</span></code></pre></div>
+<div class="sourceCode" id="cb94"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb94-1"><a href="one-factor-multiple-levels.html#cb94-1" aria-hidden="true" tabindex="-1"></a>plasma_anova <span class="ot">&lt;-</span> <span class="fu">anova</span>(plasma_lm_factor) </span>
+<span id="cb94-2"><a href="one-factor-multiple-levels.html#cb94-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb94-3"><a href="one-factor-multiple-levels.html#cb94-3" aria-hidden="true" tabindex="-1"></a>plasma_LSD <span class="ot">&lt;-</span> <span class="fu">LSD.test</span>(<span class="at">y =</span> plasma_narrow_factor<span class="sc">$</span>etch_rate,</span>
+<span id="cb94-4"><a href="one-factor-multiple-levels.html#cb94-4" aria-hidden="true" tabindex="-1"></a>         <span class="at">trt =</span> plasma_narrow_factor<span class="sc">$</span>power,</span>
+<span id="cb94-5"><a href="one-factor-multiple-levels.html#cb94-5" aria-hidden="true" tabindex="-1"></a>         <span class="at">DFerror =</span> plasma_anova<span class="sc">$</span>Df[<span class="dv">2</span>],  </span>
+<span id="cb94-6"><a href="one-factor-multiple-levels.html#cb94-6" aria-hidden="true" tabindex="-1"></a>         <span class="at">MSerror =</span> plasma_anova<span class="sc">$</span><span class="st">`</span><span class="at">Mean Sq</span><span class="st">`</span>[<span class="dv">2</span>],</span>
+<span id="cb94-7"><a href="one-factor-multiple-levels.html#cb94-7" aria-hidden="true" tabindex="-1"></a>         <span class="at">alpha =</span> <span class="fl">0.05</span>)</span></code></pre></div>
+<p>The Fisher procedure provides us with many new additional information. A first outcome is the difference between means that can be considered significant, indicated in the table below by LSD = 24.49.</p>
+<div class="sourceCode" id="cb95"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb95-1"><a href="one-factor-multiple-levels.html#cb95-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(plasma_LSD<span class="sc">$</span>statistics) <span class="sc">%&gt;%</span> </span>
+<span id="cb95-2"><a href="one-factor-multiple-levels.html#cb95-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable</span>(<span class="at">align =</span> <span class="st">&quot;c&quot;</span>, </span>
+<span id="cb95-3"><a href="one-factor-multiple-levels.html#cb95-3" aria-hidden="true" tabindex="-1"></a>        <span class="at">caption =</span> <span class="st">&quot;Fisher LSD procedure on plasma experiment: stats&quot;</span>, </span>
+<span id="cb95-4"><a href="one-factor-multiple-levels.html#cb95-4" aria-hidden="true" tabindex="-1"></a>        <span class="at">booktabs =</span> T)</span></code></pre></div>
+<p><!--
+<caption>--><span class="marginnote shownote"><span id="tab:tab-plasmafisherstatistics">Table 3: </span>Fisher LSD procedure on plasma experiment: stats</span><!--</caption>--></p>
+<table>
+<thead>
+<tr class="header">
+<th align="left"></th>
+<th align="center">MSerror</th>
+<th align="center">Df</th>
+<th align="center">Mean</th>
+<th align="center">CV</th>
+<th align="center">t.value</th>
+<th align="center">LSD</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left"></td>
+<td align="center">333.7</td>
+<td align="center">16</td>
+<td align="center">617.75</td>
+<td align="center">2.957095</td>
+<td align="center">2.119905</td>
+<td align="center">24.49202</td>
+</tr>
+</tbody>
+</table>
+<p>Furthermore it gives us a confidence interval for each treatment level mean:</p>
+<div class="sourceCode" id="cb96"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb96-1"><a href="one-factor-multiple-levels.html#cb96-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(plasma_LSD<span class="sc">$</span>means) <span class="sc">%&gt;%</span> </span>
+<span id="cb96-2"><a href="one-factor-multiple-levels.html#cb96-2" aria-hidden="true" tabindex="-1"></a>  <span class="co"># as_tibble() %&gt;%</span></span>
+<span id="cb96-3"><a href="one-factor-multiple-levels.html#cb96-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">etch_rate =</span> <span class="st">`</span><span class="at">plasma_narrow_factor$etch_rate</span><span class="st">`</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb96-4"><a href="one-factor-multiple-levels.html#cb96-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>Min, <span class="sc">-</span>Max, <span class="sc">-</span>Q25, <span class="sc">-</span>Q50, <span class="sc">-</span>Q75) <span class="sc">%&gt;%</span></span>
+<span id="cb96-5"><a href="one-factor-multiple-levels.html#cb96-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable</span>(<span class="at">align =</span> <span class="st">&quot;c&quot;</span>, </span>
+<span id="cb96-6"><a href="one-factor-multiple-levels.html#cb96-6" aria-hidden="true" tabindex="-1"></a>        <span class="at">caption =</span> <span class="st">&quot;Fisher LSD procedure on plasma experiment: means&quot;</span>, </span>
+<span id="cb96-7"><a href="one-factor-multiple-levels.html#cb96-7" aria-hidden="true" tabindex="-1"></a>        <span class="at">booktabs =</span> T)</span></code></pre></div>
+<p><!--
+<caption>--><span class="marginnote shownote"><span id="tab:tab-plasmafishermeans">Table 4: </span>Fisher LSD procedure on plasma experiment: means</span><!--</caption>--></p>
+<table>
+<thead>
+<tr class="header">
+<th align="left"></th>
+<th align="center">etch_rate</th>
+<th align="center">std</th>
+<th align="center">r</th>
+<th align="center">LCL</th>
+<th align="center">UCL</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">160</td>
+<td align="center">551.2</td>
+<td align="center">20.01749</td>
+<td align="center">5</td>
+<td align="center">533.8815</td>
+<td align="center">568.5185</td>
+</tr>
+<tr class="even">
+<td align="left">180</td>
+<td align="center">587.4</td>
+<td align="center">16.74216</td>
+<td align="center">5</td>
+<td align="center">570.0815</td>
+<td align="center">604.7185</td>
+</tr>
+<tr class="odd">
+<td align="left">200</td>
+<td align="center">625.4</td>
+<td align="center">20.52559</td>
+<td align="center">5</td>
+<td align="center">608.0815</td>
+<td align="center">642.7185</td>
+</tr>
+<tr class="even">
+<td align="left">220</td>
+<td align="center">707.0</td>
+<td align="center">15.24795</td>
+<td align="center">5</td>
+<td align="center">689.6815</td>
+<td align="center">724.3185</td>
+</tr>
+</tbody>
+</table>
+<p>We can see for example that for power 220 W the etch rate if on average 707.0 with a probability of 95% of being between 689.7 and 724.3 A/min.</p>
+<p>Another interesting outcome is the grouping of levels for each factor:</p>
+<div class="sourceCode" id="cb97"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb97-1"><a href="one-factor-multiple-levels.html#cb97-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(plasma_LSD<span class="sc">$</span>groups) <span class="sc">%&gt;%</span> </span>
+<span id="cb97-2"><a href="one-factor-multiple-levels.html#cb97-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable</span>(<span class="at">align =</span> <span class="st">&quot;c&quot;</span>, </span>
+<span id="cb97-3"><a href="one-factor-multiple-levels.html#cb97-3" aria-hidden="true" tabindex="-1"></a>        <span class="at">caption =</span> <span class="st">&quot;Fisher LSD procedure on plasma experiment: groups&quot;</span>, </span>
+<span id="cb97-4"><a href="one-factor-multiple-levels.html#cb97-4" aria-hidden="true" tabindex="-1"></a>        <span class="at">booktabs =</span> T)</span></code></pre></div>
+<p><!--
+<caption>--><span class="marginnote shownote"><span id="tab:tab-plasmafishergroups">Table 5: </span>Fisher LSD procedure on plasma experiment: groups</span><!--</caption>--></p>
+<table>
+<thead>
+<tr class="header">
+<th align="left"></th>
+<th align="center">plasma_narrow_factor$etch_rate</th>
+<th align="center">groups</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">220</td>
+<td align="center">707.0</td>
+<td align="center">a</td>
+</tr>
+<tr class="even">
+<td align="left">200</td>
+<td align="center">625.4</td>
+<td align="center">b</td>
+</tr>
+<tr class="odd">
+<td align="left">180</td>
+<td align="center">587.4</td>
+<td align="center">c</td>
+</tr>
+<tr class="even">
+<td align="left">160</td>
+<td align="center">551.2</td>
+<td align="center">d</td>
+</tr>
+</tbody>
+</table>
+<p>In this case as all level means are statistically different they all show up in separate groups, each indicated by a specific letter.</p>
+<p>Finally we can get from this package a plot with the Least significant difference error bars:</p>
+<div class="sourceCode" id="cb98"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb98-1"><a href="one-factor-multiple-levels.html#cb98-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(plasma_LSD)</span></code></pre></div>
+<p><img src="one_factor_multiple_levels_files/figure-html/unnamed-chunk-33-1.png" width="80%"  /></p>
+<p>And below we’re exploring a manual execution of this type of plot (in this case with the standard deviations instead).</p>
+<div class="sourceCode" id="cb99"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb99-1"><a href="one-factor-multiple-levels.html#cb99-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(scales)</span></code></pre></div>
+<div class="sourceCode" id="cb100"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb100-1"><a href="one-factor-multiple-levels.html#cb100-1" aria-hidden="true" tabindex="-1"></a>plasma_narrow_factor <span class="sc">%&gt;%</span></span>
+<span id="cb100-2"><a href="one-factor-multiple-levels.html#cb100-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(power) <span class="sc">%&gt;%</span></span>
+<span id="cb100-3"><a href="one-factor-multiple-levels.html#cb100-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">etch_mean =</span> <span class="fu">mean</span>(etch_rate), <span class="at">etch_sd =</span> <span class="fu">sd</span>(etch_rate)) <span class="sc">%&gt;%</span></span>
+<span id="cb100-4"><a href="one-factor-multiple-levels.html#cb100-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> power, <span class="at">y =</span> etch_mean)) <span class="sc">+</span></span>
+<span id="cb100-5"><a href="one-factor-multiple-levels.html#cb100-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="cb100-6"><a href="one-factor-multiple-levels.html#cb100-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
+<span id="cb100-7"><a href="one-factor-multiple-levels.html#cb100-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_errorbar</span>(<span class="fu">aes</span>(<span class="at">ymin =</span> etch_mean <span class="sc">-</span> etch_sd, </span>
+<span id="cb100-8"><a href="one-factor-multiple-levels.html#cb100-8" aria-hidden="true" tabindex="-1"></a>                    <span class="at">ymax =</span> etch_mean <span class="sc">+</span> etch_sd),</span>
+<span id="cb100-9"><a href="one-factor-multiple-levels.html#cb100-9" aria-hidden="true" tabindex="-1"></a>                <span class="at">width =</span> .<span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb100-10"><a href="one-factor-multiple-levels.html#cb100-10" aria-hidden="true" tabindex="-1"></a>  <span class="co"># scale_y_continuous(breaks = seq(10000, 20000, 10),</span></span>
+<span id="cb100-11"><a href="one-factor-multiple-levels.html#cb100-11" aria-hidden="true" tabindex="-1"></a>  <span class="co">#                    labels = label_number(big.mark = &quot;&#39;&quot;)) +</span></span>
+<span id="cb100-12"><a href="one-factor-multiple-levels.html#cb100-12" aria-hidden="true" tabindex="-1"></a>  <span class="co"># scale_color_viridis_d(option = &quot;C&quot;, begin = 0.1, end = 0.9) +</span></span>
+<span id="cb100-13"><a href="one-factor-multiple-levels.html#cb100-13" aria-hidden="true" tabindex="-1"></a>  <span class="co"># coord_cartesian(ylim = c(17950, 18150)) +</span></span>
+<span id="cb100-14"><a href="one-factor-multiple-levels.html#cb100-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">annotate</span>(<span class="at">geom =</span> <span class="st">&quot;text&quot;</span>, <span class="at">x =</span> <span class="cn">Inf</span>, <span class="at">y =</span> <span class="sc">-</span><span class="cn">Inf</span>, <span class="at">label =</span> <span class="st">&quot;Error bars are +/- 1xSD&quot;</span>, </span>
+<span id="cb100-15"><a href="one-factor-multiple-levels.html#cb100-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">hjust =</span> <span class="dv">1</span>, <span class="at">vjust =</span> <span class="sc">-</span><span class="dv">1</span>, <span class="at">colour =</span> <span class="st">&quot;grey30&quot;</span>, <span class="at">size =</span> <span class="dv">3</span>, </span>
+<span id="cb100-16"><a href="one-factor-multiple-levels.html#cb100-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">fontface =</span> <span class="st">&quot;italic&quot;</span>) <span class="sc">+</span></span>
+<span id="cb100-17"><a href="one-factor-multiple-levels.html#cb100-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_light</span>() <span class="sc">+</span></span>
+<span id="cb100-18"><a href="one-factor-multiple-levels.html#cb100-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;axis volume method validation&quot;</span>,</span>
+<span id="cb100-19"><a href="one-factor-multiple-levels.html#cb100-19" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="st">&quot;Interaction plot - L axis x Operator&quot;</span>,</span>
+<span id="cb100-20"><a href="one-factor-multiple-levels.html#cb100-20" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">&quot;&quot;</span>,</span>
+<span id="cb100-21"><a href="one-factor-multiple-levels.html#cb100-21" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">&quot;Volume [mm]&quot;</span>,</span>
+<span id="cb100-22"><a href="one-factor-multiple-levels.html#cb100-22" aria-hidden="true" tabindex="-1"></a>       <span class="at">caption =</span> <span class="st">&quot;Data source: QA Lab&quot;</span>)</span></code></pre></div>
+<p><img src="one_factor_multiple_levels_files/figure-html/unnamed-chunk-35-1.png" width="80%"  /></p>
+<p>As there is no general consensus on which approach to use we recommend combine the Tukey test with the Fisher’s LSD as completementary R functions. The Tukey test giving a first indication of the levels that have an effect and calculating the means differences and the Fisher function to provide much more additional information on each level. To be considered in each situation the slight difference between the significance level for difference between means and to decide if required to take the most conservative one.</p>
+</div>
+</div>
+<div id="means-comparison-covariance" class="section level3">
+<h3>Means comparison &amp; covariance</h3>
+<div id="ancova" class="section level4">
+<h4>Ancova</h4>
+<p>We assess here the potential utilisation of the analysis of covariance (ancova) in situations where a continuous variable may be influencing the measured value. This technique complements the analysis of variance (anova) allowing for a more accurate assessment of the effects of the categorical variables.</p>
+<p>Below a description of the approach taken from <span class="citation">(<label for="tufte-mn-5" class="margin-toggle">&#8853;</label><input type="checkbox" id="tufte-mn-5" class="margin-toggle">Montgomery 2012<span class="marginnote">Montgomery, Douglas C. 2012. <em>Design and Analysis of Experiments</em>. 8th ed. Wiley.</span>)</span>, pag.655:</p>
+<p><em>Suppose that in an experiment with a response variable y there is another variable, say x, and that y is linearly related to x. Furthermore, suppose that x cannot be controlled by the experimenter but can be observed along with y. The variable x is called a covariate or concomitant variable. The analysis of covariance involves adjusting the observed response variable for the effect of the concomitant variable.</em></p>
+<p><em>If such an adjustment is not performed, the concomitant variable could inflate the error mean square and make true differences in the response due to treatments harder to detect. Thus, the analysis of covariance is a method of adjusting for the effects of an uncontrollable nuisance variable. As we will see, the procedure is a combination of analysis of variance and regression analysis.</em></p>
+<p><em>As an example of an experiment in which the analysis of covariance may be employed, consider a study performed to determine if there is a difference in the strength of a monofilament fiber produced by three different machines. The data from this experiment are shown in Table 15.10 (below). Figure 15.3 presents a scatter diagram of strength (y) versus the diameter (or thickness) of the sample. Clearly, the strength of the fiber is also affected by its thickness; consequently, a thicker fiber will generally be stronger than a thinner one. The analysis of covariance could be used to remove the effect of thickness (x) on strength (y) when testing for differences in strength between machines.</em></p>
+<div class="sourceCode" id="cb101"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb101-1"><a href="one-factor-multiple-levels.html#cb101-1" aria-hidden="true" tabindex="-1"></a>filament <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">&quot;../industRial/data-raw/filament.xlsx&quot;</span>)</span>
+<span id="cb101-2"><a href="one-factor-multiple-levels.html#cb101-2" aria-hidden="true" tabindex="-1"></a>filament <span class="sc">%&gt;%</span> </span>
+<span id="cb101-3"><a href="one-factor-multiple-levels.html#cb101-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable</span>()</span></code></pre></div>
+<table>
+<thead>
+<tr class="header">
+<th align="left">machine</th>
+<th align="right">strength</th>
+<th align="right">thickness</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">m1</td>
+<td align="right">36</td>
+<td align="right">20</td>
+</tr>
+<tr class="even">
+<td align="left">m1</td>
+<td align="right">41</td>
+<td align="right">25</td>
+</tr>
+<tr class="odd">
+<td align="left">m1</td>
+<td align="right">39</td>
+<td align="right">24</td>
+</tr>
+<tr class="even">
+<td align="left">m1</td>
+<td align="right">42</td>
+<td align="right">25</td>
+</tr>
+<tr class="odd">
+<td align="left">m1</td>
+<td align="right">49</td>
+<td align="right">32</td>
+</tr>
+<tr class="even">
+<td align="left">m2</td>
+<td align="right">40</td>
+<td align="right">22</td>
+</tr>
+<tr class="odd">
+<td align="left">m2</td>
+<td align="right">48</td>
+<td align="right">28</td>
+</tr>
+<tr class="even">
+<td align="left">m2</td>
+<td align="right">39</td>
+<td align="right">22</td>
+</tr>
+<tr class="odd">
+<td align="left">m2</td>
+<td align="right">45</td>
+<td align="right">30</td>
+</tr>
+<tr class="even">
+<td align="left">m2</td>
+<td align="right">44</td>
+<td align="right">28</td>
+</tr>
+<tr class="odd">
+<td align="left">m3</td>
+<td align="right">35</td>
+<td align="right">21</td>
+</tr>
+<tr class="even">
+<td align="left">m3</td>
+<td align="right">37</td>
+<td align="right">23</td>
+</tr>
+<tr class="odd">
+<td align="left">m3</td>
+<td align="right">42</td>
+<td align="right">26</td>
+</tr>
+<tr class="even">
+<td align="left">m3</td>
+<td align="right">34</td>
+<td align="right">21</td>
+</tr>
+<tr class="odd">
+<td align="left">m3</td>
+<td align="right">32</td>
+<td align="right">15</td>
+</tr>
+</tbody>
+</table>
+<p>Below a plot of strenght by thickness:</p>
+<div class="sourceCode" id="cb102"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb102-1"><a href="one-factor-multiple-levels.html#cb102-1" aria-hidden="true" tabindex="-1"></a>filament <span class="sc">%&gt;%</span></span>
+<span id="cb102-2"><a href="one-factor-multiple-levels.html#cb102-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> thickness, <span class="at">y =</span> strength)) <span class="sc">+</span></span>
+<span id="cb102-3"><a href="one-factor-multiple-levels.html#cb102-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb102-4"><a href="one-factor-multiple-levels.html#cb102-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">&quot;lm&quot;</span>, <span class="at">se =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb102-5"><a href="one-factor-multiple-levels.html#cb102-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_light</span>()</span></code></pre></div>
+<p><img src="one_factor_multiple_levels_files/figure-html/unnamed-chunk-37-1.png" width="80%"  /></p>
+<div class="sourceCode" id="cb103"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb103-1"><a href="one-factor-multiple-levels.html#cb103-1" aria-hidden="true" tabindex="-1"></a><span class="co"># as the plot is slightly different from the book, the plot below has been done </span></span>
+<span id="cb103-2"><a href="one-factor-multiple-levels.html#cb103-2" aria-hidden="true" tabindex="-1"></a><span class="co"># in base R just to confirm and we get exactly the sameas  with ggplot2.</span></span>
+<span id="cb103-3"><a href="one-factor-multiple-levels.html#cb103-3" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow=</span><span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">1</span>))</span>
+<span id="cb103-4"><a href="one-factor-multiple-levels.html#cb103-4" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(filament<span class="sc">$</span>thickness, filament<span class="sc">$</span>strength)</span>
+<span id="cb103-5"><a href="one-factor-multiple-levels.html#cb103-5" aria-hidden="true" tabindex="-1"></a><span class="co"># plot(jitter(filament$strength, 1), jitter(filament$thickness, 1))</span></span>
+<span id="cb103-6"><a href="one-factor-multiple-levels.html#cb103-6" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="fu">lm</span>(strength<span class="sc">~</span>thickness, <span class="at">data =</span> filament))</span></code></pre></div>
+<p>And a short test to assess the strenght of the correlation:</p>
+<div class="sourceCode" id="cb104"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb104-1"><a href="one-factor-multiple-levels.html#cb104-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(stats)</span></code></pre></div>
+<div class="sourceCode" id="cb105"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb105-1"><a href="one-factor-multiple-levels.html#cb105-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cor.test</span>(filament<span class="sc">$</span>strength, filament<span class="sc">$</span>thickness)</span></code></pre></div>
+<pre><code>
+    Pearson&#39;s product-moment correlation
+
+data:  filament$strength and filament$thickness
+t = 9.8039, df = 13, p-value = 2.263e-07
+alternative hypothesis: true correlation is not equal to 0
+95 percent confidence interval:
+ 0.8209993 0.9797570
+sample estimates:
+     cor 
+0.938542 </code></pre>
+<p>Going further and using the approach from <span class="citation">(<label for="tufte-mn-6" class="margin-toggle">&#8853;</label><input type="checkbox" id="tufte-mn-6" class="margin-toggle">Broc 2016<span class="marginnote">Broc, Guillaume. 2016. <em>Stats Faciles Avec r</em>. 1th ed. deBoeck.</span>)</span> I’m faceting the scatterplots to assess if the coefficient of the linear regression is similar for all the levels of the machine factor:</p>
+<div class="sourceCode" id="cb107"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb107-1"><a href="one-factor-multiple-levels.html#cb107-1" aria-hidden="true" tabindex="-1"></a>filament <span class="sc">%&gt;%</span></span>
+<span id="cb107-2"><a href="one-factor-multiple-levels.html#cb107-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> thickness, <span class="at">y =</span> strength)) <span class="sc">+</span></span>
+<span id="cb107-3"><a href="one-factor-multiple-levels.html#cb107-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb107-4"><a href="one-factor-multiple-levels.html#cb107-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">&quot;lm&quot;</span>, <span class="at">se =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb107-5"><a href="one-factor-multiple-levels.html#cb107-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="at">facets =</span> <span class="st">&quot;machine&quot;</span>) <span class="sc">+</span></span>
+<span id="cb107-6"><a href="one-factor-multiple-levels.html#cb107-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_light</span>()</span></code></pre></div>
+<p><img src="one_factor_multiple_levels_files/figure-html/unnamed-chunk-41-1.png" width="80%"  /></p>
+<p>Visually this is the case, going from one level to the other is not changing the relationship between thickness and strenght - increasing thickness increases stenght. Visually the slopes are similar but the number of points is small. In a real case this verification could be extended with the correlation test for each level or/and a statistical test between slopes.</p>
+<p>We’re now reproducing in R the ancova case study from the book, still using the aov function.</p>
+<p>The way to feed the R function arguments is obtained from <a href="https://www.datanovia.com/en/lessons/ancova-in-r/" class="uri">https://www.datanovia.com/en/lessons/ancova-in-r/</a></p>
+<p>Note that in the formula the covariate goes first (and there is no interaction)! If you do not do this in order, you will get different results.</p>
+</div>
+<div id="ancova-in-aov" class="section level4">
+<h4>Ancova in aov</h4>
+<p><em>Three different machines produce a monofilament fiber for a textile company. The process engineer is interested in determining if there is a difference in the breaking strength of the fiber produced by the three machines. However, the strength of a fiber is related to its diameter, with thicker fibers being generally stronger than thinner ones. A random sample of five fiber specimens is selected from each machine.</em></p>
+<div class="sourceCode" id="cb108"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb108-1"><a href="one-factor-multiple-levels.html#cb108-1" aria-hidden="true" tabindex="-1"></a>filament_ancova <span class="ot">&lt;-</span> <span class="fu">aov</span>(strength <span class="sc">~</span> thickness  <span class="sc">+</span> machine, filament)</span>
+<span id="cb108-2"><a href="one-factor-multiple-levels.html#cb108-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(filament_ancova)</span></code></pre></div>
+<pre><code>            Df Sum Sq Mean Sq F value   Pr(&gt;F)    
+thickness    1 305.13  305.13 119.933 2.96e-07 ***
+machine      2  13.28    6.64   2.611    0.118    
+Residuals   11  27.99    2.54                     
+---
+Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+<p>All values from the book table page 662 are correctly obtained with the code above. In particular:</p>
+<ul>
+<li>machine in this table corresponds to the adjusted machines mean square</li>
+<li>residuals in this table corresponds to the error</li>
+</ul>
+<p>to be noted that the R anova table gives the thickness meansquare while the book doesn’t.</p>
+<p>Conclusions from the book in page 662:</p>
+<p><em>Comparing the adjusted treatment means with the unadjusted treatment means (the y i. ), we note that the adjusted means are much closer together, another indication that the covariance analysis was necessary.</em></p>
+<p><em>A basic assumption in the analysis of covariance is that the treatments do not influence the covariate x because the technique removes the effect of variations in the x i. . However, if the variability in the x i. is due in part to the treatments, then analysis of covariance removes part of the treatment effect. Thus, we must be reasonably sure that the treatments do not affect the values x ij.</em></p>
+<p><em>In some experiments this may be obvious from the nature of the covariate, whereas in others it may be more doubtful. In our example, there may be a difference in fiber diameter (x ij ) between the three machines. In such cases, Cochran and Cox (1957) suggest that an analysis of variance on the x ij values may be helpful in determining the validity of this assumption. …there is no reason to believe that machines produce fibers of different diameters.</em></p>
+<p>(I did not go further here as it goes beyond the scope of the assessment)</p>
+</div>
+<div id="comparison-with-anova" class="section level4">
+<h4>Comparison with anova</h4>
+<p>Below I’m doing the common approach we’ve been using at NSTC in design of experiments.</p>
+<div class="sourceCode" id="cb110"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb110-1"><a href="one-factor-multiple-levels.html#cb110-1" aria-hidden="true" tabindex="-1"></a>filament_aov <span class="ot">&lt;-</span> <span class="fu">aov</span>(strength <span class="sc">~</span> machine, filament)</span>
+<span id="cb110-2"><a href="one-factor-multiple-levels.html#cb110-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(filament_aov)</span></code></pre></div>
+<pre><code>            Df Sum Sq Mean Sq F value Pr(&gt;F)  
+machine      2  140.4   70.20   4.089 0.0442 *
+Residuals   12  206.0   17.17                 
+---
+Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+<p>The anova table obtained also corresponds correctly to the book example.</p>
+<p>Montgomery final observations:</p>
+<p><em>It is interesting to note what would have happened in this experiment if an analysis of covariance had not been performed, that is, if the breaking strength data (y) had been analyzed as a completely randomized single-factor experiment in which the covariate x was ignored. The analysis of variance of the breaking strength data is shown in Table 15.14. We immediately notice that the error estimate is much longer in the CRD analysis (17.17 versus 2.54). This is a reflection of the effectiveness of analysis of covariance in reducing error variability.</em></p>
+<p><em>We would also conclude, based on the CRD analysis, that machines differ significantly in the strength of fiber produced. This is exactly opposite the conclusion reached by the covariance analysis.</em></p>
+<p><em>If we suspected that the machines differed significantly in their effect on fiber strength, then we would try to equalize the strength output of the three machines. However, in this problem the machines do not differ in the strength of fiber produced after the linear effect of fiber diameter is removed. It would be helpful to reduce the within-machine fiber diameter variability because this would probably reduce the strength variability in the fiber.</em></p>
+<p>Potential applications</p>
+<p>In the scope of methods validations this approach could potentially be used in robustness validations when there is suspiction that a continuous variable is disturbing the measurement.</p>
+<p>Naturally this should not be applied everywhere but only where there would to be logical a physical or chemical reason behind as in the example with thickness and strenght.</p>
+
+<div class="sourceCode" id="cb112"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb112-1"><a href="one-factor-multiple-levels.html#cb112-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb112-2"><a href="one-factor-multiple-levels.html#cb112-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readxl)</span>
+<span id="cb112-3"><a href="one-factor-multiple-levels.html#cb112-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(stats)</span>
+<span id="cb112-4"><a href="one-factor-multiple-levels.html#cb112-4" aria-hidden="true" tabindex="-1"></a>filter <span class="ot">&lt;-</span> dplyr<span class="sc">::</span>filter</span>
+<span id="cb112-5"><a href="one-factor-multiple-levels.html#cb112-5" aria-hidden="true" tabindex="-1"></a>select <span class="ot">&lt;-</span> dplyr<span class="sc">::</span>select</span></code></pre></div>
+</div>
+</div>
+</div>
+<p style="text-align: center;">
+<a href="one-factor-two-levels.html"><button class="btn btn-default">Previous</button></a>
+<a href="two-factors-multiple-levels.html"><button class="btn btn-default">Next</button></a>
+</p>
+</div>
+</div>
+
+
+
+</body>
+</html>

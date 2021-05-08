@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta property="og:title" content="4.6 The 2^2 Factorial Design | industRial data science" />
+<meta property="og:type" content="book" />
+
+
+<meta property="og:description" content="The output format is bookdown::bookdown_site." />
+
+
+<meta name="author" content="João Ramalho" />
+
+<meta name="date" content="2021-01-20" />
+
+
+<meta name="description" content="The output format is bookdown::bookdown_site.">
+
+<title>4.6 The 2^2 Factorial Design | industRial data science</title>
+
+<script src="libs/header-attrs-2.6/header-attrs.js"></script>
+<script src="libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="libs/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet" />
+<script src="libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="libs/navigation-1.1/tabsets.js"></script>
+
+
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+  height: auto;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container-fluid main-container">
+
+
+<div class="row">
+<div class="col-sm-12">
+<div id="TOC">
+<ul>
+<li><a href="index.html#introduction">Introduction</a></li>
+<li class="part"><span><b>I FRAMEWORK</b></span></li>
+<li><a href="1-dfss-design-for-six-sigma.html#dfss---design-for-six-sigma"><span class="toc-section-number">1</span> DFSS - Design for Six Sigma</a></li>
+<li><a href="2-statistics.html#statistics"><span class="toc-section-number">2</span> Statistics</a></li>
+<li><a href="3-r-and-data-science.html#r-and-data-science"><span class="toc-section-number">3</span> R and Data Science</a>
+<ul>
+<li><a href="3-1-why-r.html#why-r"><span class="toc-section-number">3.1</span> Why R</a></li>
+<li><a href="3-2-usefull-packages.html#usefull-packages"><span class="toc-section-number">3.2</span> Usefull packages</a></li>
+</ul></li>
+<li class="part"><span><b>II CASE STUDIES</b></span></li>
+<li><a href="4-DOE.html#DOE"><span class="toc-section-number">4</span> DOE - Design of Experiments</a>
+<ul>
+<li><a href="4-1-simple-comparative-experiments.html#simple-comparative-experiments"><span class="toc-section-number">4.1</span> Simple comparative experiments</a>
+<ul>
+<li><a href="4-1-simple-comparative-experiments.html#the-cement-example"><span class="toc-section-number">4.1.1</span> The Cement example</a></li>
+<li><a href="4-1-simple-comparative-experiments.html#homogeneity-of-variances-test-levene-test"><span class="toc-section-number">4.1.2</span> Homogeneity of variances test (Levene Test)</a></li>
+<li><a href="4-1-simple-comparative-experiments.html#sample-size-calculation"><span class="toc-section-number">4.1.3</span> Sample size calculation</a></li>
+<li><a href="4-1-simple-comparative-experiments.html#t-test-paired"><span class="toc-section-number">4.1.4</span> t-test paired</a></li>
+</ul></li>
+<li><a href="4-2-single-factor-designs.html#single-factor-designs"><span class="toc-section-number">4.2</span> Single factor designs</a>
+<ul>
+<li><a href="4-2-single-factor-designs.html#plasma-etching-example"><span class="toc-section-number">4.2.1</span> Plasma etching example</a></li>
+<li><a href="4-2-single-factor-designs.html#analysis-of-variance"><span class="toc-section-number">4.2.2</span> Analysis of variance</a></li>
+<li><a href="4-2-single-factor-designs.html#single-factor-anova-fixed-effects-model"><span class="toc-section-number">4.2.3</span> Single factor Anova, fixed effects model</a></li>
+<li><a href="4-2-single-factor-designs.html#model-adequacy-check"><span class="toc-section-number">4.2.4</span> Model adequacy check</a></li>
+<li><a href="4-2-single-factor-designs.html#residuals-normality-check-outliers"><span class="toc-section-number">4.2.5</span> Residuals normality check &amp; outliers</a></li>
+<li><a href="4-2-single-factor-designs.html#plot-of-residuals-in-time-sequence"><span class="toc-section-number">4.2.6</span> Plot of residuals in time sequence</a></li>
+<li><a href="4-2-single-factor-designs.html#plot-of-residuals-versus-fitted-values"><span class="toc-section-number">4.2.7</span> Plot of residuals versus fitted values</a></li>
+<li><a href="4-2-single-factor-designs.html#equality-of-variances-test-barletts-test"><span class="toc-section-number">4.2.8</span> Equality of variances test (Barlett’s test)</a></li>
+<li><a href="4-2-single-factor-designs.html#tuckeys-pairwise-comparison-test"><span class="toc-section-number">4.2.9</span> Tuckey’s pairwise comparison test</a></li>
+<li><a href="4-2-single-factor-designs.html#fishers-lsd---pairwise-comparison-test"><span class="toc-section-number">4.2.10</span> Fisher’s LSD - pairwise comparison test</a></li>
+<li><a href="4-2-single-factor-designs.html#practical-interpretation-of-results"><span class="toc-section-number">4.2.11</span> Practical interpretation of results</a></li>
+<li><a href="4-2-single-factor-designs.html#linear-model"><span class="toc-section-number">4.2.12</span> Linear model</a></li>
+<li><a href="4-2-single-factor-designs.html#linear-model-plot"><span class="toc-section-number">4.2.13</span> Linear model plot</a></li>
+<li><a href="4-2-single-factor-designs.html#predicting-new-values"><span class="toc-section-number">4.2.14</span> Predicting new values</a></li>
+<li><a href="4-2-single-factor-designs.html#r²-coefficient-of-determination"><span class="toc-section-number">4.2.15</span> R², coefficient of determination</a></li>
+<li><a href="4-2-single-factor-designs.html#sample-size-calculation-1"><span class="toc-section-number">4.2.16</span> Sample size calculation</a></li>
+</ul></li>
+<li><a href="4-3-two-factors-anova-fixed-effects-model.html#two-factors-anova-fixed-effects-model"><span class="toc-section-number">4.3</span> two-factors ANOVA, fixed effects model</a>
+<ul>
+<li><a href="4-3-two-factors-anova-fixed-effects-model.html#battery-life-example"><span class="toc-section-number">4.3.1</span> Battery life example</a></li>
+<li><a href="4-3-two-factors-anova-fixed-effects-model.html#analysis-of-variance-1"><span class="toc-section-number">4.3.2</span> Analysis of variance</a></li>
+<li><a href="4-3-two-factors-anova-fixed-effects-model.html#doe-and-anova-plots"><span class="toc-section-number">4.3.3</span> DoE and Anova plots</a></li>
+<li><a href="4-3-two-factors-anova-fixed-effects-model.html#r²-coefficient-of-determination-1"><span class="toc-section-number">4.3.4</span> R², coefficient of determination</a></li>
+<li><a href="4-3-two-factors-anova-fixed-effects-model.html#model-adequacy-checking"><span class="toc-section-number">4.3.5</span> Model adequacy checking</a></li>
+<li><a href="4-3-two-factors-anova-fixed-effects-model.html#residuals-normality-check-outliers-1"><span class="toc-section-number">4.3.6</span> Residuals normality check &amp; outliers</a></li>
+<li><a href="4-3-two-factors-anova-fixed-effects-model.html#plot-of-residuals-versus-fitted-values-1"><span class="toc-section-number">4.3.7</span> Plot of residuals versus fitted values</a></li>
+<li><a href="4-3-two-factors-anova-fixed-effects-model.html#sample-size-calculation-2"><span class="toc-section-number">4.3.8</span> Sample size calculation</a></li>
+<li><a href="4-3-two-factors-anova-fixed-effects-model.html#model-with-no-interaction"><span class="toc-section-number">4.3.9</span> Model with no interaction</a></li>
+</ul></li>
+<li><a href="4-4-general-factorial-design.html#general-factorial-design"><span class="toc-section-number">4.4</span> General factorial design</a>
+<ul>
+<li><a href="4-4-general-factorial-design.html#soft-drink-bottling-example"><span class="toc-section-number">4.4.1</span> Soft Drink bottling example</a></li>
+<li><a href="4-4-general-factorial-design.html#analysis-of-variance-2"><span class="toc-section-number">4.4.2</span> Analysis of variance</a></li>
+<li><a href="4-4-general-factorial-design.html#residuals-analysis"><span class="toc-section-number">4.4.3</span> Residuals analysis</a></li>
+<li><a href="4-4-general-factorial-design.html#doe-plots"><span class="toc-section-number">4.4.4</span> DoE plots</a></li>
+</ul></li>
+<li><a href="4-5-the-2k-factorial-designs.html#the-2k-factorial-designs"><span class="toc-section-number">4.5</span> The 2^k factorial designs</a></li>
+<li><a href="4-6-the-22-factorial-design.html#the-22-factorial-design"><span class="toc-section-number">4.6</span> The 2^2 Factorial Design</a>
+<ul>
+<li><a href="4-6-the-22-factorial-design.html#the-chemical-process-example"><span class="toc-section-number">4.6.1</span> The Chemical Process example</a></li>
+<li><a href="4-6-the-22-factorial-design.html#anova"><span class="toc-section-number">4.6.2</span> Anova</a></li>
+<li><a href="4-6-the-22-factorial-design.html#regression-model-prediction"><span class="toc-section-number">4.6.3</span> Regression model / Prediction</a></li>
+<li><a href="4-6-the-22-factorial-design.html#response-surface"><span class="toc-section-number">4.6.4</span> Response surface</a></li>
+</ul></li>
+<li><a href="4-7-the-23-factorial-design.html#the-23-factorial-design"><span class="toc-section-number">4.7</span> The 2^3 Factorial Design</a>
+<ul>
+<li><a href="4-7-the-23-factorial-design.html#the-plasma-etching-example"><span class="toc-section-number">4.7.1</span> The plasma etching example</a></li>
+<li><a href="4-7-the-23-factorial-design.html#anova-1"><span class="toc-section-number">4.7.2</span> Anova</a></li>
+<li><a href="4-7-the-23-factorial-design.html#regression-model-prediction-1"><span class="toc-section-number">4.7.3</span> Regression model / Prediction</a></li>
+<li><a href="4-7-the-23-factorial-design.html#reduced-model"><span class="toc-section-number">4.7.4</span> Reduced model</a></li>
+<li><a href="4-7-the-23-factorial-design.html#doe-plots-1"><span class="toc-section-number">4.7.5</span> DoE plots</a></li>
+</ul></li>
+<li><a href="4-8-the-general-2k-design.html#the-general-2k-design"><span class="toc-section-number">4.8</span> The general 2^k design</a>
+<ul>
+<li><a href="4-8-the-general-2k-design.html#calculating-the-number-combinations"><span class="toc-section-number">4.8.1</span> Calculating the number combinations</a></li>
+<li><a href="4-8-the-general-2k-design.html#relationship-coded-vs-natural-variables"><span class="toc-section-number">4.8.2</span> Relationship coded vs natural variables</a></li>
+</ul></li>
+<li><a href="4-9-single-replicate-2k-design.html#single-replicate-2k-design"><span class="toc-section-number">4.9</span> Single replicate 2^k design</a>
+<ul>
+<li><a href="4-9-single-replicate-2k-design.html#the-filtration-example"><span class="toc-section-number">4.9.1</span> The Filtration example</a></li>
+<li><a href="4-9-single-replicate-2k-design.html#anova-2"><span class="toc-section-number">4.9.2</span> Anova</a></li>
+<li><a href="4-9-single-replicate-2k-design.html#linear-regression---plot-of-effects"><span class="toc-section-number">4.9.3</span> Linear regression - Plot of effects</a></li>
+<li><a href="4-9-single-replicate-2k-design.html#doe-plots-2"><span class="toc-section-number">4.9.4</span> DoE plots</a></li>
+<li><a href="4-9-single-replicate-2k-design.html#anova-reduced-model-significant-effects-only"><span class="toc-section-number">4.9.5</span> Anova reduced model (significant effects only)</a></li>
+<li><a href="4-9-single-replicate-2k-design.html#linear-regression---reduced-model"><span class="toc-section-number">4.9.6</span> Linear regression - reduced model</a></li>
+<li><a href="4-9-single-replicate-2k-design.html#residuals-normality-check"><span class="toc-section-number">4.9.7</span> Residuals normality check</a></li>
+</ul></li>
+<li><a href="4-10-two-level-fractional-factorial-designs.html#two-level-fractional-factorial-designs"><span class="toc-section-number">4.10</span> Two level fractional factorial designs</a>
+<ul>
+<li><a href="4-10-two-level-fractional-factorial-designs.html#the-one-half-fraction-of-th-2k-design"><span class="toc-section-number">4.10.1</span> The One-Half Fraction of th 2k Design</a></li>
+<li><a href="4-10-two-level-fractional-factorial-designs.html#the-filtration-example-modified"><span class="toc-section-number">4.10.2</span> The filtration example (modified)</a></li>
+<li><a href="4-10-two-level-fractional-factorial-designs.html#anova-3"><span class="toc-section-number">4.10.3</span> Anova</a></li>
+</ul></li>
+</ul></li>
+<li><a href="5-MSA.html#MSA"><span class="toc-section-number">5</span> MSA - Measurement System Analysis</a></li>
+<li><a href="6-SPC.html#SPC"><span class="toc-section-number">6</span> SPC - Statistical Process Control</a>
+<ul>
+<li><a href="6-1-xbar-and-r-charts.html#xbar-and-r-charts"><span class="toc-section-number">6.1</span> xbar and R charts</a></li>
+</ul></li>
+<li class="part"><span><b>III TOOLBOX</b></span></li>
+<li><a href="7-Rpck.html#Rpck"><span class="toc-section-number">7</span> R Packages</a>
+<ul>
+<li><a href="7-1-six-sigma.html#six-sigma"><span class="toc-section-number">7.1</span> six sigma</a></li>
+<li><a href="7-2-ggspc.html#ggspc"><span class="toc-section-number">7.2</span> ggspc</a></li>
+<li><a href="7-3-qcc.html#qcc"><span class="toc-section-number">7.3</span> qcc</a></li>
+</ul></li>
+<li><a href="about-the-authors.html#about-the-authors">About the authors</a></li>
+<li><a href="references.html#references">References</a></li>
+</ul>
+</div>
+</div>
+</div>
+<div class="row">
+<div class="col-sm-12">
+<div id="the-22-factorial-design" class="section level2" number="4.6">
+<h2><span class="header-section-number">4.6</span> The 2^2 Factorial Design</h2>
+<p>6.2</p>
+<p>Slides with R code on Montgomery book can be found under:
+<a href="https://www.stat.ncsu.edu/people/bloomfield/courses/st516/" class="uri">https://www.stat.ncsu.edu/people/bloomfield/courses/st516/</a></p>
+<div id="the-chemical-process-example" class="section level3" number="4.6.1">
+<h3><span class="header-section-number">4.6.1</span> The Chemical Process example</h3>
+<pre class="r"><code>chm &lt;- read.csv(sep = &quot;;&quot;, header = TRUE,
+                   paste0(working_folder, &quot;6 chemical.csv&quot;))
+
+# Converting into a narrow table with a factor for utilisation with ggplot2
+# syntax: gather(data, 
+#               name of the new key column (where the columns names go to), 
+#               name of the new value column (where the values go), 
+#               name of the columns to be gathered)
+chmn &lt;- chm %&gt;% # &quot;chm narrow dataframe&quot;
+  gather(replicate, yield, I, II, III)</code></pre>
+</div>
+<div id="anova" class="section level3" number="4.6.2">
+<h3><span class="header-section-number">4.6.2</span> Anova</h3>
+<pre class="r"><code>chmn_lm &lt;- lm(yield ~ A + B + A:B, data = chmn)
+chmn_aov &lt;- aov(chmn_lm)
+summary(chmn_aov)</code></pre>
+<pre><code>##             Df Sum Sq Mean Sq F value   Pr(&gt;F)    
+## A            1 208.33  208.33  53.191 8.44e-05 ***
+## B            1  75.00   75.00  19.149  0.00236 ** 
+## A:B          1   8.33    8.33   2.128  0.18278    
+## Residuals    8  31.33    3.92                     
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+<pre class="r"><code>par(mfrow = c(1, 2))
+plot(yield ~ A * B, chmn)</code></pre>
+<p><img src="IndustRialds_files/figure-html/chmn-fig-1.png" width="672" /></p>
+<pre class="r"><code>plot(chmn_lm)</code></pre>
+<p><img src="IndustRialds_files/figure-html/chmn-fig-2.png" width="672" /><img src="IndustRialds_files/figure-html/chmn-fig-3.png" width="672" /></p>
+<pre class="r"><code>par(mfrow = c(1, 1))
+with(chmn, interaction.plot(A, B, yield))</code></pre>
+<p><img src="IndustRialds_files/figure-html/chmn-fig-4.png" width="672" /></p>
+<pre class="r"><code>plot(chmn_aov) # the usual suspects</code></pre>
+<p><img src="IndustRialds_files/figure-html/chmn-fig-5.png" width="672" /><img src="IndustRialds_files/figure-html/chmn-fig-6.png" width="672" /><img src="IndustRialds_files/figure-html/chmn-fig-7.png" width="672" /><img src="IndustRialds_files/figure-html/chmn-fig-8.png" width="672" /></p>
+</div>
+<div id="regression-model-prediction" class="section level3" number="4.6.3">
+<h3><span class="header-section-number">4.6.3</span> Regression model / Prediction</h3>
+<p>Effects
+Fit the regression equation, with versions of the factors, coded as numeric!, −1 for low levels, and +1 for high levels.</p>
+<pre class="r"><code>coded &lt;- function(x) {
+  ifelse(x == x[1], -1, 1)
+}
+chmn2 &lt;- within(chmn, {cA = coded(A); cB = coded(B)})
+chmn2 &lt;- select(chmn2, A, B, replicate, yield, cA, cB)
+chmn2_lm &lt;- lm(yield ~ cA * cB, data = chmn2)
+summary(chmn2_lm)</code></pre>
+<pre><code>## 
+## Call:
+## lm(formula = yield ~ cA * cB, data = chmn2)
+## 
+## Residuals:
+##    Min     1Q Median     3Q    Max 
+## -2.000 -1.333 -0.500  1.083  3.000 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)  27.5000     0.5713  48.135 3.84e-11 ***
+## cA            4.1667     0.5713   7.293 8.44e-05 ***
+## cB           -2.5000     0.5713  -4.376  0.00236 ** 
+## cA:cB         0.8333     0.5713   1.459  0.18278    
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 1.979 on 8 degrees of freedom
+## Multiple R-squared:  0.903,  Adjusted R-squared:  0.8666 
+## F-statistic: 24.82 on 3 and 8 DF,  p-value: 0.0002093</code></pre>
+<pre class="r"><code># Predict new values
+chmn_new &lt;- data.frame(cA = 1, cB = 1)
+predict(chmn2_lm, newdata = chmn_new)</code></pre>
+<pre><code>##  1 
+## 30</code></pre>
+<pre class="r"><code># Compare with predicted table below (the same values are found!)
+chmn2_tidy &lt;- augment(chmn2_lm)</code></pre>
+<p>A coefficient in a regression equation is the change in the response when the corresponding variable changes by +1.</p>
+<p>As A or B changes from its low level to its high level, the coded variable changes by 1 − (−1) = +2, so the change in the response is twice the regression coefficient.
+So the effects and interaction(s) are twice the values in the “Estimate” column.
+–&gt; These regression coefficients are often called effects and interactions, even though they differ from the definitions given earlier.</p>
+</div>
+<div id="response-surface" class="section level3" number="4.6.4">
+<h3><span class="header-section-number">4.6.4</span> Response surface</h3>
+<p>(still to be implemented)</p>
+<pre class="r"><code>ngrid &lt;- 20
+Agrid &lt;- Bgrid &lt;- seq(from = -1, to = 1, length = ngrid)
+yhat &lt;- predict(chmn_lm, expand.grid(cA = Agrid, cB = Bgrid))
+yhat &lt;- matrix(yhat, length(Agrid), length(Bgrid))
+persp(Agrid, Bgrid, yhat, theta = -40, phi = 30)
+# in real values:
+persp(20 + 5 * Agrid, 1.5 + 0.5 * Bgrid, yhat, theta = -40, phi = 30,
+ticktype = &quot;d&quot;, xlab = &quot;Reactant Concentration&quot;, ylab = &quot;Catalyst&quot;)</code></pre>
+</div>
+</div>
+<p style="text-align: center;">
+<a href="4-5-the-2k-factorial-designs.html"><button class="btn btn-default">Previous</button></a>
+<a href="4-7-the-23-factorial-design.html"><button class="btn btn-default">Next</button></a>
+</p>
+</div>
+</div>
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+$(document).ready(function () {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+});
+
+</script>
+
+</body>
+</html>

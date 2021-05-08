@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta property="og:title" content="4.3 two-factors ANOVA, fixed effects model | industRial data science" />
+<meta property="og:type" content="book" />
+
+
+<meta property="og:description" content="The output format is bookdown::bookdown_site." />
+
+
+<meta name="author" content="João Ramalho" />
+
+<meta name="date" content="2021-01-20" />
+
+
+<meta name="description" content="The output format is bookdown::bookdown_site.">
+
+<title>4.3 two-factors ANOVA, fixed effects model | industRial data science</title>
+
+<script src="libs/header-attrs-2.6/header-attrs.js"></script>
+<script src="libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="libs/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet" />
+<script src="libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="libs/navigation-1.1/tabsets.js"></script>
+
+
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+  height: auto;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container-fluid main-container">
+
+
+<div class="row">
+<div class="col-sm-12">
+<div id="TOC">
+<ul>
+<li><a href="index.html#introduction">Introduction</a></li>
+<li class="part"><span><b>I FRAMEWORK</b></span></li>
+<li><a href="1-dfss-design-for-six-sigma.html#dfss---design-for-six-sigma"><span class="toc-section-number">1</span> DFSS - Design for Six Sigma</a></li>
+<li><a href="2-statistics.html#statistics"><span class="toc-section-number">2</span> Statistics</a></li>
+<li><a href="3-r-and-data-science.html#r-and-data-science"><span class="toc-section-number">3</span> R and Data Science</a>
+<ul>
+<li><a href="3-1-why-r.html#why-r"><span class="toc-section-number">3.1</span> Why R</a></li>
+<li><a href="3-2-usefull-packages.html#usefull-packages"><span class="toc-section-number">3.2</span> Usefull packages</a></li>
+</ul></li>
+<li class="part"><span><b>II CASE STUDIES</b></span></li>
+<li><a href="4-DOE.html#DOE"><span class="toc-section-number">4</span> DOE - Design of Experiments</a>
+<ul>
+<li><a href="4-1-simple-comparative-experiments.html#simple-comparative-experiments"><span class="toc-section-number">4.1</span> Simple comparative experiments</a>
+<ul>
+<li><a href="4-1-simple-comparative-experiments.html#the-cement-example"><span class="toc-section-number">4.1.1</span> The Cement example</a></li>
+<li><a href="4-1-simple-comparative-experiments.html#homogeneity-of-variances-test-levene-test"><span class="toc-section-number">4.1.2</span> Homogeneity of variances test (Levene Test)</a></li>
+<li><a href="4-1-simple-comparative-experiments.html#sample-size-calculation"><span class="toc-section-number">4.1.3</span> Sample size calculation</a></li>
+<li><a href="4-1-simple-comparative-experiments.html#t-test-paired"><span class="toc-section-number">4.1.4</span> t-test paired</a></li>
+</ul></li>
+<li><a href="4-2-single-factor-designs.html#single-factor-designs"><span class="toc-section-number">4.2</span> Single factor designs</a>
+<ul>
+<li><a href="4-2-single-factor-designs.html#plasma-etching-example"><span class="toc-section-number">4.2.1</span> Plasma etching example</a></li>
+<li><a href="4-2-single-factor-designs.html#analysis-of-variance"><span class="toc-section-number">4.2.2</span> Analysis of variance</a></li>
+<li><a href="4-2-single-factor-designs.html#single-factor-anova-fixed-effects-model"><span class="toc-section-number">4.2.3</span> Single factor Anova, fixed effects model</a></li>
+<li><a href="4-2-single-factor-designs.html#model-adequacy-check"><span class="toc-section-number">4.2.4</span> Model adequacy check</a></li>
+<li><a href="4-2-single-factor-designs.html#residuals-normality-check-outliers"><span class="toc-section-number">4.2.5</span> Residuals normality check &amp; outliers</a></li>
+<li><a href="4-2-single-factor-designs.html#plot-of-residuals-in-time-sequence"><span class="toc-section-number">4.2.6</span> Plot of residuals in time sequence</a></li>
+<li><a href="4-2-single-factor-designs.html#plot-of-residuals-versus-fitted-values"><span class="toc-section-number">4.2.7</span> Plot of residuals versus fitted values</a></li>
+<li><a href="4-2-single-factor-designs.html#equality-of-variances-test-barletts-test"><span class="toc-section-number">4.2.8</span> Equality of variances test (Barlett’s test)</a></li>
+<li><a href="4-2-single-factor-designs.html#tuckeys-pairwise-comparison-test"><span class="toc-section-number">4.2.9</span> Tuckey’s pairwise comparison test</a></li>
+<li><a href="4-2-single-factor-designs.html#fishers-lsd---pairwise-comparison-test"><span class="toc-section-number">4.2.10</span> Fisher’s LSD - pairwise comparison test</a></li>
+<li><a href="4-2-single-factor-designs.html#practical-interpretation-of-results"><span class="toc-section-number">4.2.11</span> Practical interpretation of results</a></li>
+<li><a href="4-2-single-factor-designs.html#linear-model"><span class="toc-section-number">4.2.12</span> Linear model</a></li>
+<li><a href="4-2-single-factor-designs.html#linear-model-plot"><span class="toc-section-number">4.2.13</span> Linear model plot</a></li>
+<li><a href="4-2-single-factor-designs.html#predicting-new-values"><span class="toc-section-number">4.2.14</span> Predicting new values</a></li>
+<li><a href="4-2-single-factor-designs.html#r²-coefficient-of-determination"><span class="toc-section-number">4.2.15</span> R², coefficient of determination</a></li>
+<li><a href="4-2-single-factor-designs.html#sample-size-calculation-1"><span class="toc-section-number">4.2.16</span> Sample size calculation</a></li>
+</ul></li>
+<li><a href="4-3-two-factors-anova-fixed-effects-model.html#two-factors-anova-fixed-effects-model"><span class="toc-section-number">4.3</span> two-factors ANOVA, fixed effects model</a>
+<ul>
+<li><a href="4-3-two-factors-anova-fixed-effects-model.html#battery-life-example"><span class="toc-section-number">4.3.1</span> Battery life example</a></li>
+<li><a href="4-3-two-factors-anova-fixed-effects-model.html#analysis-of-variance-1"><span class="toc-section-number">4.3.2</span> Analysis of variance</a></li>
+<li><a href="4-3-two-factors-anova-fixed-effects-model.html#doe-and-anova-plots"><span class="toc-section-number">4.3.3</span> DoE and Anova plots</a></li>
+<li><a href="4-3-two-factors-anova-fixed-effects-model.html#r²-coefficient-of-determination-1"><span class="toc-section-number">4.3.4</span> R², coefficient of determination</a></li>
+<li><a href="4-3-two-factors-anova-fixed-effects-model.html#model-adequacy-checking"><span class="toc-section-number">4.3.5</span> Model adequacy checking</a></li>
+<li><a href="4-3-two-factors-anova-fixed-effects-model.html#residuals-normality-check-outliers-1"><span class="toc-section-number">4.3.6</span> Residuals normality check &amp; outliers</a></li>
+<li><a href="4-3-two-factors-anova-fixed-effects-model.html#plot-of-residuals-versus-fitted-values-1"><span class="toc-section-number">4.3.7</span> Plot of residuals versus fitted values</a></li>
+<li><a href="4-3-two-factors-anova-fixed-effects-model.html#sample-size-calculation-2"><span class="toc-section-number">4.3.8</span> Sample size calculation</a></li>
+<li><a href="4-3-two-factors-anova-fixed-effects-model.html#model-with-no-interaction"><span class="toc-section-number">4.3.9</span> Model with no interaction</a></li>
+</ul></li>
+<li><a href="4-4-general-factorial-design.html#general-factorial-design"><span class="toc-section-number">4.4</span> General factorial design</a>
+<ul>
+<li><a href="4-4-general-factorial-design.html#soft-drink-bottling-example"><span class="toc-section-number">4.4.1</span> Soft Drink bottling example</a></li>
+<li><a href="4-4-general-factorial-design.html#analysis-of-variance-2"><span class="toc-section-number">4.4.2</span> Analysis of variance</a></li>
+<li><a href="4-4-general-factorial-design.html#residuals-analysis"><span class="toc-section-number">4.4.3</span> Residuals analysis</a></li>
+<li><a href="4-4-general-factorial-design.html#doe-plots"><span class="toc-section-number">4.4.4</span> DoE plots</a></li>
+</ul></li>
+<li><a href="4-5-the-2k-factorial-designs.html#the-2k-factorial-designs"><span class="toc-section-number">4.5</span> The 2^k factorial designs</a></li>
+<li><a href="4-6-the-22-factorial-design.html#the-22-factorial-design"><span class="toc-section-number">4.6</span> The 2^2 Factorial Design</a>
+<ul>
+<li><a href="4-6-the-22-factorial-design.html#the-chemical-process-example"><span class="toc-section-number">4.6.1</span> The Chemical Process example</a></li>
+<li><a href="4-6-the-22-factorial-design.html#anova"><span class="toc-section-number">4.6.2</span> Anova</a></li>
+<li><a href="4-6-the-22-factorial-design.html#regression-model-prediction"><span class="toc-section-number">4.6.3</span> Regression model / Prediction</a></li>
+<li><a href="4-6-the-22-factorial-design.html#response-surface"><span class="toc-section-number">4.6.4</span> Response surface</a></li>
+</ul></li>
+<li><a href="4-7-the-23-factorial-design.html#the-23-factorial-design"><span class="toc-section-number">4.7</span> The 2^3 Factorial Design</a>
+<ul>
+<li><a href="4-7-the-23-factorial-design.html#the-plasma-etching-example"><span class="toc-section-number">4.7.1</span> The plasma etching example</a></li>
+<li><a href="4-7-the-23-factorial-design.html#anova-1"><span class="toc-section-number">4.7.2</span> Anova</a></li>
+<li><a href="4-7-the-23-factorial-design.html#regression-model-prediction-1"><span class="toc-section-number">4.7.3</span> Regression model / Prediction</a></li>
+<li><a href="4-7-the-23-factorial-design.html#reduced-model"><span class="toc-section-number">4.7.4</span> Reduced model</a></li>
+<li><a href="4-7-the-23-factorial-design.html#doe-plots-1"><span class="toc-section-number">4.7.5</span> DoE plots</a></li>
+</ul></li>
+<li><a href="4-8-the-general-2k-design.html#the-general-2k-design"><span class="toc-section-number">4.8</span> The general 2^k design</a>
+<ul>
+<li><a href="4-8-the-general-2k-design.html#calculating-the-number-combinations"><span class="toc-section-number">4.8.1</span> Calculating the number combinations</a></li>
+<li><a href="4-8-the-general-2k-design.html#relationship-coded-vs-natural-variables"><span class="toc-section-number">4.8.2</span> Relationship coded vs natural variables</a></li>
+</ul></li>
+<li><a href="4-9-single-replicate-2k-design.html#single-replicate-2k-design"><span class="toc-section-number">4.9</span> Single replicate 2^k design</a>
+<ul>
+<li><a href="4-9-single-replicate-2k-design.html#the-filtration-example"><span class="toc-section-number">4.9.1</span> The Filtration example</a></li>
+<li><a href="4-9-single-replicate-2k-design.html#anova-2"><span class="toc-section-number">4.9.2</span> Anova</a></li>
+<li><a href="4-9-single-replicate-2k-design.html#linear-regression---plot-of-effects"><span class="toc-section-number">4.9.3</span> Linear regression - Plot of effects</a></li>
+<li><a href="4-9-single-replicate-2k-design.html#doe-plots-2"><span class="toc-section-number">4.9.4</span> DoE plots</a></li>
+<li><a href="4-9-single-replicate-2k-design.html#anova-reduced-model-significant-effects-only"><span class="toc-section-number">4.9.5</span> Anova reduced model (significant effects only)</a></li>
+<li><a href="4-9-single-replicate-2k-design.html#linear-regression---reduced-model"><span class="toc-section-number">4.9.6</span> Linear regression - reduced model</a></li>
+<li><a href="4-9-single-replicate-2k-design.html#residuals-normality-check"><span class="toc-section-number">4.9.7</span> Residuals normality check</a></li>
+</ul></li>
+<li><a href="4-10-two-level-fractional-factorial-designs.html#two-level-fractional-factorial-designs"><span class="toc-section-number">4.10</span> Two level fractional factorial designs</a>
+<ul>
+<li><a href="4-10-two-level-fractional-factorial-designs.html#the-one-half-fraction-of-th-2k-design"><span class="toc-section-number">4.10.1</span> The One-Half Fraction of th 2k Design</a></li>
+<li><a href="4-10-two-level-fractional-factorial-designs.html#the-filtration-example-modified"><span class="toc-section-number">4.10.2</span> The filtration example (modified)</a></li>
+<li><a href="4-10-two-level-fractional-factorial-designs.html#anova-3"><span class="toc-section-number">4.10.3</span> Anova</a></li>
+</ul></li>
+</ul></li>
+<li><a href="5-MSA.html#MSA"><span class="toc-section-number">5</span> MSA - Measurement System Analysis</a></li>
+<li><a href="6-SPC.html#SPC"><span class="toc-section-number">6</span> SPC - Statistical Process Control</a>
+<ul>
+<li><a href="6-1-xbar-and-r-charts.html#xbar-and-r-charts"><span class="toc-section-number">6.1</span> xbar and R charts</a></li>
+</ul></li>
+<li class="part"><span><b>III TOOLBOX</b></span></li>
+<li><a href="7-Rpck.html#Rpck"><span class="toc-section-number">7</span> R Packages</a>
+<ul>
+<li><a href="7-1-six-sigma.html#six-sigma"><span class="toc-section-number">7.1</span> six sigma</a></li>
+<li><a href="7-2-ggspc.html#ggspc"><span class="toc-section-number">7.2</span> ggspc</a></li>
+<li><a href="7-3-qcc.html#qcc"><span class="toc-section-number">7.3</span> qcc</a></li>
+</ul></li>
+<li><a href="about-the-authors.html#about-the-authors">About the authors</a></li>
+<li><a href="references.html#references">References</a></li>
+</ul>
+</div>
+</div>
+</div>
+<div class="row">
+<div class="col-sm-12">
+<div id="two-factors-anova-fixed-effects-model" class="section level2" number="4.3">
+<h2><span class="header-section-number">4.3</span> two-factors ANOVA, fixed effects model</h2>
+<p>5.3</p>
+<div id="battery-life-example" class="section level3" number="4.3.1">
+<h3><span class="header-section-number">4.3.1</span> Battery life example</h3>
+<p>Load and prepare data for analysis:</p>
+<pre class="r"><code>battery &lt;- read.csv(sep = &quot;;&quot;, header = TRUE,
+                   paste0(working_folder, &quot;5 battery.csv&quot;))
+
+# Converting into a narrow table with a factor for utilisation with ggplot2
+# syntax: gather(data, 
+#               name of the new key column (that replaces the names of the columns to be gathered), 
+#               name of the new value column (where the values go), 
+#               name of the columns to be gathered)
+battery_narrow &lt;- gather(battery,
+                         temperature,
+                         life,
+                         T15, T70, T125)
+
+battery_narrow_factor &lt;- battery_narrow
+battery_narrow_factor$material &lt;- as.factor(battery_narrow$material)
+battery_narrow_factor$temperature &lt;- ordered(battery_narrow$temperature,
+                                            levels = c(&quot;T15&quot;, &quot;T70&quot;, &quot;T125&quot;))</code></pre>
+</div>
+<div id="analysis-of-variance-1" class="section level3" number="4.3.2">
+<h3><span class="header-section-number">4.3.2</span> Analysis of variance</h3>
+<pre class="r"><code>battery_lm_factor &lt;- lm(life ~ temperature + material + temperature:material,
+                        data = battery_narrow_factor)
+
+
+battery_aov &lt;- aov(battery_lm_factor)
+
+summary(battery_aov)</code></pre>
+<pre><code>##                      Df Sum Sq Mean Sq F value   Pr(&gt;F)    
+## temperature           2  39119   19559  28.968 1.91e-07 ***
+## material              2  10684    5342   7.911  0.00198 ** 
+## temperature:material  4   9614    2403   3.560  0.01861 *  
+## Residuals            27  18231     675                     
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+</div>
+<div id="doe-and-anova-plots" class="section level3" number="4.3.3">
+<h3><span class="header-section-number">4.3.3</span> DoE and Anova plots</h3>
+<pre class="r"><code># Basic plot from Stats package (my favorite)
+interaction.plot(x.factor = battery_narrow_factor$temperature, 
+                 trace.factor = battery_narrow_factor$material,
+                 response = battery_narrow_factor$life,
+                 trace.label = &quot;Material&quot;,
+                 xlab = &quot;temperature [°C]&quot;,
+                 ylab = &quot;life [h]&quot;)</code></pre>
+<p><img src="IndustRialds_files/figure-html/battery_narrow_intplot-fig-1.png" width="672" /></p>
+<pre class="r"><code># Alternative plot from the RcmdrMisc package (&quot;Stats facile avec R&quot;)
+plotMeans(response = battery_narrow_factor$life,
+          factor1 = battery_narrow_factor$temperature,
+          factor2 = battery_narrow_factor$material)</code></pre>
+<p><img src="IndustRialds_files/figure-html/battery_narrow_doe-fig-1.png" width="672" /></p>
+<pre class="r"><code># Just for my curiosity a boxplot for comparison
+ggplot(battery_narrow_factor, aes(x = temperature, y = life, color = material)) +
+  geom_boxplot()</code></pre>
+<p><img src="IndustRialds_files/figure-html/battery_narrow_doe_box-fig-1.png" width="672" /></p>
+<pre class="r"><code># And also a scatterplot
+ggplot(battery_lm_factor, aes(x = temperature, y = life, color = material)) +
+  geom_point() +
+  geom_smooth(method = &quot;lm&quot;, se = FALSE) # not clear why the lm line is not plotted, to be investigated</code></pre>
+<pre><code>## `geom_smooth()` using formula &#39;y ~ x&#39;</code></pre>
+<p><img src="IndustRialds_files/figure-html/battery_narrow_doe_box-fig-2.png" width="672" /></p>
+<p>Note: book example correctly reproduced.</p>
+</div>
+<div id="r²-coefficient-of-determination-1" class="section level3" number="4.3.4">
+<h3><span class="header-section-number">4.3.4</span> R², coefficient of determination</h3>
+<pre class="r"><code>summary(battery_lm_factor)</code></pre>
+<pre><code>## 
+## Call:
+## lm(formula = life ~ temperature + material + temperature:material, 
+##     data = battery_narrow_factor)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -60.750 -14.625   1.375  17.937  45.250 
+## 
+## Coefficients:
+##                         Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)               83.167      7.501  11.087 1.48e-11 ***
+## temperature.L            -54.624     12.992  -4.204 0.000257 ***
+## temperature.Q             31.741     12.992   2.443 0.021385 *  
+## material2                 25.167     10.608   2.372 0.025059 *  
+## material3                 41.917     10.608   3.951 0.000503 ***
+## temperature.L:material2  -20.506     18.374  -1.116 0.274242    
+## temperature.Q:material2  -45.724     18.374  -2.488 0.019293 *  
+## temperature.L:material3   13.258     18.374   0.722 0.476759    
+## temperature.Q:material3  -57.053     18.374  -3.105 0.004434 ** 
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 25.98 on 27 degrees of freedom
+## Multiple R-squared:  0.7652, Adjusted R-squared:  0.6956 
+## F-statistic:    11 on 8 and 27 DF,  p-value: 9.426e-07</code></pre>
+<p>Note: book example correctly reproduced.</p>
+<p>R^2 = 0.7652, That is, about 77 percent of the variability in the battery life is explained by the plate material in the battery, the temperature, and the material type–temperature interaction.</p>
+</div>
+<div id="model-adequacy-checking" class="section level3" number="4.3.5">
+<h3><span class="header-section-number">4.3.5</span> Model adequacy checking</h3>
+<p>5.3.3</p>
+</div>
+<div id="residuals-normality-check-outliers-1" class="section level3" number="4.3.6">
+<h3><span class="header-section-number">4.3.6</span> Residuals normality check &amp; outliers</h3>
+<p>Q-Q plot + Shapiro-Wilk test</p>
+<pre class="r"><code>battery_residuals &lt;- battery_aov[[&quot;residuals&quot;]]
+qqnorm(battery_residuals, datax = TRUE);qqline(battery_residuals, datax = TRUE)</code></pre>
+<p><img src="IndustRialds_files/figure-html/batery_residuals-fig-1.png" width="672" /></p>
+<pre class="r"><code>shapiro.test(battery_residuals)</code></pre>
+<pre><code>## 
+##  Shapiro-Wilk normality test
+## 
+## data:  battery_residuals
+## W = 0.97606, p-value = 0.6117</code></pre>
+<pre class="r"><code>battery_tidyfit &lt;- augment(battery_lm_factor)</code></pre>
+<p>p &gt; 0.05 indicates that the residuals do not differ significantly from a normally distributed population.</p>
+<p>According to Montgomery the residual of -60.75 (hours) for the temperature value of 15°C maybe an outlier as it’s standardized value is &gt; 2.
+This can be observed more easily in the battery_tidyfit table created with the augment function from the broom package.</p>
+<p>Standardized residuals graph</p>
+<pre class="r"><code>plot(battery_aov, which = 2)</code></pre>
+<p><img src="IndustRialds_files/figure-html/battery_stdres-fig-1.png" width="672" /></p>
+</div>
+<div id="plot-of-residuals-versus-fitted-values-1" class="section level3" number="4.3.7">
+<h3><span class="header-section-number">4.3.7</span> Plot of residuals versus fitted values</h3>
+<pre class="r"><code>plot(battery_aov, which = 1)</code></pre>
+<p><img src="IndustRialds_files/figure-html/battery_fitres-fig-1.png" width="672" /></p>
+</div>
+<div id="sample-size-calculation-2" class="section level3" number="4.3.8">
+<h3><span class="header-section-number">4.3.8</span> Sample size calculation</h3>
+<p>Refer to “Statistiques faciles avec R,” page 233.
+Cohen’s effect size is calculated with the eta squared from the model (intriguing is the same value as the R²…).
+In this case with 2 replicates we obtain a power of 90% and an alpha of 1%.
+I’ve not managed here to replicate the values from the Montgomery book.</p>
+<pre class="r"><code>battery_cohend_aov &lt;- 40 / 25 # Cohen&#39;s effect size = difference of means / sd
+
+pwr.anova.test(k = 3,
+               n = 4,
+               f = battery_cohend_aov,
+               sig.level = 0.05)</code></pre>
+<pre><code>## 
+##      Balanced one-way analysis of variance power calculation 
+## 
+##               k = 3
+##               n = 4
+##               f = 1.6
+##       sig.level = 0.05
+##           power = 0.9892439
+## 
+## NOTE: n is number in each group</code></pre>
+<p>I’ve managed to almost reproduce the book result (I obtained a power of 98%, in the book 94%) by calculating the effect size by dividing the life difference of 40 hours by the standard deviation of 25h given in the example and feeding all this in the pwr.anova.test with n = 4 repetitions.</p>
+<p>The books “Statistiques faciles avec R” proposes to use the eta but this gives very different results.
+battery_eta2 &lt;- etaSquared(battery_aov)[1]
+battery_cohend_aov &lt;- sqrt(battery_eta2 / (1 - battery_eta2))</p>
+</div>
+<div id="model-with-no-interaction" class="section level3" number="4.3.9">
+<h3><span class="header-section-number">4.3.9</span> Model with no interaction</h3>
+<pre class="r"><code># Removing the interaction from the model:
+battery_lm_factor_no_int &lt;- lm(life ~ temperature + material,
+                        data = battery_narrow_factor)
+battery_aov_no_int &lt;- aov(battery_lm_factor_no_int)
+
+# Comparing Anova results with and without:
+summary(battery_aov)</code></pre>
+<pre><code>##                      Df Sum Sq Mean Sq F value   Pr(&gt;F)    
+## temperature           2  39119   19559  28.968 1.91e-07 ***
+## material              2  10684    5342   7.911  0.00198 ** 
+## temperature:material  4   9614    2403   3.560  0.01861 *  
+## Residuals            27  18231     675                     
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+<pre class="r"><code>summary(battery_aov_no_int)</code></pre>
+<pre><code>##             Df Sum Sq Mean Sq F value   Pr(&gt;F)    
+## temperature  2  39119   19559  21.776 1.24e-06 ***
+## material     2  10684    5342   5.947  0.00651 ** 
+## Residuals   31  27845     898                     
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+<p>As noted previously, both main effects are significant (p &lt; 0.05).</p>
+<p>However, as soon as a residual analysis is performed for these data, it becomes clear that the no-interaction model is inadequate:</p>
+<pre class="r"><code># Normality of residuals is worse
+battery_residuals_no_int &lt;- battery_aov_no_int[[&quot;residuals&quot;]]
+qqnorm(battery_residuals_no_int, datax = TRUE);qqline(battery_residuals_no_int, datax = TRUE)</code></pre>
+<p><img src="IndustRialds_files/figure-html/unnamed-chunk-23-1.png" width="672" /></p>
+<pre class="r"><code># But it still passes the Shapiro test
+shapiro.test(battery_residuals_no_int)</code></pre>
+<pre><code>## 
+##  Shapiro-Wilk normality test
+## 
+## data:  battery_residuals_no_int
+## W = 0.97846, p-value = 0.6932</code></pre>
+<pre class="r"><code># No standardize residual above 2 either:
+battery_tidyfit_no_int &lt;- augment(battery_lm_factor_no_int)</code></pre>
+<pre class="r"><code>plot(battery_aov_no_int, which = 2)</code></pre>
+<p><img src="IndustRialds_files/figure-html/battery_noint-fig-1.png" width="672" /></p>
+<pre class="r"><code># It is finally in the plot residuals vs fit that we can clearly see an issue:
+plot(battery_aov, which = 1)</code></pre>
+<p><img src="IndustRialds_files/figure-html/battery_noint-fig-2.png" width="672" /></p>
+<pre class="r"><code>plot(battery_aov_no_int, which = 1)</code></pre>
+<p><img src="IndustRialds_files/figure-html/battery_noint-fig-3.png" width="672" /></p>
+<p>Any pattern in these quantities is suggestive of the presence of interaction. Figure 5.15 shows a distinct pattern as the quantities move from positive to negative to positive to negative again.</p>
+</div>
+</div>
+<p style="text-align: center;">
+<a href="4-2-single-factor-designs.html"><button class="btn btn-default">Previous</button></a>
+<a href="4-4-general-factorial-design.html"><button class="btn btn-default">Next</button></a>
+</p>
+</div>
+</div>
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+$(document).ready(function () {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+});
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>industRial data science</title>
+  <meta name="description" content="industRial data science" />
+  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="industRial data science" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:image" content="img/cover3.png" />
+  
+  <meta name="github-repo" content="J-Ramalho/industRialds" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="industRial data science" />
+  
+  
+  <meta name="twitter:image" content="img/cover3.png" />
+
+<meta name="author" content="João Ramalho" />
+
+
+<meta name="date" content="2021-05-08" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+
+<link rel="next" href="r-toolbox.html"/>
+<script src="libs/header-attrs-2.7/header-attrs.js"></script>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-122820355-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-122820355-1');
+</script>
+
+
+<script type="text/javascript">
+mattcrump=1;
+</script>
+
+
+
+<link rel="stylesheet" href="industRialds.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">industRial data science</a></li>
+
+<li class="divider"></li>
+<li class="part"><span><b>I INTRODUCTION</b></span></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Welcome</a></li>
+<li class="chapter" data-level="" data-path="r-toolbox.html"><a href="r-toolbox.html"><i class="fa fa-check"></i>R Toolbox</a>
+<ul>
+<li class="chapter" data-level="" data-path="r-toolbox.html"><a href="r-toolbox.html#r-programming"><i class="fa fa-check"></i>R programming</a></li>
+<li class="chapter" data-level="" data-path="r-toolbox.html"><a href="r-toolbox.html#r-datasets"><i class="fa fa-check"></i>R Datasets</a></li>
+<li class="chapter" data-level="" data-path="r-toolbox.html"><a href="r-toolbox.html#r-packages"><i class="fa fa-check"></i>R Packages</a>
+<ul>
+<li class="chapter" data-level="" data-path="r-toolbox.html"><a href="r-toolbox.html#installation"><i class="fa fa-check"></i>Installation</a></li>
+<li class="chapter" data-level="" data-path="r-toolbox.html"><a href="r-toolbox.html#domain-packages"><i class="fa fa-check"></i>Domain packages</a></li>
+<li class="chapter" data-level="" data-path="r-toolbox.html"><a href="r-toolbox.html#other-packages"><i class="fa fa-check"></i>Other packages</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="r-toolbox.html"><a href="r-toolbox.html#r-session-info"><i class="fa fa-check"></i>R Session info</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="contents.html"><a href="contents.html"><i class="fa fa-check"></i>Contents</a></li>
+<li class="part"><span><b>II CASE STUDIES</b></span></li>
+<li class="chapter" data-level="" data-path="design-for-six-sigma.html"><a href="design-for-six-sigma.html"><i class="fa fa-check"></i>Design for Six Sigma</a>
+<ul>
+<li class="chapter" data-level="" data-path="design-for-six-sigma.html"><a href="design-for-six-sigma.html#pareto"><i class="fa fa-check"></i>Pareto</a>
+<ul>
+<li class="chapter" data-level="" data-path="design-for-six-sigma.html"><a href="design-for-six-sigma.html#paretochart"><i class="fa fa-check"></i>Pareto chart</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="design-for-six-sigma.html"><a href="design-for-six-sigma.html#ishikawa"><i class="fa fa-check"></i>Ishikawa</a>
+<ul>
+<li class="chapter" data-level="" data-path="design-for-six-sigma.html"><a href="design-for-six-sigma.html#fishbone"><i class="fa fa-check"></i>Fishbone diagram</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="design-for-six-sigma.html"><a href="design-for-six-sigma.html#correlation-matrix"><i class="fa fa-check"></i>Correlation matrix</a>
+<ul>
+<li class="chapter" data-level="" data-path="design-for-six-sigma.html"><a href="design-for-six-sigma.html#tileplot"><i class="fa fa-check"></i>Tile plot</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="design-for-six-sigma.html"><a href="design-for-six-sigma.html#clustering"><i class="fa fa-check"></i>Clustering</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="rnR.html"><a href="rnR.html"><i class="fa fa-check"></i>Gage r&amp;R</a>
+<ul>
+<li class="chapter" data-level="" data-path="rnR.html"><a href="rnR.html#trueness"><i class="fa fa-check"></i>Trueness</a>
+<ul>
+<li class="chapter" data-level="" data-path="rnR.html"><a href="rnR.html#bias-plot"><i class="fa fa-check"></i>Bias plot</a></li>
+<li class="chapter" data-level="" data-path="rnR.html"><a href="rnR.html#bias-model"><i class="fa fa-check"></i>Bias model</a></li>
+<li class="chapter" data-level="" data-path="rnR.html"><a href="rnR.html#bias-report"><i class="fa fa-check"></i>Bias report</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="rnR.html"><a href="rnR.html#precision"><i class="fa fa-check"></i>Precision</a>
+<ul>
+<li class="chapter" data-level="" data-path="rnR.html"><a href="rnR.html#base-anova"><i class="fa fa-check"></i>Base Anova</a></li>
+<li class="chapter" data-level="" data-path="rnR.html"><a href="rnR.html#gageRnR"><i class="fa fa-check"></i>gage r&amp;R</a></li>
+<li class="chapter" data-level="" data-path="rnR.html"><a href="rnR.html#acceptance-on-variance"><i class="fa fa-check"></i>Acceptance on Variance</a></li>
+<li class="chapter" data-level="" data-path="rnR.html"><a href="rnR.html#acceptance-on-sd"><i class="fa fa-check"></i>Acceptance on SD</a></li>
+<li class="chapter" data-level="" data-path="rnR.html"><a href="rnR.html#interaction-plots"><i class="fa fa-check"></i>Interaction plots</a></li>
+<li class="chapter" data-level="" data-path="rnR.html"><a href="rnR.html#negative-variations"><i class="fa fa-check"></i>Negative Variations</a></li>
+<li class="chapter" data-level="" data-path="rnR.html"><a href="rnR.html#beyond-two-factors"><i class="fa fa-check"></i>Beyond two factors</a></li>
+<li class="chapter" data-level="" data-path="rnR.html"><a href="rnR.html#conclusions"><i class="fa fa-check"></i>Conclusions</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="rnR.html"><a href="rnR.html#uncertainty"><i class="fa fa-check"></i>Uncertainty</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html"><i class="fa fa-check"></i>Design of Experiments</a>
+<ul>
+<li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#factor-2-levels"><i class="fa fa-check"></i>1 factor 2 levels</a>
+<ul>
+<li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#means-comparison"><i class="fa fa-check"></i>Means comparison</a></li>
+<li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#variances-comparison"><i class="fa fa-check"></i>Variances comparison</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#factor-n-levels"><i class="fa fa-check"></i>1 factor n levels</a>
+<ul>
+<li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#linear-regression"><i class="fa fa-check"></i>Linear regression</a></li>
+<li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#raw-data-plot"><i class="fa fa-check"></i>Raw data plot</a></li>
+<li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#residuals-model-check"><i class="fa fa-check"></i>Residuals &amp; model check</a></li>
+<li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#multiple-means-comparison"><i class="fa fa-check"></i>Multiple means comparison</a></li>
+<li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#pairwise-comparisons"><i class="fa fa-check"></i>Pairwise comparisons</a></li>
+<li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#predict"><i class="fa fa-check"></i>Prediction</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#factors-n-levels"><i class="fa fa-check"></i>2 factors n levels</a>
+<ul>
+<li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#lm-with-interactions"><i class="fa fa-check"></i>lm with interactions</a></li>
+<li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#outliers-and-model-check"><i class="fa fa-check"></i>Outliers and model check</a></li>
+<li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#interactionPlot"><i class="fa fa-check"></i>Interaction plot</a></li>
+<li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#effects-significance"><i class="fa fa-check"></i>Effects significance</a></li>
+<li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#removing-interaction"><i class="fa fa-check"></i>Removing interaction</a></li>
+<li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#covariance"><i class="fa fa-check"></i>Covariance</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#m-factors-n-levels"><i class="fa fa-check"></i>m factors n levels</a>
+<ul>
+<li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#main-effects-plots"><i class="fa fa-check"></i>Main effects plots</a></li>
+<li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#interactions-plots"><i class="fa fa-check"></i>Interactions plots</a></li>
+<li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#model-with-3rd-level-interactions"><i class="fa fa-check"></i>Model with 3rd level interactions</a></li>
+<li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#anova-with-3rd-level-interactions"><i class="fa fa-check"></i>Anova with 3rd level interactions</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#factors-2-levels"><i class="fa fa-check"></i>2 factors 2 levels</a>
+<ul>
+<li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#factors-as--"><i class="fa fa-check"></i>Factors as +/-</a></li>
+<li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#factors-as---1"><i class="fa fa-check"></i>Factors as +/- 1</a></li>
+<li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#factors-as---1-numeric"><i class="fa fa-check"></i>Factors as +/- 1 numeric</a></li>
+<li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#sd-bars-in-interaction-plots"><i class="fa fa-check"></i>sd bars in interaction plots</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#factors-2-levels-1"><i class="fa fa-check"></i>3 factors 2 levels</a>
+<ul>
+<li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#lm-and-anova"><i class="fa fa-check"></i>lm and anova</a></li>
+<li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#r2-and-adjusted-r2"><i class="fa fa-check"></i>R^2 and Adjusted R^2</a></li>
+<li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#coding-natural-values"><i class="fa fa-check"></i>Coding natural values</a></li>
+<li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#coded-values-prediction"><i class="fa fa-check"></i>Coded values prediction</a></li>
+<li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#persp"><i class="fa fa-check"></i>Response surface plot</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#m-factors-2-levels-single-replicate-designs"><i class="fa fa-check"></i>m factors 2 levels single replicate designs</a>
+<ul>
+<li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#single-replicate-lm"><i class="fa fa-check"></i>Single replicate lm</a></li>
+<li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#single-replicate-reduced-model"><i class="fa fa-check"></i>Single replicate reduced model</a></li>
+<li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#residuals-analysis"><i class="fa fa-check"></i>Residuals analysis</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="SPC.html"><a href="SPC.html"><i class="fa fa-check"></i>Statistical Process Control</a>
+<ul>
+<li class="chapter" data-level="" data-path="SPC.html"><a href="SPC.html#control-charts"><i class="fa fa-check"></i>Control charts</a>
+<ul>
+<li class="chapter" data-level="" data-path="SPC.html"><a href="SPC.html#xbarchart"><i class="fa fa-check"></i>xbar chart</a></li>
+<li class="chapter" data-level="" data-path="SPC.html"><a href="SPC.html#Rchart"><i class="fa fa-check"></i>R chart</a></li>
+<li class="chapter" data-level="" data-path="SPC.html"><a href="SPC.html#limitsxbar"><i class="fa fa-check"></i>Limits on xbar chart</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="SPC.html"><a href="SPC.html#process-capability"><i class="fa fa-check"></i>Process Capability</a>
+<ul>
+<li class="chapter" data-level="" data-path="SPC.html"><a href="SPC.html#out-of-specification"><i class="fa fa-check"></i>Out of specification</a></li>
+<li class="chapter" data-level="" data-path="SPC.html"><a href="SPC.html#cpk-index"><i class="fa fa-check"></i>Cpk index</a></li>
+<li class="chapter" data-level="" data-path="SPC.html"><a href="SPC.html#processcapability"><i class="fa fa-check"></i>Process capability chart</a></li>
+</ul></li>
+</ul></li>
+<li class="part"><span><b>III APPENDIX</b></span></li>
+<li class="chapter" data-level="" data-path="glossary.html"><a href="glossary.html"><i class="fa fa-check"></i>Glossary</a>
+<ul>
+<li class="chapter" data-level="" data-path="glossary.html"><a href="glossary.html#statistics"><i class="fa fa-check"></i>Statistics</a>
+<ul>
+<li class="chapter" data-level="" data-path="glossary.html"><a href="glossary.html#notation-conventions"><i class="fa fa-check"></i>Notation conventions</a></li>
+<li class="chapter" data-level="" data-path="glossary.html"><a href="glossary.html#descriptive-statistics"><i class="fa fa-check"></i>Descriptive statistics</a></li>
+<li class="chapter" data-level="" data-path="glossary.html"><a href="glossary.html#probability"><i class="fa fa-check"></i>Probability</a></li>
+<li class="chapter" data-level="" data-path="glossary.html"><a href="glossary.html#statistical-inference"><i class="fa fa-check"></i>Statistical Inference</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="glossary.html"><a href="glossary.html#design-for-six-sigma-1"><i class="fa fa-check"></i>Design for Six Sigma</a>
+<ul>
+<li class="chapter" data-level="" data-path="glossary.html"><a href="glossary.html#voice-of-customer"><i class="fa fa-check"></i>Voice of Customer</a></li>
+<li class="chapter" data-level="" data-path="glossary.html"><a href="glossary.html#voice-of-process"><i class="fa fa-check"></i>Voice of Process</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="glossary.html"><a href="glossary.html#gage-rr"><i class="fa fa-check"></i>Gage r&amp;R</a></li>
+<li class="chapter" data-level="" data-path="glossary.html"><a href="glossary.html#design-of-experiments"><i class="fa fa-check"></i>Design of experiments</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">indust<b style='color:#38598CFF'>R</b>ial data science</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="header">
+<h1 class="title">indust<b style='color:#38598CFF'>R</b>ial data science</h1>
+<h2 class="subtitle"><em>Case studies in product development and manufacturing</em></h2>
+<p class="author"><em>João Ramalho</em></p>
+<p class="date"><em>2021-05-08</em></p>
+</div>
+<div id="welcome" class="section level1 unnumbered">
+<h1>Welcome</h1>
+<p><a href="">
+<img src="img/cover3.png" width="250" style="margin: 0 1em 0 1em" align="right"/>
+</a></p>
+<p>This book provides examples on how to use Data Science tools and techniques in Product Development and Manufacturing. These examples are grouped in Case Studies in a “cookbook” approach, making it easier to directly adopt the tools. They come from varied manufacturing industries, mostly where repetitive production in massive quantities is involved, such as:</p>
+<ul>
+<li>pharmaceuticals</li>
+<li>food</li>
+<li>electronics</li>
+<li>watch making</li>
+<li>automotive</li>
+</ul>
+<p>Product Development and Manufacturing are very important activities in society because bringing innovative products to the market has an immense potential to improve the quality of life of everyone.</p>
+<p>Additionally Data Science brings new powerful approaches to the engineering and manufacturing of consumer goods, helping minimising environmental impact, improving quality and keeping costs under control.</p>
+<p><strong>How to use this book</strong></p>
+<p>In this book it is assumed that the reader is already familiar with the product development and manufacturing quality methodologies such as dmaic and six sigma and the associated statistical concepts. Furthermore it is considered that he brings at least a beginner knowledge on R. The book focus is then on putting the different areas together.</p>
+<p>Being a collection of case studies, the book is better used as a reference book. To get to the desired section go to the contents session which includes a full list of Case Studies, Datasets and R functions.</p>
+<p>Additionally we refer to several good quality books on both Data Science and Product Development that have served to provide the required theoretical background. These cover key disciplines such as six sigma, statistics and computer programming. This book aims complementing them and showcase how to benefit from recent software in this area.</p>
+<p><strong>Acknowledgements</strong></p>
+<p>I would like to express my gratitude to the instructors and colleagues who have spent time sharing their knowledge, answering my questions and giving me inputs: Enrico Chavez, Iegor Rudnytskyi, Giulia Ruggeri, Harry Handerson and Bobby Stuijfzand from the EPFL ADSCV team; Jean-Vincent Le Bé, Jasmine Petry, Yvan Bouza, James Clulow and Akos Spiegel from the Nestlé STC team; Frank Paris from DOQS; Théophile Emmanouilidis and Sélim Ach from Thoth.</p>
+<p>This book has been written using the R package <code>{Bookdown}</code> from <span class="citation"><a href="references.html#ref-Xie2016" role="doc-biblioref">Xie</a> (<a href="references.html#ref-Xie2016" role="doc-biblioref">2016</a>)</span> further customized with a layout developped by <a href="https://community.rstudio.com/t/bookdown-contest-submission-gitbook-style-tufte-style-for-web-book/11666">Matthew J. C. Crump</a>. Plot themes have been adapted from the package <code>{cowplot}</code> by Claus O.Wilke.</p>
+<p>To report any issue or make suggestions please open an issue on the book repository:
+<a href="https://github.com/J-Ramalho/industRialds/issues">industRialds/issues</a></p>
+<p><strong>About the authors</strong></p>
+<p><b style="color:#104e8b">João Ramalho</b> is a Senior Industrial Data Scientist with more than 20 years of experience in the manufacturing industry. He’s been in varied positions in R&amp;D, Operations and IT at Philip Morris, Rolex and Nestlé. He holds a Master in Mechanical Engineering from the IST of Lisbon, a PMP certification from the Project Management Institute and a Data Science certification from DataCamp. He’s currently specializing in Data Visualization at the Swiss technical university EPFL. See full profile at <a href="https://j-ramalho.github.io/">j-ramalho.github.io</a></p>
+
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+
+<a href="r-toolbox.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": false,
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "section"
+},
+"search": false,
+"info": false,
+"toolbar": {
+"position": "fixed"
+}
+});
+});
+</script>
+
+</body>
+
+</html>

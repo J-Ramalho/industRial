@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta property="og:title" content="Installation | industRial data science" />
+<meta property="og:type" content="book" />
+
+<meta property="og:image" content="img/cover3.png" />
+
+<meta name="github-repo" content="J-Ramalho/industRialds" />
+
+<meta name="author" content="João Ramalho" />
+
+<meta name="date" content="2021-03-27" />
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: { equationNumbers: { autoNumber: "AMS" } }
+});
+</script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<meta name="description" content="Installation | industRial data science">
+
+<title>Installation | industRial data science</title>
+
+<script src="libs/header-attrs-2.6/header-attrs.js"></script>
+<link href="libs/tufte-css-2015.12.29/tufte-fonts.css" rel="stylesheet" />
+<link href="libs/tufte-css-2015.12.29/tufte-background.css" rel="stylesheet" />
+<link href="libs/tufte-css-2015.12.29/tufte-italics.css" rel="stylesheet" />
+<link href="libs/tufte-css-2015.12.29/tufte.css" rel="stylesheet" />
+
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+
+</head>
+
+<body>
+
+
+
+<div class="row">
+<div class="col-sm-12">
+<div id="TOC">
+<ul>
+<li class="part"><span><b>I SETUP</b></span></li>
+<li><a href="index.html#welcome">Welcome</a></li>
+<li><a href="foundations.html#foundations">Foundations</a>
+<ul>
+<li><a href="foundations.html#six-sigma">Six Sigma</a></li>
+<li><a href="foundations.html#statistics">Statistics</a></li>
+<li><a href="foundations.html#r-programming">R programming</a></li>
+</ul></li>
+<li class="part"><span><b>II CASE STUDIES</b></span></li>
+<li><a href="s-six-sigma.html#s---six-sigma">6S - Six Sigma</a>
+<ul>
+<li><a href="pareto.html#pareto">Pareto</a></li>
+<li><a href="ishikawa.html#ishikawa">Ishikawa</a></li>
+<li><a href="matrix-diagrams.html#matrix-diagrams">Matrix Diagrams</a>
+<ul>
+<li><a href="matrix-diagrams.html#network-plot">Network plot</a></li>
+<li><a href="matrix-diagrams.html#clustering">Clustering</a></li>
+</ul></li>
+</ul></li>
+<li><a href="DOE.html#DOE">DOE - Design of Experiments</a>
+<ul>
+<li><a href="one-factor-two-levels.html#one-factor-two-levels">One factor two levels</a>
+<ul>
+<li><a href="one-factor-two-levels.html#two-means-comparison">Two means comparison</a></li>
+<li><a href="one-factor-two-levels.html#two-variances-comparison">Two variances comparison</a></li>
+<li><a href="one-factor-two-levels.html#sample-size">Sample size</a></li>
+</ul></li>
+<li><a href="one-factor-multiple-levels.html#one-factor-multiple-levels">One factor multiple levels</a>
+<ul>
+<li><a href="one-factor-multiple-levels.html#linear-regression">Linear regression</a></li>
+<li><a href="one-factor-multiple-levels.html#model-check-residuals">Model check &amp; residuals</a></li>
+<li><a href="one-factor-multiple-levels.html#predict">Prediction</a></li>
+<li><a href="one-factor-multiple-levels.html#multiple-means-comparison">Multiple means comparison</a></li>
+<li><a href="one-factor-multiple-levels.html#pairwise-comparisons">Pairwise comparisons</a></li>
+<li><a href="one-factor-multiple-levels.html#means-comparison-covariance">Means comparison &amp; covariance</a></li>
+</ul></li>
+<li><a href="two-factors-multiple-levels.html#two-factors-multiple-levels">Two factors multiple levels</a>
+<ul>
+<li><a href="two-factors-multiple-levels.html#linear-regression-with-interactions">Linear regression with interactions</a></li>
+<li><a href="two-factors-multiple-levels.html#augmented-model-check">Augmented model check</a></li>
+<li><a href="two-factors-multiple-levels.html#interactionPlot">Interaction plot</a></li>
+<li><a href="two-factors-multiple-levels.html#effects-significance">Effects significance</a></li>
+<li><a href="two-factors-multiple-levels.html#sample-size-calculation">Sample size calculation</a></li>
+<li><a href="two-factors-multiple-levels.html#removing-interaction">Removing interaction</a></li>
+</ul></li>
+<li><a href="multiple-factors.html#multiple-factors">Multiple factors</a>
+<ul>
+<li><a href="multiple-factors.html#main-effects-plots">Main effects plots</a></li>
+<li><a href="multiple-factors.html#model-with-3rd-level-interactions">Model with 3rd level interactions</a></li>
+<li><a href="multiple-factors.html#model-adequacy-check">Model adequacy check</a></li>
+<li><a href="multiple-factors.html#anova-with-3rd-level-interactions">Anova with 3rd level interactions</a></li>
+</ul></li>
+<li><a href="factorial-design.html#factorial-design">2^2 factorial design</a>
+<ul>
+<li><a href="factorial-design.html#linear-model-with-and--">Linear model with + and -</a></li>
+<li><a href="factorial-design.html#anova-with-and--">Anova with + and -</a></li>
+<li><a href="factorial-design.html#interaction-plots-with-sd-bars">Interaction plots with sd bars</a></li>
+<li><a href="factorial-design.html#outputs-correlation">Outputs correlation</a></li>
+<li><a href="factorial-design.html#levels-coding-with-1-and--1">Levels coding with +1 and -1</a></li>
+<li><a href="factorial-design.html#model-with-1-and--1">Model with 1 and -1</a></li>
+<li><a href="factorial-design.html#prediction-with-1-and--1">Prediction with 1 and -1</a></li>
+</ul></li>
+<li><a href="factorial-design-1.html#factorial-design-1">2^3 factorial design</a>
+<ul>
+<li><a href="factorial-design-1.html#main-effects-box-plots">Main effects box plots</a></li>
+<li><a href="factorial-design-1.html#converting-levels-to-numeric">Converting levels to numeric</a></li>
+<li><a href="factorial-design-1.html#model-with-numeric-levels">Model with numeric levels</a></li>
+<li><a href="factorial-design-1.html#prediction-with-numeric-levels">Prediction with numeric levels</a></li>
+<li><a href="factorial-design-1.html#reduced-model-removing-levels">Reduced model (removing levels)</a></li>
+</ul></li>
+<li><a href="k-factorial-design.html#k-factorial-design">2^k factorial design</a>
+<ul>
+<li><a href="k-factorial-design.html#combinations">Combinations</a></li>
+<li><a href="k-factorial-design.html#coded-vs-natural-variables">Coded vs natural variables</a></li>
+</ul></li>
+<li><a href="k-single-replicate-design.html#k-single-replicate-design">2^k single replicate design</a>
+<ul>
+<li><a href="k-single-replicate-design.html#main-effects-data-plots">Main effects data plots</a></li>
+<li><a href="k-single-replicate-design.html#linear-model-single-replicate">Linear model single replicate</a></li>
+<li><a href="k-single-replicate-design.html#anova-single-replicate">Anova single replicate</a></li>
+<li><a href="k-single-replicate-design.html#linear-regression---plot-of-effects">Linear regression - Plot of effects</a></li>
+<li><a href="k-single-replicate-design.html#anova-reduced-model-significant-effects-only">Anova reduced model (significant effects only)</a></li>
+<li><a href="k-single-replicate-design.html#reduced-model">Reduced model</a></li>
+<li><a href="k-single-replicate-design.html#reduced-model-check">Reduced model check</a></li>
+</ul></li>
+</ul></li>
+<li><a href="MSA.html#MSA">MSA - Measurement System Analysis</a>
+<ul>
+<li><a href="robustness.html#robustness">Robustness</a></li>
+<li><a href="linearity.html#linearity">Linearity</a>
+<ul>
+<li><a href="linearity.html#plot-of-bias-data">Plot of bias data</a></li>
+<li><a href="linearity.html#model-of-bias-vs-reference-value">Model of bias vs reference value</a></li>
+<li><a href="linearity.html#model-of-bias-check">Model of bias check</a></li>
+</ul></li>
+<li><a href="trueness.html#trueness">Trueness</a></li>
+<li><a href="precision.html#precision">Precision</a>
+<ul>
+<li><a href="precision.html#base-anova">Base Anova</a></li>
+<li><a href="precision.html#study">Study</a></li>
+<li><a href="precision.html#acceptance-on-variance">Acceptance on Variance</a></li>
+<li><a href="precision.html#acceptance-on-sd">Acceptance on SD</a></li>
+<li><a href="precision.html#interaction-plots">Interaction plots</a></li>
+<li><a href="precision.html#negative-variations">Negative Variations</a></li>
+<li><a href="precision.html#beyond-two-factors">Beyond two factors</a></li>
+<li><a href="precision.html#conclusions">Conclusions</a></li>
+</ul></li>
+<li><a href="uncertainty.html#uncertainty">Uncertainty</a></li>
+</ul></li>
+<li><a href="SPC.html#SPC">SPC - Statistical Process Control</a>
+<ul>
+<li><a href="control-charts.html#control-charts">Control charts</a>
+<ul>
+<li><a href="control-charts.html#xbar-and-r-charts">xbar and R charts</a></li>
+</ul></li>
+<li><a href="process-capability.html#process-capability">Process Capability</a>
+<ul>
+<li><a href="process-capability.html#out-of-specification">Out of specification</a></li>
+<li><a href="process-capability.html#cpk-index">Cpk index</a></li>
+</ul></li>
+</ul></li>
+<li class="part"><span><b>III TOOLBOX</b></span></li>
+<li><a href="r-functions-index.html#r-functions-index">R functions index</a></li>
+<li><a href="r-packages.html#r-packages">R Packages</a>
+<ul>
+<li><a href="installation.html#installation">Installation</a></li>
+<li><a href="domain-packages.html#domain-packages">Domain packages</a>
+<ul>
+<li><a href="domain-packages.html#industrial">industRial</a></li>
+<li><a href="domain-packages.html#six-sigma-1">six sigma</a></li>
+<li><a href="domain-packages.html#qcc">qcc</a></li>
+<li><a href="domain-packages.html#qicharts2">qicharts2</a></li>
+</ul></li>
+<li><a href="other-packages.html#other-packages">Other packages</a></li>
+<li><a href="r-session-info.html#r-session-info">R Session info</a></li>
+</ul></li>
+<li><a href="r-datasets.html#r-datasets">R Datasets</a></li>
+<li><a href="references.html#references">References</a></li>
+</ul>
+</div>
+</div>
+</div>
+<div class="row">
+<div class="col-sm-12">
+<div id="installation" class="section level2">
+<h2>Installation</h2>
+<p>All tools applied throughout this book are available in the form of packages of the programming language R. They’re all available for downloaded at no cost.</p>
+<p>In all sections packages are loaded as they become needed. We’ve prefered this approach instead of a grouped loading in the begining of the chapter because this helps reminding which package the functions come from.</p>
+<p>When needed we also present code required to handle the masking of functions with the same name from those different packages. In the example below the filter and select functions are made explicit to avoid having them masked by the stats package in case it has been loaded before.</p>
+</div>
+<p style="text-align: center;">
+<a href="r-packages.html"><button class="btn btn-default">Previous</button></a>
+<a href="domain-packages.html"><button class="btn btn-default">Next</button></a>
+</p>
+</div>
+</div>
+
+
+
+</body>
+</html>

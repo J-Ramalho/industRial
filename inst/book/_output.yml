@@ -1,0 +1,13 @@
+bookdown::gitbook:
+  number_sections: false
+  config:
+    search: no
+    info: no
+    toolbar:
+      position: fixed
+    toc:
+      collapse: section
+      before: |
+        <li><a href="./">industRial data science</a></li>
+    sharing: no
+    download: no

@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta property="og:title" content="4.2 Single factor designs | industRial data science" />
+<meta property="og:type" content="book" />
+
+
+<meta property="og:description" content="The output format is bookdown::bookdown_site." />
+
+
+<meta name="author" content="João Ramalho" />
+
+<meta name="date" content="2021-01-20" />
+
+
+<meta name="description" content="The output format is bookdown::bookdown_site.">
+
+<title>4.2 Single factor designs | industRial data science</title>
+
+<script src="libs/header-attrs-2.6/header-attrs.js"></script>
+<script src="libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="libs/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet" />
+<script src="libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="libs/navigation-1.1/tabsets.js"></script>
+
+
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+  height: auto;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container-fluid main-container">
+
+
+<div class="row">
+<div class="col-sm-12">
+<div id="TOC">
+<ul>
+<li><a href="index.html#introduction">Introduction</a></li>
+<li class="part"><span><b>I FRAMEWORK</b></span></li>
+<li><a href="1-dfss-design-for-six-sigma.html#dfss---design-for-six-sigma"><span class="toc-section-number">1</span> DFSS - Design for Six Sigma</a></li>
+<li><a href="2-statistics.html#statistics"><span class="toc-section-number">2</span> Statistics</a></li>
+<li><a href="3-r-and-data-science.html#r-and-data-science"><span class="toc-section-number">3</span> R and Data Science</a>
+<ul>
+<li><a href="3-1-why-r.html#why-r"><span class="toc-section-number">3.1</span> Why R</a></li>
+<li><a href="3-2-usefull-packages.html#usefull-packages"><span class="toc-section-number">3.2</span> Usefull packages</a></li>
+</ul></li>
+<li class="part"><span><b>II CASE STUDIES</b></span></li>
+<li><a href="4-DOE.html#DOE"><span class="toc-section-number">4</span> DOE - Design of Experiments</a>
+<ul>
+<li><a href="4-1-simple-comparative-experiments.html#simple-comparative-experiments"><span class="toc-section-number">4.1</span> Simple comparative experiments</a>
+<ul>
+<li><a href="4-1-simple-comparative-experiments.html#the-cement-example"><span class="toc-section-number">4.1.1</span> The Cement example</a></li>
+<li><a href="4-1-simple-comparative-experiments.html#homogeneity-of-variances-test-levene-test"><span class="toc-section-number">4.1.2</span> Homogeneity of variances test (Levene Test)</a></li>
+<li><a href="4-1-simple-comparative-experiments.html#sample-size-calculation"><span class="toc-section-number">4.1.3</span> Sample size calculation</a></li>
+<li><a href="4-1-simple-comparative-experiments.html#t-test-paired"><span class="toc-section-number">4.1.4</span> t-test paired</a></li>
+</ul></li>
+<li><a href="4-2-single-factor-designs.html#single-factor-designs"><span class="toc-section-number">4.2</span> Single factor designs</a>
+<ul>
+<li><a href="4-2-single-factor-designs.html#plasma-etching-example"><span class="toc-section-number">4.2.1</span> Plasma etching example</a></li>
+<li><a href="4-2-single-factor-designs.html#analysis-of-variance"><span class="toc-section-number">4.2.2</span> Analysis of variance</a></li>
+<li><a href="4-2-single-factor-designs.html#single-factor-anova-fixed-effects-model"><span class="toc-section-number">4.2.3</span> Single factor Anova, fixed effects model</a></li>
+<li><a href="4-2-single-factor-designs.html#model-adequacy-check"><span class="toc-section-number">4.2.4</span> Model adequacy check</a></li>
+<li><a href="4-2-single-factor-designs.html#residuals-normality-check-outliers"><span class="toc-section-number">4.2.5</span> Residuals normality check &amp; outliers</a></li>
+<li><a href="4-2-single-factor-designs.html#plot-of-residuals-in-time-sequence"><span class="toc-section-number">4.2.6</span> Plot of residuals in time sequence</a></li>
+<li><a href="4-2-single-factor-designs.html#plot-of-residuals-versus-fitted-values"><span class="toc-section-number">4.2.7</span> Plot of residuals versus fitted values</a></li>
+<li><a href="4-2-single-factor-designs.html#equality-of-variances-test-barletts-test"><span class="toc-section-number">4.2.8</span> Equality of variances test (Barlett’s test)</a></li>
+<li><a href="4-2-single-factor-designs.html#tuckeys-pairwise-comparison-test"><span class="toc-section-number">4.2.9</span> Tuckey’s pairwise comparison test</a></li>
+<li><a href="4-2-single-factor-designs.html#fishers-lsd---pairwise-comparison-test"><span class="toc-section-number">4.2.10</span> Fisher’s LSD - pairwise comparison test</a></li>
+<li><a href="4-2-single-factor-designs.html#practical-interpretation-of-results"><span class="toc-section-number">4.2.11</span> Practical interpretation of results</a></li>
+<li><a href="4-2-single-factor-designs.html#linear-model"><span class="toc-section-number">4.2.12</span> Linear model</a></li>
+<li><a href="4-2-single-factor-designs.html#linear-model-plot"><span class="toc-section-number">4.2.13</span> Linear model plot</a></li>
+<li><a href="4-2-single-factor-designs.html#predicting-new-values"><span class="toc-section-number">4.2.14</span> Predicting new values</a></li>
+<li><a href="4-2-single-factor-designs.html#r²-coefficient-of-determination"><span class="toc-section-number">4.2.15</span> R², coefficient of determination</a></li>
+<li><a href="4-2-single-factor-designs.html#sample-size-calculation-1"><span class="toc-section-number">4.2.16</span> Sample size calculation</a></li>
+</ul></li>
+<li><a href="4-3-two-factors-anova-fixed-effects-model.html#two-factors-anova-fixed-effects-model"><span class="toc-section-number">4.3</span> two-factors ANOVA, fixed effects model</a>
+<ul>
+<li><a href="4-3-two-factors-anova-fixed-effects-model.html#battery-life-example"><span class="toc-section-number">4.3.1</span> Battery life example</a></li>
+<li><a href="4-3-two-factors-anova-fixed-effects-model.html#analysis-of-variance-1"><span class="toc-section-number">4.3.2</span> Analysis of variance</a></li>
+<li><a href="4-3-two-factors-anova-fixed-effects-model.html#doe-and-anova-plots"><span class="toc-section-number">4.3.3</span> DoE and Anova plots</a></li>
+<li><a href="4-3-two-factors-anova-fixed-effects-model.html#r²-coefficient-of-determination-1"><span class="toc-section-number">4.3.4</span> R², coefficient of determination</a></li>
+<li><a href="4-3-two-factors-anova-fixed-effects-model.html#model-adequacy-checking"><span class="toc-section-number">4.3.5</span> Model adequacy checking</a></li>
+<li><a href="4-3-two-factors-anova-fixed-effects-model.html#residuals-normality-check-outliers-1"><span class="toc-section-number">4.3.6</span> Residuals normality check &amp; outliers</a></li>
+<li><a href="4-3-two-factors-anova-fixed-effects-model.html#plot-of-residuals-versus-fitted-values-1"><span class="toc-section-number">4.3.7</span> Plot of residuals versus fitted values</a></li>
+<li><a href="4-3-two-factors-anova-fixed-effects-model.html#sample-size-calculation-2"><span class="toc-section-number">4.3.8</span> Sample size calculation</a></li>
+<li><a href="4-3-two-factors-anova-fixed-effects-model.html#model-with-no-interaction"><span class="toc-section-number">4.3.9</span> Model with no interaction</a></li>
+</ul></li>
+<li><a href="4-4-general-factorial-design.html#general-factorial-design"><span class="toc-section-number">4.4</span> General factorial design</a>
+<ul>
+<li><a href="4-4-general-factorial-design.html#soft-drink-bottling-example"><span class="toc-section-number">4.4.1</span> Soft Drink bottling example</a></li>
+<li><a href="4-4-general-factorial-design.html#analysis-of-variance-2"><span class="toc-section-number">4.4.2</span> Analysis of variance</a></li>
+<li><a href="4-4-general-factorial-design.html#residuals-analysis"><span class="toc-section-number">4.4.3</span> Residuals analysis</a></li>
+<li><a href="4-4-general-factorial-design.html#doe-plots"><span class="toc-section-number">4.4.4</span> DoE plots</a></li>
+</ul></li>
+<li><a href="4-5-the-2k-factorial-designs.html#the-2k-factorial-designs"><span class="toc-section-number">4.5</span> The 2^k factorial designs</a></li>
+<li><a href="4-6-the-22-factorial-design.html#the-22-factorial-design"><span class="toc-section-number">4.6</span> The 2^2 Factorial Design</a>
+<ul>
+<li><a href="4-6-the-22-factorial-design.html#the-chemical-process-example"><span class="toc-section-number">4.6.1</span> The Chemical Process example</a></li>
+<li><a href="4-6-the-22-factorial-design.html#anova"><span class="toc-section-number">4.6.2</span> Anova</a></li>
+<li><a href="4-6-the-22-factorial-design.html#regression-model-prediction"><span class="toc-section-number">4.6.3</span> Regression model / Prediction</a></li>
+<li><a href="4-6-the-22-factorial-design.html#response-surface"><span class="toc-section-number">4.6.4</span> Response surface</a></li>
+</ul></li>
+<li><a href="4-7-the-23-factorial-design.html#the-23-factorial-design"><span class="toc-section-number">4.7</span> The 2^3 Factorial Design</a>
+<ul>
+<li><a href="4-7-the-23-factorial-design.html#the-plasma-etching-example"><span class="toc-section-number">4.7.1</span> The plasma etching example</a></li>
+<li><a href="4-7-the-23-factorial-design.html#anova-1"><span class="toc-section-number">4.7.2</span> Anova</a></li>
+<li><a href="4-7-the-23-factorial-design.html#regression-model-prediction-1"><span class="toc-section-number">4.7.3</span> Regression model / Prediction</a></li>
+<li><a href="4-7-the-23-factorial-design.html#reduced-model"><span class="toc-section-number">4.7.4</span> Reduced model</a></li>
+<li><a href="4-7-the-23-factorial-design.html#doe-plots-1"><span class="toc-section-number">4.7.5</span> DoE plots</a></li>
+</ul></li>
+<li><a href="4-8-the-general-2k-design.html#the-general-2k-design"><span class="toc-section-number">4.8</span> The general 2^k design</a>
+<ul>
+<li><a href="4-8-the-general-2k-design.html#calculating-the-number-combinations"><span class="toc-section-number">4.8.1</span> Calculating the number combinations</a></li>
+<li><a href="4-8-the-general-2k-design.html#relationship-coded-vs-natural-variables"><span class="toc-section-number">4.8.2</span> Relationship coded vs natural variables</a></li>
+</ul></li>
+<li><a href="4-9-single-replicate-2k-design.html#single-replicate-2k-design"><span class="toc-section-number">4.9</span> Single replicate 2^k design</a>
+<ul>
+<li><a href="4-9-single-replicate-2k-design.html#the-filtration-example"><span class="toc-section-number">4.9.1</span> The Filtration example</a></li>
+<li><a href="4-9-single-replicate-2k-design.html#anova-2"><span class="toc-section-number">4.9.2</span> Anova</a></li>
+<li><a href="4-9-single-replicate-2k-design.html#linear-regression---plot-of-effects"><span class="toc-section-number">4.9.3</span> Linear regression - Plot of effects</a></li>
+<li><a href="4-9-single-replicate-2k-design.html#doe-plots-2"><span class="toc-section-number">4.9.4</span> DoE plots</a></li>
+<li><a href="4-9-single-replicate-2k-design.html#anova-reduced-model-significant-effects-only"><span class="toc-section-number">4.9.5</span> Anova reduced model (significant effects only)</a></li>
+<li><a href="4-9-single-replicate-2k-design.html#linear-regression---reduced-model"><span class="toc-section-number">4.9.6</span> Linear regression - reduced model</a></li>
+<li><a href="4-9-single-replicate-2k-design.html#residuals-normality-check"><span class="toc-section-number">4.9.7</span> Residuals normality check</a></li>
+</ul></li>
+<li><a href="4-10-two-level-fractional-factorial-designs.html#two-level-fractional-factorial-designs"><span class="toc-section-number">4.10</span> Two level fractional factorial designs</a>
+<ul>
+<li><a href="4-10-two-level-fractional-factorial-designs.html#the-one-half-fraction-of-th-2k-design"><span class="toc-section-number">4.10.1</span> The One-Half Fraction of th 2k Design</a></li>
+<li><a href="4-10-two-level-fractional-factorial-designs.html#the-filtration-example-modified"><span class="toc-section-number">4.10.2</span> The filtration example (modified)</a></li>
+<li><a href="4-10-two-level-fractional-factorial-designs.html#anova-3"><span class="toc-section-number">4.10.3</span> Anova</a></li>
+</ul></li>
+</ul></li>
+<li><a href="5-MSA.html#MSA"><span class="toc-section-number">5</span> MSA - Measurement System Analysis</a></li>
+<li><a href="6-SPC.html#SPC"><span class="toc-section-number">6</span> SPC - Statistical Process Control</a>
+<ul>
+<li><a href="6-1-xbar-and-r-charts.html#xbar-and-r-charts"><span class="toc-section-number">6.1</span> xbar and R charts</a></li>
+</ul></li>
+<li class="part"><span><b>III TOOLBOX</b></span></li>
+<li><a href="7-Rpck.html#Rpck"><span class="toc-section-number">7</span> R Packages</a>
+<ul>
+<li><a href="7-1-six-sigma.html#six-sigma"><span class="toc-section-number">7.1</span> six sigma</a></li>
+<li><a href="7-2-ggspc.html#ggspc"><span class="toc-section-number">7.2</span> ggspc</a></li>
+<li><a href="7-3-qcc.html#qcc"><span class="toc-section-number">7.3</span> qcc</a></li>
+</ul></li>
+<li><a href="about-the-authors.html#about-the-authors">About the authors</a></li>
+<li><a href="references.html#references">References</a></li>
+</ul>
+</div>
+</div>
+</div>
+<div class="row">
+<div class="col-sm-12">
+<div id="single-factor-designs" class="section level2" number="4.2">
+<h2><span class="header-section-number">4.2</span> Single factor designs</h2>
+<p>CHAPTER 3 <span class="citation">(<a href="references.html#ref-Montgomery2012" role="doc-biblioref">Montgomery 2012</a>)</span></p>
+<p>Randomization of the test sequence is a required practice, not only because of operator effects but also due to other potentially unknown effects like machine warm up.</p>
+<div id="plasma-etching-example" class="section level3" number="4.2.1">
+<h3><span class="header-section-number">4.2.1</span> Plasma etching example</h3>
+<pre class="r"><code># Direct copy of the example from the book:
+plasma &lt;- read.csv(sep = &quot;;&quot;, header = TRUE,
+                   paste0(working_folder, &quot;3-1 plasma etching.csv&quot;))
+
+plasma &lt;- mutate(plasma, 
+                 totals =  (X1 + X2 + X3 + X4 + X5 ),
+                 averages = totals / 5)
+
+overall_mean &lt;- mean(plasma$averages)
+
+# Converting into a narrow table with a factor for utilisation with ggplot2
+# syntax: gather(data, 
+#               name of the new key column (where the columns names go to), 
+#               name of the new value column (where the values go), 
+#               name of the columns to be gathered)
+plasma_narrow &lt;- plasma %&gt;%
+  select(power, X1, X2, X3, X4, X5) %&gt;%
+  gather(observation, etch_rate, X1, X2, X3, X4, X5)
+# plasma_narrow$power &lt;- as.factor(plasma_narrow$power)</code></pre>
+<p>DoE Plots</p>
+<p>Typically the DoE results are presented with a box plot and a scatter diagram as below:</p>
+<pre class="r"><code>plasma_narrow_factor &lt;- plasma_narrow
+plasma_narrow_factor$power &lt;- as.factor(plasma_narrow$power)</code></pre>
+<pre class="r"><code># Box plot
+ggplot(plasma_narrow_factor, aes(x = power, y = etch_rate)) +
+        geom_boxplot()</code></pre>
+<p><img src="IndustRialds_files/figure-html/plasma-fig-1.png" width="672" /></p>
+<pre class="r"><code># Scatter diagram
+ggplot(plasma_narrow_factor, aes(x = power, y = etch_rate)) +
+        geom_point()</code></pre>
+<p><img src="IndustRialds_files/figure-html/plasma-fig-2.png" width="672" /></p>
+</div>
+<div id="analysis-of-variance" class="section level3" number="4.2.2">
+<h3><span class="header-section-number">4.2.2</span> Analysis of variance</h3>
+<p>3.2.</p>
+<p>According to Montgomery the Anova or analysis of variance is probably the most useful technique in the field of statistical inference.</p>
+<p>1 factor with severals levels + 1 continuous dependent variable
+Similar to the t-test but extended - this test allows to compare the means between several levels of treatement for a continuous response variable (the t test is only 2 levels at a time, performing all pair wise t-tests would also not be a solution because its a lot of effort and would increase the type I error)</p>
+<p>ANOVA principle: the total variability in the data, as measured by the total corrected sum of squares, can be partitioned into a sum of squares of the differences between the treatment averages and the grand average plus a sum of squares of the differences of observations within treatments from the treatment average</p>
+</div>
+<div id="single-factor-anova-fixed-effects-model" class="section level3" number="4.2.3">
+<h3><span class="header-section-number">4.2.3</span> Single factor Anova, fixed effects model</h3>
+<p>3.3.
+Anova on plasma etching example (ANOVA, single factor, fixed effects model)</p>
+<p>In R the anova is built by passing the linear model to the anova or aov functions.
+The output of the anova function is just the anova table as shown here for this first example. The output of the aov function is a list.</p>
+<pre class="r"><code># First approach: anova function - create a linear model (treatment has to be a factor)
+plasma_lm_factor &lt;- lm(etch_rate ~ power, data = plasma_narrow_factor)
+plasma_anova &lt;- anova(plasma_lm_factor)
+plasma_aov &lt;- aov(plasma_lm_factor)
+plasma_anova</code></pre>
+<pre><code>## Analysis of Variance Table
+## 
+## Response: etch_rate
+##           Df Sum Sq Mean Sq F value    Pr(&gt;F)    
+## power      3  66871 22290.2  66.797 2.883e-09 ***
+## Residuals 16   5339   333.7                      
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+<pre class="r"><code>summary(plasma_aov)</code></pre>
+<pre><code>##             Df Sum Sq Mean Sq F value   Pr(&gt;F)    
+## power        3  66871   22290    66.8 2.88e-09 ***
+## Residuals   16   5339     334                     
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+<p>Note: book example correctly reproduced.</p>
+<p>Note that the RF power or between-treatment mean square (22,290.18) is many times larger than the within-treatment or error mean square (333.70). This indicates that it is unlikely that the treatment means are equal.
+Also p &lt; 0.05 thus we can reject the null hypothesis and conclude that the means are significantly different.</p>
+<p>Anova on plasma etching, modification of the example to achieve a p &gt; 0.05:</p>
+<pre class="r"><code>plasma2 &lt;- read.csv(sep = &quot;;&quot;, header = TRUE,
+                   paste0(working_folder, &quot;3-1 plasma etching 2.csv&quot;))
+
+plasma2_narrow &lt;- gather(plasma2, observation, etch_rate, X1, X2, X3, X4, X5)
+plasma2_narrow_factor &lt;- plasma2_narrow
+plasma2_narrow_factor$power &lt;- as.factor(plasma2_narrow_factor$power)
+
+plasma2_lm_factor &lt;- lm(etch_rate ~ power, data = plasma2_narrow_factor)
+anova(plasma2_lm_factor)</code></pre>
+<pre><code>## Analysis of Variance Table
+## 
+## Response: etch_rate
+##           Df Sum Sq Mean Sq F value Pr(&gt;F)
+## power      3   1476   492.0  1.2015  0.341
+## Residuals 16   6552   409.5</code></pre>
+<pre class="r"><code>ggplot(plasma2_narrow_factor, aes(x = power, y = etch_rate)) +
+        geom_boxplot()</code></pre>
+<p><img src="IndustRialds_files/figure-html/plasma2_box-fig-1.png" width="672" /></p>
+<p>P &gt; 0.05 - there is no significant difference between the means</p>
+</div>
+<div id="model-adequacy-check" class="section level3" number="4.2.4">
+<h3><span class="header-section-number">4.2.4</span> Model adequacy check</h3>
+<p>3.4.</p>
+</div>
+<div id="residuals-normality-check-outliers" class="section level3" number="4.2.5">
+<h3><span class="header-section-number">4.2.5</span> Residuals normality check &amp; outliers</h3>
+<p>Anova fixed effects assumes that:
+- errors are normally distributed and are independent</p>
+<p>Q-Q plot + Shapiro-Wilk test</p>
+<p>As the number of residuals is too small we’re not checking the normality via the histogram but rather with a a Q-Q plot.
+The plot suggests normal distribution. The verification can be completed by a test. For populations &lt; 50 use the shapiro-wilk normality test.</p>
+<pre class="r"><code>plasma_residuals &lt;- plasma_aov$residuals
+qqnorm(plasma_residuals, datax = TRUE); qqline(plasma_residuals, datax = TRUE)</code></pre>
+<p><img src="IndustRialds_files/figure-html/plasma_res-fig-1.png" width="672" /></p>
+<pre class="r"><code>shapiro.test(plasma_residuals)</code></pre>
+<pre><code>## 
+##  Shapiro-Wilk normality test
+## 
+## data:  plasma_residuals
+## W = 0.93752, p-value = 0.2152</code></pre>
+<p>p &gt; 0.05 indicates that the residuals do not differ significantly from a normally distributed population.</p>
+<p>Standardized residuals graph</p>
+<p>A second graph shows that the standardised residuals are normally distributed (explanation in a later chunk).
+This specific Standardize residuals graph also help detecting outliers in the residuals (any residual &gt; 3 standard deviations is a potential outlier).</p>
+<pre class="r"><code>plot(plasma_aov, which = 2)</code></pre>
+<p><img src="IndustRialds_files/figure-html/plasma_stdres-fig-1.png" width="672" /></p>
+</div>
+<div id="plot-of-residuals-in-time-sequence" class="section level3" number="4.2.6">
+<h3><span class="header-section-number">4.2.6</span> Plot of residuals in time sequence</h3>
+<p>A tendency to have runs of positive of negative results indicates that the independency assumption does not hold.</p>
+<p>Such plot needs that the order of data collection is available in the dataframe. In the example below this is NOT the case as the residuals from the model are sequenced as they appear in the <em>plasma</em> dataframe.</p>
+<pre class="r"><code>plot(plasma_residuals)</code></pre>
+<p><img src="IndustRialds_files/figure-html/plasma_seqres-fig-1.png" width="672" /></p>
+</div>
+<div id="plot-of-residuals-versus-fitted-values" class="section level3" number="4.2.7">
+<h3><span class="header-section-number">4.2.7</span> Plot of residuals versus fitted values</h3>
+<p>If the model is correct and the assumptions hold, the residuals should be structureless. This plot should not reveal any obvious pattern.</p>
+<pre class="r"><code>plot(plasma_aov, which = 1)</code></pre>
+<p><img src="IndustRialds_files/figure-html/plasma_fitres-fig-1.png" width="672" /></p>
+</div>
+<div id="equality-of-variances-test-barletts-test" class="section level3" number="4.2.8">
+<h3><span class="header-section-number">4.2.8</span> Equality of variances test (Barlett’s test)</h3>
+<p>In the plasma etch experiment, the normality assumption is not in question, so we can apply Bartlett’s test to the etch
+rate data.</p>
+<p>(Bartlett’s test is very sensitive to the normality assumption. Consequently, when the validity of this assumption is doubtful, Bartlett’s test should not be used. In this case use the Modified Levene test).</p>
+<pre class="r"><code>bartlett.test(etch_rate ~ power, data = plasma_narrow)</code></pre>
+<pre><code>## 
+##  Bartlett test of homogeneity of variances
+## 
+## data:  etch_rate by power
+## Bartlett&#39;s K-squared = 0.43349, df = 3, p-value = 0.9332</code></pre>
+<p>The P-value is P = 0.934, so we cannot reject the null hypothesis. There is no evidence to counter the claim that all five variances are the same. This is the same conclusion reached by analyzing the plot of residuals versus fitted values.</p>
+</div>
+<div id="tuckeys-pairwise-comparison-test" class="section level3" number="4.2.9">
+<h3><span class="header-section-number">4.2.9</span> Tuckey’s pairwise comparison test</h3>
+<p>The Anova may indicate that the treament means differ but it won’t indicate which ones. In this case we may want to compare pairs of means.</p>
+<pre class="r"><code>plasma_tukey &lt;- TukeyHSD(plasma_aov, ordered = TRUE)
+plasma_tukey</code></pre>
+<pre><code>##   Tukey multiple comparisons of means
+##     95% family-wise confidence level
+##     factor levels have been ordered
+## 
+## Fit: aov(formula = plasma_lm_factor)
+## 
+## $power
+##          diff        lwr       upr     p adj
+## 180-160  36.2   3.145624  69.25438 0.0294279
+## 200-160  74.2  41.145624 107.25438 0.0000455
+## 220-160 155.8 122.745624 188.85438 0.0000000
+## 200-180  38.0   4.945624  71.05438 0.0215995
+## 220-180 119.6  86.545624 152.65438 0.0000001
+## 220-200  81.6  48.545624 114.65438 0.0000146</code></pre>
+<p>The differences reproduce exactly the book example.</p>
+<p>My conclusion is that for all differences p &lt; 0.05, thus all differences are significantly different.
+Therefore, each power setting results in a mean etch rate that differs from the mean etch rate at any other power setting.</p>
+</div>
+<div id="fishers-lsd---pairwise-comparison-test" class="section level3" number="4.2.10">
+<h3><span class="header-section-number">4.2.10</span> Fisher’s LSD - pairwise comparison test</h3>
+<p>Fisher’s Least Significant difference is an alternative to Tuckey’s test.</p>
+<pre class="r"><code>plasma_LSD &lt;- LSD.test(y = plasma_narrow_factor$etch_rate,
+         trt = plasma_narrow_factor$power,
+         DFerror = plasma_anova$Df[2],  
+         MSerror = plasma_anova$`Mean Sq`[2],
+         alpha = 0.05)
+plasma_LSD</code></pre>
+<pre><code>## $statistics
+##   MSerror Df   Mean       CV  t.value      LSD
+##     333.7 16 617.75 2.957095 2.119905 24.49202
+## 
+## $parameters
+##         test p.ajusted                     name.t ntr alpha
+##   Fisher-LSD      none plasma_narrow_factor$power   4  0.05
+## 
+## $means
+##     plasma_narrow_factor$etch_rate      std r      LCL      UCL Min Max Q25 Q50
+## 160                          551.2 20.01749 5 533.8815 568.5185 530 575 539 542
+## 180                          587.4 16.74216 5 570.0815 604.7185 565 610 579 590
+## 200                          625.4 20.52559 5 608.0815 642.7185 600 651 610 629
+## 220                          707.0 15.24795 5 689.6815 724.3185 685 725 700 710
+##     Q75
+## 160 570
+## 180 593
+## 200 637
+## 220 715
+## 
+## $comparison
+## NULL
+## 
+## $groups
+##     plasma_narrow_factor$etch_rate groups
+## 220                          707.0      a
+## 200                          625.4      b
+## 180                          587.4      c
+## 160                          551.2      d
+## 
+## attr(,&quot;class&quot;)
+## [1] &quot;group&quot;</code></pre>
+<p>Although the LSD value output from the test doesn’t match exactly the book value of 33.09 the conclusion is the same and can be interpreted from the fact that all means are in different groups (different letters).</p>
+</div>
+<div id="practical-interpretation-of-results" class="section level3" number="4.2.11">
+<h3><span class="header-section-number">4.2.11</span> Practical interpretation of results</h3>
+<p>3.5</p>
+</div>
+<div id="linear-model" class="section level3" number="4.2.12">
+<h3><span class="header-section-number">4.2.12</span> Linear model</h3>
+<p>Here we’re constructing a linear model of the raw data and not a model of the Anova, thus <em>power</em> has to be as integer and not as a factor, unlike in the Anova model.</p>
+<pre class="r"><code>plasma_lm &lt;- lm(etch_rate ~ power, data = plasma_narrow)
+summary(plasma_lm)</code></pre>
+<pre><code>## 
+## Call:
+## lm(formula = etch_rate ~ power, data = plasma_narrow)
+## 
+## Residuals:
+##    Min     1Q Median     3Q    Max 
+## -43.02 -12.32  -1.21  16.71  33.06 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept) 137.6200    41.2108   3.339  0.00365 ** 
+## power         2.5270     0.2154  11.731 7.26e-10 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 21.54 on 18 degrees of freedom
+## Multiple R-squared:  0.8843, Adjusted R-squared:  0.8779 
+## F-statistic: 137.6 on 1 and 18 DF,  p-value: 7.263e-10</code></pre>
+<pre class="r"><code># Just to demonstrate that with a factor we get completely different results:
+summary(plasma_lm_factor)</code></pre>
+<pre><code>## 
+## Call:
+## lm(formula = etch_rate ~ power, data = plasma_narrow_factor)
+## 
+## Residuals:
+##    Min     1Q Median     3Q    Max 
+##  -25.4  -13.0    2.8   13.2   25.6 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)  551.200      8.169  67.471  &lt; 2e-16 ***
+## power180      36.200     11.553   3.133  0.00642 ** 
+## power200      74.200     11.553   6.422 8.44e-06 ***
+## power220     155.800     11.553  13.485 3.73e-10 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 18.27 on 16 degrees of freedom
+## Multiple R-squared:  0.9261, Adjusted R-squared:  0.9122 
+## F-statistic:  66.8 on 3 and 16 DF,  p-value: 2.883e-09</code></pre>
+<p>Note: book example correctly reproduced (in the first case with power NOT as a factor)</p>
+</div>
+<div id="linear-model-plot" class="section level3" number="4.2.13">
+<h3><span class="header-section-number">4.2.13</span> Linear model plot</h3>
+<p>Same thing for the linear model graph, we have to use the raw data with power as integer and not as a factor.</p>
+<pre class="r"><code>ggplot(plasma_narrow, aes(x = power, y = etch_rate)) +
+  geom_point() +
+  geom_smooth(method = &quot;lm&quot;, se = FALSE)</code></pre>
+<pre><code>## `geom_smooth()` using formula &#39;y ~ x&#39;</code></pre>
+<p><img src="IndustRialds_files/figure-html/plasma_narrow-fig-1.png" width="672" /></p>
+<pre class="r"><code># Just to demonstrate that ggplot does not take power as a integer
+ggplot(plasma_narrow_factor, aes(x = power, y = etch_rate)) +
+  geom_point() +
+  geom_smooth(method = &quot;lm&quot;, se = FALSE)</code></pre>
+<pre><code>## `geom_smooth()` using formula &#39;y ~ x&#39;</code></pre>
+<p><img src="IndustRialds_files/figure-html/plasma_narrow-fig-2.png" width="672" /></p>
+<pre class="r"><code>ggplot(plasma_narrow, aes(x = power, y = etch_rate)) +
+  geom_point() +
+  geom_smooth(method = &quot;lm&quot;, formula = y ~ poly(x, 2), se = FALSE)</code></pre>
+<p><img src="IndustRialds_files/figure-html/plasma_narrow-fig-3.png" width="672" /></p>
+</div>
+<div id="predicting-new-values" class="section level3" number="4.2.14">
+<h3><span class="header-section-number">4.2.14</span> Predicting new values</h3>
+<p>Here we’re using the model with power as an integer:</p>
+<pre class="r"><code>power_new &lt;- data.frame(power = c(170, 190))
+predict(plasma_lm, newdata = power_new)</code></pre>
+<pre><code>##      1      2 
+## 567.21 617.75</code></pre>
+<p>Note: book example correctly reproduced (with power NOT as a factor)</p>
+</div>
+<div id="r²-coefficient-of-determination" class="section level3" number="4.2.15">
+<h3><span class="header-section-number">4.2.15</span> R², coefficient of determination</h3>
+<p>The R square can be extracted from the linear model that has been used to build the Anova model. In this case R² = 0.9261 as seen in the book.
+(attention: it is important to make <em>power</em> as a factor before creating the linear model otherwise this gives wrong results).
+(attention: the other outputs are not related with the Anova model)</p>
+<pre class="r"><code>summary(plasma_lm_factor)</code></pre>
+<pre><code>## 
+## Call:
+## lm(formula = etch_rate ~ power, data = plasma_narrow_factor)
+## 
+## Residuals:
+##    Min     1Q Median     3Q    Max 
+##  -25.4  -13.0    2.8   13.2   25.6 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)  551.200      8.169  67.471  &lt; 2e-16 ***
+## power180      36.200     11.553   3.133  0.00642 ** 
+## power200      74.200     11.553   6.422 8.44e-06 ***
+## power220     155.800     11.553  13.485 3.73e-10 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 18.27 on 16 degrees of freedom
+## Multiple R-squared:  0.9261, Adjusted R-squared:  0.9122 
+## F-statistic:  66.8 on 3 and 16 DF,  p-value: 2.883e-09</code></pre>
+<pre class="r"><code># Just to demonstrate that the lm model without factor gives different and wrong R^2
+summary(plasma_lm)</code></pre>
+<pre><code>## 
+## Call:
+## lm(formula = etch_rate ~ power, data = plasma_narrow)
+## 
+## Residuals:
+##    Min     1Q Median     3Q    Max 
+## -43.02 -12.32  -1.21  16.71  33.06 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept) 137.6200    41.2108   3.339  0.00365 ** 
+## power         2.5270     0.2154  11.731 7.26e-10 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 21.54 on 18 degrees of freedom
+## Multiple R-squared:  0.8843, Adjusted R-squared:  0.8779 
+## F-statistic: 137.6 on 1 and 18 DF,  p-value: 7.263e-10</code></pre>
+<p>Note: book example correctly reproduced (for the first case where <em>Power</em> is a factor).</p>
+<p>Thus, in the plasma etching experiment, the factor “power” explains about 92.61 percent of the variability in etch rate.</p>
+</div>
+<div id="sample-size-calculation-1" class="section level3" number="4.2.16">
+<h3><span class="header-section-number">4.2.16</span> Sample size calculation</h3>
+<p>Refer to “Statistiques faciles avec R,” page 233.
+Cohen’s effect size is calculated with the eta squared from the model (intriguing is the same value as the R²…).
+In this case with 2 replicates we obtain a power of 90% and an alpha of 1%.
+I’ve not managed here to replicate the values from the Montgomery book.</p>
+<pre class="r"><code>plasma_eta2 &lt;- etaSquared(plasma_aov)[1]
+plasma_cohend_aov &lt;- sqrt(plasma_eta2 / (1 - plasma_eta2))
+
+pwr.anova.test(k = 4,
+               n = 2,
+               f = plasma_cohend_aov,
+               sig.level = 0.01)</code></pre>
+<pre><code>## 
+##      Balanced one-way analysis of variance power calculation 
+## 
+##               k = 4
+##               n = 2
+##               f = 3.53899
+##       sig.level = 0.01
+##           power = 0.9004508
+## 
+## NOTE: n is number in each group</code></pre>
+<p>Here I have not yet managed to reproduce the book example. See the example in chapter 5 where this has been successfull thus working as a better approach for the future.</p>
+<p>Multiple factor designs</p>
+<p>CHAPTER 5 <span class="citation">(<a href="references.html#ref-Montgomery2012" role="doc-biblioref">Montgomery 2012</a>)</span></p>
+</div>
+</div>
+<p style="text-align: center;">
+<a href="4-1-simple-comparative-experiments.html"><button class="btn btn-default">Previous</button></a>
+<a href="4-3-two-factors-anova-fixed-effects-model.html"><button class="btn btn-default">Next</button></a>
+</p>
+</div>
+</div>
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+$(document).ready(function () {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+});
+
+</script>
+
+</body>
+</html>

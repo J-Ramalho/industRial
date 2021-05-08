@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta property="og:title" content="Process Capability | industRial data science" />
+<meta property="og:type" content="book" />
+
+<meta property="og:image" content="img/cover3.png" />
+
+<meta name="github-repo" content="J-Ramalho/industRialds" />
+
+<meta name="author" content="João Ramalho" />
+
+<meta name="date" content="2021-03-27" />
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: { equationNumbers: { autoNumber: "AMS" } }
+});
+</script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<meta name="description" content="Process Capability | industRial data science">
+
+<title>Process Capability | industRial data science</title>
+
+<script src="libs/header-attrs-2.6/header-attrs.js"></script>
+<link href="libs/tufte-css-2015.12.29/tufte-fonts.css" rel="stylesheet" />
+<link href="libs/tufte-css-2015.12.29/tufte-background.css" rel="stylesheet" />
+<link href="libs/tufte-css-2015.12.29/tufte-italics.css" rel="stylesheet" />
+<link href="libs/tufte-css-2015.12.29/tufte.css" rel="stylesheet" />
+
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+
+</head>
+
+<body>
+
+
+
+<div class="row">
+<div class="col-sm-12">
+<div id="TOC">
+<ul>
+<li class="part"><span><b>I SETUP</b></span></li>
+<li><a href="index.html#welcome">Welcome</a></li>
+<li><a href="foundations.html#foundations">Foundations</a>
+<ul>
+<li><a href="foundations.html#six-sigma">Six Sigma</a></li>
+<li><a href="foundations.html#statistics">Statistics</a></li>
+<li><a href="foundations.html#r-programming">R programming</a></li>
+</ul></li>
+<li class="part"><span><b>II CASE STUDIES</b></span></li>
+<li><a href="s-six-sigma.html#s---six-sigma">6S - Six Sigma</a>
+<ul>
+<li><a href="pareto.html#pareto">Pareto</a></li>
+<li><a href="ishikawa.html#ishikawa">Ishikawa</a></li>
+<li><a href="matrix-diagrams.html#matrix-diagrams">Matrix Diagrams</a>
+<ul>
+<li><a href="matrix-diagrams.html#network-plot">Network plot</a></li>
+<li><a href="matrix-diagrams.html#clustering">Clustering</a></li>
+</ul></li>
+</ul></li>
+<li><a href="DOE.html#DOE">DOE - Design of Experiments</a>
+<ul>
+<li><a href="one-factor-two-levels.html#one-factor-two-levels">One factor two levels</a>
+<ul>
+<li><a href="one-factor-two-levels.html#two-means-comparison">Two means comparison</a></li>
+<li><a href="one-factor-two-levels.html#two-variances-comparison">Two variances comparison</a></li>
+<li><a href="one-factor-two-levels.html#sample-size">Sample size</a></li>
+</ul></li>
+<li><a href="one-factor-multiple-levels.html#one-factor-multiple-levels">One factor multiple levels</a>
+<ul>
+<li><a href="one-factor-multiple-levels.html#linear-regression">Linear regression</a></li>
+<li><a href="one-factor-multiple-levels.html#model-check-residuals">Model check &amp; residuals</a></li>
+<li><a href="one-factor-multiple-levels.html#predict">Prediction</a></li>
+<li><a href="one-factor-multiple-levels.html#multiple-means-comparison">Multiple means comparison</a></li>
+<li><a href="one-factor-multiple-levels.html#pairwise-comparisons">Pairwise comparisons</a></li>
+<li><a href="one-factor-multiple-levels.html#means-comparison-covariance">Means comparison &amp; covariance</a></li>
+</ul></li>
+<li><a href="two-factors-multiple-levels.html#two-factors-multiple-levels">Two factors multiple levels</a>
+<ul>
+<li><a href="two-factors-multiple-levels.html#linear-regression-with-interactions">Linear regression with interactions</a></li>
+<li><a href="two-factors-multiple-levels.html#augmented-model-check">Augmented model check</a></li>
+<li><a href="two-factors-multiple-levels.html#interactionPlot">Interaction plot</a></li>
+<li><a href="two-factors-multiple-levels.html#effects-significance">Effects significance</a></li>
+<li><a href="two-factors-multiple-levels.html#sample-size-calculation">Sample size calculation</a></li>
+<li><a href="two-factors-multiple-levels.html#removing-interaction">Removing interaction</a></li>
+</ul></li>
+<li><a href="multiple-factors.html#multiple-factors">Multiple factors</a>
+<ul>
+<li><a href="multiple-factors.html#main-effects-plots">Main effects plots</a></li>
+<li><a href="multiple-factors.html#model-with-3rd-level-interactions">Model with 3rd level interactions</a></li>
+<li><a href="multiple-factors.html#model-adequacy-check">Model adequacy check</a></li>
+<li><a href="multiple-factors.html#anova-with-3rd-level-interactions">Anova with 3rd level interactions</a></li>
+</ul></li>
+<li><a href="factorial-design.html#factorial-design">2^2 factorial design</a>
+<ul>
+<li><a href="factorial-design.html#linear-model-with-and--">Linear model with + and -</a></li>
+<li><a href="factorial-design.html#anova-with-and--">Anova with + and -</a></li>
+<li><a href="factorial-design.html#interaction-plots-with-sd-bars">Interaction plots with sd bars</a></li>
+<li><a href="factorial-design.html#outputs-correlation">Outputs correlation</a></li>
+<li><a href="factorial-design.html#levels-coding-with-1-and--1">Levels coding with +1 and -1</a></li>
+<li><a href="factorial-design.html#model-with-1-and--1">Model with 1 and -1</a></li>
+<li><a href="factorial-design.html#prediction-with-1-and--1">Prediction with 1 and -1</a></li>
+</ul></li>
+<li><a href="factorial-design-1.html#factorial-design-1">2^3 factorial design</a>
+<ul>
+<li><a href="factorial-design-1.html#main-effects-box-plots">Main effects box plots</a></li>
+<li><a href="factorial-design-1.html#converting-levels-to-numeric">Converting levels to numeric</a></li>
+<li><a href="factorial-design-1.html#model-with-numeric-levels">Model with numeric levels</a></li>
+<li><a href="factorial-design-1.html#prediction-with-numeric-levels">Prediction with numeric levels</a></li>
+<li><a href="factorial-design-1.html#reduced-model-removing-levels">Reduced model (removing levels)</a></li>
+</ul></li>
+<li><a href="k-factorial-design.html#k-factorial-design">2^k factorial design</a>
+<ul>
+<li><a href="k-factorial-design.html#combinations">Combinations</a></li>
+<li><a href="k-factorial-design.html#coded-vs-natural-variables">Coded vs natural variables</a></li>
+</ul></li>
+<li><a href="k-single-replicate-design.html#k-single-replicate-design">2^k single replicate design</a>
+<ul>
+<li><a href="k-single-replicate-design.html#main-effects-data-plots">Main effects data plots</a></li>
+<li><a href="k-single-replicate-design.html#linear-model-single-replicate">Linear model single replicate</a></li>
+<li><a href="k-single-replicate-design.html#anova-single-replicate">Anova single replicate</a></li>
+<li><a href="k-single-replicate-design.html#linear-regression---plot-of-effects">Linear regression - Plot of effects</a></li>
+<li><a href="k-single-replicate-design.html#anova-reduced-model-significant-effects-only">Anova reduced model (significant effects only)</a></li>
+<li><a href="k-single-replicate-design.html#reduced-model">Reduced model</a></li>
+<li><a href="k-single-replicate-design.html#reduced-model-check">Reduced model check</a></li>
+</ul></li>
+</ul></li>
+<li><a href="MSA.html#MSA">MSA - Measurement System Analysis</a>
+<ul>
+<li><a href="robustness.html#robustness">Robustness</a></li>
+<li><a href="linearity.html#linearity">Linearity</a>
+<ul>
+<li><a href="linearity.html#plot-of-bias-data">Plot of bias data</a></li>
+<li><a href="linearity.html#model-of-bias-vs-reference-value">Model of bias vs reference value</a></li>
+<li><a href="linearity.html#model-of-bias-check">Model of bias check</a></li>
+</ul></li>
+<li><a href="trueness.html#trueness">Trueness</a></li>
+<li><a href="precision.html#precision">Precision</a>
+<ul>
+<li><a href="precision.html#base-anova">Base Anova</a></li>
+<li><a href="precision.html#study">Study</a></li>
+<li><a href="precision.html#acceptance-on-variance">Acceptance on Variance</a></li>
+<li><a href="precision.html#acceptance-on-sd">Acceptance on SD</a></li>
+<li><a href="precision.html#interaction-plots">Interaction plots</a></li>
+<li><a href="precision.html#negative-variations">Negative Variations</a></li>
+<li><a href="precision.html#beyond-two-factors">Beyond two factors</a></li>
+<li><a href="precision.html#conclusions">Conclusions</a></li>
+</ul></li>
+<li><a href="uncertainty.html#uncertainty">Uncertainty</a></li>
+</ul></li>
+<li><a href="SPC.html#SPC">SPC - Statistical Process Control</a>
+<ul>
+<li><a href="control-charts.html#control-charts">Control charts</a>
+<ul>
+<li><a href="control-charts.html#xbar-and-r-charts">xbar and R charts</a></li>
+</ul></li>
+<li><a href="process-capability.html#process-capability">Process Capability</a>
+<ul>
+<li><a href="process-capability.html#out-of-specification">Out of specification</a></li>
+<li><a href="process-capability.html#cpk-index">Cpk index</a></li>
+</ul></li>
+</ul></li>
+<li class="part"><span><b>III TOOLBOX</b></span></li>
+<li><a href="r-functions-index.html#r-functions-index">R functions index</a></li>
+<li><a href="r-packages.html#r-packages">R Packages</a>
+<ul>
+<li><a href="installation.html#installation">Installation</a></li>
+<li><a href="domain-packages.html#domain-packages">Domain packages</a>
+<ul>
+<li><a href="domain-packages.html#industrial">industRial</a></li>
+<li><a href="domain-packages.html#six-sigma-1">six sigma</a></li>
+<li><a href="domain-packages.html#qcc">qcc</a></li>
+<li><a href="domain-packages.html#qicharts2">qicharts2</a></li>
+</ul></li>
+<li><a href="other-packages.html#other-packages">Other packages</a></li>
+<li><a href="r-session-info.html#r-session-info">R Session info</a></li>
+</ul></li>
+<li><a href="r-datasets.html#r-datasets">R Datasets</a></li>
+<li><a href="references.html#references">References</a></li>
+</ul>
+</div>
+</div>
+</div>
+<div class="row">
+<div class="col-sm-12">
+<div id="process-capability" class="section level2">
+<h2>Process Capability</h2>
+<div id="out-of-specification" class="section level3">
+<h3>Out of specification</h3>
+<div class="sourceCode" id="cb262"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb262-1"><a href="process-capability.html#cb262-1" aria-hidden="true" tabindex="-1"></a>bamako_long <span class="ot">&lt;-</span> bamako <span class="sc">%&gt;%</span></span>
+<span id="cb262-2"><a href="process-capability.html#cb262-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="fu">starts_with</span>(<span class="st">&quot;Sample&quot;</span>),</span>
+<span id="cb262-3"><a href="process-capability.html#cb262-3" aria-hidden="true" tabindex="-1"></a>               <span class="at">names_to =</span> <span class="st">&quot;sample&quot;</span>,</span>
+<span id="cb262-4"><a href="process-capability.html#cb262-4" aria-hidden="true" tabindex="-1"></a>               <span class="at">values_to =</span> <span class="st">&quot;value&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb263"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb263-1"><a href="process-capability.html#cb263-1" aria-hidden="true" tabindex="-1"></a>spec_max <span class="ot">&lt;-</span> <span class="fl">10.5</span></span>
+<span id="cb263-2"><a href="process-capability.html#cb263-2" aria-hidden="true" tabindex="-1"></a>spec_min <span class="ot">&lt;-</span> <span class="fl">9.9</span></span>
+<span id="cb263-3"><a href="process-capability.html#cb263-3" aria-hidden="true" tabindex="-1"></a>spec_tgt <span class="ot">&lt;-</span> (spec_max <span class="sc">-</span> spec_min) <span class="sc">/</span> <span class="dv">2</span> <span class="sc">+</span> spec_min</span>
+<span id="cb263-4"><a href="process-capability.html#cb263-4" aria-hidden="true" tabindex="-1"></a>specs <span class="ot">&lt;-</span> <span class="fu">c</span>(spec_min, spec_tgt, spec_max)</span></code></pre></div>
+<p><strong>variables</strong></p>
+<div class="sourceCode" id="cb264"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb264-1"><a href="process-capability.html#cb264-1" aria-hidden="true" tabindex="-1"></a>bamako_mean <span class="ot">=</span> bamako_long <span class="sc">%&gt;%</span> <span class="fu">pull</span>(value) <span class="sc">%&gt;%</span> <span class="fu">mean</span>()</span>
+<span id="cb264-2"><a href="process-capability.html#cb264-2" aria-hidden="true" tabindex="-1"></a>bamako_sd <span class="ot">=</span> bamako_long <span class="sc">%&gt;%</span> <span class="fu">pull</span>(value) <span class="sc">%&gt;%</span> <span class="fu">sd</span>()</span>
+<span id="cb264-3"><a href="process-capability.html#cb264-3" aria-hidden="true" tabindex="-1"></a>spec_max <span class="ot">&lt;-</span> <span class="fl">10.5</span></span>
+<span id="cb264-4"><a href="process-capability.html#cb264-4" aria-hidden="true" tabindex="-1"></a>spec_min <span class="ot">&lt;-</span> <span class="fl">9.9</span></span>
+<span id="cb264-5"><a href="process-capability.html#cb264-5" aria-hidden="true" tabindex="-1"></a>bamako_n <span class="ot">&lt;-</span> <span class="fu">length</span>(bamako_long)</span>
+<span id="cb264-6"><a href="process-capability.html#cb264-6" aria-hidden="true" tabindex="-1"></a>theor_n <span class="ot">=</span> <span class="dv">1000000</span></span></code></pre></div>
+<p><strong>calculation: probability of being between the limits</strong></p>
+<div class="sourceCode" id="cb265"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb265-1"><a href="process-capability.html#cb265-1" aria-hidden="true" tabindex="-1"></a>within_limits <span class="ot">&lt;-</span> <span class="cf">function</span>(UCL, LCL, mean, sd) {</span>
+<span id="cb265-2"><a href="process-capability.html#cb265-2" aria-hidden="true" tabindex="-1"></a>  (<span class="fu">pnorm</span>(UCL, mean, sd) <span class="sc">-</span> <span class="fu">pnorm</span>(LCL, mean, sd))<span class="sc">*</span><span class="dv">100</span></span>
+<span id="cb265-3"><a href="process-capability.html#cb265-3" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb266"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb266-1"><a href="process-capability.html#cb266-1" aria-hidden="true" tabindex="-1"></a>bamako_within <span class="ot">&lt;-</span> <span class="fu">within_limits</span>(spec_max, spec_min, bamako_mean, bamako_sd)</span>
+<span id="cb266-2"><a href="process-capability.html#cb266-2" aria-hidden="true" tabindex="-1"></a>bamako_off_spec <span class="ot">&lt;-</span> <span class="dv">100</span> <span class="sc">-</span> bamako_within</span></code></pre></div>
+<div class="sourceCode" id="cb267"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb267-1"><a href="process-capability.html#cb267-1" aria-hidden="true" tabindex="-1"></a>bamako_theor <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="at">n =</span> theor_n, <span class="at">mean =</span> bamako_mean, <span class="at">sd =</span> bamako_sd) <span class="sc">%&gt;%</span> </span>
+<span id="cb267-2"><a href="process-capability.html#cb267-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as_tibble</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb268"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb268-1"><a href="process-capability.html#cb268-1" aria-hidden="true" tabindex="-1"></a>plot_subtitle <span class="ot">&lt;-</span> <span class="fu">paste</span>(</span>
+<span id="cb268-2"><a href="process-capability.html#cb268-2" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;Spec: [&quot;</span>, spec_min, <span class="st">&quot;;&quot;</span>, spec_max, </span>
+<span id="cb268-3"><a href="process-capability.html#cb268-3" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;], Proportion off-spec = &quot;</span>,</span>
+<span id="cb268-4"><a href="process-capability.html#cb268-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">signif</span>(bamako_off_spec, <span class="at">digits =</span> <span class="dv">2</span>), <span class="st">&quot;%&quot;</span></span>
+<span id="cb268-5"><a href="process-capability.html#cb268-5" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
+<p>Note that we are deliberately twicking the plot colors to make it look like the plots from minitab and from the qcc package. This gives a starting point for users who would like to adapt and further develop this kind of plots but still keep a visual coherence with the existing ones.</p>
+<div class="sourceCode" id="cb269"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb269-1"><a href="process-capability.html#cb269-1" aria-hidden="true" tabindex="-1"></a><span class="co"># source(&quot;theme_qcc.R&quot;)</span></span>
+<span id="cb269-2"><a href="process-capability.html#cb269-2" aria-hidden="true" tabindex="-1"></a>bamako_long <span class="sc">%&gt;%</span></span>
+<span id="cb269-3"><a href="process-capability.html#cb269-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> value, <span class="at">y =</span> ..density..)) <span class="sc">+</span></span>
+<span id="cb269-4"><a href="process-capability.html#cb269-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(</span>
+<span id="cb269-5"><a href="process-capability.html#cb269-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">bins =</span> <span class="dv">30</span>,</span>
+<span id="cb269-6"><a href="process-capability.html#cb269-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">fill =</span> <span class="st">&quot;white&quot;</span>,</span>
+<span id="cb269-7"><a href="process-capability.html#cb269-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">color =</span> <span class="st">&quot;grey20&quot;</span>) <span class="sc">+</span></span>
+<span id="cb269-8"><a href="process-capability.html#cb269-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_density</span>(<span class="at">data =</span> bamako_theor, <span class="at">linetype =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="cb269-9"><a href="process-capability.html#cb269-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> {spec_min}, <span class="at">color =</span> <span class="st">&quot;red&quot;</span>, <span class="at">linetype =</span> <span class="dv">3</span>) <span class="sc">+</span></span>
+<span id="cb269-10"><a href="process-capability.html#cb269-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> {spec_max}, <span class="at">color =</span> <span class="st">&quot;red&quot;</span>, <span class="at">linetype =</span> <span class="dv">3</span>) <span class="sc">+</span></span>
+<span id="cb269-11"><a href="process-capability.html#cb269-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> {spec_tgt}, <span class="at">color =</span> <span class="st">&quot;red&quot;</span>, <span class="at">linetype =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="cb269-12"><a href="process-capability.html#cb269-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">n.breaks =</span> <span class="dv">10</span>) <span class="sc">+</span></span>
+<span id="cb269-13"><a href="process-capability.html#cb269-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
+<span id="cb269-14"><a href="process-capability.html#cb269-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.background =</span> <span class="fu">element_rect</span>(<span class="at">color =</span> <span class="cn">NA</span>, <span class="at">fill =</span> <span class="st">&quot;grey90&quot;</span>),</span>
+<span id="cb269-15"><a href="process-capability.html#cb269-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">panel.background =</span> <span class="fu">element_rect</span>(<span class="at">fill =</span> <span class="st">&quot;white&quot;</span>, <span class="at">color  =</span>  <span class="cn">NA</span>),</span>
+<span id="cb269-16"><a href="process-capability.html#cb269-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">panel.border =</span> <span class="fu">element_rect</span>(<span class="at">fill =</span> <span class="cn">NA</span>, <span class="at">color =</span> <span class="st">&quot;black&quot;</span>)</span>
+<span id="cb269-17"><a href="process-capability.html#cb269-17" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb269-18"><a href="process-capability.html#cb269-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb269-19"><a href="process-capability.html#cb269-19" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">&quot;Out of specification (Expected)&quot;</span>, </span>
+<span id="cb269-20"><a href="process-capability.html#cb269-20" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> {plot_subtitle})</span></code></pre></div>
+<p><img src="spc_files/figure-html/unnamed-chunk-28-1.png" width="80%"  /></p>
+<p>By looking at the histogram of the Bamako lightning dataset we confirm the extreme offcentering of the production. We also see that although there are no measurements beyond the lower specification limit (LSL) it is very likely this will happen soon.</p>
+<p>We can also calculate the Cpk</p>
+<div class="sourceCode" id="cb270"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb270-1"><a href="process-capability.html#cb270-1" aria-hidden="true" tabindex="-1"></a>capability <span class="ot">&lt;-</span> <span class="cf">function</span>(UCL, LCL, mean, sd) {</span>
+<span id="cb270-2"><a href="process-capability.html#cb270-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pmin</span>(</span>
+<span id="cb270-3"><a href="process-capability.html#cb270-3" aria-hidden="true" tabindex="-1"></a>    (<span class="fu">abs</span>(mean <span class="sc">-</span> <span class="fu">abs</span>(LCL)) <span class="sc">/</span> (<span class="dv">3</span> <span class="sc">*</span> sd)),</span>
+<span id="cb270-4"><a href="process-capability.html#cb270-4" aria-hidden="true" tabindex="-1"></a>    (<span class="fu">abs</span>((<span class="fu">abs</span>(UCL) <span class="sc">-</span> mean)) <span class="sc">/</span> (<span class="dv">3</span> <span class="sc">*</span> sd))</span>
+<span id="cb270-5"><a href="process-capability.html#cb270-5" aria-hidden="true" tabindex="-1"></a>   )</span>
+<span id="cb270-6"><a href="process-capability.html#cb270-6" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb271"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb271-1"><a href="process-capability.html#cb271-1" aria-hidden="true" tabindex="-1"></a><span class="fu">capability</span>(spec_max, spec_min, bamako_mean, bamako_sd)</span></code></pre></div>
+<pre><code>[1] 0.7456003</code></pre>
+<p>And convert the percentage out of spec in parts per million. We’re not considering the 1.5 shift that sometimes is presented in the literature but rather making a simple direct conversion of the proportion out of spec found before:</p>
+<div class="sourceCode" id="cb273"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb273-1"><a href="process-capability.html#cb273-1" aria-hidden="true" tabindex="-1"></a>per_mio_off_spec <span class="ot">&lt;-</span> <span class="cf">function</span>(percent_within) {</span>
+<span id="cb273-2"><a href="process-capability.html#cb273-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">formatC</span>(</span>
+<span id="cb273-3"><a href="process-capability.html#cb273-3" aria-hidden="true" tabindex="-1"></a>  ((<span class="dv">100</span> <span class="sc">-</span> percent_within) <span class="sc">*</span> <span class="dv">10000</span>),</span>
+<span id="cb273-4"><a href="process-capability.html#cb273-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">format =</span> <span class="st">&quot;d&quot;</span>,</span>
+<span id="cb273-5"><a href="process-capability.html#cb273-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">big.mark =</span> <span class="st">&quot;&#39;&quot;</span></span>
+<span id="cb273-6"><a href="process-capability.html#cb273-6" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb273-7"><a href="process-capability.html#cb273-7" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb274"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb274-1"><a href="process-capability.html#cb274-1" aria-hidden="true" tabindex="-1"></a><span class="fu">per_mio_off_spec</span>(bamako_within)</span></code></pre></div>
+<pre><code>[1] &quot;12&#39;649&quot;</code></pre>
+<p>The expected population below the LSL is 1,3% which is very high for industry standards. In fact this corresponds to 12’649 parts per million (ppm) whereas a common target would be 1 ppm. Naturally these figures are indicative and they depend of the context criteria such as severity of the problem, cost, difficulty to eliminate the problem and so on.</p>
+<p>We can now establish a simple table using the functions created before, to present the expected percentage that falls within certain limits. To make it usefull we’re putting this limits at +/- 1 to 6 standard deviations</p>
+<div class="sourceCode" id="cb276"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb276-1"><a href="process-capability.html#cb276-1" aria-hidden="true" tabindex="-1"></a>mean <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb276-2"><a href="process-capability.html#cb276-2" aria-hidden="true" tabindex="-1"></a>sd <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb276-3"><a href="process-capability.html#cb276-3" aria-hidden="true" tabindex="-1"></a>sigma_conversion_table <span class="ot">&lt;-</span> </span>
+<span id="cb276-4"><a href="process-capability.html#cb276-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tibble</span>(<span class="at">UCL =</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>, <span class="dv">4</span>,<span class="dv">5</span>,<span class="dv">6</span>),</span>
+<span id="cb276-5"><a href="process-capability.html#cb276-5" aria-hidden="true" tabindex="-1"></a>         <span class="at">LCL =</span> <span class="sc">-</span>UCL,</span>
+<span id="cb276-6"><a href="process-capability.html#cb276-6" aria-hidden="true" tabindex="-1"></a>         <span class="at">mean =</span> mean,</span>
+<span id="cb276-7"><a href="process-capability.html#cb276-7" aria-hidden="true" tabindex="-1"></a>         <span class="at">sd =</span> sd)</span></code></pre></div>
+<div class="sourceCode" id="cb277"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb277-1"><a href="process-capability.html#cb277-1" aria-hidden="true" tabindex="-1"></a>sigma_conversion_table <span class="ot">&lt;-</span> sigma_conversion_table <span class="sc">%&gt;%</span></span>
+<span id="cb277-2"><a href="process-capability.html#cb277-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">perc_in_spec =</span> <span class="fu">within_limits</span>(UCL, LCL, mean, sd),</span>
+<span id="cb277-3"><a href="process-capability.html#cb277-3" aria-hidden="true" tabindex="-1"></a>         <span class="at">Cpk =</span> <span class="fu">capability</span>(UCL, LCL, mean, sd),</span>
+<span id="cb277-4"><a href="process-capability.html#cb277-4" aria-hidden="true" tabindex="-1"></a>         <span class="at">ppm_defects =</span> <span class="fu">per_mio_off_spec</span>(perc_in_spec))</span>
+<span id="cb277-5"><a href="process-capability.html#cb277-5" aria-hidden="true" tabindex="-1"></a>sigma_conversion_table <span class="sc">%&gt;%</span></span>
+<span id="cb277-6"><a href="process-capability.html#cb277-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable</span>(<span class="at">align =</span> <span class="st">&quot;c&quot;</span>)</span></code></pre></div>
+<table>
+<thead>
+<tr class="header">
+<th align="center">UCL</th>
+<th align="center">LCL</th>
+<th align="center">mean</th>
+<th align="center">sd</th>
+<th align="center">perc_in_spec</th>
+<th align="center">Cpk</th>
+<th align="center">ppm_defects</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">1</td>
+<td align="center">-1</td>
+<td align="center">0</td>
+<td align="center">1</td>
+<td align="center">68.26895</td>
+<td align="center">0.3333333</td>
+<td align="center">317’310</td>
+</tr>
+<tr class="even">
+<td align="center">2</td>
+<td align="center">-2</td>
+<td align="center">0</td>
+<td align="center">1</td>
+<td align="center">95.44997</td>
+<td align="center">0.6666667</td>
+<td align="center">45’500</td>
+</tr>
+<tr class="odd">
+<td align="center">3</td>
+<td align="center">-3</td>
+<td align="center">0</td>
+<td align="center">1</td>
+<td align="center">99.73002</td>
+<td align="center">1.0000000</td>
+<td align="center">2’699</td>
+</tr>
+<tr class="even">
+<td align="center">4</td>
+<td align="center">-4</td>
+<td align="center">0</td>
+<td align="center">1</td>
+<td align="center">99.99367</td>
+<td align="center">1.3333333</td>
+<td align="center">63</td>
+</tr>
+<tr class="odd">
+<td align="center">5</td>
+<td align="center">-5</td>
+<td align="center">0</td>
+<td align="center">1</td>
+<td align="center">99.99994</td>
+<td align="center">1.6666667</td>
+<td align="center">0</td>
+</tr>
+<tr class="even">
+<td align="center">6</td>
+<td align="center">-6</td>
+<td align="center">0</td>
+<td align="center">1</td>
+<td align="center">100.00000</td>
+<td align="center">2.0000000</td>
+<td align="center">0</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="cpk-index" class="section level3">
+<h3>Cpk index</h3>
+<div class="sourceCode" id="cb278"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb278-1"><a href="process-capability.html#cb278-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(qcc)</span></code></pre></div>
+<div class="sourceCode" id="cb279"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb279-1"><a href="process-capability.html#cb279-1" aria-hidden="true" tabindex="-1"></a>bamako_clean <span class="ot">&lt;-</span> bamako <span class="sc">%&gt;%</span> </span>
+<span id="cb279-2"><a href="process-capability.html#cb279-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>Hour) </span></code></pre></div>
+<div class="sourceCode" id="cb280"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb280-1"><a href="process-capability.html#cb280-1" aria-hidden="true" tabindex="-1"></a>bamako_cpk <span class="ot">&lt;-</span> <span class="fu">process.capability</span>(</span>
+<span id="cb280-2"><a href="process-capability.html#cb280-2" aria-hidden="true" tabindex="-1"></a>  bamako_xbar,</span>
+<span id="cb280-3"><a href="process-capability.html#cb280-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">breaks =</span> <span class="dv">10</span>,</span>
+<span id="cb280-4"><a href="process-capability.html#cb280-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">spec.limits =</span> <span class="fu">c</span>(spec_min, spec_max),</span>
+<span id="cb280-5"><a href="process-capability.html#cb280-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">target =</span> spec_tgt,</span>
+<span id="cb280-6"><a href="process-capability.html#cb280-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">digits =</span> <span class="dv">2</span>,</span>
+<span id="cb280-7"><a href="process-capability.html#cb280-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">print =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb280-8"><a href="process-capability.html#cb280-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">std.dev =</span> bamako_sd</span>
+<span id="cb280-9"><a href="process-capability.html#cb280-9" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<p><img src="spc_files/figure-html/unnamed-chunk-38-1.png" width="80%"  /></p>
+<p>A fine tuning of the forecast of the number of expected parts out of specification can be done with the parameter std.dev. The input value will be used in the probability distribution function. Different approaches can be considered: calculating the sandard deviation within each subgroup or the standard deviation of the entire population and also correcting the standard deviation dividing by n or by n - 1. In this example we re-use the standard deviation calculated on the entire set of datapoints as the group is small but for a case with more data it would be interesting to used the subgroups that tend to give smaller standard deviations.</p>
+
+</div>
+</div>
+<!-- </div> -->
+
+
+
+<span id="cb281-2"><a href="process-capability.html#cb281-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readxl)</span>
+<span id="cb281-3"><a href="process-capability.html#cb281-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(knitr)</span>
+<span id="cb281-4"><a href="process-capability.html#cb281-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(qcc)</span>
+<span id="cb281-5"><a href="process-capability.html#cb281-5" aria-hidden="true" tabindex="-1"></a>filter <span class="ot">&lt;-</span> dplyr<span class="sc">::</span>filter</span>
+<span id="cb281-6"><a href="process-capability.html#cb281-6" aria-hidden="true" tabindex="-1"></a>select <span class="ot">&lt;-</span> dplyr<span class="sc">::</span>select</span></code></pre></div>
+</div>
+<p style="text-align: center;">
+<a href="control-charts.html"><button class="btn btn-default">Previous</button></a>
+<a href="r-functions-index.html"><button class="btn btn-default">Next</button></a>
+</p>
+</div>
+</div>
+
+
+
+</body>
+</html>

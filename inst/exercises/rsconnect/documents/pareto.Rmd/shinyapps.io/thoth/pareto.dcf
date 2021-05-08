@@ -1,0 +1,13 @@
+name: pareto
+title: pareto
+username:
+account: thoth
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 3895752
+bundleId: 4573387
+url: https://thoth.shinyapps.io/pareto/
+when: 1620457841.46339
+asMultiple: FALSE
+asStatic: FALSE
+ignoredFiles: anova.R|aov.R|app_template.R|pareto.html|pareto.R|template.Rmd

@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>4.3 two-factors ANOVA, fixed effects model | industRial data science</title>
+  <meta name="description" content="4.3 two-factors ANOVA, fixed effects model | industRial data science" />
+  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="4.3 two-factors ANOVA, fixed effects model | industRial data science" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="4.3 two-factors ANOVA, fixed effects model | industRial data science" />
+  
+  
+  
+
+<meta name="author" content="João Ramalho" />
+
+
+<meta name="date" content="2021-01-23" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="single-factor-designs.html"/>
+<link rel="next" href="general-factorial-design.html"/>
+<script src="libs/header-attrs-2.6/header-attrs.js"></script>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">industRial data science</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Introduction</a></li>
+<li class="part"><span><b>I FRAMEWORK</b></span></li>
+<li class="chapter" data-level="1" data-path="six-sigma.html"><a href="six-sigma.html"><i class="fa fa-check"></i><b>1</b> Six Sigma</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="cause-and-effect-diagrams.html"><a href="cause-and-effect-diagrams.html"><i class="fa fa-check"></i><b>1.1</b> Cause and Effect diagrams</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="statistics.html"><a href="statistics.html"><i class="fa fa-check"></i><b>2</b> Statistics</a></li>
+<li class="chapter" data-level="3" data-path="r-and-data-science.html"><a href="r-and-data-science.html"><i class="fa fa-check"></i><b>3</b> R and Data Science</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="why-r.html"><a href="why-r.html"><i class="fa fa-check"></i><b>3.1</b> Why R</a></li>
+</ul></li>
+<li class="part"><span><b>II CASE STUDIES</b></span></li>
+<li class="chapter" data-level="4" data-path="DOE.html"><a href="DOE.html"><i class="fa fa-check"></i><b>4</b> DOE - Design of Experiments</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="simple-comparative-experiments.html"><a href="simple-comparative-experiments.html"><i class="fa fa-check"></i><b>4.1</b> Simple comparative experiments</a>
+<ul>
+<li class="chapter" data-level="4.1.1" data-path="simple-comparative-experiments.html"><a href="simple-comparative-experiments.html#the-cement-example"><i class="fa fa-check"></i><b>4.1.1</b> The Cement example</a></li>
+<li class="chapter" data-level="4.1.2" data-path="simple-comparative-experiments.html"><a href="simple-comparative-experiments.html#homogeneity-of-variances-test-levene-test"><i class="fa fa-check"></i><b>4.1.2</b> Homogeneity of variances test (Levene Test)</a></li>
+<li class="chapter" data-level="4.1.3" data-path="simple-comparative-experiments.html"><a href="simple-comparative-experiments.html#sample-size-calculation"><i class="fa fa-check"></i><b>4.1.3</b> Sample size calculation</a></li>
+<li class="chapter" data-level="4.1.4" data-path="simple-comparative-experiments.html"><a href="simple-comparative-experiments.html#t-test-paired"><i class="fa fa-check"></i><b>4.1.4</b> t-test paired</a></li>
+</ul></li>
+<li class="chapter" data-level="4.2" data-path="single-factor-designs.html"><a href="single-factor-designs.html"><i class="fa fa-check"></i><b>4.2</b> Single factor designs</a>
+<ul>
+<li class="chapter" data-level="4.2.1" data-path="single-factor-designs.html"><a href="single-factor-designs.html#plasma-etching-example"><i class="fa fa-check"></i><b>4.2.1</b> Plasma etching example</a></li>
+<li class="chapter" data-level="4.2.2" data-path="single-factor-designs.html"><a href="single-factor-designs.html#analysis-of-variance"><i class="fa fa-check"></i><b>4.2.2</b> Analysis of variance</a></li>
+<li class="chapter" data-level="4.2.3" data-path="single-factor-designs.html"><a href="single-factor-designs.html#single-factor-anova-fixed-effects-model"><i class="fa fa-check"></i><b>4.2.3</b> Single factor Anova, fixed effects model</a></li>
+<li class="chapter" data-level="4.2.4" data-path="single-factor-designs.html"><a href="single-factor-designs.html#model-adequacy-check"><i class="fa fa-check"></i><b>4.2.4</b> Model adequacy check</a></li>
+<li class="chapter" data-level="4.2.5" data-path="single-factor-designs.html"><a href="single-factor-designs.html#residuals-normality-check-outliers"><i class="fa fa-check"></i><b>4.2.5</b> Residuals normality check &amp; outliers</a></li>
+<li class="chapter" data-level="4.2.6" data-path="single-factor-designs.html"><a href="single-factor-designs.html#plot-of-residuals-in-time-sequence"><i class="fa fa-check"></i><b>4.2.6</b> Plot of residuals in time sequence</a></li>
+<li class="chapter" data-level="4.2.7" data-path="single-factor-designs.html"><a href="single-factor-designs.html#plot-of-residuals-versus-fitted-values"><i class="fa fa-check"></i><b>4.2.7</b> Plot of residuals versus fitted values</a></li>
+<li class="chapter" data-level="4.2.8" data-path="single-factor-designs.html"><a href="single-factor-designs.html#equality-of-variances-test-barletts-test"><i class="fa fa-check"></i><b>4.2.8</b> Equality of variances test (Barlett’s test)</a></li>
+<li class="chapter" data-level="4.2.9" data-path="single-factor-designs.html"><a href="single-factor-designs.html#tuckeys-pairwise-comparison-test"><i class="fa fa-check"></i><b>4.2.9</b> Tuckey’s pairwise comparison test</a></li>
+<li class="chapter" data-level="4.2.10" data-path="single-factor-designs.html"><a href="single-factor-designs.html#fishers-lsd---pairwise-comparison-test"><i class="fa fa-check"></i><b>4.2.10</b> Fisher’s LSD - pairwise comparison test</a></li>
+<li class="chapter" data-level="4.2.11" data-path="single-factor-designs.html"><a href="single-factor-designs.html#practical-interpretation-of-results"><i class="fa fa-check"></i><b>4.2.11</b> Practical interpretation of results</a></li>
+<li class="chapter" data-level="4.2.12" data-path="single-factor-designs.html"><a href="single-factor-designs.html#linear-model"><i class="fa fa-check"></i><b>4.2.12</b> Linear model</a></li>
+<li class="chapter" data-level="4.2.13" data-path="single-factor-designs.html"><a href="single-factor-designs.html#linear-model-plot"><i class="fa fa-check"></i><b>4.2.13</b> Linear model plot</a></li>
+<li class="chapter" data-level="4.2.14" data-path="single-factor-designs.html"><a href="single-factor-designs.html#predicting-new-values"><i class="fa fa-check"></i><b>4.2.14</b> Predicting new values</a></li>
+<li class="chapter" data-level="4.2.15" data-path="single-factor-designs.html"><a href="single-factor-designs.html#r²-coefficient-of-determination"><i class="fa fa-check"></i><b>4.2.15</b> R², coefficient of determination</a></li>
+<li class="chapter" data-level="4.2.16" data-path="single-factor-designs.html"><a href="single-factor-designs.html#sample-size-calculation-1"><i class="fa fa-check"></i><b>4.2.16</b> Sample size calculation</a></li>
+</ul></li>
+<li class="chapter" data-level="4.3" data-path="two-factors-anova-fixed-effects-model.html"><a href="two-factors-anova-fixed-effects-model.html"><i class="fa fa-check"></i><b>4.3</b> two-factors ANOVA, fixed effects model</a>
+<ul>
+<li class="chapter" data-level="4.3.1" data-path="two-factors-anova-fixed-effects-model.html"><a href="two-factors-anova-fixed-effects-model.html#battery-life-example"><i class="fa fa-check"></i><b>4.3.1</b> Battery life example</a></li>
+<li class="chapter" data-level="4.3.2" data-path="two-factors-anova-fixed-effects-model.html"><a href="two-factors-anova-fixed-effects-model.html#analysis-of-variance-1"><i class="fa fa-check"></i><b>4.3.2</b> Analysis of variance</a></li>
+<li class="chapter" data-level="4.3.3" data-path="two-factors-anova-fixed-effects-model.html"><a href="two-factors-anova-fixed-effects-model.html#doe-and-anova-plots"><i class="fa fa-check"></i><b>4.3.3</b> DoE and Anova plots</a></li>
+<li class="chapter" data-level="4.3.4" data-path="two-factors-anova-fixed-effects-model.html"><a href="two-factors-anova-fixed-effects-model.html#r²-coefficient-of-determination-1"><i class="fa fa-check"></i><b>4.3.4</b> R², coefficient of determination</a></li>
+<li class="chapter" data-level="4.3.5" data-path="two-factors-anova-fixed-effects-model.html"><a href="two-factors-anova-fixed-effects-model.html#model-adequacy-checking"><i class="fa fa-check"></i><b>4.3.5</b> Model adequacy checking</a></li>
+<li class="chapter" data-level="4.3.6" data-path="two-factors-anova-fixed-effects-model.html"><a href="two-factors-anova-fixed-effects-model.html#residuals-normality-check-outliers-1"><i class="fa fa-check"></i><b>4.3.6</b> Residuals normality check &amp; outliers</a></li>
+<li class="chapter" data-level="4.3.7" data-path="two-factors-anova-fixed-effects-model.html"><a href="two-factors-anova-fixed-effects-model.html#plot-of-residuals-versus-fitted-values-1"><i class="fa fa-check"></i><b>4.3.7</b> Plot of residuals versus fitted values</a></li>
+<li class="chapter" data-level="4.3.8" data-path="two-factors-anova-fixed-effects-model.html"><a href="two-factors-anova-fixed-effects-model.html#sample-size-calculation-2"><i class="fa fa-check"></i><b>4.3.8</b> Sample size calculation</a></li>
+<li class="chapter" data-level="4.3.9" data-path="two-factors-anova-fixed-effects-model.html"><a href="two-factors-anova-fixed-effects-model.html#model-with-no-interaction"><i class="fa fa-check"></i><b>4.3.9</b> Model with no interaction</a></li>
+</ul></li>
+<li class="chapter" data-level="4.4" data-path="general-factorial-design.html"><a href="general-factorial-design.html"><i class="fa fa-check"></i><b>4.4</b> General factorial design</a>
+<ul>
+<li class="chapter" data-level="4.4.1" data-path="general-factorial-design.html"><a href="general-factorial-design.html#soft-drink-bottling-example"><i class="fa fa-check"></i><b>4.4.1</b> Soft Drink bottling example</a></li>
+<li class="chapter" data-level="4.4.2" data-path="general-factorial-design.html"><a href="general-factorial-design.html#analysis-of-variance-2"><i class="fa fa-check"></i><b>4.4.2</b> Analysis of variance</a></li>
+<li class="chapter" data-level="4.4.3" data-path="general-factorial-design.html"><a href="general-factorial-design.html#residuals-analysis"><i class="fa fa-check"></i><b>4.4.3</b> Residuals analysis</a></li>
+<li class="chapter" data-level="4.4.4" data-path="general-factorial-design.html"><a href="general-factorial-design.html#doe-plots"><i class="fa fa-check"></i><b>4.4.4</b> DoE plots</a></li>
+</ul></li>
+<li class="chapter" data-level="4.5" data-path="the-2k-factorial-designs.html"><a href="the-2k-factorial-designs.html"><i class="fa fa-check"></i><b>4.5</b> The 2^k factorial designs</a></li>
+<li class="chapter" data-level="4.6" data-path="the-22-factorial-design.html"><a href="the-22-factorial-design.html"><i class="fa fa-check"></i><b>4.6</b> The 2^2 Factorial Design</a>
+<ul>
+<li class="chapter" data-level="4.6.1" data-path="the-22-factorial-design.html"><a href="the-22-factorial-design.html#the-chemical-process-example"><i class="fa fa-check"></i><b>4.6.1</b> The Chemical Process example</a></li>
+<li class="chapter" data-level="4.6.2" data-path="the-22-factorial-design.html"><a href="the-22-factorial-design.html#anova"><i class="fa fa-check"></i><b>4.6.2</b> Anova</a></li>
+<li class="chapter" data-level="4.6.3" data-path="the-22-factorial-design.html"><a href="the-22-factorial-design.html#regression-model-prediction"><i class="fa fa-check"></i><b>4.6.3</b> Regression model / Prediction</a></li>
+<li class="chapter" data-level="4.6.4" data-path="the-22-factorial-design.html"><a href="the-22-factorial-design.html#response-surface"><i class="fa fa-check"></i><b>4.6.4</b> Response surface</a></li>
+</ul></li>
+<li class="chapter" data-level="4.7" data-path="the-23-factorial-design.html"><a href="the-23-factorial-design.html"><i class="fa fa-check"></i><b>4.7</b> The 2^3 Factorial Design</a>
+<ul>
+<li class="chapter" data-level="4.7.1" data-path="the-23-factorial-design.html"><a href="the-23-factorial-design.html#the-plasma-etching-example"><i class="fa fa-check"></i><b>4.7.1</b> The plasma etching example</a></li>
+<li class="chapter" data-level="4.7.2" data-path="the-23-factorial-design.html"><a href="the-23-factorial-design.html#anova-1"><i class="fa fa-check"></i><b>4.7.2</b> Anova</a></li>
+<li class="chapter" data-level="4.7.3" data-path="the-23-factorial-design.html"><a href="the-23-factorial-design.html#regression-model-prediction-1"><i class="fa fa-check"></i><b>4.7.3</b> Regression model / Prediction</a></li>
+<li class="chapter" data-level="4.7.4" data-path="the-23-factorial-design.html"><a href="the-23-factorial-design.html#reduced-model"><i class="fa fa-check"></i><b>4.7.4</b> Reduced model</a></li>
+<li class="chapter" data-level="4.7.5" data-path="the-23-factorial-design.html"><a href="the-23-factorial-design.html#doe-plots-1"><i class="fa fa-check"></i><b>4.7.5</b> DoE plots</a></li>
+</ul></li>
+<li class="chapter" data-level="4.8" data-path="the-general-2k-design.html"><a href="the-general-2k-design.html"><i class="fa fa-check"></i><b>4.8</b> The general 2^k design</a>
+<ul>
+<li class="chapter" data-level="4.8.1" data-path="the-general-2k-design.html"><a href="the-general-2k-design.html#calculating-the-number-combinations"><i class="fa fa-check"></i><b>4.8.1</b> Calculating the number combinations</a></li>
+<li class="chapter" data-level="4.8.2" data-path="the-general-2k-design.html"><a href="the-general-2k-design.html#relationship-coded-vs-natural-variables"><i class="fa fa-check"></i><b>4.8.2</b> Relationship coded vs natural variables</a></li>
+</ul></li>
+<li class="chapter" data-level="4.9" data-path="single-replicate-2k-design.html"><a href="single-replicate-2k-design.html"><i class="fa fa-check"></i><b>4.9</b> Single replicate 2^k design</a>
+<ul>
+<li class="chapter" data-level="4.9.1" data-path="single-replicate-2k-design.html"><a href="single-replicate-2k-design.html#the-filtration-example"><i class="fa fa-check"></i><b>4.9.1</b> The Filtration example</a></li>
+<li class="chapter" data-level="4.9.2" data-path="single-replicate-2k-design.html"><a href="single-replicate-2k-design.html#anova-2"><i class="fa fa-check"></i><b>4.9.2</b> Anova</a></li>
+<li class="chapter" data-level="4.9.3" data-path="single-replicate-2k-design.html"><a href="single-replicate-2k-design.html#linear-regression---plot-of-effects"><i class="fa fa-check"></i><b>4.9.3</b> Linear regression - Plot of effects</a></li>
+<li class="chapter" data-level="4.9.4" data-path="single-replicate-2k-design.html"><a href="single-replicate-2k-design.html#doe-plots-2"><i class="fa fa-check"></i><b>4.9.4</b> DoE plots</a></li>
+<li class="chapter" data-level="4.9.5" data-path="single-replicate-2k-design.html"><a href="single-replicate-2k-design.html#anova-reduced-model-significant-effects-only"><i class="fa fa-check"></i><b>4.9.5</b> Anova reduced model (significant effects only)</a></li>
+<li class="chapter" data-level="4.9.6" data-path="single-replicate-2k-design.html"><a href="single-replicate-2k-design.html#linear-regression---reduced-model"><i class="fa fa-check"></i><b>4.9.6</b> Linear regression - reduced model</a></li>
+<li class="chapter" data-level="4.9.7" data-path="single-replicate-2k-design.html"><a href="single-replicate-2k-design.html#residuals-normality-check"><i class="fa fa-check"></i><b>4.9.7</b> Residuals normality check</a></li>
+</ul></li>
+<li class="chapter" data-level="4.10" data-path="two-level-fractional-factorial-designs.html"><a href="two-level-fractional-factorial-designs.html"><i class="fa fa-check"></i><b>4.10</b> Two level fractional factorial designs</a>
+<ul>
+<li class="chapter" data-level="4.10.1" data-path="two-level-fractional-factorial-designs.html"><a href="two-level-fractional-factorial-designs.html#the-one-half-fraction-of-th-2k-design"><i class="fa fa-check"></i><b>4.10.1</b> The One-Half Fraction of th 2k Design</a></li>
+<li class="chapter" data-level="4.10.2" data-path="two-level-fractional-factorial-designs.html"><a href="two-level-fractional-factorial-designs.html#the-filtration-example-modified"><i class="fa fa-check"></i><b>4.10.2</b> The filtration example (modified)</a></li>
+<li class="chapter" data-level="4.10.3" data-path="two-level-fractional-factorial-designs.html"><a href="two-level-fractional-factorial-designs.html#anova-3"><i class="fa fa-check"></i><b>4.10.3</b> Anova</a></li>
+</ul></li>
+<li class="chapter" data-level="4.11" data-path="analysis-of-covariance.html"><a href="analysis-of-covariance.html"><i class="fa fa-check"></i><b>4.11</b> Analysis of Covariance</a>
+<ul>
+<li class="chapter" data-level="4.11.1" data-path="analysis-of-covariance.html"><a href="analysis-of-covariance.html#approach"><i class="fa fa-check"></i><b>4.11.1</b> Approach</a></li>
+<li class="chapter" data-level="4.11.2" data-path="analysis-of-covariance.html"><a href="analysis-of-covariance.html#case-study"><i class="fa fa-check"></i><b>4.11.2</b> Case study</a></li>
+<li class="chapter" data-level="4.11.3" data-path="analysis-of-covariance.html"><a href="analysis-of-covariance.html#ancova"><i class="fa fa-check"></i><b>4.11.3</b> Ancova</a></li>
+<li class="chapter" data-level="4.11.4" data-path="analysis-of-covariance.html"><a href="analysis-of-covariance.html#comparison-with-anova"><i class="fa fa-check"></i><b>4.11.4</b> Comparison with anova</a></li>
+<li class="chapter" data-level="4.11.5" data-path="analysis-of-covariance.html"><a href="analysis-of-covariance.html#potential-applications"><i class="fa fa-check"></i><b>4.11.5</b> Potential applications</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="MSA.html"><a href="MSA.html"><i class="fa fa-check"></i><b>5</b> MSA - Measurement System Analysis</a></li>
+<li class="chapter" data-level="6" data-path="SPC.html"><a href="SPC.html"><i class="fa fa-check"></i><b>6</b> SPC - Statistical Process Control</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="case-study-1.html"><a href="case-study-1.html"><i class="fa fa-check"></i><b>6.1</b> Case study</a></li>
+<li class="chapter" data-level="6.2" data-path="xbar-and-r-charts.html"><a href="xbar-and-r-charts.html"><i class="fa fa-check"></i><b>6.2</b> xbar and R charts</a></li>
+<li class="chapter" data-level="6.3" data-path="warnings-and-specification-limits.html"><a href="warnings-and-specification-limits.html"><i class="fa fa-check"></i><b>6.3</b> Warnings and specification limits</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="Cpk.html"><a href="Cpk.html"><i class="fa fa-check"></i><b>7</b> CPK - Process Capability Analysis</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="case-study-2.html"><a href="case-study-2.html"><i class="fa fa-check"></i><b>7.1</b> Case study</a></li>
+<li class="chapter" data-level="7.2" data-path="process-capability-chart.html"><a href="process-capability-chart.html"><i class="fa fa-check"></i><b>7.2</b> Process Capability chart</a></li>
+</ul></li>
+<li class="part"><span><b>III TOOLBOX</b></span></li>
+<li class="chapter" data-level="8" data-path="Rpck.html"><a href="Rpck.html"><i class="fa fa-check"></i><b>8</b> R Packages</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="six-sigma-1.html"><a href="six-sigma-1.html"><i class="fa fa-check"></i><b>8.1</b> six sigma</a></li>
+<li class="chapter" data-level="8.2" data-path="ggspc.html"><a href="ggspc.html"><i class="fa fa-check"></i><b>8.2</b> ggspc</a></li>
+<li class="chapter" data-level="8.3" data-path="qcc.html"><a href="qcc.html"><i class="fa fa-check"></i><b>8.3</b> qcc</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="datasets.html"><a href="datasets.html"><i class="fa fa-check"></i><b>9</b> Datasets</a></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">indust<b style='color:#079DFE'>R</b>ial data science</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="two-factors-anova-fixed-effects-model" class="section level2" number="4.3">
+<h2><span class="header-section-number">4.3</span> two-factors ANOVA, fixed effects model</h2>
+<p>5.3</p>
+<div id="battery-life-example" class="section level3" number="4.3.1">
+<h3><span class="header-section-number">4.3.1</span> Battery life example</h3>
+<p>Load and prepare data for analysis:</p>
+<div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb53-1"><a href="two-factors-anova-fixed-effects-model.html#cb53-1" aria-hidden="true" tabindex="-1"></a>battery <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="at">sep =</span> <span class="st">&quot;;&quot;</span>, <span class="at">header =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb53-2"><a href="two-factors-anova-fixed-effects-model.html#cb53-2" aria-hidden="true" tabindex="-1"></a>                   <span class="fu">paste0</span>(working_folder, <span class="st">&quot;5 battery.csv&quot;</span>))</span>
+<span id="cb53-3"><a href="two-factors-anova-fixed-effects-model.html#cb53-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb53-4"><a href="two-factors-anova-fixed-effects-model.html#cb53-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Converting into a narrow table with a factor for utilisation with ggplot2</span></span>
+<span id="cb53-5"><a href="two-factors-anova-fixed-effects-model.html#cb53-5" aria-hidden="true" tabindex="-1"></a><span class="co"># syntax: gather(data, </span></span>
+<span id="cb53-6"><a href="two-factors-anova-fixed-effects-model.html#cb53-6" aria-hidden="true" tabindex="-1"></a><span class="co">#               name of the new key column (that replaces the names of the columns to be gathered), </span></span>
+<span id="cb53-7"><a href="two-factors-anova-fixed-effects-model.html#cb53-7" aria-hidden="true" tabindex="-1"></a><span class="co">#               name of the new value column (where the values go), </span></span>
+<span id="cb53-8"><a href="two-factors-anova-fixed-effects-model.html#cb53-8" aria-hidden="true" tabindex="-1"></a><span class="co">#               name of the columns to be gathered)</span></span>
+<span id="cb53-9"><a href="two-factors-anova-fixed-effects-model.html#cb53-9" aria-hidden="true" tabindex="-1"></a>battery_narrow <span class="ot">&lt;-</span> <span class="fu">gather</span>(battery,</span>
+<span id="cb53-10"><a href="two-factors-anova-fixed-effects-model.html#cb53-10" aria-hidden="true" tabindex="-1"></a>                         temperature,</span>
+<span id="cb53-11"><a href="two-factors-anova-fixed-effects-model.html#cb53-11" aria-hidden="true" tabindex="-1"></a>                         life,</span>
+<span id="cb53-12"><a href="two-factors-anova-fixed-effects-model.html#cb53-12" aria-hidden="true" tabindex="-1"></a>                         T15, T70, T125)</span>
+<span id="cb53-13"><a href="two-factors-anova-fixed-effects-model.html#cb53-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb53-14"><a href="two-factors-anova-fixed-effects-model.html#cb53-14" aria-hidden="true" tabindex="-1"></a>battery_narrow_factor <span class="ot">&lt;-</span> battery_narrow</span>
+<span id="cb53-15"><a href="two-factors-anova-fixed-effects-model.html#cb53-15" aria-hidden="true" tabindex="-1"></a>battery_narrow_factor<span class="sc">$</span>material <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(battery_narrow<span class="sc">$</span>material)</span>
+<span id="cb53-16"><a href="two-factors-anova-fixed-effects-model.html#cb53-16" aria-hidden="true" tabindex="-1"></a>battery_narrow_factor<span class="sc">$</span>temperature <span class="ot">&lt;-</span> <span class="fu">ordered</span>(battery_narrow<span class="sc">$</span>temperature,</span>
+<span id="cb53-17"><a href="two-factors-anova-fixed-effects-model.html#cb53-17" aria-hidden="true" tabindex="-1"></a>                                            <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">&quot;T15&quot;</span>, <span class="st">&quot;T70&quot;</span>, <span class="st">&quot;T125&quot;</span>))</span></code></pre></div>
+</div>
+<div id="analysis-of-variance-1" class="section level3" number="4.3.2">
+<h3><span class="header-section-number">4.3.2</span> Analysis of variance</h3>
+<div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb54-1"><a href="two-factors-anova-fixed-effects-model.html#cb54-1" aria-hidden="true" tabindex="-1"></a>battery_lm_factor <span class="ot">&lt;-</span> <span class="fu">lm</span>(life <span class="sc">~</span> temperature <span class="sc">+</span> material <span class="sc">+</span> temperature<span class="sc">:</span>material,</span>
+<span id="cb54-2"><a href="two-factors-anova-fixed-effects-model.html#cb54-2" aria-hidden="true" tabindex="-1"></a>                        <span class="at">data =</span> battery_narrow_factor)</span>
+<span id="cb54-3"><a href="two-factors-anova-fixed-effects-model.html#cb54-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb54-4"><a href="two-factors-anova-fixed-effects-model.html#cb54-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb54-5"><a href="two-factors-anova-fixed-effects-model.html#cb54-5" aria-hidden="true" tabindex="-1"></a>battery_aov <span class="ot">&lt;-</span> <span class="fu">aov</span>(battery_lm_factor)</span>
+<span id="cb54-6"><a href="two-factors-anova-fixed-effects-model.html#cb54-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb54-7"><a href="two-factors-anova-fixed-effects-model.html#cb54-7" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(battery_aov)</span></code></pre></div>
+<pre><code>##                      Df Sum Sq Mean Sq F value   Pr(&gt;F)    
+## temperature           2  39119   19559  28.968 1.91e-07 ***
+## material              2  10684    5342   7.911  0.00198 ** 
+## temperature:material  4   9614    2403   3.560  0.01861 *  
+## Residuals            27  18231     675                     
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+</div>
+<div id="doe-and-anova-plots" class="section level3" number="4.3.3">
+<h3><span class="header-section-number">4.3.3</span> DoE and Anova plots</h3>
+<div class="sourceCode" id="cb56"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb56-1"><a href="two-factors-anova-fixed-effects-model.html#cb56-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Basic plot from Stats package (my favorite)</span></span>
+<span id="cb56-2"><a href="two-factors-anova-fixed-effects-model.html#cb56-2" aria-hidden="true" tabindex="-1"></a><span class="fu">interaction.plot</span>(<span class="at">x.factor =</span> battery_narrow_factor<span class="sc">$</span>temperature, </span>
+<span id="cb56-3"><a href="two-factors-anova-fixed-effects-model.html#cb56-3" aria-hidden="true" tabindex="-1"></a>                 <span class="at">trace.factor =</span> battery_narrow_factor<span class="sc">$</span>material,</span>
+<span id="cb56-4"><a href="two-factors-anova-fixed-effects-model.html#cb56-4" aria-hidden="true" tabindex="-1"></a>                 <span class="at">response =</span> battery_narrow_factor<span class="sc">$</span>life,</span>
+<span id="cb56-5"><a href="two-factors-anova-fixed-effects-model.html#cb56-5" aria-hidden="true" tabindex="-1"></a>                 <span class="at">trace.label =</span> <span class="st">&quot;Material&quot;</span>,</span>
+<span id="cb56-6"><a href="two-factors-anova-fixed-effects-model.html#cb56-6" aria-hidden="true" tabindex="-1"></a>                 <span class="at">xlab =</span> <span class="st">&quot;temperature [°C]&quot;</span>,</span>
+<span id="cb56-7"><a href="two-factors-anova-fixed-effects-model.html#cb56-7" aria-hidden="true" tabindex="-1"></a>                 <span class="at">ylab =</span> <span class="st">&quot;life [h]&quot;</span>)</span></code></pre></div>
+<p><img src="IndustRialds_files/figure-html/battery_narrow_intplot-fig-1.png" width="80%" /></p>
+<div class="sourceCode" id="cb57"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb57-1"><a href="two-factors-anova-fixed-effects-model.html#cb57-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Alternative plot from the RcmdrMisc package (&quot;Stats facile avec R&quot;)</span></span>
+<span id="cb57-2"><a href="two-factors-anova-fixed-effects-model.html#cb57-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plotMeans</span>(<span class="at">response =</span> battery_narrow_factor<span class="sc">$</span>life,</span>
+<span id="cb57-3"><a href="two-factors-anova-fixed-effects-model.html#cb57-3" aria-hidden="true" tabindex="-1"></a>          <span class="at">factor1 =</span> battery_narrow_factor<span class="sc">$</span>temperature,</span>
+<span id="cb57-4"><a href="two-factors-anova-fixed-effects-model.html#cb57-4" aria-hidden="true" tabindex="-1"></a>          <span class="at">factor2 =</span> battery_narrow_factor<span class="sc">$</span>material)</span></code></pre></div>
+<p><img src="IndustRialds_files/figure-html/battery_narrow_doe-fig-1.png" width="80%" /></p>
+<div class="sourceCode" id="cb58"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb58-1"><a href="two-factors-anova-fixed-effects-model.html#cb58-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Just for my curiosity a boxplot for comparison</span></span>
+<span id="cb58-2"><a href="two-factors-anova-fixed-effects-model.html#cb58-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(battery_narrow_factor, <span class="fu">aes</span>(<span class="at">x =</span> temperature, <span class="at">y =</span> life, <span class="at">color =</span> material)) <span class="sc">+</span></span>
+<span id="cb58-3"><a href="two-factors-anova-fixed-effects-model.html#cb58-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>()</span></code></pre></div>
+<p><img src="IndustRialds_files/figure-html/battery_narrow_doe_box-fig-1.png" width="80%" /></p>
+<div class="sourceCode" id="cb59"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb59-1"><a href="two-factors-anova-fixed-effects-model.html#cb59-1" aria-hidden="true" tabindex="-1"></a><span class="co"># And also a scatterplot</span></span>
+<span id="cb59-2"><a href="two-factors-anova-fixed-effects-model.html#cb59-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(battery_lm_factor, <span class="fu">aes</span>(<span class="at">x =</span> temperature, <span class="at">y =</span> life, <span class="at">color =</span> material)) <span class="sc">+</span></span>
+<span id="cb59-3"><a href="two-factors-anova-fixed-effects-model.html#cb59-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb59-4"><a href="two-factors-anova-fixed-effects-model.html#cb59-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">&quot;lm&quot;</span>, <span class="at">se =</span> <span class="cn">FALSE</span>) <span class="co"># not clear why the lm line is not plotted, to be investigated</span></span></code></pre></div>
+<p><img src="IndustRialds_files/figure-html/battery_narrow_doe_box-fig-2.png" width="80%" /></p>
+<p>Note: book example correctly reproduced.</p>
+</div>
+<div id="r²-coefficient-of-determination-1" class="section level3" number="4.3.4">
+<h3><span class="header-section-number">4.3.4</span> R², coefficient of determination</h3>
+<div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb60-1"><a href="two-factors-anova-fixed-effects-model.html#cb60-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(battery_lm_factor)</span></code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = life ~ temperature + material + temperature:material, 
+##     data = battery_narrow_factor)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -60.750 -14.625   1.375  17.937  45.250 
+## 
+## Coefficients:
+##                         Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)               83.167      7.501  11.087 1.48e-11 ***
+## temperature.L            -54.624     12.992  -4.204 0.000257 ***
+## temperature.Q             31.741     12.992   2.443 0.021385 *  
+## material2                 25.167     10.608   2.372 0.025059 *  
+## material3                 41.917     10.608   3.951 0.000503 ***
+## temperature.L:material2  -20.506     18.374  -1.116 0.274242    
+## temperature.Q:material2  -45.724     18.374  -2.488 0.019293 *  
+## temperature.L:material3   13.258     18.374   0.722 0.476759    
+## temperature.Q:material3  -57.053     18.374  -3.105 0.004434 ** 
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 25.98 on 27 degrees of freedom
+## Multiple R-squared:  0.7652, Adjusted R-squared:  0.6956 
+## F-statistic:    11 on 8 and 27 DF,  p-value: 9.426e-07</code></pre>
+<p>Note: book example correctly reproduced.</p>
+<p>R^2 = 0.7652, That is, about 77 percent of the variability in the battery life is explained by the plate material in the battery, the temperature, and the material type–temperature interaction.</p>
+</div>
+<div id="model-adequacy-checking" class="section level3" number="4.3.5">
+<h3><span class="header-section-number">4.3.5</span> Model adequacy checking</h3>
+<p>5.3.3</p>
+</div>
+<div id="residuals-normality-check-outliers-1" class="section level3" number="4.3.6">
+<h3><span class="header-section-number">4.3.6</span> Residuals normality check &amp; outliers</h3>
+<p>Q-Q plot + Shapiro-Wilk test</p>
+<div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb62-1"><a href="two-factors-anova-fixed-effects-model.html#cb62-1" aria-hidden="true" tabindex="-1"></a>battery_residuals <span class="ot">&lt;-</span> battery_aov[[<span class="st">&quot;residuals&quot;</span>]]</span>
+<span id="cb62-2"><a href="two-factors-anova-fixed-effects-model.html#cb62-2" aria-hidden="true" tabindex="-1"></a><span class="fu">qqnorm</span>(battery_residuals, <span class="at">datax =</span> <span class="cn">TRUE</span>);<span class="fu">qqline</span>(battery_residuals, <span class="at">datax =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<p><img src="IndustRialds_files/figure-html/batery_residuals-fig-1.png" width="80%" /></p>
+<div class="sourceCode" id="cb63"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb63-1"><a href="two-factors-anova-fixed-effects-model.html#cb63-1" aria-hidden="true" tabindex="-1"></a><span class="fu">shapiro.test</span>(battery_residuals)</span></code></pre></div>
+<pre><code>## 
+##  Shapiro-Wilk normality test
+## 
+## data:  battery_residuals
+## W = 0.97606, p-value = 0.6117</code></pre>
+<div class="sourceCode" id="cb65"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb65-1"><a href="two-factors-anova-fixed-effects-model.html#cb65-1" aria-hidden="true" tabindex="-1"></a>battery_tidyfit <span class="ot">&lt;-</span> <span class="fu">augment</span>(battery_lm_factor)</span></code></pre></div>
+<p>p &gt; 0.05 indicates that the residuals do not differ significantly from a normally distributed population.</p>
+<p>According to Montgomery the residual of -60.75 (hours) for the temperature value of 15°C maybe an outlier as it’s standardized value is &gt; 2.
+This can be observed more easily in the battery_tidyfit table created with the augment function from the broom package.</p>
+<p>Standardized residuals graph</p>
+<div class="sourceCode" id="cb66"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb66-1"><a href="two-factors-anova-fixed-effects-model.html#cb66-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(battery_aov, <span class="at">which =</span> <span class="dv">2</span>)</span></code></pre></div>
+<p><img src="IndustRialds_files/figure-html/battery_stdres-fig-1.png" width="80%" /></p>
+</div>
+<div id="plot-of-residuals-versus-fitted-values-1" class="section level3" number="4.3.7">
+<h3><span class="header-section-number">4.3.7</span> Plot of residuals versus fitted values</h3>
+<div class="sourceCode" id="cb67"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb67-1"><a href="two-factors-anova-fixed-effects-model.html#cb67-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(battery_aov, <span class="at">which =</span> <span class="dv">1</span>)</span></code></pre></div>
+<p><img src="IndustRialds_files/figure-html/battery_fitres-fig-1.png" width="80%" /></p>
+</div>
+<div id="sample-size-calculation-2" class="section level3" number="4.3.8">
+<h3><span class="header-section-number">4.3.8</span> Sample size calculation</h3>
+<p>Refer to “Statistiques faciles avec R,” page 233.
+Cohen’s effect size is calculated with the eta squared from the model (intriguing is the same value as the R²…).
+In this case with 2 replicates we obtain a power of 90% and an alpha of 1%.
+I’ve not managed here to replicate the values from the Montgomery book.</p>
+<div class="sourceCode" id="cb68"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb68-1"><a href="two-factors-anova-fixed-effects-model.html#cb68-1" aria-hidden="true" tabindex="-1"></a>battery_cohend_aov <span class="ot">&lt;-</span> <span class="dv">40</span> <span class="sc">/</span> <span class="dv">25</span> <span class="co"># Cohen&#39;s effect size = difference of means / sd</span></span>
+<span id="cb68-2"><a href="two-factors-anova-fixed-effects-model.html#cb68-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb68-3"><a href="two-factors-anova-fixed-effects-model.html#cb68-3" aria-hidden="true" tabindex="-1"></a><span class="fu">pwr.anova.test</span>(<span class="at">k =</span> <span class="dv">3</span>,</span>
+<span id="cb68-4"><a href="two-factors-anova-fixed-effects-model.html#cb68-4" aria-hidden="true" tabindex="-1"></a>               <span class="at">n =</span> <span class="dv">4</span>,</span>
+<span id="cb68-5"><a href="two-factors-anova-fixed-effects-model.html#cb68-5" aria-hidden="true" tabindex="-1"></a>               <span class="at">f =</span> battery_cohend_aov,</span>
+<span id="cb68-6"><a href="two-factors-anova-fixed-effects-model.html#cb68-6" aria-hidden="true" tabindex="-1"></a>               <span class="at">sig.level =</span> <span class="fl">0.05</span>)</span></code></pre></div>
+<pre><code>## 
+##      Balanced one-way analysis of variance power calculation 
+## 
+##               k = 3
+##               n = 4
+##               f = 1.6
+##       sig.level = 0.05
+##           power = 0.9892439
+## 
+## NOTE: n is number in each group</code></pre>
+<p>I’ve managed to almost reproduce the book result (I obtained a power of 98%, in the book 94%) by calculating the effect size by dividing the life difference of 40 hours by the standard deviation of 25h given in the example and feeding all this in the pwr.anova.test with n = 4 repetitions.</p>
+<p>The books “Statistiques faciles avec R” proposes to use the eta but this gives very different results.
+battery_eta2 &lt;- etaSquared(battery_aov)[1]
+battery_cohend_aov &lt;- sqrt(battery_eta2 / (1 - battery_eta2))</p>
+</div>
+<div id="model-with-no-interaction" class="section level3" number="4.3.9">
+<h3><span class="header-section-number">4.3.9</span> Model with no interaction</h3>
+<div class="sourceCode" id="cb70"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb70-1"><a href="two-factors-anova-fixed-effects-model.html#cb70-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Removing the interaction from the model:</span></span>
+<span id="cb70-2"><a href="two-factors-anova-fixed-effects-model.html#cb70-2" aria-hidden="true" tabindex="-1"></a>battery_lm_factor_no_int <span class="ot">&lt;-</span> <span class="fu">lm</span>(life <span class="sc">~</span> temperature <span class="sc">+</span> material,</span>
+<span id="cb70-3"><a href="two-factors-anova-fixed-effects-model.html#cb70-3" aria-hidden="true" tabindex="-1"></a>                        <span class="at">data =</span> battery_narrow_factor)</span>
+<span id="cb70-4"><a href="two-factors-anova-fixed-effects-model.html#cb70-4" aria-hidden="true" tabindex="-1"></a>battery_aov_no_int <span class="ot">&lt;-</span> <span class="fu">aov</span>(battery_lm_factor_no_int)</span>
+<span id="cb70-5"><a href="two-factors-anova-fixed-effects-model.html#cb70-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb70-6"><a href="two-factors-anova-fixed-effects-model.html#cb70-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Comparing Anova results with and without:</span></span>
+<span id="cb70-7"><a href="two-factors-anova-fixed-effects-model.html#cb70-7" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(battery_aov)</span></code></pre></div>
+<pre><code>##                      Df Sum Sq Mean Sq F value   Pr(&gt;F)    
+## temperature           2  39119   19559  28.968 1.91e-07 ***
+## material              2  10684    5342   7.911  0.00198 ** 
+## temperature:material  4   9614    2403   3.560  0.01861 *  
+## Residuals            27  18231     675                     
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+<div class="sourceCode" id="cb72"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb72-1"><a href="two-factors-anova-fixed-effects-model.html#cb72-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(battery_aov_no_int)</span></code></pre></div>
+<pre><code>##             Df Sum Sq Mean Sq F value   Pr(&gt;F)    
+## temperature  2  39119   19559  21.776 1.24e-06 ***
+## material     2  10684    5342   5.947  0.00651 ** 
+## Residuals   31  27845     898                     
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+<p>As noted previously, both main effects are significant (p &lt; 0.05).</p>
+<p>However, as soon as a residual analysis is performed for these data, it becomes clear that the no-interaction model is inadequate:</p>
+<div class="sourceCode" id="cb74"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb74-1"><a href="two-factors-anova-fixed-effects-model.html#cb74-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Normality of residuals is worse</span></span>
+<span id="cb74-2"><a href="two-factors-anova-fixed-effects-model.html#cb74-2" aria-hidden="true" tabindex="-1"></a>battery_residuals_no_int <span class="ot">&lt;-</span> battery_aov_no_int[[<span class="st">&quot;residuals&quot;</span>]]</span>
+<span id="cb74-3"><a href="two-factors-anova-fixed-effects-model.html#cb74-3" aria-hidden="true" tabindex="-1"></a><span class="fu">qqnorm</span>(battery_residuals_no_int, <span class="at">datax =</span> <span class="cn">TRUE</span>);<span class="fu">qqline</span>(battery_residuals_no_int, <span class="at">datax =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<p><img src="IndustRialds_files/figure-html/unnamed-chunk-24-1.png" width="80%" /></p>
+<div class="sourceCode" id="cb75"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb75-1"><a href="two-factors-anova-fixed-effects-model.html#cb75-1" aria-hidden="true" tabindex="-1"></a><span class="co"># But it still passes the Shapiro test</span></span>
+<span id="cb75-2"><a href="two-factors-anova-fixed-effects-model.html#cb75-2" aria-hidden="true" tabindex="-1"></a><span class="fu">shapiro.test</span>(battery_residuals_no_int)</span></code></pre></div>
+<pre><code>## 
+##  Shapiro-Wilk normality test
+## 
+## data:  battery_residuals_no_int
+## W = 0.97846, p-value = 0.6932</code></pre>
+<div class="sourceCode" id="cb77"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb77-1"><a href="two-factors-anova-fixed-effects-model.html#cb77-1" aria-hidden="true" tabindex="-1"></a><span class="co"># No standardize residual above 2 either:</span></span>
+<span id="cb77-2"><a href="two-factors-anova-fixed-effects-model.html#cb77-2" aria-hidden="true" tabindex="-1"></a>battery_tidyfit_no_int <span class="ot">&lt;-</span> <span class="fu">augment</span>(battery_lm_factor_no_int)</span></code></pre></div>
+<div class="sourceCode" id="cb78"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb78-1"><a href="two-factors-anova-fixed-effects-model.html#cb78-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(battery_aov_no_int, <span class="at">which =</span> <span class="dv">2</span>)</span></code></pre></div>
+<p><img src="IndustRialds_files/figure-html/battery_noint-fig-1.png" width="80%" /></p>
+<div class="sourceCode" id="cb79"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb79-1"><a href="two-factors-anova-fixed-effects-model.html#cb79-1" aria-hidden="true" tabindex="-1"></a><span class="co"># It is finally in the plot residuals vs fit that we can clearly see an issue:</span></span>
+<span id="cb79-2"><a href="two-factors-anova-fixed-effects-model.html#cb79-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(battery_aov, <span class="at">which =</span> <span class="dv">1</span>)</span></code></pre></div>
+<p><img src="IndustRialds_files/figure-html/battery_noint-fig-2.png" width="80%" /></p>
+<div class="sourceCode" id="cb80"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb80-1"><a href="two-factors-anova-fixed-effects-model.html#cb80-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(battery_aov_no_int, <span class="at">which =</span> <span class="dv">1</span>)</span></code></pre></div>
+<p><img src="IndustRialds_files/figure-html/battery_noint-fig-3.png" width="80%" /></p>
+<p>Any pattern in these quantities is suggestive of the presence of interaction. Figure 5.15 shows a distinct pattern as the quantities move from positive to negative to positive to negative again.</p>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="single-factor-designs.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="general-factorial-design.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": true,
+"facebook": false,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "section",
+"scroll_highlight": false
+}
+});
+});
+</script>
+
+</body>
+
+</html>

@@ -81,8 +81,6 @@ Additionally we refer to several good quality books on both Data Science and  Pr
 
 I would like to express my gratitude to the instructors and colleagues who have spent time sharing their knowledge, answering my questions and giving me inputs: Enrico Chavez, Iegor Rudnytskyi, Giulia Ruggeri, Harry Handerson and Bobby Stuijfzand from the EPFL ADSCV team; Jean-Vincent Le Bé, Jasmine Petry, Yvan Bouza, James Clulow and Akos Spiegel from the Nestlé STC team; Frank Paris from DOQS; Théophile Emmanouilidis and Sélim Ach from Thoth.
 
-This book has been written using the R package `{Bookdown}` from @Xie2016 further customized with a layout developped by [Matthew J. C. Crump](https://community.rstudio.com/t/bookdown-contest-submission-gitbook-style-tufte-style-for-web-book/11666). Plot themes have been adapted from the package `{cowplot}` by Claus O.Wilke.
-
 To report any issue or make suggestions please open an issue on the book repository:
 [industRialds/issues](https://github.com/J-Ramalho/industRialds/issues)
 

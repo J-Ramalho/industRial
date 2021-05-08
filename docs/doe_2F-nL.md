@@ -15,7 +15,7 @@ select <- dplyr::select
 
 Two factors multiple levels
 
-**The solar celloutput test**
+**The solarcell output test**
 
 <div class="marginnote">
 
@@ -260,49 +260,48 @@ Below a description of the approach taken from [@Montgomery2012], pag.655:
 
 
 ```r
-filament <- read_excel("data-raw/filament.xlsx")
-filament %>% 
+solarcell_fill %>% 
   kable()
 ```
 
 
 
-|machine | strength| thickness|
-|:-------|--------:|---------:|
-|m1      |       36|        20|
-|m1      |       41|        25|
-|m1      |       39|        24|
-|m1      |       42|        25|
-|m1      |       49|        32|
-|m2      |       40|        22|
-|m2      |       48|        28|
-|m2      |       39|        22|
-|m2      |       45|        30|
-|m2      |       44|        28|
-|m3      |       35|        21|
-|m3      |       37|        23|
-|m3      |       42|        26|
-|m3      |       34|        21|
-|m3      |       32|        15|
+|material        | output| fillfactor|
+|:---------------|------:|----------:|
+|multijunction_A |    108|         20|
+|multijunction_A |    123|         25|
+|multijunction_A |    117|         24|
+|multijunction_A |    126|         25|
+|multijunction_A |    147|         32|
+|multijunction_B |    120|         22|
+|multijunction_B |    144|         28|
+|multijunction_B |    117|         22|
+|multijunction_B |    135|         30|
+|multijunction_B |    132|         28|
+|multijunction_C |    105|         21|
+|multijunction_C |    111|         23|
+|multijunction_C |    126|         26|
+|multijunction_C |    102|         21|
+|multijunction_C |     96|         15|
 
 Below a plot of strenght by thickness:
 
 
 ```r
-filament %>%
-  ggplot(aes(x = thickness, y = strength)) +
+solarcell_fill %>%
+  ggplot(aes(x = fillfactor, y = output)) +
   geom_point() +
   geom_smooth(method = "lm", se = FALSE) +
   theme_industRial() +
   labs(
-    title = "Strength of monofilament fiber",
-    subtitle = "Linear regression"
+    title = "The solarcell output test",
+    subtitle = "Output vs Fill Factor",
+    x = "Fill factor [%]",
+    y = "Output"
   )
 ```
 
 <img src="doe_2F-nL_files/figure-html/unnamed-chunk-17-1.png" width="672" />
-
-
 
 #### Correlation strenght {#corTest}
 
@@ -315,14 +314,14 @@ library(stats)
 
 
 ```r
-cor.test(filament$strength, filament$thickness)
+cor.test(solarcell_fill$output, solarcell_fill$fillfactor)
 ```
 
 ```
 
 	Pearson's product-moment correlation
 
-data:  filament$strength and filament$thickness
+data:  solarcell_fill$output and solarcell_fill$fillfactor
 t = 9.8039, df = 13, p-value = 2.263e-07
 alternative hypothesis: true correlation is not equal to 0
 95 percent confidence interval:
@@ -336,19 +335,21 @@ Going further and using the approach from [@Broc2016] I'm faceting the scatterpl
 
 
 ```r
-filament %>%
-  ggplot(aes(x = thickness, y = strength)) +
+solarcell_fill %>%
+  ggplot(aes(x = fillfactor, y = output)) +
   geom_point() +
   geom_smooth(method = "lm", se = FALSE) +
-  facet_wrap(facets = "machine") +
+  facet_wrap(vars(material)) +
   theme_industRial() +
   labs(
-    title = "Strength of monofilament fiber",
-    subtitle = "Behaviour for different machines"
+    title = "The solarcell output test",
+    subtitle = "Output vs Fill Factor, by material type",
+    x = "Fill factor [%]",
+    y = "Output"
   )
 ```
 
-<img src="doe_2F-nL_files/figure-html/unnamed-chunk-21-1.png" width="672" />
+<img src="doe_2F-nL_files/figure-html/unnamed-chunk-20-1.png" width="672" />
 
 Visually this is the case, going from one level to the other is not changing the relationship between thickness and strenght - increasing thickness increases stenght. Visually the slopes are similar but the number of points is small. In a real case this verification could be extended with the correlation test for each level or/and a statistical test between slopes.
 
@@ -361,27 +362,24 @@ The way to feed the R function arguments is obtained from https://www.datanovia.
 
 
 ```r
-filament_ancova <- aov(strength ~ thickness  + machine, filament)
-summary(filament_ancova)
+solarcell_ancova <- aov(
+  output ~ fillfactor  + material, solarcell_fill
+  )
+summary(solarcell_ancova)
 ```
 
 ```
             Df Sum Sq Mean Sq F value   Pr(>F)    
-thickness    1 305.13  305.13 119.933 2.96e-07 ***
-machine      2  13.28    6.64   2.611    0.118    
-Residuals   11  27.99    2.54                     
+fillfactor   1 2746.2  2746.2 119.933 2.96e-07 ***
+material     2  119.6    59.8   2.611    0.118    
+Residuals   11  251.9    22.9                     
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ```
 
-Note that in the formula the covariate goes first (and there is no interaction)! If you do not do this in order, you will get different results.
+> Note that in the formula the covariate goes first (and there is no interaction)! If you do not do this in order, you will get different results.
 
-All values from the book table page 662 are correctly obtained with the code above. In particular:
-
-* machine in this table corresponds to the adjusted machines mean square
-* residuals in this table corresponds to the error
-
-to be noted that the R anova table gives the thickness meansquare while the book doesn't.
+* material in this table corresponds to the adjusted material mean square
 
 Conclusions from the book in page 662:
 
@@ -399,14 +397,14 @@ Below I'm doing the common approach we've been using at NSTC in design of experi
 
 
 ```r
-filament_aov <- aov(strength ~ machine, filament)
-summary(filament_aov)
+solarcell_aov <- aov(output ~ material, solarcell_fill)
+summary(solarcell_aov)
 ```
 
 ```
             Df Sum Sq Mean Sq F value Pr(>F)  
-machine      2  140.4   70.20   4.089 0.0442 *
-Residuals   12  206.0   17.17                 
+material     2   1264   631.8   4.089 0.0442 *
+Residuals   12   1854   154.5                 
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ```

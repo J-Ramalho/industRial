@@ -86,15 +86,13 @@ dial_peter %>%
 
 ## R Packages
 
-### Installation
-
 All tools applied throughout this book are available in the form of packages of the programming language R. They're all available for downloaded at no cost.
 
 In all sections packages are loaded as they become needed. We've prefered this approach instead of a grouped loading in the begining of the chapter because this helps reminding which package the functions come from. 
 
 When needed we also present code required to handle the masking of functions with the same name from those different packages. In the example below the filter and select functions are made explicit to avoid having them masked by the stats package in case it has been loaded before.
 
-### Domain packages
+### Industrial DS
 
 #### industRial
 
@@ -116,7 +114,7 @@ qcc is another extremely complete and solid package. It was developped and is ma
 
 I recommend qichart2 specifically for the nice pareto plots. As many niche packages we need to be awere that the number of contributers is small meaning that it cannot be as thouroughly tested as community packages.
 
-### Other packages
+### Generic DS
 
 The amount of packages available is extremely large and growing very fast. When selecting new packages it is recommended to check the latest package update. Packages that have had no improvements since more than a couple of years should be questionned. The field evolves rapidly and compatibility and other issues can become painfull. A way to obtain statistics on package history is on [metacran](https://www.r-pkg.org/) or [RStudio package manager](https://packagemanager.rstudio.com/). 
 
@@ -139,7 +137,11 @@ recommended_packages %>%
   kable()
 ```
 
-## R Session info
+### Publishing
+
+This book has been written using the R package `{Bookdown}` from @Xie2016 further customized with a layout developped by [Matthew J. C. Crump](https://community.rstudio.com/t/bookdown-contest-submission-gitbook-style-tufte-style-for-web-book/11666). Plot themes have been adapted from the package `{cowplot}` by Claus O.Wilke.
+
+## R Session
 
 An important aspect to ensure reproducibility of the examples along the time and between users is to have the same programming setup. We're showing below our setup at the time of rendering the book. 
 

@@ -21,7 +21,7 @@ select <- dplyr::select
 
 Two factors multiple levels
 
-**The solar celloutput test**
+**The solarcell output test**
 
 <div class="marginnote">
 
@@ -164,32 +164,24 @@ Below a description of the approach taken from [@Montgomery2012], pag.655:
 *As an example of an experiment in which the analysis of covariance may be employed, consider a study performed to determine if there is a difference in the strength of a monofilament fiber produced by three different machines. The data from this experiment are shown in Table 15.10 (below). Figure 15.3 presents a scatter diagram of strength (y) versus the diameter (or thickness) of the sample. Clearly, the strength of the fiber is also affected by its thickness; consequently, a thicker fiber will generally be stronger than a thinner one. The analysis of covariance could be used to remove the effect of thickness (x) on strength (y) when testing for differences in strength between machines.*
 
 ```{r, fig.cap = "table 15.10"}
-filament <- read_excel("data-raw/filament.xlsx")
-filament %>% 
+solarcell_fill %>% 
   kable()
 ```
 
 Below a plot of strenght by thickness:
 
 ```{r}
-filament %>%
-  ggplot(aes(x = thickness, y = strength)) +
+solarcell_fill %>%
+  ggplot(aes(x = fillfactor, y = output)) +
   geom_point() +
   geom_smooth(method = "lm", se = FALSE) +
   theme_industRial() +
   labs(
-    title = "Strength of monofilament fiber",
-    subtitle = "Linear regression"
+    title = "The solarcell output test",
+    subtitle = "Output vs Fill Factor",
+    x = "Fill factor [%]",
+    y = "Output"
   )
-```
-
-```{r eval=FALSE, include=FALSE}
-# as the plot is slightly different from the book, the plot below has been done 
-# in base R just to confirm and we get exactly the sameas  with ggplot2.
-par(mfrow=c(1,1))
-plot(filament$thickness, filament$strength)
-# plot(jitter(filament$strength, 1), jitter(filament$thickness, 1))
-abline(lm(strength~thickness, data = filament))
 ```
 
 #### Correlation strenght {#corTest}
@@ -201,23 +193,24 @@ library(stats)
 ```
 
 ```{r}
-cor.test(filament$strength, filament$thickness)
+cor.test(solarcell_fill$output, solarcell_fill$fillfactor)
 ```
 
 Going further and using the approach from [@Broc2016] I'm faceting the scatterplots to assess if the coefficient of the linear regression is similar for all the levels of the machine factor:
 
 ```{r}
-filament %>%
-  ggplot(aes(x = thickness, y = strength)) +
+solarcell_fill %>%
+  ggplot(aes(x = fillfactor, y = output)) +
   geom_point() +
   geom_smooth(method = "lm", se = FALSE) +
-  facet_wrap(facets = "machine") +
+  facet_wrap(vars(material)) +
   theme_industRial() +
   labs(
-    title = "Strength of monofilament fiber",
-    subtitle = "Behaviour for different machines"
+    title = "The solarcell output test",
+    subtitle = "Output vs Fill Factor, by material type",
+    x = "Fill factor [%]",
+    y = "Output"
   )
-
 ```
 
 Visually this is the case, going from one level to the other is not changing the relationship between thickness and strenght - increasing thickness increases stenght. Visually the slopes are similar but the number of points is small. In a real case this verification could be extended with the correlation test for each level or/and a statistical test between slopes.
@@ -230,18 +223,15 @@ The way to feed the R function arguments is obtained from https://www.datanovia.
 #### Ancova {#ancova}
 
 ```{r}
-filament_ancova <- aov(strength ~ thickness  + machine, filament)
-summary(filament_ancova)
+solarcell_ancova <- aov(
+  output ~ fillfactor  + material, solarcell_fill
+  )
+summary(solarcell_ancova)
 ```
 
-Note that in the formula the covariate goes first (and there is no interaction)! If you do not do this in order, you will get different results.
+> Note that in the formula the covariate goes first (and there is no interaction)! If you do not do this in order, you will get different results.
 
-All values from the book table page 662 are correctly obtained with the code above. In particular:
-
-* machine in this table corresponds to the adjusted machines mean square
-* residuals in this table corresponds to the error
-
-to be noted that the R anova table gives the thickness meansquare while the book doesn't.
+* material in this table corresponds to the adjusted material mean square
 
 Conclusions from the book in page 662:
 
@@ -258,8 +248,8 @@ Conclusions from the book in page 662:
 Below I'm doing the common approach we've been using at NSTC in design of experiments.
 
 ```{r}
-filament_aov <- aov(strength ~ machine, filament)
-summary(filament_aov)
+solarcell_aov <- aov(output ~ material, solarcell_fill)
+summary(solarcell_aov)
 ```
 
 The anova table obtained also corresponds correctly to the book example. 

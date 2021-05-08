@@ -157,11 +157,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="r-toolbox.html"><a href="r-toolbox.html#r-datasets"><i class="fa fa-check"></i>R Datasets</a></li>
 <li class="chapter" data-level="" data-path="r-toolbox.html"><a href="r-toolbox.html#r-packages"><i class="fa fa-check"></i>R Packages</a>
 <ul>
-<li class="chapter" data-level="" data-path="r-toolbox.html"><a href="r-toolbox.html#installation"><i class="fa fa-check"></i>Installation</a></li>
-<li class="chapter" data-level="" data-path="r-toolbox.html"><a href="r-toolbox.html#domain-packages"><i class="fa fa-check"></i>Domain packages</a></li>
-<li class="chapter" data-level="" data-path="r-toolbox.html"><a href="r-toolbox.html#other-packages"><i class="fa fa-check"></i>Other packages</a></li>
+<li class="chapter" data-level="" data-path="r-toolbox.html"><a href="r-toolbox.html#industrial-ds"><i class="fa fa-check"></i>Industrial DS</a></li>
+<li class="chapter" data-level="" data-path="r-toolbox.html"><a href="r-toolbox.html#generic-ds"><i class="fa fa-check"></i>Generic DS</a></li>
+<li class="chapter" data-level="" data-path="r-toolbox.html"><a href="r-toolbox.html#publishing"><i class="fa fa-check"></i>Publishing</a></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="r-toolbox.html"><a href="r-toolbox.html#r-session-info"><i class="fa fa-check"></i>R Session info</a></li>
+<li class="chapter" data-level="" data-path="r-toolbox.html"><a href="r-toolbox.html#r-session"><i class="fa fa-check"></i>R Session</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="contents.html"><a href="contents.html"><i class="fa fa-check"></i>Contents</a></li>
 <li class="part"><span><b>II CASE STUDIES</b></span></li>
@@ -776,7 +776,7 @@ F-statistic:  66.8 on 3 and 16 DF,  p-value: 2.883e-09</code></pre>
 <div class="sourceCode" id="cb102"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb102-1"><a href="DOE.html#cb102-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(car)</span></code></pre></div>
 <div class="sourceCode" id="cb103"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb103-1"><a href="DOE.html#cb103-1" aria-hidden="true" tabindex="-1"></a><span class="fu">durbinWatsonTest</span>(ebike_lm_factor)</span></code></pre></div>
 <pre><code> lag Autocorrelation D-W Statistic p-value
-   1      -0.5343347      2.960893    0.09
+   1      -0.5343347      2.960893   0.094
  Alternative hypothesis: rho != 0</code></pre>
 <p>Although the output shows Autocorrelation of -0.53 we have to consider that the p value is greater than 0.05 thus there is not enough significance to say that there is autocorrelation.</p>
 </div>
@@ -1228,7 +1228,7 @@ Residuals   16 6.552e+09 409500000               </code></pre>
 <div id="factors-n-levels" class="section level2">
 <h2>2 factors n levels</h2>
 <p>Two factors multiple levels</p>
-<p><strong>The solar celloutput test</strong></p>
+<p><strong>The solarcell output test</strong></p>
 <div class="marginnote">
 <div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-3"></span>
 <img src="img/solar_cell_test_bw.jpg" alt="solar panel test chamber" width="100%" />
@@ -1381,115 +1381,116 @@ Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&
 <p><em>Suppose that in an experiment with a response variable y there is another variable, say x, and that y is linearly related to x. Furthermore, suppose that x cannot be controlled by the experimenter but can be observed along with y. The variable x is called a covariate or concomitant variable. The analysis of covariance involves adjusting the observed response variable for the effect of the concomitant variable.</em></p>
 <p><em>If such an adjustment is not performed, the concomitant variable could inflate the error mean square and make true differences in the response due to treatments harder to detect. Thus, the analysis of covariance is a method of adjusting for the effects of an uncontrollable nuisance variable. As we will see, the procedure is a combination of analysis of variance and regression analysis.</em></p>
 <p><em>As an example of an experiment in which the analysis of covariance may be employed, consider a study performed to determine if there is a difference in the strength of a monofilament fiber produced by three different machines. The data from this experiment are shown in Table 15.10 (below). Figure 15.3 presents a scatter diagram of strength (y) versus the diameter (or thickness) of the sample. Clearly, the strength of the fiber is also affected by its thickness; consequently, a thicker fiber will generally be stronger than a thinner one. The analysis of covariance could be used to remove the effect of thickness (x) on strength (y) when testing for differences in strength between machines.</em></p>
-<div class="sourceCode" id="cb156"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb156-1"><a href="DOE.html#cb156-1" aria-hidden="true" tabindex="-1"></a>filament <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">&quot;data-raw/filament.xlsx&quot;</span>)</span>
-<span id="cb156-2"><a href="DOE.html#cb156-2" aria-hidden="true" tabindex="-1"></a>filament <span class="sc">%&gt;%</span> </span>
-<span id="cb156-3"><a href="DOE.html#cb156-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb156"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb156-1"><a href="DOE.html#cb156-1" aria-hidden="true" tabindex="-1"></a>solarcell_fill <span class="sc">%&gt;%</span> </span>
+<span id="cb156-2"><a href="DOE.html#cb156-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable</span>()</span></code></pre></div>
 <table>
 <thead>
 <tr class="header">
-<th align="left">machine</th>
-<th align="right">strength</th>
-<th align="right">thickness</th>
+<th align="left">material</th>
+<th align="right">output</th>
+<th align="right">fillfactor</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td align="left">m1</td>
-<td align="right">36</td>
+<td align="left">multijunction_A</td>
+<td align="right">108</td>
 <td align="right">20</td>
 </tr>
 <tr class="even">
-<td align="left">m1</td>
-<td align="right">41</td>
+<td align="left">multijunction_A</td>
+<td align="right">123</td>
 <td align="right">25</td>
 </tr>
 <tr class="odd">
-<td align="left">m1</td>
-<td align="right">39</td>
+<td align="left">multijunction_A</td>
+<td align="right">117</td>
 <td align="right">24</td>
 </tr>
 <tr class="even">
-<td align="left">m1</td>
-<td align="right">42</td>
+<td align="left">multijunction_A</td>
+<td align="right">126</td>
 <td align="right">25</td>
 </tr>
 <tr class="odd">
-<td align="left">m1</td>
-<td align="right">49</td>
+<td align="left">multijunction_A</td>
+<td align="right">147</td>
 <td align="right">32</td>
 </tr>
 <tr class="even">
-<td align="left">m2</td>
-<td align="right">40</td>
+<td align="left">multijunction_B</td>
+<td align="right">120</td>
 <td align="right">22</td>
 </tr>
 <tr class="odd">
-<td align="left">m2</td>
-<td align="right">48</td>
+<td align="left">multijunction_B</td>
+<td align="right">144</td>
 <td align="right">28</td>
 </tr>
 <tr class="even">
-<td align="left">m2</td>
-<td align="right">39</td>
+<td align="left">multijunction_B</td>
+<td align="right">117</td>
 <td align="right">22</td>
 </tr>
 <tr class="odd">
-<td align="left">m2</td>
-<td align="right">45</td>
+<td align="left">multijunction_B</td>
+<td align="right">135</td>
 <td align="right">30</td>
 </tr>
 <tr class="even">
-<td align="left">m2</td>
-<td align="right">44</td>
+<td align="left">multijunction_B</td>
+<td align="right">132</td>
 <td align="right">28</td>
 </tr>
 <tr class="odd">
-<td align="left">m3</td>
-<td align="right">35</td>
+<td align="left">multijunction_C</td>
+<td align="right">105</td>
 <td align="right">21</td>
 </tr>
 <tr class="even">
-<td align="left">m3</td>
-<td align="right">37</td>
+<td align="left">multijunction_C</td>
+<td align="right">111</td>
 <td align="right">23</td>
 </tr>
 <tr class="odd">
-<td align="left">m3</td>
-<td align="right">42</td>
+<td align="left">multijunction_C</td>
+<td align="right">126</td>
 <td align="right">26</td>
 </tr>
 <tr class="even">
-<td align="left">m3</td>
-<td align="right">34</td>
+<td align="left">multijunction_C</td>
+<td align="right">102</td>
 <td align="right">21</td>
 </tr>
 <tr class="odd">
-<td align="left">m3</td>
-<td align="right">32</td>
+<td align="left">multijunction_C</td>
+<td align="right">96</td>
 <td align="right">15</td>
 </tr>
 </tbody>
 </table>
 <p>Below a plot of strenght by thickness:</p>
-<div class="sourceCode" id="cb157"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb157-1"><a href="DOE.html#cb157-1" aria-hidden="true" tabindex="-1"></a>filament <span class="sc">%&gt;%</span></span>
-<span id="cb157-2"><a href="DOE.html#cb157-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> thickness, <span class="at">y =</span> strength)) <span class="sc">+</span></span>
+<div class="sourceCode" id="cb157"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb157-1"><a href="DOE.html#cb157-1" aria-hidden="true" tabindex="-1"></a>solarcell_fill <span class="sc">%&gt;%</span></span>
+<span id="cb157-2"><a href="DOE.html#cb157-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> fillfactor, <span class="at">y =</span> output)) <span class="sc">+</span></span>
 <span id="cb157-3"><a href="DOE.html#cb157-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
 <span id="cb157-4"><a href="DOE.html#cb157-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">&quot;lm&quot;</span>, <span class="at">se =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
 <span id="cb157-5"><a href="DOE.html#cb157-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_industRial</span>() <span class="sc">+</span></span>
 <span id="cb157-6"><a href="DOE.html#cb157-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
-<span id="cb157-7"><a href="DOE.html#cb157-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">&quot;Strength of monofilament fiber&quot;</span>,</span>
-<span id="cb157-8"><a href="DOE.html#cb157-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="st">&quot;Linear regression&quot;</span></span>
-<span id="cb157-9"><a href="DOE.html#cb157-9" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
+<span id="cb157-7"><a href="DOE.html#cb157-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">&quot;The solarcell output test&quot;</span>,</span>
+<span id="cb157-8"><a href="DOE.html#cb157-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="st">&quot;Output vs Fill Factor&quot;</span>,</span>
+<span id="cb157-9"><a href="DOE.html#cb157-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">&quot;Fill factor [%]&quot;</span>,</span>
+<span id="cb157-10"><a href="DOE.html#cb157-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">&quot;Output&quot;</span></span>
+<span id="cb157-11"><a href="DOE.html#cb157-11" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
 <p><img src="doe_2F-nL_files/figure-html/unnamed-chunk-17-1.png" width="672" /></p>
 <div id="corTest" class="section level4">
 <h4>Correlation strenght</h4>
 <p>And a short test to assess the strenght of the correlation:</p>
 <div class="sourceCode" id="cb158"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb158-1"><a href="DOE.html#cb158-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(stats)</span></code></pre></div>
-<div class="sourceCode" id="cb159"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb159-1"><a href="DOE.html#cb159-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cor.test</span>(filament<span class="sc">$</span>strength, filament<span class="sc">$</span>thickness)</span></code></pre></div>
+<div class="sourceCode" id="cb159"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb159-1"><a href="DOE.html#cb159-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cor.test</span>(solarcell_fill<span class="sc">$</span>output, solarcell_fill<span class="sc">$</span>fillfactor)</span></code></pre></div>
 <pre><code>
     Pearson&#39;s product-moment correlation
 
-data:  filament$strength and filament$thickness
+data:  solarcell_fill$output and solarcell_fill$fillfactor
 t = 9.8039, df = 13, p-value = 2.263e-07
 alternative hypothesis: true correlation is not equal to 0
 95 percent confidence interval:
@@ -1498,17 +1499,19 @@ sample estimates:
      cor 
 0.938542 </code></pre>
 <p>Going further and using the approach from <span class="citation">(<a href="references.html#ref-Broc2016" role="doc-biblioref">Broc 2016</a>)</span> I’m faceting the scatterplots to assess if the coefficient of the linear regression is similar for all the levels of the machine factor:</p>
-<div class="sourceCode" id="cb161"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb161-1"><a href="DOE.html#cb161-1" aria-hidden="true" tabindex="-1"></a>filament <span class="sc">%&gt;%</span></span>
-<span id="cb161-2"><a href="DOE.html#cb161-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> thickness, <span class="at">y =</span> strength)) <span class="sc">+</span></span>
+<div class="sourceCode" id="cb161"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb161-1"><a href="DOE.html#cb161-1" aria-hidden="true" tabindex="-1"></a>solarcell_fill <span class="sc">%&gt;%</span></span>
+<span id="cb161-2"><a href="DOE.html#cb161-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> fillfactor, <span class="at">y =</span> output)) <span class="sc">+</span></span>
 <span id="cb161-3"><a href="DOE.html#cb161-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
 <span id="cb161-4"><a href="DOE.html#cb161-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">&quot;lm&quot;</span>, <span class="at">se =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
-<span id="cb161-5"><a href="DOE.html#cb161-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="at">facets =</span> <span class="st">&quot;machine&quot;</span>) <span class="sc">+</span></span>
+<span id="cb161-5"><a href="DOE.html#cb161-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="fu">vars</span>(material)) <span class="sc">+</span></span>
 <span id="cb161-6"><a href="DOE.html#cb161-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_industRial</span>() <span class="sc">+</span></span>
 <span id="cb161-7"><a href="DOE.html#cb161-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
-<span id="cb161-8"><a href="DOE.html#cb161-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">&quot;Strength of monofilament fiber&quot;</span>,</span>
-<span id="cb161-9"><a href="DOE.html#cb161-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="st">&quot;Behaviour for different machines&quot;</span></span>
-<span id="cb161-10"><a href="DOE.html#cb161-10" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
-<p><img src="doe_2F-nL_files/figure-html/unnamed-chunk-21-1.png" width="672" /></p>
+<span id="cb161-8"><a href="DOE.html#cb161-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">&quot;The solarcell output test&quot;</span>,</span>
+<span id="cb161-9"><a href="DOE.html#cb161-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="st">&quot;Output vs Fill Factor, by material type&quot;</span>,</span>
+<span id="cb161-10"><a href="DOE.html#cb161-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">&quot;Fill factor [%]&quot;</span>,</span>
+<span id="cb161-11"><a href="DOE.html#cb161-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">&quot;Output&quot;</span></span>
+<span id="cb161-12"><a href="DOE.html#cb161-12" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
+<p><img src="doe_2F-nL_files/figure-html/unnamed-chunk-20-1.png" width="672" /></p>
 <p>Visually this is the case, going from one level to the other is not changing the relationship between thickness and strenght - increasing thickness increases stenght. Visually the slopes are similar but the number of points is small. In a real case this verification could be extended with the correlation test for each level or/and a statistical test between slopes.</p>
 <p>We’re now reproducing in R the ancova case study from the book, still using the aov function.
 The way to feed the R function arguments is obtained from <a href="https://www.datanovia.com/en/lessons/ancova-in-r/" class="uri">https://www.datanovia.com/en/lessons/ancova-in-r/</a></p>
@@ -1516,21 +1519,22 @@ The way to feed the R function arguments is obtained from <a href="https://www.d
 </div>
 <div id="ancova" class="section level4">
 <h4>Ancova</h4>
-<div class="sourceCode" id="cb162"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb162-1"><a href="DOE.html#cb162-1" aria-hidden="true" tabindex="-1"></a>filament_ancova <span class="ot">&lt;-</span> <span class="fu">aov</span>(strength <span class="sc">~</span> thickness  <span class="sc">+</span> machine, filament)</span>
-<span id="cb162-2"><a href="DOE.html#cb162-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(filament_ancova)</span></code></pre></div>
+<div class="sourceCode" id="cb162"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb162-1"><a href="DOE.html#cb162-1" aria-hidden="true" tabindex="-1"></a>solarcell_ancova <span class="ot">&lt;-</span> <span class="fu">aov</span>(</span>
+<span id="cb162-2"><a href="DOE.html#cb162-2" aria-hidden="true" tabindex="-1"></a>  output <span class="sc">~</span> fillfactor  <span class="sc">+</span> material, solarcell_fill</span>
+<span id="cb162-3"><a href="DOE.html#cb162-3" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb162-4"><a href="DOE.html#cb162-4" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(solarcell_ancova)</span></code></pre></div>
 <pre><code>            Df Sum Sq Mean Sq F value   Pr(&gt;F)    
-thickness    1 305.13  305.13 119.933 2.96e-07 ***
-machine      2  13.28    6.64   2.611    0.118    
-Residuals   11  27.99    2.54                     
+fillfactor   1 2746.2  2746.2 119.933 2.96e-07 ***
+material     2  119.6    59.8   2.611    0.118    
+Residuals   11  251.9    22.9                     
 ---
 Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+<blockquote>
 <p>Note that in the formula the covariate goes first (and there is no interaction)! If you do not do this in order, you will get different results.</p>
-<p>All values from the book table page 662 are correctly obtained with the code above. In particular:</p>
+</blockquote>
 <ul>
-<li>machine in this table corresponds to the adjusted machines mean square</li>
-<li>residuals in this table corresponds to the error</li>
+<li>material in this table corresponds to the adjusted material mean square</li>
 </ul>
-<p>to be noted that the R anova table gives the thickness meansquare while the book doesn’t.</p>
 <p>Conclusions from the book in page 662:</p>
 <p><em>Comparing the adjusted treatment means with the unadjusted treatment means (the y i. ), we note that the adjusted means are much closer together, another indication that the covariance analysis was necessary.</em></p>
 <p><em>A basic assumption in the analysis of covariance is that the treatments do not influence the covariate x because the technique removes the effect of variations in the x i. . However, if the variability in the x i. is due in part to the treatments, then analysis of covariance removes part of the treatment effect. Thus, we must be reasonably sure that the treatments do not affect the values x ij.</em></p>
@@ -1540,11 +1544,11 @@ Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&
 <div id="comparison-with-anova" class="section level4">
 <h4>Comparison with anova</h4>
 <p>Below I’m doing the common approach we’ve been using at NSTC in design of experiments.</p>
-<div class="sourceCode" id="cb164"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb164-1"><a href="DOE.html#cb164-1" aria-hidden="true" tabindex="-1"></a>filament_aov <span class="ot">&lt;-</span> <span class="fu">aov</span>(strength <span class="sc">~</span> machine, filament)</span>
-<span id="cb164-2"><a href="DOE.html#cb164-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(filament_aov)</span></code></pre></div>
+<div class="sourceCode" id="cb164"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb164-1"><a href="DOE.html#cb164-1" aria-hidden="true" tabindex="-1"></a>solarcell_aov <span class="ot">&lt;-</span> <span class="fu">aov</span>(output <span class="sc">~</span> material, solarcell_fill)</span>
+<span id="cb164-2"><a href="DOE.html#cb164-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(solarcell_aov)</span></code></pre></div>
 <pre><code>            Df Sum Sq Mean Sq F value Pr(&gt;F)  
-machine      2  140.4   70.20   4.089 0.0442 *
-Residuals   12  206.0   17.17                 
+material     2   1264   631.8   4.089 0.0442 *
+Residuals   12   1854   154.5                 
 ---
 Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
 <p>The anova table obtained also corresponds correctly to the book example.</p>

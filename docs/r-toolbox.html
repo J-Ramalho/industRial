@@ -157,11 +157,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="r-toolbox.html"><a href="r-toolbox.html#r-datasets"><i class="fa fa-check"></i>R Datasets</a></li>
 <li class="chapter" data-level="" data-path="r-toolbox.html"><a href="r-toolbox.html#r-packages"><i class="fa fa-check"></i>R Packages</a>
 <ul>
-<li class="chapter" data-level="" data-path="r-toolbox.html"><a href="r-toolbox.html#installation"><i class="fa fa-check"></i>Installation</a></li>
-<li class="chapter" data-level="" data-path="r-toolbox.html"><a href="r-toolbox.html#domain-packages"><i class="fa fa-check"></i>Domain packages</a></li>
-<li class="chapter" data-level="" data-path="r-toolbox.html"><a href="r-toolbox.html#other-packages"><i class="fa fa-check"></i>Other packages</a></li>
+<li class="chapter" data-level="" data-path="r-toolbox.html"><a href="r-toolbox.html#industrial-ds"><i class="fa fa-check"></i>Industrial DS</a></li>
+<li class="chapter" data-level="" data-path="r-toolbox.html"><a href="r-toolbox.html#generic-ds"><i class="fa fa-check"></i>Generic DS</a></li>
+<li class="chapter" data-level="" data-path="r-toolbox.html"><a href="r-toolbox.html#publishing"><i class="fa fa-check"></i>Publishing</a></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="r-toolbox.html"><a href="r-toolbox.html#r-session-info"><i class="fa fa-check"></i>R Session info</a></li>
+<li class="chapter" data-level="" data-path="r-toolbox.html"><a href="r-toolbox.html#r-session"><i class="fa fa-check"></i>R Session</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="contents.html"><a href="contents.html"><i class="fa fa-check"></i>Contents</a></li>
 <li class="part"><span><b>II CASE STUDIES</b></span></li>
@@ -441,14 +441,11 @@ Besides taste and personnal preference R brings a significant number of specific
 </div>
 <div id="r-packages" class="section level2">
 <h2>R Packages</h2>
-<div id="installation" class="section level3">
-<h3>Installation</h3>
 <p>All tools applied throughout this book are available in the form of packages of the programming language R. They’re all available for downloaded at no cost.</p>
 <p>In all sections packages are loaded as they become needed. We’ve prefered this approach instead of a grouped loading in the begining of the chapter because this helps reminding which package the functions come from.</p>
 <p>When needed we also present code required to handle the masking of functions with the same name from those different packages. In the example below the filter and select functions are made explicit to avoid having them masked by the stats package in case it has been loaded before.</p>
-</div>
-<div id="domain-packages" class="section level3">
-<h3>Domain packages</h3>
+<div id="industrial-ds" class="section level3">
+<h3>Industrial DS</h3>
 <div id="industrial" class="section level4">
 <h4>industRial</h4>
 <p>The <code>{industRial}</code> package is an original companion package developed for this book that besides containing the datasets from all cases has varied functions to print and customise the aesthetics of spc charts. They’re built on top of the tidyverse package. They aim for an easier modification of the control chart rules and customisation of the plot aesthetics when compared with other more advanced packages for spc such as the qcc. The industRial package can be simply downloaded from github with the following command:</p>
@@ -467,8 +464,8 @@ Besides taste and personnal preference R brings a significant number of specific
 <p>I recommend qichart2 specifically for the nice pareto plots. As many niche packages we need to be awere that the number of contributers is small meaning that it cannot be as thouroughly tested as community packages.</p>
 </div>
 </div>
-<div id="other-packages" class="section level3">
-<h3>Other packages</h3>
+<div id="generic-ds" class="section level3">
+<h3>Generic DS</h3>
 <p>The amount of packages available is extremely large and growing very fast. When selecting new packages it is recommended to check the latest package update. Packages that have had no improvements since more than a couple of years should be questionned. The field evolves rapidly and compatibility and other issues can become painfull. A way to obtain statistics on package history is on <a href="https://www.r-pkg.org/">metacran</a> or <a href="https://packagemanager.rstudio.com/">RStudio package manager</a>.</p>
 <p>Below a comprehensive list of the different packages used in the book:</p>
 <div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="r-toolbox.html#cb9-1" aria-hidden="true" tabindex="-1"></a>installed_packages <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(</span>
@@ -662,9 +659,13 @@ Besides taste and personnal preference R brings a significant number of specific
 </tbody>
 </table>
 </div>
+<div id="publishing" class="section level3">
+<h3>Publishing</h3>
+<p>This book has been written using the R package <code>{Bookdown}</code> from <span class="citation"><a href="references.html#ref-Xie2016" role="doc-biblioref">Xie</a> (<a href="references.html#ref-Xie2016" role="doc-biblioref">2016</a>)</span> further customized with a layout developped by <a href="https://community.rstudio.com/t/bookdown-contest-submission-gitbook-style-tufte-style-for-web-book/11666">Matthew J. C. Crump</a>. Plot themes have been adapted from the package <code>{cowplot}</code> by Claus O.Wilke.</p>
 </div>
-<div id="r-session-info" class="section level2">
-<h2>R Session info</h2>
+</div>
+<div id="r-session" class="section level2">
+<h2>R Session</h2>
 <p>An important aspect to ensure reproducibility of the examples along the time and between users is to have the same programming setup. We’re showing below our setup at the time of rendering the book.</p>
 <div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="r-toolbox.html#cb10-1" aria-hidden="true" tabindex="-1"></a>devtools<span class="sc">::</span><span class="fu">session_info</span>()[[<span class="dv">1</span>]]</span></code></pre></div>
 <pre><code> setting  value                       

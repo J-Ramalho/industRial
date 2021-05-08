@@ -42,8 +42,8 @@
   <tr>
    <td style="text-align:left;vertical-align: middle !important;background-color: white !important;" rowspan="3"> Gage r&amp;R </td>
    <td style="text-align:left;background-color: white !important;"> Linearity </td>
-   <td style="text-align:left;background-color: white !important;"> juice_bottling </td>
-   <td style="text-align:left;background-color: white !important;">  </td>
+   <td style="text-align:left;background-color: white !important;"> juice_drymatter </td>
+   <td style="text-align:left;background-color: white !important;"> [ggplot2::geom_smooth](#geom_smooth) </td>
   </tr>
   <tr>
    
@@ -144,7 +144,7 @@
   <tr>
    
    <td style="text-align:left;vertical-align: middle !important;background-color: white !important;" rowspan="2"> 2F-nL ancova </td>
-   <td style="text-align:left;vertical-align: middle !important;background-color: white !important;" rowspan="2"> filament </td>
+   <td style="text-align:left;vertical-align: middle !important;background-color: white !important;" rowspan="2"> solarcell_fill </td>
    <td style="text-align:left;background-color: white !important;"> [stats::cor.test](#corTest) </td>
   </tr>
   <tr>
@@ -156,8 +156,8 @@
   <tr>
    
    <td style="text-align:left;background-color: white !important;"> mF-nL </td>
-   <td style="text-align:left;background-color: white !important;"> soft drink bottling </td>
-   <td style="text-align:left;background-color: white !important;">  </td>
+   <td style="text-align:left;background-color: white !important;"> juice_drymatter </td>
+   <td style="text-align:left;background-color: white !important;"> [DoE.base::fac.design](#fac.design) </td>
   </tr>
   <tr>
    
@@ -179,33 +179,33 @@
   </tr>
   <tr>
    
-   <td style="text-align:left;"> mF-2L single replicate </td>
-   <td style="text-align:left;"> filtration </td>
-   <td style="text-align:left;"> [car::qqPlot](#qqPlot) </td>
+   <td style="text-align:left;background-color: white !important;"> mF-2L single replicate </td>
+   <td style="text-align:left;background-color: white !important;"> filtration </td>
+   <td style="text-align:left;background-color: white !important;"> [car::qqPlot](#qqPlot) </td>
   </tr>
   <tr>
-   <td style="text-align:left;vertical-align: middle !important;" rowspan="2"> SPC </td>
-   <td style="text-align:left;vertical-align: middle !important;" rowspan="2"> Control charts </td>
-   <td style="text-align:left;vertical-align: middle !important;" rowspan="2"> bamako </td>
-   <td style="text-align:left;"> [qcc::qcc – xbar](#xbarchart) </td>
+   <td style="text-align:left;vertical-align: middle !important;background-color: white !important;" rowspan="4"> SPC </td>
+   <td style="text-align:left;vertical-align: middle !important;background-color: white !important;" rowspan="3"> Control charts </td>
+   <td style="text-align:left;vertical-align: middle !important;background-color: white !important;" rowspan="4"> bamako </td>
+   <td style="text-align:left;background-color: white !important;"> [qcc::qcc – xbar](#xbarchart) </td>
   </tr>
   <tr>
    
    
    
-   <td style="text-align:left;"> [qcc::qcc – R](#Rchart) </td>
+   <td style="text-align:left;background-color: white !important;"> [qcc::qcc – R](#Rchart) </td>
   </tr>
   <tr>
-   <td style="text-align:left;">  </td>
-   <td style="text-align:left;">  </td>
-   <td style="text-align:left;">  </td>
-   <td style="text-align:left;"> [qcc::limits.xbar](#limitsxbar) </td>
+   
+   
+   
+   <td style="text-align:left;background-color: white !important;"> [qcc::limits.xbar](#limitsxbar) </td>
   </tr>
   <tr>
-   <td style="text-align:left;"> SPC </td>
-   <td style="text-align:left;"> Capability Analysis </td>
-   <td style="text-align:left;"> bamako </td>
-   <td style="text-align:left;"> [qcc::process.capability](#processcapability) </td>
+   
+   <td style="text-align:left;background-color: white !important;"> Capability Analysis </td>
+   
+   <td style="text-align:left;background-color: white !important;"> [qcc::process.capability](#processcapability) </td>
   </tr>
 </tbody>
 </table>

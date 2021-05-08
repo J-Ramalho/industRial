@@ -118,7 +118,7 @@ In all sections packages are loaded as they become needed. We've prefered this a
 
 When needed we also present code required to handle the masking of functions with the same name from those different packages. In the example below the filter and select functions are made explicit to avoid having them masked by the stats package in case it has been loaded before.
 
-### Industrial DS
+### Industrial packages
 
 #### industRial
 
@@ -140,7 +140,13 @@ qcc is another extremely complete and solid package. It was developped and is ma
 
 I recommend qichart2 specifically for the nice pareto plots. As many niche packages we need to be awere that the number of contributers is small meaning that it cannot be as thouroughly tested as community packages.
 
-### Generic DS
+#### DoE.base
+
+This package is one of the most complete and vast packages in Design of Experiements. It is a first of a large suite of packages on the topic, it has vast functionality and is extremely well documented.
+
+[DoE.base](http://prof.beuth-hochschule.de/groemping/software/doe/?L=1&print=1)
+
+### All purpose packages
 
 The amount of packages available is extremely large and growing very fast. When selecting new packages it is recommended to check the latest package update. Packages that have had no improvements since more than a couple of years should be questionned. The field evolves rapidly and compatibility and other issues can become painfull. A way to obtain statistics on package history is on [metacran](https://www.r-pkg.org/) or [RStudio package manager](https://packagemanager.rstudio.com/). 
 
@@ -154,7 +160,7 @@ installed_packages <- bind_rows(
     as_tibble()
 )
 
-recommended_packages <- read_excel("data-raw/rpackages.xlsx") %>%
+recommended_packages <- read_excel("data/rpackages.xlsx") %>%
   filter(Used == "y") %>%
   left_join(installed_packages) %>%
   select(Package, Area, Version) %>%
@@ -170,6 +176,7 @@ recommended_packages %>%
 |:-----------|:----------------------|:-------|
 |rcartocolor |colors                 |2.0.0   |
 |viridis     |colors                 |0.5.1   |
+|datasets    |data                   |4.0.5   |
 |readr       |data loading           |1.4.0   |
 |readxl      |data loading           |1.3.1   |
 |dplyr       |data science           |1.0.4   |
@@ -186,6 +193,7 @@ recommended_packages %>%
 |qicharts2   |industrial stats       |0.7.1   |
 |qcc         |industrial stats       |2.7     |
 |SixSigma    |industrial stats       |0.9-52  |
+|DoE.base    |industrial stats       |1.1-6   |
 |patchwork   |plotting               |1.1.1   |
 |ggplot2     |plotting               |3.3.3   |
 |scales      |plotting               |1.1.1   |
@@ -200,9 +208,8 @@ recommended_packages %>%
 |fs          |sysadmin               |1.5.0   |
 |glue        |text                   |1.4.2   |
 |stringr     |text                   |1.4.0   |
-|datasets    |training               |4.0.5   |
 
-### Publishing
+### Publishing packages
 
 This book has been written using the R package `{Bookdown}` from @Xie2016 further customized with a layout developped by [Matthew J. C. Crump](https://community.rstudio.com/t/bookdown-contest-submission-gitbook-style-tufte-style-for-web-book/11666). Plot themes have been adapted from the package `{cowplot}` by Claus O.Wilke.
 

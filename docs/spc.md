@@ -26,7 +26,7 @@ Loading data:
 
 
 ```r
-bamako <- read_csv("data-raw/Bamako.csv")
+bamako <- read_csv("data/Bamako.csv")
 ```
 
 Looking at the first five lines to confirm and assess the quality of our data for further processing. 
@@ -301,7 +301,7 @@ Tightening a product specification without increasing the cost of a manufacturin
 
 
 ```r
-bamako <- read_csv("data-raw/Bamako.csv")
+bamako <- read_csv("data/Bamako.csv")
 ```
 
 ## Process Capability

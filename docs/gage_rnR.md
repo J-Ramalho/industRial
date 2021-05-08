@@ -43,140 +43,83 @@ Lets look into the measurements obtained on the juice bottling process:
 
 
 ```r
-summary(juice_bottling)
+summary(juice_drymatter)
 ```
 
 ```
-   product              target        DRX              Ref       
- Length:54          Min.   :10   Min.   : 9.870   Min.   : 9.99  
- Class :character   1st Qu.:10   1st Qu.: 9.955   1st Qu.:10.03  
- Mode  :character   Median :15   Median :14.810   Median :15.02  
-                    Mean   :15   Mean   :14.801   Mean   :15.02  
-                    3rd Qu.:20   3rd Qu.:19.608   3rd Qu.:20.01  
-                    Max.   :20   Max.   :19.820   Max.   :20.03  
-      part     
- Min.   : 1.0  
- 1st Qu.: 5.0  
- Median : 9.5  
- Mean   : 9.5  
- 3rd Qu.:14.0  
- Max.   :18.0  
+   product          drymatter_TGT     speed      particle_size      part  
+ Length:108         Min.   :10    Min.   :20.0   Min.   :250   Min.   :1  
+ Class :character   1st Qu.:10    1st Qu.:20.0   1st Qu.:250   1st Qu.:1  
+ Mode  :character   Median :15    Median :22.5   Median :275   Median :2  
+                    Mean   :15    Mean   :22.5   Mean   :275   Mean   :2  
+                    3rd Qu.:20    3rd Qu.:25.0   3rd Qu.:300   3rd Qu.:3  
+                    Max.   :20    Max.   :25.0   Max.   :300   Max.   :3  
+ drymatter_DRX    drymatter_REF  
+ Min.   : 9.720   Min.   : 9.97  
+ 1st Qu.: 9.898   1st Qu.:10.02  
+ Median :14.700   Median :15.01  
+ Mean   :14.706   Mean   :15.00  
+ 3rd Qu.:19.503   3rd Qu.:20.00  
+ Max.   :19.710   Max.   :20.03  
 ```
 
 we see raw data for the DRX and Ref equipment allowing us to calculate the difference between the two devices for each measurement:
 
 
 ```r
-juice_bottling <- juice_bottling %>%
-  mutate(bias = DRX - Ref, part = as_factor(part))
-summary(juice_bottling$bias)
+juice_drymatter <- juice_drymatter %>%
+  mutate(bias = drymatter_DRX - drymatter_REF, part = as_factor(part))
+summary(juice_drymatter$bias)
 ```
 
 ```
    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
--0.4800 -0.3275 -0.2000 -0.2187 -0.1000 -0.0200 
+-0.6300 -0.4025 -0.2850 -0.2979 -0.1875 -0.0700 
 ```
 
 We immediatly see a median bias of -0.2 
 Lets explore further.
 
-### Bias plot
+### Bias plot {#geom_smooth}
 
 
 ```r
-juice_bottling %>%
-  ggplot(aes(x = Ref, y = bias)) +
+juice_drymatter %>%
+  ggplot(aes(x = drymatter_REF, y = bias)) +
   geom_point() +
   geom_smooth(method = "lm", se = T, ) +
+  coord_cartesian(
+    xlim = c(9,21),
+    ylim = c(-.75,0), expand = TRUE) +
   theme_industRial() +
   labs(title = "Dry matter method validation",
        subtitle = "Gage Linearity",
-       caption = "Dataset: juice_bottling233A, Operator: S.Jonathan)")
+       caption = "Dataset: juice_drymatter233A, Operator: S.Jonathan)")
 ```
 
 <img src="gage_rnR_files/figure-html/unnamed-chunk-6-1.png" width="672" />
 
 The linear model is well adapted in this case, this by seing the position of the slope close to the averages of each level of the factor. Nevertheless the slope is rather steep showing a clear increase of the bias (in the negative direction) with the increase in dry matter content.
 
-### Bias model
-
-
-```r
-juice_bottling_lm <- lm(bias ~ Ref,
-                    data = juice_bottling)
-summary(juice_bottling_lm)
-```
-
-```
-
-Call:
-lm(formula = bias ~ Ref, data = juice_bottling)
-
-Residuals:
-      Min        1Q    Median        3Q       Max 
--0.127294 -0.033944  0.002439  0.027884  0.162171 
-
-Coefficients:
-             Estimate Std. Error t value Pr(>|t|)    
-(Intercept)  0.182977   0.031147   5.875 3.04e-07 ***
-Ref         -0.026744   0.002001 -13.364  < 2e-16 ***
----
-Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-
-Residual standard error: 0.06002 on 52 degrees of freedom
-Multiple R-squared:  0.7745,	Adjusted R-squared:  0.7702 
-F-statistic: 178.6 on 1 and 52 DF,  p-value: < 2.2e-16
-```
-
-We observe a very high correlation of the model with an R squared of 82%.
-
-
-```r
-par(mfrow = c(2, 2))
-plot(juice_bottling_lm)
-```
-
-<img src="gage_rnR_files/figure-html/unnamed-chunk-8-1.png" width="672" />
-
-The qq plot shows a strong deviation from the normality for the 2nd upper quantile. Care should be taken in defining the bias for the 25% dissolution.
-
-
-```r
-juice_bottling_aov <- aov(juice_bottling_lm)
-summary(juice_bottling_aov)
-```
-
-```
-            Df Sum Sq Mean Sq F value Pr(>F)    
-Ref          1 0.6433  0.6433   178.6 <2e-16 ***
-Residuals   52 0.1873  0.0036                   
----
-Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-```
-
-As expected the anova confirms strong influence of the dissolution level on the bias.
-
-Further reading in the interesting report issued by @minitab_linearity.
-
 ### Bias report
 
 
 ```r
-juice_bottling_bias <- juice_bottling %>%
-  group_by(target) %>%
-  summarise(bias_mean = mean(bias), bias_median = median(bias))
-juice_bottling_bias %>%
-  select(target, bias_mean, bias_median) %>%
-  kable(align = "c")
+juice_drymatter %>%
+  group_by(drymatter_TGT) %>%
+  summarise(bias_mean = mean(bias, na.rm = TRUE), 
+            bias_median = median(bias, na.rm = TRUE)) %>%
+  select(drymatter_TGT, bias_mean, bias_median) %>%
+  kable(align = "c", digits = 2)
 ```
 
 
 
-| target | bias_mean  | bias_median |
-|:------:|:----------:|:-----------:|
-|   10   | -0.0855556 |    -0.09    |
-|   15   | -0.2177778 |    -0.21    |
-|   20   | -0.3527778 |    -0.35    |
+| drymatter_TGT | bias_mean | bias_median |
+|:-------------:|:---------:|:-----------:|
+|      10       |   -0.17   |    -0.15    |
+|      15       |   -0.29   |    -0.31    |
+|      20       |   -0.44   |    -0.44    |
 
 Mean and median bias are very close. A decision now needs to be taken on which systematic offset to apply depending on the operational context. If most products on the line where the device is used a simplified operational procedure with a unique offset of 0.2 can be sufficient.
 
@@ -192,7 +135,7 @@ In our case study we're going to measurement the precision of the measurement me
 
 <div class="figure" style="text-align: center">
 <img src="img/tablet_micrometer.png" alt="Tablet thickness micrometer" width="100%" />
-<p class="caption">(\#fig:unnamed-chunk-11)Tablet thickness micrometer</p>
+<p class="caption">(\#fig:unnamed-chunk-8)Tablet thickness micrometer</p>
 </div>
 
 </div>
@@ -332,7 +275,7 @@ Total Variation   11.0935239 3.3306942 19.984165    100.00      39.97
 Number of Distinct Categories = 3 
 ```
 
-<img src="gage_rnR_files/figure-html/unnamed-chunk-17-1.png" width="768" />
+<img src="gage_rnR_files/figure-html/unnamed-chunk-14-1.png" width="768" />
 
 We can observe that the SixSigma package recreates exactly the same anova table, just calling Repeatability to the Residuals and adding an additional line with the total degrees of freedom and the total sum of squares. 
 
@@ -411,7 +354,7 @@ tablet_L %>%
        caption = "Data source: QA Lab")
 ```
 
-<img src="gage_rnR_files/figure-html/unnamed-chunk-18-1.png" width="672" />
+<img src="gage_rnR_files/figure-html/unnamed-chunk-15-1.png" width="672" />
 
 
 ### Negative Variations
@@ -490,7 +433,7 @@ Total Variation   11.08152158 3.3288919 19.973352    100.00      39.95
 Number of Distinct Categories = 3 
 ```
 
-<img src="gage_rnR_files/figure-html/unnamed-chunk-19-1.png" width="768" />
+<img src="gage_rnR_files/figure-html/unnamed-chunk-16-1.png" width="768" />
 
 In our case when comparing the total gage r&R with and without the interaction we see it changing from 38.46% to 38.38%.
 

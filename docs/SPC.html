@@ -157,9 +157,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="r-toolbox.html"><a href="r-toolbox.html#r-datasets"><i class="fa fa-check"></i>R Datasets</a></li>
 <li class="chapter" data-level="" data-path="r-toolbox.html"><a href="r-toolbox.html#r-packages"><i class="fa fa-check"></i>R Packages</a>
 <ul>
-<li class="chapter" data-level="" data-path="r-toolbox.html"><a href="r-toolbox.html#industrial-ds"><i class="fa fa-check"></i>Industrial DS</a></li>
-<li class="chapter" data-level="" data-path="r-toolbox.html"><a href="r-toolbox.html#generic-ds"><i class="fa fa-check"></i>Generic DS</a></li>
-<li class="chapter" data-level="" data-path="r-toolbox.html"><a href="r-toolbox.html#publishing"><i class="fa fa-check"></i>Publishing</a></li>
+<li class="chapter" data-level="" data-path="r-toolbox.html"><a href="r-toolbox.html#industrial-packages"><i class="fa fa-check"></i>Industrial packages</a></li>
+<li class="chapter" data-level="" data-path="r-toolbox.html"><a href="r-toolbox.html#all-purpose-packages"><i class="fa fa-check"></i>All purpose packages</a></li>
+<li class="chapter" data-level="" data-path="r-toolbox.html"><a href="r-toolbox.html#publishing-packages"><i class="fa fa-check"></i>Publishing packages</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="r-toolbox.html"><a href="r-toolbox.html#r-session"><i class="fa fa-check"></i>R Session</a></li>
 </ul></li>
@@ -185,8 +185,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li class="chapter" data-level="" data-path="rnR.html"><a href="rnR.html#trueness"><i class="fa fa-check"></i>Trueness</a>
 <ul>
-<li class="chapter" data-level="" data-path="rnR.html"><a href="rnR.html#bias-plot"><i class="fa fa-check"></i>Bias plot</a></li>
-<li class="chapter" data-level="" data-path="rnR.html"><a href="rnR.html#bias-model"><i class="fa fa-check"></i>Bias model</a></li>
+<li class="chapter" data-level="" data-path="rnR.html"><a href="rnR.html#geom_smooth"><i class="fa fa-check"></i>Bias plot</a></li>
 <li class="chapter" data-level="" data-path="rnR.html"><a href="rnR.html#bias-report"><i class="fa fa-check"></i>Bias report</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="rnR.html"><a href="rnR.html#precision"><i class="fa fa-check"></i>Precision</a>
@@ -229,9 +228,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#m-factors-n-levels"><i class="fa fa-check"></i>m factors n levels</a>
 <ul>
+<li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#fac.design"><i class="fa fa-check"></i>Factorial design</a></li>
 <li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#main-effects-plots"><i class="fa fa-check"></i>Main effects plots</a></li>
 <li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#interactions-plots"><i class="fa fa-check"></i>Interactions plots</a></li>
-<li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#model-with-3rd-level-interactions"><i class="fa fa-check"></i>Model with 3rd level interactions</a></li>
 <li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#anova-with-3rd-level-interactions"><i class="fa fa-check"></i>Anova with 3rd level interactions</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#factors-2-levels"><i class="fa fa-check"></i>2 factors 2 levels</a>
@@ -315,17 +314,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>There are many types of control charts and in this case study we’re demonstrating the xbar and R charts. These two charts are often used together and are suited to the control the mean and the variability of a continuous variable.</p>
 <p>Bamako Lightening is a company that manufactures lamps. The weight of each lamp is critical to the quality of the product. The Production Operator monitors the production process using xbar and R-charts. Samples are taken of six lamps every hour and their means and ranges plotted on control charts. Data is available representing samples taken a period of 25 hours of production.</p>
 <p>Loading packages for data loading and cleaning:</p>
-<div class="sourceCode" id="cb226"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb226-1"><a href="SPC.html#cb226-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb226-2"><a href="SPC.html#cb226-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(knitr)</span>
-<span id="cb226-3"><a href="SPC.html#cb226-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(industRial)</span>
-<span id="cb226-4"><a href="SPC.html#cb226-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb226-5"><a href="SPC.html#cb226-5" aria-hidden="true" tabindex="-1"></a>filter <span class="ot">&lt;-</span> dplyr<span class="sc">::</span>filter</span>
-<span id="cb226-6"><a href="SPC.html#cb226-6" aria-hidden="true" tabindex="-1"></a>select <span class="ot">&lt;-</span> dplyr<span class="sc">::</span>select</span></code></pre></div>
+<div class="sourceCode" id="cb227"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb227-1"><a href="SPC.html#cb227-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb227-2"><a href="SPC.html#cb227-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(knitr)</span>
+<span id="cb227-3"><a href="SPC.html#cb227-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(industRial)</span>
+<span id="cb227-4"><a href="SPC.html#cb227-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb227-5"><a href="SPC.html#cb227-5" aria-hidden="true" tabindex="-1"></a>filter <span class="ot">&lt;-</span> dplyr<span class="sc">::</span>filter</span>
+<span id="cb227-6"><a href="SPC.html#cb227-6" aria-hidden="true" tabindex="-1"></a>select <span class="ot">&lt;-</span> dplyr<span class="sc">::</span>select</span></code></pre></div>
 <p>Loading data:</p>
-<div class="sourceCode" id="cb227"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb227-1"><a href="SPC.html#cb227-1" aria-hidden="true" tabindex="-1"></a>bamako <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&quot;data-raw/Bamako.csv&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb228"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb228-1"><a href="SPC.html#cb228-1" aria-hidden="true" tabindex="-1"></a>bamako <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&quot;data/Bamako.csv&quot;</span>)</span></code></pre></div>
 <p>Looking at the first five lines to confirm and assess the quality of our data for further processing.</p>
-<div class="sourceCode" id="cb228"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb228-1"><a href="SPC.html#cb228-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(bamako) <span class="sc">%&gt;%</span></span>
-<span id="cb228-2"><a href="SPC.html#cb228-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">kable</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb229"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb229-1"><a href="SPC.html#cb229-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(bamako) <span class="sc">%&gt;%</span></span>
+<span id="cb229-2"><a href="SPC.html#cb229-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">kable</span>()</span></code></pre></div>
 <table>
 <thead>
 <tr class="header">
@@ -397,30 +396,30 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </table>
 <p>We see that in this table each line corresponds to a sampling hour and each column corresponds to a sample number.</p>
 <p>We’re now going to pass this data to the control chart plotting function qcc(). As this function takes a dataset of observations so we’re removing the Hour column with the select function from tidyverse:</p>
-<div class="sourceCode" id="cb229"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb229-1"><a href="SPC.html#cb229-1" aria-hidden="true" tabindex="-1"></a>bamako_clean <span class="ot">&lt;-</span> bamako <span class="sc">%&gt;%</span> </span>
-<span id="cb229-2"><a href="SPC.html#cb229-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>Hour) </span></code></pre></div>
+<div class="sourceCode" id="cb230"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb230-1"><a href="SPC.html#cb230-1" aria-hidden="true" tabindex="-1"></a>bamako_clean <span class="ot">&lt;-</span> bamako <span class="sc">%&gt;%</span> </span>
+<span id="cb230-2"><a href="SPC.html#cb230-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>Hour) </span></code></pre></div>
 <p>Now we load the qcc package that has the required quality control tools:</p>
 <p><b>Calibration run</b></p>
 <p>In order to establish a control chart it is recommended to run a “calibration run.” The calibration run is used to calculate the control limits before entering “regular production.” Using the first 10 samples we call the qcc() function to make the required calculations.</p>
 <div id="xbarchart" class="section level3">
 <h3>xbar chart</h3>
-<div class="sourceCode" id="cb230"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb230-1"><a href="SPC.html#cb230-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(qcc)</span></code></pre></div>
-<div class="sourceCode" id="cb231"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb231-1"><a href="SPC.html#cb231-1" aria-hidden="true" tabindex="-1"></a>bamako_xbar <span class="ot">&lt;-</span> <span class="fu">qcc</span>(</span>
-<span id="cb231-2"><a href="SPC.html#cb231-2" aria-hidden="true" tabindex="-1"></a>  bamako_clean[<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>, ], </span>
-<span id="cb231-3"><a href="SPC.html#cb231-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">type =</span> <span class="st">&quot;xbar&quot;</span>, </span>
-<span id="cb231-4"><a href="SPC.html#cb231-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">title =</span> <span class="st">&quot;Lamp weight </span><span class="sc">\n</span><span class="st"> xbar chart&quot;</span>, </span>
-<span id="cb231-5"><a href="SPC.html#cb231-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">xlab =</span> <span class="st">&quot;Sample group&quot;</span>,</span>
-<span id="cb231-6"><a href="SPC.html#cb231-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">plot =</span> <span class="cn">FALSE</span></span>
-<span id="cb231-7"><a href="SPC.html#cb231-7" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
+<div class="sourceCode" id="cb231"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb231-1"><a href="SPC.html#cb231-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(qcc)</span></code></pre></div>
+<div class="sourceCode" id="cb232"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb232-1"><a href="SPC.html#cb232-1" aria-hidden="true" tabindex="-1"></a>bamako_xbar <span class="ot">&lt;-</span> <span class="fu">qcc</span>(</span>
+<span id="cb232-2"><a href="SPC.html#cb232-2" aria-hidden="true" tabindex="-1"></a>  bamako_clean[<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>, ], </span>
+<span id="cb232-3"><a href="SPC.html#cb232-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">type =</span> <span class="st">&quot;xbar&quot;</span>, </span>
+<span id="cb232-4"><a href="SPC.html#cb232-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">title =</span> <span class="st">&quot;Lamp weight </span><span class="sc">\n</span><span class="st"> xbar chart&quot;</span>, </span>
+<span id="cb232-5"><a href="SPC.html#cb232-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">xlab =</span> <span class="st">&quot;Sample group&quot;</span>,</span>
+<span id="cb232-6"><a href="SPC.html#cb232-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">plot =</span> <span class="cn">FALSE</span></span>
+<span id="cb232-7"><a href="SPC.html#cb232-7" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
 <p>Before we step ahead and simply plot the SPC chart and interpret the results lets look a bit in detail in the calculations done to established the Control Chart. To do this we’re going to go in the details of what we’ve obtained in the previous chunk.</p>
 <p>A first step is to read the begining of the qcc() help file typing ?qcc in the console. It says "Create an object of class ‘qcc’ to perform statistical process control’ (in R technical terms function is a helper that generates an S3 R object).</p>
 <p>The key point here is that this means we can inspect the calculations separately from the plot itself. We can start by confirming the class and the type of the qcc object:</p>
-<div class="sourceCode" id="cb232"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb232-1"><a href="SPC.html#cb232-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(bamako_xbar)</span></code></pre></div>
+<div class="sourceCode" id="cb233"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb233-1"><a href="SPC.html#cb233-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(bamako_xbar)</span></code></pre></div>
 <pre><code>[1] &quot;qcc&quot;</code></pre>
-<div class="sourceCode" id="cb234"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb234-1"><a href="SPC.html#cb234-1" aria-hidden="true" tabindex="-1"></a><span class="fu">typeof</span>(bamako_xbar)</span></code></pre></div>
+<div class="sourceCode" id="cb235"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb235-1"><a href="SPC.html#cb235-1" aria-hidden="true" tabindex="-1"></a><span class="fu">typeof</span>(bamako_xbar)</span></code></pre></div>
 <pre><code>[1] &quot;list&quot;</code></pre>
 <p>It is confirmed it is a qcc object with the R type list. Looking into the structure of the list:</p>
-<div class="sourceCode" id="cb236"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb236-1"><a href="SPC.html#cb236-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(bamako_xbar)</span></code></pre></div>
+<div class="sourceCode" id="cb237"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb237-1"><a href="SPC.html#cb237-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(bamako_xbar)</span></code></pre></div>
 <pre><code>List of 11
  $ call      : language qcc(data = bamako_clean[1:10, ], type = &quot;xbar&quot;, plot = FALSE, title = &quot;Lamp weight \n xbar chart&quot;,      xlab = &quot;Sample group&quot;)
  $ type      : chr &quot;xbar&quot;
@@ -444,10 +443,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   ..$ violating.runs: num(0) 
  - attr(*, &quot;class&quot;)= chr &quot;qcc&quot;</code></pre>
 <p>The output is not easy to read but we present it here just to show that inside the list there are several tables with the statistical analysis required for our plot. If we want like to see for instance the standard deviation we can extract it separately:</p>
-<div class="sourceCode" id="cb238"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb238-1"><a href="SPC.html#cb238-1" aria-hidden="true" tabindex="-1"></a>bamako_xbar<span class="sc">$</span>std.dev</span></code></pre></div>
+<div class="sourceCode" id="cb239"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb239-1"><a href="SPC.html#cb239-1" aria-hidden="true" tabindex="-1"></a>bamako_xbar<span class="sc">$</span>std.dev</span></code></pre></div>
 <pre><code>[1] 0.0401618</code></pre>
 <p>And if we want like to see a summary of all the data stored in the object we could apply the summary method:</p>
-<div class="sourceCode" id="cb240"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb240-1"><a href="SPC.html#cb240-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(bamako_xbar)</span></code></pre></div>
+<div class="sourceCode" id="cb241"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb241-1"><a href="SPC.html#cb241-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(bamako_xbar)</span></code></pre></div>
 <pre><code>
 Call:
 qcc(data = bamako_clean[1:10, ], type = &quot;xbar&quot;, plot = FALSE,     title = &quot;Lamp weight \n xbar chart&quot;, xlab = &quot;Sample group&quot;)
@@ -467,38 +466,38 @@ Control limits:
       LCL      UCL
  9.950874 10.04925</code></pre>
 <p>We are now ready to finally we can see this all together in a plot:</p>
-<div class="sourceCode" id="cb242"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb242-1"><a href="SPC.html#cb242-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(bamako_xbar)</span></code></pre></div>
+<div class="sourceCode" id="cb243"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb243-1"><a href="SPC.html#cb243-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(bamako_xbar)</span></code></pre></div>
 <p><img src="spc_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
 </div>
 <div id="Rchart" class="section level3">
 <h3>R chart</h3>
 <p>Using the same 10 first samples we also obtain the corresponding R chart:</p>
-<div class="sourceCode" id="cb243"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb243-1"><a href="SPC.html#cb243-1" aria-hidden="true" tabindex="-1"></a>bamako_R <span class="ot">&lt;-</span> <span class="fu">qcc</span>(</span>
-<span id="cb243-2"><a href="SPC.html#cb243-2" aria-hidden="true" tabindex="-1"></a>  bamako_clean[<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>, ], </span>
-<span id="cb243-3"><a href="SPC.html#cb243-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">type =</span> <span class="st">&quot;R&quot;</span>, </span>
-<span id="cb243-4"><a href="SPC.html#cb243-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">title =</span> <span class="st">&quot;Lamp weight </span><span class="sc">\n</span><span class="st"> R chart&quot;</span>,</span>
-<span id="cb243-5"><a href="SPC.html#cb243-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">xlab =</span> <span class="st">&quot;Sample group&quot;</span></span>
-<span id="cb243-6"><a href="SPC.html#cb243-6" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
+<div class="sourceCode" id="cb244"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb244-1"><a href="SPC.html#cb244-1" aria-hidden="true" tabindex="-1"></a>bamako_R <span class="ot">&lt;-</span> <span class="fu">qcc</span>(</span>
+<span id="cb244-2"><a href="SPC.html#cb244-2" aria-hidden="true" tabindex="-1"></a>  bamako_clean[<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>, ], </span>
+<span id="cb244-3"><a href="SPC.html#cb244-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">type =</span> <span class="st">&quot;R&quot;</span>, </span>
+<span id="cb244-4"><a href="SPC.html#cb244-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">title =</span> <span class="st">&quot;Lamp weight </span><span class="sc">\n</span><span class="st"> R chart&quot;</span>,</span>
+<span id="cb244-5"><a href="SPC.html#cb244-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">xlab =</span> <span class="st">&quot;Sample group&quot;</span></span>
+<span id="cb244-6"><a href="SPC.html#cb244-6" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
 <p><img src="spc_files/figure-html/unnamed-chunk-13-1.png" width="672" /></p>
 <p><b>Regular production</b></p>
 <p>Now that the calibration data has been plotted we can consider that the control limits are defined. They can become fixed and reused in new plots for the future production runs. Samples from those future runs can then be assessed against this limits and the control chart rules can be verified (in this example the shewhart rules are used). We now add the remaining data points to our chart by specifying which lines we’re refering too in our dataframe in the ‘newdata’ argument:</p>
-<div class="sourceCode" id="cb244"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb244-1"><a href="SPC.html#cb244-1" aria-hidden="true" tabindex="-1"></a>bamako_xbar <span class="ot">&lt;-</span> <span class="fu">qcc</span>(</span>
-<span id="cb244-2"><a href="SPC.html#cb244-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> bamako_clean[<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>, ],</span>
-<span id="cb244-3"><a href="SPC.html#cb244-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">newdata =</span> bamako_clean[<span class="dv">11</span><span class="sc">:</span><span class="dv">25</span>,],</span>
-<span id="cb244-4"><a href="SPC.html#cb244-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">type =</span> <span class="st">&quot;xbar&quot;</span>, </span>
-<span id="cb244-5"><a href="SPC.html#cb244-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">title =</span> <span class="st">&quot;Lamp weight </span><span class="sc">\n</span><span class="st"> xbar chart&quot;</span>, </span>
-<span id="cb244-6"><a href="SPC.html#cb244-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">xlab =</span> <span class="st">&quot;Sample group&quot;</span></span>
-<span id="cb244-7"><a href="SPC.html#cb244-7" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
+<div class="sourceCode" id="cb245"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb245-1"><a href="SPC.html#cb245-1" aria-hidden="true" tabindex="-1"></a>bamako_xbar <span class="ot">&lt;-</span> <span class="fu">qcc</span>(</span>
+<span id="cb245-2"><a href="SPC.html#cb245-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> bamako_clean[<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>, ],</span>
+<span id="cb245-3"><a href="SPC.html#cb245-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">newdata =</span> bamako_clean[<span class="dv">11</span><span class="sc">:</span><span class="dv">25</span>,],</span>
+<span id="cb245-4"><a href="SPC.html#cb245-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">type =</span> <span class="st">&quot;xbar&quot;</span>, </span>
+<span id="cb245-5"><a href="SPC.html#cb245-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">title =</span> <span class="st">&quot;Lamp weight </span><span class="sc">\n</span><span class="st"> xbar chart&quot;</span>, </span>
+<span id="cb245-6"><a href="SPC.html#cb245-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">xlab =</span> <span class="st">&quot;Sample group&quot;</span></span>
+<span id="cb245-7"><a href="SPC.html#cb245-7" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
 <p><img src="spc_files/figure-html/unnamed-chunk-14-1.png" width="672" /></p>
 <p>We can see that the data point corresponding to the average of the measurements of the samplegroup 17 is plotted in red because it is outside of the control limits.</p>
 <p>Now we plot the R chart to assess the variability:</p>
-<div class="sourceCode" id="cb245"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb245-1"><a href="SPC.html#cb245-1" aria-hidden="true" tabindex="-1"></a>bamako_R <span class="ot">&lt;-</span> <span class="fu">qcc</span>(</span>
-<span id="cb245-2"><a href="SPC.html#cb245-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> bamako_clean[<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>, ],</span>
-<span id="cb245-3"><a href="SPC.html#cb245-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">newdata =</span> bamako_clean[<span class="dv">11</span><span class="sc">:</span><span class="dv">25</span>,], </span>
-<span id="cb245-4"><a href="SPC.html#cb245-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">type =</span> <span class="st">&quot;R&quot;</span>, </span>
-<span id="cb245-5"><a href="SPC.html#cb245-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">title =</span> <span class="st">&quot;Lamp weight </span><span class="sc">\n</span><span class="st"> R chart&quot;</span>,</span>
-<span id="cb245-6"><a href="SPC.html#cb245-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">xlab =</span> <span class="st">&quot;Sample group&quot;</span></span>
-<span id="cb245-7"><a href="SPC.html#cb245-7" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
+<div class="sourceCode" id="cb246"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb246-1"><a href="SPC.html#cb246-1" aria-hidden="true" tabindex="-1"></a>bamako_R <span class="ot">&lt;-</span> <span class="fu">qcc</span>(</span>
+<span id="cb246-2"><a href="SPC.html#cb246-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> bamako_clean[<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>, ],</span>
+<span id="cb246-3"><a href="SPC.html#cb246-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">newdata =</span> bamako_clean[<span class="dv">11</span><span class="sc">:</span><span class="dv">25</span>,], </span>
+<span id="cb246-4"><a href="SPC.html#cb246-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">type =</span> <span class="st">&quot;R&quot;</span>, </span>
+<span id="cb246-5"><a href="SPC.html#cb246-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">title =</span> <span class="st">&quot;Lamp weight </span><span class="sc">\n</span><span class="st"> R chart&quot;</span>,</span>
+<span id="cb246-6"><a href="SPC.html#cb246-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">xlab =</span> <span class="st">&quot;Sample group&quot;</span></span>
+<span id="cb246-7"><a href="SPC.html#cb246-7" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
 <p><img src="spc_files/figure-html/unnamed-chunk-15-1.png" width="672" /></p>
 <p>In this case all the points are within the previously defined control limits.</p>
 <p><b>Warnings and specification limits</b></p>
@@ -507,126 +506,126 @@ Control limits:
 <div id="limitsxbar" class="section level3">
 <h3>Limits on xbar chart</h3>
 <p>We add warning limits in the plot with as follows:</p>
-<div class="sourceCode" id="cb246"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb246-1"><a href="SPC.html#cb246-1" aria-hidden="true" tabindex="-1"></a>warn.limits <span class="ot">&lt;-</span> <span class="fu">limits.xbar</span>(</span>
-<span id="cb246-2"><a href="SPC.html#cb246-2" aria-hidden="true" tabindex="-1"></a>  bamako_xbar<span class="sc">$</span>center, </span>
-<span id="cb246-3"><a href="SPC.html#cb246-3" aria-hidden="true" tabindex="-1"></a>  bamako_xbar<span class="sc">$</span>std.dev, </span>
-<span id="cb246-4"><a href="SPC.html#cb246-4" aria-hidden="true" tabindex="-1"></a>  bamako_xbar<span class="sc">$</span>sizes, </span>
-<span id="cb246-5"><a href="SPC.html#cb246-5" aria-hidden="true" tabindex="-1"></a>  <span class="dv">2</span></span>
-<span id="cb246-6"><a href="SPC.html#cb246-6" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb246-7"><a href="SPC.html#cb246-7" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(</span>
-<span id="cb246-8"><a href="SPC.html#cb246-8" aria-hidden="true" tabindex="-1"></a>  bamako_xbar, </span>
-<span id="cb246-9"><a href="SPC.html#cb246-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">restore.par =</span> <span class="cn">FALSE</span>,</span>
-<span id="cb246-10"><a href="SPC.html#cb246-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">title =</span> <span class="st">&quot;Lamp weight </span><span class="sc">\n</span><span class="st"> xbar chart&quot;</span>,</span>
-<span id="cb246-11"><a href="SPC.html#cb246-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">xlab =</span> <span class="st">&quot;Sample group&quot;</span>)</span>
-<span id="cb246-12"><a href="SPC.html#cb246-12" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">h =</span> warn.limits, <span class="at">lty =</span> <span class="dv">3</span>, <span class="at">col =</span> <span class="st">&quot;chocolate&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb247"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb247-1"><a href="SPC.html#cb247-1" aria-hidden="true" tabindex="-1"></a>warn.limits <span class="ot">&lt;-</span> <span class="fu">limits.xbar</span>(</span>
+<span id="cb247-2"><a href="SPC.html#cb247-2" aria-hidden="true" tabindex="-1"></a>  bamako_xbar<span class="sc">$</span>center, </span>
+<span id="cb247-3"><a href="SPC.html#cb247-3" aria-hidden="true" tabindex="-1"></a>  bamako_xbar<span class="sc">$</span>std.dev, </span>
+<span id="cb247-4"><a href="SPC.html#cb247-4" aria-hidden="true" tabindex="-1"></a>  bamako_xbar<span class="sc">$</span>sizes, </span>
+<span id="cb247-5"><a href="SPC.html#cb247-5" aria-hidden="true" tabindex="-1"></a>  <span class="dv">2</span></span>
+<span id="cb247-6"><a href="SPC.html#cb247-6" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb247-7"><a href="SPC.html#cb247-7" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(</span>
+<span id="cb247-8"><a href="SPC.html#cb247-8" aria-hidden="true" tabindex="-1"></a>  bamako_xbar, </span>
+<span id="cb247-9"><a href="SPC.html#cb247-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">restore.par =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb247-10"><a href="SPC.html#cb247-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">title =</span> <span class="st">&quot;Lamp weight </span><span class="sc">\n</span><span class="st"> xbar chart&quot;</span>,</span>
+<span id="cb247-11"><a href="SPC.html#cb247-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">xlab =</span> <span class="st">&quot;Sample group&quot;</span>)</span>
+<span id="cb247-12"><a href="SPC.html#cb247-12" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">h =</span> warn.limits, <span class="at">lty =</span> <span class="dv">3</span>, <span class="at">col =</span> <span class="st">&quot;chocolate&quot;</span>)</span></code></pre></div>
 <p><img src="spc_files/figure-html/unnamed-chunk-16-1.png" width="672" /></p>
 <p>A manufacturing process under control has a variation that is lower than the product specifications and ideally it is centered. Therefore it is usually good practice to follow the control chart rules refering to the process control limits.</p>
 <p>In some cases nevertheless there may be desired or interesting to add the specification limits. This can be done as follows, first we establish the specifications:</p>
-<div class="sourceCode" id="cb247"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb247-1"><a href="SPC.html#cb247-1" aria-hidden="true" tabindex="-1"></a>spec_max <span class="ot">&lt;-</span> <span class="fl">10.5</span></span>
-<span id="cb247-2"><a href="SPC.html#cb247-2" aria-hidden="true" tabindex="-1"></a>spec_min <span class="ot">&lt;-</span> <span class="fl">9.9</span></span>
-<span id="cb247-3"><a href="SPC.html#cb247-3" aria-hidden="true" tabindex="-1"></a>spec_tgt <span class="ot">&lt;-</span> (spec_max <span class="sc">-</span> spec_min) <span class="sc">/</span> <span class="dv">2</span> <span class="sc">+</span> spec_min</span>
-<span id="cb247-4"><a href="SPC.html#cb247-4" aria-hidden="true" tabindex="-1"></a>specs <span class="ot">&lt;-</span> <span class="fu">c</span>(spec_min, spec_tgt, spec_max)</span></code></pre></div>
+<div class="sourceCode" id="cb248"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb248-1"><a href="SPC.html#cb248-1" aria-hidden="true" tabindex="-1"></a>spec_max <span class="ot">&lt;-</span> <span class="fl">10.5</span></span>
+<span id="cb248-2"><a href="SPC.html#cb248-2" aria-hidden="true" tabindex="-1"></a>spec_min <span class="ot">&lt;-</span> <span class="fl">9.9</span></span>
+<span id="cb248-3"><a href="SPC.html#cb248-3" aria-hidden="true" tabindex="-1"></a>spec_tgt <span class="ot">&lt;-</span> (spec_max <span class="sc">-</span> spec_min) <span class="sc">/</span> <span class="dv">2</span> <span class="sc">+</span> spec_min</span>
+<span id="cb248-4"><a href="SPC.html#cb248-4" aria-hidden="true" tabindex="-1"></a>specs <span class="ot">&lt;-</span> <span class="fu">c</span>(spec_min, spec_tgt, spec_max)</span></code></pre></div>
 <p>and replot the control chart with visible specification limits and targets:</p>
-<div class="sourceCode" id="cb248"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb248-1"><a href="SPC.html#cb248-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(</span>
-<span id="cb248-2"><a href="SPC.html#cb248-2" aria-hidden="true" tabindex="-1"></a>  bamako_xbar,</span>
-<span id="cb248-3"><a href="SPC.html#cb248-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">restore.par =</span> <span class="cn">FALSE</span>,</span>
-<span id="cb248-4"><a href="SPC.html#cb248-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">title =</span> <span class="st">&quot;Lamp weight </span><span class="sc">\n</span><span class="st"> xbar chart&quot;</span>,</span>
-<span id="cb248-5"><a href="SPC.html#cb248-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">xlab =</span> <span class="st">&quot;Sample group&quot;</span>,</span>
-<span id="cb248-6"><a href="SPC.html#cb248-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">ylim =</span> <span class="fu">c</span>(<span class="fl">9.8</span>, <span class="fl">10.6</span>))</span>
-<span id="cb248-7"><a href="SPC.html#cb248-7" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">h =</span> specs, <span class="at">lty =</span> <span class="dv">3</span>, <span class="at">col =</span> <span class="st">&quot;red&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb249"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb249-1"><a href="SPC.html#cb249-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(</span>
+<span id="cb249-2"><a href="SPC.html#cb249-2" aria-hidden="true" tabindex="-1"></a>  bamako_xbar,</span>
+<span id="cb249-3"><a href="SPC.html#cb249-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">restore.par =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb249-4"><a href="SPC.html#cb249-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">title =</span> <span class="st">&quot;Lamp weight </span><span class="sc">\n</span><span class="st"> xbar chart&quot;</span>,</span>
+<span id="cb249-5"><a href="SPC.html#cb249-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">xlab =</span> <span class="st">&quot;Sample group&quot;</span>,</span>
+<span id="cb249-6"><a href="SPC.html#cb249-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">ylim =</span> <span class="fu">c</span>(<span class="fl">9.8</span>, <span class="fl">10.6</span>))</span>
+<span id="cb249-7"><a href="SPC.html#cb249-7" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">h =</span> specs, <span class="at">lty =</span> <span class="dv">3</span>, <span class="at">col =</span> <span class="st">&quot;red&quot;</span>)</span></code></pre></div>
 <p><img src="spc_files/figure-html/unnamed-chunk-18-1.png" width="672" /></p>
 <p>In the previous example we see a situation that happens in practice and that requires action: the data plotted is still within the min max specification limits for this relativelly small number of data points. Furthermore the variation is overall well contained within the process limits. Nevertheless we see it is extremelly off centered when compared with the product specification. A process capability study should help determining the causes for this offcentering and help correcting it.</p>
 <p>Adapted from <span class="citation"><a href="references.html#ref-Bass2007" role="doc-biblioref">Bass</a> (<a href="references.html#ref-Bass2007" role="doc-biblioref">2007</a>)</span></p>
 <p>In this chapter we’re going to go more in depth in the study of the manufacturing process variability. We’re going to make a comparison between the product specifications and the process variability. We’re looking for opportunities to tigthen the product specifications.
 Tightening a product specification without increasing the cost of a manufacturing cost can be a source of competitive advantage.</p>
 <p><strong>Bamako lightning</strong></p>
-<div class="sourceCode" id="cb249"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb249-1"><a href="SPC.html#cb249-1" aria-hidden="true" tabindex="-1"></a>bamako <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&quot;data-raw/Bamako.csv&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb250"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb250-1"><a href="SPC.html#cb250-1" aria-hidden="true" tabindex="-1"></a>bamako <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&quot;data/Bamako.csv&quot;</span>)</span></code></pre></div>
 </div>
 </div>
 <div id="process-capability" class="section level2">
 <h2>Process Capability</h2>
 <div id="out-of-specification" class="section level3">
 <h3>Out of specification</h3>
-<div class="sourceCode" id="cb250"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb250-1"><a href="SPC.html#cb250-1" aria-hidden="true" tabindex="-1"></a>bamako_long <span class="ot">&lt;-</span> bamako <span class="sc">%&gt;%</span></span>
-<span id="cb250-2"><a href="SPC.html#cb250-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="fu">starts_with</span>(<span class="st">&quot;Sample&quot;</span>),</span>
-<span id="cb250-3"><a href="SPC.html#cb250-3" aria-hidden="true" tabindex="-1"></a>               <span class="at">names_to =</span> <span class="st">&quot;sample&quot;</span>,</span>
-<span id="cb250-4"><a href="SPC.html#cb250-4" aria-hidden="true" tabindex="-1"></a>               <span class="at">values_to =</span> <span class="st">&quot;value&quot;</span>)</span></code></pre></div>
-<div class="sourceCode" id="cb251"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb251-1"><a href="SPC.html#cb251-1" aria-hidden="true" tabindex="-1"></a>spec_max <span class="ot">&lt;-</span> <span class="fl">10.5</span></span>
-<span id="cb251-2"><a href="SPC.html#cb251-2" aria-hidden="true" tabindex="-1"></a>spec_min <span class="ot">&lt;-</span> <span class="fl">9.9</span></span>
-<span id="cb251-3"><a href="SPC.html#cb251-3" aria-hidden="true" tabindex="-1"></a>spec_tgt <span class="ot">&lt;-</span> (spec_max <span class="sc">-</span> spec_min) <span class="sc">/</span> <span class="dv">2</span> <span class="sc">+</span> spec_min</span>
-<span id="cb251-4"><a href="SPC.html#cb251-4" aria-hidden="true" tabindex="-1"></a>specs <span class="ot">&lt;-</span> <span class="fu">c</span>(spec_min, spec_tgt, spec_max)</span></code></pre></div>
+<div class="sourceCode" id="cb251"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb251-1"><a href="SPC.html#cb251-1" aria-hidden="true" tabindex="-1"></a>bamako_long <span class="ot">&lt;-</span> bamako <span class="sc">%&gt;%</span></span>
+<span id="cb251-2"><a href="SPC.html#cb251-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="fu">starts_with</span>(<span class="st">&quot;Sample&quot;</span>),</span>
+<span id="cb251-3"><a href="SPC.html#cb251-3" aria-hidden="true" tabindex="-1"></a>               <span class="at">names_to =</span> <span class="st">&quot;sample&quot;</span>,</span>
+<span id="cb251-4"><a href="SPC.html#cb251-4" aria-hidden="true" tabindex="-1"></a>               <span class="at">values_to =</span> <span class="st">&quot;value&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb252"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb252-1"><a href="SPC.html#cb252-1" aria-hidden="true" tabindex="-1"></a>spec_max <span class="ot">&lt;-</span> <span class="fl">10.5</span></span>
+<span id="cb252-2"><a href="SPC.html#cb252-2" aria-hidden="true" tabindex="-1"></a>spec_min <span class="ot">&lt;-</span> <span class="fl">9.9</span></span>
+<span id="cb252-3"><a href="SPC.html#cb252-3" aria-hidden="true" tabindex="-1"></a>spec_tgt <span class="ot">&lt;-</span> (spec_max <span class="sc">-</span> spec_min) <span class="sc">/</span> <span class="dv">2</span> <span class="sc">+</span> spec_min</span>
+<span id="cb252-4"><a href="SPC.html#cb252-4" aria-hidden="true" tabindex="-1"></a>specs <span class="ot">&lt;-</span> <span class="fu">c</span>(spec_min, spec_tgt, spec_max)</span></code></pre></div>
 <p><strong>variables</strong></p>
-<div class="sourceCode" id="cb252"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb252-1"><a href="SPC.html#cb252-1" aria-hidden="true" tabindex="-1"></a>bamako_mean <span class="ot">=</span> bamako_long <span class="sc">%&gt;%</span> <span class="fu">pull</span>(value) <span class="sc">%&gt;%</span> <span class="fu">mean</span>()</span>
-<span id="cb252-2"><a href="SPC.html#cb252-2" aria-hidden="true" tabindex="-1"></a>bamako_sd <span class="ot">=</span> bamako_long <span class="sc">%&gt;%</span> <span class="fu">pull</span>(value) <span class="sc">%&gt;%</span> <span class="fu">sd</span>()</span>
-<span id="cb252-3"><a href="SPC.html#cb252-3" aria-hidden="true" tabindex="-1"></a>spec_max <span class="ot">&lt;-</span> <span class="fl">10.5</span></span>
-<span id="cb252-4"><a href="SPC.html#cb252-4" aria-hidden="true" tabindex="-1"></a>spec_min <span class="ot">&lt;-</span> <span class="fl">9.9</span></span>
-<span id="cb252-5"><a href="SPC.html#cb252-5" aria-hidden="true" tabindex="-1"></a>bamako_n <span class="ot">&lt;-</span> <span class="fu">length</span>(bamako_long)</span>
-<span id="cb252-6"><a href="SPC.html#cb252-6" aria-hidden="true" tabindex="-1"></a>theor_n <span class="ot">=</span> <span class="dv">1000000</span></span></code></pre></div>
+<div class="sourceCode" id="cb253"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb253-1"><a href="SPC.html#cb253-1" aria-hidden="true" tabindex="-1"></a>bamako_mean <span class="ot">=</span> bamako_long <span class="sc">%&gt;%</span> <span class="fu">pull</span>(value) <span class="sc">%&gt;%</span> <span class="fu">mean</span>()</span>
+<span id="cb253-2"><a href="SPC.html#cb253-2" aria-hidden="true" tabindex="-1"></a>bamako_sd <span class="ot">=</span> bamako_long <span class="sc">%&gt;%</span> <span class="fu">pull</span>(value) <span class="sc">%&gt;%</span> <span class="fu">sd</span>()</span>
+<span id="cb253-3"><a href="SPC.html#cb253-3" aria-hidden="true" tabindex="-1"></a>spec_max <span class="ot">&lt;-</span> <span class="fl">10.5</span></span>
+<span id="cb253-4"><a href="SPC.html#cb253-4" aria-hidden="true" tabindex="-1"></a>spec_min <span class="ot">&lt;-</span> <span class="fl">9.9</span></span>
+<span id="cb253-5"><a href="SPC.html#cb253-5" aria-hidden="true" tabindex="-1"></a>bamako_n <span class="ot">&lt;-</span> <span class="fu">length</span>(bamako_long)</span>
+<span id="cb253-6"><a href="SPC.html#cb253-6" aria-hidden="true" tabindex="-1"></a>theor_n <span class="ot">=</span> <span class="dv">1000000</span></span></code></pre></div>
 <p><strong>calculation: probability of being between the limits</strong></p>
-<div class="sourceCode" id="cb253"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb253-1"><a href="SPC.html#cb253-1" aria-hidden="true" tabindex="-1"></a>within_limits <span class="ot">&lt;-</span> <span class="cf">function</span>(UCL, LCL, mean, sd) {</span>
-<span id="cb253-2"><a href="SPC.html#cb253-2" aria-hidden="true" tabindex="-1"></a>  (<span class="fu">pnorm</span>(UCL, mean, sd) <span class="sc">-</span> <span class="fu">pnorm</span>(LCL, mean, sd))<span class="sc">*</span><span class="dv">100</span></span>
-<span id="cb253-3"><a href="SPC.html#cb253-3" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
-<div class="sourceCode" id="cb254"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb254-1"><a href="SPC.html#cb254-1" aria-hidden="true" tabindex="-1"></a>bamako_within <span class="ot">&lt;-</span> <span class="fu">within_limits</span>(spec_max, spec_min, bamako_mean, bamako_sd)</span>
-<span id="cb254-2"><a href="SPC.html#cb254-2" aria-hidden="true" tabindex="-1"></a>bamako_off_spec <span class="ot">&lt;-</span> <span class="dv">100</span> <span class="sc">-</span> bamako_within</span></code></pre></div>
-<div class="sourceCode" id="cb255"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb255-1"><a href="SPC.html#cb255-1" aria-hidden="true" tabindex="-1"></a>bamako_theor <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="at">n =</span> theor_n, <span class="at">mean =</span> bamako_mean, <span class="at">sd =</span> bamako_sd) <span class="sc">%&gt;%</span> </span>
-<span id="cb255-2"><a href="SPC.html#cb255-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as_tibble</span>()</span></code></pre></div>
-<div class="sourceCode" id="cb256"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb256-1"><a href="SPC.html#cb256-1" aria-hidden="true" tabindex="-1"></a>plot_subtitle <span class="ot">&lt;-</span> <span class="fu">paste</span>(</span>
-<span id="cb256-2"><a href="SPC.html#cb256-2" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;Spec: [&quot;</span>, spec_min, <span class="st">&quot;;&quot;</span>, spec_max, </span>
-<span id="cb256-3"><a href="SPC.html#cb256-3" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;], Proportion off-spec = &quot;</span>,</span>
-<span id="cb256-4"><a href="SPC.html#cb256-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">signif</span>(bamako_off_spec, <span class="at">digits =</span> <span class="dv">2</span>), <span class="st">&quot;%&quot;</span></span>
-<span id="cb256-5"><a href="SPC.html#cb256-5" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
+<div class="sourceCode" id="cb254"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb254-1"><a href="SPC.html#cb254-1" aria-hidden="true" tabindex="-1"></a>within_limits <span class="ot">&lt;-</span> <span class="cf">function</span>(UCL, LCL, mean, sd) {</span>
+<span id="cb254-2"><a href="SPC.html#cb254-2" aria-hidden="true" tabindex="-1"></a>  (<span class="fu">pnorm</span>(UCL, mean, sd) <span class="sc">-</span> <span class="fu">pnorm</span>(LCL, mean, sd))<span class="sc">*</span><span class="dv">100</span></span>
+<span id="cb254-3"><a href="SPC.html#cb254-3" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb255"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb255-1"><a href="SPC.html#cb255-1" aria-hidden="true" tabindex="-1"></a>bamako_within <span class="ot">&lt;-</span> <span class="fu">within_limits</span>(spec_max, spec_min, bamako_mean, bamako_sd)</span>
+<span id="cb255-2"><a href="SPC.html#cb255-2" aria-hidden="true" tabindex="-1"></a>bamako_off_spec <span class="ot">&lt;-</span> <span class="dv">100</span> <span class="sc">-</span> bamako_within</span></code></pre></div>
+<div class="sourceCode" id="cb256"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb256-1"><a href="SPC.html#cb256-1" aria-hidden="true" tabindex="-1"></a>bamako_theor <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="at">n =</span> theor_n, <span class="at">mean =</span> bamako_mean, <span class="at">sd =</span> bamako_sd) <span class="sc">%&gt;%</span> </span>
+<span id="cb256-2"><a href="SPC.html#cb256-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as_tibble</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb257"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb257-1"><a href="SPC.html#cb257-1" aria-hidden="true" tabindex="-1"></a>plot_subtitle <span class="ot">&lt;-</span> <span class="fu">paste</span>(</span>
+<span id="cb257-2"><a href="SPC.html#cb257-2" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;Spec: [&quot;</span>, spec_min, <span class="st">&quot;;&quot;</span>, spec_max, </span>
+<span id="cb257-3"><a href="SPC.html#cb257-3" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;], Proportion off-spec = &quot;</span>,</span>
+<span id="cb257-4"><a href="SPC.html#cb257-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">signif</span>(bamako_off_spec, <span class="at">digits =</span> <span class="dv">2</span>), <span class="st">&quot;%&quot;</span></span>
+<span id="cb257-5"><a href="SPC.html#cb257-5" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
 <p>Note that we deliberately twick the plot colors to make it look like the plots from minitab and from the qcc package. We provide this theme in the book companion package <code>industRial</code> with the name theme_qcc.</p>
-<div class="sourceCode" id="cb257"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb257-1"><a href="SPC.html#cb257-1" aria-hidden="true" tabindex="-1"></a>bamako_long <span class="sc">%&gt;%</span></span>
-<span id="cb257-2"><a href="SPC.html#cb257-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> value, <span class="at">y =</span> ..density..)) <span class="sc">+</span></span>
-<span id="cb257-3"><a href="SPC.html#cb257-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(</span>
-<span id="cb257-4"><a href="SPC.html#cb257-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">bins =</span> <span class="dv">30</span>,</span>
-<span id="cb257-5"><a href="SPC.html#cb257-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">fill =</span> <span class="st">&quot;white&quot;</span>,</span>
-<span id="cb257-6"><a href="SPC.html#cb257-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">color =</span> <span class="st">&quot;grey20&quot;</span>) <span class="sc">+</span></span>
-<span id="cb257-7"><a href="SPC.html#cb257-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_density</span>(<span class="at">data =</span> bamako_theor, <span class="at">linetype =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
-<span id="cb257-8"><a href="SPC.html#cb257-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> {spec_min}, <span class="at">color =</span> <span class="st">&quot;red&quot;</span>, <span class="at">linetype =</span> <span class="dv">3</span>) <span class="sc">+</span></span>
-<span id="cb257-9"><a href="SPC.html#cb257-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> {spec_max}, <span class="at">color =</span> <span class="st">&quot;red&quot;</span>, <span class="at">linetype =</span> <span class="dv">3</span>) <span class="sc">+</span></span>
-<span id="cb257-10"><a href="SPC.html#cb257-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> {spec_tgt}, <span class="at">color =</span> <span class="st">&quot;red&quot;</span>, <span class="at">linetype =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
-<span id="cb257-11"><a href="SPC.html#cb257-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">n.breaks =</span> <span class="dv">10</span>) <span class="sc">+</span></span>
-<span id="cb257-12"><a href="SPC.html#cb257-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_qcc</span>() <span class="sc">+</span></span>
-<span id="cb257-13"><a href="SPC.html#cb257-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
-<span id="cb257-14"><a href="SPC.html#cb257-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">&quot;Out of specification (Expected)&quot;</span>, </span>
-<span id="cb257-15"><a href="SPC.html#cb257-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> {plot_subtitle})</span></code></pre></div>
+<div class="sourceCode" id="cb258"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb258-1"><a href="SPC.html#cb258-1" aria-hidden="true" tabindex="-1"></a>bamako_long <span class="sc">%&gt;%</span></span>
+<span id="cb258-2"><a href="SPC.html#cb258-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> value, <span class="at">y =</span> ..density..)) <span class="sc">+</span></span>
+<span id="cb258-3"><a href="SPC.html#cb258-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(</span>
+<span id="cb258-4"><a href="SPC.html#cb258-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">bins =</span> <span class="dv">30</span>,</span>
+<span id="cb258-5"><a href="SPC.html#cb258-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">fill =</span> <span class="st">&quot;white&quot;</span>,</span>
+<span id="cb258-6"><a href="SPC.html#cb258-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">color =</span> <span class="st">&quot;grey20&quot;</span>) <span class="sc">+</span></span>
+<span id="cb258-7"><a href="SPC.html#cb258-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_density</span>(<span class="at">data =</span> bamako_theor, <span class="at">linetype =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="cb258-8"><a href="SPC.html#cb258-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> {spec_min}, <span class="at">color =</span> <span class="st">&quot;red&quot;</span>, <span class="at">linetype =</span> <span class="dv">3</span>) <span class="sc">+</span></span>
+<span id="cb258-9"><a href="SPC.html#cb258-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> {spec_max}, <span class="at">color =</span> <span class="st">&quot;red&quot;</span>, <span class="at">linetype =</span> <span class="dv">3</span>) <span class="sc">+</span></span>
+<span id="cb258-10"><a href="SPC.html#cb258-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> {spec_tgt}, <span class="at">color =</span> <span class="st">&quot;red&quot;</span>, <span class="at">linetype =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="cb258-11"><a href="SPC.html#cb258-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">n.breaks =</span> <span class="dv">10</span>) <span class="sc">+</span></span>
+<span id="cb258-12"><a href="SPC.html#cb258-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_qcc</span>() <span class="sc">+</span></span>
+<span id="cb258-13"><a href="SPC.html#cb258-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb258-14"><a href="SPC.html#cb258-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">&quot;Out of specification (Expected)&quot;</span>, </span>
+<span id="cb258-15"><a href="SPC.html#cb258-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> {plot_subtitle})</span></code></pre></div>
 <p><img src="spc_files/figure-html/unnamed-chunk-27-1.png" width="672" /></p>
 <p>By looking at the histogram of the Bamako lightning dataset we confirm the extreme offcentering of the production. We also see that although there are no measurements beyond the lower specification limit (LSL) it is very likely this will happen soon.</p>
 <p>We can also calculate the Cpk</p>
-<div class="sourceCode" id="cb258"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb258-1"><a href="SPC.html#cb258-1" aria-hidden="true" tabindex="-1"></a>capability <span class="ot">&lt;-</span> <span class="cf">function</span>(UCL, LCL, mean, sd) {</span>
-<span id="cb258-2"><a href="SPC.html#cb258-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pmin</span>(</span>
-<span id="cb258-3"><a href="SPC.html#cb258-3" aria-hidden="true" tabindex="-1"></a>    (<span class="fu">abs</span>(mean <span class="sc">-</span> <span class="fu">abs</span>(LCL)) <span class="sc">/</span> (<span class="dv">3</span> <span class="sc">*</span> sd)),</span>
-<span id="cb258-4"><a href="SPC.html#cb258-4" aria-hidden="true" tabindex="-1"></a>    (<span class="fu">abs</span>((<span class="fu">abs</span>(UCL) <span class="sc">-</span> mean)) <span class="sc">/</span> (<span class="dv">3</span> <span class="sc">*</span> sd))</span>
-<span id="cb258-5"><a href="SPC.html#cb258-5" aria-hidden="true" tabindex="-1"></a>   )</span>
-<span id="cb258-6"><a href="SPC.html#cb258-6" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
-<div class="sourceCode" id="cb259"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb259-1"><a href="SPC.html#cb259-1" aria-hidden="true" tabindex="-1"></a><span class="fu">capability</span>(spec_max, spec_min, bamako_mean, bamako_sd)</span></code></pre></div>
+<div class="sourceCode" id="cb259"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb259-1"><a href="SPC.html#cb259-1" aria-hidden="true" tabindex="-1"></a>capability <span class="ot">&lt;-</span> <span class="cf">function</span>(UCL, LCL, mean, sd) {</span>
+<span id="cb259-2"><a href="SPC.html#cb259-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pmin</span>(</span>
+<span id="cb259-3"><a href="SPC.html#cb259-3" aria-hidden="true" tabindex="-1"></a>    (<span class="fu">abs</span>(mean <span class="sc">-</span> <span class="fu">abs</span>(LCL)) <span class="sc">/</span> (<span class="dv">3</span> <span class="sc">*</span> sd)),</span>
+<span id="cb259-4"><a href="SPC.html#cb259-4" aria-hidden="true" tabindex="-1"></a>    (<span class="fu">abs</span>((<span class="fu">abs</span>(UCL) <span class="sc">-</span> mean)) <span class="sc">/</span> (<span class="dv">3</span> <span class="sc">*</span> sd))</span>
+<span id="cb259-5"><a href="SPC.html#cb259-5" aria-hidden="true" tabindex="-1"></a>   )</span>
+<span id="cb259-6"><a href="SPC.html#cb259-6" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb260"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb260-1"><a href="SPC.html#cb260-1" aria-hidden="true" tabindex="-1"></a><span class="fu">capability</span>(spec_max, spec_min, bamako_mean, bamako_sd)</span></code></pre></div>
 <pre><code>[1] 0.7456003</code></pre>
 <p>And convert the percentage out of spec in parts per million. We’re not considering the 1.5 shift that sometimes is presented in the literature but rather making a simple direct conversion of the proportion out of spec found before:</p>
-<div class="sourceCode" id="cb261"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb261-1"><a href="SPC.html#cb261-1" aria-hidden="true" tabindex="-1"></a>per_mio_off_spec <span class="ot">&lt;-</span> <span class="cf">function</span>(percent_within) {</span>
-<span id="cb261-2"><a href="SPC.html#cb261-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">formatC</span>(</span>
-<span id="cb261-3"><a href="SPC.html#cb261-3" aria-hidden="true" tabindex="-1"></a>  ((<span class="dv">100</span> <span class="sc">-</span> percent_within) <span class="sc">*</span> <span class="dv">10000</span>),</span>
-<span id="cb261-4"><a href="SPC.html#cb261-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">format =</span> <span class="st">&quot;d&quot;</span>,</span>
-<span id="cb261-5"><a href="SPC.html#cb261-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">big.mark =</span> <span class="st">&quot;&#39;&quot;</span></span>
-<span id="cb261-6"><a href="SPC.html#cb261-6" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb261-7"><a href="SPC.html#cb261-7" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
-<div class="sourceCode" id="cb262"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb262-1"><a href="SPC.html#cb262-1" aria-hidden="true" tabindex="-1"></a><span class="fu">per_mio_off_spec</span>(bamako_within)</span></code></pre></div>
+<div class="sourceCode" id="cb262"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb262-1"><a href="SPC.html#cb262-1" aria-hidden="true" tabindex="-1"></a>per_mio_off_spec <span class="ot">&lt;-</span> <span class="cf">function</span>(percent_within) {</span>
+<span id="cb262-2"><a href="SPC.html#cb262-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">formatC</span>(</span>
+<span id="cb262-3"><a href="SPC.html#cb262-3" aria-hidden="true" tabindex="-1"></a>  ((<span class="dv">100</span> <span class="sc">-</span> percent_within) <span class="sc">*</span> <span class="dv">10000</span>),</span>
+<span id="cb262-4"><a href="SPC.html#cb262-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">format =</span> <span class="st">&quot;d&quot;</span>,</span>
+<span id="cb262-5"><a href="SPC.html#cb262-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">big.mark =</span> <span class="st">&quot;&#39;&quot;</span></span>
+<span id="cb262-6"><a href="SPC.html#cb262-6" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb262-7"><a href="SPC.html#cb262-7" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb263"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb263-1"><a href="SPC.html#cb263-1" aria-hidden="true" tabindex="-1"></a><span class="fu">per_mio_off_spec</span>(bamako_within)</span></code></pre></div>
 <pre><code>[1] &quot;12&#39;649&quot;</code></pre>
 <p>The expected population below the LSL is 1,3% which is very high for industry standards. In fact this corresponds to 12’649 parts per million (ppm) whereas a common target would be 1 ppm. Naturally these figures are indicative and they depend of the context criteria such as severity of the problem, cost, difficulty to eliminate the problem and so on.</p>
 <p>We can now establish a simple table using the functions created before, to present the expected percentage that falls within certain limits. To make it usefull we’re putting this limits at +/- 1 to 6 standard deviations</p>
-<div class="sourceCode" id="cb264"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb264-1"><a href="SPC.html#cb264-1" aria-hidden="true" tabindex="-1"></a>mean <span class="ot">&lt;-</span> <span class="dv">0</span></span>
-<span id="cb264-2"><a href="SPC.html#cb264-2" aria-hidden="true" tabindex="-1"></a>sd <span class="ot">&lt;-</span> <span class="dv">1</span></span>
-<span id="cb264-3"><a href="SPC.html#cb264-3" aria-hidden="true" tabindex="-1"></a>sigma_conversion_table <span class="ot">&lt;-</span> </span>
-<span id="cb264-4"><a href="SPC.html#cb264-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tibble</span>(<span class="at">UCL =</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>, <span class="dv">4</span>,<span class="dv">5</span>,<span class="dv">6</span>),</span>
-<span id="cb264-5"><a href="SPC.html#cb264-5" aria-hidden="true" tabindex="-1"></a>         <span class="at">LCL =</span> <span class="sc">-</span>UCL,</span>
-<span id="cb264-6"><a href="SPC.html#cb264-6" aria-hidden="true" tabindex="-1"></a>         <span class="at">mean =</span> mean,</span>
-<span id="cb264-7"><a href="SPC.html#cb264-7" aria-hidden="true" tabindex="-1"></a>         <span class="at">sd =</span> sd)</span></code></pre></div>
-<div class="sourceCode" id="cb265"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb265-1"><a href="SPC.html#cb265-1" aria-hidden="true" tabindex="-1"></a>sigma_conversion_table <span class="ot">&lt;-</span> sigma_conversion_table <span class="sc">%&gt;%</span></span>
-<span id="cb265-2"><a href="SPC.html#cb265-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">perc_in_spec =</span> <span class="fu">within_limits</span>(UCL, LCL, mean, sd),</span>
-<span id="cb265-3"><a href="SPC.html#cb265-3" aria-hidden="true" tabindex="-1"></a>         <span class="at">Cpk =</span> <span class="fu">capability</span>(UCL, LCL, mean, sd),</span>
-<span id="cb265-4"><a href="SPC.html#cb265-4" aria-hidden="true" tabindex="-1"></a>         <span class="at">ppm_defects =</span> <span class="fu">per_mio_off_spec</span>(perc_in_spec))</span>
-<span id="cb265-5"><a href="SPC.html#cb265-5" aria-hidden="true" tabindex="-1"></a>sigma_conversion_table <span class="sc">%&gt;%</span></span>
-<span id="cb265-6"><a href="SPC.html#cb265-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable</span>(<span class="at">align =</span> <span class="st">&quot;c&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb265"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb265-1"><a href="SPC.html#cb265-1" aria-hidden="true" tabindex="-1"></a>mean <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb265-2"><a href="SPC.html#cb265-2" aria-hidden="true" tabindex="-1"></a>sd <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb265-3"><a href="SPC.html#cb265-3" aria-hidden="true" tabindex="-1"></a>sigma_conversion_table <span class="ot">&lt;-</span> </span>
+<span id="cb265-4"><a href="SPC.html#cb265-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tibble</span>(<span class="at">UCL =</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>, <span class="dv">4</span>,<span class="dv">5</span>,<span class="dv">6</span>),</span>
+<span id="cb265-5"><a href="SPC.html#cb265-5" aria-hidden="true" tabindex="-1"></a>         <span class="at">LCL =</span> <span class="sc">-</span>UCL,</span>
+<span id="cb265-6"><a href="SPC.html#cb265-6" aria-hidden="true" tabindex="-1"></a>         <span class="at">mean =</span> mean,</span>
+<span id="cb265-7"><a href="SPC.html#cb265-7" aria-hidden="true" tabindex="-1"></a>         <span class="at">sd =</span> sd)</span></code></pre></div>
+<div class="sourceCode" id="cb266"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb266-1"><a href="SPC.html#cb266-1" aria-hidden="true" tabindex="-1"></a>sigma_conversion_table <span class="ot">&lt;-</span> sigma_conversion_table <span class="sc">%&gt;%</span></span>
+<span id="cb266-2"><a href="SPC.html#cb266-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">perc_in_spec =</span> <span class="fu">within_limits</span>(UCL, LCL, mean, sd),</span>
+<span id="cb266-3"><a href="SPC.html#cb266-3" aria-hidden="true" tabindex="-1"></a>         <span class="at">Cpk =</span> <span class="fu">capability</span>(UCL, LCL, mean, sd),</span>
+<span id="cb266-4"><a href="SPC.html#cb266-4" aria-hidden="true" tabindex="-1"></a>         <span class="at">ppm_defects =</span> <span class="fu">per_mio_off_spec</span>(perc_in_spec))</span>
+<span id="cb266-5"><a href="SPC.html#cb266-5" aria-hidden="true" tabindex="-1"></a>sigma_conversion_table <span class="sc">%&gt;%</span></span>
+<span id="cb266-6"><a href="SPC.html#cb266-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable</span>(<span class="at">align =</span> <span class="st">&quot;c&quot;</span>)</span></code></pre></div>
 <table>
 <thead>
 <tr class="header">
@@ -699,21 +698,21 @@ Tightening a product specification without increasing the cost of a manufacturin
 </div>
 <div id="cpk-index" class="section level3">
 <h3>Cpk index</h3>
-<div class="sourceCode" id="cb266"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb266-1"><a href="SPC.html#cb266-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(qcc)</span></code></pre></div>
-<div class="sourceCode" id="cb267"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb267-1"><a href="SPC.html#cb267-1" aria-hidden="true" tabindex="-1"></a>bamako_clean <span class="ot">&lt;-</span> bamako <span class="sc">%&gt;%</span> </span>
-<span id="cb267-2"><a href="SPC.html#cb267-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>Hour) </span></code></pre></div>
+<div class="sourceCode" id="cb267"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb267-1"><a href="SPC.html#cb267-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(qcc)</span></code></pre></div>
+<div class="sourceCode" id="cb268"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb268-1"><a href="SPC.html#cb268-1" aria-hidden="true" tabindex="-1"></a>bamako_clean <span class="ot">&lt;-</span> bamako <span class="sc">%&gt;%</span> </span>
+<span id="cb268-2"><a href="SPC.html#cb268-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>Hour) </span></code></pre></div>
 </div>
 <div id="processcapability" class="section level3">
 <h3>Process capability chart</h3>
-<div class="sourceCode" id="cb268"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb268-1"><a href="SPC.html#cb268-1" aria-hidden="true" tabindex="-1"></a>bamako_cpk <span class="ot">&lt;-</span> <span class="fu">process.capability</span>(</span>
-<span id="cb268-2"><a href="SPC.html#cb268-2" aria-hidden="true" tabindex="-1"></a>  bamako_xbar,</span>
-<span id="cb268-3"><a href="SPC.html#cb268-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">breaks =</span> <span class="dv">10</span>,</span>
-<span id="cb268-4"><a href="SPC.html#cb268-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">spec.limits =</span> <span class="fu">c</span>(spec_min, spec_max),</span>
-<span id="cb268-5"><a href="SPC.html#cb268-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">target =</span> spec_tgt,</span>
-<span id="cb268-6"><a href="SPC.html#cb268-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">digits =</span> <span class="dv">2</span>,</span>
-<span id="cb268-7"><a href="SPC.html#cb268-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">print =</span> <span class="cn">FALSE</span>,</span>
-<span id="cb268-8"><a href="SPC.html#cb268-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">std.dev =</span> bamako_sd</span>
-<span id="cb268-9"><a href="SPC.html#cb268-9" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb269"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb269-1"><a href="SPC.html#cb269-1" aria-hidden="true" tabindex="-1"></a>bamako_cpk <span class="ot">&lt;-</span> <span class="fu">process.capability</span>(</span>
+<span id="cb269-2"><a href="SPC.html#cb269-2" aria-hidden="true" tabindex="-1"></a>  bamako_xbar,</span>
+<span id="cb269-3"><a href="SPC.html#cb269-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">breaks =</span> <span class="dv">10</span>,</span>
+<span id="cb269-4"><a href="SPC.html#cb269-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">spec.limits =</span> <span class="fu">c</span>(spec_min, spec_max),</span>
+<span id="cb269-5"><a href="SPC.html#cb269-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">target =</span> spec_tgt,</span>
+<span id="cb269-6"><a href="SPC.html#cb269-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">digits =</span> <span class="dv">2</span>,</span>
+<span id="cb269-7"><a href="SPC.html#cb269-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">print =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb269-8"><a href="SPC.html#cb269-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">std.dev =</span> bamako_sd</span>
+<span id="cb269-9"><a href="SPC.html#cb269-9" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
 <p><img src="spc_files/figure-html/unnamed-chunk-37-1.png" width="672" /></p>
 <p>A fine tuning of the forecast of the number of expected parts out of specification can be done with the parameter std.dev. The input value will be used in the probability distribution function. Different approaches can be considered: calculating the sandard deviation within each subgroup or the standard deviation of the entire population and also correcting the standard deviation dividing by n or by n - 1. In this example we re-use the standard deviation calculated on the entire set of datapoints as the group is small but for a case with more data it would be interesting to used the subgroups that tend to give smaller standard deviations.</p>
 

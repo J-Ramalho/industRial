@@ -157,9 +157,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="r-toolbox.html"><a href="r-toolbox.html#r-datasets"><i class="fa fa-check"></i>R Datasets</a></li>
 <li class="chapter" data-level="" data-path="r-toolbox.html"><a href="r-toolbox.html#r-packages"><i class="fa fa-check"></i>R Packages</a>
 <ul>
-<li class="chapter" data-level="" data-path="r-toolbox.html"><a href="r-toolbox.html#industrial-ds"><i class="fa fa-check"></i>Industrial DS</a></li>
-<li class="chapter" data-level="" data-path="r-toolbox.html"><a href="r-toolbox.html#generic-ds"><i class="fa fa-check"></i>Generic DS</a></li>
-<li class="chapter" data-level="" data-path="r-toolbox.html"><a href="r-toolbox.html#publishing"><i class="fa fa-check"></i>Publishing</a></li>
+<li class="chapter" data-level="" data-path="r-toolbox.html"><a href="r-toolbox.html#industrial-packages"><i class="fa fa-check"></i>Industrial packages</a></li>
+<li class="chapter" data-level="" data-path="r-toolbox.html"><a href="r-toolbox.html#all-purpose-packages"><i class="fa fa-check"></i>All purpose packages</a></li>
+<li class="chapter" data-level="" data-path="r-toolbox.html"><a href="r-toolbox.html#publishing-packages"><i class="fa fa-check"></i>Publishing packages</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="r-toolbox.html"><a href="r-toolbox.html#r-session"><i class="fa fa-check"></i>R Session</a></li>
 </ul></li>
@@ -185,8 +185,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li class="chapter" data-level="" data-path="rnR.html"><a href="rnR.html#trueness"><i class="fa fa-check"></i>Trueness</a>
 <ul>
-<li class="chapter" data-level="" data-path="rnR.html"><a href="rnR.html#bias-plot"><i class="fa fa-check"></i>Bias plot</a></li>
-<li class="chapter" data-level="" data-path="rnR.html"><a href="rnR.html#bias-model"><i class="fa fa-check"></i>Bias model</a></li>
+<li class="chapter" data-level="" data-path="rnR.html"><a href="rnR.html#geom_smooth"><i class="fa fa-check"></i>Bias plot</a></li>
 <li class="chapter" data-level="" data-path="rnR.html"><a href="rnR.html#bias-report"><i class="fa fa-check"></i>Bias report</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="rnR.html"><a href="rnR.html#precision"><i class="fa fa-check"></i>Precision</a>
@@ -229,9 +228,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#m-factors-n-levels"><i class="fa fa-check"></i>m factors n levels</a>
 <ul>
+<li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#fac.design"><i class="fa fa-check"></i>Factorial design</a></li>
 <li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#main-effects-plots"><i class="fa fa-check"></i>Main effects plots</a></li>
 <li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#interactions-plots"><i class="fa fa-check"></i>Interactions plots</a></li>
-<li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#model-with-3rd-level-interactions"><i class="fa fa-check"></i>Model with 3rd level interactions</a></li>
 <li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#anova-with-3rd-level-interactions"><i class="fa fa-check"></i>Anova with 3rd level interactions</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#factors-2-levels"><i class="fa fa-check"></i>2 factors 2 levels</a>
@@ -444,8 +443,8 @@ Besides taste and personnal preference R brings a significant number of specific
 <p>All tools applied throughout this book are available in the form of packages of the programming language R. They’re all available for downloaded at no cost.</p>
 <p>In all sections packages are loaded as they become needed. We’ve prefered this approach instead of a grouped loading in the begining of the chapter because this helps reminding which package the functions come from.</p>
 <p>When needed we also present code required to handle the masking of functions with the same name from those different packages. In the example below the filter and select functions are made explicit to avoid having them masked by the stats package in case it has been loaded before.</p>
-<div id="industrial-ds" class="section level3">
-<h3>Industrial DS</h3>
+<div id="industrial-packages" class="section level3">
+<h3>Industrial packages</h3>
 <div id="industrial" class="section level4">
 <h4>industRial</h4>
 <p>The <code>{industRial}</code> package is an original companion package developed for this book that besides containing the datasets from all cases has varied functions to print and customise the aesthetics of spc charts. They’re built on top of the tidyverse package. They aim for an easier modification of the control chart rules and customisation of the plot aesthetics when compared with other more advanced packages for spc such as the qcc. The industRial package can be simply downloaded from github with the following command:</p>
@@ -463,9 +462,14 @@ Besides taste and personnal preference R brings a significant number of specific
 <h4>qicharts2</h4>
 <p>I recommend qichart2 specifically for the nice pareto plots. As many niche packages we need to be awere that the number of contributers is small meaning that it cannot be as thouroughly tested as community packages.</p>
 </div>
+<div id="doe.base" class="section level4">
+<h4>DoE.base</h4>
+<p>This package is one of the most complete and vast packages in Design of Experiements. It is a first of a large suite of packages on the topic, it has vast functionality and is extremely well documented.</p>
+<p><a href="http://prof.beuth-hochschule.de/groemping/software/doe/?L=1&amp;print=1">DoE.base</a></p>
 </div>
-<div id="generic-ds" class="section level3">
-<h3>Generic DS</h3>
+</div>
+<div id="all-purpose-packages" class="section level3">
+<h3>All purpose packages</h3>
 <p>The amount of packages available is extremely large and growing very fast. When selecting new packages it is recommended to check the latest package update. Packages that have had no improvements since more than a couple of years should be questionned. The field evolves rapidly and compatibility and other issues can become painfull. A way to obtain statistics on package history is on <a href="https://www.r-pkg.org/">metacran</a> or <a href="https://packagemanager.rstudio.com/">RStudio package manager</a>.</p>
 <p>Below a comprehensive list of the different packages used in the book:</p>
 <div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="r-toolbox.html#cb9-1" aria-hidden="true" tabindex="-1"></a>installed_packages <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(</span>
@@ -474,7 +478,7 @@ Besides taste and personnal preference R brings a significant number of specific
 <span id="cb9-4"><a href="r-toolbox.html#cb9-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">as_tibble</span>()</span>
 <span id="cb9-5"><a href="r-toolbox.html#cb9-5" aria-hidden="true" tabindex="-1"></a>)</span>
 <span id="cb9-6"><a href="r-toolbox.html#cb9-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-7"><a href="r-toolbox.html#cb9-7" aria-hidden="true" tabindex="-1"></a>recommended_packages <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">&quot;data-raw/rpackages.xlsx&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb9-7"><a href="r-toolbox.html#cb9-7" aria-hidden="true" tabindex="-1"></a>recommended_packages <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">&quot;data/rpackages.xlsx&quot;</span>) <span class="sc">%&gt;%</span></span>
 <span id="cb9-8"><a href="r-toolbox.html#cb9-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Used <span class="sc">==</span> <span class="st">&quot;y&quot;</span>) <span class="sc">%&gt;%</span></span>
 <span id="cb9-9"><a href="r-toolbox.html#cb9-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(installed_packages) <span class="sc">%&gt;%</span></span>
 <span id="cb9-10"><a href="r-toolbox.html#cb9-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(Package, Area, Version) <span class="sc">%&gt;%</span></span>
@@ -502,84 +506,94 @@ Besides taste and personnal preference R brings a significant number of specific
 <td align="left">0.5.1</td>
 </tr>
 <tr class="odd">
+<td align="left">datasets</td>
+<td align="left">data</td>
+<td align="left">4.0.5</td>
+</tr>
+<tr class="even">
 <td align="left">readr</td>
 <td align="left">data loading</td>
 <td align="left">1.4.0</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left">readxl</td>
 <td align="left">data loading</td>
 <td align="left">1.3.1</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left">dplyr</td>
 <td align="left">data science</td>
 <td align="left">1.0.4</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left">forcats</td>
 <td align="left">data science</td>
 <td align="left">0.5.1</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left">hms</td>
 <td align="left">data science</td>
 <td align="left">1.0.0</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left">janitor</td>
 <td align="left">data science</td>
 <td align="left">2.1.0</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left">lubridate</td>
 <td align="left">data science</td>
 <td align="left">1.7.9.2</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left">magrittr</td>
 <td align="left">data science</td>
 <td align="left">2.0.1</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left">tibble</td>
 <td align="left">data science</td>
 <td align="left">3.1.0</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left">tidyr</td>
 <td align="left">data science</td>
 <td align="left">1.1.2</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left">broom</td>
 <td align="left">datascience</td>
 <td align="left">0.7.4</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left">tidyverse</td>
 <td align="left">datascience</td>
 <td align="left">1.3.0</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left">purrr</td>
 <td align="left">functional programming</td>
 <td align="left">0.3.4</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left">qicharts2</td>
 <td align="left">industrial stats</td>
 <td align="left">0.7.1</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left">qcc</td>
 <td align="left">industrial stats</td>
 <td align="left">2.7</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left">SixSigma</td>
 <td align="left">industrial stats</td>
 <td align="left">0.9-52</td>
+</tr>
+<tr class="even">
+<td align="left">DoE.base</td>
+<td align="left">industrial stats</td>
+<td align="left">1.1-6</td>
 </tr>
 <tr class="odd">
 <td align="left">patchwork</td>
@@ -651,16 +665,11 @@ Besides taste and personnal preference R brings a significant number of specific
 <td align="left">text</td>
 <td align="left">1.4.0</td>
 </tr>
-<tr class="odd">
-<td align="left">datasets</td>
-<td align="left">training</td>
-<td align="left">4.0.5</td>
-</tr>
 </tbody>
 </table>
 </div>
-<div id="publishing" class="section level3">
-<h3>Publishing</h3>
+<div id="publishing-packages" class="section level3">
+<h3>Publishing packages</h3>
 <p>This book has been written using the R package <code>{Bookdown}</code> from <span class="citation"><a href="references.html#ref-Xie2016" role="doc-biblioref">Xie</a> (<a href="references.html#ref-Xie2016" role="doc-biblioref">2016</a>)</span> further customized with a layout developped by <a href="https://community.rstudio.com/t/bookdown-contest-submission-gitbook-style-tufte-style-for-web-book/11666">Matthew J. C. Crump</a>. Plot themes have been adapted from the package <code>{cowplot}</code> by Claus O.Wilke.</p>
 </div>
 </div>

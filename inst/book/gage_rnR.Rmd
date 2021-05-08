@@ -47,70 +47,47 @@ select <- dplyr::select
 Lets look into the measurements obtained on the juice bottling process:
 
 ```{r}
-summary(juice_bottling)
+summary(juice_drymatter)
 ```
 
 we see raw data for the DRX and Ref equipment allowing us to calculate the difference between the two devices for each measurement:
 
 ```{r}
-juice_bottling <- juice_bottling %>%
-  mutate(bias = DRX - Ref, part = as_factor(part))
-summary(juice_bottling$bias)
+juice_drymatter <- juice_drymatter %>%
+  mutate(bias = drymatter_DRX - drymatter_REF, part = as_factor(part))
+summary(juice_drymatter$bias)
 ```
 
 We immediatly see a median bias of -0.2 
 Lets explore further.
 
-### Bias plot
+### Bias plot {#geom_smooth}
 
 ```{r}
-juice_bottling %>%
-  ggplot(aes(x = Ref, y = bias)) +
+juice_drymatter %>%
+  ggplot(aes(x = drymatter_REF, y = bias)) +
   geom_point() +
   geom_smooth(method = "lm", se = T, ) +
+  coord_cartesian(
+    xlim = c(9,21),
+    ylim = c(-.75,0), expand = TRUE) +
   theme_industRial() +
   labs(title = "Dry matter method validation",
        subtitle = "Gage Linearity",
-       caption = "Dataset: juice_bottling233A, Operator: S.Jonathan)")
+       caption = "Dataset: juice_drymatter233A, Operator: S.Jonathan)")
 ```
 
 The linear model is well adapted in this case, this by seing the position of the slope close to the averages of each level of the factor. Nevertheless the slope is rather steep showing a clear increase of the bias (in the negative direction) with the increase in dry matter content.
 
-### Bias model
-
-```{r}
-juice_bottling_lm <- lm(bias ~ Ref,
-                    data = juice_bottling)
-summary(juice_bottling_lm)
-```
-
-We observe a very high correlation of the model with an R squared of 82%.
-
-```{r}
-par(mfrow = c(2, 2))
-plot(juice_bottling_lm)
-```
-
-The qq plot shows a strong deviation from the normality for the 2nd upper quantile. Care should be taken in defining the bias for the 25% dissolution.
-
-```{r}
-juice_bottling_aov <- aov(juice_bottling_lm)
-summary(juice_bottling_aov)
-```
-
-As expected the anova confirms strong influence of the dissolution level on the bias.
-
-Further reading in the interesting report issued by @minitab_linearity.
-
 ### Bias report
 
 ```{r}
-juice_bottling_bias <- juice_bottling %>%
-  group_by(target) %>%
-  summarise(bias_mean = mean(bias), bias_median = median(bias))
-juice_bottling_bias %>%
-  select(target, bias_mean, bias_median) %>%
-  kable(align = "c")
+juice_drymatter %>%
+  group_by(drymatter_TGT) %>%
+  summarise(bias_mean = mean(bias, na.rm = TRUE), 
+            bias_median = median(bias, na.rm = TRUE)) %>%
+  select(drymatter_TGT, bias_mean, bias_median) %>%
+  kable(align = "c", digits = 2)
 ```
 
 Mean and median bias are very close. A decision now needs to be taken on which systematic offset to apply depending on the operational context. If most products on the line where the device is used a simplified operational procedure with a unique offset of 0.2 can be sufficient.

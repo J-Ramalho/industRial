@@ -45,7 +45,7 @@ Below we start by loading our dataset:
 
 
 ```r
-chm <- read.csv(sep = ";", header = TRUE, "data-raw/6_chemical.csv")
+chm <- read.csv(sep = ";", header = TRUE, "data/6_chemical.csv")
 ```
 
 ### Factors as +/-
@@ -358,7 +358,7 @@ response - etch rate in Angstrom/m
 
 
 ```r
-pls <- read.csv("data-raw/6-3_plasma.csv")
+pls <- read.csv("data/6-3_plasma.csv")
 plsn <- pls %>% 
   gather(replicate, etch, Rep1, Rep2)
 plsn_fct <- plsn %>%
@@ -626,7 +626,7 @@ The Filtration example
 
 
 ```r
-flt <- read.csv("data-raw/6-4_filtration.csv")
+flt <- read.csv("data/6-4_filtration.csv")
 flt_nf <- flt %>%
   mutate(across(-filtration, as_factor))
 ```

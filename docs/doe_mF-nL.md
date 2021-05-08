@@ -1,5 +1,7 @@
 
 
+## m factors n levels
+
 
 ```r
 library(tidyverse)
@@ -8,33 +10,110 @@ library(stats)
 library(broom)
 library(industRial)
 library(patchwork)
+library(knitr)
 filter <- dplyr::filter
 select <- dplyr::select
 ```
 
-## m factors n levels
+We're comming back to our Juice Bottling context where a quality team was looking to put in operation a new measurement device for dry matter content in a juices bottling line.
 
-Designs with 3 factors and above with multiple levels.
+After a short brainstorming using the Ishikawa tool presented before the team has identified several potential influcing parameters on the equipment bias when compared with the reference equipement: the product itself, the drymatter level on the product (its target), the speed of the filling line and the poweder particle size. In order to evaluate such impact the team has prepared a mid size experiment design with three products, three levels of drymatter, two line speed levels and two particle size levels.
 
-Soft Drink bottling example
+First we load the DoE.base package:
 
 
 ```r
-bottling <- read.csv(sep = ";", header = TRUE, 
-                     "data-raw/5_bottling.csv")
+library(DoE.base)
+```
 
-bottling_factor <- bottling %>%
-  mutate(across(c(speed, carbonation, pressure, replicate), as_factor))
+and then generate the doe with the fac.design function.
 
-bottling_factor <- bottling_factor %>%
-  group_by(carbonation) %>%
-  mutate(fill_m_carb = mean(fill, na.rm = TRUE)) %>%
-  ungroup() %>%
-  group_by(pressure) %>%
-  mutate(fill_m_press = mean(fill, na.rm = TRUE)) %>%
-  ungroup() %>%
-  group_by(speed) %>%
-  mutate(fill_m_speed = mean(fill, na.rm = TRUE)) 
+### Factorial design {#fac.design}
+
+
+```r
+juice_doe <- fac.design(
+  randomize = FALSE,
+  factor.names = list(
+    product = c("beetroot", "apple", "carrot"), 
+    drymatter_target = c(10, 15, 20),
+    part = c(1, 2, 3),
+    speed = c(200, 250),
+    particle_size = c(250, 300))
+)
+```
+
+Note that the DoE generated is more than just a tibble, it belongs to a specific class called design and has many other attributes just like an lm or aov S3 objects.
+
+
+```r
+class(juice_doe)
+```
+
+```
+[1] "design"     "data.frame"
+```
+
+The power and care given by the package authors become visible when we use an R generic function such as summary() with this object and we see it returns a tailor made output, in this case showing the levels of the different factors of our design: 
+
+
+```r
+summary(juice_doe)
+```
+
+```
+Call:
+fac.design(randomize = FALSE, factor.names = list(product = c("beetroot", 
+    "apple", "carrot"), drymatter_target = c(10, 15, 20), part = c(1, 
+    2, 3), speed = c(200, 250), particle_size = c(250, 300)))
+
+Experimental design of type  full factorial 
+108  runs
+
+Factor settings (scale ends):
+   product drymatter_target part speed particle_size
+1 beetroot               10    1   200           250
+2    apple               15    2   250           300
+3   carrot               20    3                    
+```
+
+Using this the team has simple copied the experiment plan to an spreadsheet to collect the data:
+
+```{}
+juice_doe %>% 
+  write_clip() 
+```
+
+and after a few day the file completed and ready for analysis looked like:
+
+
+```r
+juice_drymatter %>%
+  head() %>%
+  kable()
+```
+
+
+
+|product | drymatter_TGT| speed| particle_size| part| drymatter_DRX| drymatter_REF|
+|:-------|-------------:|-----:|-------------:|----:|-------------:|-------------:|
+|apple   |            10|    20|           250|    1|          9.80|         10.05|
+|apple   |            10|    20|           250|    2|          9.82|         10.05|
+|apple   |            10|    20|           250|    3|          9.82|         10.05|
+|apple   |            15|    20|           250|    1|         14.70|         15.02|
+|apple   |            15|    20|           250|    2|         14.70|         15.02|
+|apple   |            15|    20|           250|    3|         14.70|         15.02|
+
+
+
+```r
+juice_drymatter <- juice_drymatter %>%
+  mutate(bias = drymatter_DRX - drymatter_REF)
+
+juice_drymatter_factor <- juice_drymatter %>%
+  mutate(across(
+    c(product, drymatter_TGT, speed, particle_size, part), 
+    as_factor))
 ```
 
 ### Main effects plots
@@ -45,62 +124,62 @@ Main effects plots consist usually of a scatterplot representing the experiment 
 
 
 ```r
-carbonation_plot <- bottling %>%  
-  group_by(carbonation) %>%
-  summarise(carbonation_fill_mean = mean(fill)) %>%
-  ggplot(aes(x = carbonation, y = carbonation_fill_mean)) +
+drymatter_TGT_plot <- juice_drymatter %>%
+  group_by(drymatter_TGT) %>%
+  summarise(bias_m_drymatter = mean(bias)) %>%
+  ggplot(aes(x = drymatter_TGT, y = bias_m_drymatter)) +
   geom_point() +
   geom_line() +
   coord_cartesian(
-    xlim = c(9,15),
-    ylim = c(-2,10), expand = TRUE) +
+    xlim = c(9,21),
+    ylim = c(-1,0), expand = TRUE) +
   labs(
-    title = "Soft-Drink bottling problem",
+    title = "Juice bottling problem",
     subtitle = "Main effects plots",
-    x = "Carbonation [%]",
-    y = "Average fill deviation [g]"
+    x = "drymatter_TGT [%]",
+    y = "Average bias [g]"
   ) +
   theme_industRial()
 
-pressure_plot <- bottling %>%  
-  group_by(pressure) %>%
-  summarise(pressure_fill_mean = mean(fill)) %>%
-  ggplot(aes(x = pressure, y = pressure_fill_mean)) +
+particle_size_plot <- juice_drymatter %>%  
+  group_by(particle_size) %>%
+  summarise(particle_size_bias_mean = mean(bias)) %>%
+  ggplot(aes(x = particle_size, y = particle_size_bias_mean)) +
   geom_point() +
   geom_line() +
   coord_cartesian(
-    xlim = c(24,31), 
-    ylim = c(-2,10), expand = TRUE) +
+    xlim = c(240,310), 
+    ylim = c(-1,0), expand = TRUE) +
   labs(
-    x = "Pressure",
-    y = "Average fill deviation [g]"
+    x = "particle_size",
+    y = "Average bias [g]"
   ) +
   theme_industRial()
 
-speed_plot <- bottling %>%  
+speed_plot <- juice_drymatter %>%  
   group_by(speed) %>%
-  summarise(speed_fill_mean = mean(fill)) %>%
-  ggplot(aes(x = speed, y = speed_fill_mean)) +
+  summarise(speed_bias_mean = mean(bias)) %>%
+  ggplot(aes(x = speed, y = speed_bias_mean)) +
   geom_point() +
   geom_line() +
   coord_cartesian(
-    xlim = c(190, 260),
-    ylim = c(-2,10), expand = TRUE) +
+    xlim = c(19, 26),
+    ylim = c(-1,0), expand = TRUE) +
   labs(
     x = "Speed",
-    y = "Average fill deviation [g]"
+    y = "Average bias [g]"
   ) +
   theme_industRial()
 
-carbonation_plot + pressure_plot + speed_plot
+drymatter_TGT_plot + particle_size_plot + speed_plot
 ```
 
-<img src="doe_mF-nL_files/figure-html/unnamed-chunk-4-1.png" width="672" />
+<img src="doe_mF-nL_files/figure-html/unnamed-chunk-9-1.png" width="672" />
 
 This kind of plots gives already important insights in to the experiement outcome, even before any deeper analysis with a linear model and anova. In our case:
 
-* higher pressure and higher speed result in higher fill weight deviation
-* beyond 10.5% carbonation level the fill weight is always higher than the target
+* higher particle_size and higher speed result in higher bias weight deviation
+* beyond 10.5% drymatter_TGT level the bias weight is always higher than the target
 
 ### Interactions plots
 
@@ -108,140 +187,98 @@ In designs like these with 3 factors we have 3 possible interactions (A-B, A-C, 
 
 
 ```r
-carbonation_pressure_plot <- bottling %>%  
-  group_by(carbonation, pressure) %>%
-  summarise(carbonation_fill_mean = mean(fill)) %>%
-  ggplot(aes(x = carbonation, y = carbonation_fill_mean)) +
-  geom_point(aes(group = pressure)) +
-  geom_line(aes(group = pressure, linetype = as_factor(pressure))) +
-  scale_linetype(name = "Pressure") +
+drymatter_TGT_particle_size_plot <- juice_drymatter %>%  
+  group_by(drymatter_TGT, particle_size) %>%
+  summarise(drymatter_TGT_bias_mean = mean(bias)) %>%
+  ggplot(aes(x = drymatter_TGT, y = drymatter_TGT_bias_mean)) +
+  geom_point(aes(group = particle_size)) +
+  geom_line(aes(group = particle_size, linetype = as_factor(particle_size))) +
+  scale_linetype(name = "particle_size") +
   coord_cartesian(
-    xlim = c(9,15),
-    ylim = c(-2,10), expand = TRUE) +
+    xlim = c(9,21),
+    ylim = c(-1,0), expand = TRUE) +
   labs(
-    title = "Soft-Drink bottling problem",
+    title = "Juice bottling problem",
     subtitle = "Interaction plots",
-    x = "Carbonation",
-    y = "Average fill deviation [g]"
+    x = "drymatter_TGT",
+    y = "Average bias deviation [g]"
   ) +
   theme_industRial() +
   theme(legend.justification=c(1,0), legend.position=c(1,0))
 
-carbonation_speed_plot <- bottling %>%  
-  group_by(carbonation, speed) %>%
-  summarise(carbonation_fill_mean = mean(fill)) %>%
-  ggplot(aes(x = carbonation, y = carbonation_fill_mean)) +
+drymatter_TGT_speed_plot <- juice_drymatter %>%  
+  group_by(drymatter_TGT, speed) %>%
+  summarise(drymatter_TGT_bias_mean = mean(bias)) %>%
+  ggplot(aes(x = drymatter_TGT, y = drymatter_TGT_bias_mean)) +
   geom_point(aes(group = speed)) +
   geom_line(aes(group = speed, linetype = as_factor(speed))) +
   scale_linetype(name = "Speed") +
   coord_cartesian(
-    xlim = c(9, 15),
-    ylim = c(-2,10), expand = TRUE) +
+    xlim = c(9, 21),
+    ylim = c(-1,0), expand = TRUE) +
   labs(
-    x = "Carbonation",
-    y = "Average fill deviation [g]"
+    x = "drymatter_TGT",
+    y = "Average bias deviation [g]"
   ) +
   theme_industRial() +
   theme(legend.justification=c(1,0), legend.position=c(1,0))
 
-speed_pressure_plot <- bottling %>%  
-  group_by(speed, pressure) %>%
-  summarise(speed_fill_mean = mean(fill)) %>%
-  ggplot(aes(x = speed, y = speed_fill_mean)) +
-  geom_point(aes(group = pressure)) +
-  geom_line(aes(group = pressure, linetype = as_factor(pressure))) +
-  scale_linetype(name = "Pressure") +
+speed_particle_size_plot <- juice_drymatter %>%  
+  group_by(speed, particle_size) %>%
+  summarise(speed_bias_mean = mean(bias)) %>%
+  ggplot(aes(x = speed, y = speed_bias_mean)) +
+  geom_point(aes(group = particle_size)) +
+  geom_line(aes(group = particle_size, linetype = as_factor(particle_size))) +
+  scale_linetype(name = "particle_size") +
   coord_cartesian(
-    xlim = c(190, 260),
-    ylim = c(-2,10), expand = TRUE) +
+    xlim = c(19, 26),
+    ylim = c(-1,0), expand = TRUE) +
   labs(
     x = "Speed",
-    y = "Average fill deviation [g]"
+    y = "Average bias deviation [g]"
   ) +
   theme_industRial() +
   theme(legend.justification=c(1,0), legend.position=c(1,0))
 
-carbonation_pressure_plot + carbonation_speed_plot + speed_pressure_plot
+drymatter_TGT_particle_size_plot + drymatter_TGT_speed_plot + speed_particle_size_plot
 ```
 
-<img src="doe_mF-nL_files/figure-html/unnamed-chunk-5-1.png" width="672" />
+<img src="doe_mF-nL_files/figure-html/unnamed-chunk-10-1.png" width="672" />
 
 The plots indicate no interaction between the different factors as all lines do not intercept and are mostly parallel.
 
 In most cases the anova would be performed first and only the plot for the significant interactions would be plotted, if any.
 
-### Model with 3rd level interactions
-
-The sources of variation for the Anova table for three-factor fixed effects model are: A, B, C, AB, AC, BC, ABC. To be noted that like in the two-factors we must have at least two replicates (n>2) to determine the sum of squares due to error if all possible interactions are to be included in the model.
-
-
-```r
-bottling_lm_factor <- lm(fill ~ 
-                           carbonation + speed + pressure + 
-                           carbonation:speed + 
-                           carbonation:pressure + 
-                           speed:pressure + 
-                           carbonation:speed:pressure,
-                           data = bottling_factor
-  )
-summary(bottling_lm_factor)
-```
-
-```
-
-Call:
-lm(formula = fill ~ carbonation + speed + pressure + carbonation:speed + 
-    carbonation:pressure + speed:pressure + carbonation:speed:pressure, 
-    data = bottling_factor)
-
-Residuals:
-   Min     1Q Median     3Q    Max 
-  -1.0   -0.5    0.0    0.5    1.0 
-
-Coefficients:
-                                    Estimate Std. Error t value Pr(>|t|)    
-(Intercept)                       -2.000e+00  5.951e-01  -3.361  0.00567 ** 
-carbonation12                      2.500e+00  8.416e-01   2.970  0.01169 *  
-carbonation14                      6.500e+00  8.416e-01   7.723 5.38e-06 ***
-speed250                           1.500e+00  8.416e-01   1.782  0.10000    
-pressure30                         1.500e+00  8.416e-01   1.782  0.10000    
-carbonation12:speed250            -5.000e-01  1.190e+00  -0.420  0.68185    
-carbonation14:speed250             5.000e-01  1.190e+00   0.420  0.68185    
-carbonation12:pressure30           5.000e-01  1.190e+00   0.420  0.68185    
-carbonation14:pressure30           2.000e+00  1.190e+00   1.680  0.11871    
-speed250:pressure30                5.439e-16  1.190e+00   0.000  1.00000    
-carbonation12:speed250:pressure30  2.000e+00  1.683e+00   1.188  0.25775    
-carbonation14:speed250:pressure30  5.000e-01  1.683e+00   0.297  0.77151    
----
-Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-
-Residual standard error: 0.8416 on 12 degrees of freedom
-Multiple R-squared:  0.9747,	Adjusted R-squared:  0.9516 
-F-statistic: 42.11 on 11 and 12 DF,  p-value: 7.417e-08
-```
-
 ### Anova with 3rd level interactions
 
-We are now fully prepared for an assessment of the effect of the different factors with the anova:
+The sources of variation for the Anova table for three-factor fixed effects model are: A, B, C, AB, AC, BC, ABC. To be noted that like in the two-factors we must have at least two parts (n>2) to determine the sum of squares due to error if all possible interactions are to be included in the model.
+
+We are now fully prepared for an assessment of the effect of the different factors with the anova. To reduce the amount of coding we're inputing the model directly in the aov function:
 
 
 ```r
-bottling_aov_factor <- aov(bottling_lm_factor)
-summary(bottling_aov_factor)
+juice_drymatter_aov <- aov(
+  bias ~ drymatter_TGT * speed * particle_size,
+  data = juice_drymatter)
+summary(juice_drymatter_aov)
 ```
 
 ```
-                           Df Sum Sq Mean Sq F value   Pr(>F)    
-carbonation                 2 252.75  126.38 178.412 1.19e-09 ***
-speed                       1  22.04   22.04  31.118  0.00012 ***
-pressure                    1  45.38   45.38  64.059 3.74e-06 ***
-carbonation:speed           2   0.58    0.29   0.412  0.67149    
-carbonation:pressure        2   5.25    2.62   3.706  0.05581 .  
-speed:pressure              1   1.04    1.04   1.471  0.24859    
-carbonation:speed:pressure  2   1.08    0.54   0.765  0.48687    
-Residuals                  12   8.50    0.71                     
+                                   Df Sum Sq Mean Sq F value Pr(>F)    
+drymatter_TGT                       1 1.3149  1.3149 486.057 <2e-16 ***
+speed                               1 0.0000  0.0000   0.000  0.985    
+particle_size                       1 0.6241  0.6241 230.705 <2e-16 ***
+drymatter_TGT:speed                 1 0.0007  0.0007   0.272  0.603    
+drymatter_TGT:particle_size         1 0.0028  0.0028   1.040  0.310    
+speed:particle_size                 1 0.0032  0.0032   1.191  0.278    
+drymatter_TGT:speed:particle_size   1 0.0039  0.0039   1.442  0.233    
+Residuals                         100 0.2705  0.0027                   
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ```
 
-The observations of the plots are confirmed and completed with statistical input: we see that the percentage of carbonation, operating pressure, and line speed significantly affect the fill volume (p < 0.05). The carbonation-pressure interaction has a P-value of 0.0558, indicating very low interaction between these factors.
+The observations of the plots are confirmed and completed with statistical input: we see that the percentage of drymatter_TGT and the particle_size significantly affect the bias volume (p < 0.05). The drymatter_TGT-particle_size interactions are non significative.
+
+As expected the anova confirms strong influence of the dissolution level on the bias.
+
+From the analysis all interactions could be removed from the model in order to establish a predictive model.

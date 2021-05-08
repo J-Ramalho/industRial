@@ -1,11 +1,12 @@
-
-
-rmarkdown::render_site(
-  output_format = 'bookdown::gitbook', encoding = 'UTF-8'
-)
-
 library(rmarkdown)
 library(bookdown)
+
+render_book(
+  input = "~/Documents/data_science/industRial/inst/book/index.Rmd",
+  output_format = 'bookdown::gitbook', 
+  encoding = 'UTF-8',
+  config_file = "inst/book/_bookdown.yml"
+)
 
 render_book(
   html_chapters(

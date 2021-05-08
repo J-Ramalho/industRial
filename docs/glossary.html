@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Glossary | industRial data science</title>
+  <meta name="description" content="Glossary | industRial data science" />
+  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Glossary | industRial data science" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:image" content="img/cover3.png" />
+  
+  <meta name="github-repo" content="J-Ramalho/industRialds" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Glossary | industRial data science" />
+  
+  
+  <meta name="twitter:image" content="img/cover3.png" />
+
+<meta name="author" content="João Ramalho" />
+
+
+<meta name="date" content="2021-05-08" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="SPC.html"/>
+<link rel="next" href="references.html"/>
+<script src="libs/header-attrs-2.7/header-attrs.js"></script>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-122820355-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-122820355-1');
+</script>
+
+
+<script type="text/javascript">
+mattcrump=1;
+</script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="industRialds.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">industRial data science</a></li>
+
+<li class="divider"></li>
+<li class="part"><span><b>I INTRODUCTION</b></span></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Welcome</a></li>
+<li class="chapter" data-level="" data-path="r-toolbox.html"><a href="r-toolbox.html"><i class="fa fa-check"></i>R Toolbox</a>
+<ul>
+<li class="chapter" data-level="" data-path="r-toolbox.html"><a href="r-toolbox.html#r-programming"><i class="fa fa-check"></i>R programming</a></li>
+<li class="chapter" data-level="" data-path="r-toolbox.html"><a href="r-toolbox.html#r-datasets"><i class="fa fa-check"></i>R Datasets</a></li>
+<li class="chapter" data-level="" data-path="r-toolbox.html"><a href="r-toolbox.html#r-packages"><i class="fa fa-check"></i>R Packages</a>
+<ul>
+<li class="chapter" data-level="" data-path="r-toolbox.html"><a href="r-toolbox.html#installation"><i class="fa fa-check"></i>Installation</a></li>
+<li class="chapter" data-level="" data-path="r-toolbox.html"><a href="r-toolbox.html#domain-packages"><i class="fa fa-check"></i>Domain packages</a></li>
+<li class="chapter" data-level="" data-path="r-toolbox.html"><a href="r-toolbox.html#other-packages"><i class="fa fa-check"></i>Other packages</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="r-toolbox.html"><a href="r-toolbox.html#r-session-info"><i class="fa fa-check"></i>R Session info</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="contents.html"><a href="contents.html"><i class="fa fa-check"></i>Contents</a></li>
+<li class="part"><span><b>II CASE STUDIES</b></span></li>
+<li class="chapter" data-level="" data-path="design-for-six-sigma.html"><a href="design-for-six-sigma.html"><i class="fa fa-check"></i>Design for Six Sigma</a>
+<ul>
+<li class="chapter" data-level="" data-path="design-for-six-sigma.html"><a href="design-for-six-sigma.html#pareto"><i class="fa fa-check"></i>Pareto</a>
+<ul>
+<li class="chapter" data-level="" data-path="design-for-six-sigma.html"><a href="design-for-six-sigma.html#paretochart"><i class="fa fa-check"></i>Pareto chart</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="design-for-six-sigma.html"><a href="design-for-six-sigma.html#ishikawa"><i class="fa fa-check"></i>Ishikawa</a>
+<ul>
+<li class="chapter" data-level="" data-path="design-for-six-sigma.html"><a href="design-for-six-sigma.html#fishbone"><i class="fa fa-check"></i>Fishbone diagram</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="design-for-six-sigma.html"><a href="design-for-six-sigma.html#correlation-matrix"><i class="fa fa-check"></i>Correlation matrix</a>
+<ul>
+<li class="chapter" data-level="" data-path="design-for-six-sigma.html"><a href="design-for-six-sigma.html#tileplot"><i class="fa fa-check"></i>Tile plot</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="design-for-six-sigma.html"><a href="design-for-six-sigma.html#clustering"><i class="fa fa-check"></i>Clustering</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="rnR.html"><a href="rnR.html"><i class="fa fa-check"></i>Gage r&amp;R</a>
+<ul>
+<li class="chapter" data-level="" data-path="rnR.html"><a href="rnR.html#trueness"><i class="fa fa-check"></i>Trueness</a>
+<ul>
+<li class="chapter" data-level="" data-path="rnR.html"><a href="rnR.html#bias-plot"><i class="fa fa-check"></i>Bias plot</a></li>
+<li class="chapter" data-level="" data-path="rnR.html"><a href="rnR.html#bias-model"><i class="fa fa-check"></i>Bias model</a></li>
+<li class="chapter" data-level="" data-path="rnR.html"><a href="rnR.html#bias-report"><i class="fa fa-check"></i>Bias report</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="rnR.html"><a href="rnR.html#precision"><i class="fa fa-check"></i>Precision</a>
+<ul>
+<li class="chapter" data-level="" data-path="rnR.html"><a href="rnR.html#base-anova"><i class="fa fa-check"></i>Base Anova</a></li>
+<li class="chapter" data-level="" data-path="rnR.html"><a href="rnR.html#gageRnR"><i class="fa fa-check"></i>gage r&amp;R</a></li>
+<li class="chapter" data-level="" data-path="rnR.html"><a href="rnR.html#acceptance-on-variance"><i class="fa fa-check"></i>Acceptance on Variance</a></li>
+<li class="chapter" data-level="" data-path="rnR.html"><a href="rnR.html#acceptance-on-sd"><i class="fa fa-check"></i>Acceptance on SD</a></li>
+<li class="chapter" data-level="" data-path="rnR.html"><a href="rnR.html#interaction-plots"><i class="fa fa-check"></i>Interaction plots</a></li>
+<li class="chapter" data-level="" data-path="rnR.html"><a href="rnR.html#negative-variations"><i class="fa fa-check"></i>Negative Variations</a></li>
+<li class="chapter" data-level="" data-path="rnR.html"><a href="rnR.html#beyond-two-factors"><i class="fa fa-check"></i>Beyond two factors</a></li>
+<li class="chapter" data-level="" data-path="rnR.html"><a href="rnR.html#conclusions"><i class="fa fa-check"></i>Conclusions</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="rnR.html"><a href="rnR.html#uncertainty"><i class="fa fa-check"></i>Uncertainty</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html"><i class="fa fa-check"></i>Design of Experiments</a>
+<ul>
+<li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#factor-2-levels"><i class="fa fa-check"></i>1 factor 2 levels</a>
+<ul>
+<li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#means-comparison"><i class="fa fa-check"></i>Means comparison</a></li>
+<li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#variances-comparison"><i class="fa fa-check"></i>Variances comparison</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#factor-n-levels"><i class="fa fa-check"></i>1 factor n levels</a>
+<ul>
+<li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#linear-regression"><i class="fa fa-check"></i>Linear regression</a></li>
+<li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#raw-data-plot"><i class="fa fa-check"></i>Raw data plot</a></li>
+<li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#residuals-model-check"><i class="fa fa-check"></i>Residuals &amp; model check</a></li>
+<li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#multiple-means-comparison"><i class="fa fa-check"></i>Multiple means comparison</a></li>
+<li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#pairwise-comparisons"><i class="fa fa-check"></i>Pairwise comparisons</a></li>
+<li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#predict"><i class="fa fa-check"></i>Prediction</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#factors-n-levels"><i class="fa fa-check"></i>2 factors n levels</a>
+<ul>
+<li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#lm-with-interactions"><i class="fa fa-check"></i>lm with interactions</a></li>
+<li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#outliers-and-model-check"><i class="fa fa-check"></i>Outliers and model check</a></li>
+<li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#interactionPlot"><i class="fa fa-check"></i>Interaction plot</a></li>
+<li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#effects-significance"><i class="fa fa-check"></i>Effects significance</a></li>
+<li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#removing-interaction"><i class="fa fa-check"></i>Removing interaction</a></li>
+<li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#covariance"><i class="fa fa-check"></i>Covariance</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#m-factors-n-levels"><i class="fa fa-check"></i>m factors n levels</a>
+<ul>
+<li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#main-effects-plots"><i class="fa fa-check"></i>Main effects plots</a></li>
+<li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#interactions-plots"><i class="fa fa-check"></i>Interactions plots</a></li>
+<li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#model-with-3rd-level-interactions"><i class="fa fa-check"></i>Model with 3rd level interactions</a></li>
+<li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#anova-with-3rd-level-interactions"><i class="fa fa-check"></i>Anova with 3rd level interactions</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#factors-2-levels"><i class="fa fa-check"></i>2 factors 2 levels</a>
+<ul>
+<li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#factors-as--"><i class="fa fa-check"></i>Factors as +/-</a></li>
+<li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#factors-as---1"><i class="fa fa-check"></i>Factors as +/- 1</a></li>
+<li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#factors-as---1-numeric"><i class="fa fa-check"></i>Factors as +/- 1 numeric</a></li>
+<li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#sd-bars-in-interaction-plots"><i class="fa fa-check"></i>sd bars in interaction plots</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#factors-2-levels-1"><i class="fa fa-check"></i>3 factors 2 levels</a>
+<ul>
+<li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#lm-and-anova"><i class="fa fa-check"></i>lm and anova</a></li>
+<li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#r2-and-adjusted-r2"><i class="fa fa-check"></i>R^2 and Adjusted R^2</a></li>
+<li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#coding-natural-values"><i class="fa fa-check"></i>Coding natural values</a></li>
+<li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#coded-values-prediction"><i class="fa fa-check"></i>Coded values prediction</a></li>
+<li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#persp"><i class="fa fa-check"></i>Response surface plot</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#m-factors-2-levels-single-replicate-designs"><i class="fa fa-check"></i>m factors 2 levels single replicate designs</a>
+<ul>
+<li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#single-replicate-lm"><i class="fa fa-check"></i>Single replicate lm</a></li>
+<li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#single-replicate-reduced-model"><i class="fa fa-check"></i>Single replicate reduced model</a></li>
+<li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#residuals-analysis"><i class="fa fa-check"></i>Residuals analysis</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="SPC.html"><a href="SPC.html"><i class="fa fa-check"></i>Statistical Process Control</a>
+<ul>
+<li class="chapter" data-level="" data-path="SPC.html"><a href="SPC.html#control-charts"><i class="fa fa-check"></i>Control charts</a>
+<ul>
+<li class="chapter" data-level="" data-path="SPC.html"><a href="SPC.html#xbarchart"><i class="fa fa-check"></i>xbar chart</a></li>
+<li class="chapter" data-level="" data-path="SPC.html"><a href="SPC.html#Rchart"><i class="fa fa-check"></i>R chart</a></li>
+<li class="chapter" data-level="" data-path="SPC.html"><a href="SPC.html#limitsxbar"><i class="fa fa-check"></i>Limits on xbar chart</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="SPC.html"><a href="SPC.html#process-capability"><i class="fa fa-check"></i>Process Capability</a>
+<ul>
+<li class="chapter" data-level="" data-path="SPC.html"><a href="SPC.html#out-of-specification"><i class="fa fa-check"></i>Out of specification</a></li>
+<li class="chapter" data-level="" data-path="SPC.html"><a href="SPC.html#cpk-index"><i class="fa fa-check"></i>Cpk index</a></li>
+<li class="chapter" data-level="" data-path="SPC.html"><a href="SPC.html#processcapability"><i class="fa fa-check"></i>Process capability chart</a></li>
+</ul></li>
+</ul></li>
+<li class="part"><span><b>III APPENDIX</b></span></li>
+<li class="chapter" data-level="" data-path="glossary.html"><a href="glossary.html"><i class="fa fa-check"></i>Glossary</a>
+<ul>
+<li class="chapter" data-level="" data-path="glossary.html"><a href="glossary.html#statistics"><i class="fa fa-check"></i>Statistics</a>
+<ul>
+<li class="chapter" data-level="" data-path="glossary.html"><a href="glossary.html#notation-conventions"><i class="fa fa-check"></i>Notation conventions</a></li>
+<li class="chapter" data-level="" data-path="glossary.html"><a href="glossary.html#descriptive-statistics"><i class="fa fa-check"></i>Descriptive statistics</a></li>
+<li class="chapter" data-level="" data-path="glossary.html"><a href="glossary.html#probability"><i class="fa fa-check"></i>Probability</a></li>
+<li class="chapter" data-level="" data-path="glossary.html"><a href="glossary.html#statistical-inference"><i class="fa fa-check"></i>Statistical Inference</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="glossary.html"><a href="glossary.html#design-for-six-sigma-1"><i class="fa fa-check"></i>Design for Six Sigma</a>
+<ul>
+<li class="chapter" data-level="" data-path="glossary.html"><a href="glossary.html#voice-of-customer"><i class="fa fa-check"></i>Voice of Customer</a></li>
+<li class="chapter" data-level="" data-path="glossary.html"><a href="glossary.html#voice-of-process"><i class="fa fa-check"></i>Voice of Process</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="glossary.html"><a href="glossary.html#gage-rr"><i class="fa fa-check"></i>Gage r&amp;R</a></li>
+<li class="chapter" data-level="" data-path="glossary.html"><a href="glossary.html#design-of-experiments"><i class="fa fa-check"></i>Design of experiments</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">indust<b style='color:#38598CFF'>R</b>ial data science</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="glossary" class="section level1">
+<h1>Glossary</h1>
+<div id="statistics" class="section level2">
+<h2>Statistics</h2>
+<p>Statistic concepts are picked up and applied throught the Cases Studies on a needed basis. To get a better understanding of how they fit together we are reminding below some definitions coming from <span class="citation"><a href="references.html#ref-Yakir2011" role="doc-biblioref">Yakir</a> (<a href="references.html#ref-Yakir2011" role="doc-biblioref">2011</a>)</span>. For a deep and comprehensive course on statistics we recommend the free online <a href="https://www.khanacademy.org/math/statistics-probability">kahn academy</a> courses.</p>
+<div id="notation-conventions" class="section level3">
+<h3>Notation conventions</h3>
+<p>The arithmetic mean of a series of values x1, x2, …, xn is often denoted by placing an “overbar” over the symbol, e.g. <span class="math inline">\(\bar{x}\)</span> , pronounced “x bar.”</p>
+<p>Some commonly used symbols for sample statistics are: sample mean <span class="math inline">\(\bar{x}\)</span>, sample standard deviation s.</p>
+<p>Some commonly used symbols for population parameters: population mean μ, population standard deviation σ.</p>
+<p>Random variables are usually written in upper case roman letters: <span class="math inline">\(X, Y\)</span>, etc.</p>
+<p>Particular realizations of a random variable are written in corresponding lower case letters. For example, x1, x2, …, xn could be a sample corresponding to the random variable <span class="math inline">\(X\)</span>. A cumulative probability is formally written P(<span class="math inline">\(X\)</span>≤x) to differentiate the random variable from its realization.</p>
+<p>Greek letters (e.g. θ, β) are commonly used to denote unknown parameters (population parameters).</p>
+<p>Placing a hat, or caret, over a true parameter denotes an estimator of it, e.g., <span class="math inline">\(\hat{θ}\)</span> is an estimator for θ.</p>
+</div>
+<div id="descriptive-statistics" class="section level3">
+<h3>Descriptive statistics</h3>
+<p><strong>Statistic:</strong> A numerical characteristic of the data. A statistic estimates the
+corresponding population parameter.</p>
+<p><strong>Population:</strong> The collection, or set, of all individuals, objects, or measurements whose properties are being studied.</p>
+<p><strong>Sample:</strong> A portion of the population understudy. A sample is representative
+if it characterizes the population being studied.</p>
+<p><strong>Frequency:</strong> The number of times a value occurs in the data.</p>
+<p><strong>Relative Frequency:</strong> The ratio between the frequency and the size of data. <span class="math inline">\(f / n\)</span></p>
+<p><strong>Median:</strong> A number that separates ordered data into halves.</p>
+<p><strong>Mean:</strong> A number that measures the central tendency. A common name for
+mean is ‘average.’</p>
+<p><strong>Sample size:</strong> <span class="math inline">\(n\)</span></p>
+<p><strong>Sample mean:</strong> <span class="math inline">\(\bar{x} = \frac{1}{n}\sum_{i=1}^{n}x_i = \sum_{x}(x\times f_x / n)\)</span></p>
+<p><strong>Population size:</strong> <span class="math inline">\(N\)</span></p>
+<p><strong>Population mean:</strong> <span class="math inline">\(\bar{\mu} = \frac{\sum_{i=1}^{N}x_i}{N}\)</span></p>
+<p><strong>Variance:</strong> Mean of the squared deviations from the mean.</p>
+<p><strong>Sample variance:</strong> <span class="math inline">\(s^{2} = \frac{1}{n-1}\sum_{i=1}^{n}(x_i-\bar{x})^2 = \frac{n}{n-1}\sum_{x}((x-\bar{x})^2\times(f_x/n))\)</span></p>
+<p><strong>Standard Deviation</strong>: A number that is equal to the square root of the variance and measures how far data values are from their mean.</p>
+<p><strong>Sample standard deviation:</strong> <span class="math inline">\(\sqrt[]{s^{2}}\)</span></p>
+</div>
+<div id="probability" class="section level3">
+<h3>Probability</h3>
+<p><strong>Random Variable:</strong> The probabilistic model for the value of a measurement,
+before the measurement is taken (e.g. Binomial, Poisson, Uniform, Exponential, Normal). It is denoted with latin capitals <span class="math inline">\(X, Y\)</span> and <span class="math inline">\(Z\)</span></p>
+<p><strong>Expectation:</strong> The central value for a random variable. The expectation of the
+random variable X is marked by E(<span class="math inline">\(X\)</span>).</p>
+<p><strong>Variance:</strong> The (squared) spread of a random variable. The variance of the
+random variable X is marked by Var(<span class="math inline">\(X\)</span>).</p>
+<p><strong>Normal Random Variable:</strong> A bell-shaped distribution that is frequently used
+to model a measurement. The distribution is marked with Normal(<span class="math inline">\(\mu,\sigma^2\)</span>).</p>
+<p><strong>Standard Normal Distribution:</strong> The Normal(0,1). The distribution of stan-
+dardized Normal measurement.</p>
+<p><strong>Percentile:</strong> Given a percent p · 100% (or a probability p), the value x is the
+percentile of a random variable X if it satisfies the equation P<span class="math inline">\((X ≤ x) = p\)</span>.</p>
+<p><strong>Sampling distribution</strong></p>
+<p><strong>Random Sample:</strong> The probabilistic model for the values of a measurements
+in the sample, before the measurement is taken.</p>
+<p><strong>Sampling Distribution:</strong> The distribution of a random sample.</p>
+<p><strong>Sampling Distribution of a Statistic:</strong> A statistic is a function of the data;
+i.e. a formula applied to the data. The statistic becomes a random variable
+when the formula is applied to a random sample. The distribution of this
+random variable, which is inherited from the distribution of the sample,
+is its sampling distribution.</p>
+<p><strong>Sampling Distribution of the Sample Average:</strong> The distribution of the sample average, considered as a random variable.</p>
+<p><strong>The Law of Large Numbers:</strong> A mathematical result regarding the sampling
+distribution of the sample average. States that the distribution of the av-
+erage of measurements is highly concentrated in the vicinity of the expec-
+tation of a measurement when the sample size is large.</p>
+<p><strong>The Central Limit Theorem:</strong> A mathematical result regarding the sampling
+distribution of the sample average. States that the distribution of the average is approximately Normal when the sample size is large.</p>
+<div class="marginnote">
+<p>(note: the central limit theorem is a key notion for understanding industrial measurement and its consequences will be applied in most case studies)</p>
+</div>
+<p><strong>Expectation of the sample average:</strong> the expectation of the sample mean is
+equal to the theoretical expectation of its components E<span class="math inline">\((\bar{X})\)</span> = E(<span class="math inline">\(X\)</span>)</p>
+<p><strong>Variance of the sample average:</strong> the variance of the sample average
+is equal to the variance of each of the components, divided by the sample size Var(<span class="math inline">\(X\)</span>) = Var<span class="math inline">\((X)/n\)</span></p>
+</div>
+<div id="statistical-inference" class="section level3">
+<h3>Statistical Inference</h3>
+<p><strong>Statistical Inference:</strong> Methods for gaining insight regarding the population
+parameters from the observed data.</p>
+<p><strong>Point Estimation:</strong> An attempt to obtain the best guess of the value of a
+population parameter. An estimator is a statistic that produces such a
+guess. The estimate is the observed value of the estimator.</p>
+<p><strong>Confidence Interval:</strong> An interval that is most likely to contain the population
+parameter. The confidence level of the interval is the sampling probability
+that the confidence interval contains the parameter value.</p>
+<p><strong>Hypothesis Testing:</strong> A method for determining between two hypothesis, with
+one of the two being the currently accepted hypothesis. A determination is
+based on the value of the test statistic. The probability of falsely rejecting
+the currently accepted hypothesis is the significance level of the test.</p>
+<p><strong>Comparing Samples:</strong> Samples emerge from different populations or under
+different experimental conditions. Statistical inference may be used to
+compare the distributions of the samples to each other.</p>
+<p><strong>Regression:</strong> Relates different variables that are measured on the same sample.
+Regression models are used to describe the effect of one of the variables
+on the distribution of the other one. The former is called the explanatory
+variable and the later is called the response.</p>
+<p><strong>Bias:</strong> The difference between the expectation of the estimator and the value
+of the parameter. An estimator is unbiased if the bias is equal to zero.
+Otherwise, it is biased.</p>
+<p><strong>Mean Square Error (MSE):</strong> A measure of the concentration of the distribu-
+tion of the estimator about the value of the parameter. The mean square
+error of an estimator is equal to the sum of the variance and the square of
+the bias. If the estimator is unbiased then the mean square error is equal
+to the variance.</p>
+<p><strong>Confidence Level:</strong> The sampling probability that random confidence intervals
+contain the parameter value. The confidence level of an observed interval
+indicates that it was constructed using a formula that produces, when
+applied to random samples, such random intervals.</p>
+<p><strong>Null Hypothesis </strong>(<span class="math inline">\(H0\)</span>): A sub-collection that emerges in response to the sit-
+uation when the phenomena is absent. The established scientific theory
+that is being challenged. The hypothesis which is worse to erroneously
+reject.</p>
+<p><strong>Alternative Hypothesis </strong>(<span class="math inline">\(H1\)</span>): A sub-collection that emerges in response to
+the presence of the investigated phenomena. The new scientific theory
+that challenges the currently established theory.</p>
+<p><strong>Test Statistic:</strong> A statistic that summarizes the data in the sample in order to
+decide between the two alternative.</p>
+<p><strong>Rejection Region:</strong> A set of values that the test statistic may obtain. If the
+observed value of the test statistic belongs to the rejection region then the
+null hypothesis is rejected. Otherwise, the null hypothesis is not rejected.</p>
+<p><strong>Type I Error:</strong> The null hypothesis is correct but it is rejected by the test.</p>
+<p><strong>Type II Error:</strong> The alternative hypothesis holds but the null hypothesis is not
+rejected by the test.</p>
+<p><strong>Significance Level:</strong> The probability of a Type I error. The probability, com-
+puted under the null hypothesis, of rejecting the null hypothesis. The
+test is constructed to have a given significance level. A commonly used
+significance level is 5%.</p>
+<p><strong>Statistical Power:</strong> The probability, computed under the alternative hypoth-
+esis, of rejecting the null hypothesis. The statistical power is equal to 1
+minus the probability of a Type II error.</p>
+<p><span class="math inline">\(p\)</span><strong>-value:</strong> A form of a test statistic. It is associated with a specific test statistic
+and a structure of the rejection region. The p-value is equal to the signif-
+icance level of the test in which the observed value of the statistic serves
+as the threshold.</p>
+</div>
+</div>
+<div id="design-for-six-sigma-1" class="section level2">
+<h2>Design for Six Sigma</h2>
+<p>Quality tools have been grouped under varied names and methodologies being Six Sigma one of the most comprehensives ones. One way of summarising the Six Sigma framework is presented below in a step by step approach with definitions. Each steps consists of an analyis of the product development and production process that progressively refines the final product specifications.</p>
+<p>For a more detailed description we recommend reviewing the comprehensive Six Sigma certification reference book by <span class="citation"><a href="references.html#ref-Munro2015" role="doc-biblioref">Roderik A.Munro and J.Zrymiak</a> (<a href="references.html#ref-Munro2015" role="doc-biblioref">2015</a>)</span>.</p>
+<div id="voice-of-customer" class="section level3">
+<h3>Voice of Customer</h3>
+<p><strong>1. Product brief</strong>
+List of the product features expected by the customer (internal or external), including qualitative indication of the acceptance limits.</p>
+<p><strong>2. Functional analysis</strong>
+Translation of the product attributes into lower level functions including interactions between product components and requirements induced by each component on the others.</p>
+<p><strong>3. Failure modes and effects analysis (FMEA)</strong>
+List of critical product features with failure causes, effects, detection and action plans, rated and sorted by criticality.</p>
+<p><strong>4. Product specifications and parts drawings</strong>
+Implementation of the product components into unique formulations and drawings including detailed values and tolerances of it characteristics (physical, chemical or electric or others).</p>
+</div>
+<div id="voice-of-process" class="section level3">
+<h3>Voice of Process</h3>
+<p><strong>1. Process mapping</strong><br />
+A visual diagram of the production process with inputs and outputs for each step.</p>
+<p><strong>2. Process FMEA</strong>
+List of critical production process steps with failure causes, effects, detection and action plans, rated and sorted by criticality.</p>
+<p><strong>3. Quality Control plan</strong>
+List of control points including measurement method, sample size, frequency and acceptance criteria. When needed, critical control points are handled by Statistical Process Control (SPC)</p>
+<p><strong>4. Measurement system analysis</strong>
+A thorough assessment of a measurement process, and typically includes a specially designed experiment that seeks to identify the components of variation in that measurement process.</p>
+<p><strong>5. Process capability analysis</strong>
+Comparison of the variability of a production process with its engineered specifications.</p>
+</div>
+</div>
+<div id="gage-rr" class="section level2">
+<h2>Gage r&amp;R</h2>
+<p>The definitions below are based on the articles on <span class="citation"><a href="references.html#ref-minitab_gagernR" role="doc-biblioref">Minitab</a> (<a href="references.html#ref-minitab_gagernR" role="doc-biblioref">2019c</a>)</span> which itself is based on the <span class="citation"><a href="references.html#ref-AIAG2010" role="doc-biblioref">Automotive Industry Action Group</a> (<a href="references.html#ref-AIAG2010" role="doc-biblioref">2010</a>)</span>.</p>
+<p>Variance components assess the amount of variation contributed by each source of measurement error, plus the contribution of part-to-part variability.</p>
+<p><strong>total gage r&amp;R:</strong> the sum of the repeatability and the reproducibility variance components.</p>
+<p><strong>part:</strong> The variation that comes from the parts, with 5 levels in this case.</p>
+<p><strong>operator:</strong> The variation that comes from the operators, with 3 levels in this case.</p>
+<p><strong>replicants, n:</strong> number of replications corresponding to the number of times each part is measured by each operator.</p>
+<p><strong>repeatability (or error, or residuals):</strong> The variation that is not explained by part, operator, or the operator and part interaction. It represents how much variability is caused by the measurement device (the same operator measures the same part many times, using the same gage). The repeteability can be measured directly from the Anova table from the residual mean squares.</p>
+<p><strong>reproducibility:</strong> how much variation is caused by the differences between operators (different operators measure the same part many times, using the same gage).</p>
+<p><strong>operators:</strong> the operators part of the reproducibility is the operators variation minus the interaction divided by the number of different parts times the replicants (zero if negative).</p>
+<p><strong>parts:operators:</strong> The variation that comes from the operator and part interaction. An interaction exists when an operator measures different parts differently. The interaction part of of the reproducibility is the interaction minus the repeatability divided by the number of replicants (zero if negative).</p>
+<p><strong>part-to-part:</strong> the variability due to different parts. Ideally, very little should be due to repeatability and reproducibility. Differences between parts should account for most of the variability (when the %Contribution from part-to-part variation is high, the measurement system can reliably distinguish between parts).</p>
+<p>The sum of the individual variance components equals the total variation.</p>
+</div>
+<div id="design-of-experiments" class="section level2">
+<h2>Design of experiments</h2>
+<p>Below key definitions from <span class="citation"><a href="references.html#ref-Montgomery2012" role="doc-biblioref">Montgomery</a> (<a href="references.html#ref-Montgomery2012" role="doc-biblioref">2012</a>)</span>, complemented with Wikipedia article details on the same topics.</p>
+<p><strong>Randomization:</strong> both the allocation of the experimental material and the order in which the individual runs of the experiment are to be performed are randomly determined.</p>
+<p><strong>Replicate:</strong> independent repeat run of each factor combination.</p>
+<p><strong>Factorial design:</strong> in each complete trial or replicate of the experiment all possible combinations of the levels of the factors are investigated.</p>
+<p><strong>Crossed factors:</strong> factors arranged in a factorial design.</p>
+<p><strong>Coded variable:</strong> the $$1 coding for the low and high levels of the factors. Coded variables are very effective for determining the relative size of factor effects. In almost all situations, the coded unit analysis is preferable.</p>
+<p><strong>Contrast:</strong> a linear combination of parameters in the form <span class="math inline">\(\tau=\sum_{i=1}^{a}c_i\mu_i\)</span> where the contrast constants <span class="math inline">\(c_1,c_2, ..., c_a\)</span> sum to zero; that is, <span class="math inline">\(\sum_{i=1}^{a}c_i=0\)</span>.</p>
+<p><strong>Orthogonal contrasts:</strong> two contrasts with coefficients <span class="math inline">\({c_i}\)</span> and <span class="math inline">\({d_i}\)</span> are orthogonal if: <span class="math inline">\(\sum_{i=1}^{a}c_id_i\)</span>. In a balanced one-way analysis of variance, using orthogonal contrasts has the advantage of completely partitioning the treatment sum of squares into non-overlapping additive components that represent the variation due to each contrast. Contrasts then allow for the comparison between the different means.</p>
+<p><strong>sparsity of effects principle:</strong> states that most systems are dominated by some of the main effects and low-order interactions, and most high-order interactions are negligible.</p>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="SPC.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="references.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": false,
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "section"
+},
+"search": false,
+"info": false,
+"toolbar": {
+"position": "fixed"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

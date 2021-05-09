@@ -11,6 +11,24 @@ knitr::opts_chunk$set(
 
 Keeping the variability of an industrial process under control is one of the most important objectives in manufacturing. Based on expert knowledge or on detailed functional analysis the product and process parameters that are critical to quality are identified and selected for close follow-up. The most common and effective way for such follow-up is the Statistical Process Control which is done by using control charts.
 
+**The syringe injection molding process**
+
+<div class="marginnote">
+
+```{r echo=FALSE, out.width="100%", fig.align='center', fig.cap="A clean room for syringe injection molding with fully automatised handling"}
+knitr::include_graphics("img/syringe_molding_bw.jpg")
+# sources:
+# https://en.wikipedia.org/wiki/Injection_moulding
+# https://en.wikipedia.org/wiki/Syringe
+# https://www.sio2ms.com/wp-content/uploads/2020/09/Dimensional-Stability-of-a-Multicavity-Injection-Molded-Article.pdf
+# https://www.starrapid.com/wp-content/uploads/2014/08/Star-PIM-Tolerance-Tables-2014-1.pdf
+# http://galachem.ru/upload/pdf/Hamilton-Syringe-and-Needle-Catalog.pdf
+# https://www.schott.com/schweiz/french/news/press.html?NID=com5453&freturl=%2Fschweiz%2Ffrench%2Fcontact%2Fmail_form.html
+# (image) https://www.manufacturingchemist.com/news/article_page/Syringe_benefits/42354
+```
+
+</div>
+
 ## Control charts
 
 There are many types of control charts and in this case study we're demonstrating the xbar and R charts. These two charts are often used together and are suited to the control the mean and the variability of a continuous variable.
@@ -23,21 +41,15 @@ Loading packages for data loading and cleaning:
 library(tidyverse)
 library(knitr)
 library(industRial)
-
+library(stats)
 filter <- dplyr::filter
 select <- dplyr::select
-```
-
-Loading data:
-
-```{r}
-bamako <- read_csv("data/Bamako.csv")
 ```
 
 Looking at the first five lines to confirm and assess the quality of our data for further processing. 
 
 ```{r}
-head(bamako) %>%
+head(syringe_diameter) %>%
     kable()
 ```
 
@@ -46,8 +58,9 @@ We see that in this table each line corresponds to a sampling hour and each colu
 We're now going to pass this data to the control chart plotting function qcc(). As this function takes a dataset of observations so we're removing the Hour column with the select function from tidyverse:
 
 ```{r}
-bamako_clean <- bamako %>% 
-  select(-Hour) 
+syringe_clean <- syringe_diameter %>% 
+  select(-Hour) %>%
+  mutate(across(starts_with("S"), round, 2))
 ```
 
 Now we load the qcc package that has the required quality control tools:
@@ -63,8 +76,8 @@ library(qcc)
 ```
 
 ```{r}
-bamako_xbar <- qcc(
-  bamako_clean[1:10, ], 
+syringe_xbar <- qcc(
+  syringe_clean[1:10, ], 
   type = "xbar", 
   title = "Lamp weight \n xbar chart", 
   xlab = "Sample group",
@@ -79,32 +92,32 @@ A first step is to read the begining of the qcc() help file typing ?qcc in the c
 The key point here is that this means we can inspect the calculations separately from the plot itself. We can start by confirming the class and the type of the qcc object:
 
 ```{r}
-class(bamako_xbar)
-typeof(bamako_xbar)
+class(syringe_xbar)
+typeof(syringe_xbar)
 ```
 
-It is confirmed it is a qcc object with the R type list. Looking into the structure of the list:
+It is confirmed it is an object of class qcc with the R type list. Looking into the structure of the list:
 
 ```{r}
-str(bamako_xbar)
+str(syringe_xbar)
 ```
 
 The output is not easy to read but we present it here just to show that inside the list there are several tables with the statistical analysis required for our plot. If we want like to see for instance the standard deviation we can extract it separately:
 
 ```{r}
-bamako_xbar$std.dev
+syringe_xbar$std.dev
 ```
 
 And if we want like to see a summary of all the data stored in the object we could apply the summary method:
 
 ```{r}
-summary(bamako_xbar)
+summary(syringe_xbar)
 ```
 
 We are now ready to finally we can see this all together in a plot:
 
 ```{r}
-plot(bamako_xbar)
+plot(syringe_xbar)
 ```
 
 ### R chart {#Rchart}
@@ -112,8 +125,8 @@ plot(bamako_xbar)
 Using the same 10 first samples we also obtain the corresponding R chart:
 
 ```{r}
-bamako_R <- qcc(
-  bamako_clean[1:10, ], 
+syringe_R <- qcc(
+  syringe_clean[1:10, ], 
   type = "R", 
   title = "Lamp weight \n R chart",
   xlab = "Sample group"
@@ -125,9 +138,9 @@ bamako_R <- qcc(
 Now that the calibration data has been plotted we can consider that the control limits are defined. They can become fixed and reused in new plots for the future production runs. Samples from those future runs can then be assessed against this limits and the control chart rules can be verified (in this example the shewhart rules are used). We now add the remaining data points to our chart by specifying which lines we're refering too in our dataframe in the 'newdata' argument:
 
 ```{r}
-bamako_xbar <- qcc(
-  data = bamako_clean[1:10, ],
-  newdata = bamako_clean[11:25,],
+syringe_xbar <- qcc(
+  data = syringe_clean[1:10, ],
+  newdata = syringe_clean[11:25,],
   type = "xbar", 
   title = "Lamp weight \n xbar chart", 
   xlab = "Sample group"
@@ -139,9 +152,9 @@ We can see that the data point corresponding to the average of the measurements 
 Now we plot the R chart to assess the variability:
 
 ```{r}
-bamako_R <- qcc(
-  data = bamako_clean[1:10, ],
-  newdata = bamako_clean[11:25,], 
+syringe_R <- qcc(
+  data = syringe_clean[1:10, ],
+  newdata = syringe_clean[11:25,], 
   type = "R", 
   title = "Lamp weight \n R chart",
   xlab = "Sample group"
@@ -160,13 +173,13 @@ We add warning limits in the plot with as follows:
 
 ```{r}
 warn.limits <- limits.xbar(
-  bamako_xbar$center, 
-  bamako_xbar$std.dev, 
-  bamako_xbar$sizes, 
+  syringe_xbar$center, 
+  syringe_xbar$std.dev, 
+  syringe_xbar$sizes, 
   2
   )
 plot(
-  bamako_xbar, 
+  syringe_xbar, 
   restore.par = FALSE,
   title = "Lamp weight \n xbar chart",
   xlab = "Sample group")
@@ -178,8 +191,8 @@ A manufacturing process under control has a variation that is lower than the pro
 In some cases nevertheless there may be desired or interesting to add the specification limits. This can be done as follows, first we establish the specifications:
 
 ```{r}
-spec_max <- 10.5
-spec_min <- 9.9
+spec_max <- 5.6
+spec_min <- 5.3
 spec_tgt <- (spec_max - spec_min) / 2 + spec_min
 specs <- c(spec_min, spec_tgt, spec_max)
 ```
@@ -188,11 +201,12 @@ and replot the control chart with visible specification limits and targets:
 
 ```{r}
 plot(
-  bamako_xbar,
+  syringe_xbar,
   restore.par = FALSE,
   title = "Lamp weight \n xbar chart",
   xlab = "Sample group",
-  ylim = c(9.8, 10.6))
+  ylim = c(specs[1], specs[3])
+  )
 abline(h = specs, lty = 3, col = "red")
 ```
 
@@ -203,38 +217,23 @@ Adapted from @Bass2007
 In this chapter we're going to go more in depth in the study of the manufacturing process variability. We're going to make a comparison between the product specifications and the process variability. We're looking for opportunities to tigthen the product specifications. 
 Tightening a product specification without increasing the cost of a manufacturing cost can be a source of competitive advantage.
 
-**Bamako lightning**
-
-```{r}
-bamako <- read_csv("data/Bamako.csv")
-```
-
 ## Process Capability
 
 ### Out of specification
 
 ```{r}
-bamako_long <- bamako %>%
+syringe_long <- syringe_diameter %>%
   pivot_longer(cols = starts_with("Sample"),
                names_to = "sample",
                values_to = "value")
 ```
 
-```{r}
-spec_max <- 10.5
-spec_min <- 9.9
-spec_tgt <- (spec_max - spec_min) / 2 + spec_min
-specs <- c(spec_min, spec_tgt, spec_max)
-```
-
 **variables**
 
 ```{r}
-bamako_mean = bamako_long %>% pull(value) %>% mean()
-bamako_sd = bamako_long %>% pull(value) %>% sd()
-spec_max <- 10.5
-spec_min <- 9.9
-bamako_n <- length(bamako_long)
+syringe_mean = syringe_long %>% pull(value) %>% mean()
+syringe_sd = syringe_long %>% pull(value) %>% sd()
+syringe_n <- length(syringe_long)
 theor_n = 1000000
 ```
 
@@ -247,12 +246,12 @@ within_limits <- function(UCL, LCL, mean, sd) {
 ```
 
 ```{r}
-bamako_within <- within_limits(spec_max, spec_min, bamako_mean, bamako_sd)
-bamako_off_spec <- 100 - bamako_within
+syringe_within <- within_limits(spec_max, spec_min, syringe_mean, syringe_sd)
+syringe_off_spec <- 100 - syringe_within
 ```
 
 ```{r}
-bamako_theor <- rnorm(n = theor_n, mean = bamako_mean, sd = bamako_sd) %>% 
+syringe_theor <- rnorm(n = theor_n, mean = syringe_mean, sd = syringe_sd) %>% 
   as_tibble()
 ```
 
@@ -260,20 +259,20 @@ bamako_theor <- rnorm(n = theor_n, mean = bamako_mean, sd = bamako_sd) %>%
 plot_subtitle <- paste(
   "Spec: [", spec_min, ";", spec_max, 
   "], Proportion off-spec = ",
-  signif(bamako_off_spec, digits = 2), "%"
+  signif(syringe_off_spec, digits = 2), "%"
   )
 ```
 
 Note that we deliberately twick the plot colors to make it look like the plots from minitab and from the qcc package. We provide this theme in the book companion package `industRial` with the name theme_qcc. 
 
 ```{r}
-bamako_long %>%
+syringe_long %>%
   ggplot(aes(x = value, y = ..density..)) +
   geom_histogram(
     bins = 30,
     fill = "white",
     color = "grey20") +
-  geom_density(data = bamako_theor, linetype = 2) +
+  geom_density(data = syringe_theor, linetype = 2) +
   geom_vline(xintercept = {spec_min}, color = "red", linetype = 3) +
   geom_vline(xintercept = {spec_max}, color = "red", linetype = 3) +
   geom_vline(xintercept = {spec_tgt}, color = "red", linetype = 2) +
@@ -298,7 +297,7 @@ capability <- function(UCL, LCL, mean, sd) {
 ```
 
 ```{r}
-capability(spec_max, spec_min, bamako_mean, bamako_sd)
+capability(spec_max, spec_min, syringe_mean, syringe_sd)
 ```
 
 And convert the percentage out of spec in parts per million. We're not considering the 1.5 shift that sometimes is presented in the literature but rather making a simple direct conversion of the proportion out of spec found before:
@@ -314,7 +313,7 @@ per_mio_off_spec <- function(percent_within) {
 ```
 
 ```{r}
-per_mio_off_spec(bamako_within)
+per_mio_off_spec(syringe_within)
 ```
 
 The expected population below the LSL is 1,3% which is very high for industry standards. In fact this corresponds to 12'649 parts per million (ppm) whereas a common target would be 1 ppm. Naturally these figures are indicative and they depend of the context criteria such as severity of the problem, cost, difficulty to eliminate the problem and so on. 
@@ -342,18 +341,9 @@ sigma_conversion_table %>%
 
 ### Cpk index
 
-```{r}
-library(qcc)
-```
-
-```{r}
-bamako_clean <- bamako %>% 
-  select(-Hour) 
-```
-
 ```{r echo = FALSE}
-bamako_xbar <- qcc(
-  bamako_clean, 
+syringe_xbar <- qcc(
+  syringe_clean, 
   type = "xbar", 
   title = "Lamp weight \n xbar chart", 
   xlab = "Sample group", plot = FALSE
@@ -363,14 +353,14 @@ bamako_xbar <- qcc(
 ### Process capability chart {#processcapability}
 
 ```{r}
-bamako_cpk <- process.capability(
-  bamako_xbar,
+syringe_cpk <- process.capability(
+  syringe_xbar,
   breaks = 10,
   spec.limits = c(spec_min, spec_max),
   target = spec_tgt,
   digits = 2,
   print = FALSE,
-  std.dev = bamako_sd
+  std.dev = syringe_sd
 )
 ```
 

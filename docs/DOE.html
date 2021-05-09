@@ -799,7 +799,7 @@ F-statistic:  66.8 on 3 and 16 DF,  p-value: 2.883e-09</code></pre>
 <div class="sourceCode" id="cb97"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb97-1"><a href="DOE.html#cb97-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(car)</span></code></pre></div>
 <div class="sourceCode" id="cb98"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb98-1"><a href="DOE.html#cb98-1" aria-hidden="true" tabindex="-1"></a><span class="fu">durbinWatsonTest</span>(ebike_lm_factor)</span></code></pre></div>
 <pre><code> lag Autocorrelation D-W Statistic p-value
-   1      -0.5343347      2.960893   0.098
+   1      -0.5343347      2.960893   0.088
  Alternative hypothesis: rho != 0</code></pre>
 <p>Although the output shows Autocorrelation of -0.53 we have to consider that the p value is greater than 0.05 thus there is not enough significance to say that there is autocorrelation.</p>
 </div>
@@ -1905,14 +1905,12 @@ Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&
 <span id="cb177-5"><a href="DOE.html#cb177-5" aria-hidden="true" tabindex="-1"></a>                    <span class="at">replicate =</span> <span class="fu">c</span>(<span class="st">&quot;I&quot;</span>, <span class="st">&quot;II&quot;</span>, <span class="st">&quot;III&quot;</span>))</span>
 <span id="cb177-6"><a href="DOE.html#cb177-6" aria-hidden="true" tabindex="-1"></a>  )</span>
 <span id="cb177-7"><a href="DOE.html#cb177-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb177-8"><a href="DOE.html#cb177-8" aria-hidden="true" tabindex="-1"></a>yield <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">28</span>,<span class="dv">36</span>,<span class="dv">18</span>,<span class="dv">31</span>,<span class="dv">25</span>,<span class="dv">32</span>,<span class="dv">19</span>,<span class="dv">30</span>,<span class="dv">27</span>,<span class="dv">32</span>,<span class="dv">23</span>,<span class="dv">29</span>)</span>
-<span id="cb177-9"><a href="DOE.html#cb177-9" aria-hidden="true" tabindex="-1"></a>yield <span class="ot">&lt;-</span> yield <span class="sc">*</span> <span class="fl">2.3</span></span>
-<span id="cb177-10"><a href="DOE.html#cb177-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb177-11"><a href="DOE.html#cb177-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb177-12"><a href="DOE.html#cb177-12" aria-hidden="true" tabindex="-1"></a>pet_doe <span class="ot">&lt;-</span> <span class="fu">bind_cols</span>(</span>
-<span id="cb177-13"><a href="DOE.html#cb177-13" aria-hidden="true" tabindex="-1"></a>  pet_doe,</span>
-<span id="cb177-14"><a href="DOE.html#cb177-14" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;yield&quot;</span> <span class="ot">=</span> yield,</span>
-<span id="cb177-15"><a href="DOE.html#cb177-15" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<span id="cb177-8"><a href="DOE.html#cb177-8" aria-hidden="true" tabindex="-1"></a>yield <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">64.4</span>,<span class="fl">82.8</span>,<span class="fl">41.4</span>,<span class="fl">71.3</span>,<span class="fl">57.5</span>,<span class="fl">73.6</span>,<span class="fl">43.7</span>,<span class="fl">69.0</span>,<span class="fl">62.1</span>,<span class="fl">73.6</span>,<span class="fl">52.9</span>,<span class="fl">66.7</span>)</span>
+<span id="cb177-9"><a href="DOE.html#cb177-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb177-10"><a href="DOE.html#cb177-10" aria-hidden="true" tabindex="-1"></a>pet_doe <span class="ot">&lt;-</span> <span class="fu">bind_cols</span>(</span>
+<span id="cb177-11"><a href="DOE.html#cb177-11" aria-hidden="true" tabindex="-1"></a>  pet_doe,</span>
+<span id="cb177-12"><a href="DOE.html#cb177-12" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;yield&quot;</span> <span class="ot">=</span> yield,</span>
+<span id="cb177-13"><a href="DOE.html#cb177-13" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
 <div id="relevel" class="section level3">
 <h3>Factors as +/-</h3>
 <p>In this first model we’re using a design where the inputs levels have been defined as plus and minus, sometimes also called high and low. The actual naming is not important, what is critical is to ensure that those input parameters are coded as factors. This is necessary as we will see to obtain the right coefficients in the linear model.</p>
@@ -1953,7 +1951,7 @@ F-statistic: 24.82 on 3 and 8 DF,  p-value: 0.0002093</code></pre>
 <div class="sourceCode" id="cb180"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb180-1"><a href="DOE.html#cb180-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(pet_ctr_aov)</span></code></pre></div>
 <pre><code>            Df Sum Sq Mean Sq F value   Pr(&gt;F)    
 A            1 1102.1  1102.1  53.191 8.44e-05 ***
-B            1  396.7   396.7  19.149  0.00236 ** 
+B            1  396.8   396.8  19.149  0.00236 ** 
 A:B          1   44.1    44.1   2.128  0.18278    
 Residuals    8  165.8    20.7                     
 ---
@@ -2046,7 +2044,7 @@ F-statistic: 24.82 on 3 and 8 DF,  p-value: 0.0002093</code></pre>
 <div class="sourceCode" id="cb188"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb188-1"><a href="DOE.html#cb188-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(pet_ctr2_aov)</span></code></pre></div>
 <pre><code>            Df Sum Sq Mean Sq F value   Pr(&gt;F)    
 cA           1 1102.1  1102.1  53.191 8.44e-05 ***
-cB           1  396.7   396.7  19.149  0.00236 ** 
+cB           1  396.8   396.8  19.149  0.00236 ** 
 cA:cB        1   44.1    44.1   2.128  0.18278    
 Residuals    8  165.8    20.7                     
 ---

@@ -61,9 +61,7 @@ pet_doe <- fac.design(
                     replicate = c("I", "II", "III"))
   )
 
-yield <- c(28,36,18,31,25,32,19,30,27,32,23,29)
-yield <- yield * 2.3
-
+yield <- c(64.4,82.8,41.4,71.3,57.5,73.6,43.7,69.0,62.1,73.6,52.9,66.7)
 
 pet_doe <- bind_cols(
   pet_doe,

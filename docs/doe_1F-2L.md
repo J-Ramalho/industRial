@@ -14,8 +14,6 @@ In the literature we often see the simbolic notation $a^k$ but we've opted for m
 
 ## 1 factor 2 levels
 
-One factor two levels
-
 In this chapter we cover introductory designs of experiments and take it progressively until the general 2^k factorial designs. In any case this pretends to be an introduction to the topic with only a subset of the many types of DoEs used in the industry.
 
 ### Means comparison

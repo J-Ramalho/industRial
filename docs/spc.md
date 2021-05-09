@@ -4,7 +4,7 @@
 
 Keeping the variability of an industrial process under control is one of the most important objectives in manufacturing. Based on expert knowledge or on detailed functional analysis the product and process parameters that are critical to quality are identified and selected for close follow-up. The most common and effective way for such follow-up is the Statistical Process Control which is done by using control charts.
 
-**The syringe barrel injection molding**
+**The syringe injection molding process**
 
 <div class="marginnote">
 

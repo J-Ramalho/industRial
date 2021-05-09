@@ -26,7 +26,7 @@ DEF - Sparsity of effects principle: most systems are dominated by some of the m
 
 In this first Case Study dedicated to $2^k$ designs we're going to explore the contrasts settings in the linear model functions.
 
-**The Chemical Process**
+**The PET clothing improvement plan**
 
 In this case study factors have only 2 levels. 
 
@@ -41,69 +41,87 @@ filter <- dplyr::filter
 select <- dplyr::select
 ```
 
-Below we start by loading our dataset:
+Below we start by preparing our dataset:
 
 
 ```r
-chm <- read.csv(sep = ";", header = TRUE, "data/6_chemical.csv")
+library(DoE.base)
 ```
 
-### Factors as +/-
+
+```r
+pet_doe <- fac.design(
+  randomize = FALSE,
+  factor.names=list(A=c("-","+"), 
+                    B=c("-","+"),
+                    replicate = c("I", "II", "III"))
+  )
+
+yield <- c(28,36,18,31,25,32,19,30,27,32,23,29)
+yield <- yield * 2.3
+
+
+pet_doe <- bind_cols(
+  pet_doe,
+  "yield" = yield,
+)
+```
+
+### Factors as +/- {#relevel}
 
 In this first model we're using a design where the inputs levels have been defined as plus and minus, sometimes also called high and low. The actual naming is not important, what is critical is to ensure that those input parameters are coded as factors. This is necessary as we will see to obtain the right coefficients in the linear model.
 
 
 ```r
-chmn_fct <- chm %>%
-  gather(replicate, yield, I, II, III) %>%
+pet_fct <- pet_doe %>%
   mutate(across(c(A,B), as_factor))
-chmn_fct$A <- relevel(chmn_fct$A, ref="+")
-chmn_fct$B <- relevel(chmn_fct$B, ref="+")
+pet_fct$A <- relevel(pet_fct$A, ref="+")
+pet_fct$B <- relevel(pet_fct$B, ref="+")
 
-chmn_ctr_lm <- lm(
+pet_ctr_lm <- lm(
   formula = yield ~ A * B, 
-  data = chmn_fct,
+  data = pet_fct,
   contrasts = list(A = "contr.sum", B = "contr.sum")
   )
-chmn_ctr_aov <- aov(chmn_ctr_lm)
+pet_ctr_aov <- aov(pet_ctr_lm)
 
-summary(chmn_ctr_lm)
+summary(pet_ctr_lm)
 ```
 
 ```
 
 Call:
-lm(formula = yield ~ A * B, data = chmn_fct, contrasts = list(A = "contr.sum", 
+lm.default(formula = yield ~ A * B, data = pet_fct, contrasts = list(A = "contr.sum", 
     B = "contr.sum"))
 
 Residuals:
    Min     1Q Median     3Q    Max 
--2.000 -1.333 -0.500  1.083  3.000 
+-4.600 -3.067 -1.150  2.492  6.900 
 
 Coefficients:
             Estimate Std. Error t value Pr(>|t|)    
-(Intercept)  27.5000     0.5713  48.135 3.84e-11 ***
-A1            4.1667     0.5713   7.293 8.44e-05 ***
-B1           -2.5000     0.5713  -4.376  0.00236 ** 
-A1:B1         0.8333     0.5713   1.459  0.18278    
+(Intercept)   63.250      1.314  48.135 3.84e-11 ***
+A1             9.583      1.314   7.293 8.44e-05 ***
+B1            -5.750      1.314  -4.376  0.00236 ** 
+A1:B1          1.917      1.314   1.459  0.18278    
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
-Residual standard error: 1.979 on 8 degrees of freedom
+Residual standard error: 4.552 on 8 degrees of freedom
 Multiple R-squared:  0.903,	Adjusted R-squared:  0.8666 
 F-statistic: 24.82 on 3 and 8 DF,  p-value: 0.0002093
 ```
 
 ```r
-summary(chmn_ctr_aov)
+summary(pet_ctr_aov)
 ```
 
 ```
             Df Sum Sq Mean Sq F value   Pr(>F)    
-A            1 208.33  208.33  53.191 8.44e-05 ***
-B            1  75.00   75.00  19.149  0.00236 ** 
-A:B          1   8.33    8.33   2.128  0.18278    
-Residuals    8  31.33    3.92                     
+A            1 1102.1  1102.1  53.191 8.44e-05 ***
+B            1  396.7   396.7  19.149  0.00236 ** 
+A:B          1   44.1    44.1   2.128  0.18278    
+Residuals    8  165.8    20.7                     
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ```
@@ -112,12 +130,14 @@ We can observe in the output that the p value of the effects is the same in the 
 
 Note that we've had to adjust the contrasts in the lm function with contr.sum which applies to cases where the sum of the contrasts is zero (the R default is contr.treatment which applies to cases where the levels are coded as 0 and 1).
 
-And now in order to better understand the coding of factors in this unit, we're going to establish a simple regression plot of our data: 
+And now in order to better understand the coding of factors in this unit, we're going to establish a simple regression plot of our data:
 
 
 ```r
 coded <- function(x) { ifelse(x == x[1], -1, 1) }
-chmn_fct %>% 
+pet_fct %>% 
+  unclass() %>% 
+  as_tibble() %>%
   mutate(cA = coded(A), cB = coded(B)) %>%
   pivot_longer(
     cols = c("cA", "cB"),
@@ -127,20 +147,24 @@ chmn_fct %>%
   geom_point(aes(x = level, y = yield)) +
   geom_smooth(aes(x = level, y = yield), 
               method = "lm", se = FALSE, fullrange = TRUE) +
-  coord_cartesian(xlim = c(-2, 2)) +
-  geom_hline(yintercept = 27.5, color = "grey50") +
-  scale_y_continuous(n.breaks = 20) +
+  # coord_cartesian(xlim = c(-2, 2)) +
+  # geom_hline(yintercept = 27.5, color = "grey50") +
+  # scale_y_continuous(n.breaks = 20) +
   facet_wrap(vars(variable)) +
   theme_industRial()
 ```
 
-<img src="doe_mF-2L_files/figure-html/unnamed-chunk-5-1.png" width="672" />
+<img src="doe_mF-2L_files/figure-html/unnamed-chunk-6-1.png" width="672" />
+
+Note that we had to extract the data from the S3 doe object, which we've done with using unclass() and then as_tibble()
 
 The intercept passes at 27.5 as seen on the lm summary. We're going now to put the B factor at its maximum and replot:
 
 
 ```r
-chmn_fct %>% 
+pet_fct %>% 
+  unclass() %>%
+  as_tibble() %>%
   mutate(cA = coded(A), cB = coded(B)) %>%
   filter(cB == 1) %>%
   pivot_longer(
@@ -157,18 +181,18 @@ chmn_fct %>%
   theme_industRial()
 ```
 
-<img src="doe_mF-2L_files/figure-html/unnamed-chunk-6-1.png" width="672" />
+<img src="doe_mF-2L_files/figure-html/unnamed-chunk-7-1.png" width="672" />
 
 and now going to check it with a prediction:
 
 
 ```r
-predict(chmn_ctr_lm, newdata = list(A = "+", B = "+"))
+predict(pet_ctr_lm, newdata = list(A = "+", B = "+"))
 ```
 
 ```
  1 
-30 
+69 
 ```
 
 As seen on the plot the output of our prediction is 30 corresponding the high level of A when B is at 1. To be precise we need to multiply all the coefficients by the levels of the factors as : +1x27.4 +1x(-2.5) + 1x0.83333
@@ -179,55 +203,55 @@ In this example we convert the levels to factors still using the +/-1 notation. 
 
 
 ```r
-chmn_fct <- chmn_fct %>% mutate(cA = coded(A), cB = coded(B))
-chmn_fct2 <- chmn_fct %>% mutate(across(c(cA, cB), as_factor))
-chmn_fct2$cA <- relevel(chmn_fct2$cA, ref = "1")
-chmn_fct2$cB <- relevel(chmn_fct2$cB, ref = "1")
+pet_fct <- pet_fct %>% mutate(cA = coded(A), cB = coded(B))
+pet_fct2 <- pet_fct %>% mutate(across(c(cA, cB), as_factor))
+pet_fct2$cA <- relevel(pet_fct2$cA, ref = "1")
+pet_fct2$cB <- relevel(pet_fct2$cB, ref = "1")
 
-chmn_ctr2_lm <- lm(
+pet_ctr2_lm <- lm(
   formula = yield ~ cA * cB, 
-  data = chmn_fct2,
+  data = pet_fct2,
   contrasts = list(cA = "contr.sum", cB = "contr.sum")
   )
-chmn_ctr2_aov <- aov(chmn_ctr2_lm)
+pet_ctr2_aov <- aov(pet_ctr2_lm)
 
-summary(chmn_ctr2_lm)
+summary(pet_ctr2_lm)
 ```
 
 ```
 
 Call:
-lm(formula = yield ~ cA * cB, data = chmn_fct2, contrasts = list(cA = "contr.sum", 
+lm.default(formula = yield ~ cA * cB, data = pet_fct2, contrasts = list(cA = "contr.sum", 
     cB = "contr.sum"))
 
 Residuals:
    Min     1Q Median     3Q    Max 
--2.000 -1.333 -0.500  1.083  3.000 
+-4.600 -3.067 -1.150  2.492  6.900 
 
 Coefficients:
             Estimate Std. Error t value Pr(>|t|)    
-(Intercept)  27.5000     0.5713  48.135 3.84e-11 ***
-cA1           4.1667     0.5713   7.293 8.44e-05 ***
-cB1          -2.5000     0.5713  -4.376  0.00236 ** 
-cA1:cB1       0.8333     0.5713   1.459  0.18278    
+(Intercept)   63.250      1.314  48.135 3.84e-11 ***
+cA1            9.583      1.314   7.293 8.44e-05 ***
+cB1           -5.750      1.314  -4.376  0.00236 ** 
+cA1:cB1        1.917      1.314   1.459  0.18278    
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
-Residual standard error: 1.979 on 8 degrees of freedom
+Residual standard error: 4.552 on 8 degrees of freedom
 Multiple R-squared:  0.903,	Adjusted R-squared:  0.8666 
 F-statistic: 24.82 on 3 and 8 DF,  p-value: 0.0002093
 ```
 
 ```r
-summary(chmn_ctr2_aov)
+summary(pet_ctr2_aov)
 ```
 
 ```
             Df Sum Sq Mean Sq F value   Pr(>F)    
-cA           1 208.33  208.33  53.191 8.44e-05 ***
-cB           1  75.00   75.00  19.149  0.00236 ** 
-cA:cB        1   8.33    8.33   2.128  0.18278    
-Residuals    8  31.33    3.92                     
+cA           1 1102.1  1102.1  53.191 8.44e-05 ***
+cB           1  396.7   396.7  19.149  0.00236 ** 
+cA:cB        1   44.1    44.1   2.128  0.18278    
+Residuals    8  165.8    20.7                     
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ```
@@ -242,12 +266,12 @@ Checking now with coded factors:
 
 
 ```r
-predict(chmn_ctr2_lm, newdata = list(cA = "1", cB = "1"))
+predict(pet_ctr2_lm, newdata = list(cA = "1", cB = "1"))
 ```
 
 ```
  1 
-30 
+69 
 ```
 
 
@@ -257,7 +281,7 @@ In this example we're going to code the levels with +1/-1 but we're going use th
 
 
 ```r
-chmn_num <- chmn_fct %>% mutate(cA = coded(A), cB = coded(B))
+chmn_num <- pet_fct %>% mutate(cA = coded(A), cB = coded(B))
 chmn_num_lm <- lm(
   formula = yield ~ cA * cB, 
   data = chmn_num
@@ -270,22 +294,22 @@ summary(chmn_num_lm)
 ```
 
 Call:
-lm(formula = yield ~ cA * cB, data = chmn_num)
+lm.default(formula = yield ~ cA * cB, data = chmn_num)
 
 Residuals:
    Min     1Q Median     3Q    Max 
--2.000 -1.333 -0.500  1.083  3.000 
+-4.600 -3.067 -1.150  2.492  6.900 
 
 Coefficients:
             Estimate Std. Error t value Pr(>|t|)    
-(Intercept)  27.5000     0.5713  48.135 3.84e-11 ***
-cA            4.1667     0.5713   7.293 8.44e-05 ***
-cB           -2.5000     0.5713  -4.376  0.00236 ** 
-cA:cB         0.8333     0.5713   1.459  0.18278    
+(Intercept)   63.250      1.314  48.135 3.84e-11 ***
+cA             9.583      1.314   7.293 8.44e-05 ***
+cB            -5.750      1.314  -4.376  0.00236 ** 
+cA:cB          1.917      1.314   1.459  0.18278    
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
-Residual standard error: 1.979 on 8 degrees of freedom
+Residual standard error: 4.552 on 8 degrees of freedom
 Multiple R-squared:  0.903,	Adjusted R-squared:  0.8666 
 F-statistic: 24.82 on 3 and 8 DF,  p-value: 0.0002093
 ```
@@ -296,10 +320,10 @@ summary(chmn_num_aov)
 
 ```
             Df Sum Sq Mean Sq F value   Pr(>F)    
-cA           1 208.33  208.33  53.191 8.44e-05 ***
-cB           1  75.00   75.00  19.149  0.00236 ** 
-cA:cB        1   8.33    8.33   2.128  0.18278    
-Residuals    8  31.33    3.92                     
+cA           1 1102.1  1102.1  53.191 8.44e-05 ***
+cB           1  396.7   396.7  19.149  0.00236 ** 
+cA:cB        1   44.1    44.1   2.128  0.18278    
+Residuals    8  165.8    20.7                     
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ```
@@ -310,7 +334,7 @@ predict(chmn_num_lm, newdata = list(cA = 1, cB = 1))
 
 ```
  1 
-30 
+69 
 ```
 
 In this case we did not define any contrasts. Looking into the lm We can see we've obtained exactly the same outputs.
@@ -336,16 +360,16 @@ We select standard error as argument for the error.bars argument.
 ```r
 # Alternative plot from the RcmdrMisc package ("Stats facile avec R")
 par(mfrow = c(1,1))
-plotMeans(response = chmn_fct$yield,
-          factor2 = chmn_fct$A,
-          factor1 = chmn_fct$B,
+plotMeans(response = pet_fct$yield,
+          factor2 = pet_fct$A,
+          factor1 = pet_fct$B,
           error.bars = "se",
           xlab = "A - Reactant",
           legend.lab = "B - Catalist",
           ylab = "Yield")
 ```
 
-<img src="doe_mF-2L_files/figure-html/unnamed-chunk-12-1.png" width="672" />
+<img src="doe_mF-2L_files/figure-html/unnamed-chunk-13-1.png" width="672" />
 
 ## 3 factors 2 levels
 
@@ -358,7 +382,7 @@ response - etch rate in Angstrom/m
 
 
 ```r
-pls <- read.csv("data/6-3_plasma.csv")
+pls <- read.csv("~/Documents/data_science/industRial/data-raw//6-3_plasma.csv")
 plsn <- pls %>% 
   gather(replicate, etch, Rep1, Rep2)
 plsn_fct <- plsn %>%
@@ -380,7 +404,7 @@ summary(plsn_ctr_lm)
 ```
 
 Call:
-lm(formula = etch ~ A * B * C, data = plsn_fct, contrasts = list(A = "contr.sum", 
+lm.default(formula = etch ~ A * B * C, data = plsn_fct, contrasts = list(A = "contr.sum", 
     B = "contr.sum", C = "contr.sum"))
 
 Residuals:
@@ -521,7 +545,7 @@ summary(plsn_lm)
 ```
 
 Call:
-lm(formula = etch ~ A * C, data = plsn)
+lm.default(formula = etch ~ A * C, data = plsn)
 
 Residuals:
    Min     1Q Median     3Q    Max 
@@ -572,7 +596,7 @@ plsn %>%
     subtitle = "Prediction with reduced model")
 ```
 
-<img src="doe_mF-2L_files/figure-html/unnamed-chunk-23-1.png" width="672" />
+<img src="doe_mF-2L_files/figure-html/unnamed-chunk-24-1.png" width="672" />
 
 ### Response surface plot {#persp}
 
@@ -595,7 +619,7 @@ persp(
 )
 ```
 
-<img src="doe_mF-2L_files/figure-html/unnamed-chunk-24-1.png" width="672" />
+<img src="doe_mF-2L_files/figure-html/unnamed-chunk-25-1.png" width="672" />
 
 Due to the interaction between factors A and C the surface is slightly bent. This is exactly what we observe in the interactions plots of which the one below corresponds to slicing the surface at the min and the max of Power:
 
@@ -612,7 +636,7 @@ interaction.plot(x.factor = plsn$A,
                  main = "Plasma etching experiment")
 ```
 
-<img src="doe_mF-2L_files/figure-html/unnamed-chunk-25-1.png" width="672" />
+<img src="doe_mF-2L_files/figure-html/unnamed-chunk-26-1.png" width="672" />
 
 Just like in the surface plot we can see here in the interaction plot that the response of yield on gap is different depending on the level of power. When power is high it decreases and when power is low it increases. As a reminder this is what is called an interaction between these two factors.
 
@@ -626,7 +650,7 @@ The Filtration example
 
 
 ```r
-flt <- read.csv("data/6-4_filtration.csv")
+flt <- read.csv("~/Documents/data_science/industRial/data-raw//6-4_filtration.csv")
 flt_nf <- flt %>%
   mutate(across(-filtration, as_factor))
 ```
@@ -644,7 +668,7 @@ summary(flt_lm)
 ```
 
 Call:
-lm(formula = filtration ~ A * B * C * D, data = flt)
+lm.default(formula = filtration ~ A * B * C * D, data = flt)
 
 Residuals:
 ALL 16 residuals are 0: no residual degrees of freedom!
@@ -694,7 +718,7 @@ main_effects_plot <- qqPlot(
   )
 ```
 
-<img src="doe_mF-2L_files/figure-html/unnamed-chunk-28-1.png" width="672" />
+<img src="doe_mF-2L_files/figure-html/unnamed-chunk-29-1.png" width="672" />
 
 In plot we can see that the effects that have the highest influence on the output are the effects A, C and D and their interactions. We can still confirm these observations with a calculation of the percentage contribution of each effect as follows:
 
@@ -731,7 +755,7 @@ summary(flt_red_lm)
 ```
 
 Call:
-lm(formula = filtration ~ A + C + D + A:C + A:D, data = flt)
+lm.default(formula = filtration ~ A + C + D + A:C + A:D, data = flt)
 
 Residuals:
     Min      1Q  Median      3Q     Max 
@@ -765,7 +789,7 @@ par(mfrow = c(2,2))
 plot(flt_red_lm)
 ```
 
-<img src="doe_mF-2L_files/figure-html/unnamed-chunk-31-1.png" width="672" />
+<img src="doe_mF-2L_files/figure-html/unnamed-chunk-32-1.png" width="672" />
 
 We can now establish the main effects and interaction plots and conclude on the optimal settings to maximize the output: A and D should be on the max and C on the min.
 

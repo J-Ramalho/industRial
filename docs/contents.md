@@ -162,8 +162,8 @@
   <tr>
    
    <td style="text-align:left;background-color: white !important;"> 2F-2L </td>
-   <td style="text-align:left;background-color: white !important;"> chemical experiment </td>
-   <td style="text-align:left;background-color: white !important;">  </td>
+   <td style="text-align:left;background-color: white !important;"> pet_doe </td>
+   <td style="text-align:left;background-color: white !important;"> [stats::relevel](#relevel) </td>
   </tr>
   <tr>
    
@@ -186,7 +186,7 @@
   <tr>
    <td style="text-align:left;vertical-align: middle !important;background-color: white !important;" rowspan="4"> SPC </td>
    <td style="text-align:left;vertical-align: middle !important;background-color: white !important;" rowspan="3"> Control charts </td>
-   <td style="text-align:left;vertical-align: middle !important;background-color: white !important;" rowspan="4"> bamako </td>
+   <td style="text-align:left;vertical-align: middle !important;background-color: white !important;" rowspan="4"> syringe_diameter </td>
    <td style="text-align:left;background-color: white !important;"> [qcc::qcc – xbar](#xbarchart) </td>
   </tr>
   <tr>

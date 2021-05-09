@@ -33,7 +33,7 @@ DEF - Sparsity of effects principle: most systems are dominated by some of the m
 
 In this first Case Study dedicated to $2^k$ designs we're going to explore the contrasts settings in the linear model functions.
 
-**The Chemical Process**
+**The PET clothing improvement plan**
 
 In this case study factors have only 2 levels. 
 
@@ -47,43 +47,62 @@ filter <- dplyr::filter
 select <- dplyr::select
 ```
 
-Below we start by loading our dataset:
+Below we start by preparing our dataset:
 
 ```{r}
-chm <- read.csv(sep = ";", header = TRUE, "data/6_chemical.csv")
+library(DoE.base)
 ```
 
-### Factors as +/-
+```{r}
+pet_doe <- fac.design(
+  randomize = FALSE,
+  factor.names=list(A=c("-","+"), 
+                    B=c("-","+"),
+                    replicate = c("I", "II", "III"))
+  )
+
+yield <- c(28,36,18,31,25,32,19,30,27,32,23,29)
+yield <- yield * 2.3
+
+
+pet_doe <- bind_cols(
+  pet_doe,
+  "yield" = yield,
+)
+```
+
+### Factors as +/- {#relevel}
 
 In this first model we're using a design where the inputs levels have been defined as plus and minus, sometimes also called high and low. The actual naming is not important, what is critical is to ensure that those input parameters are coded as factors. This is necessary as we will see to obtain the right coefficients in the linear model.
 
 ```{r}
-chmn_fct <- chm %>%
-  gather(replicate, yield, I, II, III) %>%
+pet_fct <- pet_doe %>%
   mutate(across(c(A,B), as_factor))
-chmn_fct$A <- relevel(chmn_fct$A, ref="+")
-chmn_fct$B <- relevel(chmn_fct$B, ref="+")
+pet_fct$A <- relevel(pet_fct$A, ref="+")
+pet_fct$B <- relevel(pet_fct$B, ref="+")
 
-chmn_ctr_lm <- lm(
+pet_ctr_lm <- lm(
   formula = yield ~ A * B, 
-  data = chmn_fct,
+  data = pet_fct,
   contrasts = list(A = "contr.sum", B = "contr.sum")
   )
-chmn_ctr_aov <- aov(chmn_ctr_lm)
+pet_ctr_aov <- aov(pet_ctr_lm)
 
-summary(chmn_ctr_lm)
-summary(chmn_ctr_aov)
+summary(pet_ctr_lm)
+summary(pet_ctr_aov)
 ```
 
 We can observe in the output that the p value of the effects is the same in the lm and in the the aov functions. This confirms that the contrasts have been correctly specified with contr.sum
 
 Note that we've had to adjust the contrasts in the lm function with contr.sum which applies to cases where the sum of the contrasts is zero (the R default is contr.treatment which applies to cases where the levels are coded as 0 and 1).
 
-And now in order to better understand the coding of factors in this unit, we're going to establish a simple regression plot of our data: 
+And now in order to better understand the coding of factors in this unit, we're going to establish a simple regression plot of our data:
 
 ```{r}
 coded <- function(x) { ifelse(x == x[1], -1, 1) }
-chmn_fct %>% 
+pet_fct %>% 
+  unclass() %>% 
+  as_tibble() %>%
   mutate(cA = coded(A), cB = coded(B)) %>%
   pivot_longer(
     cols = c("cA", "cB"),
@@ -93,17 +112,21 @@ chmn_fct %>%
   geom_point(aes(x = level, y = yield)) +
   geom_smooth(aes(x = level, y = yield), 
               method = "lm", se = FALSE, fullrange = TRUE) +
-  coord_cartesian(xlim = c(-2, 2)) +
-  geom_hline(yintercept = 27.5, color = "grey50") +
-  scale_y_continuous(n.breaks = 20) +
+  # coord_cartesian(xlim = c(-2, 2)) +
+  # geom_hline(yintercept = 27.5, color = "grey50") +
+  # scale_y_continuous(n.breaks = 20) +
   facet_wrap(vars(variable)) +
   theme_industRial()
 ```
 
+Note that we had to extract the data from the S3 doe object, which we've done with using unclass() and then as_tibble()
+
 The intercept passes at 27.5 as seen on the lm summary. We're going now to put the B factor at its maximum and replot:
 
 ```{r}
-chmn_fct %>% 
+pet_fct %>% 
+  unclass() %>%
+  as_tibble() %>%
   mutate(cA = coded(A), cB = coded(B)) %>%
   filter(cB == 1) %>%
   pivot_longer(
@@ -123,7 +146,7 @@ chmn_fct %>%
 and now going to check it with a prediction:
 
 ```{r}
-predict(chmn_ctr_lm, newdata = list(A = "+", B = "+"))
+predict(pet_ctr_lm, newdata = list(A = "+", B = "+"))
 ```
 
 As seen on the plot the output of our prediction is 30 corresponding the high level of A when B is at 1. To be precise we need to multiply all the coefficients by the levels of the factors as : +1x27.4 +1x(-2.5) + 1x0.83333
@@ -133,20 +156,20 @@ As seen on the plot the output of our prediction is 30 corresponding the high le
 In this example we convert the levels to factors still using the +/-1 notation. This will also be helpfull to apply what are called the Yates tables.
 
 ```{r}
-chmn_fct <- chmn_fct %>% mutate(cA = coded(A), cB = coded(B))
-chmn_fct2 <- chmn_fct %>% mutate(across(c(cA, cB), as_factor))
-chmn_fct2$cA <- relevel(chmn_fct2$cA, ref = "1")
-chmn_fct2$cB <- relevel(chmn_fct2$cB, ref = "1")
+pet_fct <- pet_fct %>% mutate(cA = coded(A), cB = coded(B))
+pet_fct2 <- pet_fct %>% mutate(across(c(cA, cB), as_factor))
+pet_fct2$cA <- relevel(pet_fct2$cA, ref = "1")
+pet_fct2$cB <- relevel(pet_fct2$cB, ref = "1")
 
-chmn_ctr2_lm <- lm(
+pet_ctr2_lm <- lm(
   formula = yield ~ cA * cB, 
-  data = chmn_fct2,
+  data = pet_fct2,
   contrasts = list(cA = "contr.sum", cB = "contr.sum")
   )
-chmn_ctr2_aov <- aov(chmn_ctr2_lm)
+pet_ctr2_aov <- aov(pet_ctr2_lm)
 
-summary(chmn_ctr2_lm)
-summary(chmn_ctr2_aov)
+summary(pet_ctr2_lm)
+summary(pet_ctr2_aov)
 ```
 
 Note that a coefficient in a regression equation is the change in the response when the corresponding variable changes by +1. Special attention to the + and - needs to be taken with the R output.
@@ -158,7 +181,7 @@ So the effects and interaction(s) from their minumum to their maximum correspond
 Checking now with coded factors:
 
 ```{r}
-predict(chmn_ctr2_lm, newdata = list(cA = "1", cB = "1"))
+predict(pet_ctr2_lm, newdata = list(cA = "1", cB = "1"))
 ```
 
 
@@ -167,7 +190,7 @@ predict(chmn_ctr2_lm, newdata = list(cA = "1", cB = "1"))
 In this example we're going to code the levels with +1/-1 but we're going use the numeric coding:
 
 ```{r}
-chmn_num <- chmn_fct %>% mutate(cA = coded(A), cB = coded(B))
+chmn_num <- pet_fct %>% mutate(cA = coded(A), cB = coded(B))
 chmn_num_lm <- lm(
   formula = yield ~ cA * cB, 
   data = chmn_num
@@ -200,9 +223,9 @@ We select standard error as argument for the error.bars argument.
 ```{r}
 # Alternative plot from the RcmdrMisc package ("Stats facile avec R")
 par(mfrow = c(1,1))
-plotMeans(response = chmn_fct$yield,
-          factor2 = chmn_fct$A,
-          factor1 = chmn_fct$B,
+plotMeans(response = pet_fct$yield,
+          factor2 = pet_fct$A,
+          factor1 = pet_fct$B,
           error.bars = "se",
           xlab = "A - Reactant",
           legend.lab = "B - Catalist",
@@ -219,7 +242,7 @@ C - power in W
 response - etch rate in Angstrom/m
 
 ```{r}
-pls <- read.csv("data/6-3_plasma.csv")
+pls <- read.csv("~/Documents/data_science/industRial/data-raw//6-3_plasma.csv")
 plsn <- pls %>% 
   gather(replicate, etch, Rep1, Rep2)
 plsn_fct <- plsn %>%
@@ -382,7 +405,7 @@ Possible approaches:
 The Filtration example
 
 ```{r}
-flt <- read.csv("data/6-4_filtration.csv")
+flt <- read.csv("~/Documents/data_science/industRial/data-raw//6-4_filtration.csv")
 flt_nf <- flt %>%
   mutate(across(-filtration, as_factor))
 ```

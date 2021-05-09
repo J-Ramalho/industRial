@@ -6,12 +6,12 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Gage r&amp;R | industRial data science</title>
   <meta name="description" content="Gage r&amp;R | industRial data science" />
-  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Gage r&amp;R | industRial data science" />
   <meta property="og:type" content="book" />
   
-  <meta property="og:image" content="img/cover3.png" />
+  <meta property="og:image" content="/img/cover3.png" />
   
   <meta name="github-repo" content="J-Ramalho/industRialds" />
 
@@ -19,12 +19,12 @@
   <meta name="twitter:title" content="Gage r&amp;R | industRial data science" />
   
   
-  <meta name="twitter:image" content="img/cover3.png" />
+  <meta name="twitter:image" content="/img/cover3.png" />
 
 <meta name="author" content="João Ramalho" />
 
 
-<meta name="date" content="2021-05-08" />
+<meta name="date" content="2021-05-09" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -51,6 +51,8 @@
 
 
 
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
 <script src="libs/kePrint-0.0.1/kePrint.js"></script>
 <link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
 <!-- Global site tag (gtag.js) - Google Analytics -->
@@ -131,6 +133,29 @@ code span.st { color: #4070a0; } /* String */
 code span.va { color: #19177c; } /* Variable */
 code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
 </style>
 
 <link rel="stylesheet" href="industRialds.css" type="text/css" />
@@ -235,7 +260,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#factors-2-levels"><i class="fa fa-check"></i>2 factors 2 levels</a>
 <ul>
-<li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#factors-as--"><i class="fa fa-check"></i>Factors as +/-</a></li>
+<li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#relevel"><i class="fa fa-check"></i>Factors as +/-</a></li>
 <li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#factors-as---1"><i class="fa fa-check"></i>Factors as +/- 1</a></li>
 <li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#factors-as---1-numeric"><i class="fa fa-check"></i>Factors as +/- 1 numeric</a></li>
 <li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#sd-bars-in-interaction-plots"><i class="fa fa-check"></i>sd bars in interaction plots</a></li>
@@ -536,7 +561,7 @@ Number of Distinct Categories = 3 </code></pre>
 <h3>Acceptance on SD</h3>
 <p>The study variation table is established by calculating the square root of each variance (the standard deviation) and by multiplying it by 6 (the six sigma) and then again by comparing each variation with the total variation. Standard deviations are usualy more speaking to the industry professionals. This table also provides a comparison with the specification.</p>
 <p><strong>Criteria for measurement system acceptance:</strong></p>
-<p>According to the guidelines from the <span class="citation"><a href="references.html#ref-AIAG2010" role="doc-biblioref">Automotive Industry Action Group</a> (<a href="references.html#ref-AIAG2010" role="doc-biblioref">2010</a>)</span>, if your system variation is less than 10% of the process variation, then it is acceptable.</p>
+<p>According to the guidelines from the <span class="citation"><a href="#ref-AIAG2010" role="doc-biblioref">Automotive Industry Action Group</a> (<a href="#ref-AIAG2010" role="doc-biblioref">2010</a>)</span>, if your system variation is less than 10% of the process variation, then it is acceptable.</p>
 <p>To evaluate your process variation, compare the Total Gage R&amp;R contribution in the %StudyVar column with the values in the list below:</p>
 <ul>
 <li><p>Less than 10%: the measurement system is acceptable</p></li>
@@ -586,7 +611,7 @@ Number of Distinct Categories = 3 </code></pre>
 <ol style="list-style-type: decimal">
 <li>when the operators reproducibility is negative it is converted to zero.</li>
 </ol>
-<p><span class="citation">(<a href="references.html#ref-Montgomery2012" role="doc-biblioref">Montgomery 2012</a>)</span> in page 557 adresses this case in the following way:</p>
+<p><span class="citation">(<a href="#ref-Montgomery2012" role="doc-biblioref">Montgomery 2012</a>)</span> in page 557 adresses this case in the following way:</p>
 <p><em>Notice that the estimate of one of the variance components,is negative. This is certainly not reasonable because by definition variances are nonnegative. Unfortunately, negative estimates of variance components can result when we use the analysis of variance method of estimation (this is considered one of its drawbacks). We can deal with this negative result in a variety of ways:</em></p>
 <p><em>1) one possibility is to assume that the negative estimate means that the variance component is really zero and just set it to zero, leaving the other nonnegative estimates unchanged.</em></p>
 <p><em>2) Another approach is to estimate the variance components with a method that assures nonnegative estimates (this can be done with the maximum likelihood approach).</em></p>
@@ -695,8 +720,20 @@ that we can assign in R to the variable calibration_var.</p>
 <p>For a specific measurement of say 1’800 <span class="math inline">\(\mu m\)</span> we then say: the tablet thickness is 1’800 <span class="math inline">\(\mu m\)</span> <span class="math inline">\(\pm\)</span> 3.3 <span class="math inline">\(\mu m\)</span>, at the 95 percent confidence level. Or written in short:</p>
 <p>1’800 <span class="math inline">\(\mu m\)</span> <span class="math inline">\(\pm\)</span> 3.3 <span class="math inline">\(\mu m\)</span>, at a level of confidence of 95%</p>
 <p>Knowing that the specification is [1’775; 1’825] <span class="math inline">\(\mu\)</span>m we have a specification range of 500. The expanded uncertainty corresponds to 13 %. This is another way of looking into the ratio between method variation and specification. This {SixSigma} package gave a similar result of 15.37%. To be noted that the calculation in by the package corresponds to 3 standard deviations and does not comprise the supplier calibration.</p>
-<p>For further reading on the topic we recommend the booklet from <span class="citation"><a href="references.html#ref-Bell2001" role="doc-biblioref">Bell</a> (<a href="references.html#ref-Bell2001" role="doc-biblioref">2001</a>)</span>.</p>
+<p>For further reading on the topic we recommend the booklet from <span class="citation"><a href="#ref-Bell2001" role="doc-biblioref">Bell</a> (<a href="#ref-Bell2001" role="doc-biblioref">2001</a>)</span>.</p>
 
+</div>
+</div>
+<h3>References</h3>
+<div id="refs" class="references csl-bib-body hanging-indent">
+<div id="ref-AIAG2010" class="csl-entry">
+Automotive Industry Action Group, AIAG -, ed. 2010. <a href="https://www.aiag.org/store/publications/details?ProductCode=MSA-4">https://www.aiag.org/store/publications/details?ProductCode=MSA-4</a>.
+</div>
+<div id="ref-Bell2001" class="csl-entry">
+Bell, Stéphanie. 2001. <em>The Beginers Guide to Uncertainty of Measurement</em>. 2nd ed. Teddington, Middlesex, United Kingdom: National Phisical Laboratory. <a href="https://www.npl.co.uk/special-pages/guides/gpg11_uncertainty">https://www.npl.co.uk/special-pages/guides/gpg11_uncertainty</a>.
+</div>
+<div id="ref-Montgomery2012" class="csl-entry">
+Montgomery, Douglas C. 2012. <em>Design and Analysis of Experiments</em>. 8th ed. Wiley.
 </div>
 </div>
             </section>

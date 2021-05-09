@@ -56,13 +56,15 @@ head(industRial::dial_control)
 ```
 
 ```
-  Operator       Date  Defect Location
-1     Jane 2018.01.31  Indent       3h
-2     Jane 2018.02.02  Indent       3h
-3     Jane 2018.02.02  Indent       4h
-4    Peter 2018.02.02  Indent      10h
-5     Jane 2018.02.03 Scratch       3h
-6     Jane 2018.02.03  Indent       3h
+# A tibble: 6 x 4
+  Operator Date       Defect  Location
+  <chr>    <chr>      <chr>   <chr>   
+1 Jane     2018.01.31 Indent  3h      
+2 Jane     2018.02.02 Indent  3h      
+3 Jane     2018.02.02 Indent  4h      
+4 Peter    2018.02.02 Indent  10h     
+5 Jane     2018.02.03 Scratch 3h      
+6 Jane     2018.02.03 Indent  3h      
 ```
 
 If repetitive use is required then it is best to directly load the package in the current session:
@@ -187,7 +189,7 @@ recommended_packages %>%
 |magrittr    |data science           |2.0.1   |
 |tibble      |data science           |3.1.0   |
 |tidyr       |data science           |1.1.2   |
-|broom       |datascience            |0.7.4   |
+|broom       |datascience            |0.7.6   |
 |tidyverse   |datascience            |1.3.0   |
 |purrr       |functional programming |0.3.4   |
 |qicharts2   |industrial stats       |0.7.1   |
@@ -197,7 +199,7 @@ recommended_packages %>%
 |patchwork   |plotting               |1.1.1   |
 |ggplot2     |plotting               |3.3.3   |
 |scales      |plotting               |1.1.1   |
-|bookdown    |publishing             |0.21    |
+|bookdown    |publishing             |0.22    |
 |knitr       |publishing             |1.31    |
 |stats       |statistics             |4.0.5   |
 |tidymodels  |statistics             |0.1.2   |
@@ -232,7 +234,7 @@ devtools::session_info()[[1]]
  collate  en_US.UTF-8                 
  ctype    en_US.UTF-8                 
  tz       Europe/Zurich               
- date     2021-05-08                  
+ date     2021-05-09                  
 ```
 
 

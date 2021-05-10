@@ -8,16 +8,16 @@ output_dir: "../../docs"
 
 rmd_files: [
   "index.Rmd",
-  "R_toolbox.Rmd",
-  "contents.Rmd",
-  "sixsigma.Rmd",
-  "gage_rnR.Rmd",
-  "doe_1F-2L.Rmd",
-  "doe_1F-nL.Rmd",
-  "doe_2F-nL.Rmd",
-  "doe_mF-nL.Rmd",
-  "doe_mF-2L.Rmd",
-  "spc.Rmd",
-  "glossary.Rmd",
-  "references.Rmd"
+  "1_Rtoolbox.Rmd",
+  "2_toc.Rmd",
+  "3_sixsigma.Rmd",
+  "4_msa.Rmd",
+  "5_simpleDOE.Rmd",
+  "6_regression.Rmd",
+  "7_interactions.Rmd",
+  "8_generalDOE.Rmd",
+  "9_twolevelDOE.Rmd",
+  "10_spc.Rmd",
+  "11_glossary.Rmd",
+  "12_references.Rmd"
 ]

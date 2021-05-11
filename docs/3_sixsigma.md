@@ -82,9 +82,9 @@ We can see that the count includes both the deffect type and the location (the h
 
 The team leader promotes a culture of fact based assessment of the quality measurements. Every week the team looks back and observes the weekly counts. This is important because it helps moving away from perception into a more solid assessment. The volume of data is higher like this enabling trends to start becoming apparent. The team can discuss potential actions and prepare reporting to the supplier of the parts (the stamping workshop). It also helps calibrating between operators and agreeing on acceptance criteria and what is and what is not a defect.
 
-### Pareto chart {#paretochart}
-
 A first example of the pareto of the types of defects:
+
+[]{#paretochart}
 
 
 ```r
@@ -108,7 +108,7 @@ d_type_p +
 
 As often happens we can see that the first two deffects account for more than 80% of the problems. Identation and scratching are the things to tackle here.
 
-From the available data presented before in table \@ref(tab:tab-dial) we can go deeper and establish a pareto of the defect location:
+From the available data presented before in table we can go deeper and establish a pareto of the defect location:
 
 
 ```r
@@ -167,7 +167,7 @@ effect <- "Too high uncertainty"
 
 And then load the qcc package and quickly obtain a simple diagram that allows for a quick visualisation of these influencing factors.
 
-### Fishbone diagram {#fishbone}
+[]{#fishbone}
 
 
 ```r
@@ -265,7 +265,7 @@ perfume_long <- perfume_experiment %>%
   mutate(correlation = as_factor(correlation))
 ```
 
-### Tile plot {#tileplot}
+[]{#tileplot}
 
 
 ```r

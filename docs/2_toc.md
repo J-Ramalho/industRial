@@ -58,7 +58,7 @@
    <td style="text-align:left;background-color: white !important;">  </td>
   </tr>
   <tr>
-   <td style="text-align:left;vertical-align: middle !important;background-color: white !important;" rowspan="22"> DOE </td>
+   <td style="text-align:left;vertical-align: middle !important;background-color: white !important;" rowspan="23"> DOE </td>
    <td style="text-align:left;vertical-align: middle !important;background-color: white !important;" rowspan="3"> Simple experiments </td>
    <td style="text-align:left;vertical-align: middle !important;background-color: white !important;" rowspan="3"> pet_delivery </td>
    <td style="text-align:left;background-color: white !important;"> [stats::t.test](#tTest) </td>
@@ -133,13 +133,13 @@
    
    <td style="text-align:left;vertical-align: middle !important;background-color: white !important;" rowspan="2"> Interactions </td>
    <td style="text-align:left;vertical-align: middle !important;background-color: white !important;" rowspan="2"> solarcell_output </td>
-   <td style="text-align:left;background-color: white !important;"> [stats:interaction.plot](#interactionPlot) </td>
+   <td style="text-align:left;background-color: white !important;"> [car::outlierTest](#outlierTest) </td>
   </tr>
   <tr>
    
    
    
-   <td style="text-align:left;background-color: white !important;"> [car::outlierTest](#outlierTest) </td>
+   <td style="text-align:left;background-color: white !important;"> [stats:interaction.plot](#interactionPlot) </td>
   </tr>
   <tr>
    
@@ -161,9 +161,15 @@
   </tr>
   <tr>
    
-   <td style="text-align:left;vertical-align: middle !important;background-color: white !important;" rowspan="5"> Two level designs </td>
-   <td style="text-align:left;vertical-align: middle !important;background-color: white !important;" rowspan="2"> pet_doe </td>
+   <td style="text-align:left;vertical-align: middle !important;background-color: white !important;" rowspan="6"> Two level designs </td>
+   <td style="text-align:left;vertical-align: middle !important;background-color: white !important;" rowspan="3"> pet_doe </td>
    <td style="text-align:left;background-color: white !important;"> [stats::relevel](#relevel) </td>
+  </tr>
+  <tr>
+   
+   
+   
+   <td style="text-align:left;background-color: white !important;"> [stats::contrasts](#contrasts) </td>
   </tr>
   <tr>
    
@@ -205,7 +211,7 @@
    
    
    
-   <td style="text-align:left;background-color: white !important;"> [qcc::limits.xbar](#limitsxbar) </td>
+   <td style="text-align:left;"> [qcc::limits.xbar](#limitsxbar) </td>
   </tr>
   <tr>
    

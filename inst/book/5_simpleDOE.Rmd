@@ -88,7 +88,7 @@ pet_delivery %>%
 
 The mean is just slightly below the target mean defined for acceptance and she also observes a certain variability in the batch. She decides then to perform a t-test to assess if the average calculated can be really be considered statistically different than the target value.
 
-#### t test {#tTest}
+[]{#tTest}
 
 ```{r}
 t.test(x = pet_delivery$A, mu = pet_spec)
@@ -178,9 +178,11 @@ We see that p \< 0.05 thus the means differ significantly. Furthemore the mean d
 
 ### Variances comparison
 
-#### F-test {#FTest}
+#### F-test 
 
 We're now confirming this with a variance test from the stats package.
+
+[]{#FTest}
 
 ```{r}
 var.test(tensile_strength ~ sample, pet_delivery_long)
@@ -190,9 +192,11 @@ The test null hypothesis is that the variances are equal. Since the p value is m
 
 The F-test is accurate only for normally distributed data. Any small deviation from normality can cause the F-test to be inaccurate, even with large samples. However, if the data conform well to the normal distribution, then the F-test is usually more powerful than Levene's test.
 
-#### Levene test {#leveneTest}
+#### Levene test
 
 This test is assessing the homogeneity of variances (homoscedasticity).
+
+[]{#leveneTest}
 
 ```{r}
 library(car)

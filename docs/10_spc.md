@@ -69,7 +69,9 @@ Now we load the qcc package that has the required quality control tools:
 
 In order to establish a control chart it is recommended to run a "calibration run". The calibration run is used to calculate the control limits before entering "regular production". Using the first 10 samples we call the qcc() function to make the required calculations.
 
-### xbar chart {#xbarchart}
+### xbar chart
+
+[]{#xbarchart}
 
 
 ```r
@@ -190,9 +192,11 @@ plot(syringe_xbar)
 
 <img src="10_spc_files/figure-html/unnamed-chunk-12-1.png" width="672" />
 
-### R chart {#Rchart}
+### R chart 
 
 Using the same 10 first samples we also obtain the corresponding R chart:
+
+[]{#Rchart}
 
 
 ```r
@@ -246,9 +250,11 @@ In this case all the points are within the previously defined control limits.
 
 More tight controls can be put in place by clearly identifying warning limits in a narrower range than the control limits. These measures need to be accompaigned by clear decision criteria and proper training to avoid the typical problem of overeacting and destabilizing the process by introducing unintented special causes of variation.
 
-### Limits on xbar chart {#limitsxbar}
+### Limits on xbar chart 
 
 We add warning limits in the plot with as follows:
+
+[]{#limitsxbar}
 
 
 ```r
@@ -463,7 +469,9 @@ sigma_conversion_table %>%
 
 
 
-### Process capability chart {#processcapability}
+### Process capability chart
+
+[]{#processcapability}
 
 
 ```r

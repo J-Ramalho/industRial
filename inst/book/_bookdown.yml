@@ -14,10 +14,11 @@ rmd_files: [
   "4_msa.Rmd",
   "5_simpleDOE.Rmd",
   "6_regression.Rmd",
-  "7_interactions.Rmd",
-  "8_generalDOE.Rmd",
-  "9_twolevelDOE.Rmd",
+  "7_factorialDOEs.Rmd",
+  "8_generalDOEs.Rmd",
+  "9_twolevelDOEs.Rmd",
   "10_spc.Rmd",
-  "11_glossary.Rmd",
-  "12_references.Rmd"
+  "11_exercises.Rmd",
+  "12_glossary.Rmd",
+  "13_references.Rmd"
 ]

@@ -32,7 +32,9 @@ library(DoE.base)
 
 and then generate the doe with the fac.design function.
 
-### Design generaction {#fac.design}
+### Design generaction 
+
+[]{#fac.design}
 
 
 ```r

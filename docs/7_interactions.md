@@ -11,7 +11,7 @@ filter <- dplyr::filter
 select <- dplyr::select
 ```
 
-## Interactions
+## Factorial designs
 
 Two factors multiple levels
 
@@ -80,7 +80,7 @@ F-statistic:    11 on 8 and 27 DF,  p-value: 9.426e-07
 
 Looking at the output we see that R-squared is equal to 0.7652. This means about 77 percent of the variability in the battery life is explained by the plate material in the battery, the temperature, and the material type–temperature interaction. We're going to go more in details now to validate the model and understand the effects and interactions of the different factors.
 
-### Outliers and model check {#outlierTest}
+### Outliers and model check 
 
 We start by an assessment of the residuals, starting by the timeseries of residuals:
 
@@ -118,6 +118,8 @@ Inspecting again the residuals plots we see that this corresponds to the point l
 
 We're therefore apply the outlier test from the car package:
 
+[]{#outlierTest}
+
 
 ```r
 library(car)
@@ -137,9 +139,11 @@ Largest |rstudent|:
 
 which gives a high Bonferroni p value thus excluding this possibility.
 
-### Interaction plot {#interactionPlot}
+### Interaction plot 
 
 In this experiement instead of just plotting a linear regression we need to go for a more elaborate plot that shows the response as a function of the two factors. Many different approaches are possible in R and here we're starting with a rather simple one - the interaction plot from the stats package:
+
+[]{#interactionPlot}
 
 
 ```r
@@ -303,7 +307,7 @@ solarcell_fill %>%
 
 <img src="7_interactions_files/figure-html/unnamed-chunk-17-1.png" width="672" />
 
-### Correlation strenght {#corTest}
+### Correlation strenght
 
 And a short test to assess the strenght of the correlation:
 
@@ -311,6 +315,8 @@ And a short test to assess the strenght of the correlation:
 ```r
 library(stats)
 ```
+
+[]{#corTest}
 
 
 ```r
@@ -358,7 +364,9 @@ The way to feed the R function arguments is obtained from https://www.datanovia.
 
 *Three different machines produce a monofilament fiber for a textile company. The process engineer is interested in determining if there is a difference in the breaking strength of the fiber produced by the three machines. However, the strength of a fiber is related to its diameter, with thicker fibers being generally stronger than thinner ones. A random sample of five fiber specimens is selected from each machine.*
 
-### Ancova {#ancova}
+### Ancova
+
+[]{#ancova}
 
 
 ```r

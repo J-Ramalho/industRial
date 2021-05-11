@@ -80,7 +80,9 @@ summary(juice_drymatter$bias)
 We immediatly see a median bias of -0.2 
 Lets explore further.
 
-### Bias plot {#geom_smooth}
+### Bias plot
+
+[]{#geom_smooth}
 
 
 ```r
@@ -217,7 +219,9 @@ Below we're recreating the same analysis with the ss.rr function from the Six Si
 
 tablet L 18'000mm3 +/- 250mm3 (18.0ml +/- 0.25ml)
 
-### gage r&R {#gageRnR}
+### gage r&R 
+
+[]{#gageRnR}
 
 
 ```r

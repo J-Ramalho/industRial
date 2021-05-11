@@ -7,8 +7,6 @@ knitr::opts_chunk$set(
 )
 ```
 
-# (PART) APPENDIX {-}
-
 # Glossary {#glossary}
 
 ## Statistics

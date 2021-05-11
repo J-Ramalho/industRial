@@ -2,7 +2,9 @@
 
 ## Two level designs
 
-### 2 factors 2 levels
+### Coding factors
+
+2 factors 2 levels
 
 The $2^{k}$ designs are particularly useful in the early stages of experimental work when many factors are likely to be investigated. It provides the smallest number of runs with which k factors can be studied in a complete factorial design. Consequently, these designs are widely used in factor screening experiments.
 
@@ -70,33 +72,82 @@ pet_doe <- bind_cols(
 )
 ```
 
+#### Factors as +/-
 
-#### Factors as +/- {#relevel}
-
-In this first model we're using a design where the inputs levels have been defined as plus and minus, sometimes also called high and low. The actual naming is not important, what is critical is to ensure that those input parameters are coded as factors. This is necessary as we will see to obtain the right coefficients in the linear model.
+In this first model we're using a design where the inputs levels have been defined as plus and minus, sometimes also called high and low. The actual naming is not important, what is critical is to ensure that those input parameters are coded as factors. 
 
 
 ```r
 pet_fct <- pet_doe %>%
   mutate(across(c(A,B), as_factor))
+```
+
+Another detail is to put the higher level as the reference otherwise we will get inverted signs in the lm output:
+
+[]{#relevel}
+
+
+```r
 pet_fct$A <- relevel(pet_fct$A, ref="+")
 pet_fct$B <- relevel(pet_fct$B, ref="+")
+```
 
+
+and one final step is need which is the setup of the contrasts. As our design is ortogonal and we want the contrasts to add up to zero we have to indicate that on the factor so that the coefficients of the linear model are correctly calculated. The current definition of the contrasts is:
+
+
+```r
+contrasts(pet_fct$A)
+```
+
+```
+  -
++ 0
+- 1
+```
+
+So we change this with:
+
+[]{#contrasts}
+
+
+```r
+contrasts(pet_fct$A) <- "contr.sum"
+contrasts(pet_fct$B) <- "contr.sum"
+contrasts(pet_fct$A)
+```
+
+```
+  [,1]
++    1
+-   -1
+```
+
+```r
+contrasts(pet_fct$A)
+```
+
+```
+  [,1]
++    1
+-   -1
+```
+
+Now we can run our linear model:
+
+
+```r
 pet_ctr_lm <- lm(
   formula = yield ~ A * B, 
-  data = pet_fct,
-  contrasts = list(A = "contr.sum", B = "contr.sum")
+  data = pet_fct
   )
-pet_ctr_aov <- aov(pet_ctr_lm)
-
 summary(pet_ctr_lm)
 ```
 
 ```
 
 Call:
-lm.default(formula = yield ~ A * B, data = pet_fct, contrasts = list(A = "contr.sum", 
-    B = "contr.sum"))
+lm.default(formula = yield ~ A * B, data = pet_fct)
 
 Residuals:
    Min     1Q Median     3Q    Max 
@@ -116,78 +167,11 @@ Multiple R-squared:  0.903,	Adjusted R-squared:  0.8666
 F-statistic: 24.82 on 3 and 8 DF,  p-value: 0.0002093
 ```
 
-```r
-summary(pet_ctr_aov)
-```
-
-```
-            Df Sum Sq Mean Sq F value   Pr(>F)    
-A            1 1102.1  1102.1  53.191 8.44e-05 ***
-B            1  396.8   396.8  19.149  0.00236 ** 
-A:B          1   44.1    44.1   2.128  0.18278    
-Residuals    8  165.8    20.7                     
----
-Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-```
-
 We can observe in the output that the p value of the effects is the same in the lm and in the the aov functions. This confirms that the contrasts have been correctly specified with contr.sum
 
 Note that we've had to adjust the contrasts in the lm function with contr.sum which applies to cases where the sum of the contrasts is zero (the R default is contr.treatment which applies to cases where the levels are coded as 0 and 1).
 
-And now in order to better understand the coding of factors in this unit, we're going to establish a simple regression plot of our data:
-
-
-```r
-coded <- function(x) { ifelse(x == x[1], -1, 1) }
-pet_fct %>% 
-  unclass() %>% 
-  as_tibble() %>%
-  mutate(cA = coded(A), cB = coded(B)) %>%
-  pivot_longer(
-    cols = c("cA", "cB"),
-    names_to = "variable",
-    values_to = "level") %>% 
-  ggplot() +
-  geom_point(aes(x = level, y = yield)) +
-  geom_smooth(aes(x = level, y = yield), 
-              method = "lm", se = FALSE, fullrange = TRUE) +
-  # coord_cartesian(xlim = c(-2, 2)) +
-  # geom_hline(yintercept = 27.5, color = "grey50") +
-  # scale_y_continuous(n.breaks = 20) +
-  facet_wrap(vars(variable)) +
-  theme_industRial()
-```
-
-<img src="9_twolevelDOE_files/figure-html/unnamed-chunk-7-1.png" width="672" />
-
-Note that we had to extract the data from the S3 doe object, which we've done with using unclass() and then as_tibble()
-
-The intercept passes at 27.5 as seen on the lm summary. We're going now to put the B factor at its maximum and replot:
-
-
-```r
-pet_fct %>% 
-  unclass() %>%
-  as_tibble() %>%
-  mutate(cA = coded(A), cB = coded(B)) %>%
-  filter(cB == 1) %>%
-  pivot_longer(
-    cols = c("cA", "cB"),
-    names_to = "variable",
-    values_to = "level") %>% 
-  ggplot() +
-  geom_point(aes(x = level, y = yield)) +
-  geom_smooth(aes(x = level, y = yield), 
-              method = "lm", se = FALSE, fullrange = TRUE) +
-  coord_cartesian(xlim = c(-2, 2)) +
-  scale_y_continuous(n.breaks = 10) +
-  facet_wrap(vars(variable)) +
-  theme_industRial()
-```
-
-<img src="9_twolevelDOE_files/figure-html/unnamed-chunk-8-1.png" width="672" />
-
-and now going to check it with a prediction:
+and now going to apply a prediction:
 
 
 ```r
@@ -199,11 +183,16 @@ predict(pet_ctr_lm, newdata = list(A = "+", B = "+"))
 69 
 ```
 
-As seen on the plot the output of our prediction is 30 corresponding the high level of A when B is at 1. To be precise we need to multiply all the coefficients by the levels of the factors as : +1x27.4 +1x(-2.5) + 1x0.83333
-
 #### Factors as +/- 1 
 
 In this example we convert the levels to factors still using the +/-1 notation. This will also be helpfull to apply what are called the Yates tables.
+
+
+```r
+coded <- function(x) { ifelse(x == x[1], -1, 1) }
+```
+
+We again convert them to factors and put the upper level as the reference. Regarding the contrasts we show a simpler and more direct approach now by defining them directly in the lm() function.
 
 
 ```r
@@ -217,8 +206,6 @@ pet_ctr2_lm <- lm(
   data = pet_fct2,
   contrasts = list(cA = "contr.sum", cB = "contr.sum")
   )
-pet_ctr2_aov <- aov(pet_ctr2_lm)
-
 summary(pet_ctr2_lm)
 ```
 
@@ -246,20 +233,6 @@ Multiple R-squared:  0.903,	Adjusted R-squared:  0.8666
 F-statistic: 24.82 on 3 and 8 DF,  p-value: 0.0002093
 ```
 
-```r
-summary(pet_ctr2_aov)
-```
-
-```
-            Df Sum Sq Mean Sq F value   Pr(>F)    
-cA           1 1102.1  1102.1  53.191 8.44e-05 ***
-cB           1  396.8   396.8  19.149  0.00236 ** 
-cA:cB        1   44.1    44.1   2.128  0.18278    
-Residuals    8  165.8    20.7                     
----
-Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-```
-
 Note that a coefficient in a regression equation is the change in the response when the corresponding variable changes by +1. Special attention to the + and - needs to be taken with the R output.
 
 As A or B changes from its low level to its high level, the coded variable changes by 1 − (−1) = +2, so the change in the response is twice the regression coefficient.
@@ -278,27 +251,24 @@ predict(pet_ctr2_lm, newdata = list(cA = "1", cB = "1"))
 69 
 ```
 
-
 #### Factors as +/- 1 numeric
 
 In this example we're going to code the levels with +1/-1 but we're going use the numeric coding:
 
 
 ```r
-chmn_num <- pet_fct %>% mutate(cA = coded(A), cB = coded(B))
-chmn_num_lm <- lm(
+pet_num <- pet_fct %>% mutate(cA = coded(A), cB = coded(B))
+pet_num_lm <- lm(
   formula = yield ~ cA * cB, 
-  data = chmn_num
+  data = pet_num
   )
-chmn_num_aov <- aov(chmn_num_lm)
-
-summary(chmn_num_lm)
+summary(pet_num_lm)
 ```
 
 ```
 
 Call:
-lm.default(formula = yield ~ cA * cB, data = chmn_num)
+lm.default(formula = yield ~ cA * cB, data = pet_num)
 
 Residuals:
    Min     1Q Median     3Q    Max 
@@ -318,22 +288,11 @@ Multiple R-squared:  0.903,	Adjusted R-squared:  0.8666
 F-statistic: 24.82 on 3 and 8 DF,  p-value: 0.0002093
 ```
 
-```r
-summary(chmn_num_aov)
-```
+In this case we did not define any contrasts. Looking into the lm We can see we've obtained exactly the same outputs.
 
-```
-            Df Sum Sq Mean Sq F value   Pr(>F)    
-cA           1 1102.1  1102.1  53.191 8.44e-05 ***
-cB           1  396.7   396.7  19.149  0.00236 ** 
-cA:cB        1   44.1    44.1   2.128  0.18278    
-Residuals    8  165.8    20.7                     
----
-Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-```
 
 ```r
-predict(chmn_num_lm, newdata = list(cA = 1, cB = 1))
+predict(pet_num_lm, newdata = list(cA = 1, cB = 1))
 ```
 
 ```
@@ -341,17 +300,71 @@ predict(chmn_num_lm, newdata = list(cA = 1, cB = 1))
 69 
 ```
 
-In this case we did not define any contrasts. Looking into the lm We can see we've obtained exactly the same outputs.
-
 As the inputs are coded as numeric this behaves just like the first simple linear model we've seen in the Case Study on One Factor with Multiple levels. In particular when we feed the predictions function with numeric values.
 
 This is very intuitive as it corresponds to the original units of the experiments (also called natural or engineering units). On the other hand coding the design variables provides another advange: generally, the engineering units are not directly comparable while coded variables are very effective for determining the relative size of factor effects.
 
-We can see that these three ways of coding the variable levels lead to equivalent results both in lm, anova and prediction. Our preference goes to use numeric values as it is more intuitive and allows for easier prediction between the fixed levels. 
+We can see that these three ways of coding the variable levels lead to equivalent results both in lm and prediction. Our preference goes to use numeric values as it is more intuitive and allows for easier prediction between the fixed levels. 
 
-#### sd bars in interaction plots {#plotMeans}
+And now in order to better understand the coding of factors in this unit, we're going to establish a simple regression plot of our data:
+
+
+```r
+pet_num %>% 
+  unclass() %>% 
+  as_tibble() %>%
+  mutate(cA = coded(A), cB = coded(B)) %>%
+  pivot_longer(
+    cols = c("cA", "cB"),
+    names_to = "variable",
+    values_to = "level") %>% 
+  ggplot() +
+  geom_point(aes(x = level, y = yield)) +
+  geom_smooth(aes(x = level, y = yield), 
+              method = "lm", se = FALSE, fullrange = TRUE) +
+  # coord_cartesian(xlim = c(-2, 2)) +
+  # geom_hline(yintercept = 27.5, color = "grey50") +
+  # scale_y_continuous(n.breaks = 20) +
+  facet_wrap(vars(variable)) +
+  theme_industRial()
+```
+
+<img src="9_twolevelDOE_files/figure-html/unnamed-chunk-17-1.png" width="672" />
+
+Note that we had to extract the data from the S3 doe object, which we've done with using unclass() and then as_tibble()
+
+The intercept passes at 27.5 as seen on the lm summary. We're going now to put the B factor at its maximum and replot:
+
+
+```r
+pet_num %>% 
+  unclass() %>%
+  as_tibble() %>%
+  mutate(cA = coded(A), cB = coded(B)) %>%
+  filter(cB == 1) %>%
+  pivot_longer(
+    cols = c("cA", "cB"),
+    names_to = "variable",
+    values_to = "level") %>% 
+  ggplot() +
+  geom_point(aes(x = level, y = yield)) +
+  geom_smooth(aes(x = level, y = yield), 
+              method = "lm", se = FALSE, fullrange = TRUE) +
+  coord_cartesian(xlim = c(-2, 2)) +
+  scale_y_continuous(n.breaks = 10) +
+  facet_wrap(vars(variable)) +
+  theme_industRial()
+```
+
+<img src="9_twolevelDOE_files/figure-html/unnamed-chunk-18-1.png" width="672" />
+
+As seen on the plot the output of our prediction is 69 corresponding the high level of A when B is at 1. To be precise we need to multiply all the coefficients by the levels of the factors as : 63.250 + 9.583x(+1) - 5.750x(+1) + 1.917
+
+#### sd bars in interaction plots 
 
 Here we're making a step further in the representation of interaction plots, we're adding error bars to the means. There are many ways to do this and we're providing a simple approach with the function plotMeans from the package RcmdrMisc.
+
+[]{#plotMeans}
 
 
 ```r
@@ -375,9 +388,11 @@ plotMeans(response = pet_fct$yield,
           main = "The PET clothing improvement plan")
 ```
 
-<img src="9_twolevelDOE_files/figure-html/unnamed-chunk-14-1.png" width="672" />
+<img src="9_twolevelDOE_files/figure-html/unnamed-chunk-20-1.png" width="672" />
 
-### 3 factors 2 levels
+### Coding natural values
+
+3 factors 2 levels
 
 The plasma etching example
 
@@ -416,7 +431,6 @@ plsn_fct <- bind_cols(
   "etch" = etch
 )
 ```
-
 
 #### lm and anova
 
@@ -491,7 +505,7 @@ plsn_reduced_lm <- lm(
   )
 ```
 
-#### Glance {#glance}
+[]{#glance}
 
 Besides the base summary() function, R squared and adjusted R squared can also be easily retrieved with the glance function from the {broom} package. We're extracting them here for the complete and for reduced model:
 
@@ -634,11 +648,13 @@ plsn %>%
     subtitle = "Prediction with reduced model")
 ```
 
-<img src="9_twolevelDOE_files/figure-html/unnamed-chunk-29-1.png" width="672" />
+<img src="9_twolevelDOE_files/figure-html/unnamed-chunk-35-1.png" width="672" />
 
-#### Response surface plot {#persp}
+#### Response surface plot 
 
 We are introducing here response surface plots which is yet another way to visualize the experiment outputs as a function of the inputs. We're doing this with the persp() function from base R which provides an extremely fast rendering, easy parametrization and a readable output. 
+
+[]{#persp}
 
 
 ```r
@@ -657,7 +673,7 @@ persp(
 )
 ```
 
-<img src="9_twolevelDOE_files/figure-html/unnamed-chunk-30-1.png" width="672" />
+<img src="9_twolevelDOE_files/figure-html/unnamed-chunk-36-1.png" width="672" />
 
 Due to the interaction between factors A and C the surface is slightly bent. This is exactly what we observe in the interactions plots of which the one below corresponds to slicing the surface at the min and the max of Power:
 
@@ -674,7 +690,7 @@ interaction.plot(x.factor = plsn$A,
                  main = "Plasma etching experiment")
 ```
 
-<img src="9_twolevelDOE_files/figure-html/unnamed-chunk-31-1.png" width="672" />
+<img src="9_twolevelDOE_files/figure-html/unnamed-chunk-37-1.png" width="672" />
 
 Just like in the surface plot we can see here in the interaction plot that the response of yield on gap is different depending on the level of power. When power is high it decreases and when power is low it increases. As a reminder this is what is called an interaction between these two factors.
 
@@ -739,9 +755,11 @@ F-statistic:   NaN on 15 and 0 DF,  p-value: NA
 
 We can see that being a single replicate design no statistics have been calculated for the effects in the model. A recommended approach in this case is to look into the normal probability plot of the model effects. 
 
-#### qqPlot {#qqPlot} 
+#### qqPlot 
 
 Here we are going to prepare this plot with the function qqPlot() from the {car} package:
+
+[]{#qqPlot}
 
 
 ```r
@@ -758,7 +776,7 @@ main_effects_plot <- qqPlot(
   )
 ```
 
-<img src="9_twolevelDOE_files/figure-html/unnamed-chunk-34-1.png" width="672" />
+<img src="9_twolevelDOE_files/figure-html/unnamed-chunk-40-1.png" width="672" />
 
 In plot we can see that the effects that have the highest influence on the output are the effects A, C and D and their interactions. We can still confirm these observations with a calculation of the percentage contribution of each effect as follows:
 
@@ -829,7 +847,7 @@ par(mfrow = c(2,2))
 plot(flt_red_lm)
 ```
 
-<img src="9_twolevelDOE_files/figure-html/unnamed-chunk-37-1.png" width="672" />
+<img src="9_twolevelDOE_files/figure-html/unnamed-chunk-43-1.png" width="672" />
 
 We can now establish the main effects and interaction plots and conclude on the optimal settings to maximize the output: A and D should be on the max and C on the min.
 

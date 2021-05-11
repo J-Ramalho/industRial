@@ -86,9 +86,11 @@ ggplot(data = ebike_narrow) +
 
 <img src="6_regression_files/figure-html/unnamed-chunk-6-1.png" width="672" />
 
-#### Linear model {#linearModel}
+#### Linear model
 
 We start by establishing the model, ensuring for now that we leave the variable `temperature` as a numeric vector. 
+
+[]{#linearModel}
 
 
 ```r
@@ -200,7 +202,7 @@ We start by loading the package broom which will help us retrieving the data fro
 
 Now we build and show below an extract of the "augmented" dataframe
 
-#### Augment {#augment}
+[]{#augment}
 
 
 ```r
@@ -252,9 +254,11 @@ ebike_aug %>%
 
 Nothing pattern emerges from the current plot and the design presents itself ^well randomised.
 
-#### Autocorrelation test {#residualsCorrelation}
+#### Autocorrelation test 
 
 It is always good to keep in mind that all visual observations can be complemented with a statistical test. In this case we're going to use the durbinWatson test from the car package (Companion to Applied Regression).
+
+[]{#residualsCorrelation}
 
 
 ```r
@@ -268,7 +272,7 @@ durbinWatsonTest(ebike_lm_factor)
 
 ```
  lag Autocorrelation D-W Statistic p-value
-   1      -0.5343347      2.960893   0.078
+   1      -0.5343347      2.960893   0.104
  Alternative hypothesis: rho != 0
 ```
 
@@ -298,9 +302,11 @@ ebike_aug %>%
 
 In this plot we see no variance anomalies such as a higher variance for a certain factor level or other types of skweness.
 
-#### Equality of variance test {#barlettTest}
+#### Equality of variance test 
 
 In the e-bike hardening process, the normality assumption is not in question, so we can apply Bartlett’s test to the etch rate data.
+
+[]{#barlettTest}
 
 
 ```r
@@ -347,7 +353,9 @@ ebike_aug %>%
 The plot suggests normal distribution. We see that the error distribution is aproximately normal. In the fixed effects model we give more importance to the center of the values and here we consider acceptable that the extremes of the data tend to bend away from the straight line.
 The verification can be completed by a test. For populations < 50 use the shapiro-wilk normality test.
 
-#### Shapiro test {#shapiroTest}
+#### Shapiro test 
+
+[]{#shapiroTest}
 
 
 ```r
@@ -471,9 +479,11 @@ Similar to the t-test but extended - this test allows to compare the means betwe
 
 ANOVA principle: the total variability in the data, as measured by the total corrected sum of squares, can be partitioned into a sum of squares of the differences between the treatment averages and the grand average plus a sum of squares of the differences of observations within treatments from the treatment average
 
-#### Anova fixed effects {#anova}
+#### Anova fixed effects 
 
 In R the anova is built by passing the linear model to the anova or aov functions. The output of the anova function is just the anova table as shown here for this first example. The output of the aov function is a list.
+
+[]{#anova}
 
 
 ```r
@@ -545,9 +555,11 @@ P > 0.05 - there is no significant difference between the means
 
 ### Pairwise comparisons
 
-#### Tukey's test {#tukeyTest}
+#### Tukey's test 
 
 The Anova may indicate that the treament means differ but it won't indicate which ones. In this case we may want to compare pairs of means.
+
+[]{#tukeyTest}
 
 
 ```r
@@ -586,9 +598,11 @@ plot(ebike_tukey)
 
 <img src="6_regression_files/figure-html/unnamed-chunk-30-1.png" width="672" />
 
-#### Fisher's LSD {#fisherLSD}
+#### Fisher's LSD 
 
 Fisher's Least Significant difference is an alternative to Tuckey's test.
+
+[]{#fisherLSD}
 
 
 ```r
@@ -714,11 +728,13 @@ As often with statistical tools, there is debate on the best approach to use. We
 
 To go further in the Anova F-test we recommend this interesting article from @minitab_anovaftest.
 
-### Prediction {#predict}
+### Prediction 
 
 Following the residuals analysis and the anova our model is validated. 
 
 A model is usefull for predictions. In a random effects model where conclusions can applied to the all the population we can predict values at any value of the input variables. In that case reusing the model with temperature as a numeric vector we could have a prediction for various temperature values such as:
+
+[]{#predict}
 
 
 ```r

@@ -1,12 +1,20 @@
 library(rmarkdown)
 library(bookdown)
+library(here)
 
 render_book(
-  input = "~/Documents/data_science/industRial/inst/book/index.Rmd",
+  input = here("inst/book/"),
   output_format = 'bookdown::gitbook', 
   encoding = 'UTF-8',
-  config_file = "inst/book/_bookdown.yml"
+  config_file = here("inst/book/_bookdown.yml"),
+  output_dir = here("docs")
 )
+
+serve_book(
+  dir = here("inst/book/"), 
+  output_dir = here("docs"),
+  preview = FALSE
+  )
 
 render_book(
   html_chapters(

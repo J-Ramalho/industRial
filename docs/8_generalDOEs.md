@@ -1,17 +1,11 @@
-```{r message=FALSE, warning=FALSE, include=FALSE}
-knitr::opts_chunk$set(
-	message = FALSE,
-	warning = FALSE,
-	comment = NA
-	# out.width = "80%"
-)
-```
+
 
 ## General factorial designs
 
 m factors n levels
 
-```{r}
+
+```r
 library(tidyverse)
 library(readxl)
 library(stats)
@@ -31,15 +25,19 @@ After a short brainstorming using the Ishikawa tool presented before the team ha
 
 First we load the DoE.base package:
 
-```{r}
+
+```r
 library(DoE.base)
 ```
 
 and then generate the doe with the fac.design function.
 
-### Design generaction {#fac.design}
+### Design generaction 
 
-```{r}
+[]{#fac.design}
+
+
+```r
 juice_doe <- fac.design(
   randomize = FALSE,
   factor.names = list(
@@ -53,14 +51,36 @@ juice_doe <- fac.design(
 
 Note that the DoE generated is more than just a tibble, it belongs to a specific class called design and has many other attributes just like an lm or aov S3 objects.
 
-```{r}
+
+```r
 class(juice_doe)
+```
+
+```
+[1] "design"     "data.frame"
 ```
 
 The power and care given by the package authors become visible when we use an R generic function such as summary() with this object and we see it returns a tailor made output, in this case showing the levels of the different factors of our design: 
 
-```{r}
+
+```r
 summary(juice_doe)
+```
+
+```
+Call:
+fac.design(randomize = FALSE, factor.names = list(product = c("beetroot", 
+    "apple", "carrot"), drymatter_target = c(10, 15, 20), part = c(1, 
+    2, 3), speed = c(200, 250), particle_size = c(250, 300)))
+
+Experimental design of type  full factorial 
+108  runs
+
+Factor settings (scale ends):
+   product drymatter_target part speed particle_size
+1 beetroot               10    1   200           250
+2    apple               15    2   250           300
+3   carrot               20    3                    
 ```
 
 Using this the team has simple copied the experiment plan to an spreadsheet to collect the data:
@@ -72,14 +92,27 @@ juice_doe %>%
 
 and after a few day the file completed and ready for analysis looked like:
 
-```{r}
+
+```r
 juice_drymatter %>%
   head() %>%
   kable()
 ```
 
 
-```{r}
+
+|product | drymatter_TGT| speed| particle_size| part| drymatter_DRX| drymatter_REF|
+|:-------|-------------:|-----:|-------------:|----:|-------------:|-------------:|
+|apple   |            10|    20|           250|    1|          9.80|         10.05|
+|apple   |            10|    20|           250|    2|          9.82|         10.05|
+|apple   |            10|    20|           250|    3|          9.82|         10.05|
+|apple   |            15|    20|           250|    1|         14.70|         15.02|
+|apple   |            15|    20|           250|    2|         14.70|         15.02|
+|apple   |            15|    20|           250|    3|         14.70|         15.02|
+
+
+
+```r
 juice_drymatter <- juice_drymatter %>%
   mutate(bias = drymatter_DRX - drymatter_REF)
 
@@ -95,7 +128,8 @@ As the number of factors and levels of a design increase, more thinking is requi
 
 Main effects plots consist usually of a scatterplot representing the experiment output as a function of one of the inputs. In a design like this with three different inputs three plots are required:
 
-```{r}
+
+```r
 drymatter_TGT_plot <- juice_drymatter %>%
   group_by(drymatter_TGT) %>%
   summarise(bias_m_drymatter = mean(bias)) %>%
@@ -146,6 +180,8 @@ speed_plot <- juice_drymatter %>%
 drymatter_TGT_plot + particle_size_plot + speed_plot
 ```
 
+<img src="8_generalDOEs_files/figure-html/unnamed-chunk-9-1.png" width="672" />
+
 This kind of plots gives already important insights in to the experiement outcome, even before any deeper analysis with a linear model and anova. In our case:
 
 * higher particle_size and higher speed result in higher bias weight deviation
@@ -155,7 +191,8 @@ This kind of plots gives already important insights in to the experiement outcom
 
 In designs like these with 3 factors we have 3 possible interactions (A-B, A-C, B-C) corresponding the the possible combination between them. This results in three interaction plots that we're presenting below. The approach here goes beyond the interaction.plot function from the `{stats}` package presented previously in the two factors multiple levels case. We are developping here the plots with {ggplot2} which provides much more control on the plot attibutes but on the other hand requires that additional code is added to calculate the means by group.
 
-```{r}
+
+```r
 drymatter_TGT_particle_size_plot <- juice_drymatter %>%  
   group_by(drymatter_TGT, particle_size) %>%
   summarise(drymatter_TGT_bias_mean = mean(bias)) %>%
@@ -212,6 +249,8 @@ speed_particle_size_plot <- juice_drymatter %>%
 drymatter_TGT_particle_size_plot + drymatter_TGT_speed_plot + speed_particle_size_plot
 ```
 
+<img src="8_generalDOEs_files/figure-html/unnamed-chunk-10-1.png" width="672" />
+
 The plots indicate no interaction between the different factors as all lines do not intercept and are mostly parallel.
 
 In most cases the anova would be performed first and only the plot for the significant interactions would be plotted, if any.
@@ -222,11 +261,26 @@ The sources of variation for the Anova table for three-factor fixed effects mode
 
 We are now fully prepared for an assessment of the effect of the different factors with the anova. To reduce the amount of coding we're inputing the model directly in the aov function:
 
-```{r}
+
+```r
 juice_drymatter_aov <- aov(
   bias ~ drymatter_TGT * speed * particle_size,
   data = juice_drymatter)
 summary(juice_drymatter_aov)
+```
+
+```
+                                   Df Sum Sq Mean Sq F value Pr(>F)    
+drymatter_TGT                       1 1.3149  1.3149 486.057 <2e-16 ***
+speed                               1 0.0000  0.0000   0.000  0.985    
+particle_size                       1 0.6241  0.6241 230.705 <2e-16 ***
+drymatter_TGT:speed                 1 0.0007  0.0007   0.272  0.603    
+drymatter_TGT:particle_size         1 0.0028  0.0028   1.040  0.310    
+speed:particle_size                 1 0.0032  0.0032   1.191  0.278    
+drymatter_TGT:speed:particle_size   1 0.0039  0.0039   1.442  0.233    
+Residuals                         100 0.2705  0.0027                   
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ```
 
 The observations of the plots are confirmed and completed with statistical input: we see that the percentage of drymatter_TGT and the particle_size significantly affect the bias volume (p < 0.05). The drymatter_TGT-particle_size interactions are non significative.

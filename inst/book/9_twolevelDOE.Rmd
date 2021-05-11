@@ -73,37 +73,127 @@ pet_doe <- bind_cols(
 )
 ```
 
+#### Factors as +/-
 
-#### Factors as +/- {#relevel}
-
-In this first model we're using a design where the inputs levels have been defined as plus and minus, sometimes also called high and low. The actual naming is not important, what is critical is to ensure that those input parameters are coded as factors. This is necessary as we will see to obtain the right coefficients in the linear model.
+In this first model we're using a design where the inputs levels have been defined as plus and minus, sometimes also called high and low. The actual naming is not important, what is critical is to ensure that those input parameters are coded as factors. 
 
 ```{r}
 pet_fct <- pet_doe %>%
   mutate(across(c(A,B), as_factor))
+```
+
+#### Relevel {#relevel}
+
+Another detail is to put the higher level as the reference otherwise we will get inverted signs in the lm output:
+
+```{r}
 pet_fct$A <- relevel(pet_fct$A, ref="+")
 pet_fct$B <- relevel(pet_fct$B, ref="+")
+```
 
+
+and one final step is need which is the setup of the contrasts. As our design is ortogonal and we want the contrasts to add up to zero we have to indicate that on the factor so that the coefficients of the linear model are correctly calculated. The current definition of the contrasts is:
+
+```{r}
+contrasts(pet_fct$A)
+```
+
+So we change this with:
+
+#### Contrasts {#contrasts}
+
+```{r}
+contrasts(pet_fct$A) <- "contr.sum"
+contrasts(pet_fct$B) <- "contr.sum"
+contrasts(pet_fct$A)
+contrasts(pet_fct$A)
+```
+
+Now we can run our linear model:
+
+```{r}
 pet_ctr_lm <- lm(
   formula = yield ~ A * B, 
-  data = pet_fct,
-  contrasts = list(A = "contr.sum", B = "contr.sum")
+  data = pet_fct
   )
-pet_ctr_aov <- aov(pet_ctr_lm)
-
 summary(pet_ctr_lm)
-summary(pet_ctr_aov)
 ```
 
 We can observe in the output that the p value of the effects is the same in the lm and in the the aov functions. This confirms that the contrasts have been correctly specified with contr.sum
 
 Note that we've had to adjust the contrasts in the lm function with contr.sum which applies to cases where the sum of the contrasts is zero (the R default is contr.treatment which applies to cases where the levels are coded as 0 and 1).
 
-And now in order to better understand the coding of factors in this unit, we're going to establish a simple regression plot of our data:
+and now going to apply a prediction:
+
+```{r}
+predict(pet_ctr_lm, newdata = list(A = "+", B = "+"))
+```
+
+#### Factors as +/- 1 
+
+In this example we convert the levels to factors still using the +/-1 notation. This will also be helpfull to apply what are called the Yates tables.
 
 ```{r}
 coded <- function(x) { ifelse(x == x[1], -1, 1) }
-pet_fct %>% 
+```
+
+We again convert them to factors and put the upper level as the reference. Regarding the contrasts we show a simpler and more direct approach now by defining them directly in the lm() function.
+
+```{r}
+pet_fct <- pet_fct %>% mutate(cA = coded(A), cB = coded(B))
+pet_fct2 <- pet_fct %>% mutate(across(c(cA, cB), as_factor))
+pet_fct2$cA <- relevel(pet_fct2$cA, ref = "1")
+pet_fct2$cB <- relevel(pet_fct2$cB, ref = "1")
+
+pet_ctr2_lm <- lm(
+  formula = yield ~ cA * cB, 
+  data = pet_fct2,
+  contrasts = list(cA = "contr.sum", cB = "contr.sum")
+  )
+summary(pet_ctr2_lm)
+```
+
+Note that a coefficient in a regression equation is the change in the response when the corresponding variable changes by +1. Special attention to the + and - needs to be taken with the R output.
+
+As A or B changes from its low level to its high level, the coded variable changes by 1 − (−1) = +2, so the change in the response is twice the regression coefficient.
+
+So the effects and interaction(s) from their minumum to their maximum correspond to  twice the values in the “Estimate” column. These regression coefficients are often called effects and interactions, even though they differ from the definitions used in the designs themeselves.
+
+Checking now with coded factors:
+
+```{r}
+predict(pet_ctr2_lm, newdata = list(cA = "1", cB = "1"))
+```
+
+#### Factors as +/- 1 numeric
+
+In this example we're going to code the levels with +1/-1 but we're going use the numeric coding:
+
+```{r}
+pet_num <- pet_fct %>% mutate(cA = coded(A), cB = coded(B))
+pet_num_lm <- lm(
+  formula = yield ~ cA * cB, 
+  data = pet_num
+  )
+summary(pet_num_lm)
+```
+
+In this case we did not define any contrasts. Looking into the lm We can see we've obtained exactly the same outputs.
+
+```{r}
+predict(pet_num_lm, newdata = list(cA = 1, cB = 1))
+```
+
+As the inputs are coded as numeric this behaves just like the first simple linear model we've seen in the Case Study on One Factor with Multiple levels. In particular when we feed the predictions function with numeric values.
+
+This is very intuitive as it corresponds to the original units of the experiments (also called natural or engineering units). On the other hand coding the design variables provides another advange: generally, the engineering units are not directly comparable while coded variables are very effective for determining the relative size of factor effects.
+
+We can see that these three ways of coding the variable levels lead to equivalent results both in lm and prediction. Our preference goes to use numeric values as it is more intuitive and allows for easier prediction between the fixed levels. 
+
+And now in order to better understand the coding of factors in this unit, we're going to establish a simple regression plot of our data:
+
+```{r}
+pet_num %>% 
   unclass() %>% 
   as_tibble() %>%
   mutate(cA = coded(A), cB = coded(B)) %>%
@@ -127,7 +217,7 @@ Note that we had to extract the data from the S3 doe object, which we've done wi
 The intercept passes at 27.5 as seen on the lm summary. We're going now to put the B factor at its maximum and replot:
 
 ```{r}
-pet_fct %>% 
+pet_num %>% 
   unclass() %>%
   as_tibble() %>%
   mutate(cA = coded(A), cB = coded(B)) %>%
@@ -146,72 +236,7 @@ pet_fct %>%
   theme_industRial()
 ```
 
-and now going to check it with a prediction:
-
-```{r}
-predict(pet_ctr_lm, newdata = list(A = "+", B = "+"))
-```
-
-As seen on the plot the output of our prediction is 30 corresponding the high level of A when B is at 1. To be precise we need to multiply all the coefficients by the levels of the factors as : +1x27.4 +1x(-2.5) + 1x0.83333
-
-#### Factors as +/- 1 
-
-In this example we convert the levels to factors still using the +/-1 notation. This will also be helpfull to apply what are called the Yates tables.
-
-```{r}
-pet_fct <- pet_fct %>% mutate(cA = coded(A), cB = coded(B))
-pet_fct2 <- pet_fct %>% mutate(across(c(cA, cB), as_factor))
-pet_fct2$cA <- relevel(pet_fct2$cA, ref = "1")
-pet_fct2$cB <- relevel(pet_fct2$cB, ref = "1")
-
-pet_ctr2_lm <- lm(
-  formula = yield ~ cA * cB, 
-  data = pet_fct2,
-  contrasts = list(cA = "contr.sum", cB = "contr.sum")
-  )
-pet_ctr2_aov <- aov(pet_ctr2_lm)
-
-summary(pet_ctr2_lm)
-summary(pet_ctr2_aov)
-```
-
-Note that a coefficient in a regression equation is the change in the response when the corresponding variable changes by +1. Special attention to the + and - needs to be taken with the R output.
-
-As A or B changes from its low level to its high level, the coded variable changes by 1 − (−1) = +2, so the change in the response is twice the regression coefficient.
-
-So the effects and interaction(s) from their minumum to their maximum correspond to  twice the values in the “Estimate” column. These regression coefficients are often called effects and interactions, even though they differ from the definitions used in the designs themeselves.
-
-Checking now with coded factors:
-
-```{r}
-predict(pet_ctr2_lm, newdata = list(cA = "1", cB = "1"))
-```
-
-
-#### Factors as +/- 1 numeric
-
-In this example we're going to code the levels with +1/-1 but we're going use the numeric coding:
-
-```{r}
-chmn_num <- pet_fct %>% mutate(cA = coded(A), cB = coded(B))
-chmn_num_lm <- lm(
-  formula = yield ~ cA * cB, 
-  data = chmn_num
-  )
-chmn_num_aov <- aov(chmn_num_lm)
-
-summary(chmn_num_lm)
-summary(chmn_num_aov)
-predict(chmn_num_lm, newdata = list(cA = 1, cB = 1))
-```
-
-In this case we did not define any contrasts. Looking into the lm We can see we've obtained exactly the same outputs.
-
-As the inputs are coded as numeric this behaves just like the first simple linear model we've seen in the Case Study on One Factor with Multiple levels. In particular when we feed the predictions function with numeric values.
-
-This is very intuitive as it corresponds to the original units of the experiments (also called natural or engineering units). On the other hand coding the design variables provides another advange: generally, the engineering units are not directly comparable while coded variables are very effective for determining the relative size of factor effects.
-
-We can see that these three ways of coding the variable levels lead to equivalent results both in lm, anova and prediction. Our preference goes to use numeric values as it is more intuitive and allows for easier prediction between the fixed levels. 
+As seen on the plot the output of our prediction is 69 corresponding the high level of A when B is at 1. To be precise we need to multiply all the coefficients by the levels of the factors as : 63.250 + 9.583x(+1) - 5.750x(+1) + 1.917
 
 #### sd bars in interaction plots {#plotMeans}
 

@@ -5,6 +5,7 @@ library(stats)
 library(broom)
 filter <- dplyr::filter
 select <- dplyr::select
+# ready for push into epfl for prototype review
 
 ui <- fluidPage(
     titlePanel("The anova sandbox"),
@@ -46,7 +47,7 @@ server <- function(input, output) {
             geom_point(aes(x = group, y = group_mean), color = "red", size = 4) +
             geom_jitter(aes(x = group, y = value), width = 0.1) +
             labs(
-                title = "Measurement Boxplot",
+                title = "Measurements plot",
                 subtile = "",
                 x = "",
                 y = "Value"

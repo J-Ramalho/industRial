@@ -44,7 +44,6 @@ We start by loading the first packages we will need:
 
 ```r
 library(tidyverse)
-library(skimr)
 library(readxl)
 library(stats)
 library(viridis)

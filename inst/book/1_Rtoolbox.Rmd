@@ -1,3 +1,8 @@
+---
+output: html_document
+editor_options: 
+  chunk_output_type: console
+---
 # R Toolbox
 
 ## R programming
@@ -29,9 +34,7 @@ R is compatible with most other software on the market and is an excellent "glue
 ```{r message=FALSE, warning=FALSE, include=FALSE}
 knitr::opts_chunk$set(
 	message = FALSE,
-	warning = FALSE,
-	comment = NA
-	# out.width = "80%"
+	warning = FALSE
 )
 ```
 

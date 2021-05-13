@@ -270,55 +270,32 @@ plotMeans(response = pet_fct$yield,
 
 3 factors 2 levels
 
-The plasma etching example
+**The litium-ion battery charging time test**
 
-A - gap in cm
-B - flow
-C - power in W
-response - etch rate in Angstrom/m
+A - temperature 
+B - previous cycles (within warranty)
+C - voltage
+response - charging time [h]
 
 ```{r}
-pls <- read.csv("~/Documents/data_science/industRial/data-raw/6-3_plasma.csv")
-
-plsn <- pls %>% 
-  gather(replicate, etch, Rep1, Rep2)
-plsn_fct <- plsn %>%
-  mutate(across(c(A,B,C), as_factor))
-```
-
-```{r eval=FALSE}
-pls <- fac.design(
-  randomize = FALSE,
-  factor.names=list(A=c(-1,1), 
-                    B=c(-1,1),
-                    C=c(-1,1),
-                    replicate = c("Rep1", "Rep2"))
-  )
-```
-
-```{r eval=FALSE}
-etch <- c(550, 669, 633, 642, 1037, 749, 1075, 729, 604, 650 , 601, 635, 1052, 868, 1063, 860)
-
-plsn_fct <- bind_cols(
-  pls2,
-  "etch" = etch
-)
+battery_charging %>%
+  head() %>%
+  kable()
 ```
 
 #### lm and anova
 
 ```{r}
-plsn_lm <- lm(
-  formula = etch ~ A * B * C, 
-  data = plsn
-  # contrasts = list(A = "contr.sum", B = "contr.sum", C = "contr.sum")
+battery_lm <- lm(
+  formula = charging_time ~ A * B * C, 
+  data = battery_charging
   )
-summary(plsn_lm)
+summary(battery_lm)
 ```
 
 ```{r}
-plsn_aov <- aov(plsn_lm)
-summary(plsn_aov)
+battery_aov <- aov(battery_lm)
+summary(battery_aov)
 ```
 
 The main effects of Gap and Power are highly significant (both have very small P-values). The AC interaction is also highly significant; thus, there is a strong interaction between Gap and Power.
@@ -328,10 +305,11 @@ The main effects of Gap and Power are highly significant (both have very small P
 The ordinary R^2 is 0.9661 and it measures the proportion of total variability explained by the model. A potential problem with this statistic is that it always increases as factors are added to the model, even if these factors are not significant. The adjusted R^2 is obtained by dividing the Sums of Squares by the degrees of freedom, and is adjusted for the size of the model, that is the number of factors.
 
 ```{r}
-plsn_reduced_lm <- lm(
-  formula = etch ~ A + C + A:C, 
-  data = plsn
+battery_reduced_lm <- lm(
+  formula = charging_time ~ A + C + A:C, 
+  data = battery_charging
   )
+summary(battery_reduced_lm)
 ```
 
 []{#glance}
@@ -343,8 +321,8 @@ library(broom)
 ```
 
 ```{r}
-glance(plsn_lm)[1:2] %>%
-  bind_rows(glance(plsn_reduced_lm)[1:2], 
+glance(battery_lm)[1:2] %>%
+  bind_rows(glance(battery_reduced_lm)[1:2], 
             .id = "model")
 ```
 
@@ -392,28 +370,19 @@ nA
 And now we can feed our linear model and make predictions:
 
 ```{r}
-plsn_lm <- lm(
-  formula = etch ~ A * C, 
-  data = plsn,
-  # contrasts = list(A = "contr.sum", B = "contr.sum", C = "contr.sum")
-  )
-summary(plsn_lm)
-```
-
-```{r}
-plsn_new <- tibble(A = cA, C = 1)
-pA <- predict(plsn_lm, plsn_new)
+battery_new <- tibble(A = cA, C = 1)
+pA <- predict(battery_reduced_lm, battery_new)
 pA
 ```
 
 We can visualize this outcome as follows:
 
 ```{r}
-plsn %>%
+battery_charging %>%
   filter(C == 1) %>%
   ggplot() +
-  geom_point(aes(x = A, y = etch, color = as_factor(C))) +
-  geom_smooth(aes(x = A, y = etch), method = "lm") +
+  geom_point(aes(x = A, y = charging_time, color = as_factor(C))) +
+  geom_smooth(aes(x = A, y = charging_time), method = "lm") +
   geom_point(aes(x = cA, y = pA)) +
   scale_y_continuous(n.breaks = 10) + 
   scale_color_discrete(guide = FALSE) +
@@ -433,13 +402,13 @@ We are introducing here response surface plots which is yet another way to visua
 ```{r}
 ngrid <- 20
 Agrid <- Bgrid <- seq(from = -1, to = 1, length = ngrid)
-yield <- predict(plsn_lm, expand.grid(A = Agrid, C = Bgrid))
-yield <- matrix(yield, length(Agrid), length(Bgrid))
+etch <- predict(battery_reduced_lm, expand.grid(A = Agrid, C = Bgrid))
+etch <- matrix(etch, length(Agrid), length(Bgrid))
 
 persp(
   x = Agrid, 
   y = Bgrid, 
-  z = yield, 
+  z = etch, 
   theta = -40, phi = 20, r = 10,
   ticktype = "d", xlab = "Gap", ylab = "Power",
   main = "Plasma etching experiment"
@@ -449,10 +418,10 @@ persp(
 Due to the interaction between factors A and C the surface is slightly bent. This is exactly what we observe in the interactions plots of which the one below corresponds to slicing the surface at the min and the max of Power:
 
 ```{r}
-interaction.plot(x.factor = plsn$A, 
-                 trace.factor = plsn$C,
+interaction.plot(x.factor = battery_charging$A, 
+                 trace.factor = battery_charging$C,
                  fun = mean,
-                 response = plsn$etch,
+                 response = battery_charging$charging_time,
                  trace.label = "Power",
                  legend = TRUE,
                  xlab = "Gap",
@@ -464,27 +433,35 @@ Just like in the surface plot we can see here in the interaction plot that the r
 
 ### Single replicate designs
 
+**The litium-ion battery charging time test (cont.)**
+
 m factors 2 levels 
 
 Possible approaches:
 - graphical methods–normal and half-normal probability plots; no formal tests;
 - assume some high-order interactions are zero, and fit a model that excludes them; degrees of freedom go into error, so testing is possible (not recommended)
 
-The Filtration example
+<div class="marginnote">
+
+```{r echo=FALSE, fig.align='center', fig.cap="electrical car platform", out.width="100%"}
+knitr::include_graphics("img/electrical_car_bw.png")
+```
+
+</div>
 
 ```{r}
-flt <- read.csv("~/Documents/data_science/industRial/data-raw//6-4_filtration.csv")
-flt_nf <- flt %>%
-  mutate(across(-filtration, as_factor))
+battery_charging %>%
+  head()
 ```
+
 
 #### lm
 
 ```{r}
-flt_lm <- lm(
-  formula = filtration ~ A * B * C * D, 
-  data = flt)
-summary(flt_lm)
+battery_lm3 <- lm(
+  formula = charging_time_new ~ A * B * C * D, 
+  data = battery_charging)
+summary(battery_lm3)
 ```
 
 We can see that being a single replicate design no statistics have been calculated for the effects in the model. A recommended approach in this case is to look into the normal probability plot of the model effects. 
@@ -493,35 +470,40 @@ We can see that being a single replicate design no statistics have been calculat
 
 Here we are going to prepare this plot with the function qqPlot() from the {car} package:
 
+```{r}
+library(car)
+```
+
+
 []{#qqPlot}
 
 ```{r}
-flt_eff <- flt_lm$coefficients[2:16]
-flt_eff_names <- names((flt_lm$coefficients)[2:16])
+battery_eff3 <- battery_lm3$coefficients[2:16]
+battery_eff_names2 <- names((battery_lm3$coefficients)[2:16])
 main_effects_plot <- qqPlot(
-  flt_eff, envelope = 0.70, 
+  battery_eff3, envelope = 0.70, 
   id = list(
-    method="y", n=5, cex=1, col=carPalette()[1], location="lr"), 
+    method = "y", n = 5, cex = 1, col = carPalette()[1], location = "lr"), 
     grid = FALSE,
   col = "black",
   col.lines = "black",
-  main = "Chemical vessel - Normal plot of effects"
+  main = "Chemical vessel - Normal plot of effects 2"
   )
 ```
 
 In plot we can see that the effects that have the highest influence on the output are the effects A, C and D and their interactions. We can still confirm these observations with a calculation of the percentage contribution of each effect as follows:
 
 ```{r}
-flt_lm_tidy <- flt_lm %>%
+battery_lm_tidy3 <- battery_lm3 %>%
   tidy() %>%
   filter(term != "(Intercept)") %>%
   mutate(
-    effect_estimate = - 2 * estimate,
+    effect_estimate = -2 * estimate,
     effect_estimate_sum = sum(effect_estimate), 
     effect_contribution_perc = abs((effect_estimate/effect_estimate_sum)*100) %>%
       round(2)
   )
-main_effects_table <- flt_lm_tidy %>%
+battery_lm_tidy3 %>%
   select(term, effect_estimate, effect_contribution_perc) %>%
   arrange(desc(effect_contribution_perc)) %>%
   head(8) %>%
@@ -533,10 +515,10 @@ main_effects_table <- flt_lm_tidy %>%
 Following the previous analysis we are removing the factor B from the model and keeping only the 2nd order interactions assuming the system also respects the sparcity of effects principle.
 
 ```{r}
-flt_red_lm <- lm(
-  formula = filtration ~ A + C + D + A:C + A:D, 
-  data = flt)
-summary(flt_red_lm)
+battery_red_lm3 <- lm(
+  formula = charging_time_new ~ A + C + D + A:C + A:D, 
+  data = battery_charging)
+summary(battery_red_lm3)
 ```
 
 We can now see that we've regained degrees of freedom and obtained a sort of hidden replication allowing to calculate statistics and error terms on the model.
@@ -547,7 +529,7 @@ Checking the residuals we see the significant effect of the remaining interactio
 
 ```{r}
 par(mfrow = c(2,2))
-plot(flt_red_lm)
+plot(battery_red_lm3)
 ```
 
 We can now establish the main effects and interaction plots and conclude on the optimal settings to maximize the output: A and D should be on the max and C on the min.

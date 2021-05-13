@@ -355,7 +355,7 @@ perfum_tbl_graph
 4     1     5    0.2
 5     1     6    0.2
 6     1     8    0.8
-# … with 79 more rows
+# ... with 79 more rows
 #
 # Node Data: 22 x 1
   name 
@@ -363,7 +363,7 @@ perfum_tbl_graph
 1 pw   
 2 w    
 3 pm   
-# … with 19 more rows
+# ... with 19 more rows
 ```
 
 In the previous chunk output we see a preview of the tibble graph object with the first few nodes and edges.

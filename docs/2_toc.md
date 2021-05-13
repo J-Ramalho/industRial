@@ -180,7 +180,7 @@
   <tr>
    
    
-   <td style="text-align:left;vertical-align: middle !important;background-color: white !important;" rowspan="2"> plasma </td>
+   <td style="text-align:left;vertical-align: middle !important;background-color: white !important;" rowspan="3"> battery_charging </td>
    <td style="text-align:left;background-color: white !important;"> [broom::glance](#glance) </td>
   </tr>
   <tr>
@@ -192,7 +192,7 @@
   <tr>
    
    
-   <td style="text-align:left;background-color: white !important;"> filtration </td>
+   
    <td style="text-align:left;background-color: white !important;"> [car::qqPlot](#qqPlot) </td>
   </tr>
   <tr>

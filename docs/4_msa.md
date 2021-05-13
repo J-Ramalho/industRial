@@ -154,7 +154,7 @@ str(tablet_thickness)
 ```
 
 ```
-tibble [675 × 11] (S3: tbl_df/tbl/data.frame)
+tibble [675 x 11] (S3: tbl_df/tbl/data.frame)
  $ Position             : chr [1:675] "Position 1" "Position 1" "Position 1" "Position 1" ...
  $ Size                 : chr [1:675] "L" "L" "L" "L" ...
  $ Tablet               : chr [1:675] "L001" "L001" "L001" "L001" ...
@@ -226,6 +226,10 @@ tablet L 18'000mm3 +/- 250mm3 (18.0ml +/- 0.25ml)
 
 ```r
 library(SixSigma)
+```
+
+```
+Error in get(genname, envir = envir) : objet 'testthat_print' introuvable
 ```
 
 

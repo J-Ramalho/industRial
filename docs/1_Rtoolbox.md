@@ -176,40 +176,40 @@ recommended_packages %>%
 
 |Package     |Area                   |Version |
 |:-----------|:----------------------|:-------|
-|rcartocolor |colors                 |2.0.0   |
-|viridis     |colors                 |0.5.1   |
-|datasets    |data                   |4.0.5   |
-|readr       |data loading           |1.4.0   |
-|readxl      |data loading           |1.3.1   |
-|dplyr       |data science           |1.0.4   |
-|forcats     |data science           |0.5.1   |
-|hms         |data science           |1.0.0   |
-|janitor     |data science           |2.1.0   |
-|lubridate   |data science           |1.7.9.2 |
-|magrittr    |data science           |2.0.1   |
-|tibble      |data science           |3.1.0   |
-|tidyr       |data science           |1.1.2   |
-|broom       |datascience            |0.7.6   |
-|tidyverse   |datascience            |1.3.0   |
-|purrr       |functional programming |0.3.4   |
-|qicharts2   |industrial stats       |0.7.1   |
-|qcc         |industrial stats       |2.7     |
-|SixSigma    |industrial stats       |0.9-52  |
-|DoE.base    |industrial stats       |1.1-6   |
-|patchwork   |plotting               |1.1.1   |
-|ggplot2     |plotting               |3.3.3   |
-|scales      |plotting               |1.1.1   |
-|bookdown    |publishing             |0.22    |
-|knitr       |publishing             |1.31    |
-|stats       |statistics             |4.0.5   |
-|tidymodels  |statistics             |0.1.2   |
-|agricolae   |statistics             |1.3-3   |
-|car         |statistics             |3.0-10  |
-|RcmdrMisc   |statistics             |2.7-1   |
-|lsr         |statistics             |0.5     |
-|fs          |sysadmin               |1.5.0   |
-|glue        |text                   |1.4.2   |
-|stringr     |text                   |1.4.0   |
+|rcartocolor |colors                 |NA      |
+|viridis     |colors                 |NA      |
+|datasets    |data                   |4.0.2   |
+|readr       |data loading           |NA      |
+|readxl      |data loading           |NA      |
+|dplyr       |data science           |NA      |
+|forcats     |data science           |NA      |
+|hms         |data science           |NA      |
+|janitor     |data science           |NA      |
+|lubridate   |data science           |NA      |
+|magrittr    |data science           |NA      |
+|tibble      |data science           |NA      |
+|tidyr       |data science           |NA      |
+|broom       |datascience            |NA      |
+|tidyverse   |datascience            |NA      |
+|purrr       |functional programming |NA      |
+|qicharts2   |industrial stats       |NA      |
+|qcc         |industrial stats       |NA      |
+|SixSigma    |industrial stats       |NA      |
+|DoE.base    |industrial stats       |NA      |
+|patchwork   |plotting               |NA      |
+|ggplot2     |plotting               |NA      |
+|scales      |plotting               |NA      |
+|bookdown    |publishing             |NA      |
+|knitr       |publishing             |NA      |
+|stats       |statistics             |4.0.2   |
+|tidymodels  |statistics             |NA      |
+|agricolae   |statistics             |NA      |
+|car         |statistics             |NA      |
+|RcmdrMisc   |statistics             |NA      |
+|lsr         |statistics             |NA      |
+|fs          |sysadmin               |NA      |
+|glue        |text                   |NA      |
+|stringr     |text                   |NA      |
 
 ### Publishing packages
 
@@ -225,16 +225,20 @@ devtools::session_info()[[1]]
 ```
 
 ```
+Error in get(genname, envir = envir) : objet 'testthat_print' introuvable
+```
+
+```
  setting  value                       
- version  R version 4.0.5 (2021-03-31)
- os       Ubuntu 20.04.2 LTS          
- system   x86_64, linux-gnu           
- ui       X11                         
+ version  R version 4.0.2 (2020-06-22)
+ os       Windows 10 x64              
+ system   x86_64, mingw32             
+ ui       RTerm                       
  language (EN)                        
- collate  en_US.UTF-8                 
- ctype    en_US.UTF-8                 
- tz       Europe/Zurich               
- date     2021-05-11                  
+ collate  French_Switzerland.1252     
+ ctype    French_Switzerland.1252     
+ tz       Europe/Berlin               
+ date     2021-05-13                  
 ```
 
 ## Disclaimer

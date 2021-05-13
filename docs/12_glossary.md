@@ -187,7 +187,7 @@ and a structure of the rejection region. The p-value is equal to the signif-
 icance level of the test in which the observed value of the statistic serves
 as the threshold.
 
-## Design for Six Sigma
+## DFSS
 
 Quality tools have been grouped under varied names and methodologies being Six Sigma one of the most comprehensives ones. One way of summarising the Six Sigma framework is presented below in a step by step approach with definitions. Each steps consists of an analyis of the product development and production process that progressively refines the final product specifications.
 
@@ -224,7 +224,7 @@ A thorough assessment of a measurement process, and typically includes a special
 **5. Process capability analysis**
 Comparison of the variability of a production process with its engineered specifications.
 
-## Gage r&R
+## MSA
 
 The definitions below are based on the articles on @minitab_gagernR which itself is based on the @AIAG2010.
 
@@ -250,7 +250,7 @@ Variance components assess the amount of variation contributed by each source of
 
 The sum of the individual variance components equals the total variation.
 
-## Design of experiments
+## DOE
 
 Below key definitions from @Montgomery2012, complemented with Wikipedia article details on the same topics.
 

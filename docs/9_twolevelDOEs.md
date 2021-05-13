@@ -394,99 +394,85 @@ plotMeans(response = pet_fct$yield,
 
 3 factors 2 levels
 
-The plasma etching example
+**The litium-ion battery charging time test**
 
-A - gap in cm
-B - flow
-C - power in W
-response - etch rate in Angstrom/m
-
-
-```r
-pls <- read.csv("~/Documents/data_science/industRial/data-raw/6-3_plasma.csv")
-
-plsn <- pls %>% 
-  gather(replicate, etch, Rep1, Rep2)
-plsn_fct <- plsn %>%
-  mutate(across(c(A,B,C), as_factor))
-```
+A - temperature 
+B - previous cycles (within warranty)
+C - voltage
+response - charging time [h]
 
 
 ```r
-pls <- fac.design(
-  randomize = FALSE,
-  factor.names=list(A=c(-1,1), 
-                    B=c(-1,1),
-                    C=c(-1,1),
-                    replicate = c("Rep1", "Rep2"))
-  )
+battery_charging %>%
+  head() %>%
+  kable()
 ```
 
 
-```r
-etch <- c(550, 669, 633, 642, 1037, 749, 1075, 729, 604, 650 , 601, 635, 1052, 868, 1063, 860)
 
-plsn_fct <- bind_cols(
-  pls2,
-  "etch" = etch
-)
-```
+|  A|  B|  C|  D| charging_time| charging_time_new|
+|--:|--:|--:|--:|-------------:|-----------------:|
+| -1| -1| -1| -1|          5.50|               4.5|
+|  1| -1| -1| -1|          6.69|               7.1|
+| -1|  1| -1| -1|          6.33|               4.8|
+|  1|  1| -1| -1|          6.42|               6.5|
+| -1| -1|  1| -1|         10.37|               6.8|
+|  1| -1|  1| -1|          7.49|               6.9|
 
 #### lm and anova
 
 
 ```r
-plsn_lm <- lm(
-  formula = etch ~ A * B * C, 
-  data = plsn
-  # contrasts = list(A = "contr.sum", B = "contr.sum", C = "contr.sum")
+battery_lm <- lm(
+  formula = charging_time ~ A * B * C, 
+  data = battery_charging
   )
-summary(plsn_lm)
+summary(battery_lm)
 ```
 
 ```
 
 Call:
-lm.default(formula = etch ~ A * B * C, data = plsn)
+lm.default(formula = charging_time ~ A * B * C, data = battery_charging)
 
 Residuals:
-   Min     1Q Median     3Q    Max 
--65.50 -11.12   0.00  11.12  65.50 
+    Min      1Q  Median      3Q     Max 
+-0.6550 -0.1113  0.0000  0.1113  0.6550 
 
 Coefficients:
             Estimate Std. Error t value Pr(>|t|)    
-(Intercept)  776.062     11.865  65.406 3.32e-12 ***
-A            -50.812     11.865  -4.282 0.002679 ** 
-B              3.688     11.865   0.311 0.763911    
-C            153.062     11.865  12.900 1.23e-06 ***
-A:B          -12.437     11.865  -1.048 0.325168    
-A:C          -76.812     11.865  -6.474 0.000193 ***
-B:C           -1.062     11.865  -0.090 0.930849    
-A:B:C          2.813     11.865   0.237 0.818586    
+(Intercept)  7.76062    0.11865  65.406 3.32e-12 ***
+A           -0.50812    0.11865  -4.282 0.002679 ** 
+B            0.03688    0.11865   0.311 0.763911    
+C            1.53063    0.11865  12.900 1.23e-06 ***
+A:B         -0.12438    0.11865  -1.048 0.325168    
+A:C         -0.76812    0.11865  -6.474 0.000193 ***
+B:C         -0.01062    0.11865  -0.090 0.930849    
+A:B:C        0.02812    0.11865   0.237 0.818586    
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
-Residual standard error: 47.46 on 8 degrees of freedom
+Residual standard error: 0.4746 on 8 degrees of freedom
 Multiple R-squared:  0.9661,	Adjusted R-squared:  0.9364 
 F-statistic: 32.56 on 7 and 8 DF,  p-value: 2.896e-05
 ```
 
 
 ```r
-plsn_aov <- aov(plsn_lm)
-summary(plsn_aov)
+battery_aov <- aov(battery_lm)
+summary(battery_aov)
 ```
 
 ```
             Df Sum Sq Mean Sq F value   Pr(>F)    
-A            1  41311   41311  18.339 0.002679 ** 
-B            1    218     218   0.097 0.763911    
-C            1 374850  374850 166.411 1.23e-06 ***
-A:B          1   2475    2475   1.099 0.325168    
-A:C          1  94403   94403  41.909 0.000193 ***
-B:C          1     18      18   0.008 0.930849    
-A:B:C        1    127     127   0.056 0.818586    
-Residuals    8  18020    2253                     
+A            1   4.13    4.13  18.339 0.002679 ** 
+B            1   0.02    0.02   0.097 0.763911    
+C            1  37.49   37.49 166.411 1.23e-06 ***
+A:B          1   0.25    0.25   1.099 0.325168    
+A:C          1   9.44    9.44  41.909 0.000193 ***
+B:C          1   0.00    0.00   0.008 0.930849    
+A:B:C        1   0.01    0.01   0.056 0.818586    
+Residuals    8   1.80    0.23                     
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ```
@@ -499,10 +485,34 @@ The ordinary R^2 is 0.9661 and it measures the proportion of total variability e
 
 
 ```r
-plsn_reduced_lm <- lm(
-  formula = etch ~ A + C + A:C, 
-  data = plsn
+battery_reduced_lm <- lm(
+  formula = charging_time ~ A + C + A:C, 
+  data = battery_charging
   )
+summary(battery_reduced_lm)
+```
+
+```
+
+Call:
+lm.default(formula = charging_time ~ A + C + A:C, data = battery_charging)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-0.7250 -0.1544  0.0250  0.1869  0.6650 
+
+Coefficients:
+            Estimate Std. Error t value Pr(>|t|)    
+(Intercept)   7.7606     0.1042  74.458  < 2e-16 ***
+A            -0.5081     0.1042  -4.875 0.000382 ***
+C             1.5306     0.1042  14.685 4.95e-09 ***
+A:C          -0.7681     0.1042  -7.370 8.62e-06 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 0.4169 on 12 degrees of freedom
+Multiple R-squared:  0.9608,	Adjusted R-squared:  0.9509 
+F-statistic: 97.91 on 3 and 12 DF,  p-value: 1.054e-08
 ```
 
 []{#glance}
@@ -516,8 +526,8 @@ library(broom)
 
 
 ```r
-glance(plsn_lm)[1:2] %>%
-  bind_rows(glance(plsn_reduced_lm)[1:2], 
+glance(battery_lm)[1:2] %>%
+  bind_rows(glance(battery_reduced_lm)[1:2], 
             .id = "model")
 ```
 
@@ -586,58 +596,25 @@ And now we can feed our linear model and make predictions:
 
 
 ```r
-plsn_lm <- lm(
-  formula = etch ~ A * C, 
-  data = plsn,
-  # contrasts = list(A = "contr.sum", B = "contr.sum", C = "contr.sum")
-  )
-summary(plsn_lm)
-```
-
-```
-
-Call:
-lm.default(formula = etch ~ A * C, data = plsn)
-
-Residuals:
-   Min     1Q Median     3Q    Max 
--72.50 -15.44   2.50  18.69  66.50 
-
-Coefficients:
-            Estimate Std. Error t value Pr(>|t|)    
-(Intercept)   776.06      10.42  74.458  < 2e-16 ***
-A             -50.81      10.42  -4.875 0.000382 ***
-C             153.06      10.42  14.685 4.95e-09 ***
-A:C           -76.81      10.42  -7.370 8.62e-06 ***
----
-Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-
-Residual standard error: 41.69 on 12 degrees of freedom
-Multiple R-squared:  0.9608,	Adjusted R-squared:  0.9509 
-F-statistic: 97.91 on 3 and 12 DF,  p-value: 1.054e-08
-```
-
-
-```r
-plsn_new <- tibble(A = cA, C = 1)
-pA <- predict(plsn_lm, plsn_new)
+battery_new <- tibble(A = cA, C = 1)
+pA <- predict(battery_reduced_lm, battery_new)
 pA
 ```
 
 ```
        1 
-992.9375 
+9.929375 
 ```
 
 We can visualize this outcome as follows:
 
 
 ```r
-plsn %>%
+battery_charging %>%
   filter(C == 1) %>%
   ggplot() +
-  geom_point(aes(x = A, y = etch, color = as_factor(C))) +
-  geom_smooth(aes(x = A, y = etch), method = "lm") +
+  geom_point(aes(x = A, y = charging_time, color = as_factor(C))) +
+  geom_smooth(aes(x = A, y = charging_time), method = "lm") +
   geom_point(aes(x = cA, y = pA)) +
   scale_y_continuous(n.breaks = 10) + 
   scale_color_discrete(guide = FALSE) +
@@ -648,7 +625,7 @@ plsn %>%
     subtitle = "Prediction with reduced model")
 ```
 
-<img src="9_twolevelDOEs_files/figure-html/unnamed-chunk-35-1.png" width="672" />
+<img src="9_twolevelDOEs_files/figure-html/unnamed-chunk-32-1.png" width="672" />
 
 #### Response surface plot 
 
@@ -660,29 +637,29 @@ We are introducing here response surface plots which is yet another way to visua
 ```r
 ngrid <- 20
 Agrid <- Bgrid <- seq(from = -1, to = 1, length = ngrid)
-yield <- predict(plsn_lm, expand.grid(A = Agrid, C = Bgrid))
-yield <- matrix(yield, length(Agrid), length(Bgrid))
+etch <- predict(battery_reduced_lm, expand.grid(A = Agrid, C = Bgrid))
+etch <- matrix(etch, length(Agrid), length(Bgrid))
 
 persp(
   x = Agrid, 
   y = Bgrid, 
-  z = yield, 
+  z = etch, 
   theta = -40, phi = 20, r = 10,
   ticktype = "d", xlab = "Gap", ylab = "Power",
   main = "Plasma etching experiment"
 )
 ```
 
-<img src="9_twolevelDOEs_files/figure-html/unnamed-chunk-36-1.png" width="672" />
+<img src="9_twolevelDOEs_files/figure-html/unnamed-chunk-33-1.png" width="672" />
 
 Due to the interaction between factors A and C the surface is slightly bent. This is exactly what we observe in the interactions plots of which the one below corresponds to slicing the surface at the min and the max of Power:
 
 
 ```r
-interaction.plot(x.factor = plsn$A, 
-                 trace.factor = plsn$C,
+interaction.plot(x.factor = battery_charging$A, 
+                 trace.factor = battery_charging$C,
                  fun = mean,
-                 response = plsn$etch,
+                 response = battery_charging$charging_time,
                  trace.label = "Power",
                  legend = TRUE,
                  xlab = "Gap",
@@ -690,11 +667,13 @@ interaction.plot(x.factor = plsn$A,
                  main = "Plasma etching experiment")
 ```
 
-<img src="9_twolevelDOEs_files/figure-html/unnamed-chunk-37-1.png" width="672" />
+<img src="9_twolevelDOEs_files/figure-html/unnamed-chunk-34-1.png" width="672" />
 
 Just like in the surface plot we can see here in the interaction plot that the response of yield on gap is different depending on the level of power. When power is high it decreases and when power is low it increases. As a reminder this is what is called an interaction between these two factors.
 
 ### Single replicate designs
+
+**The litium-ion battery charging time test (cont.)**
 
 m factors 2 levels 
 
@@ -702,51 +681,70 @@ Possible approaches:
 - graphical methods–normal and half-normal probability plots; no formal tests;
 - assume some high-order interactions are zero, and fit a model that excludes them; degrees of freedom go into error, so testing is possible (not recommended)
 
-The Filtration example
+<div class="marginnote">
+
+<div class="figure" style="text-align: center">
+<img src="img/electrical_car_bw.png" alt="electrical car platform" width="100%" />
+<p class="caption">(\#fig:unnamed-chunk-35)electrical car platform</p>
+</div>
+
+</div>
 
 
 ```r
-flt <- read.csv("~/Documents/data_science/industRial/data-raw//6-4_filtration.csv")
-flt_nf <- flt %>%
-  mutate(across(-filtration, as_factor))
+battery_charging %>%
+  head()
 ```
+
+```
+# A tibble: 6 x 6
+      A     B     C     D charging_time charging_time_new
+  <dbl> <dbl> <dbl> <dbl>         <dbl>             <dbl>
+1    -1    -1    -1    -1          5.5                4.5
+2     1    -1    -1    -1          6.69               7.1
+3    -1     1    -1    -1          6.33               4.8
+4     1     1    -1    -1          6.42               6.5
+5    -1    -1     1    -1         10.4                6.8
+6     1    -1     1    -1          7.49               6.9
+```
+
 
 #### lm
 
 
 ```r
-flt_lm <- lm(
-  formula = filtration ~ A * B * C * D, 
-  data = flt)
-summary(flt_lm)
+battery_lm3 <- lm(
+  formula = charging_time_new ~ A * B * C * D, 
+  data = battery_charging)
+summary(battery_lm3)
 ```
 
 ```
 
 Call:
-lm.default(formula = filtration ~ A * B * C * D, data = flt)
+lm.default(formula = charging_time_new ~ A * B * C * D, data = battery_charging)
 
 Residuals:
 ALL 16 residuals are 0: no residual degrees of freedom!
 
 Coefficients:
             Estimate Std. Error t value Pr(>|t|)
-(Intercept)  70.0625         NA      NA       NA
-A            10.8125         NA      NA       NA
-B             1.5625         NA      NA       NA
-C             4.9375         NA      NA       NA
-D             7.3125         NA      NA       NA
-A:B           0.0625         NA      NA       NA
-A:C          -9.0625         NA      NA       NA
-B:C           1.1875         NA      NA       NA
-A:D           8.3125         NA      NA       NA
-B:D          -0.1875         NA      NA       NA
-C:D          -0.5625         NA      NA       NA
-A:B:C         0.9375         NA      NA       NA
-A:B:D         2.0625         NA      NA       NA
-A:C:D        -0.8125         NA      NA       NA
-B:C:D        -1.3125         NA      NA       NA
-A:B:C:D       0.6875         NA      NA       NA
+(Intercept)   7.0625         NA      NA       NA
+A             1.1375         NA      NA       NA
+B             0.1000         NA      NA       NA
+C             0.5500         NA      NA       NA
+D             0.6750         NA      NA       NA
+A:B          -0.0500         NA      NA       NA
+A:C          -0.8500         NA      NA       NA
+B:C           0.0625         NA      NA       NA
+A:D           0.7750         NA      NA       NA
+B:D           0.0375         NA      NA       NA
+C:D          -0.1125         NA      NA       NA
+A:B:C         0.0375         NA      NA       NA
+A:B:D         0.2625         NA      NA       NA
+A:C:D        -0.1375         NA      NA       NA
+B:C:D        -0.0750         NA      NA       NA
+A:B:C:D       0.1250         NA      NA       NA
 
 Residual standard error: NaN on 0 degrees of freedom
 Multiple R-squared:      1,	Adjusted R-squared:    NaN 
@@ -759,44 +757,63 @@ We can see that being a single replicate design no statistics have been calculat
 
 Here we are going to prepare this plot with the function qqPlot() from the {car} package:
 
+
+```r
+library(car)
+```
+
+
 []{#qqPlot}
 
 
 ```r
-flt_eff <- flt_lm$coefficients[2:16]
-flt_eff_names <- names((flt_lm$coefficients)[2:16])
+battery_eff3 <- battery_lm3$coefficients[2:16]
+battery_eff_names2 <- names((battery_lm3$coefficients)[2:16])
 main_effects_plot <- qqPlot(
-  flt_eff, envelope = 0.70, 
+  battery_eff3, envelope = 0.70, 
   id = list(
-    method="y", n=5, cex=1, col=carPalette()[1], location="lr"), 
+    method = "y", n = 5, cex = 1, col = carPalette()[1], location = "lr"), 
     grid = FALSE,
   col = "black",
   col.lines = "black",
-  main = "Chemical vessel - Normal plot of effects"
+  main = "Chemical vessel - Normal plot of effects 2"
   )
 ```
 
-<img src="9_twolevelDOEs_files/figure-html/unnamed-chunk-40-1.png" width="672" />
+<img src="9_twolevelDOEs_files/figure-html/unnamed-chunk-39-1.png" width="672" />
 
 In plot we can see that the effects that have the highest influence on the output are the effects A, C and D and their interactions. We can still confirm these observations with a calculation of the percentage contribution of each effect as follows:
 
 
 ```r
-flt_lm_tidy <- flt_lm %>%
+battery_lm_tidy3 <- battery_lm3 %>%
   tidy() %>%
   filter(term != "(Intercept)") %>%
   mutate(
-    effect_estimate = - 2 * estimate,
+    effect_estimate = -2 * estimate,
     effect_estimate_sum = sum(effect_estimate), 
     effect_contribution_perc = abs((effect_estimate/effect_estimate_sum)*100) %>%
       round(2)
   )
-main_effects_table <- flt_lm_tidy %>%
+battery_lm_tidy3 %>%
   select(term, effect_estimate, effect_contribution_perc) %>%
   arrange(desc(effect_contribution_perc)) %>%
   head(8) %>%
   kable()
 ```
+
+
+
+|term    | effect_estimate| effect_contribution_perc|
+|:-------|---------------:|------------------------:|
+|A       |          -2.275|                    44.83|
+|A:C     |           1.700|                    33.50|
+|A:D     |          -1.550|                    30.54|
+|D       |          -1.350|                    26.60|
+|C       |          -1.100|                    21.67|
+|A:B:D   |          -0.525|                    10.34|
+|A:C:D   |           0.275|                     5.42|
+|A:B:C:D |          -0.250|                     4.93|
 
 #### Reduced model
 
@@ -804,35 +821,36 @@ Following the previous analysis we are removing the factor B from the model and 
 
 
 ```r
-flt_red_lm <- lm(
-  formula = filtration ~ A + C + D + A:C + A:D, 
-  data = flt)
-summary(flt_red_lm)
+battery_red_lm3 <- lm(
+  formula = charging_time_new ~ A + C + D + A:C + A:D, 
+  data = battery_charging)
+summary(battery_red_lm3)
 ```
 
 ```
 
 Call:
-lm.default(formula = filtration ~ A + C + D + A:C + A:D, data = flt)
+lm.default(formula = charging_time_new ~ A + C + D + A:C + A:D, 
+    data = battery_charging)
 
 Residuals:
     Min      1Q  Median      3Q     Max 
--6.3750 -1.5000  0.0625  2.9062  5.7500 
+-0.7500 -0.1500  0.0500  0.2562  0.5750 
 
 Coefficients:
             Estimate Std. Error t value Pr(>|t|)    
-(Intercept)   70.062      1.104  63.444 2.30e-14 ***
-A             10.812      1.104   9.791 1.93e-06 ***
-C              4.938      1.104   4.471   0.0012 ** 
-D              7.313      1.104   6.622 5.92e-05 ***
-A:C           -9.063      1.104  -8.206 9.41e-06 ***
-A:D            8.312      1.104   7.527 2.00e-05 ***
+(Intercept)   7.0625     0.1187  59.490 4.38e-14 ***
+A             1.1375     0.1187   9.582 2.35e-06 ***
+C             0.5500     0.1187   4.633 0.000932 ***
+D             0.6750     0.1187   5.686 0.000202 ***
+A:C          -0.8500     0.1187  -7.160 3.07e-05 ***
+A:D           0.7750     0.1187   6.528 6.65e-05 ***
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
-Residual standard error: 4.417 on 10 degrees of freedom
-Multiple R-squared:  0.966,	Adjusted R-squared:  0.9489 
-F-statistic: 56.74 on 5 and 10 DF,  p-value: 5.14e-07
+Residual standard error: 0.4749 on 10 degrees of freedom
+Multiple R-squared:  0.9599,	Adjusted R-squared:  0.9399 
+F-statistic:  47.9 on 5 and 10 DF,  p-value: 1.154e-06
 ```
 
 We can now see that we've regained degrees of freedom and obtained a sort of hidden replication allowing to calculate statistics and error terms on the model.
@@ -844,10 +862,10 @@ Checking the residuals we see the significant effect of the remaining interactio
 
 ```r
 par(mfrow = c(2,2))
-plot(flt_red_lm)
+plot(battery_red_lm3)
 ```
 
-<img src="9_twolevelDOEs_files/figure-html/unnamed-chunk-43-1.png" width="672" />
+<img src="9_twolevelDOEs_files/figure-html/unnamed-chunk-42-1.png" width="672" />
 
 We can now establish the main effects and interaction plots and conclude on the optimal settings to maximize the output: A and D should be on the max and C on the min.
 

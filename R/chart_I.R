@@ -1,0 +1,45 @@
+#' Create IMR chart for statistical process control
+#' 
+#' @description
+#' Generate a single point time series chart from a set of consecutive measurements.
+#' 
+#' @details
+#' This type of chart is typically applied in product manufacturing to monitor
+#' deviations from the target value over time. It is usually accompanied by 
+#' the \code{\link{chart_IMR}}
+#' 
+#' @references 
+#' For a complete case study application refer to \url{https://j-ramalho.github.io/industRial/}
+#'
+#' @param data 
+#' @param factory 
+#'
+#' @return
+#' @export
+#'
+#' @examples
+#' 
+chart_I <- function(data) {
+  data %>%
+    ggplot2::ggplot(ggplot2::aes(x = part_id, y = weight_value)) +
+    ggplot2::geom_line() +
+    ggplot2::geom_point() +
+    ggplot2::geom_hline(ggplot2::aes(yintercept = spec_min), color = "red", linetype = 3) +
+    ggplot2::geom_hline(ggplot2::aes(yintercept = spec_max), color = "red", linetype = 3) +
+    ggplot2::geom_hline(ggplot2::aes(yintercept = weight_target_value), color = "red", linetype = 2) +
+    ggplot2::geom_hline(ggplot2::aes(yintercept = I_UCL), color = "deepskyblue4", linetype = 3) +
+    ggplot2::geom_hline(ggplot2::aes(yintercept = I_LCL), color = "deepskyblue4", linetype = 3) +
+    ggplot2::geom_hline(ggplot2::aes(yintercept = weight_mean), color = "deepskyblue4", linetype = 2) +
+    ggplot2::geom_point(ggplot2::aes(x = part_id, y = weight_out_limits), color = "red") +
+    scale_y_continuous(n.breaks = 10) +
+    ggplot2::theme_light() +
+    ggplot2::theme(axis.text.x = ggplot2::element_text(size = 8)) +
+    ggplot2::labs(
+      title = "Weight SPC",
+      subtitle = "I-chart",
+      x = "Part id",
+      y = "Weight Mean [g]",
+      caption = "data source: pilot Line"
+    ) +
+    theme_qcc()
+}

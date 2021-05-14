@@ -16,7 +16,7 @@ Keeping the variability of an industrial process under control is one of the mos
 
 </div>
 
-## Control charts
+## xbar-R charts
 
 There are many types of control charts and in this case study we're demonstrating the xbar and R charts. These two charts are often used together and are suited to the control the mean and the variability of a continuous variable.
 
@@ -58,7 +58,7 @@ Now we load the qcc package that has the required quality control tools:
 
 In order to establish a control chart it is recommended to run a "calibration run". The calibration run is used to calculate the control limits before entering "regular production". Using the first 10 samples we call the qcc() function to make the required calculations.
 
-### xbar chart
+### Mean chart
 
 []{#xbarchart}
 
@@ -181,7 +181,7 @@ plot(syringe_xbar)
 
 <img src="10_spc_files/figure-html/unnamed-chunk-11-1.png" width="672" />
 
-### R chart 
+### Range chart 
 
 Using the same 10 first samples we also obtain the corresponding R chart:
 
@@ -239,7 +239,7 @@ In this case all the points are within the previously defined control limits.
 
 More tight controls can be put in place by clearly identifying warning limits in a narrower range than the control limits. These measures need to be accompaigned by clear decision criteria and proper training to avoid the typical problem of overeacting and destabilizing the process by introducing unintented special causes of variation.
 
-### Limits on xbar chart 
+### Control limits
 
 We add warning limits in the plot with as follows:
 
@@ -298,9 +298,9 @@ Adapted from @Bass2007
 In this chapter we're going to go more in depth in the study of the manufacturing process variability. We're going to make a comparison between the product specifications and the process variability. We're looking for opportunities to tigthen the product specifications. 
 Tightening a product specification without increasing the cost of a manufacturing cost can be a source of competitive advantage.
 
-## Process Capability
+## Cpk charts
 
-### Out of specification
+### Off spec
 
 
 ```r
@@ -324,15 +324,14 @@ theor_n = 1000000
 
 
 ```r
-within_limits <- function(UCL, LCL, mean, sd) {
-  (pnorm(UCL, mean, sd) - pnorm(LCL, mean, sd))*100
+off_spec <- function(UCL, LCL, mean, sd) {
+  round(100 - ((stats::pnorm(UCL, mean, sd) - stats::pnorm(LCL, mean, sd))*100), 2)
 }
 ```
 
 
 ```r
-syringe_within <- within_limits(spec_max, spec_min, syringe_mean, syringe_sd)
-syringe_off_spec <- 100 - syringe_within
+syringe_off_spec <- off_spec(spec_max, spec_min, syringe_mean, syringe_sd)
 ```
 
 
@@ -379,7 +378,7 @@ We can also calculate the Cpk
 
 
 ```r
-capability <- function(UCL, LCL, mean, sd) {
+process_Cpk <- function(UCL, LCL, mean, sd) {
   pmin(
     (abs(mean - abs(LCL)) / (3 * sd)),
     (abs((abs(UCL) - mean)) / (3 * sd))
@@ -389,7 +388,7 @@ capability <- function(UCL, LCL, mean, sd) {
 
 
 ```r
-capability(spec_max, spec_min, syringe_mean, syringe_sd)
+process_Cpk(spec_max, spec_min, syringe_mean, syringe_sd)
 ```
 
 ```
@@ -400,27 +399,16 @@ And convert the percentage out of spec in parts per million. We're not consideri
 
 
 ```r
-per_mio_off_spec <- function(percent_within) {
-  formatC(
-  ((100 - percent_within) * 10000),
-  format = "d",
-  big.mark = "'"
-  )
-}
-```
-
-
-```r
-per_mio_off_spec(syringe_within)
+formatC(((syringe_off_spec) * 10000), format = "d", big.mark = "'")
 ```
 
 ```
-[1] "15'872"
+[1] "15'900"
 ```
 
-The expected population below the LSL is 1,3% which is very high for industry standards. In fact this corresponds to 12'649 parts per million (ppm) whereas a common target would be 1 ppm. Naturally these figures are indicative and they depend of the context criteria such as severity of the problem, cost, difficulty to eliminate the problem and so on. 
+The expected population below the LSL is 1,3% which is very high for industry standards. In fact this corresponds to 15'900 parts per million (ppm) whereas a common target would be 1 ppm. Naturally these figures are indicative and they depend of the context criteria such as severity of the problem, cost, difficulty to eliminate the problem and so on. 
 
-We can now establish a simple table using the functions created before, to present the expected percentage that falls within certain limits. To make it usefull we're putting this limits at +/- 1 to 6 standard deviations
+We can now establish a simple table using the functions created before, to present the expected percentage that falls within certain limits. To make it useful we're putting this limits at +/- 1 to 6 standard deviations
 
 
 ```r
@@ -435,9 +423,19 @@ sigma_conversion_table <-
 
 
 ```r
+within_limits <- function(UCL, LCL, mean, sd) {
+  (pnorm(UCL, mean, sd) - pnorm(LCL, mean, sd))*100
+}
+per_mio_off_spec <- function(percent_within) {
+  formatC(
+  ((100 - percent_within) * 10000),
+  format = "d",
+  big.mark = "'"
+  )
+}
 sigma_conversion_table <- sigma_conversion_table %>%
   mutate(perc_in_spec = within_limits(UCL, LCL, mean, sd),
-         Cpk = capability(UCL, LCL, mean, sd),
+         Cpk = process_Cpk(UCL, LCL, mean, sd),
          ppm_defects = per_mio_off_spec(perc_in_spec))
 sigma_conversion_table %>%
   kable(align = "c")
@@ -454,11 +452,11 @@ sigma_conversion_table %>%
 |  5  | -5  |  0   | 1  |   99.99994   | 1.6666667 |      0      |
 |  6  | -6  |  0   | 1  |  100.00000   | 2.0000000 |      0      |
 
-### Cpk index
+### Capability index
 
 
 
-### Process capability chart
+### Capability chart
 
 []{#processcapability}
 
@@ -475,6 +473,496 @@ syringe_cpk <- process.capability(
 )
 ```
 
-<img src="10_spc_files/figure-html/unnamed-chunk-32-1.png" width="672" />
+<img src="10_spc_files/figure-html/unnamed-chunk-31-1.png" width="672" />
 
 A fine tuning of the forecast of the number of expected parts out of specification can be done with the parameter std.dev. The input value will be used in the probability distribution function. Different approaches can be considered: calculating the sandard deviation within each subgroup or the standard deviation of the entire population and also correcting the standard deviation dividing by n or by n - 1. In this example we re-use the standard deviation calculated on the entire set of datapoints as the group is small but for a case with more data it would be interesting to used the subgroups that tend to give smaller standard deviations.
+
+## I-MR charts
+
+In this final chapter we're exploring the development of custom functions for summary statistics and timeseries plotting. All these functions are available on the book companion package `{industRial}` for exploration and further development. They don't pretend to be used as such for real life applications. For that we recommend the functions from the package `{QCC}` presented before. The objective here is to show a workflow and demonstrate some possibilities that the `{tidyverse}` offers to make completely customized functions.
+
+To encourage this exploration we're not presenting here the complete code for each function but propose to check it with the R functionality for function code exploration. We see often the recommendation to read R source code and we can only support it as an excellent way to develop our skilset.
+
+Lets start with the simple function that calculates the percentage of parts out of specification given the specification limits, the process mean and standard deviation. This function was presented in the previous case study and since it is loaded in memory we can read its content with the R function body():
+
+
+```r
+body(off_spec)
+```
+
+```
+{
+    round(100 - ((stats::pnorm(UCL, mean, sd) - stats::pnorm(LCL, 
+        mean, sd)) * 100), 2)
+}
+```
+
+we can see that it uses simple functions from the package {`stats}`. We can also explicitly request to see the arguments it takes with formals():
+
+
+```r
+dput(formals(off_spec))
+```
+
+```
+as.pairlist(alist(UCL = , LCL = , mean = , sd = ))
+```
+
+and for a complete review we can open the function help page with:
+
+```{}
+?off_spec
+```
+
+Lets give some data and use the function:
+
+[]{#offspec}
+
+
+```r
+off_spec(0.981, 0.819, 0.943, 0.019)
+```
+
+```
+[1] 2.28
+```
+
+we get 2.28% parts out of spec. We'll see this calculation in action in a moment.
+
+### Process stats
+
+**The tablet weight control procedure**
+
+
+```r
+tablet_weight <- tablet_weight %>%
+    janitor::clean_names(case = "snake")
+```
+
+We're now going to use the function process stats to calculate several statistical data for this dataset. As mentionned we encourage the reader to explore the code with body(process_stats) and dput(formals(process_stats)) as there is a wealth of details in how to calculate process control limits, moving ranges and the like.
+
+
+```r
+weight_statistics_data <- process_stats(tablet_weight, 9)
+```
+
+this being done we can now convert this data into an easy readable format for reporting of for a future integration in a shiny app for example. We're exploring the package `{gt}` that has a specific very neat look rather different from the `{kable}` package used in most of the book. 
+
+
+```r
+process_stats_table(weight_statistics_data)
+```
+
+```{=html}
+<div id="wsndvtlvez" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>html {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
+}
+
+#wsndvtlvez .gt_table {
+  display: table;
+  border-collapse: collapse;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#wsndvtlvez .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#wsndvtlvez .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#wsndvtlvez .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 0;
+  padding-bottom: 4px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#wsndvtlvez .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#wsndvtlvez .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#wsndvtlvez .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#wsndvtlvez .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#wsndvtlvez .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#wsndvtlvez .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#wsndvtlvez .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#wsndvtlvez .gt_group_heading {
+  padding: 8px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#wsndvtlvez .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#wsndvtlvez .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#wsndvtlvez .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#wsndvtlvez .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#wsndvtlvez .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 12px;
+}
+
+#wsndvtlvez .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#wsndvtlvez .gt_first_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+}
+
+#wsndvtlvez .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#wsndvtlvez .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#wsndvtlvez .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#wsndvtlvez .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#wsndvtlvez .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#wsndvtlvez .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding: 4px;
+}
+
+#wsndvtlvez .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#wsndvtlvez .gt_sourcenote {
+  font-size: 90%;
+  padding: 4px;
+}
+
+#wsndvtlvez .gt_left {
+  text-align: left;
+}
+
+#wsndvtlvez .gt_center {
+  text-align: center;
+}
+
+#wsndvtlvez .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#wsndvtlvez .gt_font_normal {
+  font-weight: normal;
+}
+
+#wsndvtlvez .gt_font_bold {
+  font-weight: bold;
+}
+
+#wsndvtlvez .gt_font_italic {
+  font-style: italic;
+}
+
+#wsndvtlvez .gt_super {
+  font-size: 65%;
+}
+
+#wsndvtlvez .gt_footnote_marks {
+  font-style: italic;
+  font-weight: normal;
+  font-size: 65%;
+}
+</style>
+<table class="gt_table">
+  <thead class="gt_header">
+    <tr>
+      <th colspan="3" class="gt_heading gt_title gt_font_normal gt_bottom_border" style>Process Summary Statistics</th>
+    </tr>
+    
+  </thead>
+  <thead class="gt_col_headings">
+    <tr>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1">Variable</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1">Value</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1">Unit</th>
+    </tr>
+  </thead>
+  <tbody class="gt_table_body">
+    <tr><td class="gt_row gt_left">Weight mean</td>
+<td class="gt_row gt_right">0.94</td>
+<td class="gt_row gt_left">g</td></tr>
+    <tr><td class="gt_row gt_left">Spec target</td>
+<td class="gt_row gt_right">0.90</td>
+<td class="gt_row gt_left">g</td></tr>
+    <tr><td class="gt_row gt_left">Spec min</td>
+<td class="gt_row gt_right">0.82</td>
+<td class="gt_row gt_left">g</td></tr>
+    <tr><td class="gt_row gt_left">Spec max</td>
+<td class="gt_row gt_right">0.98</td>
+<td class="gt_row gt_left">g</td></tr>
+    <tr><td class="gt_row gt_left">Out of spec</td>
+<td class="gt_row gt_right">2.39</td>
+<td class="gt_row gt_left">%</td></tr>
+    <tr><td class="gt_row gt_left">Sample size</td>
+<td class="gt_row gt_right">137</td>
+<td class="gt_row gt_left">parts</td></tr>
+  </tbody>
+  
+  
+</table>
+</div>
+```
+
+### Sample chart
+
+The data set being available we're feeding it into the chart_I() function:
+
+
+```r
+chart_I(weight_statistics_data)
+```
+
+<img src="10_spc_files/figure-html/unnamed-chunk-38-1.png" width="672" />
+
+### Moving range chart
+
+The companion of the I chart is the MR chart, where MR stands for moving range. This chart can be called with:
+
+
+```r
+chart_IMR(weight_statistics_data)
+```
+
+<img src="10_spc_files/figure-html/unnamed-chunk-39-1.png" width="672" />
+
+### Capability chart II
+
+And a final chart for this session the capability chart:
+
+
+```r
+chart_Cpk(weight_statistics_data)
+```
+
+<img src="10_spc_files/figure-html/unnamed-chunk-40-1.png" width="672" />
+
+

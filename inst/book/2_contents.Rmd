@@ -1,0 +1,20 @@
+
+# Table of Contents {-}
+
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+source(here::here("inst/book/setup.R"))
+knitr::opts_chunk$set(options(knitr.kable.NA = ''))
+library(readxl)
+library(kableExtra)
+```
+
+```{r echo=FALSE}
+read_excel("data/contents.xlsx") %>%
+  select(Chapter, Unit, Dataset, Functions) %>%
+  kable(align = "l") %>%
+  # collapse_rows(columns = c(1,2,3), valign = "middle") %>%
+  row_spec(row = c(1, 6, 10, 34), background = "#e6e6e6", color = "#104e8b")
+  # row_spec(row = 5, background = "#e6e6e6", color = "#104e8b")
+  # row_spec(row = 1:33 ,background = "white")
+```
+

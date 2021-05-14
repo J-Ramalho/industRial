@@ -71,3 +71,4 @@ To report any issue or make suggestions please open an issue on the book reposit
 **About the authors**
 
 <b style="color:#104e8b">João Ramalho</b> is a Senior Industrial Data Scientist with more than 20 years of experience in the manufacturing industry. He's been in varied positions in R&D, Operations and IT at Philip Morris, Rolex and Nestlé. He holds a Master in Mechanical Engineering from the IST of Lisbon, a PMP certification from the Project Management Institute and a Data Science certification from DataCamp. He's currently specializing in Data Visualization at the Swiss technical university EPFL. See full profile at [j-ramalho.github.io](https://j-ramalho.github.io/)
+

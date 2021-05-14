@@ -80,51 +80,51 @@
    <td style="text-align:left;background-color: white !important;"> [stats::lm](#linearModel) </td>
   </tr>
   <tr>
-   <td style="text-align:left;background-color: white !important;"> DOE </td>
-   <td style="text-align:left;background-color: white !important;"> Regression and anova </td>
-   <td style="text-align:left;background-color: white !important;"> ebike_hardening </td>
+   <td style="text-align:left;background-color: white !important;"> NA </td>
+   <td style="text-align:left;background-color: white !important;"> NA </td>
+   <td style="text-align:left;background-color: white !important;"> NA </td>
    <td style="text-align:left;background-color: white !important;"> [broom::augment](#augment) </td>
   </tr>
   <tr>
-   <td style="text-align:left;background-color: white !important;"> DOE </td>
-   <td style="text-align:left;background-color: white !important;"> Regression and anova </td>
-   <td style="text-align:left;background-color: white !important;"> ebike_hardening </td>
+   <td style="text-align:left;background-color: white !important;"> NA </td>
+   <td style="text-align:left;background-color: white !important;"> NA </td>
+   <td style="text-align:left;background-color: white !important;"> NA </td>
    <td style="text-align:left;background-color: white !important;"> [car::durbinWatsonTest](#residualsCorrelation) </td>
   </tr>
   <tr>
-   <td style="text-align:left;background-color: white !important;"> DOE </td>
-   <td style="text-align:left;background-color: white !important;"> Regression and anova </td>
-   <td style="text-align:left;background-color: white !important;"> ebike_hardening </td>
+   <td style="text-align:left;background-color: white !important;"> NA </td>
+   <td style="text-align:left;background-color: white !important;"> NA </td>
+   <td style="text-align:left;background-color: white !important;"> NA </td>
    <td style="text-align:left;background-color: white !important;"> [stats::bartlett.test](#barlettTest) </td>
   </tr>
   <tr>
-   <td style="text-align:left;background-color: white !important;"> DOE </td>
-   <td style="text-align:left;background-color: white !important;"> Regression and anova </td>
-   <td style="text-align:left;background-color: white !important;"> ebike_hardening </td>
+   <td style="text-align:left;background-color: white !important;"> NA </td>
+   <td style="text-align:left;background-color: white !important;"> NA </td>
+   <td style="text-align:left;background-color: white !important;"> NA </td>
    <td style="text-align:left;background-color: white !important;"> [stats::shapiro.test](#shapiroTest) </td>
   </tr>
   <tr>
-   <td style="text-align:left;background-color: white !important;"> DOE </td>
-   <td style="text-align:left;background-color: white !important;"> Regression and anova </td>
-   <td style="text-align:left;background-color: white !important;"> ebike_hardening </td>
+   <td style="text-align:left;background-color: white !important;"> NA </td>
+   <td style="text-align:left;background-color: white !important;"> NA </td>
+   <td style="text-align:left;background-color: white !important;"> NA </td>
    <td style="text-align:left;background-color: white !important;"> [stats::aov](#anova) </td>
   </tr>
   <tr>
-   <td style="text-align:left;background-color: white !important;"> DOE </td>
-   <td style="text-align:left;background-color: white !important;"> Regression and anova </td>
-   <td style="text-align:left;background-color: white !important;"> ebike_hardening </td>
+   <td style="text-align:left;background-color: white !important;"> NA </td>
+   <td style="text-align:left;background-color: white !important;"> NA </td>
+   <td style="text-align:left;background-color: white !important;"> NA </td>
    <td style="text-align:left;background-color: white !important;"> [stats::TukeyHSD](#tukeyTest) </td>
   </tr>
   <tr>
-   <td style="text-align:left;background-color: white !important;"> DOE </td>
-   <td style="text-align:left;background-color: white !important;"> Regression and anova </td>
-   <td style="text-align:left;background-color: white !important;"> ebike_hardening </td>
+   <td style="text-align:left;background-color: white !important;"> NA </td>
+   <td style="text-align:left;background-color: white !important;"> NA </td>
+   <td style="text-align:left;background-color: white !important;"> NA </td>
    <td style="text-align:left;background-color: white !important;"> [agricolae::LSD.test](#fisherLSD) </td>
   </tr>
   <tr>
-   <td style="text-align:left;background-color: white !important;"> DOE </td>
-   <td style="text-align:left;background-color: white !important;"> Regression and anova </td>
-   <td style="text-align:left;background-color: white !important;"> ebike_hardening </td>
+   <td style="text-align:left;background-color: white !important;"> NA </td>
+   <td style="text-align:left;background-color: white !important;"> NA </td>
+   <td style="text-align:left;background-color: white !important;"> NA </td>
    <td style="text-align:left;background-color: white !important;"> [stats::predict](#predict) </td>
   </tr>
   <tr>
@@ -195,27 +195,33 @@
   </tr>
   <tr>
    <td style="text-align:left;background-color: white !important;"> SPC </td>
-   <td style="text-align:left;background-color: white !important;"> Control charts </td>
+   <td style="text-align:left;background-color: white !important;"> Xbar-R charts </td>
    <td style="text-align:left;background-color: white !important;"> syringe_diameter </td>
    <td style="text-align:left;background-color: white !important;"> [qcc::qcc – xbar](#xbarchart) </td>
   </tr>
   <tr>
    <td style="text-align:left;background-color: white !important;"> SPC </td>
-   <td style="text-align:left;background-color: white !important;"> Control charts </td>
+   <td style="text-align:left;background-color: white !important;"> Xbar-R charts </td>
    <td style="text-align:left;background-color: white !important;"> syringe_diameter </td>
    <td style="text-align:left;background-color: white !important;"> [qcc::qcc – R](#Rchart) </td>
   </tr>
   <tr>
    <td style="text-align:left;"> SPC </td>
-   <td style="text-align:left;"> Control charts </td>
+   <td style="text-align:left;"> Xbar-R charts </td>
    <td style="text-align:left;"> syringe_diameter </td>
    <td style="text-align:left;"> [qcc::limits.xbar](#limitsxbar) </td>
   </tr>
   <tr>
    <td style="text-align:left;"> SPC </td>
-   <td style="text-align:left;"> Capability Analysis </td>
+   <td style="text-align:left;"> Cpk </td>
    <td style="text-align:left;"> syringe_diameter </td>
    <td style="text-align:left;"> [qcc::process.capability](#processcapability) </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> SPC </td>
+   <td style="text-align:left;"> I-MR charts </td>
+   <td style="text-align:left;"> tablet_weight </td>
+   <td style="text-align:left;"> [industRial::off_spec](#offspec) </td>
   </tr>
 </tbody>
 </table>

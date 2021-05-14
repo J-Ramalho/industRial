@@ -2,7 +2,7 @@
 % Please edit documentation in R/chart_IMR.R
 \name{chart_IMR}
 \alias{chart_IMR}
-\title{Create IMR chart for statistical process control}
+\title{Create R MR chart for statistical process control}
 \usage{
 chart_IMR(data, factory)
 }
@@ -15,12 +15,12 @@ chart_IMR(data, factory)
 
 }
 \description{
-Generate a single point time series chart from a set of consecutive measurements.
+Generate a moving range chart chart from a set of consecutive measurements.
 }
 \details{
 This type of chart is typically applied in product manufacturing to monitor
 deviations from the target value over time. It is usually accompanied by 
-the \code{\link{chart_RMR}}
+the \code{\link{chart_IMR}}
 }
 \references{
 For a complete case study application refer to \url{https://j-ramalho.github.io/industRial/}

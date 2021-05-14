@@ -52,9 +52,9 @@ chart_R <- function(data, factory){
     geom_text(data = R_labels, mapping = aes(x=x_position, y=y_position, label=label_value),
               color = "#FF0000", hjust = 0) +
     theme_light() +
-    labs(title = "Milk fat in dry matter (MF/DM)",
-         subtitle = glue("R chart, Gruyère factory {factory}"),
-         caption = "data source: Dr Heidi Lamucca, QA",
+    labs(title = "Weight",
+         subtitle = glue("R chart, factory {factory}"),
+         caption = "data source: pilot line",
          y = "Range",
          x = "Timepoint") +
     theme(plot.caption = element_text(vjust = 1))

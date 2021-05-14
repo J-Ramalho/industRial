@@ -25,7 +25,7 @@ knitr::include_graphics("img/syringe_molding_bw.jpg")
 
 </div>
 
-## Control charts
+## xbar-R charts
 
 There are many types of control charts and in this case study we're demonstrating the xbar and R charts. These two charts are often used together and are suited to the control the mean and the variability of a continuous variable.
 
@@ -54,7 +54,7 @@ Now we load the qcc package that has the required quality control tools:
 
 In order to establish a control chart it is recommended to run a "calibration run". The calibration run is used to calculate the control limits before entering "regular production". Using the first 10 samples we call the qcc() function to make the required calculations.
 
-### xbar chart
+### Mean chart
 
 []{#xbarchart}
 
@@ -107,7 +107,7 @@ We are now ready to finally we can see this all together in a plot:
 plot(syringe_xbar)
 ```
 
-### R chart 
+### Range chart 
 
 Using the same 10 first samples we also obtain the corresponding R chart:
 
@@ -156,7 +156,7 @@ In this case all the points are within the previously defined control limits.
 
 More tight controls can be put in place by clearly identifying warning limits in a narrower range than the control limits. These measures need to be accompaigned by clear decision criteria and proper training to avoid the typical problem of overeacting and destabilizing the process by introducing unintented special causes of variation.
 
-### Limits on xbar chart 
+### Control limits
 
 We add warning limits in the plot with as follows:
 
@@ -208,9 +208,9 @@ Adapted from @Bass2007
 In this chapter we're going to go more in depth in the study of the manufacturing process variability. We're going to make a comparison between the product specifications and the process variability. We're looking for opportunities to tigthen the product specifications. 
 Tightening a product specification without increasing the cost of a manufacturing cost can be a source of competitive advantage.
 
-## Process Capability
+## Cpk charts
 
-### Out of specification
+### Off spec
 
 ```{r}
 syringe_long <- syringe_diameter %>%
@@ -231,14 +231,13 @@ theor_n = 1000000
 **calculation: probability of being between the limits**
 
 ```{r}
-within_limits <- function(UCL, LCL, mean, sd) {
-  (pnorm(UCL, mean, sd) - pnorm(LCL, mean, sd))*100
+off_spec <- function(UCL, LCL, mean, sd) {
+  round(100 - ((stats::pnorm(UCL, mean, sd) - stats::pnorm(LCL, mean, sd))*100), 2)
 }
 ```
 
 ```{r}
-syringe_within <- within_limits(spec_max, spec_min, syringe_mean, syringe_sd)
-syringe_off_spec <- 100 - syringe_within
+syringe_off_spec <- off_spec(spec_max, spec_min, syringe_mean, syringe_sd)
 ```
 
 ```{r}
@@ -279,7 +278,7 @@ By looking at the histogram of the Bamako lightning dataset we confirm the extre
 We can also calculate the Cpk
 
 ```{r}
-capability <- function(UCL, LCL, mean, sd) {
+process_Cpk <- function(UCL, LCL, mean, sd) {
   pmin(
     (abs(mean - abs(LCL)) / (3 * sd)),
     (abs((abs(UCL) - mean)) / (3 * sd))
@@ -288,28 +287,18 @@ capability <- function(UCL, LCL, mean, sd) {
 ```
 
 ```{r}
-capability(spec_max, spec_min, syringe_mean, syringe_sd)
+process_Cpk(spec_max, spec_min, syringe_mean, syringe_sd)
 ```
 
 And convert the percentage out of spec in parts per million. We're not considering the 1.5 shift that sometimes is presented in the literature but rather making a simple direct conversion of the proportion out of spec found before:
 
 ```{r}
-per_mio_off_spec <- function(percent_within) {
-  formatC(
-  ((100 - percent_within) * 10000),
-  format = "d",
-  big.mark = "'"
-  )
-}
+formatC(((syringe_off_spec) * 10000), format = "d", big.mark = "'")
 ```
 
-```{r}
-per_mio_off_spec(syringe_within)
-```
+The expected population below the LSL is 1,3% which is very high for industry standards. In fact this corresponds to 15'900 parts per million (ppm) whereas a common target would be 1 ppm. Naturally these figures are indicative and they depend of the context criteria such as severity of the problem, cost, difficulty to eliminate the problem and so on. 
 
-The expected population below the LSL is 1,3% which is very high for industry standards. In fact this corresponds to 12'649 parts per million (ppm) whereas a common target would be 1 ppm. Naturally these figures are indicative and they depend of the context criteria such as severity of the problem, cost, difficulty to eliminate the problem and so on. 
-
-We can now establish a simple table using the functions created before, to present the expected percentage that falls within certain limits. To make it usefull we're putting this limits at +/- 1 to 6 standard deviations
+We can now establish a simple table using the functions created before, to present the expected percentage that falls within certain limits. To make it useful we're putting this limits at +/- 1 to 6 standard deviations
 
 ```{r}
 mean <- 0
@@ -322,15 +311,25 @@ sigma_conversion_table <-
 ```
 
 ```{r}
+within_limits <- function(UCL, LCL, mean, sd) {
+  (pnorm(UCL, mean, sd) - pnorm(LCL, mean, sd))*100
+}
+per_mio_off_spec <- function(percent_within) {
+  formatC(
+  ((100 - percent_within) * 10000),
+  format = "d",
+  big.mark = "'"
+  )
+}
 sigma_conversion_table <- sigma_conversion_table %>%
   mutate(perc_in_spec = within_limits(UCL, LCL, mean, sd),
-         Cpk = capability(UCL, LCL, mean, sd),
+         Cpk = process_Cpk(UCL, LCL, mean, sd),
          ppm_defects = per_mio_off_spec(perc_in_spec))
 sigma_conversion_table %>%
   kable(align = "c")
 ```
 
-### Cpk index
+### Capability chart
 
 ```{r echo = FALSE}
 syringe_xbar <- qcc(
@@ -340,8 +339,6 @@ syringe_xbar <- qcc(
   xlab = "Sample group", plot = FALSE
   )
 ```
-
-### Process capability chart
 
 []{#processcapability}
 
@@ -358,3 +355,84 @@ syringe_cpk <- process.capability(
 ```
 
 A fine tuning of the forecast of the number of expected parts out of specification can be done with the parameter std.dev. The input value will be used in the probability distribution function. Different approaches can be considered: calculating the sandard deviation within each subgroup or the standard deviation of the entire population and also correcting the standard deviation dividing by n or by n - 1. In this example we re-use the standard deviation calculated on the entire set of datapoints as the group is small but for a case with more data it would be interesting to used the subgroups that tend to give smaller standard deviations.
+
+## I-MR charts
+
+In this final chapter we're exploring the development of custom functions for summary statistics and timeseries plotting. All these functions are available on the book companion package `{industRial}` for exploration and further development. They don't pretend to be used as such for real life applications. For that we recommend the functions from the package `{QCC}` presented before. The objective here is to show a workflow and demonstrate some possibilities that the `{tidyverse}` offers to make completely customized functions.
+
+To encourage this exploration we're not presenting here the complete code for each function but propose to check it with the R functionality for function code exploration. We see often the recommendation to read R source code and we can only support it as an excellent way to develop our skilset.
+
+Lets start with the simple function that calculates the percentage of parts out of specification given the specification limits, the process mean and standard deviation. This function was presented in the previous case study and since it is loaded in memory we can read its content with the R function body():
+
+```{r}
+body(off_spec)
+```
+
+we can see that it uses simple functions from the package {`stats}`. We can also explicitly request to see the arguments it takes with formals():
+
+```{r}
+dput(formals(off_spec))
+```
+
+and for a complete review we can open the function help page with:
+
+```{}
+?off_spec
+```
+
+Lets give some data and use the function:
+
+[]{#offspec}
+
+```{r}
+off_spec(0.981, 0.819, 0.943, 0.019)
+```
+
+we get 2.28% parts out of spec. We'll see this calculation in action in a moment.
+
+### Process stats
+
+**The tablet weight control procedure**
+
+```{r}
+tablet_weight <- tablet_weight %>%
+    janitor::clean_names(case = "snake")
+```
+
+We're now going to use the function process stats to calculate several statistical data for this dataset. As mentionned we encourage the reader to explore the code with body(process_stats) and dput(formals(process_stats)) as there is a wealth of details in how to calculate process control limits, moving ranges and the like.
+
+```{r}
+weight_statistics_data <- process_stats(tablet_weight, 9)
+```
+
+this being done we can now convert this data into an easy readable format for reporting of for a future integration in a shiny app for example. We're exploring the package `{gt}` that has a specific very neat look rather different from the `{kable}` package used in most of the book. 
+
+```{r}
+process_stats_table(weight_statistics_data)
+```
+
+### Sample chart
+
+The data set being available we're feeding it into the chart_I() function:
+
+```{r}
+chart_I(weight_statistics_data)
+```
+
+### Moving range chart
+
+The companion of the I chart is the MR chart, where MR stands for moving range. This chart can be called with:
+
+```{r}
+chart_IMR(weight_statistics_data)
+```
+
+### Capability chart II
+
+And a final chart for this session the capability chart:
+
+```{r}
+chart_Cpk(weight_statistics_data)
+```
+
+

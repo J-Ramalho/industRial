@@ -11,7 +11,7 @@ filter <- dplyr::filter
 select <- dplyr::select
 ```
 
-## Factorial designs
+## Interactions
 
 Two factors multiple levels
 

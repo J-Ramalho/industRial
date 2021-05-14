@@ -21,7 +21,7 @@ their mean on each time point.
 \details{
 This type of chart is typically applied in product manufacturing to monitor
 deviations from the target value over time. It is usually accompanied by 
-the \code{\link{chart_R}}
+the \code{\link{chart_xbarR}}
 }
 \references{
 For a complete case study application refer to \url{https://j-ramalho.github.io/industRial/}

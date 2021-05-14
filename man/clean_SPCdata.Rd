@@ -16,6 +16,9 @@ clean_SPCdata(data)
 This function takes a dataset consisting of consecutive measurements and
 cleans it so that it can be used in SPC charts.
 }
+\examples{
+
+}
 \references{
 For a complete case study application refer to \url{https://j-ramalho.github.io/industRial/}
 }

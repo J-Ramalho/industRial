@@ -7,7 +7,7 @@
 #' @details
 #' This type of chart is typically applied in product manufacturing to monitor
 #' deviations from the target value over time. It is usually accompanied by 
-#' the \code{\link{chart_R}}
+#' the \code{\link{chart_xbarR}}
 #' 
 #' @references 
 #' For a complete case study application refer to \url{https://j-ramalho.github.io/industRial/}
@@ -83,9 +83,9 @@ chart_xbar <- function(data, factory) {
               color = "#FF0000", hjust = 0) +
     scale_y_continuous(breaks = seq(round(xbar_LCL, 0), round(xbar_UCL,0), 0.5)) +
     theme_light() +
-    labs(title = "Milk fat in dry matter (MF/DM)",
-         subtitle = glue("xbar chart, Gruyère factory {factory}"),
-         caption = "data source: Dr Heidi Lamucca, QA",
+    labs(title = "Weight",
+         subtitle = glue("xbar chart, factory {factory}"),
+         caption = "data source: pilot line",
          y = "Mean",
          x = "Timepoint") +
     theme(plot.caption = element_text(vjust = 1))

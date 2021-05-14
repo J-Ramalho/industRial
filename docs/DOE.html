@@ -179,14 +179,14 @@ div.csl-indent {
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Welcome</a></li>
 <li class="chapter" data-level="" data-path="r-toolbox.html"><a href="r-toolbox.html"><i class="fa fa-check"></i>R Toolbox</a>
 <ul>
-<li class="chapter" data-level="" data-path="r-toolbox.html"><a href="r-toolbox.html#r-programming"><i class="fa fa-check"></i>R programming</a></li>
-<li class="chapter" data-level="" data-path="r-toolbox.html"><a href="r-toolbox.html#r-datasets"><i class="fa fa-check"></i>R Datasets</a></li>
+<li class="chapter" data-level="" data-path="r-toolbox.html"><a href="r-toolbox.html#r-programming"><i class="fa fa-check"></i>R Programming</a></li>
 <li class="chapter" data-level="" data-path="r-toolbox.html"><a href="r-toolbox.html#r-packages"><i class="fa fa-check"></i>R Packages</a>
 <ul>
-<li class="chapter" data-level="" data-path="r-toolbox.html"><a href="r-toolbox.html#industrial-packages"><i class="fa fa-check"></i>Industrial packages</a></li>
-<li class="chapter" data-level="" data-path="r-toolbox.html"><a href="r-toolbox.html#all-purpose-packages"><i class="fa fa-check"></i>All purpose packages</a></li>
-<li class="chapter" data-level="" data-path="r-toolbox.html"><a href="r-toolbox.html#packages-for-writing"><i class="fa fa-check"></i>Packages for writing</a></li>
+<li class="chapter" data-level="" data-path="r-toolbox.html"><a href="r-toolbox.html#specific"><i class="fa fa-check"></i>Specific</a></li>
+<li class="chapter" data-level="" data-path="r-toolbox.html"><a href="r-toolbox.html#generic"><i class="fa fa-check"></i>Generic</a></li>
+<li class="chapter" data-level="" data-path="r-toolbox.html"><a href="r-toolbox.html#edition"><i class="fa fa-check"></i>Edition</a></li>
 </ul></li>
+<li class="chapter" data-level="" data-path="r-toolbox.html"><a href="r-toolbox.html#DataSets"><i class="fa fa-check"></i>DataSets</a></li>
 <li class="chapter" data-level="" data-path="r-toolbox.html"><a href="r-toolbox.html#r-session"><i class="fa fa-check"></i>R Session</a></li>
 <li class="chapter" data-level="" data-path="r-toolbox.html"><a href="r-toolbox.html#disclaimer"><i class="fa fa-check"></i>Disclaimer</a></li>
 </ul></li>
@@ -756,7 +756,7 @@ F-statistic:  66.8 on 3 and 16 DF,  p-value: 2.883e-09</code></pre>
 <div class="sourceCode" id="cb91"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb91-1"><a href="DOE.html#cb91-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(car)</span></code></pre></div>
 <div class="sourceCode" id="cb92"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb92-1"><a href="DOE.html#cb92-1" aria-hidden="true" tabindex="-1"></a><span class="fu">durbinWatsonTest</span>(ebike_lm_factor)</span></code></pre></div>
 <pre><code> lag Autocorrelation D-W Statistic p-value
-   1      -0.5343347      2.960893   0.106
+   1      -0.5343347      2.960893   0.074
  Alternative hypothesis: rho != 0</code></pre>
 <p>Although the output shows Autocorrelation of -0.53 we have to consider that the p value is greater than 0.05 thus there is not enough significance to say that there is autocorrelation.</p>
 </div>

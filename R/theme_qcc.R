@@ -1,3 +1,26 @@
+#' Custom theme "qcc" for the book industRial Data Science plots  
+#'
+#' This theme provides a similar look and feel to the package \code{\link[qcc]{qcc}}
+#' statistical process control charts (SPC) which have themselves a resemblance with 
+#' Minitab charts. This theme aims at providing a layout that is familiar to readers
+#' of Minitab chart to help in reducing transition to R build reports and charts.
+#' 
+#' @references 
+#' For a complete case study application refer to \url{https://j-ramalho.github.io/industRial/}
+#' 
+#' @details
+#' Apply this theme by adding it at the end of the code of any \code{\link[ggplot2]{ggplot}} chart.
+#' It #' basically provides a grey background and some highlights to help reading key
+#' process statistics such as the population mean.
+#'
+#' @param base_size 
+#' @param base_family 
+#'
+#' @return
+#' @export
+#'
+#' @examples
+#' 
 theme_qcc <- function(base_size = 12, base_family = "") {
   
   theme_grey(base_size = base_size, base_family = base_family) %+replace%

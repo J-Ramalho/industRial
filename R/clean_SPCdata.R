@@ -1,4 +1,19 @@
-clean_control_data <- function(data) {
+#' Clean control data for Statistical Process Control Charts (SPC)
+#' 
+#' @description
+#' This function takes a dataset consisting of consecutive measurements and
+#' cleans it so that it can be used in SPC charts. 
+#'
+#' @references 
+#' For a complete case study application refer to \url{https://j-ramalho.github.io/industRial/}
+#
+#' @param data 
+#'
+#' @return
+#' @export
+#'
+#' @examples
+clean_SPCdata <- function(data) {
   data_zeros <- data %>%
     mutate(
       m1zero = if_else(m1 == 0, 1, 0),

@@ -1,4 +1,24 @@
-I_MR_plot <- function(data, factory){
+#' Create IMR chart for statistical process control
+#' 
+#' @description
+#' Generate a single point time series chart from a set of consecutive measurements.
+#' 
+#' @details
+#' This type of chart is typically applied in product manufacturing to monitor
+#' deviations from the target value over time. It is usually accompanied by 
+#' the \code{\link{chart_RMR}}
+#' 
+#' @references 
+#' For a complete case study application refer to \url{https://j-ramalho.github.io/industRial/}
+#'
+#' @param data 
+#' @param factory 
+#'
+#' @return
+#' @export
+#'
+#' @examples
+chart_IMR <- function(data, factory){
   # adding summary statistics
   data_stats <- data %>%
     rowwise() %>%

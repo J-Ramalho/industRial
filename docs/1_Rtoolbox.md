@@ -5,7 +5,7 @@ editor_options:
 ---
 # R Toolbox
 
-## R programming
+## R Programming
 
 Why R? Many tools exist to do Data Analysis and Statistics with different degrees of power and difficulty such as:
 
@@ -51,81 +51,6 @@ source(here::here("inst/book/setup.R"))
 library(readxl)
 ```
 
-
-## R Datasets
-
-All examples presented throughout the book are published either fully anonymized or the with the original entities authorization and reference. All datasets are made available for further exploration. The books original datasets are available in the books github repository. Instructions for downloading them are presented specifically for each dataset, the general approach is described below.
-
-Get from github the book companion package:
-
-```
-devtools::install_github("J-Ramalho/industRial")
-```
-
-Datasets become immediatly available by invoking the package name and the dataset, e.g.:
-
-
-```r
-head(industRial::dial_control)
-```
-
-```
-# A tibble: 6 x 4
-  Operator Date       Defect  Location
-  <chr>    <chr>      <chr>   <chr>   
-1 Jane     2018.01.31 Indent  3h      
-2 Jane     2018.02.02 Indent  3h      
-3 Jane     2018.02.02 Indent  4h      
-4 Peter    2018.02.02 Indent  10h     
-5 Jane     2018.02.03 Scratch 3h      
-6 Jane     2018.02.03 Indent  3h      
-```
-
-If repetitive use is required then it is best to directly load the package in the current session:
-
-
-```r
-library(industRial)
-```
-
-as the package is loaded the dataset is in memory and ready to go, e.g.:
-
-
-```r
-dial_control %>%
-  head() %>%
-  kable()
-```
-
-
-
-|Operator |Date       |Defect  |Location |
-|:--------|:----------|:-------|:--------|
-|Jane     |2018.01.31 |Indent  |3h       |
-|Jane     |2018.02.02 |Indent  |3h       |
-|Jane     |2018.02.02 |Indent  |4h       |
-|Peter    |2018.02.02 |Indent  |10h      |
-|Jane     |2018.02.03 |Scratch |3h       |
-|Jane     |2018.02.03 |Indent  |3h       |
-
-The dateset can be used and manipulated like any other dataset created in the session or loaded otherwise. For example it can be filtered and assigned to a new variable name:
-
-
-```r
-dial_peter <- dial_control %>%
-  filter(Operator == "Peter") 
-dial_peter %>%
-  head(2) %>%
-  kable()
-```
-
-
-
-|Operator |Date       |Defect  |Location |
-|:--------|:----------|:-------|:--------|
-|Peter    |2018.02.02 |Indent  |10h      |
-|Peter    |2018.02.03 |Scratch |4h       |
-
 ## R Packages
 
 All tools applied throughout this book are available in the form of packages of the programming language R. They're all available for downloaded at no cost.
@@ -134,15 +59,20 @@ In all sections packages are loaded as they become needed. We've prefered this a
 
 When needed we also present code required to handle the masking of functions with the same name from those different packages. In the example below the filter and select functions are made explicit to avoid having them masked by the stats package in case it has been loaded before.
 
-### Industrial packages
+### Specific
 
 #### industRial
 
-The `{industRial}` package is an original companion package developed for this book that besides containing the datasets from all cases has varied functions to print and customise the aesthetics of spc charts. They're built on top of the tidyverse package. They aim for an easier modification of the control chart rules and customisation of the plot aesthetics when compared with other more advanced packages for spc such as the qcc. The industRial package can be simply downloaded from github with the following command:
+The `{industRial}` package is an original companion package developed for this book that can be simply downloaded from github with the following command:
 
 ```{}
 devtools::install_github("J-Ramalho/industRial")
 ```
+
+The primary package goal is to make easily available all the datasets from all case studies. Once loaded datasets can directly be used in the examples presented see session [Datasets](#datasets)
+
+Additionally it contains some theme functions to print and customise the aesthetics of spc charts and other charts. These themes are built on top of the `{ggplot2}` by H.Wickham and `{cowplot}` package by Claus O.Wilke. They aim for an easier modification of the control chart rules and customisation of the plot aesthetics when compared with other more advanced packages for spc such as the qcc. 
+
 
 #### six sigma
 
@@ -162,7 +92,7 @@ This package is one of the most complete and vast packages in Design of Experiem
 
 [DoE.base](http://prof.beuth-hochschule.de/groemping/software/doe/?L=1&print=1)
 
-### All purpose packages
+### Generic
 
 The amount of packages available is extremely large and growing very fast. When selecting new packages it is recommended to check the latest package update. Packages that have had no improvements since more than a couple of years should be questionned. The field evolves rapidly and compatibility and other issues can become painfull. A way to obtain statistics on package history is on [metacran](https://www.r-pkg.org/) or [RStudio package manager](https://packagemanager.rstudio.com/). 
 
@@ -225,9 +155,83 @@ recommended_packages %>%
 |glue        |text                   |1.4.2   |
 |stringr     |text                   |1.4.0   |
 
-### Packages for writing
+### Edition
 
-This book has been written using the R package `{Bookdown}` from @Xie2016 further customized with a layout developped by [Matthew J. C. Crump](https://community.rstudio.com/t/bookdown-contest-submission-gitbook-style-tufte-style-for-web-book/11666). Plot themes have been adapted from the package `{cowplot}` by Claus O.Wilke.
+Many packages are available for editing documention, from notes to blogs up to complete websites. In this book we've opted to use the R package `{Bookdown}` from @Xie2016 further customized with a layout developped by [Matthew J. C. Crump](https://community.rstudio.com/t/bookdown-contest-submission-gitbook-style-tufte-style-for-web-book/11666). 
+
+## R Datasets {#datasets}
+
+All examples presented throughout the book are published either fully anonymized or the with the original entities authorization and reference. All datasets are made available for further exploration. The books original datasets are available in the books github repository. Instructions for downloading them are presented specifically for each dataset, the general approach is described below.
+
+Get from github the book companion package:
+
+```
+devtools::install_github("J-Ramalho/industRial")
+```
+
+Datasets become immediately available by invoking the package name and the dataset, e.g.:
+
+
+```r
+head(industRial::dial_control)
+```
+
+```
+# A tibble: 6 x 4
+  Operator Date       Defect  Location
+  <chr>    <chr>      <chr>   <chr>   
+1 Jane     2018.01.31 Indent  3h      
+2 Jane     2018.02.02 Indent  3h      
+3 Jane     2018.02.02 Indent  4h      
+4 Peter    2018.02.02 Indent  10h     
+5 Jane     2018.02.03 Scratch 3h      
+6 Jane     2018.02.03 Indent  3h      
+```
+
+If repetitive use is required then it is best to directly load the package in the current session:
+
+
+```r
+library(industRial)
+```
+
+as the package is loaded the dataset is in memory and ready to go, e.g.:
+
+
+```r
+dial_control %>%
+  head() %>%
+  kable()
+```
+
+
+
+|Operator |Date       |Defect  |Location |
+|:--------|:----------|:-------|:--------|
+|Jane     |2018.01.31 |Indent  |3h       |
+|Jane     |2018.02.02 |Indent  |3h       |
+|Jane     |2018.02.02 |Indent  |4h       |
+|Peter    |2018.02.02 |Indent  |10h      |
+|Jane     |2018.02.03 |Scratch |3h       |
+|Jane     |2018.02.03 |Indent  |3h       |
+
+The dateset can be used and manipulated like any other dataset created in the session or loaded otherwise. For example it can be filtered and assigned to a new variable name:
+
+
+```r
+dial_peter <- dial_control %>%
+  filter(Operator == "Peter") 
+dial_peter %>%
+  head(2) %>%
+  kable()
+```
+
+
+
+|Operator |Date       |Defect  |Location |
+|:--------|:----------|:-------|:--------|
+|Peter    |2018.02.02 |Indent  |10h      |
+|Peter    |2018.02.03 |Scratch |4h       |
 
 ## R Session
 

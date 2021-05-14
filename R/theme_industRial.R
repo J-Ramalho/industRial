@@ -1,3 +1,24 @@
+#' Custom theme "industRial" for the book industRial Data Science plots  
+#'
+#' @description
+#' This theme aims at optimal balance between readability and precision. It has 
+#' adapted from the package {cowplot} by Claus O.Wilke and reflects the principles
+#' of his book \href{https://clauswilke.com/dataviz/}{Fundamentals of Data Visualization }
+#' 
+#' @references 
+#' For a complete case study application refer to \url{https://j-ramalho.github.io/industRial/}
+#' 
+#' @details
+#' Apply this theme by adding it at the end of the code of any \code{\link[ggplot2]{ggplot}} chart.
+#' It basically combines the half open theme with a grid background from {cowplot}
+#'
+#' @param base_size 
+#' @param base_family 
+#'
+#' @return
+#' @export
+#'
+#' @examples
 theme_industRial <- function (font_size = 14, font_family = "", line_size = 0.5,
                               rel_small = 12/14, rel_tiny = 11/14, rel_large = 16/14)
 {

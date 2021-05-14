@@ -1,4 +1,25 @@
-Rchart_plot <- function(data, factory){
+#' Create R chart for statistical process control
+#' 
+#' @description
+#' Generate a ranges chart from a set of consecutive measurements by calculating
+#' their mean on each time point.
+#' 
+#' @details
+#' This type of chart is typically applied in product manufacturing to monitor
+#' deviations from the target value over time. It is usually accompanied by 
+#' the \code{\link{chart_xbar}}
+#' 
+#' @references 
+#' For a complete case study application refer to \url{https://j-ramalho.github.io/industRial/}
+#'
+#' @param data 
+#' @param factory 
+#'
+#' @return
+#' @export
+#'
+#' @examples
+chart_R <- function(data, factory){
   # adding summary statistics
   data_stats <- data %>%
     rowwise() %>%
@@ -13,7 +34,7 @@ Rchart_plot <- function(data, factory){
   D4 <- 2.1145
   R_LCL <- round((D3 * R_mean), 1)
   R_UCL <- round((D4 * R_mean), 1)
-  # Preparing labels for the plot limits
+  # Preparing labels for the chart limits
   R_labels <- tibble(
     x_position = min(data_stats$timepoint),
     y_position = c(R_UCL + 0.2, R_LCL - 0.2),

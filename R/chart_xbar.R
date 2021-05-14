@@ -1,27 +1,33 @@
-#' Create means plot for statistical process control
+#' Create xbar chart for statistical process control
 #'
-#' Generate an xbar plot from a set of consecutive measurements by calculating
+#' @description
+#' Generate an means chart from a set of consecutive measurements by calculating
 #' their mean on each time point.
 #' 
-#' This type of plot is typically applied in product manufacturing to monitor
-#' deviations from the target value over time.
+#' @details
+#' This type of chart is typically applied in product manufacturing to monitor
+#' deviations from the target value over time. It is usually accompanied by 
+#' the \code{\link{chart_R}}
+#' 
+#' @references 
+#' For a complete case study application refer to \url{https://j-ramalho.github.io/industRial/}
 #'
 #' @param data 
 #' @param factory 
 #'
 #' @return
 #' @export
-#'
+#' 
 #' @examples
-xbar_plot <- function(data, factory) {
+chart_xbar <- function(data, factory) {
   # adding summary statistics
   data_stats <- data %>%
-    rowwise() %>%
-    mutate(xbar = mean(c(m1, m2, m3, m4, m5))) %>%
-    mutate(range = max(c(m1, m2, m3, m4, m5)) - min(c(m1, m2, m3, m4, m5)))
+    dplyr::rowwise() %>%
+    dplyr::mutate(xbar = mean(c(m1, m2, m3, m4, m5))) %>%
+    dplyr::mutate(range = max(c(m1, m2, m3, m4, m5)) - min(c(m1, m2, m3, m4, m5)))
   
   nr_timepoints <- data_stats %>% nrow()
-  xbar_mean <- data_stats %>% pull(xbar) %>% mean() %>% round(1)
+  xbar_mean <- data_stats %>% dplyr::pull(xbar) %>% mean() %>% round(1)
   R_mean <- data_stats %>% pull(range) %>% mean() %>% round(1)
   # Calculating R chart limits
   A2 <- 0.5768

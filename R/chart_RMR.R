@@ -1,4 +1,24 @@
-Rchart_wkly_plot <- function(data, factory){
+#' Create R MR chart for statistical process control
+#'
+#' @description
+#' Generate a moving range chart chart from a set of consecutive measurements.
+#' 
+#' @details
+#' This type of chart is typically applied in product manufacturing to monitor
+#' deviations from the target value over time. It is usually accompanied by 
+#' the \code{\link{chart_IMR}}
+#' 
+#' @references 
+#' For a complete case study application refer to \url{https://j-ramalho.github.io/industRial/}
+#'
+#' @param data 
+#' @param factory 
+#'
+#' @return
+#' @export
+#'
+#' @examples
+chart_RMR <- function(data, factory){
   # adding summary statistics
   data_stats <- data %>%
     rowwise() %>%

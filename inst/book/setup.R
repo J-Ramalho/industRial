@@ -1,5 +1,5 @@
 # Load packages
-pkgs <- c(
+ds_pkgs <- c(
   "tidyverse",
   "scales",
   "janitor",
@@ -10,7 +10,7 @@ pkgs <- c(
   "broom",
   "patchwork"
 )
-purrr::map(pkgs, library, character.only = TRUE)
+purrr::map(ds_pkgs, library, character.only = TRUE)
 
 filter <- dplyr::filter
 select <- dplyr::select

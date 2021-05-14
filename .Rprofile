@@ -5,21 +5,30 @@ options(repos = c(REPO_NAME = "https://packagemanager.rstudio.com/all/latest"))
 message("The RStudio Package Manager Repository has been configured specifically for this Rproject folder:")
 options('repos')
 
-# Load packages
-pkgs <- c(
+# Load data science packages:
+ds_pkgs <- c(
   "tidyverse",
   "scales",
   "janitor",
   "knitr",
   "stats",
   "industRial",
-  "viridis"
+  "viridis",
+  "broom",
+  "patchwork"
 )
-purrr::map(pkgs, library, character.only = TRUE)
-
+purrr::map(ds_pkgs, library, character.only = TRUE)
 filter <- dplyr::filter
 select <- dplyr::select
 
+# load development packages:
+dev_pkgs <- c(
+  "devtools",
+  "fs"
+)
+purrr::map(dev_pkgs, library, character.only = TRUE)
+
+# general options:
 options(
   digits = 3,
   width = 69,

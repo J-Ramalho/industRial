@@ -1,5 +1,6 @@
 
 
+
 # Statistical Process Control {#SPC}
 
 Keeping the variability of an industrial process under control is one of the most important objectives in manufacturing. Based on expert knowledge or on detailed functional analysis the product and process parameters that are critical to quality are identified and selected for close follow-up. The most common and effective way for such follow-up is the Statistical Process Control which is done by using control charts.
@@ -20,18 +21,6 @@ Keeping the variability of an industrial process under control is one of the mos
 There are many types of control charts and in this case study we're demonstrating the xbar and R charts. These two charts are often used together and are suited to the control the mean and the variability of a continuous variable.
 
 Bamako Lightening is a company that manufactures lamps. The weight of each lamp is critical to the quality of the product. The Production Operator monitors the production process using xbar and R-charts. Samples are taken of six lamps every hour and their means and ranges plotted on control charts. Data is available representing samples taken a period of 25 hours of production.
-
-Loading packages for data loading and cleaning:
-
-
-```r
-library(tidyverse)
-library(knitr)
-library(industRial)
-library(stats)
-filter <- dplyr::filter
-select <- dplyr::select
-```
 
 Looking at the first five lines to confirm and assess the quality of our data for further processing. 
 
@@ -190,7 +179,7 @@ We are now ready to finally we can see this all together in a plot:
 plot(syringe_xbar)
 ```
 
-<img src="10_spc_files/figure-html/unnamed-chunk-12-1.png" width="672" />
+<img src="10_spc_files/figure-html/unnamed-chunk-11-1.png" width="672" />
 
 ### R chart 
 
@@ -208,7 +197,7 @@ syringe_R <- qcc(
   )
 ```
 
-<img src="10_spc_files/figure-html/unnamed-chunk-13-1.png" width="672" />
+<img src="10_spc_files/figure-html/unnamed-chunk-12-1.png" width="672" />
 
 <b>Regular production</b>
 
@@ -225,7 +214,7 @@ syringe_xbar <- qcc(
   )
 ```
 
-<img src="10_spc_files/figure-html/unnamed-chunk-14-1.png" width="672" />
+<img src="10_spc_files/figure-html/unnamed-chunk-13-1.png" width="672" />
 
 We can see that the data point corresponding to the average of the measurements of the samplegroup 17 is plotted in red because it is outside of the control limits.
 
@@ -242,7 +231,7 @@ syringe_R <- qcc(
   )
 ```
 
-<img src="10_spc_files/figure-html/unnamed-chunk-15-1.png" width="672" />
+<img src="10_spc_files/figure-html/unnamed-chunk-14-1.png" width="672" />
 
 In this case all the points are within the previously defined control limits.
 
@@ -272,7 +261,7 @@ plot(
 abline(h = warn.limits, lty = 3, col = "chocolate")
 ```
 
-<img src="10_spc_files/figure-html/unnamed-chunk-16-1.png" width="672" />
+<img src="10_spc_files/figure-html/unnamed-chunk-15-1.png" width="672" />
 
 A manufacturing process under control has a variation that is lower than the product specifications and ideally it is centered. Therefore it is usually good practice to follow the control chart rules refering to the process control limits. 
 
@@ -300,7 +289,7 @@ plot(
 abline(h = specs, lty = 3, col = "red")
 ```
 
-<img src="10_spc_files/figure-html/unnamed-chunk-18-1.png" width="672" />
+<img src="10_spc_files/figure-html/unnamed-chunk-17-1.png" width="672" />
 
 In the previous example we see a situation that happens in practice and that requires action: the data plotted is still within the min max specification limits for this relativelly small number of data points. Furthermore the variation is overall well contained within the process limits. Nevertheless we see it is extremelly off centered when compared with the product specification. A process capability study should help determining the causes for this offcentering and help correcting it.
 
@@ -382,7 +371,7 @@ syringe_long %>%
     subtitle = {plot_subtitle})
 ```
 
-<img src="10_spc_files/figure-html/unnamed-chunk-25-1.png" width="672" />
+<img src="10_spc_files/figure-html/unnamed-chunk-24-1.png" width="672" />
 
 By looking at the histogram of the Bamako lightning dataset we confirm the extreme offcentering of the production. We also see that although there are no measurements beyond the lower specification limit (LSL) it is very likely this will happen soon.
 
@@ -486,6 +475,6 @@ syringe_cpk <- process.capability(
 )
 ```
 
-<img src="10_spc_files/figure-html/unnamed-chunk-33-1.png" width="672" />
+<img src="10_spc_files/figure-html/unnamed-chunk-32-1.png" width="672" />
 
 A fine tuning of the forecast of the number of expected parts out of specification can be done with the parameter std.dev. The input value will be used in the probability distribution function. Different approaches can be considered: calculating the sandard deviation within each subgroup or the standard deviation of the entire population and also correcting the standard deviation dividing by n or by n - 1. In this example we re-use the standard deviation calculated on the entire set of datapoints as the group is small but for a case with more data it would be interesting to used the subgroups that tend to give smaller standard deviations.

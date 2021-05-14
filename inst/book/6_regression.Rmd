@@ -1,10 +1,6 @@
-```{r message=FALSE, warning=FALSE, include=FALSE}
-knitr::opts_chunk$set(
-	message = FALSE,
-	warning = FALSE,
-	comment = NA
-	# out.width = "80%"
-)
+
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+source(here::here("inst/book/setup.R"))
 ```
 
 ## Regression and anova
@@ -30,18 +26,6 @@ We will present here a first example of the utilisation of linear regression tec
 **Data loading**
 
 ```{r}
-library(tidyverse)
-library(readxl)
-library(janitor)
-library(scales)
-library(stats)
-library(knitr)
-library(industRial)
-filter <- dplyr::filter
-select <- dplyr::select
-```
-
-```{r}
 ebike_narrow <- ebike_hardening %>%
   pivot_longer(
     cols = starts_with("g"),
@@ -65,7 +49,6 @@ slice_head(.data = ebike_narrow, n = 5) %>%
 ggplot(data = ebike_narrow) +
   geom_point(aes(x = temperature, y = cycles)) +
   geom_point(aes(x = temperature, y = cycles_mean), color = "red") +
-  theme_industRial() +
   scale_y_continuous(n.breaks = 10, labels = label_number(big.mark = "'")) +
   theme(legend.position = "none") +
   labs(title = "e-bike frame hardening process",
@@ -94,9 +77,7 @@ ggplot(ebike_narrow) +
   geom_point(aes(x = temperature, y = cycles)) +
   geom_smooth(aes(x = temperature, y = cycles), method = "lm") +
   geom_point(aes(x = temperature, y = cycles_mean), color = "red") +
-  theme_industRial() +
   scale_y_continuous(n.breaks = 10, labels = label_number(big.mark = "'")) +
-  theme_industRial() +
   theme(legend.position = "none") +
   labs(title = "e-bike frame hardening process",
        subtitle = "Raw data plot",
@@ -159,7 +140,6 @@ For this plot we need to ensure that the order of plotting in the x axis corresp
 ebike_aug %>%
   ggplot(aes(x = index, y = .resid)) +
   geom_point() +
-  theme_industRial() +
   scale_y_continuous(n.breaks = 10, labels = label_number(big.mark = "'")) +
   labs(
     title = "e-bike frame hardening process",
@@ -195,7 +175,6 @@ If the model is correct and the assumptions hold, the residuals should be struct
 ebike_aug %>%
   ggplot(aes(x = .fitted, y = .resid)) +
   geom_point() +
-  theme_industRial() +
   geom_smooth(method = "loess", se = FALSE, color = "red") +
   scale_y_continuous(n.breaks = 10, labels = label_number(big.mark = "'")) +
   labs(
@@ -233,8 +212,6 @@ ebike_aug %>%
   ggplot(aes(sample = .resid)) +
   geom_qq() +
   geom_qq_line() +
-  # coord_flip() +
-  theme_industRial() +
   scale_y_continuous(n.breaks = 10, labels = label_number(big.mark = "'")) +
   labs(
     title = "e-bike frame hardening process",
@@ -265,7 +242,6 @@ This specific Standardized residuals graph also help detecting outliers in the r
 ebike_aug %>% 
   ggplot(aes(x = .fitted, y = .std.resid)) +
   geom_point() +
-  theme_industRial() +
   geom_smooth(method = "loess", se = FALSE, color = "red") +
   labs(title = "e-bike frame hardening process",
        subtitle = "Linear model - Standardised Residuals vs Fitted values",
@@ -292,7 +268,6 @@ ebike_aug %>%
   ggplot(aes(x = .cooksd, y = .std.resid)) +
   geom_point() +
   geom_vline(xintercept = 0.5, color = "red") +
-  theme_industRial() +
   labs(title = "e-bike frame hardening process",
        subtitle = "Residuals vs Leverage",
        y = "Standardised Residuals",
@@ -326,9 +301,7 @@ We can also compare medians and get a sense of the effect of the treatment level
 ggplot(ebike_factor, 
        aes(x = temperature, y = cycles, fill = temperature)) +
   geom_boxplot() +
-  theme_industRial() +
   scale_fill_viridis_d(option = "D", begin = 0.5) +
-  theme_industRial() +
   scale_y_continuous(n.breaks = 10, labels = label_number(big.mark = "'")) +
   theme(legend.position = "none") +
   labs(title = "e-bike frame hardening process",
@@ -383,7 +356,6 @@ ggplot(ebike_factor2,
   geom_boxplot() +
   scale_y_continuous(n.breaks = 10) +
   scale_fill_viridis_d(option = "A", begin = 0.5) +
-  theme_industRial() +
   theme(legend.position = "none") +
   scale_y_continuous(n.breaks = 10, labels = label_number(big.mark = "'")) +
   labs(title = "e-bike frame hardening process",
@@ -499,7 +471,6 @@ ebike_factor %>%
   annotate(geom = "text", x = Inf, y = -Inf, label = "Error bars are +/- 1xSD", 
     hjust = 1, vjust = -1, colour = "grey30", size = 3, 
     fontface = "italic") +
-  theme_industRial() +
   labs(title = "e-bike frame hardening process",
        subtitle = "Raw data plot",
        x = "Furnace Temperature [°C]",

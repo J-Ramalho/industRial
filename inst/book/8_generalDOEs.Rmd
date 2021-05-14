@@ -1,27 +1,11 @@
-```{r message=FALSE, warning=FALSE, include=FALSE}
-knitr::opts_chunk$set(
-	message = FALSE,
-	warning = FALSE,
-	comment = NA
-	# out.width = "80%"
-)
+
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+source(here::here("inst/book/setup.R"))
 ```
 
 ## General factorial designs
 
-m factors n levels
-
-```{r}
-library(tidyverse)
-library(readxl)
-library(stats)
-library(broom)
-library(industRial)
-library(patchwork)
-library(knitr)
-filter <- dplyr::filter
-select <- dplyr::select
-```
+m factors n levels designs
 
 **The juice production plant**
 
@@ -84,11 +68,6 @@ juice_drymatter %>%
 ```{r}
 juice_drymatter <- juice_drymatter %>%
   mutate(bias = drymatter_DRX - drymatter_REF)
-
-juice_drymatter_factor <- juice_drymatter %>%
-  mutate(across(
-    c(product, drymatter_TGT, speed, particle_size, part), 
-    as_factor))
 ```
 
 ### Main effects plots
@@ -112,8 +91,7 @@ drymatter_TGT_plot <- juice_drymatter %>%
     subtitle = "Main effects plots",
     x = "drymatter_TGT [%]",
     y = "Average bias [g]"
-  ) +
-  theme_industRial()
+  )
 
 particle_size_plot <- juice_drymatter %>%  
   group_by(particle_size) %>%
@@ -127,8 +105,7 @@ particle_size_plot <- juice_drymatter %>%
   labs(
     x = "particle_size",
     y = "Average bias [g]"
-  ) +
-  theme_industRial()
+  )
 
 speed_plot <- juice_drymatter %>%  
   group_by(speed) %>%
@@ -142,8 +119,7 @@ speed_plot <- juice_drymatter %>%
   labs(
     x = "Speed",
     y = "Average bias [g]"
-  ) +
-  theme_industRial()
+  )
 
 drymatter_TGT_plot + particle_size_plot + speed_plot
 ```

@@ -1,10 +1,6 @@
-```{r message=FALSE, warning=FALSE, include=FALSE}
-knitr::opts_chunk$set(
-	message = FALSE,
-	warning = FALSE,
-	comment = NA,
-	out.width = "80%"
-)
+
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+source(here::here("inst/book/setup.R"))
 ```
 
 # Design of Experiments {#DOE}
@@ -45,22 +41,7 @@ knitr::include_graphics("img/tensile_test_bw.jpg")
 
 A first delivery is submited and the customer wants to know if the lot average tensile strength exceeds the agreed level and if so, she wants to accept the lot.
 
-We start by loading the first packages we will need:
-
-```{r}
-library(tidyverse)
-library(readxl)
-library(stats)
-library(viridis)
-filter <- dplyr::filter
-select <- dplyr::select
-```
-
-```{r}
-library(industRial)
-```
-
-The Quality Control department specialist at the reception starts by calcultating the average, a first criteria to reject the batch:
+The Quality Control department specialist at the reception starts by calculating the average, a first criteria to reject the batch:
 
 ```{r}
 pet_spec <- 69
@@ -77,8 +58,6 @@ pet_delivery %>%
   geom_vline(xintercept = pet_mean, color = "darkblue", linetype = 3) +
   geom_vline(xintercept = pet_spec, color = "darkgreen", linetype = 2, 
              show.legend = TRUE) +
-  # scale_x_continuous(breaks = seq(62, 74, 0.5)) +
-  theme_industRial() +
   labs(title = "PET clothing case study",
        subtitle = "Raw data plot",
        x = "Treatment",
@@ -120,7 +99,6 @@ In data analysis it is good practice to start by plotting the raw data and have 
 pet_delivery_long %>% 
   ggplot(aes(x = sample, y = tensile_strength)) +
   geom_point() +
-  theme_industRial() +
   theme(legend.position = "none") +
   labs(title = "PET clothing case study",
        subtitle = "Raw data plot",
@@ -135,7 +113,6 @@ pet_delivery_long %>%
   ggplot(aes(x = sample, y = tensile_strength, fill = sample)) +
   geom_boxplot(width = 0.3) +
   scale_fill_viridis_d(begin = 0.5, end = 0.8) +
-  theme_industRial() +
   theme(legend.position = "none") +
   labs(title = "PET clothing case study",
        subtitle = "Box plot",
@@ -154,7 +131,6 @@ pet_delivery_long %>%
   geom_qq_line() +
   coord_flip() +
   scale_color_viridis_d(begin = 0.1, end = 0.7) +
-  theme_industRial() +
   labs(title = "PET clothing case study",
        subtitle = "Q-Q plot",
        x = "Residuals",

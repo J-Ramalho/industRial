@@ -24,7 +24,7 @@
 <meta name="author" content="João Ramalho" />
 
 
-<meta name="date" content="2021-05-13" />
+<meta name="date" content="2021-05-14" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -185,7 +185,7 @@ div.csl-indent {
 <ul>
 <li class="chapter" data-level="" data-path="r-toolbox.html"><a href="r-toolbox.html#industrial-packages"><i class="fa fa-check"></i>Industrial packages</a></li>
 <li class="chapter" data-level="" data-path="r-toolbox.html"><a href="r-toolbox.html#all-purpose-packages"><i class="fa fa-check"></i>All purpose packages</a></li>
-<li class="chapter" data-level="" data-path="r-toolbox.html"><a href="r-toolbox.html#publishing-packages"><i class="fa fa-check"></i>Publishing packages</a></li>
+<li class="chapter" data-level="" data-path="r-toolbox.html"><a href="r-toolbox.html#packages-for-writing"><i class="fa fa-check"></i>Packages for writing</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="r-toolbox.html"><a href="r-toolbox.html#r-session"><i class="fa fa-check"></i>R Session</a></li>
 <li class="chapter" data-level="" data-path="r-toolbox.html"><a href="r-toolbox.html#disclaimer"><i class="fa fa-check"></i>Disclaimer</a></li>
@@ -340,12 +340,18 @@ Besides taste and personnal preference R brings a significant number of specific
 <li>R is extensible</li>
 </ol>
 <p>R is compatible with most other software on the market and is an excellent “glue” tool allowing for example for data loading from excel files, producing reports in pdf and even building complete dashboards in the form of web pages.</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="r-toolbox.html#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb1-2"><a href="r-toolbox.html#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readxl)</span>
-<span id="cb1-3"><a href="r-toolbox.html#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(knitr)</span>
-<span id="cb1-4"><a href="r-toolbox.html#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(qcc)</span>
-<span id="cb1-5"><a href="r-toolbox.html#cb1-5" aria-hidden="true" tabindex="-1"></a>filter <span class="ot">&lt;-</span> dplyr<span class="sc">::</span>filter</span>
-<span id="cb1-6"><a href="r-toolbox.html#cb1-6" aria-hidden="true" tabindex="-1"></a>select <span class="ot">&lt;-</span> dplyr<span class="sc">::</span>select</span></code></pre></div>
+<!--
+
+-->
+<p>¨</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="r-toolbox.html#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># library(tidyverse)</span></span>
+<span id="cb1-2"><a href="r-toolbox.html#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="co"># library(readxl)</span></span>
+<span id="cb1-3"><a href="r-toolbox.html#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co"># library(knitr)</span></span>
+<span id="cb1-4"><a href="r-toolbox.html#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co"># library(qcc)</span></span>
+<span id="cb1-5"><a href="r-toolbox.html#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="co"># filter &lt;- dplyr::filter</span></span>
+<span id="cb1-6"><a href="r-toolbox.html#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="co"># select &lt;- dplyr::select</span></span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="r-toolbox.html#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(here<span class="sc">::</span><span class="fu">here</span>(<span class="st">&quot;inst/book/setup.R&quot;</span>))</span>
+<span id="cb2-2"><a href="r-toolbox.html#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readxl)</span></code></pre></div>
 </div>
 <div id="r-datasets" class="section level2">
 <h2>R Datasets</h2>
@@ -353,22 +359,22 @@ Besides taste and personnal preference R brings a significant number of specific
 <p>Get from github the book companion package:</p>
 <pre><code>devtools::install_github(&quot;J-Ramalho/industRial&quot;)</code></pre>
 <p>Datasets become immediatly available by invoking the package name and the dataset, e.g.:</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="r-toolbox.html#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(industRial<span class="sc">::</span>dial_control)</span></code></pre></div>
-<pre><code>## # A tibble: 6 x 4
-##   Operator Date       Defect  Location
-##   &lt;chr&gt;    &lt;chr&gt;      &lt;chr&gt;   &lt;chr&gt;   
-## 1 Jane     2018.01.31 Indent  3h      
-## 2 Jane     2018.02.02 Indent  3h      
-## 3 Jane     2018.02.02 Indent  4h      
-## 4 Peter    2018.02.02 Indent  10h     
-## 5 Jane     2018.02.03 Scratch 3h      
-## 6 Jane     2018.02.03 Indent  3h</code></pre>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="r-toolbox.html#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(industRial<span class="sc">::</span>dial_control)</span></code></pre></div>
+<pre><code># A tibble: 6 x 4
+  Operator Date       Defect  Location
+  &lt;chr&gt;    &lt;chr&gt;      &lt;chr&gt;   &lt;chr&gt;   
+1 Jane     2018.01.31 Indent  3h      
+2 Jane     2018.02.02 Indent  3h      
+3 Jane     2018.02.02 Indent  4h      
+4 Peter    2018.02.02 Indent  10h     
+5 Jane     2018.02.03 Scratch 3h      
+6 Jane     2018.02.03 Indent  3h      </code></pre>
 <p>If repetitive use is required then it is best to directly load the package in the current session:</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="r-toolbox.html#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(industRial)</span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="r-toolbox.html#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(industRial)</span></code></pre></div>
 <p>as the package is loaded the dataset is in memory and ready to go, e.g.:</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="r-toolbox.html#cb6-1" aria-hidden="true" tabindex="-1"></a>dial_control <span class="sc">%&gt;%</span></span>
-<span id="cb6-2"><a href="r-toolbox.html#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb6-3"><a href="r-toolbox.html#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="r-toolbox.html#cb7-1" aria-hidden="true" tabindex="-1"></a>dial_control <span class="sc">%&gt;%</span></span>
+<span id="cb7-2"><a href="r-toolbox.html#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb7-3"><a href="r-toolbox.html#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable</span>()</span></code></pre></div>
 <table>
 <thead>
 <tr class="header">
@@ -418,11 +424,11 @@ Besides taste and personnal preference R brings a significant number of specific
 </tbody>
 </table>
 <p>The dateset can be used and manipulated like any other dataset created in the session or loaded otherwise. For example it can be filtered and assigned to a new variable name:</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="r-toolbox.html#cb7-1" aria-hidden="true" tabindex="-1"></a>dial_peter <span class="ot">&lt;-</span> dial_control <span class="sc">%&gt;%</span></span>
-<span id="cb7-2"><a href="r-toolbox.html#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Operator <span class="sc">==</span> <span class="st">&quot;Peter&quot;</span>) </span>
-<span id="cb7-3"><a href="r-toolbox.html#cb7-3" aria-hidden="true" tabindex="-1"></a>dial_peter <span class="sc">%&gt;%</span></span>
-<span id="cb7-4"><a href="r-toolbox.html#cb7-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>(<span class="dv">2</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb7-5"><a href="r-toolbox.html#cb7-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="r-toolbox.html#cb8-1" aria-hidden="true" tabindex="-1"></a>dial_peter <span class="ot">&lt;-</span> dial_control <span class="sc">%&gt;%</span></span>
+<span id="cb8-2"><a href="r-toolbox.html#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Operator <span class="sc">==</span> <span class="st">&quot;Peter&quot;</span>) </span>
+<span id="cb8-3"><a href="r-toolbox.html#cb8-3" aria-hidden="true" tabindex="-1"></a>dial_peter <span class="sc">%&gt;%</span></span>
+<span id="cb8-4"><a href="r-toolbox.html#cb8-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>(<span class="dv">2</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb8-5"><a href="r-toolbox.html#cb8-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable</span>()</span></code></pre></div>
 <table>
 <thead>
 <tr class="header">
@@ -482,20 +488,20 @@ Besides taste and personnal preference R brings a significant number of specific
 <h3>All purpose packages</h3>
 <p>The amount of packages available is extremely large and growing very fast. When selecting new packages it is recommended to check the latest package update. Packages that have had no improvements since more than a couple of years should be questionned. The field evolves rapidly and compatibility and other issues can become painfull. A way to obtain statistics on package history is on <a href="https://www.r-pkg.org/">metacran</a> or <a href="https://packagemanager.rstudio.com/">RStudio package manager</a>.</p>
 <p>Below a comprehensive list of the different packages used in the book:</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="r-toolbox.html#cb9-1" aria-hidden="true" tabindex="-1"></a>installed_packages <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(</span>
-<span id="cb9-2"><a href="r-toolbox.html#cb9-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">installed.packages</span>(<span class="at">lib.loc =</span> .Library) <span class="sc">%&gt;%</span> <span class="fu">as_tibble</span>(),</span>
-<span id="cb9-3"><a href="r-toolbox.html#cb9-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">installed.packages</span>(<span class="at">lib.loc =</span> <span class="st">&quot;/home/joao/R/x86_64-pc-linux-gnu-library/4.0/&quot;</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb9-4"><a href="r-toolbox.html#cb9-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">as_tibble</span>()</span>
-<span id="cb9-5"><a href="r-toolbox.html#cb9-5" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb9-6"><a href="r-toolbox.html#cb9-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-7"><a href="r-toolbox.html#cb9-7" aria-hidden="true" tabindex="-1"></a>recommended_packages <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">&quot;data/rpackages.xlsx&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb9-8"><a href="r-toolbox.html#cb9-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Used <span class="sc">==</span> <span class="st">&quot;y&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb9-9"><a href="r-toolbox.html#cb9-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(installed_packages) <span class="sc">%&gt;%</span></span>
-<span id="cb9-10"><a href="r-toolbox.html#cb9-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(Package, Area, Version) <span class="sc">%&gt;%</span></span>
-<span id="cb9-11"><a href="r-toolbox.html#cb9-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(Area)</span>
-<span id="cb9-12"><a href="r-toolbox.html#cb9-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-13"><a href="r-toolbox.html#cb9-13" aria-hidden="true" tabindex="-1"></a>recommended_packages <span class="sc">%&gt;%</span></span>
-<span id="cb9-14"><a href="r-toolbox.html#cb9-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="r-toolbox.html#cb10-1" aria-hidden="true" tabindex="-1"></a>installed_packages <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(</span>
+<span id="cb10-2"><a href="r-toolbox.html#cb10-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">installed.packages</span>(<span class="at">lib.loc =</span> .Library) <span class="sc">%&gt;%</span> <span class="fu">as_tibble</span>(),</span>
+<span id="cb10-3"><a href="r-toolbox.html#cb10-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">installed.packages</span>(<span class="at">lib.loc =</span> <span class="st">&quot;/home/joao/R/x86_64-pc-linux-gnu-library/4.0/&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb10-4"><a href="r-toolbox.html#cb10-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">as_tibble</span>()</span>
+<span id="cb10-5"><a href="r-toolbox.html#cb10-5" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb10-6"><a href="r-toolbox.html#cb10-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-7"><a href="r-toolbox.html#cb10-7" aria-hidden="true" tabindex="-1"></a>recommended_packages <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">&quot;data/rpackages.xlsx&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb10-8"><a href="r-toolbox.html#cb10-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Used <span class="sc">==</span> <span class="st">&quot;y&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb10-9"><a href="r-toolbox.html#cb10-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(installed_packages) <span class="sc">%&gt;%</span></span>
+<span id="cb10-10"><a href="r-toolbox.html#cb10-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(Package, Area, Version) <span class="sc">%&gt;%</span></span>
+<span id="cb10-11"><a href="r-toolbox.html#cb10-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(Area)</span>
+<span id="cb10-12"><a href="r-toolbox.html#cb10-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-13"><a href="r-toolbox.html#cb10-13" aria-hidden="true" tabindex="-1"></a>recommended_packages <span class="sc">%&gt;%</span></span>
+<span id="cb10-14"><a href="r-toolbox.html#cb10-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable</span>()</span></code></pre></div>
 <table>
 <thead>
 <tr class="header">
@@ -678,25 +684,25 @@ Besides taste and personnal preference R brings a significant number of specific
 </tbody>
 </table>
 </div>
-<div id="publishing-packages" class="section level3">
-<h3>Publishing packages</h3>
+<div id="packages-for-writing" class="section level3">
+<h3>Packages for writing</h3>
 <p>This book has been written using the R package <code>{Bookdown}</code> from <span class="citation"><a href="#ref-Xie2016" role="doc-biblioref">Xie</a> (<a href="#ref-Xie2016" role="doc-biblioref">2016</a>)</span> further customized with a layout developped by <a href="https://community.rstudio.com/t/bookdown-contest-submission-gitbook-style-tufte-style-for-web-book/11666">Matthew J. C. Crump</a>. Plot themes have been adapted from the package <code>{cowplot}</code> by Claus O.Wilke.</p>
 </div>
 </div>
 <div id="r-session" class="section level2">
 <h2>R Session</h2>
 <p>An important aspect to ensure reproducibility of the examples along the time and between users is to have the same programming setup. We’re showing below our setup at the time of rendering the book.</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="r-toolbox.html#cb10-1" aria-hidden="true" tabindex="-1"></a>devtools<span class="sc">::</span><span class="fu">session_info</span>()[[<span class="dv">1</span>]]</span></code></pre></div>
-<pre><code>##  setting  value                       
-##  version  R version 4.0.5 (2021-03-31)
-##  os       Ubuntu 20.04.2 LTS          
-##  system   x86_64, linux-gnu           
-##  ui       X11                         
-##  language (EN)                        
-##  collate  en_US.UTF-8                 
-##  ctype    en_US.UTF-8                 
-##  tz       Europe/Zurich               
-##  date     2021-05-13</code></pre>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="r-toolbox.html#cb11-1" aria-hidden="true" tabindex="-1"></a>devtools<span class="sc">::</span><span class="fu">session_info</span>()[[<span class="dv">1</span>]]</span></code></pre></div>
+<pre><code> setting  value                       
+ version  R version 4.0.5 (2021-03-31)
+ os       Ubuntu 20.04.2 LTS          
+ system   x86_64, linux-gnu           
+ ui       X11                         
+ language (EN)                        
+ collate  en_US.UTF-8                 
+ ctype    en_US.UTF-8                 
+ tz       Europe/Zurich               
+ date     2021-05-14                  </code></pre>
 </div>
 <div id="disclaimer" class="section level2">
 <h2>Disclaimer</h2>

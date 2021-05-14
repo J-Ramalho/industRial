@@ -1,10 +1,6 @@
-```{r message=FALSE, warning=FALSE, include=FALSE}
-knitr::opts_chunk$set(
-	message = FALSE,
-	warning = FALSE,
-	comment = NA
-	# out.width = "80%"
-)
+
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+source(here::here("inst/book/setup.R"))
 ```
 
 # Measurement System Analysis {#MSA}
@@ -30,19 +26,6 @@ In this case study we will look into the assessment of the linearity which is th
 Dry matter content for the company top seller juice_bottling have around  12% dry matter as for example Premium Fresh Apple juice: 12.4 % and Austrian Beetroot: 13.2% and some other specialities may have a higher content up such as Organic Carrot with 16.3%.
 
 It has been decided to start by checking the equipement in the range of 10 to 20% dry matter content.
-
-
-```{r message=FALSE, warning=FALSE}
-library(tidyverse)
-library(readxl)
-library(janitor)
-library(scales)
-library(stats)
-library(knitr)
-library(industRial)
-filter <- dplyr::filter
-select <- dplyr::select
-```
 
 Lets look into the measurements obtained on the juice bottling process:
 

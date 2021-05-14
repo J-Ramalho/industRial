@@ -5,7 +5,5 @@ A good mastership of the vast domain of Industrial Data Science can take several
 
 The list below collects websites, books and articles referenced throughout this book. It is a curated set of some of the most relevant works available today in Six Sigma, Statistics, Data Science and programming with R.
 
-closed
-
 
 

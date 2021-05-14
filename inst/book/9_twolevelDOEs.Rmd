@@ -1,15 +1,6 @@
----
-output: html_document
-editor_options: 
-  chunk_output_type: console
----
-```{r message=FALSE, warning=FALSE, include=FALSE}
-knitr::opts_chunk$set(
-	message = FALSE,
-	warning = FALSE,
-	comment = NA
-	# out.width = "80%"
-)
+
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+source(here::here("inst/book/setup.R"))
 ```
 
 ## Two level designs
@@ -45,16 +36,6 @@ In this first Case Study dedicated to $2^k$ designs we're going to explore the c
 **The PET clothing improvement plan**
 
 In this case study factors have only 2 levels. 
-
-```{r}
-library(tidyverse)
-library(readxl)
-library(stats)
-library(industRial)
-library(knitr)
-filter <- dplyr::filter
-select <- dplyr::select
-```
 
 Below we start by preparing our dataset:
 
@@ -212,11 +193,7 @@ pet_num %>%
   geom_point(aes(x = level, y = yield)) +
   geom_smooth(aes(x = level, y = yield), 
               method = "lm", se = FALSE, fullrange = TRUE) +
-  # coord_cartesian(xlim = c(-2, 2)) +
-  # geom_hline(yintercept = 27.5, color = "grey50") +
-  # scale_y_continuous(n.breaks = 20) +
-  facet_wrap(vars(variable)) +
-  theme_industRial()
+  facet_wrap(vars(variable))
 ```
 
 Note that we had to extract the data from the S3 doe object, which we've done with using unclass() and then as_tibble()
@@ -239,8 +216,7 @@ pet_num %>%
               method = "lm", se = FALSE, fullrange = TRUE) +
   coord_cartesian(xlim = c(-2, 2)) +
   scale_y_continuous(n.breaks = 10) +
-  facet_wrap(vars(variable)) +
-  theme_industRial()
+  facet_wrap(vars(variable))
 ```
 
 As seen on the plot the output of our prediction is 69 corresponding the high level of A when B is at 1. To be precise we need to multiply all the coefficients by the levels of the factors as : 63.250 + 9.583x(+1) - 5.750x(+1) + 1.917
@@ -322,10 +298,6 @@ summary(battery_reduced_lm)
 Besides the base summary() function, R squared and adjusted R squared can also be easily retrieved with the glance function from the {broom} package. We're extracting them here for the complete and for reduced model:
 
 ```{r}
-library(broom)
-```
-
-```{r}
 glance(battery_lm)[1:2] %>%
   bind_rows(glance(battery_reduced_lm)[1:2], 
             .id = "model")
@@ -391,7 +363,6 @@ battery_charging %>%
   geom_point(aes(x = cA, y = pA)) +
   scale_y_continuous(n.breaks = 10) + 
   scale_color_discrete(guide = FALSE) +
-  theme_industRial() +
   theme(plot.title = ggtext::element_markdown()) +
   labs(
     title = "3^k factorial design",

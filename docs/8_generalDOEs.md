@@ -1,21 +1,9 @@
 
 
+
 ## General factorial designs
 
-m factors n levels
-
-
-```r
-library(tidyverse)
-library(readxl)
-library(stats)
-library(broom)
-library(industRial)
-library(patchwork)
-library(knitr)
-filter <- dplyr::filter
-select <- dplyr::select
-```
+m factors n levels designs
 
 **The juice production plant**
 
@@ -115,11 +103,6 @@ juice_drymatter %>%
 ```r
 juice_drymatter <- juice_drymatter %>%
   mutate(bias = drymatter_DRX - drymatter_REF)
-
-juice_drymatter_factor <- juice_drymatter %>%
-  mutate(across(
-    c(product, drymatter_TGT, speed, particle_size, part), 
-    as_factor))
 ```
 
 ### Main effects plots
@@ -144,8 +127,7 @@ drymatter_TGT_plot <- juice_drymatter %>%
     subtitle = "Main effects plots",
     x = "drymatter_TGT [%]",
     y = "Average bias [g]"
-  ) +
-  theme_industRial()
+  )
 
 particle_size_plot <- juice_drymatter %>%  
   group_by(particle_size) %>%
@@ -159,8 +141,7 @@ particle_size_plot <- juice_drymatter %>%
   labs(
     x = "particle_size",
     y = "Average bias [g]"
-  ) +
-  theme_industRial()
+  )
 
 speed_plot <- juice_drymatter %>%  
   group_by(speed) %>%
@@ -174,13 +155,12 @@ speed_plot <- juice_drymatter %>%
   labs(
     x = "Speed",
     y = "Average bias [g]"
-  ) +
-  theme_industRial()
+  )
 
 drymatter_TGT_plot + particle_size_plot + speed_plot
 ```
 
-<img src="8_generalDOEs_files/figure-html/unnamed-chunk-9-1.png" width="672" />
+<img src="8_generalDOEs_files/figure-html/unnamed-chunk-8-1.png" width="672" />
 
 This kind of plots gives already important insights in to the experiement outcome, even before any deeper analysis with a linear model and anova. In our case:
 
@@ -249,7 +229,7 @@ speed_particle_size_plot <- juice_drymatter %>%
 drymatter_TGT_particle_size_plot + drymatter_TGT_speed_plot + speed_particle_size_plot
 ```
 
-<img src="8_generalDOEs_files/figure-html/unnamed-chunk-10-1.png" width="672" />
+<img src="8_generalDOEs_files/figure-html/unnamed-chunk-9-1.png" width="672" />
 
 The plots indicate no interaction between the different factors as all lines do not intercept and are mostly parallel.
 

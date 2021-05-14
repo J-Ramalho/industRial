@@ -1,5 +1,6 @@
 
 
+
 # Measurement System Analysis {#MSA}
 
 Validation of a measurement device
@@ -24,20 +25,6 @@ In this case study we will look into the assessment of the linearity which is th
 Dry matter content for the company top seller juice_bottling have around  12% dry matter as for example Premium Fresh Apple juice: 12.4 % and Austrian Beetroot: 13.2% and some other specialities may have a higher content up such as Organic Carrot with 16.3%.
 
 It has been decided to start by checking the equipement in the range of 10 to 20% dry matter content.
-
-
-
-```r
-library(tidyverse)
-library(readxl)
-library(janitor)
-library(scales)
-library(stats)
-library(knitr)
-library(industRial)
-filter <- dplyr::filter
-select <- dplyr::select
-```
 
 Lets look into the measurements obtained on the juice bottling process:
 
@@ -99,7 +86,7 @@ juice_drymatter %>%
        caption = "Dataset: juice_drymatter233A, Operator: S.Jonathan)")
 ```
 
-<img src="4_msa_files/figure-html/unnamed-chunk-6-1.png" width="672" />
+<img src="4_msa_files/figure-html/unnamed-chunk-5-1.png" width="672" />
 
 The linear model is well adapted in this case, this by seing the position of the slope close to the averages of each level of the factor. Nevertheless the slope is rather steep showing a clear increase of the bias (in the negative direction) with the increase in dry matter content.
 
@@ -137,7 +124,7 @@ In our case study we're going to measurement the precision of the measurement me
 
 <div class="figure" style="text-align: center">
 <img src="img/tablet_micrometer.png" alt="Tablet thickness micrometer" width="100%" />
-<p class="caption">(\#fig:unnamed-chunk-8)Tablet thickness micrometer</p>
+<p class="caption">(\#fig:unnamed-chunk-7)Tablet thickness micrometer</p>
 </div>
 
 </div>
@@ -279,7 +266,7 @@ Total Variation   11.0935239 3.3306942 19.984165    100.00      39.97
 Number of Distinct Categories = 3 
 ```
 
-<img src="4_msa_files/figure-html/unnamed-chunk-14-1.png" width="768" />
+<img src="4_msa_files/figure-html/unnamed-chunk-13-1.png" width="768" />
 
 We can observe that the SixSigma package recreates exactly the same anova table, just calling Repeatability to the Residuals and adding an additional line with the total degrees of freedom and the total sum of squares. 
 
@@ -358,7 +345,7 @@ tablet_L %>%
        caption = "Data source: QA Lab")
 ```
 
-<img src="4_msa_files/figure-html/unnamed-chunk-15-1.png" width="672" />
+<img src="4_msa_files/figure-html/unnamed-chunk-14-1.png" width="672" />
 
 
 ### Negative Variations
@@ -437,7 +424,7 @@ Total Variation   11.08152158 3.3288919 19.973352    100.00      39.95
 Number of Distinct Categories = 3 
 ```
 
-<img src="4_msa_files/figure-html/unnamed-chunk-16-1.png" width="768" />
+<img src="4_msa_files/figure-html/unnamed-chunk-15-1.png" width="768" />
 
 In our case when comparing the total gage r&R with and without the interaction we see it changing from 38.46% to 38.38%.
 

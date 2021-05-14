@@ -1,10 +1,6 @@
-```{r message=FALSE, warning=FALSE, include=FALSE}
-knitr::opts_chunk$set(
-	message = FALSE,
-	warning = FALSE,
-	comment = NA
-	# out.width = "80%"
-)
+
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+source(here::here("inst/book/setup.R"))
 ```
 
 # Statistical Process Control {#SPC}
@@ -34,17 +30,6 @@ knitr::include_graphics("img/syringe_molding_bw.jpg")
 There are many types of control charts and in this case study we're demonstrating the xbar and R charts. These two charts are often used together and are suited to the control the mean and the variability of a continuous variable.
 
 Bamako Lightening is a company that manufactures lamps. The weight of each lamp is critical to the quality of the product. The Production Operator monitors the production process using xbar and R-charts. Samples are taken of six lamps every hour and their means and ranges plotted on control charts. Data is available representing samples taken a period of 25 hours of production.
-
-Loading packages for data loading and cleaning:
-
-```{r message=FALSE, warning=FALSE}
-library(tidyverse)
-library(knitr)
-library(industRial)
-library(stats)
-filter <- dplyr::filter
-select <- dplyr::select
-```
 
 Looking at the first five lines to confirm and assess the quality of our data for further processing. 
 

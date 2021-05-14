@@ -24,35 +24,11 @@ The example here comes from a dial polishing workshop in the watchmaking industr
 
 **Loading packages and data:**
 
-If needed get the book companion package from github:
-
-```
-devtools::install_github("J-Ramalho/industRial")
-```
-
-load it in the current session:
-
-
-```r
-library(industRial)
-```
-
 getting the dial dataset:
 
 
 ```r
 dial_control <-  industRial::dial_control
-```
-
-and additional packages to deal with the data:
-
-
-```r
-library(tidyverse)
-library(knitr)
-library(viridis)
-filter <- dplyr::filter
-select <- dplyr::select
 ```
 
 A first look at the dataset now:
@@ -67,7 +43,7 @@ head(dial_control) %>%
 
 
 
-Table: (\#tab:unnamed-chunk-6)dial control data
+Table: (\#tab:unnamed-chunk-4)dial control data
 
 | Operator |    Date    | Defect  | Location |
 |:--------:|:----------:|:-------:|:--------:|
@@ -104,7 +80,7 @@ d_type_p +
   theme_industRial()
 ```
 
-<img src="3_sixsigma_files/figure-html/unnamed-chunk-8-1.png" width="672" />
+<img src="3_sixsigma_files/figure-html/unnamed-chunk-6-1.png" width="672" />
 
 As often happens we can see that the first two deffects account for more than 80% of the problems. Identation and scratching are the things to tackle here.
 
@@ -123,7 +99,7 @@ d_location_p +
   theme_industRial()
 ```
 
-<img src="3_sixsigma_files/figure-html/unnamed-chunk-9-1.png" width="672" />
+<img src="3_sixsigma_files/figure-html/unnamed-chunk-7-1.png" width="672" />
 
 Here a third bucket could be included in the priorities: to reach 80% of the count we consider the defects that appear at 4 o'clock, 3 o'clock and 5 o'clock.
 
@@ -145,7 +121,7 @@ An optical measurement device has just been installed in a large Dental Prosthes
 
 <div class="figure" style="text-align: center">
 <img src="img/dental_scan2.png" alt="dental impression measurement" width="100%" />
-<p class="caption">(\#fig:unnamed-chunk-10)dental impression measurement</p>
+<p class="caption">(\#fig:unnamed-chunk-8)dental impression measurement</p>
 </div>
 
 </div>
@@ -212,7 +188,7 @@ We provide here two different techniques, one with a tile plot and another with 
 
 <div class="figure" style="text-align: center">
 <img src="img/parfum.jpg" alt="Perfume destillation line" width="100%" />
-<p class="caption">(\#fig:unnamed-chunk-13)Perfume destillation line</p>
+<p class="caption">(\#fig:unnamed-chunk-11)Perfume destillation line</p>
 </div>
 
 </div>
@@ -236,7 +212,7 @@ perfume_experiment[1:8, 1:8] %>%
 
 
 
-Table: (\#tab:unnamed-chunk-14)perfume DoE output variables
+Table: (\#tab:unnamed-chunk-12)perfume DoE output variables
 
 |yy | pw|  w| pm| pe|  f| it| ew|
 |:--|--:|--:|--:|--:|--:|--:|--:|
@@ -283,7 +259,7 @@ perfume_long %>%
   theme_industRial()
 ```
 
-<img src="3_sixsigma_files/figure-html/unnamed-chunk-16-1.png" width="672" />
+<img src="3_sixsigma_files/figure-html/unnamed-chunk-14-1.png" width="672" />
 
 The plot shows that many parameters are expected to move together, for example with maximum correlation we have hp moving with d, oc moving with o and so on.
  
@@ -389,7 +365,7 @@ perfum_tbl_graph %>%
        subtitle = "Most important expected correlations")
 ```
 
-<img src="3_sixsigma_files/figure-html/unnamed-chunk-23-1.png" width="672" />
+<img src="3_sixsigma_files/figure-html/unnamed-chunk-21-1.png" width="672" />
 
 Data loading is confirmed to have been done correctly, we can now move into the clustering and analysis.
 
@@ -454,7 +430,7 @@ perfum_tg_2 %>%
                                       face = "bold")) 
 ```
 
-<img src="3_sixsigma_files/figure-html/unnamed-chunk-25-1.png" width="864" />
+<img src="3_sixsigma_files/figure-html/unnamed-chunk-23-1.png" width="864" />
 
 <br>
 

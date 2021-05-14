@@ -1,11 +1,6 @@
 
-```{r message=FALSE, warning=FALSE, include=FALSE}
-knitr::opts_chunk$set(
-	message = FALSE,
-	warning = FALSE,
-	comment = NA
-	# out.width = "80%"
-)
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+source(here::here("inst/book/setup.R"))
 ```
 
 # (PART) CASE STUDIES {-}
@@ -30,32 +25,10 @@ knitr::include_graphics("img/assemblage_cadran_bw.jpg")
 
 **Loading packages and data:**
 
-If needed get the book companion package from github:
-
-```
-devtools::install_github("J-Ramalho/industRial")
-```
-
-load it in the current session:
-
-```{r}
-library(industRial)
-```
-
 getting the dial dataset:
 
 ```{r}
 dial_control <-  industRial::dial_control
-```
-
-and additional packages to deal with the data:
-
-```{r}
-library(tidyverse)
-library(knitr)
-library(viridis)
-filter <- dplyr::filter
-select <- dplyr::select
 ```
 
 A first look at the dataset now:

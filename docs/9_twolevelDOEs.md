@@ -1,8 +1,4 @@
----
-output: html_document
-editor_options: 
-  chunk_output_type: console
----
+
 
 
 ## Two level designs
@@ -38,17 +34,6 @@ In this first Case Study dedicated to $2^k$ designs we're going to explore the c
 **The PET clothing improvement plan**
 
 In this case study factors have only 2 levels. 
-
-
-```r
-library(tidyverse)
-library(readxl)
-library(stats)
-library(industRial)
-library(knitr)
-filter <- dplyr::filter
-select <- dplyr::select
-```
 
 Below we start by preparing our dataset:
 
@@ -327,14 +312,10 @@ pet_num %>%
   geom_point(aes(x = level, y = yield)) +
   geom_smooth(aes(x = level, y = yield), 
               method = "lm", se = FALSE, fullrange = TRUE) +
-  # coord_cartesian(xlim = c(-2, 2)) +
-  # geom_hline(yintercept = 27.5, color = "grey50") +
-  # scale_y_continuous(n.breaks = 20) +
-  facet_wrap(vars(variable)) +
-  theme_industRial()
+  facet_wrap(vars(variable))
 ```
 
-<img src="9_twolevelDOEs_files/figure-html/unnamed-chunk-17-1.png" width="672" />
+<img src="9_twolevelDOEs_files/figure-html/unnamed-chunk-16-1.png" width="672" />
 
 Note that we had to extract the data from the S3 doe object, which we've done with using unclass() and then as_tibble()
 
@@ -357,11 +338,10 @@ pet_num %>%
               method = "lm", se = FALSE, fullrange = TRUE) +
   coord_cartesian(xlim = c(-2, 2)) +
   scale_y_continuous(n.breaks = 10) +
-  facet_wrap(vars(variable)) +
-  theme_industRial()
+  facet_wrap(vars(variable))
 ```
 
-<img src="9_twolevelDOEs_files/figure-html/unnamed-chunk-18-1.png" width="672" />
+<img src="9_twolevelDOEs_files/figure-html/unnamed-chunk-17-1.png" width="672" />
 
 As seen on the plot the output of our prediction is 69 corresponding the high level of A when B is at 1. To be precise we need to multiply all the coefficients by the levels of the factors as : 63.250 + 9.583x(+1) - 5.750x(+1) + 1.917
 
@@ -393,7 +373,7 @@ plotMeans(response = pet_fct$yield,
           main = "The PET clothing improvement plan")
 ```
 
-<img src="9_twolevelDOEs_files/figure-html/unnamed-chunk-20-1.png" width="672" />
+<img src="9_twolevelDOEs_files/figure-html/unnamed-chunk-19-1.png" width="672" />
 
 ### Coding natural values
 
@@ -526,11 +506,6 @@ Besides the base summary() function, R squared and adjusted R squared can also b
 
 
 ```r
-library(broom)
-```
-
-
-```r
 glance(battery_lm)[1:2] %>%
   bind_rows(glance(battery_reduced_lm)[1:2], 
             .id = "model")
@@ -623,14 +598,13 @@ battery_charging %>%
   geom_point(aes(x = cA, y = pA)) +
   scale_y_continuous(n.breaks = 10) + 
   scale_color_discrete(guide = FALSE) +
-  theme_industRial() +
   theme(plot.title = ggtext::element_markdown()) +
   labs(
     title = "3^k factorial design",
     subtitle = "Prediction with reduced model")
 ```
 
-<img src="9_twolevelDOEs_files/figure-html/unnamed-chunk-32-1.png" width="672" />
+<img src="9_twolevelDOEs_files/figure-html/unnamed-chunk-30-1.png" width="672" />
 
 #### Response surface plot 
 
@@ -655,7 +629,7 @@ persp(
 )
 ```
 
-<img src="9_twolevelDOEs_files/figure-html/unnamed-chunk-33-1.png" width="672" />
+<img src="9_twolevelDOEs_files/figure-html/unnamed-chunk-31-1.png" width="672" />
 
 Due to the interaction between factors A and C the surface is slightly bent. This is exactly what we observe in the interactions plots of which the one below corresponds to slicing the surface at the min and the max of Power:
 
@@ -672,7 +646,7 @@ interaction.plot(x.factor = battery_charging$A,
                  main = "Plasma etching experiment")
 ```
 
-<img src="9_twolevelDOEs_files/figure-html/unnamed-chunk-34-1.png" width="672" />
+<img src="9_twolevelDOEs_files/figure-html/unnamed-chunk-32-1.png" width="672" />
 
 Just like in the surface plot we can see here in the interaction plot that the response of yield on gap is different depending on the level of power. When power is high it decreases and when power is low it increases. As a reminder this is what is called an interaction between these two factors.
 
@@ -690,7 +664,7 @@ Possible approaches:
 
 <div class="figure" style="text-align: center">
 <img src="img/electrical_car_bw.png" alt="electrical car platform" width="100%" />
-<p class="caption">(\#fig:unnamed-chunk-35)electrical car platform</p>
+<p class="caption">(\#fig:unnamed-chunk-33)electrical car platform</p>
 </div>
 
 </div>
@@ -785,7 +759,7 @@ main_effects_plot <- qqPlot(
   )
 ```
 
-<img src="9_twolevelDOEs_files/figure-html/unnamed-chunk-39-1.png" width="672" />
+<img src="9_twolevelDOEs_files/figure-html/unnamed-chunk-37-1.png" width="672" />
 
 In plot we can see that the effects that have the highest influence on the output are the effects A, C and D and their interactions. We can still confirm these observations with a calculation of the percentage contribution of each effect as follows:
 
@@ -870,7 +844,7 @@ par(mfrow = c(2,2))
 plot(battery_red_lm3)
 ```
 
-<img src="9_twolevelDOEs_files/figure-html/unnamed-chunk-42-1.png" width="672" />
+<img src="9_twolevelDOEs_files/figure-html/unnamed-chunk-40-1.png" width="672" />
 
 We can now establish the main effects and interaction plots and conclude on the optimal settings to maximize the output: A and D should be on the max and C on the min.
 

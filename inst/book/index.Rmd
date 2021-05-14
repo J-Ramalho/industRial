@@ -34,19 +34,8 @@ knitr::opts_chunk$set(
 	message = FALSE,
 	warning = FALSE,
 	comment = NA
-	# out.width = "80%"
 )
 
-
-# # automatically create a bib database for R packages
-# knitr::write_bib(c(
-#   .packages(), 'bookdown', 'knitr', 'rmarkdown'
-# ), 'packages.bib')
-
-
-
-# book website:
-# https://j-ramalho.github.io/industRialstatistics/
 ```
 
 # (PART) INTRODUCTION {-}

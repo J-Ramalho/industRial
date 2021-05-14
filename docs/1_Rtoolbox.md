@@ -31,17 +31,26 @@ Being an open source language, all R libraries and packages added to the basic e
 
 R is compatible with most other software on the market and is an excellent "glue" tool allowing for example for data loading from excel files, producing reports in pdf and even building complete dashboards in the form of web pages. 
 
+<!--
 
+-->
+¨
+
+```r
+# library(tidyverse)
+# library(readxl)
+# library(knitr)
+# library(qcc)
+# filter <- dplyr::filter
+# select <- dplyr::select
+```
 
 
 ```r
-library(tidyverse)
+source(here::here("inst/book/setup.R"))
 library(readxl)
-library(knitr)
-library(qcc)
-filter <- dplyr::filter
-select <- dplyr::select
 ```
+
 
 ## R Datasets
 
@@ -61,15 +70,15 @@ head(industRial::dial_control)
 ```
 
 ```
-## # A tibble: 6 x 4
-##   Operator Date       Defect  Location
-##   <chr>    <chr>      <chr>   <chr>   
-## 1 Jane     2018.01.31 Indent  3h      
-## 2 Jane     2018.02.02 Indent  3h      
-## 3 Jane     2018.02.02 Indent  4h      
-## 4 Peter    2018.02.02 Indent  10h     
-## 5 Jane     2018.02.03 Scratch 3h      
-## 6 Jane     2018.02.03 Indent  3h
+# A tibble: 6 x 4
+  Operator Date       Defect  Location
+  <chr>    <chr>      <chr>   <chr>   
+1 Jane     2018.01.31 Indent  3h      
+2 Jane     2018.02.02 Indent  3h      
+3 Jane     2018.02.02 Indent  4h      
+4 Peter    2018.02.02 Indent  10h     
+5 Jane     2018.02.03 Scratch 3h      
+6 Jane     2018.02.03 Indent  3h      
 ```
 
 If repetitive use is required then it is best to directly load the package in the current session:
@@ -216,7 +225,7 @@ recommended_packages %>%
 |glue        |text                   |1.4.2   |
 |stringr     |text                   |1.4.0   |
 
-### Publishing packages
+### Packages for writing
 
 This book has been written using the R package `{Bookdown}` from @Xie2016 further customized with a layout developped by [Matthew J. C. Crump](https://community.rstudio.com/t/bookdown-contest-submission-gitbook-style-tufte-style-for-web-book/11666). Plot themes have been adapted from the package `{cowplot}` by Claus O.Wilke.
 
@@ -230,16 +239,16 @@ devtools::session_info()[[1]]
 ```
 
 ```
-##  setting  value                       
-##  version  R version 4.0.5 (2021-03-31)
-##  os       Ubuntu 20.04.2 LTS          
-##  system   x86_64, linux-gnu           
-##  ui       X11                         
-##  language (EN)                        
-##  collate  en_US.UTF-8                 
-##  ctype    en_US.UTF-8                 
-##  tz       Europe/Zurich               
-##  date     2021-05-13
+ setting  value                       
+ version  R version 4.0.5 (2021-03-31)
+ os       Ubuntu 20.04.2 LTS          
+ system   x86_64, linux-gnu           
+ ui       X11                         
+ language (EN)                        
+ collate  en_US.UTF-8                 
+ ctype    en_US.UTF-8                 
+ tz       Europe/Zurich               
+ date     2021-05-14                  
 ```
 
 ## Disclaimer

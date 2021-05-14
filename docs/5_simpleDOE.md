@@ -1,5 +1,6 @@
 
 
+
 # Design of Experiments {#DOE}
 
 In a design of experiements we calculate the total number of trials with the expression $n^m$ where n is the number of levels, m the number of factors. A trial represents the number of unique combinations of the factors. To obtain the final number of test runs we have to multiply the number of trials by the number of replicates per trial.
@@ -39,24 +40,7 @@ An engineer working the winter sports clothing industry has established a contra
 
 A first delivery is submited and the customer wants to know if the lot average tensile strength exceeds the agreed level and if so, she wants to accept the lot.
 
-We start by loading the first packages we will need:
-
-
-```r
-library(tidyverse)
-library(readxl)
-library(stats)
-library(viridis)
-filter <- dplyr::filter
-select <- dplyr::select
-```
-
-
-```r
-library(industRial)
-```
-
-The Quality Control department specialist at the reception starts by calcultating the average, a first criteria to reject the batch:
+The Quality Control department specialist at the reception starts by calculating the average, a first criteria to reject the batch:
 
 
 ```r
@@ -79,15 +63,13 @@ pet_delivery %>%
   geom_vline(xintercept = pet_mean, color = "darkblue", linetype = 3) +
   geom_vline(xintercept = pet_spec, color = "darkgreen", linetype = 2, 
              show.legend = TRUE) +
-  # scale_x_continuous(breaks = seq(62, 74, 0.5)) +
-  theme_industRial() +
   labs(title = "PET clothing case study",
        subtitle = "Raw data plot",
        x = "Treatment",
        y = "Tensile strength [MPa]")
 ```
 
-<img src="5_simpleDOE_files/figure-html/unnamed-chunk-6-1.png" width="80%" />
+<img src="5_simpleDOE_files/figure-html/unnamed-chunk-4-1.png" width="672" />
 
 The mean is just slightly below the target mean defined for acceptance and she also observes a certain variability in the batch. She decides then to perform a t-test to assess if the average calculated can be really be considered statistically different than the target value.
 
@@ -141,7 +123,6 @@ In data analysis it is good practice to start by plotting the raw data and have 
 pet_delivery_long %>% 
   ggplot(aes(x = sample, y = tensile_strength)) +
   geom_point() +
-  theme_industRial() +
   theme(legend.position = "none") +
   labs(title = "PET clothing case study",
        subtitle = "Raw data plot",
@@ -149,7 +130,7 @@ pet_delivery_long %>%
        y = "Tensile strength [MPa]")
 ```
 
-<img src="5_simpleDOE_files/figure-html/unnamed-chunk-9-1.png" width="80%" />
+<img src="5_simpleDOE_files/figure-html/unnamed-chunk-7-1.png" width="672" />
 
 Another way to better understanding the bond distributions is to plot a box plot. This type of plot is somehow like the histogram seen before but more compact when several groups are required to be plotted.
 
@@ -159,7 +140,6 @@ pet_delivery_long %>%
   ggplot(aes(x = sample, y = tensile_strength, fill = sample)) +
   geom_boxplot(width = 0.3) +
   scale_fill_viridis_d(begin = 0.5, end = 0.8) +
-  theme_industRial() +
   theme(legend.position = "none") +
   labs(title = "PET clothing case study",
        subtitle = "Box plot",
@@ -167,7 +147,7 @@ pet_delivery_long %>%
        y = "Tensile strength [MPa]")
 ```
 
-<img src="5_simpleDOE_files/figure-html/unnamed-chunk-10-1.png" width="80%" />
+<img src="5_simpleDOE_files/figure-html/unnamed-chunk-8-1.png" width="672" />
 
 We would like to understand if the treatment has an effect. Thus we want to compare the two population means. For that we use a t test using samples obtained independently and randomly. Before running the test we also have to check the normality of the samples distributions and equality of their variances.
 
@@ -181,14 +161,13 @@ pet_delivery_long %>%
   geom_qq_line() +
   coord_flip() +
   scale_color_viridis_d(begin = 0.1, end = 0.7) +
-  theme_industRial() +
   labs(title = "PET clothing case study",
        subtitle = "Q-Q plot",
        x = "Residuals",
        y = "Tensile strength [MPa]")
 ```
 
-<img src="5_simpleDOE_files/figure-html/unnamed-chunk-11-1.png" width="80%" />
+<img src="5_simpleDOE_files/figure-html/unnamed-chunk-9-1.png" width="672" />
 
 We observe that for both levels of treatment the data is adhering to the straight line thus we can assume they follow a normal distribution. Also both lines in the qq plot  have equivalent slopes indicating that the assumption of variances is a reasonable one. These verifications are summary ones. We review in subsequent sessions other deeper verifications of such as the shapiro-wilk normality test.
 

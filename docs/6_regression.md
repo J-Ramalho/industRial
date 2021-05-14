@@ -1,5 +1,6 @@
 
 
+
 ## Regression and anova
 
 One factor multiple levels
@@ -25,19 +26,6 @@ We will present here a first example of the utilisation of linear regression tec
 
 
 ```r
-library(tidyverse)
-library(readxl)
-library(janitor)
-library(scales)
-library(stats)
-library(knitr)
-library(industRial)
-filter <- dplyr::filter
-select <- dplyr::select
-```
-
-
-```r
 ebike_narrow <- ebike_hardening %>%
   pivot_longer(
     cols = starts_with("g"),
@@ -58,7 +46,7 @@ slice_head(.data = ebike_narrow, n = 5) %>%
 
 
 
-Table: (\#tab:unnamed-chunk-5)e-bike hardening experiment data
+Table: (\#tab:unnamed-chunk-4)e-bike hardening experiment data
 
 | temperature | observation | cycles | cycles_mean |
 |:-----------:|:-----------:|:------:|:-----------:|
@@ -75,7 +63,6 @@ Table: (\#tab:unnamed-chunk-5)e-bike hardening experiment data
 ggplot(data = ebike_narrow) +
   geom_point(aes(x = temperature, y = cycles)) +
   geom_point(aes(x = temperature, y = cycles_mean), color = "red") +
-  theme_industRial() +
   scale_y_continuous(n.breaks = 10, labels = label_number(big.mark = "'")) +
   theme(legend.position = "none") +
   labs(title = "e-bike frame hardening process",
@@ -84,7 +71,7 @@ ggplot(data = ebike_narrow) +
        y = "Cycles to failure [n]")
 ```
 
-<img src="6_regression_files/figure-html/unnamed-chunk-6-1.png" width="672" />
+<img src="6_regression_files/figure-html/unnamed-chunk-5-1.png" width="672" />
 
 #### Linear model
 
@@ -129,9 +116,7 @@ ggplot(ebike_narrow) +
   geom_point(aes(x = temperature, y = cycles)) +
   geom_smooth(aes(x = temperature, y = cycles), method = "lm") +
   geom_point(aes(x = temperature, y = cycles_mean), color = "red") +
-  theme_industRial() +
   scale_y_continuous(n.breaks = 10, labels = label_number(big.mark = "'")) +
-  theme_industRial() +
   theme(legend.position = "none") +
   labs(title = "e-bike frame hardening process",
        subtitle = "Raw data plot",
@@ -139,7 +124,7 @@ ggplot(ebike_narrow) +
        y = "Cycles to failure [n]")
 ```
 
-<img src="6_regression_files/figure-html/unnamed-chunk-8-1.png" width="672" />
+<img src="6_regression_files/figure-html/unnamed-chunk-7-1.png" width="672" />
 
 #### Linear model fixed effects
 
@@ -240,7 +225,6 @@ For this plot we need to ensure that the order of plotting in the x axis corresp
 ebike_aug %>%
   ggplot(aes(x = index, y = .resid)) +
   geom_point() +
-  theme_industRial() +
   scale_y_continuous(n.breaks = 10, labels = label_number(big.mark = "'")) +
   labs(
     title = "e-bike frame hardening process",
@@ -250,7 +234,7 @@ ebike_aug %>%
   )
 ```
 
-<img src="6_regression_files/figure-html/unnamed-chunk-13-1.png" width="672" />
+<img src="6_regression_files/figure-html/unnamed-chunk-12-1.png" width="672" />
 
 Nothing pattern emerges from the current plot and the design presents itself ^well randomised.
 
@@ -272,7 +256,7 @@ durbinWatsonTest(ebike_lm_factor)
 
 ```
  lag Autocorrelation D-W Statistic p-value
-   1      -0.5343347      2.960893   0.084
+   1      -0.5343347      2.960893   0.094
  Alternative hypothesis: rho != 0
 ```
 
@@ -287,7 +271,6 @@ If the model is correct and the assumptions hold, the residuals should be struct
 ebike_aug %>%
   ggplot(aes(x = .fitted, y = .resid)) +
   geom_point() +
-  theme_industRial() +
   geom_smooth(method = "loess", se = FALSE, color = "red") +
   scale_y_continuous(n.breaks = 10, labels = label_number(big.mark = "'")) +
   labs(
@@ -298,7 +281,7 @@ ebike_aug %>%
   )
 ```
 
-<img src="6_regression_files/figure-html/unnamed-chunk-16-1.png" width="672" />
+<img src="6_regression_files/figure-html/unnamed-chunk-15-1.png" width="672" />
 
 In this plot we see no variance anomalies such as a higher variance for a certain factor level or other types of skweness.
 
@@ -337,8 +320,6 @@ ebike_aug %>%
   ggplot(aes(sample = .resid)) +
   geom_qq() +
   geom_qq_line() +
-  # coord_flip() +
-  theme_industRial() +
   scale_y_continuous(n.breaks = 10, labels = label_number(big.mark = "'")) +
   labs(
     title = "e-bike frame hardening process",
@@ -348,7 +329,7 @@ ebike_aug %>%
   )
 ```
 
-<img src="6_regression_files/figure-html/unnamed-chunk-18-1.png" width="672" />
+<img src="6_regression_files/figure-html/unnamed-chunk-17-1.png" width="672" />
 
 The plot suggests normal distribution. We see that the error distribution is aproximately normal. In the fixed effects model we give more importance to the center of the values and here we consider acceptable that the extremes of the data tend to bend away from the straight line.
 The verification can be completed by a test. For populations < 50 use the shapiro-wilk normality test.
@@ -381,7 +362,6 @@ This specific Standardized residuals graph also help detecting outliers in the r
 ebike_aug %>% 
   ggplot(aes(x = .fitted, y = .std.resid)) +
   geom_point() +
-  theme_industRial() +
   geom_smooth(method = "loess", se = FALSE, color = "red") +
   labs(title = "e-bike frame hardening process",
        subtitle = "Linear model - Standardised Residuals vs Fitted values",
@@ -389,7 +369,7 @@ ebike_aug %>%
        x = "Fitted values")
 ```
 
-<img src="6_regression_files/figure-html/unnamed-chunk-20-1.png" width="672" />
+<img src="6_regression_files/figure-html/unnamed-chunk-19-1.png" width="672" />
 
 The plot shows no outliers to consider in this DOE.
 
@@ -419,14 +399,13 @@ ebike_aug %>%
   ggplot(aes(x = .cooksd, y = .std.resid)) +
   geom_point() +
   geom_vline(xintercept = 0.5, color = "red") +
-  theme_industRial() +
   labs(title = "e-bike frame hardening process",
        subtitle = "Residuals vs Leverage",
        y = "Standardised Residuals",
        x = "Cooks distance")
 ```
 
-<img src="6_regression_files/figure-html/unnamed-chunk-22-1.png" width="672" />
+<img src="6_regression_files/figure-html/unnamed-chunk-21-1.png" width="672" />
 
 #### R squared 
 
@@ -461,9 +440,7 @@ We can also compare medians and get a sense of the effect of the treatment level
 ggplot(ebike_factor, 
        aes(x = temperature, y = cycles, fill = temperature)) +
   geom_boxplot() +
-  theme_industRial() +
   scale_fill_viridis_d(option = "D", begin = 0.5) +
-  theme_industRial() +
   scale_y_continuous(n.breaks = 10, labels = label_number(big.mark = "'")) +
   theme(legend.position = "none") +
   labs(title = "e-bike frame hardening process",
@@ -472,7 +449,7 @@ ggplot(ebike_factor,
        y = "Cycles to failure [n]")
 ```
 
-<img src="6_regression_files/figure-html/unnamed-chunk-24-1.png" width="672" />
+<img src="6_regression_files/figure-html/unnamed-chunk-23-1.png" width="672" />
 
 1 factor with severals levels + 1 continuous dependent variable
 Similar to the t-test but extended - this test allows to compare the means between several levels of treatement for a continuous response variable (the t test is only 2 levels at a time, performing all pair wise t-tests would also not be a solution because its a lot of effort and would increase the type I error)
@@ -540,7 +517,6 @@ ggplot(ebike_factor2,
   geom_boxplot() +
   scale_y_continuous(n.breaks = 10) +
   scale_fill_viridis_d(option = "A", begin = 0.5) +
-  theme_industRial() +
   theme(legend.position = "none") +
   scale_y_continuous(n.breaks = 10, labels = label_number(big.mark = "'")) +
   labs(title = "e-bike frame hardening process",
@@ -549,7 +525,7 @@ ggplot(ebike_factor2,
        y = "Cycles to failure [n]")
 ```
 
-<img src="6_regression_files/figure-html/unnamed-chunk-27-1.png" width="672" />
+<img src="6_regression_files/figure-html/unnamed-chunk-26-1.png" width="672" />
 
 P > 0.05 - there is no significant difference between the means
 
@@ -576,7 +552,7 @@ head(ebike_tukey$temperature) %>%
 
 
 
-Table: (\#tab:unnamed-chunk-29)tukey test on e-bike frame hardening process
+Table: (\#tab:unnamed-chunk-28)tukey test on e-bike frame hardening process
 
 |        |  diff  |    lwr     |    upr    |   p adj   |
 |:-------|:------:|:----------:|:---------:|:---------:|
@@ -596,7 +572,7 @@ Additionally we can obtain the related plot with the confidence intervals
 plot(ebike_tukey)
 ```
 
-<img src="6_regression_files/figure-html/unnamed-chunk-30-1.png" width="672" />
+<img src="6_regression_files/figure-html/unnamed-chunk-29-1.png" width="672" />
 
 #### Fisher's LSD 
 
@@ -632,7 +608,7 @@ head(ebike_LSD$statistics) %>%
 
 
 
-Table: (\#tab:unnamed-chunk-33)Fisher LSD procedure on e-bike frame hardening: stats
+Table: (\#tab:unnamed-chunk-32)Fisher LSD procedure on e-bike frame hardening: stats
 
 |   |  MSerror  | Df |  Mean  |    CV    | t.value  |   LSD    |
 |:--|:---------:|:--:|:------:|:--------:|:--------:|:--------:|
@@ -653,7 +629,7 @@ head(ebike_LSD$means) %>%
 
 
 
-Table: (\#tab:unnamed-chunk-34)Fisher LSD procedure on e-bike frame hardening: means
+Table: (\#tab:unnamed-chunk-33)Fisher LSD procedure on e-bike frame hardening: means
 
 |    | cycles |   std    | r |   LCL    |   UCL    |
 |:---|:------:|:--------:|:-:|:--------:|:--------:|
@@ -676,7 +652,7 @@ head(ebike_LSD$groups) %>%
 
 
 
-Table: (\#tab:unnamed-chunk-35)Fisher LSD procedure on e-bike frame hardening: groups
+Table: (\#tab:unnamed-chunk-34)Fisher LSD procedure on e-bike frame hardening: groups
 
 |    | ebike_factor$cycles | groups |
 |:---|:-------------------:|:------:|
@@ -694,7 +670,7 @@ Finally we can get from this package a plot with the Least significant differenc
 plot(ebike_LSD)
 ```
 
-<img src="6_regression_files/figure-html/unnamed-chunk-36-1.png" width="672" />
+<img src="6_regression_files/figure-html/unnamed-chunk-35-1.png" width="672" />
 
 And below we're exploring a manual execution of this type of plot (in this case with the standard deviations instead).
 
@@ -715,14 +691,13 @@ ebike_factor %>%
   annotate(geom = "text", x = Inf, y = -Inf, label = "Error bars are +/- 1xSD", 
     hjust = 1, vjust = -1, colour = "grey30", size = 3, 
     fontface = "italic") +
-  theme_industRial() +
   labs(title = "e-bike frame hardening process",
        subtitle = "Raw data plot",
        x = "Furnace Temperature [°C]",
        y = "Cycles to failure [n]")
 ```
 
-<img src="6_regression_files/figure-html/unnamed-chunk-37-1.png" width="672" />
+<img src="6_regression_files/figure-html/unnamed-chunk-36-1.png" width="672" />
 
 As often with statistical tools, there is debate on the best approach to use. We recommend to combine the Tukey test with the Fisher's LSD completementary R functions. The Tukey test giving a first indication of the levels that have an effect and calculating the means differences and the Fisher function to provide much more additional information on each level. To be considered in each situation the slight difference  between the significance level for difference between means and to decide if required to take the most conservative one.
 

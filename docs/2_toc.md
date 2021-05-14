@@ -3,8 +3,6 @@
 
 
 
-
-
 <table>
  <thead>
   <tr>
@@ -37,7 +35,7 @@
    <td style="text-align:left;background-color: white !important;"> DFSS </td>
    <td style="text-align:left;background-color: white !important;"> Network clustering </td>
    <td style="text-align:left;background-color: white !important;"> perfume_experiment </td>
-   <td style="text-align:left;background-color: white !important;">  </td>
+   <td style="text-align:left;background-color: white !important;"> - </td>
   </tr>
   <tr>
    <td style="text-align:left;background-color: white !important;"> MSA </td>
@@ -55,7 +53,7 @@
    <td style="text-align:left;background-color: white !important;"> MSA </td>
    <td style="text-align:left;background-color: white !important;"> Uncertainty </td>
    <td style="text-align:left;background-color: white !important;"> tablet_thickness </td>
-   <td style="text-align:left;background-color: white !important;">  </td>
+   <td style="text-align:left;background-color: white !important;"> - </td>
   </tr>
   <tr>
    <td style="text-align:left;background-color: white !important;"> DOE </td>

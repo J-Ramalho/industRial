@@ -12,15 +12,23 @@
 #' Apply this theme by adding it at the end of the code of any \code{\link[ggplot2]{ggplot}} chart.
 #' It basically combines the half open theme with a grid background from {cowplot}
 #'
-#' @param base_size 
-#' @param base_family 
+#' @param font_size defaults to 14
+#' @param font_family defaults to ""
+#' @param line_size defaults to 0.5
+#' @param rel_small defaults to 12/14
+#' @param rel_tiny defaults to 11/14
+#' @param rel_large defaults to 16/14
+#' @param base_size internal arguments, defaults to font_size
+#' @param base_family internal arguments, defaults to font_family 
 #'
 #' @return
+#' This function returns an object of classes theme and gg from the ggplot2 package
 #' @export
 #'
 #' @examples
 theme_industRial <- function (font_size = 14, font_family = "", line_size = 0.5,
-                              rel_small = 12/14, rel_tiny = 11/14, rel_large = 16/14)
+                              rel_small = 12/14, rel_tiny = 11/14, rel_large = 16/14,
+                              base_size = font_size, base_family = font_family)
 {
   half_line <- font_size / 2
   small_size <- rel_small * font_size

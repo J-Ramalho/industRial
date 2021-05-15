@@ -33,13 +33,13 @@
   </tr>
   <tr>
    <td style="text-align:left;">  </td>
-   <td style="text-align:left;"> Correlation Matrix </td>
+   <td style="text-align:left;"> Correlation matrix </td>
    <td style="text-align:left;"> perfume_experiment </td>
    <td style="text-align:left;"> [ggplot2::geom_tile](#tileplot) </td>
   </tr>
   <tr>
    <td style="text-align:left;">  </td>
-   <td style="text-align:left;"> Network clustering </td>
+   <td style="text-align:left;"> Clustering </td>
    <td style="text-align:left;"> perfume_experiment </td>
    <td style="text-align:left;"> - </td>
   </tr>
@@ -237,7 +237,7 @@
   </tr>
   <tr>
    <td style="text-align:left;">  </td>
-   <td style="text-align:left;"> Cpk </td>
+   <td style="text-align:left;"> Cpk charts </td>
    <td style="text-align:left;"> syringe_diameter </td>
    <td style="text-align:left;"> [qcc::process.capability](#processcapability) </td>
   </tr>

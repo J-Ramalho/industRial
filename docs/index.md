@@ -66,7 +66,7 @@ Additionally we refer to several good quality books on both Data Science and Pro
 I would like to express my gratitude to the instructors and colleagues who have spent time sharing their knowledge, answering my questions and giving me inputs: Enrico Chavez, Iegor Rudnytskyi, Giulia Ruggeri, Harry Handerson and Bobby Stuijfzand from the EPFL ADSCV team; Jean-Vincent Le Bé, Jasmine Petry, Yvan Bouza, James Clulow and Akos Spiegel from the Nestlé STC team; Frank Paris from DOQS; Théophile Emmanouilidis and Sélim Ach from Thoth.
 
 To report any issue or make suggestions please open an issue on the book repository:
-[industRialds/issues](https://github.com/J-Ramalho/industRialds/issues)
+[industRialds/issues](https://github.com/J-Ramalho/industRial/issues)
 
 **About the authors**
 

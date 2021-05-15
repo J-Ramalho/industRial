@@ -7,12 +7,12 @@
 theme_qcc(base_size = 12, base_family = "")
 }
 \arguments{
-\item{base_size}{}
+\item{base_size}{font size, defaults to 12}
 
-\item{base_family}{}
+\item{base_family}{font family defaults to ""}
 }
 \value{
-
+This function returns an object of classes theme and gg from the ggplot2 package
 }
 \description{
 This theme provides a similar look and feel to the package \code{\link[qcc]{qcc}}
@@ -24,9 +24,6 @@ of Minitab chart to help in reducing transition to R build reports and charts.
 Apply this theme by adding it at the end of the code of any \code{\link[ggplot2]{ggplot}} chart.
 It #' basically provides a grey background and some highlights to help reading key
 process statistics such as the population mean.
-}
-\examples{
-
 }
 \references{
 For a complete case study application refer to \url{https://j-ramalho.github.io/industRial/}

@@ -191,15 +191,14 @@ ls("package:industRial")
 ```
 
 ```
- [1] "battery_charging"    "chart_Cpk"           "chart_I"            
- [4] "chart_IMR"           "chart_R"             "chart_xbar"         
- [7] "clean_SPCdata"       "dial_control"        "ebike_hardening"    
-[10] "ebike_hardening2"    "juice_drymatter"     "off_spec"           
-[13] "perfume_experiment"  "pet_delivery"        "pet_doe"            
-[16] "process_Cpk"         "process_stats"       "process_stats_table"
-[19] "solarcell_fill"      "solarcell_output"    "syringe_diameter"   
-[22] "tablet_thickness"    "tablet_weight"       "theme_industRial"   
-[25] "theme_qcc"          
+ [1] "%>%"                 "battery_charging"    "chart_Cpk"          
+ [4] "chart_I"             "chart_IMR"           "dial_control"       
+ [7] "ebike_hardening"     "ebike_hardening2"    "juice_drymatter"    
+[10] "off_spec"            "perfume_experiment"  "pet_delivery"       
+[13] "pet_doe"             "process_Cpk"         "process_stats"      
+[16] "process_stats_table" "solarcell_fill"      "solarcell_output"   
+[19] "syringe_diameter"    "tablet_thickness"    "tablet_weight"      
+[22] "theme_industRial"    "theme_qcc"          
 ```
 
 or conveniently on the console with industRial:: and then tab. For each function a help page is available and can be obtained the same way as any other R datasets, themes and functions with `?<object>` (e.g. ?chart_xbar)
@@ -232,6 +231,8 @@ devtools::session_info()[[1]]
 
 This book presents a variety of software tools and recommended approaches for industrial data analysis. It is incumbent upon the user to execute judgement in their use. The author does not provide any guarantee, expressed or implied, with regard to the general or specific applicability of the software, the range of errors that may be associated with it, or the appropriateness of using them in any subsequent calculation, design, or decision process. The author accepts no responsibility for damages, if any, suffered by any reader or user of this handbook as a result of decisions made or actions taken on information contained therein.
 
+**Licence**
 
+This book and its companion package are made available under a GPLv3 licence granting end users the freedom to run, study, share, and modify the software.
 
 

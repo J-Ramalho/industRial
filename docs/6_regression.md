@@ -71,7 +71,7 @@ ggplot(data = ebike_narrow) +
        y = "Cycles to failure [n]")
 ```
 
-<img src="6_regression_files/figure-html/unnamed-chunk-5-1.png" width="672" />
+<img src="6_regression_files/figure-html/unnamed-chunk-5-1.png" width="80%" />
 
 #### Linear model
 
@@ -124,7 +124,7 @@ ggplot(ebike_narrow) +
        y = "Cycles to failure [n]")
 ```
 
-<img src="6_regression_files/figure-html/unnamed-chunk-7-1.png" width="672" />
+<img src="6_regression_files/figure-html/unnamed-chunk-7-1.png" width="80%" />
 
 #### Linear model fixed effects
 
@@ -234,7 +234,7 @@ ebike_aug %>%
   )
 ```
 
-<img src="6_regression_files/figure-html/unnamed-chunk-12-1.png" width="672" />
+<img src="6_regression_files/figure-html/unnamed-chunk-12-1.png" width="80%" />
 
 Nothing pattern emerges from the current plot and the design presents itself ^well randomised.
 
@@ -256,7 +256,7 @@ durbinWatsonTest(ebike_lm_factor)
 
 ```
  lag Autocorrelation D-W Statistic p-value
-   1      -0.5343347      2.960893   0.102
+   1      -0.5343347      2.960893   0.106
  Alternative hypothesis: rho != 0
 ```
 
@@ -281,7 +281,7 @@ ebike_aug %>%
   )
 ```
 
-<img src="6_regression_files/figure-html/unnamed-chunk-15-1.png" width="672" />
+<img src="6_regression_files/figure-html/unnamed-chunk-15-1.png" width="80%" />
 
 In this plot we see no variance anomalies such as a higher variance for a certain factor level or other types of skweness.
 
@@ -329,7 +329,7 @@ ebike_aug %>%
   )
 ```
 
-<img src="6_regression_files/figure-html/unnamed-chunk-17-1.png" width="672" />
+<img src="6_regression_files/figure-html/unnamed-chunk-17-1.png" width="80%" />
 
 The plot suggests normal distribution. We see that the error distribution is aproximately normal. In the fixed effects model we give more importance to the center of the values and here we consider acceptable that the extremes of the data tend to bend away from the straight line.
 The verification can be completed by a test. For populations < 50 use the shapiro-wilk normality test.
@@ -369,7 +369,7 @@ ebike_aug %>%
        x = "Fitted values")
 ```
 
-<img src="6_regression_files/figure-html/unnamed-chunk-19-1.png" width="672" />
+<img src="6_regression_files/figure-html/unnamed-chunk-19-1.png" width="80%" />
 
 The plot shows no outliers to consider in this DOE.
 
@@ -405,7 +405,7 @@ ebike_aug %>%
        x = "Cooks distance")
 ```
 
-<img src="6_regression_files/figure-html/unnamed-chunk-21-1.png" width="672" />
+<img src="6_regression_files/figure-html/unnamed-chunk-21-1.png" width="80%" />
 
 #### R squared 
 
@@ -449,7 +449,7 @@ ggplot(ebike_factor,
        y = "Cycles to failure [n]")
 ```
 
-<img src="6_regression_files/figure-html/unnamed-chunk-23-1.png" width="672" />
+<img src="6_regression_files/figure-html/unnamed-chunk-23-1.png" width="80%" />
 
 1 factor with severals levels + 1 continuous dependent variable
 Similar to the t-test but extended - this test allows to compare the means between several levels of treatement for a continuous response variable (the t test is only 2 levels at a time, performing all pair wise t-tests would also not be a solution because its a lot of effort and would increase the type I error)
@@ -525,7 +525,7 @@ ggplot(ebike_factor2,
        y = "Cycles to failure [n]")
 ```
 
-<img src="6_regression_files/figure-html/unnamed-chunk-26-1.png" width="672" />
+<img src="6_regression_files/figure-html/unnamed-chunk-26-1.png" width="80%" />
 
 P > 0.05 - there is no significant difference between the means
 
@@ -572,7 +572,7 @@ Additionally we can obtain the related plot with the confidence intervals
 plot(ebike_tukey)
 ```
 
-<img src="6_regression_files/figure-html/unnamed-chunk-29-1.png" width="672" />
+<img src="6_regression_files/figure-html/unnamed-chunk-29-1.png" width="80%" />
 
 #### Fisher's LSD 
 
@@ -670,7 +670,7 @@ Finally we can get from this package a plot with the Least significant differenc
 plot(ebike_LSD)
 ```
 
-<img src="6_regression_files/figure-html/unnamed-chunk-35-1.png" width="672" />
+<img src="6_regression_files/figure-html/unnamed-chunk-35-1.png" width="80%" />
 
 And below we're exploring a manual execution of this type of plot (in this case with the standard deviations instead).
 
@@ -697,7 +697,7 @@ ebike_factor %>%
        y = "Cycles to failure [n]")
 ```
 
-<img src="6_regression_files/figure-html/unnamed-chunk-36-1.png" width="672" />
+<img src="6_regression_files/figure-html/unnamed-chunk-36-1.png" width="80%" />
 
 As often with statistical tools, there is debate on the best approach to use. We recommend to combine the Tukey test with the Fisher's LSD completementary R functions. The Tukey test giving a first indication of the levels that have an effect and calculating the means differences and the Fisher function to provide much more additional information on each level. To be considered in each situation the slight difference  between the significance level for difference between means and to decide if required to take the most conservative one.
 

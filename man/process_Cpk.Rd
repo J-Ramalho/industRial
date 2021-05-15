@@ -7,17 +7,20 @@
 process_Cpk(UCL, LCL, mean, sd)
 }
 \arguments{
-\item{data}{}
+\item{UCL}{the process upper control limit}
+
+\item{LCL}{the process lower control limit}
+
+\item{mean}{the process mean}
+
+\item{sd}{the process standard deviation}
 }
 \value{
-
+This function returns an object of class numeric
 }
 \description{
 This function takes process variables and calculates the Cpk index which 
 is a measure of the process centering and variability against specification.
-}
-\examples{
-
 }
 \references{
 For a complete case study application refer to \url{https://j-ramalho.github.io/industRial/}

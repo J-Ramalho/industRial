@@ -664,15 +664,14 @@ purrr::map(ds_pkgs, library, character.only = TRUE)</code></pre>
 <p>Additionally the package contains theme functions to print and customise the aesthetics of spc charts and other charts. These themes are built on top of the <code>{ggplot2}</code> by H.Wickham and <code>{cowplot}</code> package by Claus O.Wilke. The main objective is to give the reader a starting point for customization of charts in this domain.</p>
 <p>The complete list of datasets, themes and functions can be seen by listing all objects from the package with ls():</p>
 <div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="toolbox.html#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span>(<span class="st">&quot;package:industRial&quot;</span>)</span></code></pre></div>
-<pre><code> [1] &quot;battery_charging&quot;    &quot;chart_Cpk&quot;           &quot;chart_I&quot;            
- [4] &quot;chart_IMR&quot;           &quot;chart_R&quot;             &quot;chart_xbar&quot;         
- [7] &quot;clean_SPCdata&quot;       &quot;dial_control&quot;        &quot;ebike_hardening&quot;    
-[10] &quot;ebike_hardening2&quot;    &quot;juice_drymatter&quot;     &quot;off_spec&quot;           
-[13] &quot;perfume_experiment&quot;  &quot;pet_delivery&quot;        &quot;pet_doe&quot;            
-[16] &quot;process_Cpk&quot;         &quot;process_stats&quot;       &quot;process_stats_table&quot;
-[19] &quot;solarcell_fill&quot;      &quot;solarcell_output&quot;    &quot;syringe_diameter&quot;   
-[22] &quot;tablet_thickness&quot;    &quot;tablet_weight&quot;       &quot;theme_industRial&quot;   
-[25] &quot;theme_qcc&quot;          </code></pre>
+<pre><code> [1] &quot;%&gt;%&quot;                 &quot;battery_charging&quot;    &quot;chart_Cpk&quot;          
+ [4] &quot;chart_I&quot;             &quot;chart_IMR&quot;           &quot;dial_control&quot;       
+ [7] &quot;ebike_hardening&quot;     &quot;ebike_hardening2&quot;    &quot;juice_drymatter&quot;    
+[10] &quot;off_spec&quot;            &quot;perfume_experiment&quot;  &quot;pet_delivery&quot;       
+[13] &quot;pet_doe&quot;             &quot;process_Cpk&quot;         &quot;process_stats&quot;      
+[16] &quot;process_stats_table&quot; &quot;solarcell_fill&quot;      &quot;solarcell_output&quot;   
+[19] &quot;syringe_diameter&quot;    &quot;tablet_thickness&quot;    &quot;tablet_weight&quot;      
+[22] &quot;theme_industRial&quot;    &quot;theme_qcc&quot;          </code></pre>
 <p>or conveniently on the console with industRial:: and then tab. For each function a help page is available and can be obtained the same way as any other R datasets, themes and functions with <code>?&lt;object&gt;</code> (e.g. ?chart_xbar)</p>
 </div>
 <div id="imprint" class="section level2">
@@ -692,6 +691,8 @@ purrr::map(ds_pkgs, library, character.only = TRUE)</code></pre>
  date     2021-05-15                  </code></pre>
 <p><strong>Disclaimer</strong></p>
 <p>This book presents a variety of software tools and recommended approaches for industrial data analysis. It is incumbent upon the user to execute judgement in their use. The author does not provide any guarantee, expressed or implied, with regard to the general or specific applicability of the software, the range of errors that may be associated with it, or the appropriateness of using them in any subsequent calculation, design, or decision process. The author accepts no responsibility for damages, if any, suffered by any reader or user of this handbook as a result of decisions made or actions taken on information contained therein.</p>
+<p><strong>Licence</strong></p>
+<p>This book and its companion package are made available under a GPLv3 licence granting end users the freedom to run, study, share, and modify the software.</p>
 
 </div>
 </div>

@@ -10,16 +10,30 @@ theme_industRial(
   line_size = 0.5,
   rel_small = 12/14,
   rel_tiny = 11/14,
-  rel_large = 16/14
+  rel_large = 16/14,
+  base_size = font_size,
+  base_family = font_family
 )
 }
 \arguments{
-\item{base_size}{}
+\item{font_size}{defaults to 14}
 
-\item{base_family}{}
+\item{font_family}{defaults to ""}
+
+\item{line_size}{defaults to 0.5}
+
+\item{rel_small}{defaults to 12/14}
+
+\item{rel_tiny}{defaults to 11/14}
+
+\item{rel_large}{defaults to 16/14}
+
+\item{base_size}{internal arguments, defaults to font_size}
+
+\item{base_family}{internal arguments, defaults to font_family}
 }
 \value{
-
+This function returns an object of classes theme and gg from the ggplot2 package
 }
 \description{
 This theme aims at optimal balance between readability and precision. It has 

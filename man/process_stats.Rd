@@ -7,10 +7,13 @@
 process_stats(data, pod_spec_percent)
 }
 \arguments{
-\item{data}{}
+\item{data}{This function takes the dataset tablet_thickness cleaned with the clean_names function from 
+the {janitor} package}
+
+\item{pod_spec_percent}{the process tolerance in percentage.}
 }
 \value{
-
+This function returns an object with class tibble (tbl_df)
 }
 \description{
 This function takes process variables and calculates summary statistics and 

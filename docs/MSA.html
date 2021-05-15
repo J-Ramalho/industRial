@@ -376,7 +376,7 @@ Lets explore further.</p>
 <span id="cb36-9"><a href="MSA.html#cb36-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Dry matter method validation&quot;</span>,</span>
 <span id="cb36-10"><a href="MSA.html#cb36-10" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="st">&quot;Gage Linearity&quot;</span>,</span>
 <span id="cb36-11"><a href="MSA.html#cb36-11" aria-hidden="true" tabindex="-1"></a>       <span class="at">caption =</span> <span class="st">&quot;Dataset: juice_drymatter233A, Operator: S.Jonathan)&quot;</span>)</span></code></pre></div>
-<p><img src="4_msa_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+<p><img src="4_msa_files/figure-html/unnamed-chunk-5-1.png" width="80%" /></p>
 <p>The linear model is well adapted in this case, this by seing the position of the slope close to the averages of each level of the factor. Nevertheless the slope is rather steep showing a clear increase of the bias (in the negative direction) with the increase in dry matter content.</p>
 </div>
 <div id="bias-report" class="section level3">
@@ -525,7 +525,7 @@ Part-To-Part       9.4525173 3.0744946 18.446968     92.31      36.89
 Total Variation   11.0935239 3.3306942 19.984165    100.00      39.97
 
 Number of Distinct Categories = 3 </code></pre>
-<p><img src="4_msa_files/figure-html/unnamed-chunk-13-1.png" width="768" /></p>
+<p><img src="4_msa_files/figure-html/unnamed-chunk-13-1.png" width="80%" /></p>
 <p>We can observe that the SixSigma package recreates exactly the same anova table, just calling Repeatability to the Residuals and adding an additional line with the total degrees of freedom and the total sum of squares.</p>
 <p>Note that the argument alphaLim has been set to 1 to avoid suppressing the interaction which is in this case non significative.</p>
 </div>
@@ -585,7 +585,7 @@ Number of Distinct Categories = 3 </code></pre>
 <span id="cb47-19"><a href="MSA.html#cb47-19" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">&quot;&quot;</span>,</span>
 <span id="cb47-20"><a href="MSA.html#cb47-20" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">&quot;thickness [mm]&quot;</span>,</span>
 <span id="cb47-21"><a href="MSA.html#cb47-21" aria-hidden="true" tabindex="-1"></a>       <span class="at">caption =</span> <span class="st">&quot;Data source: QA Lab&quot;</span>)</span></code></pre></div>
-<p><img src="4_msa_files/figure-html/unnamed-chunk-14-1.png" width="672" /></p>
+<p><img src="4_msa_files/figure-html/unnamed-chunk-14-1.png" width="80%" /></p>
 </div>
 <div id="negative-variations" class="section level3">
 <h3>Negative Variations</h3>
@@ -650,7 +650,7 @@ Part-To-Part       9.44889591 3.0739056 18.443434     92.34      36.89
 Total Variation   11.08152158 3.3288919 19.973352    100.00      39.95
 
 Number of Distinct Categories = 3 </code></pre>
-<p><img src="4_msa_files/figure-html/unnamed-chunk-15-1.png" width="768" /></p>
+<p><img src="4_msa_files/figure-html/unnamed-chunk-15-1.png" width="80%" /></p>
 <p>In our case when comparing the total gage r&amp;R with and without the interaction we see it changing from 38.46% to 38.38%.</p>
 </div>
 <div id="beyond-two-factors" class="section level3">
@@ -695,7 +695,7 @@ that we can assign in R to the variable calibration_var.</p>
 <div class="sourceCode" id="cb55"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb55-1"><a href="MSA.html#cb55-1" aria-hidden="true" tabindex="-1"></a>u <span class="ot">&lt;-</span> <span class="fu">sqrt</span>(reprod_var <span class="sc">+</span> repeat_var <span class="sc">+</span> calibration_var)</span>
 <span id="cb55-2"><a href="MSA.html#cb55-2" aria-hidden="true" tabindex="-1"></a>u</span></code></pre></div>
 <pre><code>[1] 1.625117</code></pre>
-<p>Finally what is usually reported is the expanded uncertainty corresponding to 2 standard deviations. To be recalled that +/- 2 std corresponds to 95% of the values when a repeative measurement is done. In this case we have <span class="math inline">\(U = 2*u\)</span>:</p>
+<p>Finally what is usually reported is the expanded uncertainty corresponding to 2 standard deviations. To be recalled that <span class="math inline">\(\pm\)</span> 2 std corresponds to 95% of the values when a repeative measurement is done. In this case we have <span class="math inline">\(U = 2*u\)</span>:</p>
 <div class="sourceCode" id="cb57"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb57-1"><a href="MSA.html#cb57-1" aria-hidden="true" tabindex="-1"></a>U <span class="ot">&lt;-</span> <span class="dv">2</span> <span class="sc">*</span> u</span>
 <span id="cb57-2"><a href="MSA.html#cb57-2" aria-hidden="true" tabindex="-1"></a>U</span></code></pre></div>
 <pre><code>[1] 3.250235</code></pre>

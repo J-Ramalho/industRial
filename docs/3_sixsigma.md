@@ -80,7 +80,7 @@ d_type_p +
   theme_industRial()
 ```
 
-<img src="3_sixsigma_files/figure-html/unnamed-chunk-6-1.png" width="672" />
+<img src="3_sixsigma_files/figure-html/unnamed-chunk-6-1.png" width="80%" />
 
 As often happens we can see that the first two deffects account for more than 80% of the problems. Identation and scratching are the things to tackle here.
 
@@ -99,7 +99,7 @@ d_location_p +
   theme_industRial()
 ```
 
-<img src="3_sixsigma_files/figure-html/unnamed-chunk-7-1.png" width="672" />
+<img src="3_sixsigma_files/figure-html/unnamed-chunk-7-1.png" width="80%" />
 
 Here a third bucket could be included in the priorities: to reach 80% of the count we consider the defects that appear at 4 o'clock, 3 o'clock and 5 o'clock.
 
@@ -259,7 +259,7 @@ perfume_long %>%
   theme_industRial()
 ```
 
-<img src="3_sixsigma_files/figure-html/unnamed-chunk-14-1.png" width="672" />
+<img src="3_sixsigma_files/figure-html/unnamed-chunk-14-1.png" width="80%" />
 
 The plot shows that many parameters are expected to move together, for example with maximum correlation we have hp moving with d, oc moving with o and so on.
  
@@ -365,7 +365,7 @@ perfum_tbl_graph %>%
        subtitle = "Most important expected correlations")
 ```
 
-<img src="3_sixsigma_files/figure-html/unnamed-chunk-21-1.png" width="672" />
+<img src="3_sixsigma_files/figure-html/unnamed-chunk-21-1.png" width="80%" />
 
 Data loading is confirmed to have been done correctly, we can now move into the clustering and analysis.
 
@@ -430,7 +430,7 @@ perfum_tg_2 %>%
                                       face = "bold")) 
 ```
 
-<img src="3_sixsigma_files/figure-html/unnamed-chunk-23-1.png" width="864" />
+<img src="3_sixsigma_files/figure-html/unnamed-chunk-23-1.png" width="80%" />
 
 <br>
 

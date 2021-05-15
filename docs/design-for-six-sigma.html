@@ -406,7 +406,7 @@ Figure 1: watch dial inspection
 <span id="cb14-7"><a href="design-for-six-sigma.html#cb14-7" aria-hidden="true" tabindex="-1"></a>                           <span class="at">caption =</span> <span class="st">&quot;Source: Dial Production Team&quot;</span>)</span>
 <span id="cb14-8"><a href="design-for-six-sigma.html#cb14-8" aria-hidden="true" tabindex="-1"></a>d_type_p <span class="sc">+</span> </span>
 <span id="cb14-9"><a href="design-for-six-sigma.html#cb14-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_industRial</span>()</span></code></pre></div>
-<p><img src="3_sixsigma_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+<p><img src="3_sixsigma_files/figure-html/unnamed-chunk-6-1.png" width="80%" /></p>
 <p>As often happens we can see that the first two deffects account for more than 80% of the problems. Identation and scratching are the things to tackle here.</p>
 <p>From the available data presented before in table we can go deeper and establish a pareto of the defect location:</p>
 <div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="design-for-six-sigma.html#cb15-1" aria-hidden="true" tabindex="-1"></a>d_location <span class="ot">&lt;-</span> dial_control <span class="sc">%&gt;%</span> <span class="fu">pull</span>(Location) <span class="sc">%&gt;%</span> <span class="fu">as.character</span>()</span>
@@ -418,7 +418,7 @@ Figure 1: watch dial inspection
 <span id="cb15-7"><a href="design-for-six-sigma.html#cb15-7" aria-hidden="true" tabindex="-1"></a>                           <span class="at">caption =</span> <span class="st">&quot;Source: Dial Production Team&quot;</span>)</span>
 <span id="cb15-8"><a href="design-for-six-sigma.html#cb15-8" aria-hidden="true" tabindex="-1"></a>d_location_p <span class="sc">+</span></span>
 <span id="cb15-9"><a href="design-for-six-sigma.html#cb15-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_industRial</span>()</span></code></pre></div>
-<p><img src="3_sixsigma_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
+<p><img src="3_sixsigma_files/figure-html/unnamed-chunk-7-1.png" width="80%" /></p>
 <p>Here a third bucket could be included in the priorities: to reach 80% of the count we consider the defects that appear at 4 o’clock, 3 o’clock and 5 o’clock.</p>
 <p>During the reviews the team can also identify other types of data for follow up such as the dial model or the material type. With a simple excel file and an upload in R this can be finetuned from week to week according to the progress of the improvement measures.</p>
 </div>
@@ -612,7 +612,7 @@ Figure 4: Perfume destillation line
 <span id="cb21-10"><a href="design-for-six-sigma.html#cb21-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">caption =</span> <span class="st">&quot;Data variables anonymized&quot;</span></span>
 <span id="cb21-11"><a href="design-for-six-sigma.html#cb21-11" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
 <span id="cb21-12"><a href="design-for-six-sigma.html#cb21-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_industRial</span>()</span></code></pre></div>
-<p><img src="3_sixsigma_files/figure-html/unnamed-chunk-14-1.png" width="672" /></p>
+<p><img src="3_sixsigma_files/figure-html/unnamed-chunk-14-1.png" width="80%" /></p>
 <p>The plot shows that many parameters are expected to move together, for example with maximum correlation we have hp moving with d, oc moving with o and so on.</p>
 <p>After this first DoE the real correlations will be established and the team expects to be able to avoid a significant part of the measurements that have a correlation higher than 50% from the second DoE onwards.</p>
 </div>
@@ -675,7 +675,7 @@ Figure 4: Perfume destillation line
 <span id="cb29-5"><a href="design-for-six-sigma.html#cb29-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_graph</span>() <span class="sc">+</span></span>
 <span id="cb29-6"><a href="design-for-six-sigma.html#cb29-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;DOE Perfume Formulation - Inputs&quot;</span>,</span>
 <span id="cb29-7"><a href="design-for-six-sigma.html#cb29-7" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="st">&quot;Most important expected correlations&quot;</span>)</span></code></pre></div>
-<p><img src="3_sixsigma_files/figure-html/unnamed-chunk-21-1.png" width="672" /></p>
+<p><img src="3_sixsigma_files/figure-html/unnamed-chunk-21-1.png" width="80%" /></p>
 <p>Data loading is confirmed to have been done correctly, we can now move into the clustering and analysis.</p>
 <p>We use different clusters algorithms like in part 3 to generate the groups:</p>
 <div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="design-for-six-sigma.html#cb30-1" aria-hidden="true" tabindex="-1"></a>perfum_tbl_graph <span class="ot">&lt;-</span> perfum_tbl_graph <span class="sc">%&gt;%</span></span>
@@ -728,7 +728,7 @@ Figure 4: Perfume destillation line
 <span id="cb31-36"><a href="design-for-six-sigma.html#cb31-36" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">plot.title =</span> <span class="fu">element_markdown</span>(<span class="at">family =</span> <span class="st">&quot;Helvetica&quot;</span>,</span>
 <span id="cb31-37"><a href="design-for-six-sigma.html#cb31-37" aria-hidden="true" tabindex="-1"></a>                                      <span class="at">size =</span> <span class="dv">14</span>, </span>
 <span id="cb31-38"><a href="design-for-six-sigma.html#cb31-38" aria-hidden="true" tabindex="-1"></a>                                      <span class="at">face =</span> <span class="st">&quot;bold&quot;</span>)) </span></code></pre></div>
-<p><img src="3_sixsigma_files/figure-html/unnamed-chunk-23-1.png" width="864" /></p>
+<p><img src="3_sixsigma_files/figure-html/unnamed-chunk-23-1.png" width="80%" /></p>
 <p><br></p>
 <p>We can see that the algorithm is grouping elements that have a strong correlation. Most stronger correlations are present within elements of each cluster with some exceptions such as oc with pw and y with pe.</p>
 <p>The code presented can now easily be reused once the DOE is executed to compare with the real correlations measured.</p>

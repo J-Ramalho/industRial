@@ -363,7 +363,7 @@ Figure 1: PET tensile test
 <span id="cb61-8"><a href="DOE.html#cb61-8" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="st">&quot;Raw data plot&quot;</span>,</span>
 <span id="cb61-9"><a href="DOE.html#cb61-9" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">&quot;Treatment&quot;</span>,</span>
 <span id="cb61-10"><a href="DOE.html#cb61-10" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">&quot;Tensile strength [MPa]&quot;</span>)</span></code></pre></div>
-<p><img src="5_simpleDOE_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
+<p><img src="5_simpleDOE_files/figure-html/unnamed-chunk-4-1.png" width="80%" /></p>
 <p>The mean is just slightly below the target mean defined for acceptance and she also observes a certain variability in the batch. She decides then to perform a t-test to assess if the average calculated can be really be considered statistically different than the target value.</p>
 <p><span id="tTest"></span></p>
 <div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb62-1"><a href="DOE.html#cb62-1" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(<span class="at">x =</span> pet_delivery<span class="sc">$</span>A, <span class="at">mu =</span> pet_spec)</span></code></pre></div>
@@ -400,7 +400,7 @@ mean of x
 <span id="cb65-6"><a href="DOE.html#cb65-6" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="st">&quot;Raw data plot&quot;</span>,</span>
 <span id="cb65-7"><a href="DOE.html#cb65-7" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">&quot;Sample&quot;</span>,</span>
 <span id="cb65-8"><a href="DOE.html#cb65-8" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">&quot;Tensile strength [MPa]&quot;</span>)</span></code></pre></div>
-<p><img src="5_simpleDOE_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
+<p><img src="5_simpleDOE_files/figure-html/unnamed-chunk-7-1.png" width="80%" /></p>
 <p>Another way to better understanding the bond distributions is to plot a box plot. This type of plot is somehow like the histogram seen before but more compact when several groups are required to be plotted.</p>
 <div class="sourceCode" id="cb66"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb66-1"><a href="DOE.html#cb66-1" aria-hidden="true" tabindex="-1"></a>pet_delivery_long <span class="sc">%&gt;%</span> </span>
 <span id="cb66-2"><a href="DOE.html#cb66-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> sample, <span class="at">y =</span> tensile_strength, <span class="at">fill =</span> sample)) <span class="sc">+</span></span>
@@ -411,7 +411,7 @@ mean of x
 <span id="cb66-7"><a href="DOE.html#cb66-7" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="st">&quot;Box plot&quot;</span>,</span>
 <span id="cb66-8"><a href="DOE.html#cb66-8" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">&quot;Sample&quot;</span>,</span>
 <span id="cb66-9"><a href="DOE.html#cb66-9" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">&quot;Tensile strength [MPa]&quot;</span>)</span></code></pre></div>
-<p><img src="5_simpleDOE_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
+<p><img src="5_simpleDOE_files/figure-html/unnamed-chunk-8-1.png" width="80%" /></p>
 <p>We would like to understand if the treatment has an effect. Thus we want to compare the two population means. For that we use a t test using samples obtained independently and randomly. Before running the test we also have to check the normality of the samples distributions and equality of their variances.</p>
 <p>To do these checks we’re using the stat_qq functions from the ggplot package and plotting the qq plots for both levels in the same plot:</p>
 <div class="sourceCode" id="cb67"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb67-1"><a href="DOE.html#cb67-1" aria-hidden="true" tabindex="-1"></a>pet_delivery_long <span class="sc">%&gt;%</span></span>
@@ -424,7 +424,7 @@ mean of x
 <span id="cb67-8"><a href="DOE.html#cb67-8" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="st">&quot;Q-Q plot&quot;</span>,</span>
 <span id="cb67-9"><a href="DOE.html#cb67-9" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">&quot;Residuals&quot;</span>,</span>
 <span id="cb67-10"><a href="DOE.html#cb67-10" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">&quot;Tensile strength [MPa]&quot;</span>)</span></code></pre></div>
-<p><img src="5_simpleDOE_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
+<p><img src="5_simpleDOE_files/figure-html/unnamed-chunk-9-1.png" width="80%" /></p>
 <p>We observe that for both levels of treatment the data is adhering to the straight line thus we can assume they follow a normal distribution. Also both lines in the qq plot have equivalent slopes indicating that the assumption of variances is a reasonable one. These verifications are summary ones. We review in subsequent sessions other deeper verifications of such as the shapiro-wilk normality test.</p>
 <p>We’re now going to apply the t-test:</p>
 <div class="sourceCode" id="cb68"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb68-1"><a href="DOE.html#cb68-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(stats)</span></code></pre></div>
@@ -563,7 +563,7 @@ Figure 1: e-bike frames entering hardening treatment
 <span id="cb78-7"><a href="DOE.html#cb78-7" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="st">&quot;Raw data plot&quot;</span>,</span>
 <span id="cb78-8"><a href="DOE.html#cb78-8" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">&quot;Furnace Temperature [°C]&quot;</span>,</span>
 <span id="cb78-9"><a href="DOE.html#cb78-9" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">&quot;Cycles to failure [n]&quot;</span>)</span></code></pre></div>
-<p><img src="6_regression_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+<p><img src="6_regression_files/figure-html/unnamed-chunk-5-1.png" width="80%" /></p>
 </div>
 <div id="linear-model" class="section level4">
 <h4>Linear model</h4>
@@ -603,7 +603,7 @@ F-statistic: 137.6 on 1 and 18 DF,  p-value: 7.263e-10</code></pre>
 <span id="cb81-8"><a href="DOE.html#cb81-8" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="st">&quot;Raw data plot&quot;</span>,</span>
 <span id="cb81-9"><a href="DOE.html#cb81-9" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">&quot;Furnace Temperature [°C]&quot;</span>,</span>
 <span id="cb81-10"><a href="DOE.html#cb81-10" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">&quot;Cycles to failure [n]&quot;</span>)</span></code></pre></div>
-<p><img src="6_regression_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
+<p><img src="6_regression_files/figure-html/unnamed-chunk-7-1.png" width="80%" /></p>
 </div>
 <div id="linear-model-fixed-effects" class="section level4">
 <h4>Linear model fixed effects</h4>
@@ -752,7 +752,7 @@ F-statistic:  66.8 on 3 and 16 DF,  p-value: 2.883e-09</code></pre>
 <span id="cb88-8"><a href="DOE.html#cb88-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">&quot;Index&quot;</span>,</span>
 <span id="cb88-9"><a href="DOE.html#cb88-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">&quot;Fitted values&quot;</span></span>
 <span id="cb88-10"><a href="DOE.html#cb88-10" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
-<p><img src="6_regression_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
+<p><img src="6_regression_files/figure-html/unnamed-chunk-12-1.png" width="80%" /></p>
 <p>Nothing pattern emerges from the current plot and the design presents itself ^well randomised.</p>
 </div>
 <div id="autocorrelation-test" class="section level4">
@@ -762,7 +762,7 @@ F-statistic:  66.8 on 3 and 16 DF,  p-value: 2.883e-09</code></pre>
 <div class="sourceCode" id="cb89"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb89-1"><a href="DOE.html#cb89-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(car)</span></code></pre></div>
 <div class="sourceCode" id="cb90"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb90-1"><a href="DOE.html#cb90-1" aria-hidden="true" tabindex="-1"></a><span class="fu">durbinWatsonTest</span>(ebike_lm_factor)</span></code></pre></div>
 <pre><code> lag Autocorrelation D-W Statistic p-value
-   1      -0.5343347      2.960893   0.102
+   1      -0.5343347      2.960893   0.106
  Alternative hypothesis: rho != 0</code></pre>
 <p>Although the output shows Autocorrelation of -0.53 we have to consider that the p value is greater than 0.05 thus there is not enough significance to say that there is autocorrelation.</p>
 </div>
@@ -780,7 +780,7 @@ F-statistic:  66.8 on 3 and 16 DF,  p-value: 2.883e-09</code></pre>
 <span id="cb92-9"><a href="DOE.html#cb92-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">&quot;Residuals&quot;</span>,</span>
 <span id="cb92-10"><a href="DOE.html#cb92-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">&quot;Fitted values&quot;</span></span>
 <span id="cb92-11"><a href="DOE.html#cb92-11" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
-<p><img src="6_regression_files/figure-html/unnamed-chunk-15-1.png" width="672" /></p>
+<p><img src="6_regression_files/figure-html/unnamed-chunk-15-1.png" width="80%" /></p>
 <p>In this plot we see no variance anomalies such as a higher variance for a certain factor level or other types of skweness.</p>
 </div>
 <div id="equality-of-variance-test" class="section level4">
@@ -812,7 +812,7 @@ Bartlett&#39;s K-squared = 0.43349, df = 3, p-value = 0.9332</code></pre>
 <span id="cb95-9"><a href="DOE.html#cb95-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">&quot;Residuals&quot;</span>,</span>
 <span id="cb95-10"><a href="DOE.html#cb95-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">&quot;Fitted values&quot;</span></span>
 <span id="cb95-11"><a href="DOE.html#cb95-11" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
-<p><img src="6_regression_files/figure-html/unnamed-chunk-17-1.png" width="672" /></p>
+<p><img src="6_regression_files/figure-html/unnamed-chunk-17-1.png" width="80%" /></p>
 <p>The plot suggests normal distribution. We see that the error distribution is aproximately normal. In the fixed effects model we give more importance to the center of the values and here we consider acceptable that the extremes of the data tend to bend away from the straight line.
 The verification can be completed by a test. For populations &lt; 50 use the shapiro-wilk normality test.</p>
 </div>
@@ -838,7 +838,7 @@ W = 0.93752, p-value = 0.2152</code></pre>
 <span id="cb98-6"><a href="DOE.html#cb98-6" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="st">&quot;Linear model - Standardised Residuals vs Fitted values&quot;</span>,</span>
 <span id="cb98-7"><a href="DOE.html#cb98-7" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">&quot;Standardised Residuals&quot;</span>,</span>
 <span id="cb98-8"><a href="DOE.html#cb98-8" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">&quot;Fitted values&quot;</span>)</span></code></pre></div>
-<p><img src="6_regression_files/figure-html/unnamed-chunk-19-1.png" width="672" /></p>
+<p><img src="6_regression_files/figure-html/unnamed-chunk-19-1.png" width="80%" /></p>
 <p>The plot shows no outliers to consider in this DOE.</p>
 </div>
 <div id="outlier-test" class="section level4">
@@ -861,7 +861,7 @@ Largest |rstudent|:
 <span id="cb101-6"><a href="DOE.html#cb101-6" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="st">&quot;Residuals vs Leverage&quot;</span>,</span>
 <span id="cb101-7"><a href="DOE.html#cb101-7" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">&quot;Standardised Residuals&quot;</span>,</span>
 <span id="cb101-8"><a href="DOE.html#cb101-8" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">&quot;Cooks distance&quot;</span>)</span></code></pre></div>
-<p><img src="6_regression_files/figure-html/unnamed-chunk-21-1.png" width="672" /></p>
+<p><img src="6_regression_files/figure-html/unnamed-chunk-21-1.png" width="80%" /></p>
 </div>
 <div id="r-squared" class="section level4">
 <h4>R squared</h4>
@@ -890,7 +890,7 @@ Largest |rstudent|:
 <span id="cb104-8"><a href="DOE.html#cb104-8" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="st">&quot;Raw data plot&quot;</span>,</span>
 <span id="cb104-9"><a href="DOE.html#cb104-9" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">&quot;Furnace Temperature [°C]&quot;</span>,</span>
 <span id="cb104-10"><a href="DOE.html#cb104-10" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">&quot;Cycles to failure [n]&quot;</span>)</span></code></pre></div>
-<p><img src="6_regression_files/figure-html/unnamed-chunk-23-1.png" width="672" /></p>
+<p><img src="6_regression_files/figure-html/unnamed-chunk-23-1.png" width="80%" /></p>
 <p>1 factor with severals levels + 1 continuous dependent variable
 Similar to the t-test but extended - this test allows to compare the means between several levels of treatement for a continuous response variable (the t test is only 2 levels at a time, performing all pair wise t-tests would also not be a solution because its a lot of effort and would increase the type I error)</p>
 <p>ANOVA principle: the total variability in the data, as measured by the total corrected sum of squares, can be partitioned into a sum of squares of the differences between the treatment averages and the grand average plus a sum of squares of the differences of observations within treatments from the treatment average</p>
@@ -943,7 +943,7 @@ Residuals   16 6.552e+09 409500000               </code></pre>
 <span id="cb109-9"><a href="DOE.html#cb109-9" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="st">&quot;Raw data plot&quot;</span>,</span>
 <span id="cb109-10"><a href="DOE.html#cb109-10" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">&quot;Furnace Temperature [°C]&quot;</span>,</span>
 <span id="cb109-11"><a href="DOE.html#cb109-11" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">&quot;Cycles to failure [n]&quot;</span>)</span></code></pre></div>
-<p><img src="6_regression_files/figure-html/unnamed-chunk-26-1.png" width="672" /></p>
+<p><img src="6_regression_files/figure-html/unnamed-chunk-26-1.png" width="80%" /></p>
 <p>P &gt; 0.05 - there is no significant difference between the means</p>
 </div>
 </div>
@@ -1017,7 +1017,7 @@ Residuals   16 6.552e+09 409500000               </code></pre>
 <p>The test provides us a simple direct calculation of the differences between the treatment means and a confidence interval for those. Most importantly it provides us with the p value to help us confirm the significance of the difference and conclude factor level by factor level which differences are significant.</p>
 <p>Additionally we can obtain the related plot with the confidence intervals</p>
 <div class="sourceCode" id="cb112"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb112-1"><a href="DOE.html#cb112-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(ebike_tukey)</span></code></pre></div>
-<p><img src="6_regression_files/figure-html/unnamed-chunk-29-1.png" width="672" /></p>
+<p><img src="6_regression_files/figure-html/unnamed-chunk-29-1.png" width="80%" /></p>
 </div>
 <div id="fishers-lsd" class="section level4">
 <h4>Fisher’s LSD</h4>
@@ -1157,7 +1157,7 @@ Residuals   16 6.552e+09 409500000               </code></pre>
 <p>In this case as all level means are statistically different they all show up in separate groups, each indicated by a specific letter.</p>
 <p>Finally we can get from this package a plot with the Least significant difference error bars:</p>
 <div class="sourceCode" id="cb118"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb118-1"><a href="DOE.html#cb118-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(ebike_LSD)</span></code></pre></div>
-<p><img src="6_regression_files/figure-html/unnamed-chunk-35-1.png" width="672" /></p>
+<p><img src="6_regression_files/figure-html/unnamed-chunk-35-1.png" width="80%" /></p>
 <p>And below we’re exploring a manual execution of this type of plot (in this case with the standard deviations instead).</p>
 <div class="sourceCode" id="cb119"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb119-1"><a href="DOE.html#cb119-1" aria-hidden="true" tabindex="-1"></a>ebike_factor <span class="sc">%&gt;%</span></span>
 <span id="cb119-2"><a href="DOE.html#cb119-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(temperature) <span class="sc">%&gt;%</span></span>
@@ -1178,7 +1178,7 @@ Residuals   16 6.552e+09 409500000               </code></pre>
 <span id="cb119-17"><a href="DOE.html#cb119-17" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="st">&quot;Raw data plot&quot;</span>,</span>
 <span id="cb119-18"><a href="DOE.html#cb119-18" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">&quot;Furnace Temperature [°C]&quot;</span>,</span>
 <span id="cb119-19"><a href="DOE.html#cb119-19" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">&quot;Cycles to failure [n]&quot;</span>)</span></code></pre></div>
-<p><img src="6_regression_files/figure-html/unnamed-chunk-36-1.png" width="672" /></p>
+<p><img src="6_regression_files/figure-html/unnamed-chunk-36-1.png" width="80%" /></p>
 <p>As often with statistical tools, there is debate on the best approach to use. We recommend to combine the Tukey test with the Fisher’s LSD completementary R functions. The Tukey test giving a first indication of the levels that have an effect and calculating the means differences and the Fisher function to provide much more additional information on each level. To be considered in each situation the slight difference between the significance level for difference between means and to decide if required to take the most conservative one.</p>
 <p>To go further in the Anova F-test we recommend this interesting article from <span class="citation"><a href="#ref-minitab_anovaftest" role="doc-biblioref">Minitab</a> (<a href="#ref-minitab_anovaftest" role="doc-biblioref">2016</a>)</span>.</p>
 </div>
@@ -1717,7 +1717,7 @@ Factor settings (scale ends):
 <span id="cb162-43"><a href="DOE.html#cb162-43" aria-hidden="true" tabindex="-1"></a>  )</span>
 <span id="cb162-44"><a href="DOE.html#cb162-44" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb162-45"><a href="DOE.html#cb162-45" aria-hidden="true" tabindex="-1"></a>drymatter_TGT_plot <span class="sc">+</span> particle_size_plot <span class="sc">+</span> speed_plot</span></code></pre></div>
-<p><img src="8_generalDOEs_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
+<p><img src="8_generalDOEs_files/figure-html/unnamed-chunk-8-1.png" width="80%" /></p>
 <p>This kind of plots gives already important insights in to the experiement outcome, even before any deeper analysis with a linear model and anova. In our case:</p>
 <ul>
 <li>higher particle_size and higher speed result in higher bias weight deviation</li>
@@ -1781,7 +1781,7 @@ Factor settings (scale ends):
 <span id="cb163-52"><a href="DOE.html#cb163-52" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.justification=</span><span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">0</span>), <span class="at">legend.position=</span><span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">0</span>))</span>
 <span id="cb163-53"><a href="DOE.html#cb163-53" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb163-54"><a href="DOE.html#cb163-54" aria-hidden="true" tabindex="-1"></a>drymatter_TGT_particle_size_plot <span class="sc">+</span> drymatter_TGT_speed_plot <span class="sc">+</span> speed_particle_size_plot</span></code></pre></div>
-<p><img src="8_generalDOEs_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
+<p><img src="8_generalDOEs_files/figure-html/unnamed-chunk-9-1.png" width="80%" /></p>
 <p>The plots indicate no interaction between the different factors as all lines do not intercept and are mostly parallel.</p>
 <p>In most cases the anova would be performed first and only the plot for the significant interactions would be plotted, if any.</p>
 </div>
@@ -2010,7 +2010,7 @@ F-statistic: 24.82 on 3 and 8 DF,  p-value: 0.0002093</code></pre>
 <span id="cb190-11"><a href="DOE.html#cb190-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="fu">aes</span>(<span class="at">x =</span> level, <span class="at">y =</span> yield), </span>
 <span id="cb190-12"><a href="DOE.html#cb190-12" aria-hidden="true" tabindex="-1"></a>              <span class="at">method =</span> <span class="st">&quot;lm&quot;</span>, <span class="at">se =</span> <span class="cn">FALSE</span>, <span class="at">fullrange =</span> <span class="cn">TRUE</span>) <span class="sc">+</span></span>
 <span id="cb190-13"><a href="DOE.html#cb190-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="fu">vars</span>(variable))</span></code></pre></div>
-<p><img src="9_twolevelDOEs_files/figure-html/unnamed-chunk-16-1.png" width="672" /></p>
+<p><img src="9_twolevelDOEs_files/figure-html/unnamed-chunk-16-1.png" width="80%" /></p>
 <p>Note that we had to extract the data from the S3 doe object, which we’ve done with using unclass() and then as_tibble()</p>
 <p>The intercept passes at 27.5 as seen on the lm summary. We’re going now to put the B factor at its maximum and replot:</p>
 <div class="sourceCode" id="cb191"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb191-1"><a href="DOE.html#cb191-1" aria-hidden="true" tabindex="-1"></a>pet_num <span class="sc">%&gt;%</span> </span>
@@ -2029,7 +2029,7 @@ F-statistic: 24.82 on 3 and 8 DF,  p-value: 0.0002093</code></pre>
 <span id="cb191-14"><a href="DOE.html#cb191-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_cartesian</span>(<span class="at">xlim =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">2</span>, <span class="dv">2</span>)) <span class="sc">+</span></span>
 <span id="cb191-15"><a href="DOE.html#cb191-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">n.breaks =</span> <span class="dv">10</span>) <span class="sc">+</span></span>
 <span id="cb191-16"><a href="DOE.html#cb191-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="fu">vars</span>(variable))</span></code></pre></div>
-<p><img src="9_twolevelDOEs_files/figure-html/unnamed-chunk-17-1.png" width="672" /></p>
+<p><img src="9_twolevelDOEs_files/figure-html/unnamed-chunk-17-1.png" width="80%" /></p>
 <p>As seen on the plot the output of our prediction is 69 corresponding the high level of A when B is at 1. To be precise we need to multiply all the coefficients by the levels of the factors as : 63.250 + 9.583x(+1) - 5.750x(+1) + 1.917</p>
 </div>
 <div id="sd-bars-in-interaction-plots" class="section level4">
@@ -2049,7 +2049,7 @@ F-statistic: 24.82 on 3 and 8 DF,  p-value: 0.0002093</code></pre>
 <span id="cb193-9"><a href="DOE.html#cb193-9" aria-hidden="true" tabindex="-1"></a>          <span class="at">col =</span> viridis<span class="sc">::</span><span class="fu">viridis</span>(<span class="dv">12</span>)[<span class="dv">4</span>],</span>
 <span id="cb193-10"><a href="DOE.html#cb193-10" aria-hidden="true" tabindex="-1"></a>          <span class="at">legend.pos =</span> <span class="st">&quot;bottomright&quot;</span>,</span>
 <span id="cb193-11"><a href="DOE.html#cb193-11" aria-hidden="true" tabindex="-1"></a>          <span class="at">main =</span> <span class="st">&quot;The PET clothing improvement plan&quot;</span>)</span></code></pre></div>
-<p><img src="9_twolevelDOEs_files/figure-html/unnamed-chunk-19-1.png" width="672" /></p>
+<p><img src="9_twolevelDOEs_files/figure-html/unnamed-chunk-19-1.png" width="80%" /></p>
 </div>
 </div>
 <div id="coding-natural-values" class="section level3">
@@ -2256,7 +2256,7 @@ F-statistic: 97.91 on 3 and 12 DF,  p-value: 1.054e-08</code></pre>
 <span id="cb211-10"><a href="DOE.html#cb211-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
 <span id="cb211-11"><a href="DOE.html#cb211-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">&quot;3^k factorial design&quot;</span>,</span>
 <span id="cb211-12"><a href="DOE.html#cb211-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="st">&quot;Prediction with reduced model&quot;</span>)</span></code></pre></div>
-<p><img src="9_twolevelDOEs_files/figure-html/unnamed-chunk-30-1.png" width="672" /></p>
+<p><img src="9_twolevelDOEs_files/figure-html/unnamed-chunk-30-1.png" width="80%" /></p>
 </div>
 <div id="response-surface-plot" class="section level4">
 <h4>Response surface plot</h4>
@@ -2275,7 +2275,7 @@ F-statistic: 97.91 on 3 and 12 DF,  p-value: 1.054e-08</code></pre>
 <span id="cb212-11"><a href="DOE.html#cb212-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">ticktype =</span> <span class="st">&quot;d&quot;</span>, <span class="at">xlab =</span> <span class="st">&quot;Gap&quot;</span>, <span class="at">ylab =</span> <span class="st">&quot;Power&quot;</span>,</span>
 <span id="cb212-12"><a href="DOE.html#cb212-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">main =</span> <span class="st">&quot;Plasma etching experiment&quot;</span></span>
 <span id="cb212-13"><a href="DOE.html#cb212-13" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
-<p><img src="9_twolevelDOEs_files/figure-html/unnamed-chunk-31-1.png" width="672" /></p>
+<p><img src="9_twolevelDOEs_files/figure-html/unnamed-chunk-31-1.png" width="80%" /></p>
 <p>Due to the interaction between factors A and C the surface is slightly bent. This is exactly what we observe in the interactions plots of which the one below corresponds to slicing the surface at the min and the max of Power:</p>
 <div class="sourceCode" id="cb213"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb213-1"><a href="DOE.html#cb213-1" aria-hidden="true" tabindex="-1"></a><span class="fu">interaction.plot</span>(<span class="at">x.factor =</span> battery_charging<span class="sc">$</span>A, </span>
 <span id="cb213-2"><a href="DOE.html#cb213-2" aria-hidden="true" tabindex="-1"></a>                 <span class="at">trace.factor =</span> battery_charging<span class="sc">$</span>C,</span>
@@ -2286,7 +2286,7 @@ F-statistic: 97.91 on 3 and 12 DF,  p-value: 1.054e-08</code></pre>
 <span id="cb213-7"><a href="DOE.html#cb213-7" aria-hidden="true" tabindex="-1"></a>                 <span class="at">xlab =</span> <span class="st">&quot;Gap&quot;</span>,</span>
 <span id="cb213-8"><a href="DOE.html#cb213-8" aria-hidden="true" tabindex="-1"></a>                 <span class="at">ylab =</span> <span class="st">&quot;Yield&quot;</span>,</span>
 <span id="cb213-9"><a href="DOE.html#cb213-9" aria-hidden="true" tabindex="-1"></a>                 <span class="at">main =</span> <span class="st">&quot;Plasma etching experiment&quot;</span>)</span></code></pre></div>
-<p><img src="9_twolevelDOEs_files/figure-html/unnamed-chunk-32-1.png" width="672" /></p>
+<p><img src="9_twolevelDOEs_files/figure-html/unnamed-chunk-32-1.png" width="80%" /></p>
 <p>Just like in the surface plot we can see here in the interaction plot that the response of yield on gap is different depending on the level of power. When power is high it decreases and when power is low it increases. As a reminder this is what is called an interaction between these two factors.</p>
 </div>
 </div>
@@ -2369,7 +2369,7 @@ F-statistic:   NaN on 15 and 0 DF,  p-value: NA</code></pre>
 <span id="cb219-9"><a href="DOE.html#cb219-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">col.lines =</span> <span class="st">&quot;black&quot;</span>,</span>
 <span id="cb219-10"><a href="DOE.html#cb219-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">main =</span> <span class="st">&quot;Chemical vessel - Normal plot of effects 2&quot;</span></span>
 <span id="cb219-11"><a href="DOE.html#cb219-11" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
-<p><img src="9_twolevelDOEs_files/figure-html/unnamed-chunk-37-1.png" width="672" /></p>
+<p><img src="9_twolevelDOEs_files/figure-html/unnamed-chunk-37-1.png" width="80%" /></p>
 <p>In plot we can see that the effects that have the highest influence on the output are the effects A, C and D and their interactions. We can still confirm these observations with a calculation of the percentage contribution of each effect as follows:</p>
 <div class="sourceCode" id="cb220"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb220-1"><a href="DOE.html#cb220-1" aria-hidden="true" tabindex="-1"></a>battery_lm_tidy3 <span class="ot">&lt;-</span> battery_lm3 <span class="sc">%&gt;%</span></span>
 <span id="cb220-2"><a href="DOE.html#cb220-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tidy</span>() <span class="sc">%&gt;%</span></span>
@@ -2474,7 +2474,7 @@ F-statistic:  47.9 on 5 and 10 DF,  p-value: 1.154e-06</code></pre>
 <p>Checking the residuals we see the significant effect of the remaining interactions. The residuals are not completely normal but the in the standardized residuals the deviations are contained within 1.2 sd.</p>
 <div class="sourceCode" id="cb223"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb223-1"><a href="DOE.html#cb223-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">2</span>))</span>
 <span id="cb223-2"><a href="DOE.html#cb223-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(battery_red_lm3)</span></code></pre></div>
-<p><img src="9_twolevelDOEs_files/figure-html/unnamed-chunk-40-1.png" width="672" /></p>
+<p><img src="9_twolevelDOEs_files/figure-html/unnamed-chunk-40-1.png" width="80%" /></p>
 <p>We can now establish the main effects and interaction plots and conclude on the optimal settings to maximize the output: A and D should be on the max and C on the min.</p>
 
 </div>

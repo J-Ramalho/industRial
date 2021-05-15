@@ -7,14 +7,16 @@
 #' @references 
 #' For a complete case study application refer to \url{https://j-ramalho.github.io/industRial/}
 #
-#' @param data 
+#' @param data
+#' This function takes the dataset tablet_thickness cleaned with the clean_names function from 
+#' the {janitor} package 
+#' @param pod_spec_percent the process tolerance in percentage.
 #'
 #' @return
+#' This function returns an object with class tibble (tbl_df)
 #' @export
 #'
 #' @examples
-#' 
-
 process_stats <- function(data, pod_spec_percent) {
   data %>%
     dplyr::filter(!is.na(weight_value), weight_value >= 0) %>%

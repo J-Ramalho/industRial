@@ -262,7 +262,7 @@ Below key definitions from @Montgomery2012, complemented with Wikipedia article 
 
 **Crossed factors:** factors arranged in a factorial design.
 
-**Coded variable:** the $\pm$1 coding for the low and high levels of the factors. Coded variables are very effective for determining the relative size of factor effects. In almost all situations, the coded unit analysis is preferable.
+**Coded variable:** the $\pm$ 1 coding for the low and high levels of the factors. Coded variables are very effective for determining the relative size of factor effects. In almost all situations, the coded unit analysis is preferable.
 
 **Contrast:** a linear combination of parameters in the form $\tau=\sum_{i=1}^{a}c_i\mu_i$ where the contrast constants $c_1,c_2, ..., c_a$ sum to zero; that is, $\sum_{i=1}^{a}c_i=0$. 
 

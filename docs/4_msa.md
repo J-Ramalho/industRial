@@ -86,7 +86,7 @@ juice_drymatter %>%
        caption = "Dataset: juice_drymatter233A, Operator: S.Jonathan)")
 ```
 
-<img src="4_msa_files/figure-html/unnamed-chunk-5-1.png" width="672" />
+<img src="4_msa_files/figure-html/unnamed-chunk-5-1.png" width="80%" />
 
 The linear model is well adapted in this case, this by seing the position of the slope close to the averages of each level of the factor. Nevertheless the slope is rather steep showing a clear increase of the bias (in the negative direction) with the increase in dry matter content.
 
@@ -266,7 +266,7 @@ Total Variation   11.0935239 3.3306942 19.984165    100.00      39.97
 Number of Distinct Categories = 3 
 ```
 
-<img src="4_msa_files/figure-html/unnamed-chunk-13-1.png" width="768" />
+<img src="4_msa_files/figure-html/unnamed-chunk-13-1.png" width="80%" />
 
 We can observe that the SixSigma package recreates exactly the same anova table, just calling Repeatability to the Residuals and adding an additional line with the total degrees of freedom and the total sum of squares. 
 
@@ -345,7 +345,7 @@ tablet_L %>%
        caption = "Data source: QA Lab")
 ```
 
-<img src="4_msa_files/figure-html/unnamed-chunk-14-1.png" width="672" />
+<img src="4_msa_files/figure-html/unnamed-chunk-14-1.png" width="80%" />
 
 
 ### Negative Variations
@@ -424,7 +424,7 @@ Total Variation   11.08152158 3.3288919 19.973352    100.00      39.95
 Number of Distinct Categories = 3 
 ```
 
-<img src="4_msa_files/figure-html/unnamed-chunk-15-1.png" width="768" />
+<img src="4_msa_files/figure-html/unnamed-chunk-15-1.png" width="80%" />
 
 In our case when comparing the total gage r&R with and without the interaction we see it changing from 38.46% to 38.38%.
 
@@ -504,7 +504,7 @@ u
 [1] 1.625117
 ```
 
-Finally what is usually reported is the expanded uncertainty corresponding to 2 standard deviations. To be recalled that +/- 2 std corresponds to 95% of the values when a repeative measurement is done. In this case we have $U = 2*u$:
+Finally what is usually reported is the expanded uncertainty corresponding to 2 standard deviations. To be recalled that $\pm$ 2 std corresponds to 95% of the values when a repeative measurement is done. In this case we have $U = 2*u$:
 
 
 ```r

@@ -315,7 +315,7 @@ pet_num %>%
   facet_wrap(vars(variable))
 ```
 
-<img src="9_twolevelDOEs_files/figure-html/unnamed-chunk-16-1.png" width="672" />
+<img src="9_twolevelDOEs_files/figure-html/unnamed-chunk-16-1.png" width="80%" />
 
 Note that we had to extract the data from the S3 doe object, which we've done with using unclass() and then as_tibble()
 
@@ -341,7 +341,7 @@ pet_num %>%
   facet_wrap(vars(variable))
 ```
 
-<img src="9_twolevelDOEs_files/figure-html/unnamed-chunk-17-1.png" width="672" />
+<img src="9_twolevelDOEs_files/figure-html/unnamed-chunk-17-1.png" width="80%" />
 
 As seen on the plot the output of our prediction is 69 corresponding the high level of A when B is at 1. To be precise we need to multiply all the coefficients by the levels of the factors as : 63.250 + 9.583x(+1) - 5.750x(+1) + 1.917
 
@@ -373,7 +373,7 @@ plotMeans(response = pet_fct$yield,
           main = "The PET clothing improvement plan")
 ```
 
-<img src="9_twolevelDOEs_files/figure-html/unnamed-chunk-19-1.png" width="672" />
+<img src="9_twolevelDOEs_files/figure-html/unnamed-chunk-19-1.png" width="80%" />
 
 ### Coding natural values
 
@@ -604,7 +604,7 @@ battery_charging %>%
     subtitle = "Prediction with reduced model")
 ```
 
-<img src="9_twolevelDOEs_files/figure-html/unnamed-chunk-30-1.png" width="672" />
+<img src="9_twolevelDOEs_files/figure-html/unnamed-chunk-30-1.png" width="80%" />
 
 #### Response surface plot 
 
@@ -629,7 +629,7 @@ persp(
 )
 ```
 
-<img src="9_twolevelDOEs_files/figure-html/unnamed-chunk-31-1.png" width="672" />
+<img src="9_twolevelDOEs_files/figure-html/unnamed-chunk-31-1.png" width="80%" />
 
 Due to the interaction between factors A and C the surface is slightly bent. This is exactly what we observe in the interactions plots of which the one below corresponds to slicing the surface at the min and the max of Power:
 
@@ -646,7 +646,7 @@ interaction.plot(x.factor = battery_charging$A,
                  main = "Plasma etching experiment")
 ```
 
-<img src="9_twolevelDOEs_files/figure-html/unnamed-chunk-32-1.png" width="672" />
+<img src="9_twolevelDOEs_files/figure-html/unnamed-chunk-32-1.png" width="80%" />
 
 Just like in the surface plot we can see here in the interaction plot that the response of yield on gap is different depending on the level of power. When power is high it decreases and when power is low it increases. As a reminder this is what is called an interaction between these two factors.
 
@@ -759,7 +759,7 @@ main_effects_plot <- qqPlot(
   )
 ```
 
-<img src="9_twolevelDOEs_files/figure-html/unnamed-chunk-37-1.png" width="672" />
+<img src="9_twolevelDOEs_files/figure-html/unnamed-chunk-37-1.png" width="80%" />
 
 In plot we can see that the effects that have the highest influence on the output are the effects A, C and D and their interactions. We can still confirm these observations with a calculation of the percentage contribution of each effect as follows:
 
@@ -844,7 +844,7 @@ par(mfrow = c(2,2))
 plot(battery_red_lm3)
 ```
 
-<img src="9_twolevelDOEs_files/figure-html/unnamed-chunk-40-1.png" width="672" />
+<img src="9_twolevelDOEs_files/figure-html/unnamed-chunk-40-1.png" width="80%" />
 
 We can now establish the main effects and interaction plots and conclude on the optimal settings to maximize the output: A and D should be on the max and C on the min.
 

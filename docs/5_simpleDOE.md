@@ -69,7 +69,7 @@ pet_delivery %>%
        y = "Tensile strength [MPa]")
 ```
 
-<img src="5_simpleDOE_files/figure-html/unnamed-chunk-4-1.png" width="672" />
+<img src="5_simpleDOE_files/figure-html/unnamed-chunk-4-1.png" width="80%" />
 
 The mean is just slightly below the target mean defined for acceptance and she also observes a certain variability in the batch. She decides then to perform a t-test to assess if the average calculated can be really be considered statistically different than the target value.
 
@@ -130,7 +130,7 @@ pet_delivery_long %>%
        y = "Tensile strength [MPa]")
 ```
 
-<img src="5_simpleDOE_files/figure-html/unnamed-chunk-7-1.png" width="672" />
+<img src="5_simpleDOE_files/figure-html/unnamed-chunk-7-1.png" width="80%" />
 
 Another way to better understanding the bond distributions is to plot a box plot. This type of plot is somehow like the histogram seen before but more compact when several groups are required to be plotted.
 
@@ -147,7 +147,7 @@ pet_delivery_long %>%
        y = "Tensile strength [MPa]")
 ```
 
-<img src="5_simpleDOE_files/figure-html/unnamed-chunk-8-1.png" width="672" />
+<img src="5_simpleDOE_files/figure-html/unnamed-chunk-8-1.png" width="80%" />
 
 We would like to understand if the treatment has an effect. Thus we want to compare the two population means. For that we use a t test using samples obtained independently and randomly. Before running the test we also have to check the normality of the samples distributions and equality of their variances.
 
@@ -167,7 +167,7 @@ pet_delivery_long %>%
        y = "Tensile strength [MPa]")
 ```
 
-<img src="5_simpleDOE_files/figure-html/unnamed-chunk-9-1.png" width="672" />
+<img src="5_simpleDOE_files/figure-html/unnamed-chunk-9-1.png" width="80%" />
 
 We observe that for both levels of treatment the data is adhering to the straight line thus we can assume they follow a normal distribution. Also both lines in the qq plot  have equivalent slopes indicating that the assumption of variances is a reasonable one. These verifications are summary ones. We review in subsequent sessions other deeper verifications of such as the shapiro-wilk normality test.
 

@@ -13,14 +13,14 @@
 #' It #' basically provides a grey background and some highlights to help reading key
 #' process statistics such as the population mean.
 #'
-#' @param base_size 
-#' @param base_family 
+#' @param base_size font size, defaults to 12
+#' @param base_family font family defaults to ""
 #'
 #' @return
+#' This function returns an object of classes theme and gg from the ggplot2 package
 #' @export
 #'
 #' @examples
-#' 
 theme_qcc <- function(base_size = 12, base_family = "") {
   
   theme_grey(base_size = base_size, base_family = base_family) %+replace%

@@ -22,5 +22,6 @@ theme_set(industRial::theme_industRial())
 knitr::opts_chunk$set(
   message = FALSE,
   warning = FALSE,
-  comment = NA
+  comment = NA,
+  out.width = "80%"
 )

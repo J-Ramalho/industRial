@@ -39,7 +39,7 @@ chart_I <- function(data) {
       subtitle = "I-chart",
       x = "Part id",
       y = "Weight Mean [g]",
-      caption = "data source: pilot Line"
+      caption = "data source: Line1"
     ) +
     theme_qcc()
 }

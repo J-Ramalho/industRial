@@ -33,7 +33,7 @@ chart_IMR <- function(data) {
       subtitle = "MR-chart",
       x = "Part id",
       y = "Weight Moving Range [g]",
-      caption = "data source: pilot Line"
+      caption = "data source: Line1"
     ) +
     theme_qcc()
 }

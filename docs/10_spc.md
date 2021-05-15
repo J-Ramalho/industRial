@@ -179,7 +179,7 @@ We are now ready to finally we can see this all together in a plot:
 plot(syringe_xbar)
 ```
 
-<img src="10_spc_files/figure-html/unnamed-chunk-11-1.png" width="672" />
+<img src="10_spc_files/figure-html/unnamed-chunk-11-1.png" width="80%" />
 
 ### Range chart 
 
@@ -197,7 +197,7 @@ syringe_R <- qcc(
   )
 ```
 
-<img src="10_spc_files/figure-html/unnamed-chunk-12-1.png" width="672" />
+<img src="10_spc_files/figure-html/unnamed-chunk-12-1.png" width="80%" />
 
 <b>Regular production</b>
 
@@ -214,7 +214,7 @@ syringe_xbar <- qcc(
   )
 ```
 
-<img src="10_spc_files/figure-html/unnamed-chunk-13-1.png" width="672" />
+<img src="10_spc_files/figure-html/unnamed-chunk-13-1.png" width="80%" />
 
 We can see that the data point corresponding to the average of the measurements of the samplegroup 17 is plotted in red because it is outside of the control limits.
 
@@ -231,7 +231,7 @@ syringe_R <- qcc(
   )
 ```
 
-<img src="10_spc_files/figure-html/unnamed-chunk-14-1.png" width="672" />
+<img src="10_spc_files/figure-html/unnamed-chunk-14-1.png" width="80%" />
 
 In this case all the points are within the previously defined control limits.
 
@@ -261,7 +261,7 @@ plot(
 abline(h = warn.limits, lty = 3, col = "chocolate")
 ```
 
-<img src="10_spc_files/figure-html/unnamed-chunk-15-1.png" width="672" />
+<img src="10_spc_files/figure-html/unnamed-chunk-15-1.png" width="80%" />
 
 A manufacturing process under control has a variation that is lower than the product specifications and ideally it is centered. Therefore it is usually good practice to follow the control chart rules refering to the process control limits. 
 
@@ -289,7 +289,7 @@ plot(
 abline(h = specs, lty = 3, col = "red")
 ```
 
-<img src="10_spc_files/figure-html/unnamed-chunk-17-1.png" width="672" />
+<img src="10_spc_files/figure-html/unnamed-chunk-17-1.png" width="80%" />
 
 In the previous example we see a situation that happens in practice and that requires action: the data plotted is still within the min max specification limits for this relativelly small number of data points. Furthermore the variation is overall well contained within the process limits. Nevertheless we see it is extremelly off centered when compared with the product specification. A process capability study should help determining the causes for this offcentering and help correcting it.
 
@@ -370,7 +370,7 @@ syringe_long %>%
     subtitle = {plot_subtitle})
 ```
 
-<img src="10_spc_files/figure-html/unnamed-chunk-24-1.png" width="672" />
+<img src="10_spc_files/figure-html/unnamed-chunk-24-1.png" width="80%" />
 
 By looking at the histogram of the Bamako lightning dataset we confirm the extreme offcentering of the production. We also see that although there are no measurements beyond the lower specification limit (LSL) it is very likely this will happen soon.
 
@@ -408,55 +408,42 @@ formatC(((syringe_off_spec) * 10000), format = "d", big.mark = "'")
 
 The expected population below the LSL is 1,3% which is very high for industry standards. In fact this corresponds to 15'900 parts per million (ppm) whereas a common target would be 1 ppm. Naturally these figures are indicative and they depend of the context criteria such as severity of the problem, cost, difficulty to eliminate the problem and so on. 
 
-We can now establish a simple table using the functions created before, to present the expected percentage that falls within certain limits. To make it useful we're putting this limits at +/- 1 to 6 standard deviations
+We can now establish a simple table using the functions created before, to present the expected percentage that falls within certain limits. To make it useful as a reference table we're putting this limits from $\pm$ 1 to $\pm$ 6 standard deviations
 
 
 ```r
-mean <- 0
-sd <- 1
-sigma_conversion_table <- 
-  tibble(UCL = c(1,2,3, 4,5,6),
-         LCL = -UCL,
-         mean = mean,
-         sd = sd)
-```
+sigma_limits <- tibble(
+  UCL = c(1, 2, 3, 4, 5, 6),
+  LCL = -UCL,
+  mean = 0,
+  sd = 1
+)
 
-
-```r
-within_limits <- function(UCL, LCL, mean, sd) {
-  (pnorm(UCL, mean, sd) - pnorm(LCL, mean, sd))*100
-}
-per_mio_off_spec <- function(percent_within) {
-  formatC(
-  ((100 - percent_within) * 10000),
-  format = "d",
-  big.mark = "'"
-  )
-}
-sigma_conversion_table <- sigma_conversion_table %>%
-  mutate(perc_in_spec = within_limits(UCL, LCL, mean, sd),
-         Cpk = process_Cpk(UCL, LCL, mean, sd),
-         ppm_defects = per_mio_off_spec(perc_in_spec))
-sigma_conversion_table %>%
-  kable(align = "c")
+sigma_limits %>%
+  mutate(
+    in_spec_percent = 100 - off_spec(UCL, LCL, mean, sd),
+    Cpk = process_Cpk(UCL, LCL, mean, sd),
+    ppm_defects = formatC(
+      off_spec(UCL, LCL, mean, sd) * 10000,
+      format = "d",
+      big.mark = "'")) %>%
+  kable(align = "c", digits = 2)
 ```
 
 
 
-| UCL | LCL | mean | sd | perc_in_spec |    Cpk    | ppm_defects |
-|:---:|:---:|:----:|:--:|:------------:|:---------:|:-----------:|
-|  1  | -1  |  0   | 1  |   68.26895   | 0.3333333 |   317'310   |
-|  2  | -2  |  0   | 1  |   95.44997   | 0.6666667 |   45'500    |
-|  3  | -3  |  0   | 1  |   99.73002   | 1.0000000 |    2'699    |
-|  4  | -4  |  0   | 1  |   99.99367   | 1.3333333 |     63      |
-|  5  | -5  |  0   | 1  |   99.99994   | 1.6666667 |      0      |
-|  6  | -6  |  0   | 1  |  100.00000   | 2.0000000 |      0      |
-
-### Capability index
-
-
+| UCL | LCL | mean | sd | in_spec_percent | Cpk  | ppm_defects |
+|:---:|:---:|:----:|:--:|:---------------:|:----:|:-----------:|
+|  1  | -1  |  0   | 1  |      68.27      | 0.33 |   317'300   |
+|  2  | -2  |  0   | 1  |      95.45      | 0.67 |   45'500    |
+|  3  | -3  |  0   | 1  |      99.73      | 1.00 |    2'700    |
+|  4  | -4  |  0   | 1  |      99.99      | 1.33 |     100     |
+|  5  | -5  |  0   | 1  |     100.00      | 1.67 |      0      |
+|  6  | -6  |  0   | 1  |     100.00      | 2.00 |      0      |
 
 ### Capability chart
+
+
 
 []{#processcapability}
 
@@ -473,7 +460,7 @@ syringe_cpk <- process.capability(
 )
 ```
 
-<img src="10_spc_files/figure-html/unnamed-chunk-31-1.png" width="672" />
+<img src="10_spc_files/figure-html/unnamed-chunk-30-1.png" width="80%" />
 
 A fine tuning of the forecast of the number of expected parts out of specification can be done with the parameter std.dev. The input value will be used in the probability distribution function. Different approaches can be considered: calculating the sandard deviation within each subgroup or the standard deviation of the entire population and also correcting the standard deviation dividing by n or by n - 1. In this example we re-use the standard deviation calculated on the entire set of datapoints as the group is small but for a case with more data it would be interesting to used the subgroups that tend to give smaller standard deviations.
 
@@ -554,12 +541,12 @@ process_stats_table(weight_statistics_data)
 ```
 
 ```{=html}
-<div id="wsndvtlvez" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="xhbnjwzbec" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>html {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
 }
 
-#wsndvtlvez .gt_table {
+#xhbnjwzbec .gt_table {
   display: table;
   border-collapse: collapse;
   margin-left: auto;
@@ -584,7 +571,7 @@ process_stats_table(weight_statistics_data)
   border-left-color: #D3D3D3;
 }
 
-#wsndvtlvez .gt_heading {
+#xhbnjwzbec .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -596,7 +583,7 @@ process_stats_table(weight_statistics_data)
   border-right-color: #D3D3D3;
 }
 
-#wsndvtlvez .gt_title {
+#xhbnjwzbec .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -606,7 +593,7 @@ process_stats_table(weight_statistics_data)
   border-bottom-width: 0;
 }
 
-#wsndvtlvez .gt_subtitle {
+#xhbnjwzbec .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -616,13 +603,13 @@ process_stats_table(weight_statistics_data)
   border-top-width: 0;
 }
 
-#wsndvtlvez .gt_bottom_border {
+#xhbnjwzbec .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#wsndvtlvez .gt_col_headings {
+#xhbnjwzbec .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -637,7 +624,7 @@ process_stats_table(weight_statistics_data)
   border-right-color: #D3D3D3;
 }
 
-#wsndvtlvez .gt_col_heading {
+#xhbnjwzbec .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -657,7 +644,7 @@ process_stats_table(weight_statistics_data)
   overflow-x: hidden;
 }
 
-#wsndvtlvez .gt_column_spanner_outer {
+#xhbnjwzbec .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -669,15 +656,15 @@ process_stats_table(weight_statistics_data)
   padding-right: 4px;
 }
 
-#wsndvtlvez .gt_column_spanner_outer:first-child {
+#xhbnjwzbec .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#wsndvtlvez .gt_column_spanner_outer:last-child {
+#xhbnjwzbec .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#wsndvtlvez .gt_column_spanner {
+#xhbnjwzbec .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -689,7 +676,7 @@ process_stats_table(weight_statistics_data)
   width: 100%;
 }
 
-#wsndvtlvez .gt_group_heading {
+#xhbnjwzbec .gt_group_heading {
   padding: 8px;
   color: #333333;
   background-color: #FFFFFF;
@@ -711,7 +698,7 @@ process_stats_table(weight_statistics_data)
   vertical-align: middle;
 }
 
-#wsndvtlvez .gt_empty_group_heading {
+#xhbnjwzbec .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -726,15 +713,15 @@ process_stats_table(weight_statistics_data)
   vertical-align: middle;
 }
 
-#wsndvtlvez .gt_from_md > :first-child {
+#xhbnjwzbec .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#wsndvtlvez .gt_from_md > :last-child {
+#xhbnjwzbec .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#wsndvtlvez .gt_row {
+#xhbnjwzbec .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -753,7 +740,7 @@ process_stats_table(weight_statistics_data)
   overflow-x: hidden;
 }
 
-#wsndvtlvez .gt_stub {
+#xhbnjwzbec .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -765,7 +752,7 @@ process_stats_table(weight_statistics_data)
   padding-left: 12px;
 }
 
-#wsndvtlvez .gt_summary_row {
+#xhbnjwzbec .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -775,7 +762,7 @@ process_stats_table(weight_statistics_data)
   padding-right: 5px;
 }
 
-#wsndvtlvez .gt_first_summary_row {
+#xhbnjwzbec .gt_first_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -785,7 +772,7 @@ process_stats_table(weight_statistics_data)
   border-top-color: #D3D3D3;
 }
 
-#wsndvtlvez .gt_grand_summary_row {
+#xhbnjwzbec .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -795,7 +782,7 @@ process_stats_table(weight_statistics_data)
   padding-right: 5px;
 }
 
-#wsndvtlvez .gt_first_grand_summary_row {
+#xhbnjwzbec .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -805,11 +792,11 @@ process_stats_table(weight_statistics_data)
   border-top-color: #D3D3D3;
 }
 
-#wsndvtlvez .gt_striped {
+#xhbnjwzbec .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#wsndvtlvez .gt_table_body {
+#xhbnjwzbec .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -818,7 +805,7 @@ process_stats_table(weight_statistics_data)
   border-bottom-color: #D3D3D3;
 }
 
-#wsndvtlvez .gt_footnotes {
+#xhbnjwzbec .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -832,13 +819,13 @@ process_stats_table(weight_statistics_data)
   border-right-color: #D3D3D3;
 }
 
-#wsndvtlvez .gt_footnote {
+#xhbnjwzbec .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding: 4px;
 }
 
-#wsndvtlvez .gt_sourcenotes {
+#xhbnjwzbec .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -852,41 +839,41 @@ process_stats_table(weight_statistics_data)
   border-right-color: #D3D3D3;
 }
 
-#wsndvtlvez .gt_sourcenote {
+#xhbnjwzbec .gt_sourcenote {
   font-size: 90%;
   padding: 4px;
 }
 
-#wsndvtlvez .gt_left {
+#xhbnjwzbec .gt_left {
   text-align: left;
 }
 
-#wsndvtlvez .gt_center {
+#xhbnjwzbec .gt_center {
   text-align: center;
 }
 
-#wsndvtlvez .gt_right {
+#xhbnjwzbec .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#wsndvtlvez .gt_font_normal {
+#xhbnjwzbec .gt_font_normal {
   font-weight: normal;
 }
 
-#wsndvtlvez .gt_font_bold {
+#xhbnjwzbec .gt_font_bold {
   font-weight: bold;
 }
 
-#wsndvtlvez .gt_font_italic {
+#xhbnjwzbec .gt_font_italic {
   font-style: italic;
 }
 
-#wsndvtlvez .gt_super {
+#xhbnjwzbec .gt_super {
   font-size: 65%;
 }
 
-#wsndvtlvez .gt_footnote_marks {
+#xhbnjwzbec .gt_footnote_marks {
   font-style: italic;
   font-weight: normal;
   font-size: 65%;
@@ -932,7 +919,7 @@ process_stats_table(weight_statistics_data)
 </div>
 ```
 
-### Sample chart
+### Individual chart
 
 The data set being available we're feeding it into the chart_I() function:
 
@@ -941,7 +928,7 @@ The data set being available we're feeding it into the chart_I() function:
 chart_I(weight_statistics_data)
 ```
 
-<img src="10_spc_files/figure-html/unnamed-chunk-38-1.png" width="672" />
+<img src="10_spc_files/figure-html/unnamed-chunk-37-1.png" width="80%" />
 
 ### Moving range chart
 
@@ -952,7 +939,7 @@ The companion of the I chart is the MR chart, where MR stands for moving range. 
 chart_IMR(weight_statistics_data)
 ```
 
-<img src="10_spc_files/figure-html/unnamed-chunk-39-1.png" width="672" />
+<img src="10_spc_files/figure-html/unnamed-chunk-38-1.png" width="80%" />
 
 ### Capability chart II
 
@@ -963,6 +950,6 @@ And a final chart for this session the capability chart:
 chart_Cpk(weight_statistics_data)
 ```
 
-<img src="10_spc_files/figure-html/unnamed-chunk-40-1.png" width="672" />
+<img src="10_spc_files/figure-html/unnamed-chunk-39-1.png" width="80%" />
 
 

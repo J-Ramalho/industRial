@@ -298,35 +298,25 @@ formatC(((syringe_off_spec) * 10000), format = "d", big.mark = "'")
 
 The expected population below the LSL is 1,3% which is very high for industry standards. In fact this corresponds to 15'900 parts per million (ppm) whereas a common target would be 1 ppm. Naturally these figures are indicative and they depend of the context criteria such as severity of the problem, cost, difficulty to eliminate the problem and so on. 
 
-We can now establish a simple table using the functions created before, to present the expected percentage that falls within certain limits. To make it useful we're putting this limits at +/- 1 to 6 standard deviations
+We can now establish a simple table using the functions created before, to present the expected percentage that falls within certain limits. To make it useful as a reference table we're putting this limits from $\pm$ 1 to $\pm$ 6 standard deviations
 
 ```{r}
-mean <- 0
-sd <- 1
-sigma_conversion_table <- 
-  tibble(UCL = c(1,2,3, 4,5,6),
-         LCL = -UCL,
-         mean = mean,
-         sd = sd)
-```
+sigma_limits <- tibble(
+  UCL = c(1, 2, 3, 4, 5, 6),
+  LCL = -UCL,
+  mean = 0,
+  sd = 1
+)
 
-```{r}
-within_limits <- function(UCL, LCL, mean, sd) {
-  (pnorm(UCL, mean, sd) - pnorm(LCL, mean, sd))*100
-}
-per_mio_off_spec <- function(percent_within) {
-  formatC(
-  ((100 - percent_within) * 10000),
-  format = "d",
-  big.mark = "'"
-  )
-}
-sigma_conversion_table <- sigma_conversion_table %>%
-  mutate(perc_in_spec = within_limits(UCL, LCL, mean, sd),
-         Cpk = process_Cpk(UCL, LCL, mean, sd),
-         ppm_defects = per_mio_off_spec(perc_in_spec))
-sigma_conversion_table %>%
-  kable(align = "c")
+sigma_limits %>%
+  mutate(
+    in_spec_percent = 100 - off_spec(UCL, LCL, mean, sd),
+    Cpk = process_Cpk(UCL, LCL, mean, sd),
+    ppm_defects = formatC(
+      off_spec(UCL, LCL, mean, sd) * 10000,
+      format = "d",
+      big.mark = "'")) %>%
+  kable(align = "c", digits = 2)
 ```
 
 ### Capability chart
@@ -411,7 +401,7 @@ this being done we can now convert this data into an easy readable format for re
 process_stats_table(weight_statistics_data)
 ```
 
-### Sample chart
+### Individual chart
 
 The data set being available we're feeding it into the chart_I() function:
 

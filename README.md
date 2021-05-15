@@ -6,11 +6,10 @@
 <!-- badges: start -->
 <!-- badges: end -->
 
-This is the github repository of `{industRial}` the companion package to
-the book [industRial Data
-Science](https://j-ramalho.github.io/industRial/index.html). The goal of
-this package is to provide data sets and functions to complete the case
-studies. It also contains all book original files and exercises.
+`{industRial}` is the companion package to the book [industRial Data
+Science](https://j-ramalho.github.io/industRial/index.html). It provides
+data sets and functions to complete the case studies and contains the
+book original files and exercises.
 
 ## Installation
 
@@ -31,8 +30,8 @@ devtools::install_github("J-Ramalho/industRial")
 
 ## Example
 
-This is an example from the first case study of the book on a pareto
-chart that use the data set dial\_control and the theme\_industrial.
+The *Pareto* case study explores the creation of pareto charts and how
+to make use of them in a day to day situation.
 
 ``` r
 library(industRial)
@@ -51,9 +50,9 @@ paretochart(
 
 <img src="man/figures/README-example-1.png" width="80%" />
 
-Here is another example from the last case study with a custom made
-process capability chart that use the tablet\_weight dataset and the
-theme\_qcc.
+In the *Statistical Process Control* case study the capability of
+manufacturing process is established with process statistics and
+visualized with custom made plots.
 
 ``` r
 tablet_weight <- tablet_weight %>%

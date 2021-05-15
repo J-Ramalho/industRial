@@ -5,9 +5,10 @@ account: thoth
 server: shinyapps.io
 hostUrl: https://api.shinyapps.io/v1
 appId: 3895752
-bundleId: 4573387
+bundleId: 4601192
 url: https://thoth.shinyapps.io/pareto/
-when: 1620457841.46339
+when: 1621076605.50365
+lastSyncTime: 1621076605.50368
 asMultiple: FALSE
 asStatic: FALSE
-ignoredFiles: anova.R|aov.R|app_template.R|pareto.html|pareto.R|template.Rmd
+ignoredFiles: anova.html|anova.R|anova.Rmd|aov.R|app_template.R|ebike_hardening.rds|pareto.html|pareto.R|template_files/figure-html/dial-1.png|template.html|template.Rmd

@@ -339,7 +339,7 @@ u <- sqrt(reprod_var + repeat_var + calibration_var)
 u
 ```
 
-Finally what is usually reported is the expanded uncertainty corresponding to 2 standard deviations. To be recalled that +/- 2 std corresponds to 95% of the values when a repeative measurement is done. In this case we have $U = 2*u$:
+Finally what is usually reported is the expanded uncertainty corresponding to 2 standard deviations. To be recalled that $\pm$ 2 std corresponds to 95% of the values when a repeative measurement is done. In this case we have $U = 2*u$:
 
 ```{r}
 U <- 2 * u

@@ -7,17 +7,16 @@ runtime: shiny_prerendered
 ```{r setup, include=FALSE}
 library(learnr)
 knitr::opts_chunk$set(echo = FALSE)
-dial_control <- read.csv("data/dial_control.csv")
 ```
 
 ```{r message=FALSE, warning=FALSE}
 library(tidyverse)
 library(knitr)
-# library(industRial)
+library(industRial)
 library(qicharts2)
 ```
 
-# Design for Six Sigma
+# learnr TEMPLATE
 
 ## Pareto chart
 

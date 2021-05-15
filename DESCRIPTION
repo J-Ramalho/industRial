@@ -2,11 +2,11 @@ Package: industRial
 Type: Package
 Title: Companion To IndustRial Data Science Book
 Version: 0.1.0
-Author: J.Ramalho
+Authors@R: person("João", "Ramalho", email = "ramalho.joao@protonmail.com", role = c("aut", "cre"))
 Maintainer: The package maintainer <ramalho.joao@protonmail.com>
 Description: More about what it does (maybe more than one line)
     Use four spaces when indenting paragraphs within the Description.
-License: What license is it under?
+License: GPL (>= 3)
 Encoding: UTF-8
 LazyData: true
 Imports:
@@ -24,7 +24,12 @@ Imports:
     tidyr,
     tibble,
     magrittr,
-    gt
+    gt,
+    qcc,
+    DoE.base,
+    qicharts2,
+    SixSigma,
+    car
 Depends: 
-    R (>= 2.10)
+    R (>= 3.5.0)
 RoxygenNote: 7.1.1

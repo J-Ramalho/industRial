@@ -1,0 +1,14 @@
+name: anova
+title: anova
+username:
+account: thoth
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 4135421
+bundleId: 4601171
+url: https://thoth.shinyapps.io/anova/
+when: 1621075874.33513
+lastSyncTime: 1621075874.33517
+asMultiple: FALSE
+asStatic: FALSE
+ignoredFiles: anova.html|anova.R|aov.R|app_template.R|dial_control.rds|pareto.html|pareto.R|pareto.Rmd|template_files/figure-html/dial-1.png|template.html|template.Rmd

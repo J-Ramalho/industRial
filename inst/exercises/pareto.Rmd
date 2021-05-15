@@ -1,12 +1,22 @@
 ---
 title: "industRial practice"
-output: learnr::tutorial
+output: 
+  learnr::tutorial:
+    progressive: true
+    allow_skip: true
 runtime: shiny_prerendered
+description: >
+  apply pareto principles by building and customizing a series of pareto charts.
 ---
 
 ```{r setup, include=FALSE}
 library(learnr)
-library(industRial)
+library(tidyverse)
+library(knitr)
+source("theme_industRial.R")
+# dial_control <- industRial::dial_control
+# write_rds(dial_control, "dial_control.rds")
+dial_control <- read_rds("dial_control.rds")
 knitr::opts_chunk$set(echo = FALSE)
 ```
 
@@ -16,13 +26,17 @@ knitr::opts_chunk$set(echo = FALSE)
 
 In this first set of exercises we are exploring further the pareto charts topic to put your skills to practice.
 
-### Packages
+Pareto charts are a rather simple type of bar charts but they're extremely powerful by helping focusing on the main priorities. We can see over and over that the pareto principle applies and in most industrial setups there are a few quality issues impacting the cost or the productivity of an equipment.
 
-Pareto chart are a rather simple type of bar charts and they're part of more that one of the packages recommended in the *industRial data science* book.
+Pareto charts can be built from scratch by wrangling the data, making counts occurences and calculating the proportions in percentage. This can be done with packages like `{dplyr}` and `{ggplot2}`. Fortunately due the large community working with open source tools there are other shorter paths to get there...
+
+## Packages
+
+Lets start this module with a simple quiz to review where to get functions for easily establish pareto charts:
 
 ```{r quiz}
 quiz(
-  question("Which packages below include a specific function to plot pareto charts:?",
+  question("Which packages below include a specific function to plot pareto charts?",
     answer("qcc", correct = TRUE),
     answer("SixSigma"),
     answer("ggplot2"),
@@ -31,15 +45,7 @@ quiz(
 )
 ```
 
-We're now loading for you some important packages to handle data:
-
-```{r echo=TRUE, message=FALSE, warning=FALSE}
-library(tidyverse)
-library(knitr)
-# library(industRial)
-```
-
-### Data
+## Data
 
 We've also loaded the dial control data set is in memory. It can easily be called by its name `dial_control`. Use the code chunk below to inspect the dataset. How many variables have been collected by the dial production team in the data set? Which are they?
 
@@ -51,12 +57,11 @@ We've also loaded the dial control data set is in memory. It can easily be calle
 head(dial_control)
 ```
 
-### App
+## App
 
 Four variables are available in the dataset: the operator, the date, the defect type and the defect location in the dial. Have a look at the plots that can be obtained by simply changing the variable. The location corresponds to the hour, e.g. 3h is on the right of the dial and 6h is on the bottom.
 
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
-library(tidyverse)
 library(qicharts2)
 fluidPage(
   titlePanel("Dial control pareto charts"),
@@ -90,13 +95,13 @@ output$pareto <- renderPlot({
     ylab = "Percentage of deffects",
     xlab = "Selected variable",
     caption = "Source: Dial Production Team"
-  )
-})
+  ) + theme_industRial()
+  })
 ```
 
 Note that date is usually not considered for a parato plot as time passes and 80/20 rule would not apply. For that a timeseries plot would be the suited approach allowing to see the evolution of the problems in time. Although from a dataset point of view Operator is also a variable it needs to be handled with care to avoid unfair judgement of team members performance.
 
-### Plotting
+## Plotting
 
 We're loading the qicharts2 package for our next plot:
 

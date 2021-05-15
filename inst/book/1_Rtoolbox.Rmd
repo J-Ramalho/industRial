@@ -147,6 +147,8 @@ devtools::session_info()[[1]]
 
 This book presents a variety of software tools and recommended approaches for industrial data analysis. It is incumbent upon the user to execute judgement in their use. The author does not provide any guarantee, expressed or implied, with regard to the general or specific applicability of the software, the range of errors that may be associated with it, or the appropriateness of using them in any subsequent calculation, design, or decision process. The author accepts no responsibility for damages, if any, suffered by any reader or user of this handbook as a result of decisions made or actions taken on information contained therein.
 
+**Licence**
 
+This book and its companion package are made available under a GPLv3 licence granting end users the freedom to run, study, share, and modify the software.
 
 

@@ -4,7 +4,7 @@
 \alias{chart_IMR}
 \title{Create R MR chart for statistical process control}
 \usage{
-chart_IMR(data, factory)
+chart_IMR(data)
 }
 \arguments{
 \item{data}{}

@@ -19,9 +19,6 @@ This function returns an object with class tibble (tbl_df)
 This function takes process variables and calculates summary statistics and 
 presents them in a easy readable table format.
 }
-\examples{
-
-}
 \references{
 For a complete case study application refer to \url{https://j-ramalho.github.io/industRial/}
 }

@@ -1,8 +1,8 @@
 #' Thickness measurements of pharmaceutical tablets
 #' 
-#' @format A data frame with 675 observations on 11 variables
+#' @format A tibble with 675 observations on 11 variables
 #' 
-#' @description This dataset contains physical measurements of pharmaceutical tablets (pills) 
+#' @description This data set contains physical measurements of pharmaceutical tablets (pills) 
 #' including measurement room conditions. The data and the insights it provides 
 #' are typical of an industrial context with high production throughput and 
 #' stringent dimensional requirements.

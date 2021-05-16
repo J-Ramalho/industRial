@@ -7,13 +7,6 @@
 #' It provides a practical case to establish pareto charts typically with a 
 #' function like \code{\link[qicharts2]{paretochart}}
 #' 
-#' @details
-#' Categorical variables are deliberately
-#' not coded as factors in order to provide material for type 
-#' conversions which are part of the industRial Data Science book examples 
-#' and exercises. The data set also contains other variables not used in the 
-#' text book relating to the measurement room conditions.
-#' 
 #' \describe{
 #'   \item{Operator}{The shop floor operator collecting the data}
 #'   \item{Date}{Data collection date}

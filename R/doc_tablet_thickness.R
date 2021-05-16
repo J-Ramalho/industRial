@@ -2,20 +2,17 @@
 #' 
 #' @format A tibble with 675 observations on 11 variables
 #' 
-#' @description This data set contains physical measurements of pharmaceutical tablets (pills) 
-#' including measurement room conditions. The data and the insights it provides 
-#' are typical of an industrial context with high production throughput and 
-#' stringent dimensional requirements.
+#' @description This data set contains physical measurements of pharmaceutical 
+#' tablets (pills) including measurement room conditions. The data and the 
+#' insights it provides are typical of an industrial context with high production
+#' throughput and stringent dimensional requirements.
 #' 
 #' @details
-#' Variable names are deliberately long and not clean and categorical variables 
-#' not coded as factors in order to provide material for name cleansing and type 
-#' conversions which are part of the industRial Data Science book examples 
-#' and exercises. The data set also contains other variables not used in the 
-#' text book relating to the measurement room conditions.
+#' The data set contains other variables not used in the text book related with 
+#' to the measurement room conditions (not listed).
 #' 
 #' \describe{
-#'   \item{Position}{Position of the part on the device}
+#'   \item{Position}{Position of the part on the measurement device}
 #'   \item{Size}{Size class (L, M, S)}
 #'   \item{Tablet}{Part number (L001, L002, ...)}
 #'   \item{Replicate}{Measurement replicate, a sequential numbers}

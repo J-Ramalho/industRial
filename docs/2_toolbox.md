@@ -36,25 +36,6 @@ The amount of packages available is extremely large and growing very fast. When 
 Below a comprehensive list of the different packages used in the book:
 
 
-```r
-installed_packages <- bind_rows(
-  installed.packages(lib.loc = .Library) %>% as_tibble(),
-  installed.packages(lib.loc = .libPaths()[1]) %>% 
-    as_tibble()
-)
-
-recommended_packages <- read_excel("data/rpackages.xlsx") %>%
-  filter(Used == "y") %>%
-  left_join(installed_packages) %>%
-  select(Package, Area, Version) %>%
-  arrange(Area)
-
-recommended_packages %>%
-  kable()
-```
-
-
-
 |Package     |Area                   |Version |
 |:-----------|:----------------------|:-------|
 |rcartocolor |colors                 |NA      |
@@ -178,7 +159,7 @@ dial_peter %>%
 |Peter    |2018.02.02 |Indent  |10h      |
 |Peter    |2018.02.03 |Scratch |4h       |
 
-# Functions
+# Functions {#functions}
 
 Besides the data sets the `{industRial}` package also contains toy functions to plot Statistical Process Control (SPC) charts. The objective here is to showcase how to build such functions and their scope of application is limited to the book case studies. For complete and robust SPC functions we recommend using the `{QCC}` package also described below.
 

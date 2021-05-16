@@ -256,7 +256,7 @@ durbinWatsonTest(ebike_lm_factor)
 
 ```
  lag Autocorrelation D-W Statistic p-value
-   1      -0.5343347      2.960893   0.082
+   1      -0.5343347      2.960893   0.112
  Alternative hypothesis: rho != 0
 ```
 

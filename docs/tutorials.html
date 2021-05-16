@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="SPC.html"/>
-<link rel="next" href="glossary.html"/>
+<link rel="prev" href="functions.html"/>
+<link rel="next" href="design-for-six-sigma.html"/>
 <script src="libs/header-attrs-2.8/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -175,27 +175,20 @@ div.csl-indent {
 <li><a href="./">industRial data science</a></li>
 
 <li class="divider"></li>
-<li class="part"><span><b>I INTRODUCTION</b></span></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Welcome</a></li>
-<li class="chapter" data-level="" data-path="toolbox.html"><a href="toolbox.html"><i class="fa fa-check"></i>Toolbox</a>
-<ul>
-<li class="chapter" data-level="" data-path="toolbox.html"><a href="toolbox.html#packages"><i class="fa fa-check"></i>Packages</a>
-<ul>
-<li class="chapter" data-level="" data-path="toolbox.html"><a href="toolbox.html#six-sigma"><i class="fa fa-check"></i>six sigma</a></li>
-<li class="chapter" data-level="" data-path="toolbox.html"><a href="toolbox.html#qcc"><i class="fa fa-check"></i>qcc</a></li>
-<li class="chapter" data-level="" data-path="toolbox.html"><a href="toolbox.html#qicharts2"><i class="fa fa-check"></i>qicharts2</a></li>
-<li class="chapter" data-level="" data-path="toolbox.html"><a href="toolbox.html#doe.base"><i class="fa fa-check"></i>DoE.base</a></li>
-<li class="chapter" data-level="" data-path="toolbox.html"><a href="toolbox.html#car"><i class="fa fa-check"></i>car</a></li>
-</ul></li>
-<li class="chapter" data-level="" data-path="toolbox.html"><a href="toolbox.html#datasets"><i class="fa fa-check"></i>Datasets and more</a>
-<ul>
-<li class="chapter" data-level="" data-path="toolbox.html"><a href="toolbox.html#datasets-1"><i class="fa fa-check"></i>Datasets</a></li>
-<li class="chapter" data-level="" data-path="toolbox.html"><a href="toolbox.html#functions"><i class="fa fa-check"></i>Functions</a></li>
-<li class="chapter" data-level="" data-path="toolbox.html"><a href="toolbox.html#code"><i class="fa fa-check"></i>Code</a></li>
-</ul></li>
-<li class="chapter" data-level="" data-path="toolbox.html"><a href="toolbox.html#imprint"><i class="fa fa-check"></i>Imprint</a></li>
-</ul></li>
 <li class="chapter" data-level="" data-path="contents.html"><a href="contents.html"><i class="fa fa-check"></i>Table of Contents</a></li>
+<li class="part"><span><b>I TOOLBOX</b></span></li>
+<li class="chapter" data-level="" data-path="r-packages.html"><a href="r-packages.html"><i class="fa fa-check"></i>R Packages</a>
+<ul>
+<li class="chapter" data-level="" data-path="r-packages.html"><a href="r-packages.html#six-sigma"><i class="fa fa-check"></i>six sigma</a></li>
+<li class="chapter" data-level="" data-path="r-packages.html"><a href="r-packages.html#qcc"><i class="fa fa-check"></i>qcc</a></li>
+<li class="chapter" data-level="" data-path="r-packages.html"><a href="r-packages.html#qicharts2"><i class="fa fa-check"></i>qicharts2</a></li>
+<li class="chapter" data-level="" data-path="r-packages.html"><a href="r-packages.html#doe.base"><i class="fa fa-check"></i>DoE.base</a></li>
+<li class="chapter" data-level="" data-path="r-packages.html"><a href="r-packages.html#car"><i class="fa fa-check"></i>car</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="datasets.html"><a href="datasets.html"><i class="fa fa-check"></i>Datasets</a></li>
+<li class="chapter" data-level="" data-path="functions.html"><a href="functions.html"><i class="fa fa-check"></i>Functions</a></li>
+<li class="chapter" data-level="" data-path="tutorials.html"><a href="tutorials.html"><i class="fa fa-check"></i>Tutorials</a></li>
 <li class="part"><span><b>II CASE STUDIES</b></span></li>
 <li class="chapter" data-level="" data-path="design-for-six-sigma.html"><a href="design-for-six-sigma.html"><i class="fa fa-check"></i>Design for Six Sigma</a>
 <ul>
@@ -289,7 +282,6 @@ div.csl-indent {
 </ul></li>
 </ul></li>
 <li class="part"><span><b>III APPENDIX</b></span></li>
-<li class="chapter" data-level="" data-path="tutorials.html"><a href="tutorials.html"><i class="fa fa-check"></i>Tutorials</a></li>
 <li class="chapter" data-level="" data-path="glossary.html"><a href="glossary.html"><i class="fa fa-check"></i>Glossary</a>
 <ul>
 <li class="chapter" data-level="" data-path="glossary.html"><a href="glossary.html#statistics"><i class="fa fa-check"></i>Statistics</a>
@@ -307,6 +299,7 @@ div.csl-indent {
 <li class="chapter" data-level="" data-path="glossary.html"><a href="glossary.html#msa"><i class="fa fa-check"></i>MSA</a></li>
 <li class="chapter" data-level="" data-path="glossary.html"><a href="glossary.html#doe"><i class="fa fa-check"></i>DOE</a></li>
 </ul></li>
+<li class="chapter" data-level="" data-path="imprint.html"><a href="imprint.html"><i class="fa fa-check"></i>Imprint</a></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 </ul>
 
@@ -335,15 +328,15 @@ This tutorial builds on the <em>The dial polishing workshop</em> case study from
 <p><a href="https://thoth.shinyapps.io/anova/">Anova</a><br />
 This tutorial explores how the p value is calculated by playing with a dynamic anova chart. This exercise is based on the <em>The e-bike frame hardening process</em> of the DOE Interactions chapter.</p>
 <p><strong>Run tutorials locally</strong></p>
-<p>The tutorials can also be run locally which can be convinient as they load faster. This also allows for further exploration as the original tutorial code becomes available.</p>
-<p>Install the <code>{industRial}</code> and <code>{learnr}</code> packages, with:</p>
+<p>The tutorials can also be run locally which can be convenient as they load faster. This also allows for further exploration as the original tutorial code becomes available.</p>
+<p>Install locally the <code>{industRial}</code> and <code>{learnr}</code> packages, with:</p>
 <pre><code>devtools::install_github(&quot;J-Ramalho/industRial&quot;)
 install.packages(&quot;learnr)</code></pre>
 <p>load the packages:</p>
 <pre><code>library(industRial)
 library(learnr)</code></pre>
 <p>and list the tutorials with:</p>
-<div class="sourceCode" id="cb276"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb276-1"><a href="tutorials.html#cb276-1" aria-hidden="true" tabindex="-1"></a>learnr<span class="sc">::</span><span class="fu">available_tutorials</span>(<span class="at">package =</span> <span class="st">&quot;industRial&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="tutorials.html#cb12-1" aria-hidden="true" tabindex="-1"></a>learnr<span class="sc">::</span><span class="fu">available_tutorials</span>(<span class="at">package =</span> <span class="st">&quot;industRial&quot;</span>)</span></code></pre></div>
 <pre><code>Available tutorials:
 * industRial
   - anova      : &quot;industRial practice&quot;
@@ -357,13 +350,16 @@ library(learnr)</code></pre>
   )</code></pre>
 
 </div>
+
+
+
             </section>
 
           </div>
         </div>
       </div>
-<a href="SPC.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="glossary.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="functions.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="design-for-six-sigma.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

@@ -38,21 +38,13 @@ knitr::opts_chunk$set(
 
 ```
 
-# (PART) INTRODUCTION {-}
-
 # Welcome {-}
 
 <a href="">
   <img src="img/cover3.png" width="250" style="margin: 0 1em 0 1em" align="right"/>
 </a> 
 
-This book provides examples on how to use Data Science tools and techniques in Product Development and Manufacturing. These examples are grouped in Case Studies in a "cookbook" approach, making it easier to directly adopt the tools. They come from varied manufacturing industries, mostly where repetitive production in massive quantities is involved, such as:
-
-+ pharmaceuticals
-+ food
-+ electronics
-+ watch making
-+ automotive
+This book provides examples on how to use Data Science tools and techniques in Product Development and Manufacturing. These examples are grouped in Case Studies in a "cookbook" approach, making it easier to directly adopt the tools. They come from varied manufacturing industries, mostly where repetitive production in massive quantities is involved, including: pharmaceuticals, food, electronics, watch making and automotive.
 
 Product Development and Manufacturing are very important activities in society because bringing innovative products to the market has an immense potential to improve the quality of life of everyone. 
 
@@ -66,7 +58,7 @@ Being a collection of case studies, the book is better used as a reference book.
 
 Complementing the text, a series of tutorials can be accessed either on line or locally to practice dynamically key statistical concepts. For the online option no specific software installation is required. A list of web links and detailed instructions on local installation can be seen in the section [Tutorials](#tutorials).
 
-To go even further all the case studies data sets, selected example functions and the textbook original files can be downloaded as a package called `{industRial}`. For guidelines on how to use them refer to the section [Datasets and more](#datasets).
+To go even further all the case studies data sets, selected example functions and the textbook original files can be downloaded as a package called `{industRial}`. For guidelines on how to use them refer to the sections [Datasets](#datasets) and [Functions](#functions)
 
 Finally we refer to several good quality books on both Data Science and Product Development that have served to provide the required theoretical  background. These cover key disciplines such as six sigma, statistics and computer programming. This book aims complementing them and showcase how to benefit from recent software in this area. A full list can be found in [References](#references).
 

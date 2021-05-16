@@ -32,7 +32,7 @@ juice_doe <- fac.design(
     product = c("beetroot", "apple", "carrot"), 
     drymatter_target = c(10, 15, 20),
     part = c(1, 2, 3),
-    speed = c(200, 250),
+    speed = c(20, 25),
     particle_size = c(250, 300))
 )
 ```
@@ -59,15 +59,15 @@ summary(juice_doe)
 Call:
 fac.design(randomize = FALSE, factor.names = list(product = c("beetroot", 
     "apple", "carrot"), drymatter_target = c(10, 15, 20), part = c(1, 
-    2, 3), speed = c(200, 250), particle_size = c(250, 300)))
+    2, 3), speed = c(20, 25), particle_size = c(250, 300)))
 
 Experimental design of type  full factorial 
 108  runs
 
 Factor settings (scale ends):
    product drymatter_target part speed particle_size
-1 beetroot               10    1   200           250
-2    apple               15    2   250           300
+1 beetroot               10    1    20           250
+2    apple               15    2    25           300
 3   carrot               20    3                    
 ```
 
@@ -97,7 +97,6 @@ juice_drymatter %>%
 |apple   |            15|    20|           250|    1|         14.70|         15.02|
 |apple   |            15|    20|           250|    2|         14.70|         15.02|
 |apple   |            15|    20|           250|    3|         14.70|         15.02|
-
 
 
 ```r

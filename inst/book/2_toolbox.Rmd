@@ -4,7 +4,9 @@ source(here::here("inst/book/setup.R"))
 library(readxl)
 ```
 
-# Toolbox
+# (PART) TOOLBOX {-}
+
+# R Packages
 
 Why R? Many tools exist to do Data Analysis and Statistics with different degrees of power and difficulty such as:
 
@@ -30,15 +32,13 @@ Being an open source language, all R libraries and packages added to the basic e
 
 R is compatible with most other software on the market and is an excellent "glue" tool allowing for example for data loading from excel files, producing reports in pdf and even building complete dashboards in the form of web pages. 
 
-## Packages
-
 All tools applied throughout this book are available in the form of packages of the programming language R. As with all open source code, they're all available for download with freedom to modification and at no cost.
 
 The amount of packages available is extremely large and growing very fast. When selecting new packages it is recommended to check the latest package update. Packages that have had no improvements since more than a couple of years should be questionned. The field evolves rapidly and compatibility and other issues can become painfull. A way to obtain statistics on package history is on [metacran](https://www.r-pkg.org/) or [RStudio package manager](https://packagemanager.rstudio.com/). 
 
 Below a comprehensive list of the different packages used in the book:
 
-```{r}
+```{r echo=FALSE}
 installed_packages <- bind_rows(
   installed.packages(lib.loc = .Library) %>% as_tibble(),
   installed.packages(lib.loc = .libPaths()[1]) %>% 
@@ -65,33 +65,31 @@ purrr::map(ds_pkgs, library, character.only = TRUE)
 
 A common issue in R when compared to python for instance is **function masking**. As we tend to load all the sets of functions from each package we end up with conflicting function names. In the scope of this text it is mostly the function filter() from `{dplyr}` which conflicts with the function with the same name from `{stats}`. We use the most simple technique which is to add `filter <- dplyr::filter` in the beginning of our script to precise which function we want to give priority and we pre-append the package name to all calls of the other function such as `stats::filter`. For more sophisticated ways to handle this issue we suggest the package `{import}`.
 
-We're highlighting now some specific packages from this list that are used in the book and that bring powerful features in analysis of data from R&D and Operations. Wherever they are required in the book they are loaded explicitly so that we know where the functions come from.
+We're highlighting now some specific packages that are used in the book and that bring powerful features in analysis of data from R&D and Operations. Wherever they are required in the book they are loaded explicitly so that we know where the functions come from.
 
-### six sigma
+## six sigma
 
 SixSigma is a very complete and robust package by Emilio L.Cano [@Cano2015]. It provides well many well tested functions in the area of quality management.
 
-### qcc
+## qcc
 
 qcc is another extremely complete and solid package. It was developped and is maintained by Luca Scrucca and offers a very large range of statistical process control charts and capability analysis. Short examples in its vignette: [qcc vignette](https://luca-scr.github.io/qcc/articles/qcc.html)
 
-### qicharts2
+## qicharts2
 
 I recommend qichart2 specifically for the nice pareto plots. As many niche packages we need to be awere that the number of contributers is small meaning that it cannot be as thouroughly tested as community packages.
 
-### DoE.base
+## DoE.base
 
 This package is one of the most complete and vast packages in Design of Experiements. It is a first of a large suite of packages on the topic, it has vast functionality and is extremely well documented.
 
 [DoE.base](http://prof.beuth-hochschule.de/groemping/software/doe/?L=1&print=1)
 
-### car
+## car
 
 The Companion for Applied Regression is also used extensively as it contains many usefull functions to assess the performance of linear models and anova. 
 
-## Datasets and more {#datasets}
-
-### Datasets
+# Datasets {#datasets}
 
 An original package with the name `{industRial}` has been developed as a companion package for this book. It can be downloaded from github with the following command:
 
@@ -123,9 +121,9 @@ dial_peter %>%
   kable()
 ```
 
-### Functions
+# Functions {#functions}
 
-Besides the data sets the `{industRial}` package also contains toy functions to clean data and plot Statistical Process Control (SPC) charts. The objective here is to showcase how to build such functions and their scope of application is limited to the book case studies. For complete and robust SPC functions we recommend using the `{QCC}` package also described below.
+Besides the data sets the `{industRial}` package also contains toy functions to plot Statistical Process Control (SPC) charts. The objective here is to showcase how to build such functions and their scope of application is limited to the book case studies. For complete and robust SPC functions we recommend using the `{QCC}` package also described below.
 
 Additionally the package contains theme functions to print and customize the aesthetics of spc charts and other charts. These themes are built on top of the `{ggplot2}` by H.Wickham and `{cowplot}` package by Claus O.Wilke. The main objective is to give the reader a starting point for customization of charts in this domain.
 
@@ -137,30 +135,65 @@ ls("package:industRial")
 
 or conveniently on the console with industRial:: and then tab. For each function a help page is available and can be obtained the same way as any other R data sets, themes and functions with `?<object>` (e.g. ?chart_xbar)
 
-### Code
-
-To go even deeper the text book original Rmd files are also bundled in the package and can be seen in the book folder. A way to get the exact path is with:
+To go even deeper the text book and get access to all the code, the original Rmd files are also bundled in the package and can be seen in the book folder. A way to get the exact path is with:
 
 ```{r}
 paste0(.libPaths()[1], "/industRial/book")
 ```
 
-## Imprint
+# Tutorials {#tutorials}
 
-Many packages are available for editing documentation, from notes to blogs up to complete websites. In this book we've opted to use the R package `{Bookdown}` from Yihui Xie further customized with a layout developed by [Matthew J. C. Crump](https://community.rstudio.com/t/bookdown-contest-submission-gitbook-style-tufte-style-for-web-book/11666). 
+A set of practical exercises on key concepts presented throughout this book is available either on the web or locally, instructions follow.
 
-An important aspect to ensure reproducibility of the examples along the time and between users is to have the same programming setup. We're showing below our setup at the time of rendering the book. 
+**Run tutorials on the web**
 
-```{r}
-devtools::session_info()[[1]]
+the exercises are published on the shinyapp.io server and can be freely accessed with the links below:
+
+[Pareto charts](https://thoth.shinyapps.io/pareto/)  
+This tutorial builds on the *The dial polishing workshop* case study from the Design for Six Sigma chapter, train building pareto charts using the `{qichart2}` package and explore how playing with different variables gives new insights into apparently simple data collections.
+
+[Anova](https://thoth.shinyapps.io/anova/)  
+This tutorial explores how the p value is calculated by playing with a dynamic anova chart. This exercise is based on the *The e-bike frame hardening process* of the DOE Interactions chapter.
+
+**Run tutorials locally**
+
+The tutorials can also be run locally which can be convenient as they load faster. This also allows for further exploration as the original tutorial code becomes available.
+
+Install locally the `{industRial}` and `{learnr}` packages, with:
+
+```{}
+devtools::install_github("J-Ramalho/industRial")
+install.packages("learnr)
 ```
 
-**Disclaimer**
+load the packages:
 
-This book presents a variety of software tools and recommended approaches for industrial data analysis. It is incumbent upon the user to execute judgement in their use. The author does not provide any guarantee, expressed or implied, with regard to the general or specific applicability of the software, the range of errors that may be associated with it, or the appropriateness of using them in any subsequent calculation, design, or decision process. The author accepts no responsibility for damages, if any, suffered by any reader or user of this handbook as a result of decisions made or actions taken on information contained therein.
+```{}
+library(industRial)
+library(learnr)
+```
 
-**Licence**
+and list the tutorials with:
 
-This book and its companion package are made available under a GPLv3 licence granting end users the freedom to run, study, share, and modify the software.
+```{r}
+learnr::available_tutorials(package = "industRial")
+```
+
+choose a tutorial and run it as follows:
+
+```{}
+learnr::run_tutorial(package = "industRial", "anova")
+```
+
+The original files are available in the package tutorials folder. Their names correspond to the tutorial names listed before so there is a simple way to open the desired file, e.g.: 
+
+```{}
+rstudioapi::navigateToFile(
+  paste0(.libPaths()[1], "/industRial/tutorials/anova/anova.Rmd")
+  )
+```
+
+
+
 
 

@@ -1,6 +1,6 @@
 #' Thickness measurements of pharmaceutical tablets
 #' 
-#' @format A tibble with 675 observations on 11 variables
+#' @format An object of class tibble with 675 observations on 11 variables
 #' 
 #' @description This data set contains physical measurements of pharmaceutical 
 #' tablets (pills) including measurement room conditions. The data and the 

@@ -1,6 +1,6 @@
-#' Tensile strength values on PET raw material for the clothing industry
+#' Tensile strength values on PET raw material for the clothing industry.
 #' 
-#' @format A tibble with 28 observations on 2 variables
+#' @format An object of class tibble with 28 observations on 2 variables.
 #' 
 #' @description Measurements of tensile strength of two different deliveries
 #' of PET raw material used in the clothing industry. The two data sets follow
@@ -12,10 +12,10 @@
 #' }
 #' 
 #' @source
-#' Original data set
+#' Original data set.
 #' 
 #' @references 
-#' For a complete case study application refer to \url{https://j-ramalho.github.io/industRial/}
+#' For a complete case study application refer to \url{https://j-ramalho.github.io/industRial/}.
 #' 
 #' @examples
 "pet_delivery"

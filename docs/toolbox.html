@@ -24,7 +24,7 @@
 <meta name="author" content="João Ramalho" />
 
 
-<meta name="date" content="2021-05-15" />
+<meta name="date" content="2021-05-16" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -32,7 +32,7 @@
   
   
 <link rel="prev" href="index.html"/>
-<link rel="next" href="table-of-contents.html"/>
+<link rel="next" href="contents.html"/>
 <script src="libs/header-attrs-2.8/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -187,10 +187,15 @@ div.csl-indent {
 <li class="chapter" data-level="" data-path="toolbox.html"><a href="toolbox.html#doe.base"><i class="fa fa-check"></i>DoE.base</a></li>
 <li class="chapter" data-level="" data-path="toolbox.html"><a href="toolbox.html#car"><i class="fa fa-check"></i>car</a></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="toolbox.html"><a href="toolbox.html#datasets-and-functions"><i class="fa fa-check"></i>Datasets and functions</a></li>
+<li class="chapter" data-level="" data-path="toolbox.html"><a href="toolbox.html#datasets"><i class="fa fa-check"></i>Datasets and more</a>
+<ul>
+<li class="chapter" data-level="" data-path="toolbox.html"><a href="toolbox.html#datasets-1"><i class="fa fa-check"></i>Datasets</a></li>
+<li class="chapter" data-level="" data-path="toolbox.html"><a href="toolbox.html#functions"><i class="fa fa-check"></i>Functions</a></li>
+<li class="chapter" data-level="" data-path="toolbox.html"><a href="toolbox.html#code"><i class="fa fa-check"></i>Code</a></li>
+</ul></li>
 <li class="chapter" data-level="" data-path="toolbox.html"><a href="toolbox.html#imprint"><i class="fa fa-check"></i>Imprint</a></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="table-of-contents.html"><a href="table-of-contents.html"><i class="fa fa-check"></i>Table of Contents</a></li>
+<li class="chapter" data-level="" data-path="contents.html"><a href="contents.html"><i class="fa fa-check"></i>Table of Contents</a></li>
 <li class="part"><span><b>II CASE STUDIES</b></span></li>
 <li class="chapter" data-level="" data-path="design-for-six-sigma.html"><a href="design-for-six-sigma.html"><i class="fa fa-check"></i>Design for Six Sigma</a>
 <ul>
@@ -284,7 +289,7 @@ div.csl-indent {
 </ul></li>
 </ul></li>
 <li class="part"><span><b>III APPENDIX</b></span></li>
-<li class="chapter" data-level="" data-path="exercises.html"><a href="exercises.html"><i class="fa fa-check"></i>Exercises</a></li>
+<li class="chapter" data-level="" data-path="tutorials.html"><a href="tutorials.html"><i class="fa fa-check"></i>Tutorials</a></li>
 <li class="chapter" data-level="" data-path="glossary.html"><a href="glossary.html"><i class="fa fa-check"></i>Glossary</a>
 <ul>
 <li class="chapter" data-level="" data-path="glossary.html"><a href="glossary.html#statistics"><i class="fa fa-check"></i>Statistics</a>
@@ -351,7 +356,7 @@ Besides taste and personnal preference R brings a significant number of specific
 <p>Below a comprehensive list of the different packages used in the book:</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="toolbox.html#cb1-1" aria-hidden="true" tabindex="-1"></a>installed_packages <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(</span>
 <span id="cb1-2"><a href="toolbox.html#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">installed.packages</span>(<span class="at">lib.loc =</span> .Library) <span class="sc">%&gt;%</span> <span class="fu">as_tibble</span>(),</span>
-<span id="cb1-3"><a href="toolbox.html#cb1-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">installed.packages</span>(<span class="at">lib.loc =</span> <span class="st">&quot;/home/joao/R/x86_64-pc-linux-gnu-library/4.0/&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb1-3"><a href="toolbox.html#cb1-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">installed.packages</span>(<span class="at">lib.loc =</span> <span class="fu">.libPaths</span>()[<span class="dv">1</span>]) <span class="sc">%&gt;%</span> </span>
 <span id="cb1-4"><a href="toolbox.html#cb1-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">as_tibble</span>()</span>
 <span id="cb1-5"><a href="toolbox.html#cb1-5" aria-hidden="true" tabindex="-1"></a>)</span>
 <span id="cb1-6"><a href="toolbox.html#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
@@ -572,13 +577,15 @@ purrr::map(ds_pkgs, library, character.only = TRUE)</code></pre>
 <p>The Companion for Applied Regression is also used extensively as it contains many usefull functions to assess the performance of linear models and anova.</p>
 </div>
 </div>
-<div id="datasets-and-functions" class="section level2">
-<h2>Datasets and functions</h2>
+<div id="datasets" class="section level2">
+<h2>Datasets and more</h2>
+<div id="datasets-1" class="section level3">
+<h3>Datasets</h3>
 <p>An original package with the name <code>{industRial}</code> has been developed as a companion package for this book. It can be downloaded from github with the following command:</p>
 <pre><code>devtools::install_github(&quot;J-Ramalho/industRial&quot;)</code></pre>
-<p>The primary package goal is to make easily available all the datasets from all case studies. All dataset presented throughout the book are published either fully anonymized. Once the package is correctly installed it can be loaded in the R session as usual with the library() function:</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="toolbox.html#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(industRial)</span></code></pre></div>
-<p>Once loaded the datasets become immediately available in memory and can directly be used in the examples presented or for further exploration. Lets confirm this invoking the first dataset:</p>
+<p>The primary package goal is to make easily available all the data sets from all case studies. All dataset presented throughout the book are published either fully anonymized. Once the package is correctly installed it can be loaded in the R session as usual with the library() function:</p>
+<pre><code>library(industRial)</code></pre>
+<p>Once loaded the data sets become immediately available in memory and can directly be used in the examples presented or for further exploration. Lets confirm this invoking the first data set:</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="toolbox.html#cb5-1" aria-hidden="true" tabindex="-1"></a>dial_control <span class="sc">%&gt;%</span></span>
 <span id="cb5-2"><a href="toolbox.html#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>() <span class="sc">%&gt;%</span></span>
 <span id="cb5-3"><a href="toolbox.html#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable</span>()</span></code></pre></div>
@@ -660,8 +667,11 @@ purrr::map(ds_pkgs, library, character.only = TRUE)</code></pre>
 </tr>
 </tbody>
 </table>
-<p>Besides the datasets the <code>{industRial}</code> package also contains toy functions to clean data and plot Statistical Process Control (SPC) charts. The objective here is to showcase how to build such functions and their scope of application is limited to the book case studies. For complete and robust SPC functions we recommend using the <code>{QCC}</code> package also described below.</p>
-<p>Additionally the package contains theme functions to print and customise the aesthetics of spc charts and other charts. These themes are built on top of the <code>{ggplot2}</code> by H.Wickham and <code>{cowplot}</code> package by Claus O.Wilke. The main objective is to give the reader a starting point for customization of charts in this domain.</p>
+</div>
+<div id="functions" class="section level3">
+<h3>Functions</h3>
+<p>Besides the data sets the <code>{industRial}</code> package also contains toy functions to clean data and plot Statistical Process Control (SPC) charts. The objective here is to showcase how to build such functions and their scope of application is limited to the book case studies. For complete and robust SPC functions we recommend using the <code>{QCC}</code> package also described below.</p>
+<p>Additionally the package contains theme functions to print and customize the aesthetics of spc charts and other charts. These themes are built on top of the <code>{ggplot2}</code> by H.Wickham and <code>{cowplot}</code> package by Claus O.Wilke. The main objective is to give the reader a starting point for customization of charts in this domain.</p>
 <p>The complete list of datasets, themes and functions can be seen by listing all objects from the package with ls():</p>
 <div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="toolbox.html#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span>(<span class="st">&quot;package:industRial&quot;</span>)</span></code></pre></div>
 <pre><code> [1] &quot;%&gt;%&quot;                 &quot;battery_charging&quot;    &quot;chart_Cpk&quot;          
@@ -672,13 +682,20 @@ purrr::map(ds_pkgs, library, character.only = TRUE)</code></pre>
 [16] &quot;process_stats_table&quot; &quot;solarcell_fill&quot;      &quot;solarcell_output&quot;   
 [19] &quot;syringe_diameter&quot;    &quot;tablet_thickness&quot;    &quot;tablet_weight&quot;      
 [22] &quot;theme_industRial&quot;    &quot;theme_qcc&quot;          </code></pre>
-<p>or conveniently on the console with industRial:: and then tab. For each function a help page is available and can be obtained the same way as any other R datasets, themes and functions with <code>?&lt;object&gt;</code> (e.g. ?chart_xbar)</p>
+<p>or conveniently on the console with industRial:: and then tab. For each function a help page is available and can be obtained the same way as any other R data sets, themes and functions with <code>?&lt;object&gt;</code> (e.g. ?chart_xbar)</p>
+</div>
+<div id="code" class="section level3">
+<h3>Code</h3>
+<p>To go even deeper the text book original Rmd files are also bundled in the package and can be seen in the book folder. A way to get the exact path is with:</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="toolbox.html#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">paste0</span>(<span class="fu">.libPaths</span>()[<span class="dv">1</span>], <span class="st">&quot;/industRial/book&quot;</span>)</span></code></pre></div>
+<pre><code>[1] &quot;/home/joao/R/x86_64-pc-linux-gnu-library/4.0/industRial/book&quot;</code></pre>
+</div>
 </div>
 <div id="imprint" class="section level2">
 <h2>Imprint</h2>
-<p>Many packages are available for editing documention, from notes to blogs up to complete websites. In this book we’ve opted to use the R package <code>{Bookdown}</code> from Yihui Xie further customized with a layout developped by <a href="https://community.rstudio.com/t/bookdown-contest-submission-gitbook-style-tufte-style-for-web-book/11666">Matthew J. C. Crump</a>.</p>
+<p>Many packages are available for editing documentation, from notes to blogs up to complete websites. In this book we’ve opted to use the R package <code>{Bookdown}</code> from Yihui Xie further customized with a layout developed by <a href="https://community.rstudio.com/t/bookdown-contest-submission-gitbook-style-tufte-style-for-web-book/11666">Matthew J. C. Crump</a>.</p>
 <p>An important aspect to ensure reproducibility of the examples along the time and between users is to have the same programming setup. We’re showing below our setup at the time of rendering the book.</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="toolbox.html#cb9-1" aria-hidden="true" tabindex="-1"></a>devtools<span class="sc">::</span><span class="fu">session_info</span>()[[<span class="dv">1</span>]]</span></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="toolbox.html#cb11-1" aria-hidden="true" tabindex="-1"></a>devtools<span class="sc">::</span><span class="fu">session_info</span>()[[<span class="dv">1</span>]]</span></code></pre></div>
 <pre><code> setting  value                       
  version  R version 4.0.5 (2021-03-31)
  os       Ubuntu 20.04.2 LTS          
@@ -688,7 +705,7 @@ purrr::map(ds_pkgs, library, character.only = TRUE)</code></pre>
  collate  en_US.UTF-8                 
  ctype    en_US.UTF-8                 
  tz       Europe/Zurich               
- date     2021-05-15                  </code></pre>
+ date     2021-05-16                  </code></pre>
 <p><strong>Disclaimer</strong></p>
 <p>This book presents a variety of software tools and recommended approaches for industrial data analysis. It is incumbent upon the user to execute judgement in their use. The author does not provide any guarantee, expressed or implied, with regard to the general or specific applicability of the software, the range of errors that may be associated with it, or the appropriateness of using them in any subsequent calculation, design, or decision process. The author accepts no responsibility for damages, if any, suffered by any reader or user of this handbook as a result of decisions made or actions taken on information contained therein.</p>
 <p><strong>Licence</strong></p>
@@ -708,7 +725,7 @@ Emilio L. Cano • Javier M. Moguerza, Mariano Prieto Corcoba. 2015. <em>Quality
         </div>
       </div>
 <a href="index.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="table-of-contents.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="contents.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

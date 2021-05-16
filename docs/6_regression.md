@@ -256,7 +256,7 @@ durbinWatsonTest(ebike_lm_factor)
 
 ```
  lag Autocorrelation D-W Statistic p-value
-   1      -0.5343347      2.960893   0.106
+   1      -0.5343347      2.960893     0.1
  Alternative hypothesis: rho != 0
 ```
 
@@ -520,7 +520,7 @@ ggplot(ebike_factor2,
   theme(legend.position = "none") +
   scale_y_continuous(n.breaks = 10, labels = label_number(big.mark = "'")) +
   labs(title = "e-bike frame hardening process",
-       subtitle = "Raw data plot",
+       subtitle = "Boxplot of frame aging resistance",
        x = "Furnace Temperature [°C]",
        y = "Cycles to failure [n]")
 ```
@@ -692,7 +692,7 @@ ebike_factor %>%
     hjust = 1, vjust = -1, colour = "grey30", size = 3, 
     fontface = "italic") +
   labs(title = "e-bike frame hardening process",
-       subtitle = "Raw data plot",
+       subtitle = "Boxplot of frame aging resistance",
        x = "Furnace Temperature [°C]",
        y = "Cycles to failure [n]")
 ```

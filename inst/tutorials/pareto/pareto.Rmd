@@ -17,7 +17,7 @@ source("theme_industRial.R")
 # dial_control <- industRial::dial_control
 # write_rds(dial_control, "dial_control.rds")
 dial_control <- read_rds("dial_control.rds")
-knitr::opts_chunk$set(echo = FALSE)
+knitr::opts_chunk$set(echo = FALSE, message = FALSE, warning = FALSE)
 ```
 
 # Design for Six Sigma

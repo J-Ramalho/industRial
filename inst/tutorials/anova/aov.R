@@ -45,6 +45,7 @@ server <- function(input, output) {
         
     output$boxplot <- renderPlot({
 
+        if (analysis()$p.value >= 0.05) {
         ggplot(measurements()) +
             # geom_point(aes(x = group, y = group_mean), color = "red", size = 4) +
             geom_boxplot(aes(x = group, y = value, fill = group)) +
@@ -55,7 +56,7 @@ server <- function(input, output) {
                 y = "Value"
             ) +
             geom_hline(yintercept = 540000, color = "red") +
-            scale_fill_viridis_d(option = "D", begin = 0.5) +
+            scale_fill_viridis_d(option = "A", begin = 0.5) +
             scale_y_continuous(n.breaks = 10) +
             # coord_cartesian(ylim = c(500000, 600000)) +
             labs(title = "e-bike frame hardening process",
@@ -63,6 +64,26 @@ server <- function(input, output) {
                  x = "Furnace Temperature [°C]",
                  y = "Cycles to failure [n]") +
             theme_industRial()
+        } else {
+            ggplot(measurements()) +
+                # geom_point(aes(x = group, y = group_mean), color = "red", size = 4) +
+                geom_boxplot(aes(x = group, y = value, fill = group)) +
+                labs(
+                    title = "Measurements plot",
+                    subtile = "",
+                    x = "",
+                    y = "Value"
+                ) +
+                geom_hline(yintercept = 540000, color = "red") +
+                scale_fill_viridis_d(option = "D", begin = 0.5) +
+                scale_y_continuous(n.breaks = 10) +
+                # coord_cartesian(ylim = c(500000, 600000)) +
+                labs(title = "e-bike frame hardening process",
+                     subtitle = "Raw data plot",
+                     x = "Furnace Temperature [°C]",
+                     y = "Cycles to failure [n]") +
+                theme_industRial()
+        }
     })
     
     analysis <- reactive({
@@ -70,10 +91,23 @@ server <- function(input, output) {
     })
         
     output$analysis <- renderDT({
-        analysis() %>%
-            datatable() %>%
-            formatRound(3:4, 1) %>%
-            formatRound(5:6, 2)
+        if (analysis()$p.value >= 0.05) {
+            analysis() %>%
+                datatable(
+                    options = list(searching = FALSE)
+                ) %>%
+                formatSignif(columns = 3:4, digits = 1) %>%
+                formatRound(columns = 5:6, digits = 2) %>%
+                formatStyle(6, color = "red", fontWeight = "bold")
+        } else {
+            analysis() %>%
+                datatable(
+                    options = list(searching = FALSE)
+                ) %>%
+                formatSignif(columns = 3:4, digits = 1) %>%
+                formatRound(columns = 5:6, digits = 2) %>%
+                formatStyle(6, color = "darkgreen", fontWeight = "bold")
+        }
     }) 
 }
 

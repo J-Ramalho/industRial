@@ -1,0 +1,210 @@
+---
+title: "industRial practice"
+output: 
+  learnr::tutorial:
+    progressive: true
+    allow_skip: true
+runtime: shiny_prerendered
+description: > 
+  Practice applications of process capability in statiscal process control to gain
+  understanding of how the out of specification is calculated
+---
+
+```{r setup, include=FALSE}
+library(tidyverse)
+library(scales)
+library(learnr)
+source("theme_industRial.R")
+tablet_weight <- read_rds("tablet_weight.rds")
+knitr::opts_chunk$set(echo = FALSE, message = FALSE, warning = FALSE)
+```
+
+# Design of Experiments
+
+## Process Capability
+
+To get a new industrial product to the market there is often a long process that goes from the initial discussions and briefings to the start of production on the shop floor. For products produced in millions or billions of units this process can take several years but then once its completed the regular production will generally also remain for years. This is why it is important to assess the capability of a manufacturing process and to put a statistical process control in place where needed.
+
+## When to apply?
+
+```{r quiz}
+quiz(
+  question("Which is the primary use of the anova in an industrial DoE (design of experiment)?",
+    answer(
+      "Compare variances", 
+      message = "The name analysis of variance can be considered misleading. In fact the variances (or to be more specific the sums of the squares) are calculated but this is not the primary outcome we're looking for."
+      ),
+    answer("Compare standard deviations"),
+    answer(
+      "Compare means",
+      "That's it! This approach allows to compare more that two means, thus extending the t.test. It establishes if their difference is statistically different. This provides an indication if the experiment has had an effect.",
+      correct = TRUE)
+    ,
+    answer("Compare ranges"),
+    allow_retry = TRUE
+  )
+)
+```
+
+## Data
+
+For the coming exercises we're using the data set ebike_hardening. This data set comes in a *wide* format typically used in day to day data collection situations. For someone in a laboratory or factory shopfloor it is often easier to simple create a new column and add new measurements. Sometimes unfortunately this leads to not very clear headers. Also for ggplots is necessary to specify the factors clearly so a *longer* format makes it easier to deal with in R.
+
+In the following exercise convert the dataset to a narrow format and take the opportunity to calculate the means by group leading to a tibble such as:
+
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+ebike_narrow <- ebike_hardening %>%
+  pivot_longer(
+    cols = starts_with("g"),
+    names_to = "observation",
+    values_to = "cycles"
+  ) %>%
+  group_by(temperature) %>%
+  mutate(cycles_mean = mean(cycles)) %>%
+  ungroup()
+head(ebike_narrow)
+```
+
+
+```{r ebike, exercise=TRUE, exercise.lines = 5, exercise.eval=TRUE}
+
+```
+
+```{r ebike-hint}
+# start with the ebike_hardening dataset and use the function pivot_longer()
+# then group by temperature to calculate the means for each treatment group
+```
+
+## The anova sandbox
+
+The anova output can be sometimes tricky to interpret as many things are at play. In the application below we start with a plot similar to the plot of the Anova chapter. It presents boxplots of the distribution of the different treatment groups of the ebike frame hardening process. Outputs correspond to the lifecycle of the frame (in number of cycles to failure) and the groups correspond each to a specific furnace temperature. You can play with the group means, standard deviation and population size.
+
+Try to get to a non significant p value of more than <b style='color:#ff0000'>0.05</b> by playing with the means (and standard deviations if needed). The boxes colors will change from greenish to reddish reflecting the book examples. 
+
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+library(tidyverse)
+library(DT)
+library(stats)
+library(broom)
+filter <- dplyr::filter
+select <- dplyr::select
+
+fluidPage(
+    titlePanel("The anova sandbox"),
+    sidebarLayout(
+        sidebarPanel(width = 4,
+            sliderInput(inputId = "mean1", "Group 1 target mean:", min = 500000, max = 700000, value = 540000),
+            sliderInput(inputId = "mean2", "Group 2 target mean:", min = 500000, max = 700000, value = 575000),
+            sliderInput(inputId = "mean3", "Group 3 target mean:", min = 500000, max = 700000, value = 625000),
+            sliderInput(inputId = "mean4", "Group 4 target mean:", min = 500000, max = 700000, value = 700000),
+            sliderInput(inputId = "sd1", "Group 1 sd:", min = 10000, max = 50000, value = 50000, step = 1000),
+            sliderInput(inputId = "sd2", "Group 2 sd:", min = 10000, max = 50000, value = 30000, step = 1000),
+            sliderInput(inputId = "sd3", "Group 3 sd:", min = 10000, max = 50000, value = 40000, step = 1000),
+            sliderInput(inputId = "sd4", "Group 4 sd:", min = 10000, max = 50000, value = 15000, step = 1000),
+            sliderInput(inputId = "n", "Group sample size n:", min = 100, max = 10000, value = 100),
+        ),
+        mainPanel(width = 8,
+           plotOutput("boxplot"),
+           DTOutput("analysis")
+        )
+    )
+)
+```
+
+```{r context="server"}
+    measurements <- reactive({
+        tibble(
+            T160 = rnorm(mean = input$mean1, sd = input$sd1, n = input$n),
+            T180 = rnorm(mean = input$mean2, sd = input$sd2, n = input$n),
+            T200 = rnorm(mean = input$mean3, sd = input$sd3, n = input$n),
+            T220 = rnorm(mean = input$mean4, sd = input$sd4, n = input$n)) %>% 
+        pivot_longer(
+            cols = everything(), 
+            names_to = "group",
+            values_to = "value") %>%
+            group_by(group) %>%
+            mutate(group_mean = mean(value))
+    })
+
+    analysis <- reactive({
+        aov(value ~ group, measurements()) %>% tidy()
+    })
+        
+    output$boxplot <- renderPlot({
+
+    if (analysis()$p.value >= 0.05) {
+    ggplot(measurements()) +
+        geom_boxplot(aes(x = group, y = value, fill = group)) +
+        labs(
+            title = "Measurements plot",
+            subtile = "",
+            x = "",
+            y = "Value"
+        ) +
+        scale_fill_viridis_d(option = "A", begin = 0.5, guide = FALSE) +
+        scale_y_continuous(n.breaks = 10, labels = label_number(big.mark = "'")) +
+        labs(title = "e-bike frame hardening process",
+             subtitle = "Boxplot of frame aging resistance",
+             x = "Furnace Temperature [°C]",
+             y = "Cycles to failure [n]") +
+        theme_industRial()
+    } else {
+        ggplot(measurements()) +
+            geom_boxplot(aes(x = group, y = value, fill = group)) +
+            labs(
+                title = "Measurements plot",
+                subtile = "",
+                x = "",
+                y = "Value"
+            ) +
+            scale_fill_viridis_d(option = "D", begin = 0.5, guide = FALSE) +
+            scale_y_continuous(n.breaks = 10, labels = label_number(big.mark = "'")) +
+            labs(title = "e-bike frame hardening process",
+                 subtitle = "Boxplot of frame aging resistance",
+                 x = "Furnace Temperature [°C]",
+                 y = "Cycles to failure [n]") +
+            theme_industRial()
+      }
+    })
+        
+    output$analysis <- renderDT({
+      if (analysis()$p.value >= 0.05) {
+                analysis() %>%
+                    datatable(
+                        options = list(searching = FALSE)
+                    ) %>%
+                    formatSignif(columns = 3:4, digits = 1) %>%
+                    formatRound(columns = 5:6, digits = 2) %>%
+                    formatStyle(6, color = "red", fontWeight = "bold")
+            } else {
+                analysis() %>%
+                    datatable(
+                        options = list(searching = FALSE)
+                    ) %>%
+                    formatSignif(columns = 3:4, digits = 1) %>%
+                    formatRound(columns = 5:6, digits = 2) %>%
+                    formatStyle(6, color = "darkgreen", fontWeight = "bold")
+            }
+    }) 
+```
+
+We can see that to get to a p value greater than 0.05 we have to get the means very close. In other words the treatment does not have an effect or in our case the ebike frame hardening process wouldn't have an effect on its aging resistance.
+
+## Anova parameters
+
+Although we tend to take it as a direct calculation when using excel, minitab or another software the anova calculation has many steps to get to the p value and to fully grasp its meaning it is helpful to dig into those aspects.
+
+```{r parameters, echo = FALSE}
+question_checkbox(
+  "Which parameters influence the anova calculation?",
+  answer("the group means", correct = TRUE),
+  answer("the group standard deviations", correct = TRUE),
+  answer("the sample size", correct = TRUE),
+  answer("The absolute value of the output", correct = FALSE, message = "the sample size has no influence if the ratios are the same the p value is the same, e.g. if the lifecycles were all divided by 10"),
+  random_answer_order = TRUE,
+  allow_retry = TRUE
+)
+```
+
+
+inputs and output, distribution of the inputs, the inputs means and variability, the split of the input factors in groups, differences between the means of those factors, the ratio between the groups variabilitiy.

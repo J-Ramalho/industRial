@@ -1,5 +1,5 @@
 
-# References {-}
+# References {#references}
 
 A good mastership of the vast domain of Industrial Data Science can take several years and can only be obtained by a strong combination of theory and practice. As mentionned in the introduction chapter, our book is focused on the practice and in this bibliography we find some the necessary supporting theory. 
 

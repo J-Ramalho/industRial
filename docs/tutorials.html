@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>References | industRial data science</title>
-  <meta name="description" content="References | industRial data science" />
+  <title>Tutorials | industRial data science</title>
+  <meta name="description" content="Tutorials | industRial data science" />
   <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="References | industRial data science" />
+  <meta property="og:title" content="Tutorials | industRial data science" />
   <meta property="og:type" content="book" />
   
   <meta property="og:image" content="/img/cover3.png" />
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="J-Ramalho/industRialds" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="References | industRial data science" />
+  <meta name="twitter:title" content="Tutorials | industRial data science" />
   
   
   <meta name="twitter:image" content="/img/cover3.png" />
@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="glossary.html"/>
-
+<link rel="prev" href="SPC.html"/>
+<link rel="next" href="glossary.html"/>
 <script src="libs/header-attrs-2.8/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -325,60 +325,45 @@ div.csl-indent {
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="references" class="section level1">
-<h1>References</h1>
-<p>A good mastership of the vast domain of Industrial Data Science can take several years and can only be obtained by a strong combination of theory and practice. As mentionned in the introduction chapter, our book is focused on the practice and in this bibliography we find some the necessary supporting theory.</p>
-<p>The list below collects websites, books and articles referenced throughout this book. It is a curated set of some of the most relevant works available today in Six Sigma, Statistics, Data Science and programming with R.</p>
+<div id="tutorials" class="section level1">
+<h1>Tutorials</h1>
+<p>A set of practical exercises on key concepts presented throughout this book is available either on the web or locally, instructions follow.</p>
+<p><strong>Run tutorials on the web</strong></p>
+<p>the exercises are published on the shinyapp.io server and can be freely accessed with the links below:</p>
+<p><a href="https://thoth.shinyapps.io/pareto/">Pareto charts</a><br />
+This tutorial builds on the <em>The dial polishing workshop</em> case study from the Design for Six Sigma chapter, train building pareto charts using the <code>{qichart2}</code> package and explore how playing with different variables gives new insights into apparently simple data collections.</p>
+<p><a href="https://thoth.shinyapps.io/anova/">Anova</a><br />
+This tutorial explores how the p value is calculated by playing with a dynamic anova chart. This exercise is based on the <em>The e-bike frame hardening process</em> of the DOE Interactions chapter.</p>
+<p><strong>Run tutorials locally</strong></p>
+<p>The tutorials can also be run locally which can be convinient as they load faster. This also allows for further exploration as the original tutorial code becomes available.</p>
+<p>Install the <code>{industRial}</code> and <code>{learnr}</code> packages, with:</p>
+<pre><code>devtools::install_github(&quot;J-Ramalho/industRial&quot;)
+install.packages(&quot;learnr)</code></pre>
+<p>load the packages:</p>
+<pre><code>library(industRial)
+library(learnr)</code></pre>
+<p>and list the tutorials with:</p>
+<div class="sourceCode" id="cb276"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb276-1"><a href="tutorials.html#cb276-1" aria-hidden="true" tabindex="-1"></a>learnr<span class="sc">::</span><span class="fu">available_tutorials</span>(<span class="at">package =</span> <span class="st">&quot;industRial&quot;</span>)</span></code></pre></div>
+<pre><code>Available tutorials:
+* industRial
+  - anova      : &quot;industRial practice&quot;
+  - capability : &quot;industRial practice&quot;
+  - pareto     : &quot;industRial practice&quot; </code></pre>
+<p>choose a tutorial and run it as follows:</p>
+<pre><code>learnr::run_tutorial(package = &quot;industRial&quot;, &quot;anova&quot;)</code></pre>
+<p>The original files are available in the package tutorials folder. Their names correspond to the tutorial names listed before so there is a simple way to open the desired file, e.g.:</p>
+<pre><code>rstudioapi::navigateToFile(
+  paste0(.libPaths()[1], &quot;/industRial/tutorials/anova/anova.Rmd&quot;)
+  )</code></pre>
 
-<div id="refs" class="references csl-bib-body hanging-indent">
-<div class="csl-entry">
-Automotive Industry Action Group, AIAG -, ed. 2010. <a href="https://www.aiag.org/store/publications/details?ProductCode=MSA-4">https://www.aiag.org/store/publications/details?ProductCode=MSA-4</a>.
-</div>
-<div class="csl-entry">
-Bass, Issa. 2007. <em>Six Sigma Statistics with Excel and Minitab</em>. 1st ed. McGraw-Hill.
-</div>
-<div class="csl-entry">
-Bell, Stéphanie. 2001. <em>The Beginers Guide to Uncertainty of Measurement</em>. 2nd ed. Teddington, Middlesex, United Kingdom: National Phisical Laboratory. <a href="https://www.npl.co.uk/special-pages/guides/gpg11_uncertainty">https://www.npl.co.uk/special-pages/guides/gpg11_uncertainty</a>.
-</div>
-<div class="csl-entry">
-Broc, Guillaume. 2016. <em>Stats Faciles Avec r</em>. 1th ed. deBoeck.
-</div>
-<div class="csl-entry">
-Emilio L. Cano, Andrés Redchuk, Javier M. Moguerza. 2012. <em>Six Sigma with r</em>. 1th ed. Use r! Springer New York Heidelberg Dordrecht London: Springer.
-</div>
-<div class="csl-entry">
-Emilio L. Cano • Javier M. Moguerza, Mariano Prieto Corcoba. 2015. <em>Quality Control with r</em>. 1th ed. Use r! Springer New York Heidelberg Dordrecht London: Springer.
-</div>
-<div class="csl-entry">
-Minitab. 2016. <span>“Understanding Analysis of Variance (ANOVA) and the f-Test.”</span> <a href="https://blog.minitab.com/en/adventures-in-statistics-2/understanding-analysis-of-variance-anova-and-the-f-test">https://blog.minitab.com/en/adventures-in-statistics-2/understanding-analysis-of-variance-anova-and-the-f-test</a>.
-</div>
-<div class="csl-entry">
-———. 2019a. <span>“Interpret the Key Results for 2 Variances.”</span> <a href="https://support.minitab.com/en-us/minitab/18/help-and-how-to/statistics/basic-statistics/how-to/2-variances/interpret-the-results/key-results/">https://support.minitab.com/en-us/minitab/18/help-and-how-to/statistics/basic-statistics/how-to/2-variances/interpret-the-results/key-results/</a>.
-</div>
-<div class="csl-entry">
-———. 2019b. <span>“What Is a Gage Repeatability and Reproducibility (r&amp;r) Study?”</span> <a href="https://support.minitab.com/en-us/minitab/18/help-and-how-to/quality-and-process-improvement/measurement-system-analysis/supporting-topics/gage-r-r-analyses/what-is-a-gage-r-r-study/">https://support.minitab.com/en-us/minitab/18/help-and-how-to/quality-and-process-improvement/measurement-system-analysis/supporting-topics/gage-r-r-analyses/what-is-a-gage-r-r-study/</a>.
-</div>
-<div class="csl-entry">
-Montgomery, Douglas C. 2012. <em>Design and Analysis of Experiments</em>. 8th ed. Wiley.
-</div>
-<div class="csl-entry">
-Roderik A.Munro, Govindarajan Ramu, and Daniel J.Zrymiak. 2015. <em>The Certified Six Sigma Green Belt Handbook</em>. 2nd ed. Milwaukee, Winsconsin: ASQ Quality Press.
-</div>
-<div class="csl-entry">
-Scrucca, Luca. 2004. <span>“Qcc: An r Package for Quality Control Charting and Statistical Process Control.”</span> <em>R News</em> 4/1: 11–17.
-</div>
-<div class="csl-entry">
-Yakir, Benjamin. 2011. <em>Introduction to Statistical Thinking (with r, Without Calculus)</em>. Department of Statistics, The Hebrew University of Jerusalem.
-</div>
-</div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="glossary.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-
+<a href="SPC.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="glossary.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

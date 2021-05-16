@@ -1,5 +1,5 @@
 
-# Table of Contents {-}
+# Table of Contents {#contents}
 
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
 source(here::here("inst/book/setup.R"))

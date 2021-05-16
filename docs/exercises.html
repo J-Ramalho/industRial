@@ -176,7 +176,7 @@ div.csl-indent {
 
 <li class="divider"></li>
 <li class="part"><span><b>I INTRODUCTION</b></span></li>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Welcome</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>output: pdf_document</a></li>
 <li class="chapter" data-level="" data-path="toolbox.html"><a href="toolbox.html"><i class="fa fa-check"></i>Toolbox</a>
 <ul>
 <li class="chapter" data-level="" data-path="toolbox.html"><a href="toolbox.html#packages"><i class="fa fa-check"></i>Packages</a>
@@ -322,11 +322,33 @@ div.csl-indent {
             <section class="normal" id="section-">
 <div id="exercises" class="section level1 unnumbered">
 <h1>Exercises</h1>
-<p>To go further in the exploration of key concepts of this book a set of dynamic exercises and quizzes is available on the web and can be freely accessed with the links below.</p>
+<p>A set of practical exercises on key concepts presented throughout this book is available either on the web or locally, instructions follow.</p>
+<p><strong>Run tutorials on the web</strong></p>
+<p>the exercises are published on the shinyapp.io server and can be freely accessed with the links below:</p>
 <p><a href="https://thoth.shinyapps.io/pareto/">Pareto charts</a><br />
 Building on the <em>The dial polishing workshop</em> case study from the Design for Six Sigma chapter, train building pareto charts using the <code>{qichart2}</code> package and explore how playing with different variables gives new insights into apparently simple data collections.</p>
 <p><a href="https://thoth.shinyapps.io/anova/">Anova</a><br />
 Develop a sensitivity to how the p value is calculated by playing with a dynamic anova chart. This exercise is based on the <em>The e-bike frame hardening process</em> of the DOE Interactions chapter.</p>
+<p><strong>Run tutorials locally</strong></p>
+<p>The tutorials can also be run locally which can be convinient as they load faster. This also allows for further exploration as the original tutorial code becomes available.</p>
+<p>Install the <code>{industRial}</code> and <code>{learnr}</code> packages, with:</p>
+<pre><code>devtools::install_github(&quot;J-Ramalho/industRial&quot;)
+install.packages(&quot;learnr)</code></pre>
+<p>load the packages:</p>
+<pre><code>library(industRial)
+library(learnr)</code></pre>
+<p>and list the tutorials with:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="exercises.html#cb3-1" aria-hidden="true" tabindex="-1"></a>learnr<span class="sc">::</span><span class="fu">available_tutorials</span>(<span class="at">package =</span> <span class="st">&quot;industRial&quot;</span>)</span></code></pre></div>
+<pre><code>Available tutorials:
+* industRial
+  - anova : &quot;industRial practice&quot; </code></pre>
+<p>choose a tutorial and run it as follows:</p>
+<pre><code>run_tutorial(package = &quot;industRial&quot;, &quot;anova&quot;)</code></pre>
+<p>The original files are available in the package tutorials folder. Their names correspond to the tutorial names listed before so there is a simple way to open the desired file, e.g.:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="exercises.html#cb6-1" aria-hidden="true" tabindex="-1"></a>rstudioapi<span class="sc">::</span><span class="fu">navigateToFile</span>(</span>
+<span id="cb6-2"><a href="exercises.html#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">paste0</span>(<span class="fu">.libPaths</span>()[<span class="dv">1</span>], <span class="st">&quot;/industRial/tutorials/anova/anova.Rmd&quot;</span>)</span>
+<span id="cb6-3"><a href="exercises.html#cb6-3" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
+<pre><code>NULL</code></pre>
 
 </div>
             </section>
@@ -381,20 +403,6 @@ gitbook.start({
 });
 </script>
 
-<!-- dynamically load mathjax for compatibility with self-contained -->
-<script>
-  (function () {
-    var script = document.createElement("script");
-    script.type = "text/javascript";
-    var src = "true";
-    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
-    if (location.protocol !== "file:")
-      if (/^https?:/.test(src))
-        src = src.replace(/^https?:/, '');
-    script.src = src;
-    document.getElementsByTagName("head")[0].appendChild(script);
-  })();
-</script>
 </body>
 
 </html>

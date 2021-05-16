@@ -8,7 +8,7 @@ output_dir: "../../docs"
 
 rmd_files: [
   "index.Rmd",
-  "1_Rtoolbox.Rmd",
+  "1_toolbox.Rmd",
   "2_contents.Rmd",
   "3_sixsigma.Rmd",
   "4_msa.Rmd",
@@ -18,7 +18,7 @@ rmd_files: [
   "8_generalDOEs.Rmd",
   "9_twolevelDOEs.Rmd",
   "10_spc.Rmd",
-  "11_exercises.Rmd",
+  "11_tutorials.Rmd",
   "12_glossary.Rmd",
   "13_references.Rmd"
 ]

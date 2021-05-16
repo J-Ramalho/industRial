@@ -16,7 +16,7 @@ library(learnr)
 source("theme_industRial.R")
 # ebike_hardening <- industRial::ebike_hardening
 ebike_hardening <- read_rds("ebike_hardening.rds")
-knitr::opts_chunk$set(echo = FALSE)
+knitr::opts_chunk$set(echo = FALSE, message = FALSE, warning = FALSE)
 ```
 
 # Design of Experiments
@@ -81,7 +81,7 @@ head(ebike_narrow)
 
 The anova output can be sometimes tricky to interpret as many things are at play. In the application below we start with a plot similar to the plot of the Anova chapter. It presents boxplots of the distribution of the different treatment groups of the ebike frame hardening process. Outputs correspond to the lifecycle of the frame (in number of cycles to failure) and the groups correspond each to a specific furnace temperature. You can play with the group means, standard deviation and population size.
 
-Try to get to a non significant p value of more than 0.05 by playing with the means (and standard deviations if needed)
+Try to get to a non significant p value of more than <b style='color:#ff0000'>0.05</b> by playing with the means (and standard deviations if needed). The boxes colors will change from greenish to reddish reflecting the book examples. 
 
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
 library(tidyverse)
@@ -116,10 +116,10 @@ fluidPage(
 ```{r context="server"}
     measurements <- reactive({
         tibble(
-            group1 = rnorm(mean = input$mean1, sd = input$sd1, n = input$n),
-            group2 = rnorm(mean = input$mean2, sd = input$sd2, n = input$n),
-            group3 = rnorm(mean = input$mean3, sd = input$sd3, n = input$n),
-            group4 = rnorm(mean = input$mean4, sd = input$sd4, n = input$n)) %>% 
+            T160 = rnorm(mean = input$mean1, sd = input$sd1, n = input$n),
+            T180 = rnorm(mean = input$mean2, sd = input$sd2, n = input$n),
+            T200 = rnorm(mean = input$mean3, sd = input$sd3, n = input$n),
+            T220 = rnorm(mean = input$mean4, sd = input$sd4, n = input$n)) %>% 
         pivot_longer(
             cols = everything(), 
             names_to = "group",
@@ -127,9 +127,30 @@ fluidPage(
             group_by(group) %>%
             mutate(group_mean = mean(value))
     })
+
+    analysis <- reactive({
+        aov(value ~ group, measurements()) %>% tidy()
+    })
         
     output$boxplot <- renderPlot({
 
+    if (analysis()$p.value >= 0.05) {
+    ggplot(measurements()) +
+        geom_boxplot(aes(x = group, y = value, fill = group)) +
+        labs(
+            title = "Measurements plot",
+            subtile = "",
+            x = "",
+            y = "Value"
+        ) +
+        scale_fill_viridis_d(option = "A", begin = 0.5, guide = FALSE) +
+        scale_y_continuous(n.breaks = 10, labels = label_number(big.mark = "'")) +
+        labs(title = "e-bike frame hardening process",
+             subtitle = "Boxplot of frame aging resistance",
+             x = "Furnace Temperature [°C]",
+             y = "Cycles to failure [n]") +
+        theme_industRial()
+    } else {
         ggplot(measurements()) +
             geom_boxplot(aes(x = group, y = value, fill = group)) +
             labs(
@@ -138,28 +159,38 @@ fluidPage(
                 x = "",
                 y = "Value"
             ) +
-            scale_fill_viridis_d(option = "D", begin = 0.5) +
+            scale_fill_viridis_d(option = "D", begin = 0.5, guide = FALSE) +
             scale_y_continuous(n.breaks = 10, labels = label_number(big.mark = "'")) +
             labs(title = "e-bike frame hardening process",
-                 subtitle = "Raw data plot",
+                 subtitle = "Boxplot of frame aging resistance",
                  x = "Furnace Temperature [°C]",
                  y = "Cycles to failure [n]") +
-        theme_industRial()
-    })
-    
-    analysis <- reactive({
-        aov(value ~ group, measurements()) %>% tidy()
+            theme_industRial()
+      }
     })
         
     output$analysis <- renderDT({
-        analysis() %>%
-            datatable(
-              options = list(searching = FALSE)
-            ) %>%
-            formatSignif(columns = 3:4, digits = 1) %>%
-            formatRound(columns = 5:6, digits = 2)
+      if (analysis()$p.value >= 0.05) {
+                analysis() %>%
+                    datatable(
+                        options = list(searching = FALSE)
+                    ) %>%
+                    formatSignif(columns = 3:4, digits = 1) %>%
+                    formatRound(columns = 5:6, digits = 2) %>%
+                    formatStyle(6, color = "red", fontWeight = "bold")
+            } else {
+                analysis() %>%
+                    datatable(
+                        options = list(searching = FALSE)
+                    ) %>%
+                    formatSignif(columns = 3:4, digits = 1) %>%
+                    formatRound(columns = 5:6, digits = 2) %>%
+                    formatStyle(6, color = "darkgreen", fontWeight = "bold")
+            }
     }) 
 ```
+
+We can see that to get to a p value greater than 0.05 we have to get the means very close. In other words the treatment does not have an effect or in our case the ebike frame hardening process wouldn't have an effect on its aging resistance.
 
 ## Anova parameters
 

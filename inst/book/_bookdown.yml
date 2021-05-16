@@ -8,7 +8,7 @@ output_dir: "../../docs"
 
 rmd_files: [
   "index.Rmd",
-  "1_toolbox.Rmd",
+  # "1_toolbox.Rmd",
   # "2_contents.Rmd",
   # "3_sixsigma.Rmd",
   # "4_msa.Rmd",

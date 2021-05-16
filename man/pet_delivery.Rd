@@ -14,6 +14,10 @@ Original data set
 pet_delivery
 }
 \description{
+Measurements of tensile strength of two different deliveries
+of PET raw material used in the clothing industry. The two data sets follow
+approximately a normal distribution.
+
 \describe{
   \item{A}{Tensile strenght measurements for product A [Mpa] (numeric)}
   \item{B}{Tensile strenght measurements for product B [Mpa] (numeric)}

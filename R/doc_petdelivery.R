@@ -2,7 +2,9 @@
 #' 
 #' @format A tibble with 28 observations on 2 variables
 #' 
-#' @description 
+#' @description Measurements of tensile strength of two different deliveries
+#' of PET raw material used in the clothing industry. The two data sets follow
+#' approximately a normal distribution.
 #' 
 #' \describe{
 #'   \item{A}{Tensile strenght measurements for product A [Mpa] (numeric)}

@@ -70,6 +70,5 @@ In that case, don't forget to commit and push the resulting figure files, so the
 
 ## Issues
 
-To report any issue or make suggestions please open an issue on the book
-repository:
+To report any bug or make suggestions please open an issue:
 [industRialds/issues](https://github.com/J-Ramalho/industRial/issues)

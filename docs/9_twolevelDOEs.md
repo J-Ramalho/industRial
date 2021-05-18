@@ -54,11 +54,11 @@ pet_doe <- fac.design(
 
 
 ```r
-yield <- c(64.4,82.8,41.4,71.3,57.5,73.6,43.7,69.0,62.1,73.6,52.9,66.7)
+tensile_strength <- c(64.4,82.8,41.4,71.3,57.5,73.6,43.7,69.0,62.1,73.6,52.9,66.7)
 
 pet_doe <- bind_cols(
   pet_doe,
-  "yield" = yield,
+  "tensile_strength" = tensile_strength,
 )
 ```
 
@@ -128,7 +128,7 @@ Now we can run our linear model:
 
 ```r
 pet_ctr_lm <- lm(
-  formula = yield ~ A * B, 
+  formula = tensile_strength ~ A * B, 
   data = pet_fct
   )
 summary(pet_ctr_lm)
@@ -137,7 +137,7 @@ summary(pet_ctr_lm)
 ```
 
 Call:
-lm.default(formula = yield ~ A * B, data = pet_fct)
+lm.default(formula = tensile_strength ~ A * B, data = pet_fct)
 
 Residuals:
    Min     1Q Median     3Q    Max 
@@ -192,7 +192,7 @@ pet_fct2$cA <- relevel(pet_fct2$cA, ref = "1")
 pet_fct2$cB <- relevel(pet_fct2$cB, ref = "1")
 
 pet_ctr2_lm <- lm(
-  formula = yield ~ cA * cB, 
+  formula = tensile_strength ~ cA * cB, 
   data = pet_fct2,
   contrasts = list(cA = "contr.sum", cB = "contr.sum")
   )
@@ -202,8 +202,8 @@ summary(pet_ctr2_lm)
 ```
 
 Call:
-lm.default(formula = yield ~ cA * cB, data = pet_fct2, contrasts = list(cA = "contr.sum", 
-    cB = "contr.sum"))
+lm.default(formula = tensile_strength ~ cA * cB, data = pet_fct2, 
+    contrasts = list(cA = "contr.sum", cB = "contr.sum"))
 
 Residuals:
    Min     1Q Median     3Q    Max 
@@ -249,7 +249,7 @@ In this example we're going to code the levels with +1/-1 but we're going use th
 ```r
 pet_num <- pet_fct %>% mutate(cA = coded(A), cB = coded(B))
 pet_num_lm <- lm(
-  formula = yield ~ cA * cB, 
+  formula = tensile_strength ~ cA * cB, 
   data = pet_num
   )
 summary(pet_num_lm)
@@ -258,7 +258,7 @@ summary(pet_num_lm)
 ```
 
 Call:
-lm.default(formula = yield ~ cA * cB, data = pet_num)
+lm.default(formula = tensile_strength ~ cA * cB, data = pet_num)
 
 Residuals:
    Min     1Q Median     3Q    Max 
@@ -309,8 +309,8 @@ pet_num %>%
     names_to = "variable",
     values_to = "level") %>% 
   ggplot() +
-  geom_point(aes(x = level, y = yield)) +
-  geom_smooth(aes(x = level, y = yield), 
+  geom_point(aes(x = level, y = tensile_strength)) +
+  geom_smooth(aes(x = level, y = tensile_strength), 
               method = "lm", se = FALSE, fullrange = TRUE) +
   facet_wrap(vars(variable))
 ```
@@ -333,8 +333,8 @@ pet_num %>%
     names_to = "variable",
     values_to = "level") %>% 
   ggplot() +
-  geom_point(aes(x = level, y = yield)) +
-  geom_smooth(aes(x = level, y = yield), 
+  geom_point(aes(x = level, y = tensile_strength)) +
+  geom_smooth(aes(x = level, y = tensile_strength), 
               method = "lm", se = FALSE, fullrange = TRUE) +
   coord_cartesian(xlim = c(-2, 2)) +
   scale_y_continuous(n.breaks = 10) +
@@ -361,13 +361,13 @@ We select standard error as argument for the error.bars argument.
 
 ```r
 par(mfrow = c(1,1), bty = "l")
-plotMeans(response = pet_fct$yield,
+plotMeans(response = pet_fct$tensile_strength,
           factor2 = pet_fct$A,
           factor1 = pet_fct$B,
           error.bars = "se",
           xlab = "A - Reactant",
           legend.lab = "B - Catalist\n(error bars +/-se)",
-          ylab = "Yield",
+          ylab = "Tensile Strenght",
           col = viridis::viridis(12)[4],
           legend.pos = "bottomright",
           main = "The PET clothing improvement plan")
@@ -395,14 +395,14 @@ battery_charging %>%
 
 
 
-|  A|  B|  C|  D| charging_time| charging_time_new|
-|--:|--:|--:|--:|-------------:|-----------------:|
-| -1| -1| -1| -1|          5.50|               4.5|
-|  1| -1| -1| -1|          6.69|               7.1|
-| -1|  1| -1| -1|          6.33|               4.8|
-|  1|  1| -1| -1|          6.42|               6.5|
-| -1| -1|  1| -1|         10.37|               6.8|
-|  1| -1|  1| -1|          7.49|               6.9|
+|  A|  B|  C|  D| Replicate| charging_time|
+|--:|--:|--:|--:|---------:|-------------:|
+| -1| -1| -1| -1|         1|          5.50|
+|  1| -1| -1| -1|         1|          6.69|
+| -1|  1| -1| -1|         1|          6.33|
+|  1|  1| -1| -1|         1|          6.42|
+| -1| -1|  1| -1|         1|         10.37|
+|  1| -1|  1| -1|         1|          7.49|
 
 #### lm and anova
 
@@ -422,24 +422,24 @@ lm.default(formula = charging_time ~ A * B * C, data = battery_charging)
 
 Residuals:
     Min      1Q  Median      3Q     Max 
--0.6550 -0.1113  0.0000  0.1113  0.6550 
+-2.0950 -1.0025 -0.5288  0.9287  2.9825 
 
 Coefficients:
             Estimate Std. Error t value Pr(>|t|)    
-(Intercept)  7.76062    0.11865  65.406 3.32e-12 ***
-A           -0.50812    0.11865  -4.282 0.002679 ** 
-B            0.03688    0.11865   0.311 0.763911    
-C            1.53063    0.11865  12.900 1.23e-06 ***
-A:B         -0.12438    0.11865  -1.048 0.325168    
-A:C         -0.76812    0.11865  -6.474 0.000193 ***
-B:C         -0.01062    0.11865  -0.090 0.930849    
-A:B:C        0.02812    0.11865   0.237 0.818586    
+(Intercept)  7.41156    0.26542  27.924  < 2e-16 ***
+A            0.31469    0.26542   1.186 0.247370    
+B            0.06844    0.26542   0.258 0.798720    
+C            1.04031    0.26542   3.920 0.000646 ***
+A:B         -0.08719    0.26542  -0.328 0.745387    
+A:C         -0.80906    0.26542  -3.048 0.005532 ** 
+B:C          0.02594    0.26542   0.098 0.922963    
+A:B:C        0.03281    0.26542   0.124 0.902640    
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
-Residual standard error: 0.4746 on 8 degrees of freedom
-Multiple R-squared:  0.9661,	Adjusted R-squared:  0.9364 
-F-statistic: 32.56 on 7 and 8 DF,  p-value: 2.896e-05
+Residual standard error: 1.501 on 24 degrees of freedom
+Multiple R-squared:  0.5225,	Adjusted R-squared:  0.3832 
+F-statistic: 3.751 on 7 and 24 DF,  p-value: 0.006963
 ```
 
 
@@ -450,14 +450,14 @@ summary(battery_aov)
 
 ```
             Df Sum Sq Mean Sq F value   Pr(>F)    
-A            1   4.13    4.13  18.339 0.002679 ** 
-B            1   0.02    0.02   0.097 0.763911    
-C            1  37.49   37.49 166.411 1.23e-06 ***
-A:B          1   0.25    0.25   1.099 0.325168    
-A:C          1   9.44    9.44  41.909 0.000193 ***
-B:C          1   0.00    0.00   0.008 0.930849    
-A:B:C        1   0.01    0.01   0.056 0.818586    
-Residuals    8   1.80    0.23                     
+A            1   3.17    3.17   1.406 0.247370    
+B            1   0.15    0.15   0.066 0.798720    
+C            1  34.63   34.63  15.363 0.000646 ***
+A:B          1   0.24    0.24   0.108 0.745387    
+A:C          1  20.95   20.95   9.292 0.005532 ** 
+B:C          1   0.02    0.02   0.010 0.922963    
+A:B:C        1   0.03    0.03   0.015 0.902640    
+Residuals   24  54.10    2.25                     
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ```
@@ -471,7 +471,7 @@ The ordinary R^2 is 0.9661 and it measures the proportion of total variability e
 
 ```r
 battery_reduced_lm <- lm(
-  formula = charging_time ~ A + C + A:C, 
+  formula = charging_time ~ C + A:C, 
   data = battery_charging
   )
 summary(battery_reduced_lm)
@@ -480,24 +480,23 @@ summary(battery_reduced_lm)
 ```
 
 Call:
-lm.default(formula = charging_time ~ A + C + A:C, data = battery_charging)
+lm.default(formula = charging_time ~ C + A:C, data = battery_charging)
 
 Residuals:
     Min      1Q  Median      3Q     Max 
--0.7250 -0.1544  0.0250  0.1869  0.6650 
+-2.4609 -0.8883 -0.2528  0.9772  3.2197 
 
 Coefficients:
             Estimate Std. Error t value Pr(>|t|)    
-(Intercept)   7.7606     0.1042  74.458  < 2e-16 ***
-A            -0.5081     0.1042  -4.875 0.000382 ***
-C             1.5306     0.1042  14.685 4.95e-09 ***
-A:C          -0.7681     0.1042  -7.370 8.62e-06 ***
+(Intercept)   7.4116     0.2494  29.718  < 2e-16 ***
+C             1.0403     0.2494   4.171 0.000251 ***
+C:A          -0.8091     0.2494  -3.244 0.002964 ** 
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
-Residual standard error: 0.4169 on 12 degrees of freedom
-Multiple R-squared:  0.9608,	Adjusted R-squared:  0.9509 
-F-statistic: 97.91 on 3 and 12 DF,  p-value: 1.054e-08
+Residual standard error: 1.411 on 29 degrees of freedom
+Multiple R-squared:  0.4905,	Adjusted R-squared:  0.4554 
+F-statistic: 13.96 on 2 and 29 DF,  p-value: 5.662e-05
 ```
 
 []{#glance}
@@ -515,8 +514,8 @@ glance(battery_lm)[1:2] %>%
 # A tibble: 2 x 3
   model r.squared adj.r.squared
   <chr>     <dbl>         <dbl>
-1 1         0.966         0.936
-2 2         0.961         0.951
+1 1         0.522         0.383
+2 2         0.491         0.455
 ```
 
 Adjusted R² has improved. Removing the nonsignificant terms from the full model has produced a final model that is likely to function more effectively as a predictor of new data.
@@ -583,7 +582,7 @@ pA
 
 ```
        1 
-9.929375 
+8.856406 
 ```
 
 We can visualize this outcome as follows:
@@ -672,19 +671,20 @@ Possible approaches:
 
 ```r
 battery_charging %>%
+  filter((Replicate == 1)) %>%
   head()
 ```
 
 ```
 # A tibble: 6 x 6
-      A     B     C     D charging_time charging_time_new
-  <dbl> <dbl> <dbl> <dbl>         <dbl>             <dbl>
-1    -1    -1    -1    -1          5.5                4.5
-2     1    -1    -1    -1          6.69               7.1
-3    -1     1    -1    -1          6.33               4.8
-4     1     1    -1    -1          6.42               6.5
-5    -1    -1     1    -1         10.4                6.8
-6     1    -1     1    -1          7.49               6.9
+      A     B     C     D Replicate charging_time
+  <dbl> <dbl> <dbl> <dbl>     <dbl>         <dbl>
+1    -1    -1    -1    -1         1          5.5 
+2     1    -1    -1    -1         1          6.69
+3    -1     1    -1    -1         1          6.33
+4     1     1    -1    -1         1          6.42
+5    -1    -1     1    -1         1         10.4 
+6     1    -1     1    -1         1          7.49
 ```
 
 
@@ -693,37 +693,38 @@ battery_charging %>%
 
 ```r
 battery_lm3 <- lm(
-  formula = charging_time_new ~ A * B * C * D, 
-  data = battery_charging)
+  formula = charging_time ~ A * B * C * D, 
+  data = battery_charging %>% filter(Replicate ==1))
 summary(battery_lm3)
 ```
 
 ```
 
 Call:
-lm.default(formula = charging_time_new ~ A * B * C * D, data = battery_charging)
+lm.default(formula = charging_time ~ A * B * C * D, data = battery_charging %>% 
+    filter(Replicate == 1))
 
 Residuals:
 ALL 16 residuals are 0: no residual degrees of freedom!
 
 Coefficients:
             Estimate Std. Error t value Pr(>|t|)
-(Intercept)   7.0625         NA      NA       NA
-A             1.1375         NA      NA       NA
-B             0.1000         NA      NA       NA
-C             0.5500         NA      NA       NA
-D             0.6750         NA      NA       NA
-A:B          -0.0500         NA      NA       NA
-A:C          -0.8500         NA      NA       NA
-B:C           0.0625         NA      NA       NA
-A:D           0.7750         NA      NA       NA
-B:D           0.0375         NA      NA       NA
-C:D          -0.1125         NA      NA       NA
-A:B:C         0.0375         NA      NA       NA
-A:B:D         0.2625         NA      NA       NA
-A:C:D        -0.1375         NA      NA       NA
-B:C:D        -0.0750         NA      NA       NA
-A:B:C:D       0.1250         NA      NA       NA
+(Intercept)  7.76062         NA      NA       NA
+A           -0.50812         NA      NA       NA
+B            0.03688         NA      NA       NA
+C            1.53063         NA      NA       NA
+D            0.15563         NA      NA       NA
+A:B         -0.12438         NA      NA       NA
+A:C         -0.76813         NA      NA       NA
+B:C         -0.01062         NA      NA       NA
+A:D          0.12437         NA      NA       NA
+B:D         -0.05563         NA      NA       NA
+C:D          0.16062         NA      NA       NA
+A:B:C        0.02812         NA      NA       NA
+A:B:D        0.08562         NA      NA       NA
+A:C:D        0.18438         NA      NA       NA
+B:C:D        0.03688         NA      NA       NA
+A:B:C:D     -0.03688         NA      NA       NA
 
 Residual standard error: NaN on 0 degrees of freedom
 Multiple R-squared:      1,	Adjusted R-squared:    NaN 
@@ -783,16 +784,16 @@ battery_lm_tidy3 %>%
 
 
 
-|term    | effect_estimate| effect_contribution_perc|
-|:-------|---------------:|------------------------:|
-|A       |          -2.275|                    44.83|
-|A:C     |           1.700|                    33.50|
-|A:D     |          -1.550|                    30.54|
-|D       |          -1.350|                    26.60|
-|C       |          -1.100|                    21.67|
-|A:B:D   |          -0.525|                    10.34|
-|A:C:D   |           0.275|                     5.42|
-|A:B:C:D |          -0.250|                     4.93|
+|term  | effect_estimate| effect_contribution_perc|
+|:-----|---------------:|------------------------:|
+|C     |        -3.06125|                   182.35|
+|A:C   |         1.53625|                    91.51|
+|A     |         1.01625|                    60.54|
+|A:C:D |        -0.36875|                    21.97|
+|C:D   |        -0.32125|                    19.14|
+|D     |        -0.31125|                    18.54|
+|A:B   |         0.24875|                    14.82|
+|A:D   |        -0.24875|                    14.82|
 
 #### Reduced model
 
@@ -801,7 +802,7 @@ Following the previous analysis we are removing the factor B from the model and 
 
 ```r
 battery_red_lm3 <- lm(
-  formula = charging_time_new ~ A + C + D + A:C + A:D, 
+  formula = charging_time ~ A + C + A:C, 
   data = battery_charging)
 summary(battery_red_lm3)
 ```
@@ -809,27 +810,24 @@ summary(battery_red_lm3)
 ```
 
 Call:
-lm.default(formula = charging_time_new ~ A + C + D + A:C + A:D, 
-    data = battery_charging)
+lm.default(formula = charging_time ~ A + C + A:C, data = battery_charging)
 
 Residuals:
     Min      1Q  Median      3Q     Max 
--0.7500 -0.1500  0.0500  0.2562  0.5750 
+-2.1463 -0.9950 -0.4575  0.8650  2.9050 
 
 Coefficients:
             Estimate Std. Error t value Pr(>|t|)    
-(Intercept)   7.0625     0.1187  59.490 4.38e-14 ***
-A             1.1375     0.1187   9.582 2.35e-06 ***
-C             0.5500     0.1187   4.633 0.000932 ***
-D             0.6750     0.1187   5.686 0.000202 ***
-A:C          -0.8500     0.1187  -7.160 3.07e-05 ***
-A:D           0.7750     0.1187   6.528 6.65e-05 ***
+(Intercept)   7.4116     0.2467  30.037  < 2e-16 ***
+A             0.3147     0.2467   1.275 0.212663    
+C             1.0403     0.2467   4.216 0.000235 ***
+A:C          -0.8091     0.2467  -3.279 0.002786 ** 
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
-Residual standard error: 0.4749 on 10 degrees of freedom
-Multiple R-squared:  0.9599,	Adjusted R-squared:  0.9399 
-F-statistic:  47.9 on 5 and 10 DF,  p-value: 1.154e-06
+Residual standard error: 1.396 on 28 degrees of freedom
+Multiple R-squared:  0.5185,	Adjusted R-squared:  0.4669 
+F-statistic: 10.05 on 3 and 28 DF,  p-value: 0.0001157
 ```
 
 We can now see that we've regained degrees of freedom and obtained a sort of hidden replication allowing to calculate statistics and error terms on the model.

@@ -177,7 +177,7 @@
   </tr>
   <tr>
    <td style="text-align:left;">  </td>
-   <td style="text-align:left;">  </td>
+   <td style="text-align:left;"> Two level designs </td>
    <td style="text-align:left;"> pet_doe </td>
    <td style="text-align:left;"> [stats::relevel](#relevel) </td>
   </tr>

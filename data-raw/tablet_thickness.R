@@ -1,4 +1,4 @@
 ## code to prepare `tablet_thickness` dataset goes here
-tablet_thickness <- readxl::read_excel("data-raw/tablet_thickness.xlsx")
+tablet_thickness <- readr::read_csv("data-raw/tablet_thickness.csv")
 
 usethis::use_data(tablet_thickness, overwrite = TRUE)

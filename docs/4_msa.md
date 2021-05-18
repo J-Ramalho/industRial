@@ -141,18 +141,32 @@ str(tablet_thickness)
 ```
 
 ```
-tibble[,11] [675 × 11] (S3: tbl_df/tbl/data.frame)
+spec_tbl_df[,11] [675 × 11] (S3: spec_tbl_df/tbl_df/tbl/data.frame)
  $ Position             : chr [1:675] "Position 1" "Position 1" "Position 1" "Position 1" ...
  $ Size                 : chr [1:675] "L" "L" "L" "L" ...
  $ Tablet               : chr [1:675] "L001" "L001" "L001" "L001" ...
  $ Replicate            : num [1:675] 1 2 3 4 5 1 2 3 4 5 ...
  $ Day                  : chr [1:675] "Day 1" "Day 1" "Day 1" "Day 1" ...
- $ Date [DD.MM.YYYY]    : POSIXct[1:675], format: "2020-11-18" "2020-11-18" ...
+ $ Date [DD.MM.YYYY]    : chr [1:675] "18/11/2020" "18/11/2020" "18/11/2020" "18/11/2020" ...
  $ Operator             : chr [1:675] "Paulo" "Paulo" "Paulo" "Paulo" ...
  $ Thickness [micron]   : num [1:675] 1803 1803 1804 1804 1803 ...
  $ Temperature [°C]     : num [1:675] 22.3 22.3 22.3 22.4 22.6 22.9 22.8 22.8 22.7 22.7 ...
  $ Relative Humidity [%]: num [1:675] 32.7 32.8 32.8 33.4 33.4 36 36.3 36.4 36.6 36.3 ...
  $ Luminescence [lux]   : num [1:675] 569 580 580 584 594 ...
+ - attr(*, "spec")=
+  .. cols(
+  ..   Position = col_character(),
+  ..   Size = col_character(),
+  ..   Tablet = col_character(),
+  ..   Replicate = col_double(),
+  ..   Day = col_character(),
+  ..   `Date [DD.MM.YYYY]` = col_character(),
+  ..   Operator = col_character(),
+  ..   `Thickness [micron]` = col_double(),
+  ..   `Temperature [°C]` = col_double(),
+  ..   `Relative Humidity [%]` = col_double(),
+  ..   `Luminescence [lux]` = col_double()
+  .. )
 ```
 
 We see that quite an extensive variaty of parameters was collected here including room conditions. We are mostly interested in the tablet size, thickness and operator who has performed the measurement. As these parameters are coded as characters we are going to convert them to factors:
@@ -194,10 +208,10 @@ summary(tablet_L_aov)
 
 ```
                  Df Sum Sq Mean Sq F value Pr(>F)    
-tablet            4 1707.1   426.8 271.450 <2e-16 ***
-operator          2   13.1     6.6   4.176 0.0167 *  
+tablet            4 1707.1   426.8 271.457 <2e-16 ***
+operator          2   13.1     6.6   4.177 0.0166 *  
 tablet:operator   8   11.2     1.4   0.892 0.5237    
-Residuals       210  330.2     1.6                   
+Residuals       210  330.1     1.6                   
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ```
@@ -235,33 +249,33 @@ tablet_L_rr <- ss.rr(
 Complete model (with interaction):
 
                  Df Sum Sq Mean Sq F value Pr(>F)
-tablet            4 1707.1   426.8 271.450 <2e-16
-operator          2   13.1     6.6   4.176 0.0167
+tablet            4 1707.1   426.8 271.457 <2e-16
+operator          2   13.1     6.6   4.177 0.0166
 tablet:operator   8   11.2     1.4   0.892 0.5237
-Repeatability   210  330.2     1.6               
+Repeatability   210  330.1     1.6               
 Total           224 2061.6                       
 
 alpha for removing interaction: 1 
 
 Gage R&R
 
-                     VarComp %Contrib
-Total Gage R&R     1.6410066    14.79
-  Repeatability    1.5721730    14.17
-  Reproducibility  0.0688336     0.62
-    operator       0.0688336     0.62
-tablet:operator    0.0000000     0.00
-Part-To-Part       9.4525173    85.21
-Total Variation   11.0935239   100.00
+                      VarComp %Contrib
+Total Gage R&R     1.64098201    14.79
+  Repeatability    1.57212495    14.17
+  Reproducibility  0.06885705     0.62
+    operator       0.06885705     0.62
+tablet:operator    0.00000000     0.00
+Part-To-Part       9.45247729    85.21
+Total Variation   11.09345930   100.00
 
-                     VarComp    StdDev  StudyVar %StudyVar %Tolerance
-Total Gage R&R     1.6410066 1.2810178  7.686107     38.46      15.37
-  Repeatability    1.5721730 1.2538632  7.523179     37.65      15.05
-  Reproducibility  0.0688336 0.2623616  1.574170      7.88       3.15
-    operator       0.0688336 0.2623616  1.574170      7.88       3.15
-tablet:operator    0.0000000 0.0000000  0.000000      0.00       0.00
-Part-To-Part       9.4525173 3.0744946 18.446968     92.31      36.89
-Total Variation   11.0935239 3.3306942 19.984165    100.00      39.97
+                      VarComp    StdDev  StudyVar %StudyVar %Tolerance
+Total Gage R&R     1.64098201 1.2810082  7.686049     38.46      15.37
+  Repeatability    1.57212495 1.2538441  7.523064     37.65      15.05
+  Reproducibility  0.06885705 0.2624063  1.574438      7.88       3.15
+    operator       0.06885705 0.2624063  1.574438      7.88       3.15
+tablet:operator    0.00000000 0.0000000  0.000000      0.00       0.00
+Part-To-Part       9.45247729 3.0744881 18.446929     92.31      36.89
+Total Variation   11.09345930 3.3306845 19.984107    100.00      39.97
 
 Number of Distinct Categories = 3 
 ```
@@ -386,10 +400,10 @@ tablet_L_rr2 <- ss.rr(
 Complete model (with interaction):
 
                  Df Sum Sq Mean Sq F value Pr(>F)
-tablet            4 1707.1   426.8 271.450 <2e-16
-operator          2   13.1     6.6   4.176 0.0167
+tablet            4 1707.1   426.8 271.457 <2e-16
+operator          2   13.1     6.6   4.177 0.0166
 tablet:operator   8   11.2     1.4   0.892 0.5237
-Repeatability   210  330.2     1.6               
+Repeatability   210  330.1     1.6               
 Total           224 2061.6                       
 
 alpha for removing interaction: 0.2 
@@ -398,28 +412,28 @@ alpha for removing interaction: 0.2
 Reduced model (without interaction):
 
                Df Sum Sq Mean Sq F value Pr(>F)
-tablet          4 1707.1   426.8 272.526 <2e-16
-operator        2   13.1     6.6   4.193 0.0163
+tablet          4 1707.1   426.8 272.533 <2e-16
+operator        2   13.1     6.6   4.194 0.0163
 Repeatability 218  341.4     1.6               
 Total         224 2061.6                       
 
 Gage R&R
 
                       VarComp %Contrib
-Total Gage R&R     1.63262567    14.73
-  Repeatability    1.56596490    14.13
-  Reproducibility  0.06666077     0.60
-    operator       0.06666077     0.60
-Part-To-Part       9.44889591    85.27
-Total Variation   11.08152158   100.00
+Total Gage R&R     1.63260451    14.73
+  Repeatability    1.56591940    14.13
+  Reproducibility  0.06668511     0.60
+    operator       0.06668511     0.60
+Part-To-Part       9.44885739    85.27
+Total Variation   11.08146189   100.00
 
                       VarComp    StdDev  StudyVar %StudyVar %Tolerance
-Total Gage R&R     1.63262567 1.2777424  7.666454     38.38      15.33
-  Repeatability    1.56596490 1.2513852  7.508311     37.59      15.02
-  Reproducibility  0.06666077 0.2581875  1.549125      7.76       3.10
-    operator       0.06666077 0.2581875  1.549125      7.76       3.10
-Part-To-Part       9.44889591 3.0739056 18.443434     92.34      36.89
-Total Variation   11.08152158 3.3288919 19.973352    100.00      39.95
+Total Gage R&R     1.63260451 1.2777341  7.666405     38.38      15.33
+  Repeatability    1.56591940 1.2513670  7.508202     37.59      15.02
+  Reproducibility  0.06668511 0.2582346  1.549408      7.76       3.10
+    operator       0.06668511 0.2582346  1.549408      7.76       3.10
+Part-To-Part       9.44885739 3.0738994 18.443396     92.34      36.89
+Total Variation   11.08146189 3.3288830 19.973298    100.00      39.95
 
 Number of Distinct Categories = 3 
 ```
@@ -464,7 +478,7 @@ repeat_var
 ```
 
 ```
-[1] 1.572173
+[1] 1.572125
 ```
 
 and for the reproducibility we have:
@@ -476,7 +490,7 @@ reprod_var
 ```
 
 ```
-[1] 0.0688336
+[1] 0.06885705
 ```
 
 The equipment manual mentions an accuracy of 0.001 mm. If we take this as the calibration uncertainty expressed as a standard deviation, this means we have:
@@ -501,7 +515,7 @@ u
 ```
 
 ```
-[1] 1.625117
+[1] 1.62511
 ```
 
 Finally what is usually reported is the expanded uncertainty corresponding to 2 standard deviations. To be recalled that $\pm$ 2 std corresponds to 95% of the values when a repeative measurement is done. In this case we have $U = 2*u$:
@@ -513,7 +527,7 @@ U
 ```
 
 ```
-[1] 3.250235
+[1] 3.25022
 ```
 
 For a specific measurement of say 1'800 $\mu m$ we then say: the tablet thickness is 1'800 $\mu m$ $\pm$ 3.3 $\mu m$, at the 95 percent confidence level. Or written in short:

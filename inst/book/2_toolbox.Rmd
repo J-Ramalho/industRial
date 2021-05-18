@@ -45,10 +45,10 @@ installed_packages <- bind_rows(
     as_tibble()
 )
 
-recommended_packages <- read_excel("data/rpackages.xlsx") %>%
+recommended_packages <- read_excel(here::here("inst/book/data/rpackages.xlsx")) %>%
   filter(Used == "y") %>%
   left_join(installed_packages) %>%
-  select(Package, Area, Version) %>%
+  select(Package, Area, Version, Depends, License) %>%
   arrange(Area)
 
 recommended_packages %>%

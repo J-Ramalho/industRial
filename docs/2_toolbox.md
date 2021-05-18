@@ -36,42 +36,42 @@ The amount of packages available is extremely large and growing very fast. When 
 Below a comprehensive list of the different packages used in the book:
 
 
-|Package     |Area                   |Version |
-|:-----------|:----------------------|:-------|
-|rcartocolor |colors                 |NA      |
-|viridis     |colors                 |0.6.1   |
-|datasets    |data                   |4.0.5   |
-|readr       |data loading           |1.4.0   |
-|readxl      |data loading           |1.3.1   |
-|dplyr       |data science           |1.0.6   |
-|forcats     |data science           |0.5.1   |
-|hms         |data science           |1.0.0   |
-|janitor     |data science           |2.1.0   |
-|lubridate   |data science           |1.7.10  |
-|magrittr    |data science           |2.0.1   |
-|tibble      |data science           |3.1.1   |
-|tidyr       |data science           |1.1.3   |
-|broom       |datascience            |0.7.6   |
-|tidyverse   |datascience            |1.3.1   |
-|purrr       |functional programming |0.3.4   |
-|qicharts2   |industrial stats       |0.7.1   |
-|qcc         |industrial stats       |2.7     |
-|SixSigma    |industrial stats       |0.9-52  |
-|DoE.base    |industrial stats       |1.1-6   |
-|patchwork   |plotting               |1.1.1   |
-|ggplot2     |plotting               |3.3.3   |
-|scales      |plotting               |1.1.1   |
-|bookdown    |publishing             |0.22    |
-|knitr       |publishing             |1.33    |
-|stats       |statistics             |4.0.5   |
-|tidymodels  |statistics             |NA      |
-|agricolae   |statistics             |1.3-3   |
-|car         |statistics             |3.0-10  |
-|RcmdrMisc   |statistics             |2.7-1   |
-|lsr         |statistics             |NA      |
-|fs          |sysadmin               |1.5.0   |
-|glue        |text                   |1.4.2   |
-|stringr     |text                   |1.4.0   |
+|Package     |Area                   |Version |Depends                                       |License                        |
+|:-----------|:----------------------|:-------|:---------------------------------------------|:------------------------------|
+|rcartocolor |colors                 |NA      |NA                                            |NA                             |
+|viridis     |colors                 |0.6.1   |R (>= 2.10), viridisLite (>= 0.4.0)           |MIT + file LICENSE             |
+|datasets    |data                   |4.0.5   |NA                                            |Part of R 4.0.5                |
+|readr       |data loading           |1.4.0   |R (>= 3.1)                                    |GPL (>= 2) &#124; file LICENSE |
+|readxl      |data loading           |1.3.1   |NA                                            |GPL-3                          |
+|dplyr       |data science           |1.0.6   |R (>= 3.3.0)                                  |MIT + file LICENSE             |
+|forcats     |data science           |0.5.1   |R (>= 3.2)                                    |MIT + file LICENSE             |
+|hms         |data science           |1.0.0   |NA                                            |MIT + file LICENSE             |
+|janitor     |data science           |2.1.0   |R (>= 3.1.2)                                  |MIT + file LICENSE             |
+|lubridate   |data science           |1.7.10  |methods, R (>= 3.2)                           |GPL (>= 2)                     |
+|magrittr    |data science           |2.0.1   |NA                                            |MIT + file LICENSE             |
+|tibble      |data science           |3.1.1   |R (>= 3.1.0)                                  |MIT + file LICENSE             |
+|tidyr       |data science           |1.1.3   |R (>= 3.1)                                    |MIT + file LICENSE             |
+|broom       |datascience            |0.7.6   |R (>= 3.1)                                    |MIT + file LICENSE             |
+|tidyverse   |datascience            |1.3.1   |R (>= 3.3)                                    |MIT + file LICENSE             |
+|purrr       |functional programming |0.3.4   |R (>= 3.2)                                    |GPL-3 &#124; file LICENSE      |
+|qicharts2   |industrial stats       |0.7.1   |R (>= 3.0.0)                                  |GPL-3                          |
+|qcc         |industrial stats       |2.7     |R (>= 3.0)                                    |GPL (>= 2)                     |
+|SixSigma    |industrial stats       |0.9-52  |R (>= 2.14.0)                                 |GPL (>= 2)                     |
+|DoE.base    |industrial stats       |1.1-6   |R (>= 2.10), grid, conf.design                |GPL (>= 2)                     |
+|patchwork   |plotting               |1.1.1   |NA                                            |MIT + file LICENSE             |
+|ggplot2     |plotting               |3.3.3   |R (>= 3.2)                                    |MIT + file LICENSE             |
+|scales      |plotting               |1.1.1   |R (>= 3.2)                                    |MIT + file LICENSE             |
+|bookdown    |publishing             |0.22    |NA                                            |GPL-3                          |
+|knitr       |publishing             |1.33    |R (>= 3.2.3)                                  |GPL                            |
+|stats       |statistics             |4.0.5   |NA                                            |Part of R 4.0.5                |
+|tidymodels  |statistics             |NA      |NA                                            |NA                             |
+|agricolae   |statistics             |1.3-3   |R (>= 2.10)                                   |GPL                            |
+|car         |statistics             |3.0-10  |R (>= 3.5.0), carData (>= 3.0-0)              |GPL (>= 2)                     |
+|RcmdrMisc   |statistics             |2.7-1   |R (>= 3.5.0), utils, car (>= 3.0-0), sandwich |GPL (>= 2)                     |
+|lsr         |statistics             |NA      |NA                                            |NA                             |
+|fs          |sysadmin               |1.5.0   |R (>= 3.1)                                    |GPL-3                          |
+|glue        |text                   |1.4.2   |R (>= 3.2)                                    |MIT + file LICENSE             |
+|stringr     |text                   |1.4.0   |R (>= 3.1)                                    |GPL-2 &#124; file LICENSE      |
 
 Theses packages below are loaded implicitly and not visible in the book text. Be sure to load at minimum the packages below before trying any example:
 

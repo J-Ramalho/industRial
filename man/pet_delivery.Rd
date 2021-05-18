@@ -3,12 +3,12 @@
 \docType{data}
 \name{pet_delivery}
 \alias{pet_delivery}
-\title{Tensile strength values on PET raw material for the clothing industry}
+\title{Tensile strength values on PET raw material for the clothing industry.}
 \format{
-A tibble with 28 observations on 2 variables
+An object of class tibble with 28 observations on 2 variables.
 }
 \source{
-Original data set
+Original data set.
 }
 \usage{
 pet_delivery
@@ -24,6 +24,6 @@ approximately a normal distribution.
 }
 }
 \references{
-For a complete case study application refer to \url{https://j-ramalho.github.io/industRial/}
+For a complete case study application refer to \url{https://j-ramalho.github.io/industRial/}.
 }
 \keyword{datasets}

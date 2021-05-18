@@ -5,7 +5,7 @@
 \alias{tablet_thickness}
 \title{Thickness measurements of pharmaceutical tablets}
 \format{
-A tibble with 675 observations on 11 variables
+An object of class tibble with 675 observations on 11 variables
 }
 \source{
 Based on a gage r&R (gage reproducibility and repeatability) 

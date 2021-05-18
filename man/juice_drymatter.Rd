@@ -3,13 +3,15 @@
 \docType{data}
 \name{juice_drymatter}
 \alias{juice_drymatter}
-\title{Dry matter content of different juices obtained with two different devices}
+\title{Dry matter content of different juices obtained with two different measurement devices.}
 \format{
-A tibble with 108 observations on 7 variables
+An object of class tibble with 108 observations on 7 variables.
 }
 \source{
 Adapted from a real gage bias and linearity study performed in 2021 on 
-industrial beverages dry matter content measurement.
+industrial beverages dry matter content measurement. The structure of the
+data corresponds to a full factorial design of 5 factors (3 with 3 levels and
+ 2 with 2 levels).
 }
 \usage{
 juice_drymatter
@@ -32,6 +34,6 @@ performed.
 }
 }
 \references{
-For a complete case study application refer to \url{https://j-ramalho.github.io/industRial/}
+For a complete case study application refer to \url{https://j-ramalho.github.io/industRial/}.
 }
 \keyword{datasets}

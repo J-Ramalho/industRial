@@ -14,7 +14,7 @@ rmd_files: [
   "4_msa.Rmd",
   "5_simpleDOE.Rmd",
   "6_regression.Rmd",
-  "7_factorialDOEs.Rmd",
+  "7_interactions.Rmd",
   "8_generalDOEs.Rmd",
   "9_twolevelDOEs.Rmd",
   "10_spc.Rmd",

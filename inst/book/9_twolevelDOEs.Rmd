@@ -53,11 +53,11 @@ pet_doe <- fac.design(
 ```
 
 ```{r}
-yield <- c(64.4,82.8,41.4,71.3,57.5,73.6,43.7,69.0,62.1,73.6,52.9,66.7)
+tensile_strength <- c(64.4,82.8,41.4,71.3,57.5,73.6,43.7,69.0,62.1,73.6,52.9,66.7)
 
 pet_doe <- bind_cols(
   pet_doe,
-  "yield" = yield,
+  "tensile_strength" = tensile_strength,
 )
 ```
 
@@ -101,7 +101,7 @@ Now we can run our linear model:
 
 ```{r}
 pet_ctr_lm <- lm(
-  formula = yield ~ A * B, 
+  formula = tensile_strength ~ A * B, 
   data = pet_fct
   )
 summary(pet_ctr_lm)
@@ -134,7 +134,7 @@ pet_fct2$cA <- relevel(pet_fct2$cA, ref = "1")
 pet_fct2$cB <- relevel(pet_fct2$cB, ref = "1")
 
 pet_ctr2_lm <- lm(
-  formula = yield ~ cA * cB, 
+  formula = tensile_strength ~ cA * cB, 
   data = pet_fct2,
   contrasts = list(cA = "contr.sum", cB = "contr.sum")
   )
@@ -160,7 +160,7 @@ In this example we're going to code the levels with +1/-1 but we're going use th
 ```{r}
 pet_num <- pet_fct %>% mutate(cA = coded(A), cB = coded(B))
 pet_num_lm <- lm(
-  formula = yield ~ cA * cB, 
+  formula = tensile_strength ~ cA * cB, 
   data = pet_num
   )
 summary(pet_num_lm)
@@ -190,8 +190,8 @@ pet_num %>%
     names_to = "variable",
     values_to = "level") %>% 
   ggplot() +
-  geom_point(aes(x = level, y = yield)) +
-  geom_smooth(aes(x = level, y = yield), 
+  geom_point(aes(x = level, y = tensile_strength)) +
+  geom_smooth(aes(x = level, y = tensile_strength), 
               method = "lm", se = FALSE, fullrange = TRUE) +
   facet_wrap(vars(variable))
 ```
@@ -211,8 +211,8 @@ pet_num %>%
     names_to = "variable",
     values_to = "level") %>% 
   ggplot() +
-  geom_point(aes(x = level, y = yield)) +
-  geom_smooth(aes(x = level, y = yield), 
+  geom_point(aes(x = level, y = tensile_strength)) +
+  geom_smooth(aes(x = level, y = tensile_strength), 
               method = "lm", se = FALSE, fullrange = TRUE) +
   coord_cartesian(xlim = c(-2, 2)) +
   scale_y_continuous(n.breaks = 10) +
@@ -235,13 +235,13 @@ We select standard error as argument for the error.bars argument.
 
 ```{r}
 par(mfrow = c(1,1), bty = "l")
-plotMeans(response = pet_fct$yield,
+plotMeans(response = pet_fct$tensile_strength,
           factor2 = pet_fct$A,
           factor1 = pet_fct$B,
           error.bars = "se",
           xlab = "A - Reactant",
           legend.lab = "B - Catalist\n(error bars +/-se)",
-          ylab = "Yield",
+          ylab = "Tensile Strenght",
           col = viridis::viridis(12)[4],
           legend.pos = "bottomright",
           main = "The PET clothing improvement plan")
@@ -287,7 +287,7 @@ The ordinary R^2 is 0.9661 and it measures the proportion of total variability e
 
 ```{r}
 battery_reduced_lm <- lm(
-  formula = charging_time ~ A + C + A:C, 
+  formula = charging_time ~ C + A:C, 
   data = battery_charging
   )
 summary(battery_reduced_lm)
@@ -427,6 +427,7 @@ knitr::include_graphics("img/electrical_car_bw.png")
 
 ```{r}
 battery_charging %>%
+  filter((Replicate == 1)) %>%
   head()
 ```
 
@@ -435,8 +436,8 @@ battery_charging %>%
 
 ```{r}
 battery_lm3 <- lm(
-  formula = charging_time_new ~ A * B * C * D, 
-  data = battery_charging)
+  formula = charging_time ~ A * B * C * D, 
+  data = battery_charging %>% filter(Replicate ==1))
 summary(battery_lm3)
 ```
 
@@ -492,7 +493,7 @@ Following the previous analysis we are removing the factor B from the model and 
 
 ```{r}
 battery_red_lm3 <- lm(
-  formula = charging_time_new ~ A + C + D + A:C + A:D, 
+  formula = charging_time ~ A + C + A:C, 
   data = battery_charging)
 summary(battery_red_lm3)
 ```

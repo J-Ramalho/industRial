@@ -24,7 +24,7 @@
 <meta name="author" content="João Ramalho" />
 
 
-<meta name="date" content="2021-05-18" />
+<meta name="date" content="2021-05-19" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -760,7 +760,7 @@ F-statistic:  66.8 on 3 and 16 DF,  p-value: 2.883e-09</code></pre>
 <div class="sourceCode" id="cb94"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb94-1"><a href="DOE.html#cb94-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(car)</span></code></pre></div>
 <div class="sourceCode" id="cb95"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb95-1"><a href="DOE.html#cb95-1" aria-hidden="true" tabindex="-1"></a><span class="fu">durbinWatsonTest</span>(ebike_lm_factor)</span></code></pre></div>
 <pre><code> lag Autocorrelation D-W Statistic p-value
-   1      -0.5343347      2.960893   0.082
+   1      -0.5343347      2.960893   0.076
  Alternative hypothesis: rho != 0</code></pre>
 <p>Although the output shows Autocorrelation of -0.53 we have to consider that the p value is greater than 0.05 thus there is not enough significance to say that there is autocorrelation.</p>
 </div>

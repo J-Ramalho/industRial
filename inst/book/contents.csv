@@ -1,0 +1,40 @@
+Chapter,Unit,Case,Industry,Dataset,Functions,,Photo,Storyline,Data_packaged
+DFSS,,,,,,,,,
+,Pareto,The dial polishing workshop,Watch making,dial_control,[qicharts2::paretochart](#paretochart),,ok,Completed,ok
+,Ishikawa,The dental prosthesis laboratory,Medical devices,-,[qcc::cause.and.effect](#fishbone),,ok,Completed,ok
+,Correlation matrix,The perfume destilation experiment,Perfume,perfume_experiment,[ggplot2::geom_tile](#tileplot),,ok,Completed,ok
+,Clustering,The perfume destilation experiment,Perfume,perfume_experiment,-,,ok,Completed,ok
+MSA,,,,,,,,,
+,Linearity,The juice production plant,Food,juice_drymatter,[ggplot2::geom_smooth](#geom_smooth),,ok,Completed,ok
+,Precision,The tablet compaction process,Pharma,tablet_thickness,[SixSigma::ss.rr](#gageRnR),,ok,On going,ok
+,Uncertainty,The tablet compaction process,Pharma,tablet_thickness,-,,ok,On going,ok
+DOE,,,,,,,,,
+,Simple experiments,The winter sports clothing manufacturer,Clothing,pet_delivery,[stats::t.test](#tTest),,ok,On going,ok
+,,,,,[stats::var.test](#FTest),,ok,On going,ok
+,,,,,[car::leveneTest](#leveneTest),,ok,On going,ok
+,Regression and anova,The e-bike frame hardening process,Bicycle manufacturing,ebike_hardening,[stats::lm](#linearModel),,ok,On going,ok
+,,,,,[broom::augment](#augment),,ok,On going,ok
+,,,,,[car::durbinWatsonTest](#residualsCorrelation),,ok,On going,ok
+,,,,,[stats::bartlett.test](#barlettTest),,ok,On going,ok
+,,,,,[stats::shapiro.test](#shapiroTest),,ok,On going,ok
+,,,,,[stats::aov](#anova),,ok,On going,ok
+,,,,,[stats::TukeyHSD](#tukeyTest),,ok,On going,ok
+,,,,,[agricolae::LSD.test](#fisherLSD),,ok,On going,ok
+,,,,,[stats::predict](#predict),,ok,On going,ok
+,Interactions,The solar cell ouput test,Solar energy,solarcell_output,[car::outlierTest](#outlierTest),,ok,On going,ok
+,,,,,[stats:interaction.plot](#interactionPlot),,ok,On going,ok
+,Covariance,The solar cell ouput test,Solar energy,solarcell_fill,[stats::cor.test](#corTest),,ok,On going,ok
+,,,,,[stats::aov – ancova](#ancova),,ok,On going,ok
+,General factorial designs,The juice production plant,Food,juice_drymatter,[DoE.base::fac.design](#fac.design),,On going,On going,ok
+,Two level designs,The PET clothing improvement DoE,Clothing,pet_doe,[stats::relevel](#relevel),,On going,On going,-
+,,,,,[stats::contrasts](#contrasts),,On going,On going,-
+,,,,,[RcmdrMisc::plotMeans](#plotMeans),,On going,On going,-
+,,The litium-ion battery charging time test,Automotive,battery_charging,[broom::glance](#glance),,ok,On going,ok
+,,,,,[graphics::persp](#persp),,ok,On going,ok
+,,,,,[car::qqPlot](#qqPlot),,ok,On going,ok
+SPC,,,,,,,,,
+,Xbar-R charts,The syringe injection molding process,Medical devices,syringe_diameter,[qcc::qcc – xbar](#xbarchart),,ok,On going,ok
+,,,,,[qcc::qcc – R](#Rchart),,ok,On going,ok
+,,,,,[qcc::limits.xbar](#limitsxbar),,ok,On going,ok
+,Cpk charts,The syringe injection molding process,Medical devices,syringe_diameter,[qcc::process.capability](#processcapability),,ok,On going,ok
+,I-MR charts,The tablet weight control procedure,Pharma,tablet_weight,[industRial::off_spec](#offspec),,-,On going,ok

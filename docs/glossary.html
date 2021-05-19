@@ -24,7 +24,7 @@
 <meta name="author" content="João Ramalho" />
 
 
-<meta name="date" content="2021-05-18" />
+<meta name="date" content="2021-05-19" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -484,18 +484,22 @@ Comparison of the variability of a production process with its engineered specif
 </div>
 <div id="msa" class="section level2">
 <h2>MSA</h2>
-<p>The definitions below are based on the articles on <span class="citation"><a href="#ref-minitab_gagernR" role="doc-biblioref">Minitab</a> (<a href="#ref-minitab_gagernR" role="doc-biblioref">2019b</a>)</span> which itself is based on the <span class="citation"><a href="#ref-AIAG2010" role="doc-biblioref">Automotive Industry Action Group</a> (<a href="#ref-AIAG2010" role="doc-biblioref">2010</a>)</span>.</p>
-<p>Variance components assess the amount of variation contributed by each source of measurement error, plus the contribution of part-to-part variability.</p>
+<p>It is a fact that different communities utilize different methodologies and terminologies on the domain of measurement uncertainty. Unfortunately these differences are still too often overlapping, see <span class="citation"><a href="#ref-Muelaner2015" role="doc-biblioref">J E Muelaner</a> (<a href="#ref-Muelaner2015" role="doc-biblioref">2015</a>)</span> for detailed comparison.</p>
+<p>In our text we opt for the industry terminology, in particular to the norm <a href="https://www.iso.org/obp/ui/#iso:std:11833:en">ISO 5725</a>, the practical application guides from <span class="citation"><a href="#ref-AIAG2010" role="doc-biblioref">Automotive Industry Action Group</a> (<a href="#ref-AIAG2010" role="doc-biblioref">2010</a>)</span> and some articles on <span class="citation"><a href="#ref-minitab_gagernR" role="doc-biblioref">Minitab</a> (<a href="#ref-minitab_gagernR" role="doc-biblioref">2019b</a>)</span> which itself is based on the AIAG guidelines.</p>
+<p>Variance components assess the amount of variation contributed by each source of measurement error, plus the contribution of part-to-part variability. The sum of the individual variance components equals the total variation.</p>
 <p><strong>total gage r&amp;R:</strong> the sum of the repeatability and the reproducibility variance components.</p>
 <p><strong>part:</strong> The variation that comes from the parts, with 5 levels in this case.</p>
 <p><strong>operator:</strong> The variation that comes from the operators, with 3 levels in this case.</p>
 <p><strong>replicants, n:</strong> number of replications corresponding to the number of times each part is measured by each operator.</p>
-<p><strong>repeatability (or error, or residuals):</strong> The variation that is not explained by part, operator, or the operator and part interaction. It represents how much variability is caused by the measurement device (the same operator measures the same part many times, using the same gage). The repeteability can be measured directly from the Anova table from the residual mean squares.</p>
+<p><strong>repeatability (or error, or residuals):</strong> The variation that is not explained by part, operator, or the operator and part interaction. It represents how much variability is caused by the measurement device (the same operator measures the same part many times, using the same gage). The repeatability can be measured directly from the Anova table from the residual mean squares.</p>
 <p><strong>reproducibility:</strong> how much variation is caused by the differences between operators (different operators measure the same part many times, using the same gage).</p>
 <p><strong>operators:</strong> the operators part of the reproducibility is the operators variation minus the interaction divided by the number of different parts times the replicants (zero if negative).</p>
 <p><strong>parts:operators:</strong> The variation that comes from the operator and part interaction. An interaction exists when an operator measures different parts differently. The interaction part of of the reproducibility is the interaction minus the repeatability divided by the number of replicants (zero if negative).</p>
 <p><strong>part-to-part:</strong> the variability due to different parts. Ideally, very little should be due to repeatability and reproducibility. Differences between parts should account for most of the variability (when the %Contribution from part-to-part variation is high, the measurement system can reliably distinguish between parts).</p>
 <p>The sum of the individual variance components equals the total variation.</p>
+<p><strong>Accuracy/Uncertainty:</strong> Combination of precision and trueness. In the ISO 5725 both terms are equivalent.</p>
+<p><strong>Precision:</strong> Combination of repeatability and reproducibility</p>
+<p><strong>Trueness:</strong> difference between the mean of many measurements and the reference value. In ISO 5725 the term bias has been replaced by trueness.</p>
 </div>
 <div id="doe" class="section level2">
 <h2>DOE</h2>
@@ -515,6 +519,9 @@ Comparison of the variability of a production process with its engineered specif
 <div id="refs" class="references csl-bib-body hanging-indent">
 <div id="ref-AIAG2010" class="csl-entry">
 Automotive Industry Action Group, AIAG -, ed. 2010. <a href="https://www.aiag.org/store/publications/details?ProductCode=MSA-4">https://www.aiag.org/store/publications/details?ProductCode=MSA-4</a>.
+</div>
+<div id="ref-Muelaner2015" class="csl-entry">
+J E Muelaner, M Chappell, A Francis. 2015. <span>“A Hybrid Measurement Systems Analysis and Uncertainty of Measurement Approach for Industrial Measurement in the Light Controlled Factory.”</span> <em>Laboratory for Integrated Metrology Applications, Dep. Of Mechanical Engineering, University of Bath, Bath, UK</em>.
 </div>
 <div id="ref-minitab_gagernR" class="csl-entry">
 ———. 2019b. <span>“What Is a Gage Repeatability and Reproducibility (r&amp;r) Study?”</span> <a href="https://support.minitab.com/en-us/minitab/18/help-and-how-to/quality-and-process-improvement/measurement-system-analysis/supporting-topics/gage-r-r-analyses/what-is-a-gage-r-r-study/">https://support.minitab.com/en-us/minitab/18/help-and-how-to/quality-and-process-improvement/measurement-system-analysis/supporting-topics/gage-r-r-analyses/what-is-a-gage-r-r-study/</a>.

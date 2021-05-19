@@ -175,6 +175,9 @@ Note that the argument alphaLim has been set to 1 to avoid suppressing the inter
 
 **Criteria for measurement system acceptance:**
 
+
+
+
 To evaluate your process variation, compare the Total Gage R&R contribution in the %Contrib column with the values in the list below:
 
 * Less than 1%: the measurement system is acceptable

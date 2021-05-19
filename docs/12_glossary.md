@@ -226,9 +226,11 @@ Comparison of the variability of a production process with its engineered specif
 
 ## MSA
 
-The definitions below are based on the articles on @minitab_gagernR which itself is based on the @AIAG2010.
+It is a fact that different communities utilize different methodologies and terminologies on the domain of measurement uncertainty. Unfortunately these differences are still too often overlapping, see @Muelaner2015 for detailed comparison.
 
-Variance components assess the amount of variation contributed by each source of measurement error, plus the contribution of part-to-part variability.
+In our text we opt for the industry terminology, in particular to the norm [ISO 5725](https://www.iso.org/obp/ui/#iso:std:11833:en), the practical application guides from @AIAG2010 and some articles on @minitab_gagernR which itself is based on the AIAG guidelines.
+
+Variance components assess the amount of variation contributed by each source of measurement error, plus the contribution of part-to-part variability. The sum of the individual variance components equals the total variation.
 
 **total gage r&R:** the sum of the repeatability and the reproducibility variance components.
 
@@ -238,7 +240,7 @@ Variance components assess the amount of variation contributed by each source of
 
 **replicants, n:** number of replications corresponding to the number of times each part is measured by each operator.
 
-**repeatability (or error, or residuals):** The variation that is not explained by part, operator, or the operator and part interaction. It represents how much variability is caused by the measurement device (the same operator measures the same part many times, using the same gage). The repeteability can be measured directly from the Anova table from the residual mean squares.
+**repeatability (or error, or residuals):** The variation that is not explained by part, operator, or the operator and part interaction. It represents how much variability is caused by the measurement device (the same operator measures the same part many times, using the same gage). The repeatability can be measured directly from the Anova table from the residual mean squares.
 
 **reproducibility:** how much variation is caused by the differences between operators (different operators measure the same part many times, using the same gage).
 
@@ -249,6 +251,13 @@ Variance components assess the amount of variation contributed by each source of
 **part-to-part:** the variability due to different parts. Ideally, very little should be due to repeatability and reproducibility. Differences between parts should account for most of the variability (when the %Contribution from part-to-part variation is high, the measurement system can reliably distinguish between parts).
 
 The sum of the individual variance components equals the total variation.
+
+**Accuracy/Uncertainty:** Combination of precision and trueness. In the ISO 5725 both terms are equivalent.
+
+**Precision:** Combination of repeatability and reproducibility
+
+**Trueness:** difference between the mean of many measurements and the reference value. In ISO 5725 the term bias has been replaced by trueness.
+
 
 ## DOE
 

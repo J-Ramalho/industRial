@@ -4,12 +4,11 @@
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
 source(here::here("inst/book/setup.R"))
 knitr::opts_chunk$set(options(knitr.kable.NA = ''))
-library(readxl)
 library(kableExtra)
 ```
 
 ```{r echo=FALSE}
-read_excel("data/contents.xlsx") %>%
+read_csv("contents.csv") %>%
   select(Chapter, Unit, Dataset, Functions) %>%
   kable(align = "l") %>%
   # collapse_rows(columns = c(1,2,3), valign = "middle") %>%

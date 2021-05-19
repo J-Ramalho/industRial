@@ -2,7 +2,7 @@
 title: "indust<b style='color:#38598CFF'>R</b>ial data science"
 subtitle: Case studies in product development and manufacturing
 author: "João Ramalho"
-date: "2021-05-18"
+date: "2021-05-19"
 # output: pdf_document
 site: bookdown::bookdown_site
 output: 
@@ -37,11 +37,11 @@ cover-image: "img/cover3.png"
   <img src="img/cover3.png" width="250" style="margin: 0 1em 0 1em" align="right"/>
 </a> 
 
-This book provides examples on how to use Data Science tools and techniques in Product Development and Manufacturing. These examples are grouped in Case Studies in a "cookbook" approach, making it easier to directly adopt the tools. They come from varied manufacturing industries, mostly where repetitive production in massive quantities is involved, including: pharmaceuticals, food, electronics, watch making and automotive.
+This is the online version of industRial data science, a book on Data Science tools and techniques for Product Development and Manufacturing. It is organized around Case Studies in a "cookbook" approach, making it easier to directly adopt the tools. The examples come from varied manufacturing industries, mostly where repetitive production in massive quantities is involved, including: pharmaceuticals, food, electronics, watch making and automotive.
 
 Product Development and Manufacturing are very important activities in society because bringing innovative products to the market has an immense potential to improve the quality of life of everyone. 
 
-Additionally Data Science brings new powerful approaches to the engineering and manufacturing of consumer goods, helping minimising environmental impact, improving quality and keeping costs under control.
+Additionally Data Science brings new powerful approaches to the engineering and manufacturing of consumer goods, helping minimizing environmental impact, improving quality and keeping costs under control.
 
 **How to use this book**
 

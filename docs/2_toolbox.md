@@ -58,6 +58,7 @@ Below a comprehensive list of the different packages used in the book:
 |qcc         |industrial stats       |2.7     |R (>= 3.0)                                    |GPL (>= 2)                     |
 |SixSigma    |industrial stats       |0.9-52  |R (>= 2.14.0)                                 |GPL (>= 2)                     |
 |DoE.base    |industrial stats       |1.1-6   |R (>= 2.10), grid, conf.design                |GPL (>= 2)                     |
+|rsm         |industrial stats       |2.10.2  |NA                                            |GPL (>= 2)                     |
 |patchwork   |plotting               |1.1.1   |NA                                            |MIT + file LICENSE             |
 |ggplot2     |plotting               |3.3.3   |R (>= 3.2)                                    |MIT + file LICENSE             |
 |scales      |plotting               |1.1.1   |R (>= 3.2)                                    |MIT + file LICENSE             |

@@ -471,7 +471,7 @@ The ordinary R^2 is 0.9661 and it measures the proportion of total variability e
 
 ```r
 battery_reduced_lm <- lm(
-  formula = charging_time ~ C + A:C, 
+  formula = charging_time ~ A + C + A:C, 
   data = battery_charging
   )
 summary(battery_reduced_lm)
@@ -480,23 +480,24 @@ summary(battery_reduced_lm)
 ```
 
 Call:
-lm.default(formula = charging_time ~ C + A:C, data = battery_charging)
+lm.default(formula = charging_time ~ A + C + A:C, data = battery_charging)
 
 Residuals:
     Min      1Q  Median      3Q     Max 
--2.4609 -0.8883 -0.2528  0.9772  3.2197 
+-2.1463 -0.9950 -0.4575  0.8650  2.9050 
 
 Coefficients:
             Estimate Std. Error t value Pr(>|t|)    
-(Intercept)   7.4116     0.2494  29.718  < 2e-16 ***
-C             1.0403     0.2494   4.171 0.000251 ***
-C:A          -0.8091     0.2494  -3.244 0.002964 ** 
+(Intercept)   7.4116     0.2467  30.037  < 2e-16 ***
+A             0.3147     0.2467   1.275 0.212663    
+C             1.0403     0.2467   4.216 0.000235 ***
+A:C          -0.8091     0.2467  -3.279 0.002786 ** 
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
-Residual standard error: 1.411 on 29 degrees of freedom
-Multiple R-squared:  0.4905,	Adjusted R-squared:  0.4554 
-F-statistic: 13.96 on 2 and 29 DF,  p-value: 5.662e-05
+Residual standard error: 1.396 on 28 degrees of freedom
+Multiple R-squared:  0.5185,	Adjusted R-squared:  0.4669 
+F-statistic: 10.05 on 3 and 28 DF,  p-value: 0.0001157
 ```
 
 []{#glance}
@@ -515,7 +516,7 @@ glance(battery_lm)[1:2] %>%
   model r.squared adj.r.squared
   <chr>     <dbl>         <dbl>
 1 1         0.522         0.383
-2 2         0.491         0.455
+2 2         0.519         0.467
 ```
 
 Adjusted R² has improved. Removing the nonsignificant terms from the full model has produced a final model that is likely to function more effectively as a predictor of new data.
@@ -582,7 +583,7 @@ pA
 
 ```
        1 
-8.856406 
+8.699062 
 ```
 
 We can visualize this outcome as follows:
@@ -607,28 +608,28 @@ battery_charging %>%
 
 #### Response surface plot 
 
-We are introducing here response surface plots which is yet another way to visualize the experiment outputs as a function of the inputs. We're doing this with the persp() function from base R which provides an extremely fast rendering, easy parametrization and a readable output. 
+We are introducing here response surface plots which is yet another way to visualize the experiment outputs as a function of the inputs. We're doing this with the persp() function from the {rsm} package which provides an extremely fast rendering, easy parametrization and a readable output. To be noted that this function is an extension of the base R persp() consisting from the R point of view in an S3 method for the lm class. This allows to simply provide directly the lm object to the function to obtain the response surface.
 
 []{#persp}
 
 
 ```r
-ngrid <- 20
-Agrid <- Bgrid <- seq(from = -1, to = 1, length = ngrid)
-etch <- predict(battery_reduced_lm, expand.grid(A = Agrid, C = Bgrid))
-etch <- matrix(etch, length(Agrid), length(Bgrid))
+library(rsm)
+```
 
+
+```r
 persp(
-  x = Agrid, 
-  y = Bgrid, 
-  z = etch, 
+  battery_reduced_lm, 
+  C ~ A, 
+  bounds = list(A = c(-1,1), C = c(-1,1)),
   theta = -40, phi = 20, r = 10,
-  ticktype = "d", xlab = "Gap", ylab = "Power",
-  main = "Plasma etching experiment"
+  zlab = "Charging Time",
+  main = "Litium-ion battery\ncharging time test"
 )
 ```
 
-<img src="9_twolevelDOEs_files/figure-html/unnamed-chunk-31-1.png" width="80%" />
+<img src="9_twolevelDOEs_files/figure-html/unnamed-chunk-32-1.png" width="80%" />
 
 Due to the interaction between factors A and C the surface is slightly bent. This is exactly what we observe in the interactions plots of which the one below corresponds to slicing the surface at the min and the max of Power:
 
@@ -638,14 +639,14 @@ interaction.plot(x.factor = battery_charging$A,
                  trace.factor = battery_charging$C,
                  fun = mean,
                  response = battery_charging$charging_time,
-                 trace.label = "Power",
                  legend = TRUE,
-                 xlab = "Gap",
-                 ylab = "Yield",
-                 main = "Plasma etching experiment")
+                 xlab = "A",
+                 trace.label = "C",
+                 ylab = "Charging Time",
+                 main = "Litium-ion battery\ncharging time test")
 ```
 
-<img src="9_twolevelDOEs_files/figure-html/unnamed-chunk-32-1.png" width="80%" />
+<img src="9_twolevelDOEs_files/figure-html/unnamed-chunk-33-1.png" width="80%" />
 
 Just like in the surface plot we can see here in the interaction plot that the response of yield on gap is different depending on the level of power. When power is high it decreases and when power is low it increases. As a reminder this is what is called an interaction between these two factors.
 
@@ -663,7 +664,7 @@ Possible approaches:
 
 <div class="figure" style="text-align: center">
 <img src="img/electrical_car_bw.png" alt="electrical car platform" width="100%" />
-<p class="caption">(\#fig:unnamed-chunk-33)electrical car platform</p>
+<p class="caption">(\#fig:unnamed-chunk-34)electrical car platform</p>
 </div>
 
 </div>
@@ -760,7 +761,7 @@ main_effects_plot <- qqPlot(
   )
 ```
 
-<img src="9_twolevelDOEs_files/figure-html/unnamed-chunk-37-1.png" width="80%" />
+<img src="9_twolevelDOEs_files/figure-html/unnamed-chunk-38-1.png" width="80%" />
 
 In plot we can see that the effects that have the highest influence on the output are the effects A, C and D and their interactions. We can still confirm these observations with a calculation of the percentage contribution of each effect as follows:
 
@@ -842,7 +843,7 @@ par(mfrow = c(2,2))
 plot(battery_red_lm3)
 ```
 
-<img src="9_twolevelDOEs_files/figure-html/unnamed-chunk-40-1.png" width="80%" />
+<img src="9_twolevelDOEs_files/figure-html/unnamed-chunk-41-1.png" width="80%" />
 
 We can now establish the main effects and interaction plots and conclude on the optimal settings to maximize the output: A and D should be on the max and C on the min.
 

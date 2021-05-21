@@ -2,7 +2,7 @@
 title: "indust<b style='color:#38598CFF'>R</b>ial data science"
 subtitle: Case studies in product development and manufacturing
 author: "João Ramalho"
-date: "2021-05-19"
+date: "2021-05-21"
 # output: pdf_document
 site: bookdown::bookdown_site
 output: 
@@ -34,7 +34,7 @@ cover-image: "img/cover3.png"
 # Welcome {-}
 
 <a href="">
-  <img src="img/cover3.png" width="250" style="margin: 0 1em 0 1em" align="right"/>
+  <img src="img/cover4.png" width="250" style="margin: 0 1em 0 1em" align="right"/>
 </a> 
 
 This is the online version of industRial data science, a book on Data Science tools and techniques for Product Development and Manufacturing. It is organized around Case Studies in a "cookbook" approach, making it easier to directly adopt the tools. The examples come from varied manufacturing industries, mostly where repetitive production in massive quantities is involved, including: pharmaceuticals, food, electronics, watch making and automotive.

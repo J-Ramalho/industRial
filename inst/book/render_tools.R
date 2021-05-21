@@ -37,6 +37,7 @@ render_book(
     )
   )
 )
+
 bookdown::render_book("index.Rmd",
   pdf_book(
     toc = TRUE,

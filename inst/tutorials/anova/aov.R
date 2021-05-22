@@ -1,10 +1,11 @@
 library(tidyverse)
-library(industRial)
 library(DT)
 library(stats)
 library(broom)
+source("theme_industRial.R")
 filter <- dplyr::filter
 select <- dplyr::select
+ebike_hardening <- read_rds("ebike_hardening.rds")
 
 ui <- fluidPage(
     titlePanel("The anova sandbox"),
@@ -28,6 +29,8 @@ ui <- fluidPage(
 )
 
 server <- function(input, output) {
+    
+    ebike_hardening <- read_rds("ebike_hardening.rds")
 
     measurements <- reactive({
         tibble(

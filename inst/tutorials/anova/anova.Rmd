@@ -19,17 +19,17 @@ ebike_hardening <- read_rds("ebike_hardening.rds")
 knitr::opts_chunk$set(echo = FALSE, message = FALSE, warning = FALSE)
 ```
 
-# Design of Experiments
+# Design of Experiments - Anova
 
-## Anova
+## Review: anova concept
 
 The anova is a well established statistical technique that results from the fine tuning and combination of different statistical methods such as the partitioning of sums of squares, the linear regression and the statistical inference. Sometimes we may take its output as definitive and jump to conclusions like: *the p value is lower than 0.05 so the machine has a problem*. Nevertheless just like most other statistical tools it helps knowing where it comes from and how and when it can be applied.
 
 In the context of design of experiments the anova extends further the t.test lets see how...
 
-## When to apply?
+## Question: anova use cases
 
-```{r quiz}
+```{r quiz-usage}
 quiz(
   question("Which is the primary use of the anova in an industrial DoE (design of experiment)?",
     answer(
@@ -48,9 +48,9 @@ quiz(
 )
 ```
 
-## Data
+## Exercise: transform data
 
-For the coming exercises we're using the data set ebike_hardening. This data set comes in a *wide* format typically used in day to day data collection situations. For someone in a laboratory or factory shopfloor it is often easier to simple create a new column and add new measurements. Sometimes unfortunately this leads to not very clear headers. Also for ggplots is necessary to specify the factors clearly so a *longer* format makes it easier to deal with in R.
+For the coming exercise we're using the data set ebike_hardening. This data set comes in a *wide* format typically used in day to day data collection situations. For someone in a laboratory or factory shopfloor it is often easier to simple create a new column and add new measurements. Sometimes unfortunately this leads to not very clear headers. Also for ggplots is necessary to specify the factors clearly so a *longer* format makes it easier to deal with in R.
 
 In the following exercise convert the dataset to a narrow format and take the opportunity to calculate the means by group leading to a tibble such as:
 
@@ -68,8 +68,9 @@ head(ebike_narrow)
 ```
 
 
-```{r ebike, exercise=TRUE, exercise.lines = 5, exercise.eval=TRUE}
-
+```{r ebike, exercise=TRUE, exercise.lines = 5, exercise.eval=FALSE}
+ebike_narrow <- ebike_hardening %>%
+  pivot_longer(                  )
 ```
 
 ```{r ebike-hint}
@@ -77,7 +78,7 @@ head(ebike_narrow)
 # then group by temperature to calculate the means for each treatment group
 ```
 
-## The anova sandbox
+## Play: anova app
 
 The anova output can be sometimes tricky to interpret as many things are at play. In the application below we start with a plot similar to the plot of the Anova chapter. It presents boxplots of the distribution of the different treatment groups of the ebike frame hardening process. Outputs correspond to the lifecycle of the frame (in number of cycles to failure) and the groups correspond each to a specific furnace temperature. You can play with the group means, standard deviation and population size.
 
@@ -192,11 +193,32 @@ fluidPage(
 
 We can see that to get to a p value greater than 0.05 we have to get the means very close. In other words the treatment does not have an effect or in our case the ebike frame hardening process wouldn't have an effect on its aging resistance.
 
-## Anova parameters
+## Exercise: boxplot
+
+A final exercise below to check your knowledge on box plots. In the box below generate a boxplot like the one presented on the app before. To get the exact same result you need to convert the variable to a factor. This can be done either modifying it in the data set or in the ggplot call directly.
+
+```{r pareto, exercise=TRUE, exercise.lines = 13, exercise.eval=FALSE}
+ebike_factor <- ebike_narrow %>%
+  mutate(                             )
+
+ggplot(
+  
+  
+) + 
+  labs(
+    title = "e-bike frame hardening process",
+    subtitle = "Raw data plot",
+    x = "Furnace Temperature [°C]",
+    y = "Cycles to failure [n]"
+  )
+```
+
+
+## Quiz: anova parameters
 
 Although we tend to take it as a direct calculation when using excel, minitab or another software the anova calculation has many steps to get to the p value and to fully grasp its meaning it is helpful to dig into those aspects.
 
-```{r parameters, echo = FALSE}
+```{r quiz-parameters, echo = FALSE}
 question_checkbox(
   "Which parameters influence the anova calculation?",
   answer("the group means", correct = TRUE),
@@ -208,5 +230,3 @@ question_checkbox(
 )
 ```
 
-
-inputs and output, distribution of the inputs, the inputs means and variability, the split of the input factors in groups, differences between the means of those factors, the ratio between the groups variabilitiy.

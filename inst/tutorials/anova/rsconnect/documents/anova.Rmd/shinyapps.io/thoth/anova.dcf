@@ -5,9 +5,10 @@ account: thoth
 server: shinyapps.io
 hostUrl: https://api.shinyapps.io/v1
 appId: 4135421
-bundleId: 4603033
-url: https://thoth.shinyapps.io/anova/
-when: 1621142553.82475
-lastSyncTime: 1621142553.8248
+bundleId: 4626845
+url: https://j-ramalho.shinyapps.io/anova/
+when: 1621664046.47303
+lastSyncTime: 1621664046.47306
 asMultiple: FALSE
 asStatic: FALSE
+ignoredFiles: anova.html|anova.R|aov.R

@@ -41,10 +41,10 @@ knitr::opts_chunk$set(
 # Welcome {-}
 
 <a href="">
-  <img src="img/cover4.png" width="250" style="margin: 0 1em 0 1em" align="right"/>
+  <img src="img/cover.png" width="250" style="margin: 0 1em 0 1em" align="right"/>
 </a> 
 
-This is the online version of industRial data science, a book on Data Science tools and techniques for Product Development and Manufacturing. It is organized around Case Studies in a "cookbook" approach, making it easier to directly adopt the tools. The examples come from varied manufacturing industries, mostly where repetitive production in massive quantities is involved, including: pharmaceuticals, food, electronics, watch making and automotive.
+This is the online version of industRial data science, a book with tools and techniques for data analysis in Product Development and Manufacturing. It is organized around Case Studies in a "cookbook" approach, making it easier to directly adopt the tools. The examples come from varied manufacturing industries, mostly where repetitive production in massive quantities is involved, including: pharmaceuticals, food, electronics, watch making and automotive.
 
 Product Development and Manufacturing are very important activities in society because bringing innovative products to the market has an immense potential to improve the quality of life of everyone. 
 

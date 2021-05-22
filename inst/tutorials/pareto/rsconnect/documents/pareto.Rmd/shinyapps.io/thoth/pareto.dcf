@@ -1,0 +1,14 @@
+name: pareto
+title: pareto
+username:
+account: thoth
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 3895752
+bundleId: 4626833
+url: https://j-ramalho.shinyapps.io/pareto/
+when: 1621663909.30124
+lastSyncTime: 1621663909.3013
+asMultiple: FALSE
+asStatic: FALSE
+ignoredFiles: pareto.html|pareto.R

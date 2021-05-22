@@ -1,0 +1,14 @@
+name: ebike
+title: ebike
+username:
+account: thoth
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 4166911
+bundleId: 4626707
+url: https://j-ramalho.shinyapps.io/ebike/
+when: 1621659532.30124
+lastSyncTime: 1621659532.3013
+asMultiple: FALSE
+asStatic: FALSE
+ignoredFiles: anova.html|anova.R|anova.Rmd

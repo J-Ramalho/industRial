@@ -93,7 +93,7 @@ filter <- dplyr::filter
 select <- dplyr::select
 
 fluidPage(
-    titlePanel("The anova sandbox"),
+    titlePanel("The anova app"),
     sidebarLayout(
         sidebarPanel(width = 4,
             sliderInput(inputId = "mean1", "Group 1 target mean:", min = 500000, max = 700000, value = 540000),
@@ -174,7 +174,7 @@ fluidPage(
       if (analysis()$p.value >= 0.05) {
                 analysis() %>%
                     datatable(
-                        options = list(searching = FALSE)
+                        options = list(dom = 't')
                     ) %>%
                     formatSignif(columns = 3:4, digits = 1) %>%
                     formatRound(columns = 5:6, digits = 2) %>%
@@ -182,7 +182,7 @@ fluidPage(
             } else {
                 analysis() %>%
                     datatable(
-                        options = list(searching = FALSE)
+                        options = list(dom = 't')
                     ) %>%
                     formatSignif(columns = 3:4, digits = 1) %>%
                     formatRound(columns = 5:6, digits = 2) %>%

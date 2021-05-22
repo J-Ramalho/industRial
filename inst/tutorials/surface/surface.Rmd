@@ -1,0 +1,228 @@
+---
+title: "industRial practice"
+output: 
+  learnr::tutorial:
+    progressive: true
+    allow_skip: true
+runtime: shiny_prerendered
+description: > 
+  Practice applications of process capability in statiscal process control to gain
+  understanding of how the out of specification is calculated
+---
+
+```{r setup, include=FALSE}
+library(learnr)
+# battery_charging <- write_rds(battery_charging, "battery_charging.rds")
+battery_charging <- readr::read_rds("battery_charging.rds")
+knitr::opts_chunk$set(echo = FALSE, message = FALSE, warning = FALSE)
+```
+
+# Design of Experiments - Response Surface Model
+
+## Review: inputs and outputs
+
+To get a new industrial product to the market there is often a long process that goes from the initial discussions and briefings to the start of production on the shop floor. For products produced in millions or billions of units this process can take several years but then once its completed the regular production will generally also remain for years. This is why it is important to assess the capability of a manufacturing process and to put a statistical process control in place where needed.
+
+## Question: response surface plots
+
+```{r question-cpk}
+quiz(
+  question("Which is the primary use of the anova in an industrial DoE (design of experiment)?",
+    answer(
+      "Compare variances", 
+      message = "The name analysis of variance can be considered misleading. In fact the variances (or to be more specific the sums of the squares) are calculated but this is not the primary outcome we're looking for."
+      ),
+    answer("Compare standard deviations"),
+    answer(
+      "Compare means",
+      "That's it! This approach allows to compare more that two means, thus extending the t.test. It establishes if their difference is statistically different. This provides an indication if the experiment has had an effect.",
+      correct = TRUE)
+    ,
+    answer("Compare ranges"),
+    allow_retry = TRUE
+  )
+)
+```
+
+## Exercise: reduced linear model
+
+For the coming exercises we're using the data set ebike_hardening. This data set comes in a *wide* format typically used in day to day data collection situations. For someone in a laboratory or factory shopfloor it is often easier to simple create a new column and add new measurements. Sometimes unfortunately this leads to not very clear headers. Also for ggplots is necessary to specify the factors clearly so a *longer* format makes it easier to deal with in R.
+
+In the following exercise convert the dataset to a narrow format and take the opportunity to calculate the means by group leading to a tibble such as:
+
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+
+```
+
+
+```{r ebike, exercise=TRUE, exercise.lines = 5, exercise.eval=TRUE}
+
+```
+
+```{r ebike-hint}
+# start with the ebike_hardening dataset and use the function pivot_longer()
+# then group by temperature to calculate the means for each treatment group
+```
+
+## Play: surface app
+
+Observe the p value on the interaction term.
+
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+library(stats)
+library(rsm)
+library(viridis)
+library(DT)
+library(broom)
+fluidPage(
+  titlePanel("Response surface app"),
+  sidebarLayout(
+    sidebarPanel(width = 3,
+
+      radioButtons(
+        inputId = "selected_variables",
+        label = "Select the input variables",
+        choices = c("A and B" = "ab", "A and C" = "ac", "B and C" = "bc"),
+        selected = "ac"
+      ),
+      sliderInput("theta", "Theta", min = -75, max = -20, value = -40),
+      sliderInput("phi", "Phi", min = 0, max = 50, value = 20),
+      sliderInput("r", "R", min = 2, max = 5, value = 5)
+    ),
+    mainPanel(
+      fluidRow(
+        column(6, plotOutput("response_surface")),
+        column(6, plotOutput("interaction_plot"))
+      ),
+      fluidRow(
+        column(2),
+        column(10, 
+               tags$b("Linear model summary"),
+               DTOutput("linear_model"))
+      )
+    )
+  )
+)
+```
+
+```{r context="server"}
+  model_formula <- reactive({
+    if (input$selected_variables == "ab") {
+      model_formula = charging_time ~ A + B + A:B
+    } else if (input$selected_variables == "ac") {
+      model_formula = charging_time ~ A + C + A:C
+    } else if (input$selected_variables == "bc") {
+      model_formula = charging_time ~ B + C + B:C
+    }
+  }) 
+  
+  model_view <- reactive({
+    if (input$selected_variables == "ab") {
+      model_view = A ~ B
+    } else if (input$selected_variables == "ac") {
+      model_view = A ~ C
+    } else if (input$selected_variables == "bc") {
+      model_view = B ~ C
+    }
+  })
+    
+  
+  interaction_factors <- reactive({
+    if (input$selected_variables == "ab") {
+        interaction_factors <- list()
+        interaction_factors$x.factor <- battery_charging$B
+        interaction_factors$trace.factor <- battery_charging$A
+        interaction_factors$xlab <- "B"
+        interaction_factors$trace.label <- "A"
+    } else if (input$selected_variables == "ac") {
+        interaction_factors <- list()
+        interaction_factors$x.factor <- battery_charging$C
+        interaction_factors$trace.factor <- battery_charging$A
+        interaction_factors$xlab <- "C"
+        interaction_factors$trace.label <- "A"
+    } else if (input$selected_variables == "bc") {
+        interaction_factors <- list()
+        interaction_factors$x.factor <- battery_charging$C
+        interaction_factors$trace.factor <- battery_charging$B
+        interaction_factors$xlab <- "C"
+        interaction_factors$trace.label <- "B"
+    }
+    interaction_factors
+  })
+  
+  observe({
+    print("int factors")
+    print(class(interaction_factors))
+    print(interaction_factors())
+    })
+  
+  model <- reactive({
+    battery_lm <- lm(
+      formula = model_formula(),
+      data = battery_charging
+    )
+  })
+  
+  output$response_surface <- renderPlot(
+    persp(
+      model(),
+      model_view(),
+      col = viridis(12)[8],
+      contours = "col",
+      bounds = list(A = c(-1,1), C = c(-1,1)),
+      theta = input$theta, phi = input$phi, r = input$r,
+      zlab = "Charging Time",
+      main = "Response surface"
+    )
+  )
+  
+  output$interaction_plot <- renderPlot(
+    interaction.plot(x.factor = interaction_factors()$x.factor,
+                     trace.factor = interaction_factors()$trace.factor,
+                     fun = mean,
+                     response = battery_charging$charging_time,
+                     legend = TRUE,
+                     xlab =  {interaction_factors()$xlab},
+                     trace.label = {interaction_factors()$trace.label},
+                     ylab = "Charging Time",
+                     lwd = 2,
+                     main = "Interaction plot")
+  )
+  
+  output$linear_model <- renderDT({
+    model() %>%
+      tidy() %>%
+      datatable(
+        options = list(dom = 't')
+        ) %>%
+      formatRound(columns = c(2:5), digits = 2)
+  })
+```
+
+We can see that to get to a p value greater than 0.05 we have to get the means very close. In other words the treatment does not have an effect or in our case the ebike frame hardening process wouldn't have an effect on its aging resistance.
+
+## Exercise: 
+
+```{r histogram, exercise=TRUE, exercise.lines = 5}
+
+```
+
+
+## Quizz: interactions
+
+Although we tend to take it as a direct calculation when using excel, minitab or another software the anova calculation has many steps to get to the p value and to fully grasp its meaning it is helpful to dig into those aspects.
+
+```{r quizz-cpk, echo = FALSE}
+question_checkbox(
+  "What is the exact mathematical formula to calculate the Cpk",
+  answer("", correct = TRUE),
+  answer("the group standard deviations", correct = TRUE),
+  answer("the sample size", correct = TRUE),
+  answer("The absolute value of the output", correct = FALSE, message = "the sample size has no influence if the ratios are the same the p value is the same, e.g. if the lifecycles were all divided by 10"),
+  random_answer_order = TRUE,
+  allow_retry = TRUE
+)
+```
+
+
+inputs and output, distribution of the inputs, the inputs means and variability, the split of the input factors in groups, differences between the means of those factors, the ratio between the groups variabilitiy.

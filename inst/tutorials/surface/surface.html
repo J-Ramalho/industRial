@@ -116,37 +116,29 @@ $(document).ready(function () {
 
 <div class="topics">
 
-<div id="section-design-of-experiments---anova" class="section level1">
-<h1>Design of Experiments - Anova</h1>
-<div id="section-review-anova-concept" class="section level2">
-<h2>Review: anova concept</h2>
-<p>The anova is a well established statistical technique that results from the fine tuning and combination of different statistical methods such as the partitioning of sums of squares, the linear regression and the statistical inference. Sometimes we may take its output as definitive and jump to conclusions like: <em>the p value is lower than 0.05 so the machine has a problem</em>. Nevertheless just like most other statistical tools it helps knowing where it comes from and how and when it can be applied.</p>
-<p>In the context of design of experiments the anova extends further the t.test lets see how…</p>
+<div id="section-design-of-experiments---response-surface-model" class="section level1">
+<h1>Design of Experiments - Response Surface Model</h1>
+<div id="section-review-inputs-and-outputs" class="section level2">
+<h2>Review: inputs and outputs</h2>
+<p>To get a new industrial product to the market there is often a long process that goes from the initial discussions and briefings to the start of production on the shop floor. For products produced in millions or billions of units this process can take several years but then once its completed the regular production will generally also remain for years. This is why it is important to assess the capability of a manufacturing process and to put a statistical process control in place where needed.</p>
 </div>
-<div id="section-question-anova-use-cases" class="section level2">
-<h2>Question: anova use cases</h2>
+<div id="section-question-response-surface-plots" class="section level2">
+<h2>Question: response surface plots</h2>
 <p><div class="panel-heading tutorial-quiz-title">Quiz</div></p>
 <div class="panel panel-default">
-<div data-label="quiz-usage-1" class="tutorial-question panel-body">
-<div id="quiz-usage-1-answer_container" class="shiny-html-output"></div>
-<div id="quiz-usage-1-message_container" class="shiny-html-output"></div>
-<div id="quiz-usage-1-action_button_container" class="shiny-html-output"></div>
+<div data-label="question-cpk-1" class="tutorial-question panel-body">
+<div id="question-cpk-1-answer_container" class="shiny-html-output"></div>
+<div id="question-cpk-1-message_container" class="shiny-html-output"></div>
+<div id="question-cpk-1-action_button_container" class="shiny-html-output"></div>
 <script>if (Tutorial.triggerMathJax) Tutorial.triggerMathJax()</script>
 </div>
 </div>
 </div>
-<div id="section-exercise-transform-data" class="section level2">
-<h2>Exercise: transform data</h2>
-<p>For the coming exercise we’re using the data set ebike_hardening. This data set comes in a <em>wide</em> format typically used in day to day data collection situations. For someone in a laboratory or factory shopfloor it is often easier to simple create a new column and add new measurements. Sometimes unfortunately this leads to not very clear headers. Also for ggplots is necessary to specify the factors clearly so a <em>longer</em> format makes it easier to deal with in R.</p>
+<div id="section-exercise-reduced-linear-model" class="section level2">
+<h2>Exercise: reduced linear model</h2>
+<p>For the coming exercises we’re using the data set ebike_hardening. This data set comes in a <em>wide</em> format typically used in day to day data collection situations. For someone in a laboratory or factory shopfloor it is often easier to simple create a new column and add new measurements. Sometimes unfortunately this leads to not very clear headers. Also for ggplots is necessary to specify the factors clearly so a <em>longer</em> format makes it easier to deal with in R.</p>
 <p>In the following exercise convert the dataset to a narrow format and take the opportunity to calculate the means by group leading to a tibble such as:</p>
-<div data-pagedtable="false">
-<script data-pagedtable-source type="application/json">
-{"columns":[{"label":["temperature"],"name":[1],"type":["dbl"],"align":["right"]},{"label":["observation"],"name":[2],"type":["chr"],"align":["left"]},{"label":["cycles"],"name":[3],"type":["dbl"],"align":["right"]},{"label":["cycles_mean"],"name":[4],"type":["dbl"],"align":["right"]}],"data":[{"1":"160","2":"g1","3":"575000","4":"551200"},{"1":"160","2":"g2","3":"542000","4":"551200"},{"1":"160","2":"g3","3":"530000","4":"551200"},{"1":"160","2":"g4","3":"539000","4":"551200"},{"1":"160","2":"g5","3":"570000","4":"551200"},{"1":"180","2":"g1","3":"565000","4":"587400"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
-  </script>
-</div>
 <div class="tutorial-exercise" data-label="ebike" data-caption="Code" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="5">
-<pre class="text"><code>ebike_narrow &lt;- ebike_hardening %&gt;%
-  pivot_longer(                  )</code></pre>
 <script type="application/json" data-opts-chunk="1">{"fig.width":6.5,"fig.height":4,"fig.retina":2,"fig.align":"default","fig.keep":"high","fig.show":"asis","out.width":624,"warning":false,"error":false,"message":false,"exercise.df_print":"paged","exercise.checker":"NULL"}</script>
 </div>
 <div class="tutorial-exercise-support" data-label="ebike-hint" data-caption="Code" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="0">
@@ -154,100 +146,95 @@ $(document).ready(function () {
 # then group by temperature to calculate the means for each treatment group</code></pre>
 </div>
 </div>
-<div id="section-play-anova-app" class="section level2">
-<h2>Play: anova app</h2>
+<div id="section-play-surface-app" class="section level2">
+<h2>Play: surface app</h2>
 <p>The anova output can be sometimes tricky to interpret as many things are at play. In the application below we start with a plot similar to the plot of the Anova chapter. It presents boxplots of the distribution of the different treatment groups of the ebike frame hardening process. Outputs correspond to the lifecycle of the frame (in number of cycles to failure) and the groups correspond each to a specific furnace temperature. You can play with the group means, standard deviation and population size.</p>
 <p>Try to get to a non significant p value of more than <b style='color:#ff0000'>0.05</b> by playing with the means (and standard deviations if needed). The boxes colors will change from greenish to reddish reflecting the book examples.</p>
 <div class="container-fluid">
-<h2>The anova app</h2>
+<h2>Response surface app</h2>
 <div class="row">
-<div class="col-sm-4">
+<div class="col-sm-3">
 <form class="well" role="complementary">
-<div class="form-group shiny-input-container">
-<label class="control-label" id="mean1-label" for="mean1">Group 1 target mean:</label>
-<input class="js-range-slider" id="mean1" data-skin="shiny" data-min="500000" data-max="700000" data-from="540000" data-step="1" data-grid="true" data-grid-num="10" data-grid-snap="false" data-prettify-separator="," data-prettify-enabled="true" data-keyboard="true" data-data-type="number"/>
+<div id="selected_variables" class="form-group shiny-input-radiogroup shiny-input-container" role="radiogroup" aria-labelledby="selected_variables-label">
+<label class="control-label" id="selected_variables-label" for="selected_variables">Select the input variables</label>
+<div class="shiny-options-group">
+<div class="radio">
+<label>
+<input type="radio" name="selected_variables" value="ab"/>
+<span>A and B</span>
+</label>
+</div>
+<div class="radio">
+<label>
+<input type="radio" name="selected_variables" value="ac" checked="checked"/>
+<span>A and C</span>
+</label>
+</div>
+<div class="radio">
+<label>
+<input type="radio" name="selected_variables" value="bc"/>
+<span>B and C</span>
+</label>
+</div>
+</div>
 </div>
 <div class="form-group shiny-input-container">
-<label class="control-label" id="mean2-label" for="mean2">Group 2 target mean:</label>
-<input class="js-range-slider" id="mean2" data-skin="shiny" data-min="500000" data-max="700000" data-from="575000" data-step="1" data-grid="true" data-grid-num="10" data-grid-snap="false" data-prettify-separator="," data-prettify-enabled="true" data-keyboard="true" data-data-type="number"/>
+<label class="control-label" id="theta-label" for="theta">Theta</label>
+<input class="js-range-slider" id="theta" data-skin="shiny" data-min="-75" data-max="-20" data-from="-40" data-step="1" data-grid="true" data-grid-num="9.16666666666667" data-grid-snap="false" data-prettify-separator="," data-prettify-enabled="true" data-keyboard="true" data-data-type="number"/>
 </div>
 <div class="form-group shiny-input-container">
-<label class="control-label" id="mean3-label" for="mean3">Group 3 target mean:</label>
-<input class="js-range-slider" id="mean3" data-skin="shiny" data-min="500000" data-max="700000" data-from="625000" data-step="1" data-grid="true" data-grid-num="10" data-grid-snap="false" data-prettify-separator="," data-prettify-enabled="true" data-keyboard="true" data-data-type="number"/>
+<label class="control-label" id="phi-label" for="phi">Phi</label>
+<input class="js-range-slider" id="phi" data-skin="shiny" data-min="0" data-max="50" data-from="20" data-step="1" data-grid="true" data-grid-num="10" data-grid-snap="false" data-prettify-separator="," data-prettify-enabled="true" data-keyboard="true" data-data-type="number"/>
 </div>
 <div class="form-group shiny-input-container">
-<label class="control-label" id="mean4-label" for="mean4">Group 4 target mean:</label>
-<input class="js-range-slider" id="mean4" data-skin="shiny" data-min="500000" data-max="700000" data-from="700000" data-step="1" data-grid="true" data-grid-num="10" data-grid-snap="false" data-prettify-separator="," data-prettify-enabled="true" data-keyboard="true" data-data-type="number"/>
-</div>
-<div class="form-group shiny-input-container">
-<label class="control-label" id="sd1-label" for="sd1">Group 1 sd:</label>
-<input class="js-range-slider" id="sd1" data-skin="shiny" data-min="10000" data-max="50000" data-from="50000" data-step="1000" data-grid="true" data-grid-num="10" data-grid-snap="false" data-prettify-separator="," data-prettify-enabled="true" data-keyboard="true" data-data-type="number"/>
-</div>
-<div class="form-group shiny-input-container">
-<label class="control-label" id="sd2-label" for="sd2">Group 2 sd:</label>
-<input class="js-range-slider" id="sd2" data-skin="shiny" data-min="10000" data-max="50000" data-from="30000" data-step="1000" data-grid="true" data-grid-num="10" data-grid-snap="false" data-prettify-separator="," data-prettify-enabled="true" data-keyboard="true" data-data-type="number"/>
-</div>
-<div class="form-group shiny-input-container">
-<label class="control-label" id="sd3-label" for="sd3">Group 3 sd:</label>
-<input class="js-range-slider" id="sd3" data-skin="shiny" data-min="10000" data-max="50000" data-from="40000" data-step="1000" data-grid="true" data-grid-num="10" data-grid-snap="false" data-prettify-separator="," data-prettify-enabled="true" data-keyboard="true" data-data-type="number"/>
-</div>
-<div class="form-group shiny-input-container">
-<label class="control-label" id="sd4-label" for="sd4">Group 4 sd:</label>
-<input class="js-range-slider" id="sd4" data-skin="shiny" data-min="10000" data-max="50000" data-from="15000" data-step="1000" data-grid="true" data-grid-num="10" data-grid-snap="false" data-prettify-separator="," data-prettify-enabled="true" data-keyboard="true" data-data-type="number"/>
-</div>
-<div class="form-group shiny-input-container">
-<label class="control-label" id="n-label" for="n">Group sample size n:</label>
-<input class="js-range-slider" id="n" data-skin="shiny" data-min="100" data-max="10000" data-from="100" data-step="1" data-grid="true" data-grid-num="10" data-grid-snap="false" data-prettify-separator="," data-prettify-enabled="true" data-keyboard="true" data-data-type="number"/>
+<label class="control-label" id="r-label" for="r">R</label>
+<input class="js-range-slider" id="r" data-skin="shiny" data-min="2" data-max="5" data-from="5" data-step="1" data-grid="true" data-grid-num="3" data-grid-snap="false" data-prettify-separator="," data-prettify-enabled="true" data-keyboard="true" data-data-type="number"/>
 </div>
 </form>
 </div>
 <div class="col-sm-8" role="main">
-<div id="boxplot" class="shiny-plot-output" style="width:100%;height:400px;"></div>
-<div id="analysis" style="width:100%; height:auto; " class="datatables html-widget html-widget-output"></div>
+<div class="row">
+<div class="col-sm-6">
+<div id="response_surface" class="shiny-plot-output" style="width:100%;height:400px;"></div>
+</div>
+<div class="col-sm-6">
+<div id="interaction_plot" class="shiny-plot-output" style="width:100%;height:400px;"></div>
+</div>
+</div>
+<div class="row">
+<div class="col-sm-2"></div>
+<div class="col-sm-10">
+<b>Linear model summary</b>
+<div id="linear_model" style="width:100%; height:auto; " class="datatables html-widget html-widget-output"></div>
+</div>
+</div>
 </div>
 </div>
 </div>
 <p>We can see that to get to a p value greater than 0.05 we have to get the means very close. In other words the treatment does not have an effect or in our case the ebike frame hardening process wouldn’t have an effect on its aging resistance.</p>
 </div>
-<div id="section-exercise-boxplot" class="section level2">
-<h2>Exercise: boxplot</h2>
-<p>A final exercise below to check your knowledge on box plots. In the box below generate a boxplot like the one presented on the app before. To get the exact same result you need to convert the variable to a factor. This can be done either modifying it in the data set or in the ggplot call directly.</p>
-<div class="tutorial-exercise" data-label="pareto" data-caption="Code" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="13">
-<pre class="text"><code>ebike_factor &lt;- ebike_narrow %&gt;%
-  mutate(                             )
-
-ggplot(
-  
-  
-) + 
-  labs(
-    title = &quot;e-bike frame hardening process&quot;,
-    subtitle = &quot;Raw data plot&quot;,
-    x = &quot;Furnace Temperature [°C]&quot;,
-    y = &quot;Cycles to failure [n]&quot;
-  )</code></pre>
+<div id="section-exercise" class="section level2">
+<h2>Exercise:</h2>
+<div class="tutorial-exercise" data-label="histogram" data-caption="Code" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="5">
 <script type="application/json" data-opts-chunk="1">{"fig.width":6.5,"fig.height":4,"fig.retina":2,"fig.align":"default","fig.keep":"high","fig.show":"asis","out.width":624,"warning":false,"error":false,"message":false,"exercise.df_print":"paged","exercise.checker":"NULL"}</script>
 </div>
 </div>
-<div id="section-quiz-anova-parameters" class="section level2">
-<h2>Quiz: anova parameters</h2>
+<div id="section-quizz-interactions" class="section level2">
+<h2>Quizz: interactions</h2>
 <p>Although we tend to take it as a direct calculation when using excel, minitab or another software the anova calculation has many steps to get to the p value and to fully grasp its meaning it is helpful to dig into those aspects.</p>
 <div class="panel panel-default">
-<div data-label="quiz-parameters" class="tutorial-question panel-body">
-<div id="quiz-parameters-answer_container" class="shiny-html-output"></div>
-<div id="quiz-parameters-message_container" class="shiny-html-output"></div>
-<div id="quiz-parameters-action_button_container" class="shiny-html-output"></div>
+<div data-label="quizz-cpk" class="tutorial-question panel-body">
+<div id="quizz-cpk-answer_container" class="shiny-html-output"></div>
+<div id="quizz-cpk-message_container" class="shiny-html-output"></div>
+<div id="quizz-cpk-action_button_container" class="shiny-html-output"></div>
 <script>if (Tutorial.triggerMathJax) Tutorial.triggerMathJax()</script>
 </div>
 </div>
-
+inputs and output, distribution of the inputs, the inputs means and variability, the split of the input factors in groups, differences between the means of those factors, the ratio between the groups variabilitiy. 
 <script type="application/shiny-prerendered" data-context="server-start">
-library(tidyverse)
-library(scales)
 library(learnr)
-source("theme_industRial.R")
-# ebike_hardening <- industRial::ebike_hardening
-ebike_hardening <- read_rds("ebike_hardening.rds")
+# battery_charging <- write_rds(battery_charging, "battery_charging.rds")
+battery_charging <- readr::read_rds("battery_charging.rds")
 knitr::opts_chunk$set(echo = FALSE, message = FALSE, warning = FALSE)
 </script>
  
@@ -262,7 +249,7 @@ session$onSessionEnded(function() {
 </script>
  
 <script type="application/shiny-prerendered" data-context="server">
-learnr:::question_prerendered_chunk(structure(list(type = "learnr_radio", label = "quiz-usage-1",     question = structure("Which is the primary use of the anova in an industrial DoE (design of experiment)?", html = TRUE, class = c("html",     "character")), answers = list(structure(list(id = "lnr_ans_3b4f5a6",         option = "Compare variances", value = "Compare variances",         label = structure("Compare variances", html = TRUE, class = c("html",         "character")), correct = FALSE, message = structure("The name analysis of variance can be considered misleading. In fact the variances (or to be more specific the sums of the squares) are calculated but this is not the primary outcome we&#39;re looking for.", html = TRUE, class = c("html",         "character"))), class = c("tutorial_question_answer",     "tutorial_quiz_answer")), structure(list(id = "lnr_ans_ae12adb",         option = "Compare standard deviations", value = "Compare standard deviations",         label = structure("Compare standard deviations", html = TRUE, class = c("html",         "character")), correct = FALSE, message = NULL), class = c("tutorial_question_answer",     "tutorial_quiz_answer")), structure(list(id = "lnr_ans_431fbeb",         option = "Compare means", value = "Compare means", label = structure("Compare means", html = TRUE, class = c("html",         "character")), correct = TRUE, message = structure("That&#39;s it! This approach allows to compare more that two means, thus extending the t.test. It establishes if their difference is statistically different. This provides an indication if the experiment has had an effect.", html = TRUE, class = c("html",         "character"))), class = c("tutorial_question_answer",     "tutorial_quiz_answer")), structure(list(id = "lnr_ans_e283741",         option = "Compare ranges", value = "Compare ranges",         label = structure("Compare ranges", html = TRUE, class = c("html",         "character")), correct = FALSE, message = NULL), class = c("tutorial_question_answer",     "tutorial_quiz_answer"))), button_labels = list(submit = structure("Submit Answer", html = TRUE, class = c("html",     "character")), try_again = structure("Try Again", html = TRUE, class = c("html",     "character"))), messages = list(correct = structure("Correct!", html = TRUE, class = c("html",     "character")), try_again = structure("Incorrect", html = TRUE, class = c("html",     "character")), incorrect = structure("Incorrect", html = TRUE, class = c("html",     "character")), message = NULL, post_message = NULL), ids = list(        answer = "quiz-usage-1-answer", question = "quiz-usage-1"),     loading = structure("<strong>Loading:<\u002fstrong> \nWhich is the primary use of the anova in an industrial DoE (design of experiment)?\n<br/><br/><br/>", html = TRUE, class = c("html",     "character")), random_answer_order = FALSE, allow_retry = TRUE,     seed = 1483410421.80923, options = list()), class = c("learnr_radio", "tutorial_question")))
+learnr:::question_prerendered_chunk(structure(list(type = "learnr_radio", label = "question-cpk-1",     question = structure("Which is the primary use of the anova in an industrial DoE (design of experiment)?", html = TRUE, class = c("html",     "character")), answers = list(structure(list(id = "lnr_ans_b948e08",         option = "Compare variances", value = "Compare variances",         label = structure("Compare variances", html = TRUE, class = c("html",         "character")), correct = FALSE, message = structure("The name analysis of variance can be considered misleading. In fact the variances (or to be more specific the sums of the squares) are calculated but this is not the primary outcome we&#39;re looking for.", html = TRUE, class = c("html",         "character"))), class = c("tutorial_question_answer",     "tutorial_quiz_answer")), structure(list(id = "lnr_ans_c3df5e1",         option = "Compare standard deviations", value = "Compare standard deviations",         label = structure("Compare standard deviations", html = TRUE, class = c("html",         "character")), correct = FALSE, message = NULL), class = c("tutorial_question_answer",     "tutorial_quiz_answer")), structure(list(id = "lnr_ans_412064a",         option = "Compare means", value = "Compare means", label = structure("Compare means", html = TRUE, class = c("html",         "character")), correct = TRUE, message = structure("That&#39;s it! This approach allows to compare more that two means, thus extending the t.test. It establishes if their difference is statistically different. This provides an indication if the experiment has had an effect.", html = TRUE, class = c("html",         "character"))), class = c("tutorial_question_answer",     "tutorial_quiz_answer")), structure(list(id = "lnr_ans_2da1561",         option = "Compare ranges", value = "Compare ranges",         label = structure("Compare ranges", html = TRUE, class = c("html",         "character")), correct = FALSE, message = NULL), class = c("tutorial_question_answer",     "tutorial_quiz_answer"))), button_labels = list(submit = structure("Submit Answer", html = TRUE, class = c("html",     "character")), try_again = structure("Try Again", html = TRUE, class = c("html",     "character"))), messages = list(correct = structure("Correct!", html = TRUE, class = c("html",     "character")), try_again = structure("Incorrect", html = TRUE, class = c("html",     "character")), incorrect = structure("Incorrect", html = TRUE, class = c("html",     "character")), message = NULL, post_message = NULL), ids = list(        answer = "question-cpk-1-answer", question = "question-cpk-1"),     loading = structure("<strong>Loading:<\u002fstrong> \nWhich is the primary use of the anova in an industrial DoE (design of experiment)?\n<br/><br/><br/>", html = TRUE, class = c("html",     "character")), random_answer_order = FALSE, allow_retry = TRUE,     seed = 831131949.612974, options = list()), class = c("learnr_radio", "tutorial_question")))
 </script>
  
 <script type="application/shiny-prerendered" data-context="server">
@@ -273,91 +260,108 @@ output$`tutorial-exercise-ebike-output` <- renderUI({
 </script>
  
 <script type="application/shiny-prerendered" data-context="server">
-    measurements <- reactive({
-        tibble(
-            T160 = rnorm(mean = input$mean1, sd = input$sd1, n = input$n),
-            T180 = rnorm(mean = input$mean2, sd = input$sd2, n = input$n),
-            T200 = rnorm(mean = input$mean3, sd = input$sd3, n = input$n),
-            T220 = rnorm(mean = input$mean4, sd = input$sd4, n = input$n)) %>% 
-        pivot_longer(
-            cols = everything(), 
-            names_to = "group",
-            values_to = "value") %>%
-            group_by(group) %>%
-            mutate(group_mean = mean(value))
+  model_formula <- reactive({
+    if (input$selected_variables == "ab") {
+      model_formula = charging_time ~ A + B + A:B
+    } else if (input$selected_variables == "ac") {
+      model_formula = charging_time ~ A + C + A:C
+    } else if (input$selected_variables == "bc") {
+      model_formula = charging_time ~ B + C + B:C
+    }
+  }) 
+  
+  model_view <- reactive({
+    if (input$selected_variables == "ab") {
+      model_view = A ~ B
+    } else if (input$selected_variables == "ac") {
+      model_view = A ~ C
+    } else if (input$selected_variables == "bc") {
+      model_view = B ~ C
+    }
+  })
+    
+  
+  interaction_factors <- reactive({
+    if (input$selected_variables == "ab") {
+        interaction_factors <- list()
+        interaction_factors$x.factor <- battery_charging$B
+        interaction_factors$trace.factor <- battery_charging$A
+        interaction_factors$xlab <- "B"
+        interaction_factors$trace.label <- "A"
+    } else if (input$selected_variables == "ac") {
+        interaction_factors <- list()
+        interaction_factors$x.factor <- battery_charging$C
+        interaction_factors$trace.factor <- battery_charging$A
+        interaction_factors$xlab <- "C"
+        interaction_factors$trace.label <- "A"
+    } else if (input$selected_variables == "bc") {
+        interaction_factors <- list()
+        interaction_factors$x.factor <- battery_charging$C
+        interaction_factors$trace.factor <- battery_charging$B
+        interaction_factors$xlab <- "C"
+        interaction_factors$trace.label <- "B"
+    }
+    interaction_factors
+  })
+  
+  observe({
+    print("int factors")
+    print(class(interaction_factors))
+    print(interaction_factors())
     })
-
-    analysis <- reactive({
-        aov(value ~ group, measurements()) %>% tidy()
-    })
-        
-    output$boxplot <- renderPlot({
-
-    if (analysis()$p.value >= 0.05) {
-    ggplot(measurements()) +
-        geom_boxplot(aes(x = group, y = value, fill = group)) +
-        labs(
-            title = "Measurements plot",
-            subtile = "",
-            x = "",
-            y = "Value"
-        ) +
-        scale_fill_viridis_d(option = "A", begin = 0.5, guide = FALSE) +
-        scale_y_continuous(n.breaks = 10, labels = label_number(big.mark = "'")) +
-        labs(title = "e-bike frame hardening process",
-             subtitle = "Boxplot of frame aging resistance",
-             x = "Furnace Temperature [°C]",
-             y = "Cycles to failure [n]") +
-        theme_industRial()
-    } else {
-        ggplot(measurements()) +
-            geom_boxplot(aes(x = group, y = value, fill = group)) +
-            labs(
-                title = "Measurements plot",
-                subtile = "",
-                x = "",
-                y = "Value"
-            ) +
-            scale_fill_viridis_d(option = "D", begin = 0.5, guide = FALSE) +
-            scale_y_continuous(n.breaks = 10, labels = label_number(big.mark = "'")) +
-            labs(title = "e-bike frame hardening process",
-                 subtitle = "Boxplot of frame aging resistance",
-                 x = "Furnace Temperature [°C]",
-                 y = "Cycles to failure [n]") +
-            theme_industRial()
-      }
-    })
-        
-    output$analysis <- renderDT({
-      if (analysis()$p.value >= 0.05) {
-                analysis() %>%
-                    datatable(
-                        options = list(dom = 't')
-                    ) %>%
-                    formatSignif(columns = 3:4, digits = 1) %>%
-                    formatRound(columns = 5:6, digits = 2) %>%
-                    formatStyle(6, color = "red", fontWeight = "bold")
-            } else {
-                analysis() %>%
-                    datatable(
-                        options = list(dom = 't')
-                    ) %>%
-                    formatSignif(columns = 3:4, digits = 1) %>%
-                    formatRound(columns = 5:6, digits = 2) %>%
-                    formatStyle(6, color = "darkgreen", fontWeight = "bold")
-            }
-    }) 
+  
+  model <- reactive({
+    battery_lm <- lm(
+      formula = model_formula(),
+      data = battery_charging
+    )
+  })
+  
+  output$response_surface <- renderPlot(
+    persp(
+      model(),
+      model_view(),
+      col = viridis(12)[8],
+      contours = "col",
+      bounds = list(A = c(-1,1), C = c(-1,1)),
+      theta = input$theta, phi = input$phi, r = input$r,
+      zlab = "Charging Time",
+      main = "Response surface"
+    )
+  )
+  
+  output$interaction_plot <- renderPlot(
+    interaction.plot(x.factor = interaction_factors()$x.factor,
+                     trace.factor = interaction_factors()$trace.factor,
+                     fun = mean,
+                     response = battery_charging$charging_time,
+                     legend = TRUE,
+                     xlab =  {interaction_factors()$xlab},
+                     trace.label = {interaction_factors()$trace.label},
+                     ylab = "Charging Time",
+                     lwd = 2,
+                     main = "Interaction plot")
+  )
+  
+  output$linear_model <- renderDT({
+    model() %>%
+      tidy() %>%
+      datatable(
+        options = list(dom = 't')
+        ) %>%
+      formatRound(columns = c(2:5), digits = 2)
+  })
 </script>
  
 <script type="application/shiny-prerendered" data-context="server">
-`tutorial-exercise-pareto-result` <- learnr:::setup_exercise_handler(reactive(req(input$`tutorial-exercise-pareto-code-editor`)), session)
-output$`tutorial-exercise-pareto-output` <- renderUI({
-  `tutorial-exercise-pareto-result`()
+`tutorial-exercise-histogram-result` <- learnr:::setup_exercise_handler(reactive(req(input$`tutorial-exercise-histogram-code-editor`)), session)
+output$`tutorial-exercise-histogram-output` <- renderUI({
+  `tutorial-exercise-histogram-result`()
 })
 </script>
  
 <script type="application/shiny-prerendered" data-context="server">
-learnr:::question_prerendered_chunk(structure(list(type = "learnr_checkbox", label = "quiz-parameters",     question = structure("Which parameters influence the anova calculation?", html = TRUE, class = c("html",     "character")), answers = list(structure(list(id = "lnr_ans_f559e8e",         option = "the group means", value = "the group means",         label = structure("the group means", html = TRUE, class = c("html",         "character")), correct = TRUE, message = NULL), class = c("tutorial_question_answer",     "tutorial_quiz_answer")), structure(list(id = "lnr_ans_4ae4583",         option = "the group standard deviations", value = "the group standard deviations",         label = structure("the group standard deviations", html = TRUE, class = c("html",         "character")), correct = TRUE, message = NULL), class = c("tutorial_question_answer",     "tutorial_quiz_answer")), structure(list(id = "lnr_ans_70bf3d3",         option = "the sample size", value = "the sample size",         label = structure("the sample size", html = TRUE, class = c("html",         "character")), correct = TRUE, message = NULL), class = c("tutorial_question_answer",     "tutorial_quiz_answer")), structure(list(id = "lnr_ans_c970557",         option = "The absolute value of the output", value = "The absolute value of the output",         label = structure("The absolute value of the output", html = TRUE, class = c("html",         "character")), correct = FALSE, message = structure("the sample size has no influence if the ratios are the same the p value is the same, e.g. if the lifecycles were all divided by 10", html = TRUE, class = c("html",         "character"))), class = c("tutorial_question_answer",     "tutorial_quiz_answer"))), button_labels = list(submit = structure("Submit Answer", html = TRUE, class = c("html",     "character")), try_again = structure("Try Again", html = TRUE, class = c("html",     "character"))), messages = list(correct = structure("Correct!", html = TRUE, class = c("html",     "character")), try_again = structure("Incorrect", html = TRUE, class = c("html",     "character")), incorrect = structure("Incorrect", html = TRUE, class = c("html",     "character")), message = NULL, post_message = NULL), ids = list(        answer = "quiz-parameters-answer", question = "quiz-parameters"),     loading = structure("<strong>Loading:<\u002fstrong> \nWhich parameters influence the anova calculation?\n<br/><br/><br/>", html = TRUE, class = c("html",     "character")), random_answer_order = TRUE, allow_retry = TRUE,     seed = 48476168.4774265, options = list()), class = c("learnr_checkbox", "tutorial_question")))
+learnr:::question_prerendered_chunk(structure(list(type = "learnr_checkbox", label = "quizz-cpk",     question = structure("What is the exact mathematical formula to calculate the Cpk", html = TRUE, class = c("html",     "character")), answers = list(structure(list(id = "lnr_ans_65d0a68",         option = "", value = "", label = structure("", html = TRUE, class = c("html",         "character")), correct = TRUE, message = NULL), class = c("tutorial_question_answer",     "tutorial_quiz_answer")), structure(list(id = "lnr_ans_4ee0ead",         option = "the group standard deviations", value = "the group standard deviations",         label = structure("the group standard deviations", html = TRUE, class = c("html",         "character")), correct = TRUE, message = NULL), class = c("tutorial_question_answer",     "tutorial_quiz_answer")), structure(list(id = "lnr_ans_a99eafe",         option = "the sample size", value = "the sample size",         label = structure("the sample size", html = TRUE, class = c("html",         "character")), correct = TRUE, message = NULL), class = c("tutorial_question_answer",     "tutorial_quiz_answer")), structure(list(id = "lnr_ans_14e0a52",         option = "The absolute value of the output", value = "The absolute value of the output",         label = structure("The absolute value of the output", html = TRUE, class = c("html",         "character")), correct = FALSE, message = structure("the sample size has no influence if the ratios are the same the p value is the same, e.g. if the lifecycles were all divided by 10", html = TRUE, class = c("html",         "character"))), class = c("tutorial_question_answer",     "tutorial_quiz_answer"))), button_labels = list(submit = structure("Submit Answer", html = TRUE, class = c("html",     "character")), try_again = structure("Try Again", html = TRUE, class = c("html",     "character"))), messages = list(correct = structure("Correct!", html = TRUE, class = c("html",     "character")), try_again = structure("Incorrect", html = TRUE, class = c("html",     "character")), incorrect = structure("Incorrect", html = TRUE, class = c("html",     "character")), message = NULL, post_message = NULL), ids = list(        answer = "quizz-cpk-answer", question = "quizz-cpk"),     loading = structure("<strong>Loading:<\u002fstrong> \nWhat is the exact mathematical formula to calculate the Cpk\n<br/><br/><br/>", html = TRUE, class = c("html",     "character")), random_answer_order = TRUE, allow_retry = TRUE,     seed = 377862616.324044, options = list()), class = c("learnr_checkbox", "tutorial_question")))
 </script>
  <!--html_preserve-->
 <script type="application/shiny-prerendered" data-context="dependencies">
@@ -366,7 +370,7 @@ learnr:::question_prerendered_chunk(structure(list(type = "learnr_checkbox", lab
 <!--/html_preserve-->
 <!--html_preserve-->
 <script type="application/shiny-prerendered" data-context="execution_dependencies">
-{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["packages"]}},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["packages","version"]},"class":{"type":"character","attributes":{},"value":["data.frame"]},"row.names":{"type":"integer","attributes":{},"value":[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83]}},"value":[{"type":"character","attributes":{},"value":["assertthat","backports","base","broom","bslib","cellranger","checkmate","cli","colorspace","compiler","crayon","crosstalk","datasets","DBI","dbplyr","digest","dplyr","DT","ellipsis","evaluate","fansi","fastmap","forcats","fs","generics","ggplot2","glue","graphics","grDevices","grid","gtable","haven","hms","htmltools","htmlwidgets","httpuv","httr","jquerylib","jsonlite","knitr","later","learnr","lifecycle","lubridate","magrittr","markdown","methods","mime","modelr","munsell","pillar","pkgconfig","promises","purrr","R6","Rcpp","readr","readxl","reprex","rlang","rmarkdown","rprojroot","rstudioapi","rvest","sass","scales","shiny","stats","stringi","stringr","tibble","tidyr","tidyselect","tidyverse","tools","utf8","utils","vctrs","withr","xfun","xml2","xtable","yaml"]},{"type":"character","attributes":{},"value":["0.2.1","1.2.1","4.0.5","0.7.6","0.2.5","1.1.0","2.0.0","2.5.0","2.0-1","4.0.5","1.4.1","1.1.1","4.0.5","1.1.1","2.1.1","0.6.27","1.0.6","0.18","0.3.2","0.14","0.4.2","1.1.0","0.5.1","1.5.0","0.1.0","3.3.3","1.4.2","4.0.5","4.0.5","4.0.5","0.3.0","2.4.1","1.0.0","0.5.1.1","1.5.3","1.6.1","1.4.2","0.1.4","1.7.2","1.33","1.2.0","0.10.1","1.0.0","1.7.10","2.0.1","1.1","4.0.5","0.10","0.1.8","0.5.0","1.6.0","2.0.3","1.2.0.1","0.3.4","2.5.0","1.0.6","1.4.0","1.3.1","2.0.0","0.4.11","2.8","2.0.2","0.13","1.0.0","0.4.0","1.1.1","1.6.0","4.0.5","1.6.1","1.4.0","3.1.1","1.1.3","1.1.1","1.3.1","4.0.5","1.2.1","4.0.5","0.3.8","2.4.2","0.22","1.3.2","1.8-4","2.2.1"]}]}]}
+{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["packages"]}},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["packages","version"]},"class":{"type":"character","attributes":{},"value":["data.frame"]},"row.names":{"type":"integer","attributes":{},"value":[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72]}},"value":[{"type":"character","attributes":{},"value":["assertthat","backports","base","broom","bslib","checkmate","colorspace","compiler","crayon","crosstalk","datasets","DBI","digest","dplyr","DT","ellipsis","evaluate","fansi","fastmap","generics","ggplot2","glue","graphics","grDevices","grid","gridExtra","gtable","hms","htmltools","htmlwidgets","httpuv","jquerylib","jsonlite","knitr","later","learnr","lifecycle","magrittr","markdown","methods","mime","munsell","pillar","pkgconfig","promises","purrr","R6","Rcpp","readr","rlang","rmarkdown","rprojroot","rsm","sass","scales","shiny","stats","stringi","stringr","tibble","tidyr","tidyselect","tools","utf8","utils","vctrs","viridis","viridisLite","withr","xfun","xtable","yaml"]},{"type":"character","attributes":{},"value":["0.2.1","1.2.1","4.0.5","0.7.6","0.2.5","2.0.0","2.0-1","4.0.5","1.4.1","1.1.1","4.0.5","1.1.1","0.6.27","1.0.6","0.18","0.3.2","0.14","0.4.2","1.1.0","0.1.0","3.3.3","1.4.2","4.0.5","4.0.5","4.0.5","2.3","0.3.0","1.0.0","0.5.1.1","1.5.3","1.6.1","0.1.4","1.7.2","1.33","1.2.0","0.10.1","1.0.0","2.0.1","1.1","4.0.5","0.10","0.5.0","1.6.0","2.0.3","1.2.0.1","0.3.4","2.5.0","1.0.6","1.4.0","0.4.11","2.8","2.0.2","2.10.2","0.4.0","1.1.1","1.6.0","4.0.5","1.6.1","1.4.0","3.1.1","1.1.3","1.1.1","4.0.5","1.2.1","4.0.5","0.3.8","0.6.1","0.4.0","2.4.2","0.22","1.8-4","2.2.1"]}]}]}
 </script>
 <!--/html_preserve-->
 </div>

@@ -1,37 +1,35 @@
 
 
-
-# (PART) TOOLBOX {-}
+# (PART) TOOLBOX {.unnumbered}
 
 # R Packages
 
 Why R? Many tools exist to do Data Analysis and Statistics with different degrees of power and difficulty such as:
 
-* Spreadsheets: Excel, Libreoffice, Numbers
-* Proprietary software: Minitab, Mathlab
-* Programming languages: Visual Basic, R, Python, Julia
-* Databases: sqlite, postgre, mysql, mongodb
+-   Spreadsheets: Excel, Libreoffice, Numbers
+-   Proprietary software: Minitab, Mathlab
+-   Programming languages: Visual Basic, R, Python, Julia
+-   Databases: sqlite, postgre, mysql, mongodb
 
 Choosing the right set of tools for Data Science is often not a very scientific task. Mostly is a matter of what is available and what our colleagues, customers or suppliers use. As with everything it is important to remain open to evaluate new tools and approaches and even to be able to combine them.
 
-In this book we've chosen to provide all examples in R which is a free software environment for statistical computing and graphics https://www.r-project.org/
-Besides taste and personnal preference R brings a significant number of specific advantages in the field of Industrial Data Science:
+In this book we've chosen to provide all examples in R which is a free software environment for statistical computing and graphics <https://www.r-project.org/> Besides taste and personnal preference R brings a significant number of specific advantages in the field of Industrial Data Science:
 
-1. R allows for reproducible research
+1.  R allows for reproducible research
 
 This because the algorithms and functions defined to make the calculations can be inspected and all results can be fully reproduced and audited. This is known as reproducible research and is a critical aspect in all areas where a proof is needed such as in equipment validation and product quality reporting.
 
-2. R functions, tools and programs can be adapted and improved
+2.  R functions, tools and programs can be adapted and improved
 
 Being an open source language, all R libraries and packages added to the basic environment can be not only audited but adapted and improved This is very important as when we enter into details every industry has a slight different way of doing things, different naming conventions, different coeficients and so on.
 
-3. R is extensible
+3.  R is extensible
 
-R is compatible with most other software on the market and is an excellent "glue" tool allowing for example for data loading from excel files, producing reports in pdf and even building complete dashboards in the form of web pages. 
+R is compatible with most other software on the market and is an excellent "glue" tool allowing for example for data loading from excel files, producing reports in pdf and even building complete dashboards in the form of web pages.
 
 All tools applied throughout this book are available in the form of packages of the programming language R. As with all open source code, they're all available for download with freedom to modification and at no cost.
 
-The amount of packages available is extremely large and growing very fast. When selecting new packages it is recommended to check the latest package update. Packages that have had no improvements since more than a couple of years should be questionned. The field evolves rapidly and compatibility and other issues can become painfull. A way to obtain statistics on package history is on [metacran](https://www.r-pkg.org/) or [RStudio package manager](https://packagemanager.rstudio.com/). 
+The amount of packages available is extremely large and growing very fast. When selecting new packages it is recommended to check the latest package update. Packages that have had no improvements since more than a couple of years should be questionned. The field evolves rapidly and compatibility and other issues can become painfull. A way to obtain statistics on package history is on [metacran](https://www.r-pkg.org/) or [RStudio package manager](https://packagemanager.rstudio.com/).
 
 Below a comprehensive list of the different packages used in the book:
 
@@ -76,11 +74,9 @@ Below a comprehensive list of the different packages used in the book:
 
 Theses packages below are loaded implicitly and not visible in the book text. Be sure to load at minimum the packages below before trying any example:
 
-```{}
-ds_pkgs <- c("tidyverse", "scales", "janitor", "knitr", "stats", "industRial",
-  "viridis", "broom", "patchwork")
-purrr::map(ds_pkgs, library, character.only = TRUE)
-```
+    ds_pkgs <- c("tidyverse", "scales", "janitor", "knitr", "stats", "industRial",
+      "viridis", "broom", "patchwork")
+    purrr::map(ds_pkgs, library, character.only = TRUE)
 
 A common issue in R when compared to python for instance is **function masking**. As we tend to load all the sets of functions from each package we end up with conflicting function names. In the scope of this text it is mostly the function filter() from `{dplyr}` which conflicts with the function with the same name from `{stats}`. We use the most simple technique which is to add `filter <- dplyr::filter` in the beginning of our script to precise which function we want to give priority and we pre-append the package name to all calls of the other function such as `stats::filter`. For more sophisticated ways to handle this issue we suggest the package `{import}`.
 
@@ -106,21 +102,17 @@ This package is one of the most complete and vast packages in Design of Experiem
 
 ## car
 
-The Companion for Applied Regression is also used extensively as it contains many usefull functions to assess the performance of linear models and anova. 
+The Companion for Applied Regression is also used extensively as it contains many usefull functions to assess the performance of linear models and anova.
 
 # Datasets {#datasets}
 
 An original package with the name `{industRial}` has been developed as a companion package for this book. It can be downloaded from github with the following command:
 
-```{}
-devtools::install_github("J-Ramalho/industRial")
-```
+    devtools::install_github("J-Ramalho/industRial")
 
 The primary package goal is to make easily available all the data sets from all case studies. All dataset presented throughout the book are published either fully anonymized. Once the package is correctly installed it can be loaded in the R session as usual with the library() function:
 
-```{}
-library(industRial)
-```
+    library(industRial)
 
 Once loaded the data sets become immediately available in memory and can directly be used in the examples presented or for further exploration. Lets confirm this invoking the first data set:
 
@@ -201,33 +193,33 @@ paste0(.libPaths()[1], "/industRial/book")
 
 A set of practical exercises on key concepts presented throughout this book is available either on the web or locally, instructions follow.
 
+<br>
+
 **Run tutorials on the web**
 
 the exercises are published on the shinyapp.io server and can be freely accessed with the links below:
 
-[Pareto charts](https://j-ramalho.shinyapps.io/pareto/)  
-This tutorial builds on the *The dial polishing workshop* case study from the Design for Six Sigma chapter, train building pareto charts using the `{qichart2}` package and explore how playing with different variables gives new insights into apparently simple data collections.
+| Topic/Link | Content                                        |
+|------------|------------------------------------------------|
+| [Pareto](https://j-ramalho.shinyapps.io/pareto/) | This tutorial builds on the *The dial polishing workshop* case study from the Design for Six Sigma chapter, train building pareto charts using the `{qichart2}` package and explore how playing with different variables gives new insights into apparently simple data collections. |
+| [Anova](https://j-ramalho.shinyapps.io/anova/)   | This tutorial explores how the p value is calculated by playing with a dynamic anova chart. This exercise is based on the *The e-bike frame hardening process* of the DOE Interactions chapter. |
+| [Response Surfaces](https://j-ramalho.shinyapps.io/surface/) | This tutorial tests 3D visualization skills by playing with 3D response surface plots and the related interaction plots. Additionally it shows how the p value of the model interactions change with the surface shape.| 
 
-[Anova](https://j-ramalho.shinyapps.io/anova/)  
-This tutorial explores how the p value is calculated by playing with a dynamic anova chart. This exercise is based on the *The e-bike frame hardening process* of the DOE Interactions chapter.
+<br><br>
 
 **Run tutorials locally**
 
-The tutorials can also be run locally which can be convenient as they load faster. This also allows for further exploration as the original tutorial code becomes available.
+The same set of tutorials can also be run locally which can be convenient as they load faster. This also allows for further exploration as the original tutorial code becomes available.
 
 Install locally the `{industRial}` and `{learnr}` packages, with:
 
-```{}
-devtools::install_github("J-Ramalho/industRial")
-install.packages("learnr)
-```
+    devtools::install_github("J-Ramalho/industRial")
+    install.packages("learnr)
 
 load the packages:
 
-```{}
-library(industRial)
-library(learnr)
-```
+    library(industRial)
+    library(learnr)
 
 and list the tutorials with:
 
@@ -246,19 +238,10 @@ Available tutorials:
 
 choose a tutorial and run it as follows:
 
-```{}
-learnr::run_tutorial(package = "industRial", "anova")
-```
+    learnr::run_tutorial(package = "industRial", "anova")
 
-The original files are available in the package tutorials folder. Their names correspond to the tutorial names listed before so there is a simple way to open the desired file, e.g.: 
+The original files are available in the package tutorials folder. Their names correspond to the tutorial names listed before so there is a simple way to open the desired file, e.g.:
 
-```{}
-rstudioapi::navigateToFile(
-  paste0(.libPaths()[1], "/industRial/tutorials/anova/anova.Rmd")
-  )
-```
-
-
-
-
-
+    rstudioapi::navigateToFile(
+      paste0(.libPaths()[1], "/industRial/tutorials/anova/anova.Rmd")
+      )

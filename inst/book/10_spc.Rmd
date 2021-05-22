@@ -392,7 +392,7 @@ tablet_weight <- tablet_weight %>%
 We're now going to use the function process stats to calculate several statistical data for this dataset. As mentionned we encourage the reader to explore the code with body(process_stats) and dput(formals(process_stats)) as there is a wealth of details in how to calculate process control limits, moving ranges and the like.
 
 ```{r}
-weight_statistics_data <- process_stats(tablet_weight, 9)
+weight_statistics_data <- process_stats(tablet_weight, 10)
 ```
 
 this being done we can now convert this data into an easy readable format for reporting of for a future integration in a shiny app for example. We're exploring the package `{gt}` that has a specific very neat look rather different from the `{kable}` package used in most of the book. 

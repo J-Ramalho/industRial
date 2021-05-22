@@ -12,10 +12,19 @@ description: >
 
 ```{r setup, include=FALSE}
 library(tidyverse)
-library(scales)
+library(stats)
+library(gt)
 library(learnr)
 source("theme_qcc.R")
-# tablet_weight <- read_rds("tablet_weight.rds")
+source("chart_Cpk.R")
+source("process_stats.R")
+source("process_stats_table.R")
+source("off_spec.R")
+source("process_Cpk.R")
+filter <- dplyr::filter
+select <- dplyr::select
+tablet_weight <- read_rds("tablet_weight.rds")
+
 knitr::opts_chunk$set(echo = FALSE, message = FALSE, warning = FALSE)
 ```
 
@@ -73,11 +82,69 @@ The anova output can be sometimes tricky to interpret as many things are at play
 Try to get to a non significant p value of more than <b style='color:#ff0000'>0.05</b> by playing with the means (and standard deviations if needed). The boxes colors will change from greenish to reddish reflecting the book examples. 
 
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
+fluidPage(
+  titlePanel("Process Capability Study"),
 
+    fluidPage(
+      column(
+        6,
+        plotOutput("capability_chart"),
+        sliderInput(
+          width = 100,
+          "spec_perc",
+          "Tolerance [%]",
+          min = 1,
+          max = 16,
+          value = 9,
+          step = 1
+        ),
+      ), 
+      column(6, gt_output("statistics_table")
+      )
+    )
+
+)
 ```
 
 ```{r context="server"}
+filter <- dplyr::filter
+select <- dplyr::select
+  tablet_weight <- tablet_weight %>%
+    janitor::clean_names(case = "snake")
+  
+  weight_statistics_data <- reactive({
+    process_stats(
+      data = tablet_weight, 
+      part_spec_percent = input$spec_perc
+    )
+  })
+  
+  weight_normal <- reactive({
+    stats::rnorm(
+    n = 100000,
+    mean = mean(weight_statistics_data() %>% pull(weight_mean)),
+    sd = mean(weight_statistics_data() %>% pull(weight_sd))
+    ) %>%
+    as_tibble()
+  })
+  
+  output$capability_chart <- renderPlot({
 
+    chart_Cpk(weight_statistics_data()) +
+    ggplot2::geom_density(
+      data = weight_normal(),
+      ggplot2::aes(x = value), linetype = 2
+    ) +
+      expand_limits(x = c(0.7, 1.1)) 
+  })
+  
+  output$statistics_table <- render_gt({
+
+    process_stats_table(weight_statistics_data()) %>%
+      gt::fmt_number(columns = 2, decimals = 2) %>%
+      gt::fmt_number(columns = 2, rows = Variable == "Sample size", decimals = 0)
+
+  })
 ```
 
 We can see that to get to a p value greater than 0.05 we have to get the means very close. In other words the treatment does not have an effect or in our case the ebike frame hardening process wouldn't have an effect on its aging resistance.

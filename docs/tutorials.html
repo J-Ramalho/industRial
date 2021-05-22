@@ -175,7 +175,7 @@ div.csl-indent {
 <li><a href="./">industRial data science</a></li>
 
 <li class="divider"></li>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Welcome</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>output: pdf_document</a></li>
 <li class="chapter" data-level="" data-path="contents.html"><a href="contents.html"><i class="fa fa-check"></i>Table of Contents</a></li>
 <li class="part"><span><b>I TOOLBOX</b></span></li>
 <li class="chapter" data-level="" data-path="r-packages.html"><a href="r-packages.html"><i class="fa fa-check"></i>R Packages</a>
@@ -321,14 +321,38 @@ div.csl-indent {
 <div id="tutorials" class="section level1">
 <h1>Tutorials</h1>
 <p>A set of practical exercises on key concepts presented throughout this book is available either on the web or locally, instructions follow.</p>
+<p><br></p>
 <p><strong>Run tutorials on the web</strong></p>
 <p>the exercises are published on the shinyapp.io server and can be freely accessed with the links below:</p>
-<p><a href="https://j-ramalho.shinyapps.io/pareto/">Pareto charts</a><br />
-This tutorial builds on the <em>The dial polishing workshop</em> case study from the Design for Six Sigma chapter, train building pareto charts using the <code>{qichart2}</code> package and explore how playing with different variables gives new insights into apparently simple data collections.</p>
-<p><a href="https://j-ramalho.shinyapps.io/anova/">Anova</a><br />
-This tutorial explores how the p value is calculated by playing with a dynamic anova chart. This exercise is based on the <em>The e-bike frame hardening process</em> of the DOE Interactions chapter.</p>
+<table>
+<colgroup>
+<col width="20%" />
+<col width="80%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Topic/Link</th>
+<th>Content</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><a href="https://j-ramalho.shinyapps.io/pareto/">Pareto</a></td>
+<td>This tutorial builds on the <em>The dial polishing workshop</em> case study from the Design for Six Sigma chapter, train building pareto charts using the <code>{qichart2}</code> package and explore how playing with different variables gives new insights into apparently simple data collections.</td>
+</tr>
+<tr class="even">
+<td><a href="https://j-ramalho.shinyapps.io/anova/">Anova</a></td>
+<td>This tutorial explores how the p value is calculated by playing with a dynamic anova chart. This exercise is based on the <em>The e-bike frame hardening process</em> of the DOE Interactions chapter.</td>
+</tr>
+<tr class="odd">
+<td><a href="https://j-ramalho.shinyapps.io/surface/">Response Surfaces</a></td>
+<td>This tutorial tests 3D visualization skills by playing with 3D response surface plots and the related interaction plots. Additionally it shows how the p value of the model interactions change with the surface shape.</td>
+</tr>
+</tbody>
+</table>
+<p><br><br></p>
 <p><strong>Run tutorials locally</strong></p>
-<p>The tutorials can also be run locally which can be convenient as they load faster. This also allows for further exploration as the original tutorial code becomes available.</p>
+<p>The same set of tutorials can also be run locally which can be convenient as they load faster. This also allows for further exploration as the original tutorial code becomes available.</p>
 <p>Install locally the <code>{industRial}</code> and <code>{learnr}</code> packages, with:</p>
 <pre><code>devtools::install_github(&quot;J-Ramalho/industRial&quot;)
 install.packages(&quot;learnr)</code></pre>
@@ -405,20 +429,6 @@ gitbook.start({
 });
 </script>
 
-<!-- dynamically load mathjax for compatibility with self-contained -->
-<script>
-  (function () {
-    var script = document.createElement("script");
-    script.type = "text/javascript";
-    var src = "true";
-    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
-    if (location.protocol !== "file:")
-      if (/^https?:/.test(src))
-        src = src.replace(/^https?:/, '');
-    script.src = src;
-    document.getElementsByTagName("head")[0].appendChild(script);
-  })();
-</script>
 </body>
 
 </html>

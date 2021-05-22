@@ -13,6 +13,10 @@ description: >
 library(tidyverse)
 library(scales)
 library(learnr)
+library(DT)
+library(broom)
+filter <- dplyr::filter
+select <- dplyr::select
 source("theme_industRial.R")
 # ebike_hardening <- industRial::ebike_hardening
 ebike_hardening <- read_rds("ebike_hardening.rds")
@@ -85,13 +89,6 @@ The anova output can be sometimes tricky to interpret as many things are at play
 Try to get to a non significant p value of more than <b style='color:#ff0000'>0.05</b> by playing with the means (and standard deviations if needed). The boxes colors will change from greenish to reddish reflecting the book examples. 
 
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
-library(tidyverse)
-library(DT)
-library(stats)
-library(broom)
-filter <- dplyr::filter
-select <- dplyr::select
-
 fluidPage(
     titlePanel("The anova app"),
     sidebarLayout(

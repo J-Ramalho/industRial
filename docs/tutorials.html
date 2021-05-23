@@ -24,7 +24,7 @@
 <meta name="author" content="João Ramalho" />
 
 
-<meta name="date" content="2021-05-22" />
+<meta name="date" content="2021-05-23" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -159,7 +159,7 @@ div.csl-indent {
 }
 </style>
 
-<link rel="stylesheet" href="industRialds.css" type="text/css" />
+<link rel="stylesheet" href="css/industRialds.css" type="text/css" />
 </head>
 
 <body>
@@ -175,7 +175,7 @@ div.csl-indent {
 <li><a href="./">industRial data science</a></li>
 
 <li class="divider"></li>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>output: pdf_document</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Welcome</a></li>
 <li class="chapter" data-level="" data-path="contents.html"><a href="contents.html"><i class="fa fa-check"></i>Table of Contents</a></li>
 <li class="part"><span><b>I TOOLBOX</b></span></li>
 <li class="chapter" data-level="" data-path="r-packages.html"><a href="r-packages.html"><i class="fa fa-check"></i>R Packages</a>
@@ -188,7 +188,11 @@ div.csl-indent {
 </ul></li>
 <li class="chapter" data-level="" data-path="datasets.html"><a href="datasets.html"><i class="fa fa-check"></i>Datasets</a></li>
 <li class="chapter" data-level="" data-path="functions.html"><a href="functions.html"><i class="fa fa-check"></i>Functions</a></li>
-<li class="chapter" data-level="" data-path="tutorials.html"><a href="tutorials.html"><i class="fa fa-check"></i>Tutorials</a></li>
+<li class="chapter" data-level="" data-path="tutorials.html"><a href="tutorials.html"><i class="fa fa-check"></i>Tutorials</a>
+<ul>
+<li class="chapter" data-level="" data-path="tutorials.html"><a href="tutorials.html#on-the-web"><i class="fa fa-check"></i>On the web</a></li>
+<li class="chapter" data-level="" data-path="tutorials.html"><a href="tutorials.html#locally"><i class="fa fa-check"></i>Locally</a></li>
+</ul></li>
 <li class="part"><span><b>II CASE STUDIES</b></span></li>
 <li class="chapter" data-level="" data-path="design-for-six-sigma.html"><a href="design-for-six-sigma.html"><i class="fa fa-check"></i>Design for Six Sigma</a>
 <ul>
@@ -299,8 +303,8 @@ div.csl-indent {
 <li class="chapter" data-level="" data-path="glossary.html"><a href="glossary.html#msa"><i class="fa fa-check"></i>MSA</a></li>
 <li class="chapter" data-level="" data-path="glossary.html"><a href="glossary.html#doe"><i class="fa fa-check"></i>DOE</a></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="imprint.html"><a href="imprint.html"><i class="fa fa-check"></i>Imprint</a></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+<li class="chapter" data-level="" data-path="imprint.html"><a href="imprint.html"><i class="fa fa-check"></i>Imprint</a></li>
 </ul>
 
       </nav>
@@ -322,8 +326,9 @@ div.csl-indent {
 <h1>Tutorials</h1>
 <p>A set of practical exercises on key concepts presented throughout this book is available either on the web or locally, instructions follow.</p>
 <p><br></p>
-<p><strong>Run tutorials on the web</strong></p>
-<p>the exercises are published on the shinyapp.io server and can be freely accessed with the links below:</p>
+<div id="on-the-web" class="section level2">
+<h2>On the web</h2>
+<p>the tutorials in the list below are published on the shinyapp.io server and can be freely accessed with the links below:</p>
 <table>
 <colgroup>
 <col width="20%" />
@@ -337,21 +342,27 @@ div.csl-indent {
 </thead>
 <tbody>
 <tr class="odd">
-<td><a href="https://j-ramalho.shinyapps.io/pareto/">Pareto</a></td>
+<td><a href="https://j-ramalho.shinyapps.io/pareto/">Pareto chart</a></td>
 <td>This tutorial builds on the <em>The dial polishing workshop</em> case study from the Design for Six Sigma chapter, train building pareto charts using the <code>{qichart2}</code> package and explore how playing with different variables gives new insights into apparently simple data collections.</td>
 </tr>
 <tr class="even">
-<td><a href="https://j-ramalho.shinyapps.io/anova/">Anova</a></td>
+<td><a href="https://j-ramalho.shinyapps.io/anova/">DOE Anova</a></td>
 <td>This tutorial explores how the p value is calculated by playing with a dynamic anova chart. This exercise is based on the <em>The e-bike frame hardening process</em> of the DOE Interactions chapter.</td>
 </tr>
 <tr class="odd">
-<td><a href="https://j-ramalho.shinyapps.io/surface/">Response Surfaces</a></td>
-<td>This tutorial tests 3D visualization skills by playing with 3D response surface plots and the related interaction plots. Additionally it shows how the p value of the model interactions change with the surface shape.</td>
+<td><a href="https://j-ramalho.shinyapps.io/surface/">Response Surface</a></td>
+<td>This tutorial tests 3D visualization skills by playing with 3D response surface plots and the related interaction plots using the battery_charging dataset and the <code>{rsm}</code> package.</td>
+</tr>
+<tr class="even">
+<td><a href="https://j-ramalho.shinyapps.io/capability/">Process Capability</a></td>
+<td>In this tutorial we can play with the process centering variability and see how this is translated in the process indicators “percentage out of spec” and Cpk.</td>
 </tr>
 </tbody>
 </table>
 <p><br><br></p>
-<p><strong>Run tutorials locally</strong></p>
+</div>
+<div id="locally" class="section level2">
+<h2>Locally</h2>
 <p>The same set of tutorials can also be run locally which can be convenient as they load faster. This also allows for further exploration as the original tutorial code becomes available.</p>
 <p>Install locally the <code>{industRial}</code> and <code>{learnr}</code> packages, with:</p>
 <pre><code>devtools::install_github(&quot;J-Ramalho/industRial&quot;)
@@ -373,6 +384,7 @@ library(learnr)</code></pre>
   paste0(.libPaths()[1], &quot;/industRial/tutorials/anova/anova.Rmd&quot;)
   )</code></pre>
 
+</div>
 </div>
 
 
@@ -429,6 +441,20 @@ gitbook.start({
 });
 </script>
 
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
 </body>
 
 </html>

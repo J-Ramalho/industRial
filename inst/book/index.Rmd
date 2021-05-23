@@ -9,7 +9,7 @@ output:
   bookdown::gitbook:
     includes:
       in_header: includeme.html
-    css: industRialds.css
+    css: css/industRialds.css
     fontsettings:
       theme: white
       family: sans

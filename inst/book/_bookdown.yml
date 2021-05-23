@@ -18,7 +18,6 @@ rmd_files: [
   "8_generalDOEs.Rmd",
   "9_twolevelDOEs.Rmd",
   "10_spc.Rmd",
-  "12_glossary.Rmd",
-  "13_imprint.Rmd",
-  "14_references.Rmd"
+  "11_glossary.Rmd",
+  "12_references.Rmd"
 ]

@@ -256,7 +256,7 @@ durbinWatsonTest(ebike_lm_factor)
 
 ```
  lag Autocorrelation D-W Statistic p-value
-   1      -0.5343347      2.960893   0.086
+   1      -0.5343347      2.960893   0.096
  Alternative hypothesis: rho != 0
 ```
 
@@ -456,16 +456,6 @@ Similar to the t-test but extended - this test allows to compare the means betwe
 
 ANOVA principle: the total variability in the data, as measured by the total corrected sum of squares, can be partitioned into a sum of squares of the differences between the treatment averages and the grand average plus a sum of squares of the differences of observations within treatments from the treatment average
 
-
-```r
-library(kableExtra)
-knitr::include_app("https://j-ramalho.shinyapps.io/ebike/", 
-  height = "600px")
-```
-
-<iframe src="https://j-ramalho.shinyapps.io/ebike/?showcase=0" width="80%" height="600px"></iframe>
-
-
 #### Anova fixed effects 
 
 In R the anova is built by passing the linear model to the anova or aov functions. The output of the anova function is just the anova table as shown here for this first example. The output of the aov function is a list.
@@ -535,7 +525,7 @@ ggplot(ebike_factor2,
        y = "Cycles to failure [n]")
 ```
 
-<img src="6_regression_files/figure-html/unnamed-chunk-27-1.png" width="80%" />
+<img src="6_regression_files/figure-html/unnamed-chunk-26-1.png" width="80%" />
 
 P > 0.05 - there is no significant difference between the means
 
@@ -560,62 +550,18 @@ head(ebike_tukey$temperature) %>%
         booktabs = T)
 ```
 
-<table>
-<caption>(\#tab:unnamed-chunk-29)tukey test on e-bike frame hardening process</caption>
- <thead>
-  <tr>
-   <th style="text-align:left;">   </th>
-   <th style="text-align:center;"> diff </th>
-   <th style="text-align:center;"> lwr </th>
-   <th style="text-align:center;"> upr </th>
-   <th style="text-align:center;"> p adj </th>
-  </tr>
- </thead>
-<tbody>
-  <tr>
-   <td style="text-align:left;"> 180-160 </td>
-   <td style="text-align:center;"> 36200 </td>
-   <td style="text-align:center;"> 3145.624 </td>
-   <td style="text-align:center;"> 69254.38 </td>
-   <td style="text-align:center;"> 0.0294279 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> 200-160 </td>
-   <td style="text-align:center;"> 74200 </td>
-   <td style="text-align:center;"> 41145.624 </td>
-   <td style="text-align:center;"> 107254.38 </td>
-   <td style="text-align:center;"> 0.0000455 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> 220-160 </td>
-   <td style="text-align:center;"> 155800 </td>
-   <td style="text-align:center;"> 122745.624 </td>
-   <td style="text-align:center;"> 188854.38 </td>
-   <td style="text-align:center;"> 0.0000000 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> 200-180 </td>
-   <td style="text-align:center;"> 38000 </td>
-   <td style="text-align:center;"> 4945.624 </td>
-   <td style="text-align:center;"> 71054.38 </td>
-   <td style="text-align:center;"> 0.0215995 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> 220-180 </td>
-   <td style="text-align:center;"> 119600 </td>
-   <td style="text-align:center;"> 86545.624 </td>
-   <td style="text-align:center;"> 152654.38 </td>
-   <td style="text-align:center;"> 0.0000001 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> 220-200 </td>
-   <td style="text-align:center;"> 81600 </td>
-   <td style="text-align:center;"> 48545.624 </td>
-   <td style="text-align:center;"> 114654.38 </td>
-   <td style="text-align:center;"> 0.0000146 </td>
-  </tr>
-</tbody>
-</table>
+
+
+Table: (\#tab:unnamed-chunk-28)tukey test on e-bike frame hardening process
+
+|        |  diff  |    lwr     |    upr    |   p adj   |
+|:-------|:------:|:----------:|:---------:|:---------:|
+|180-160 | 36200  |  3145.624  | 69254.38  | 0.0294279 |
+|200-160 | 74200  | 41145.624  | 107254.38 | 0.0000455 |
+|220-160 | 155800 | 122745.624 | 188854.38 | 0.0000000 |
+|200-180 | 38000  |  4945.624  | 71054.38  | 0.0215995 |
+|220-180 | 119600 | 86545.624  | 152654.38 | 0.0000001 |
+|220-200 | 81600  | 48545.624  | 114654.38 | 0.0000146 |
 
 The test provides us a simple direct calculation of the differences between the treatment means and a confidence interval for those. Most importantly it provides us with the p value to help us confirm the significance of the difference and conclude factor level by factor level which differences are significant.
 
@@ -626,7 +572,7 @@ Additionally we can obtain the related plot with the confidence intervals
 plot(ebike_tukey)
 ```
 
-<img src="6_regression_files/figure-html/unnamed-chunk-30-1.png" width="80%" />
+<img src="6_regression_files/figure-html/unnamed-chunk-29-1.png" width="80%" />
 
 #### Fisher's LSD 
 
@@ -660,31 +606,13 @@ head(ebike_LSD$statistics) %>%
         booktabs = T)
 ```
 
-<table>
-<caption>(\#tab:unnamed-chunk-33)Fisher LSD procedure on e-bike frame hardening: stats</caption>
- <thead>
-  <tr>
-   <th style="text-align:left;">   </th>
-   <th style="text-align:center;"> MSerror </th>
-   <th style="text-align:center;"> Df </th>
-   <th style="text-align:center;"> Mean </th>
-   <th style="text-align:center;"> CV </th>
-   <th style="text-align:center;"> t.value </th>
-   <th style="text-align:center;"> LSD </th>
-  </tr>
- </thead>
-<tbody>
-  <tr>
-   <td style="text-align:left;">  </td>
-   <td style="text-align:center;"> 333700000 </td>
-   <td style="text-align:center;"> 16 </td>
-   <td style="text-align:center;"> 617750 </td>
-   <td style="text-align:center;"> 2.957095 </td>
-   <td style="text-align:center;"> 2.119905 </td>
-   <td style="text-align:center;"> 24492.02 </td>
-  </tr>
-</tbody>
-</table>
+
+
+Table: (\#tab:unnamed-chunk-32)Fisher LSD procedure on e-bike frame hardening: stats
+
+|   |  MSerror  | Df |  Mean  |    CV    | t.value  |   LSD    |
+|:--|:---------:|:--:|:------:|:--------:|:--------:|:--------:|
+|   | 333700000 | 16 | 617750 | 2.957095 | 2.119905 | 24492.02 |
 
 Furthermore it gives us a confidence interval for each treatment level mean:
 
@@ -699,53 +627,16 @@ head(ebike_LSD$means) %>%
         booktabs = T)
 ```
 
-<table>
-<caption>(\#tab:unnamed-chunk-34)Fisher LSD procedure on e-bike frame hardening: means</caption>
- <thead>
-  <tr>
-   <th style="text-align:left;">   </th>
-   <th style="text-align:center;"> cycles </th>
-   <th style="text-align:center;"> std </th>
-   <th style="text-align:center;"> r </th>
-   <th style="text-align:center;"> LCL </th>
-   <th style="text-align:center;"> UCL </th>
-  </tr>
- </thead>
-<tbody>
-  <tr>
-   <td style="text-align:left;"> 160 </td>
-   <td style="text-align:center;"> 551200 </td>
-   <td style="text-align:center;"> 20017.49 </td>
-   <td style="text-align:center;"> 5 </td>
-   <td style="text-align:center;"> 533881.5 </td>
-   <td style="text-align:center;"> 568518.5 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> 180 </td>
-   <td style="text-align:center;"> 587400 </td>
-   <td style="text-align:center;"> 16742.16 </td>
-   <td style="text-align:center;"> 5 </td>
-   <td style="text-align:center;"> 570081.5 </td>
-   <td style="text-align:center;"> 604718.5 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> 200 </td>
-   <td style="text-align:center;"> 625400 </td>
-   <td style="text-align:center;"> 20525.59 </td>
-   <td style="text-align:center;"> 5 </td>
-   <td style="text-align:center;"> 608081.5 </td>
-   <td style="text-align:center;"> 642718.5 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> 220 </td>
-   <td style="text-align:center;"> 707000 </td>
-   <td style="text-align:center;"> 15247.95 </td>
-   <td style="text-align:center;"> 5 </td>
-   <td style="text-align:center;"> 689681.5 </td>
-   <td style="text-align:center;"> 724318.5 </td>
-  </tr>
-</tbody>
-</table>
+
+
+Table: (\#tab:unnamed-chunk-33)Fisher LSD procedure on e-bike frame hardening: means
+
+|    | cycles |   std    | r |   LCL    |   UCL    |
+|:---|:------:|:--------:|:-:|:--------:|:--------:|
+|160 | 551200 | 20017.49 | 5 | 533881.5 | 568518.5 |
+|180 | 587400 | 16742.16 | 5 | 570081.5 | 604718.5 |
+|200 | 625400 | 20525.59 | 5 | 608081.5 | 642718.5 |
+|220 | 707000 | 15247.95 | 5 | 689681.5 | 724318.5 |
 
 We can see for example that for temperature 220 °C the etch rate if on average 707.0 with a probability of 95% of being between 689.7 and 724.3 A/min.
 
@@ -759,38 +650,16 @@ head(ebike_LSD$groups) %>%
         booktabs = T)
 ```
 
-<table>
-<caption>(\#tab:unnamed-chunk-35)Fisher LSD procedure on e-bike frame hardening: groups</caption>
- <thead>
-  <tr>
-   <th style="text-align:left;">   </th>
-   <th style="text-align:center;"> ebike_factor$cycles </th>
-   <th style="text-align:center;"> groups </th>
-  </tr>
- </thead>
-<tbody>
-  <tr>
-   <td style="text-align:left;"> 220 </td>
-   <td style="text-align:center;"> 707000 </td>
-   <td style="text-align:center;"> a </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> 200 </td>
-   <td style="text-align:center;"> 625400 </td>
-   <td style="text-align:center;"> b </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> 180 </td>
-   <td style="text-align:center;"> 587400 </td>
-   <td style="text-align:center;"> c </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> 160 </td>
-   <td style="text-align:center;"> 551200 </td>
-   <td style="text-align:center;"> d </td>
-  </tr>
-</tbody>
-</table>
+
+
+Table: (\#tab:unnamed-chunk-34)Fisher LSD procedure on e-bike frame hardening: groups
+
+|    | ebike_factor$cycles | groups |
+|:---|:-------------------:|:------:|
+|220 |       707000        |   a    |
+|200 |       625400        |   b    |
+|180 |       587400        |   c    |
+|160 |       551200        |   d    |
 
 In this case as all level means are statistically different they all show up in separate groups, each indicated by a specific letter.
 
@@ -801,7 +670,7 @@ Finally we can get from this package a plot with the Least significant differenc
 plot(ebike_LSD)
 ```
 
-<img src="6_regression_files/figure-html/unnamed-chunk-36-1.png" width="80%" />
+<img src="6_regression_files/figure-html/unnamed-chunk-35-1.png" width="80%" />
 
 And below we're exploring a manual execution of this type of plot (in this case with the standard deviations instead).
 
@@ -828,7 +697,7 @@ ebike_factor %>%
        y = "Cycles to failure [n]")
 ```
 
-<img src="6_regression_files/figure-html/unnamed-chunk-37-1.png" width="80%" />
+<img src="6_regression_files/figure-html/unnamed-chunk-36-1.png" width="80%" />
 
 As often with statistical tools, there is debate on the best approach to use. We recommend to combine the Tukey test with the Fisher's LSD completementary R functions. The Tukey test giving a first indication of the levels that have an effect and calculating the means differences and the Fisher function to provide much more additional information on each level. To be considered in each situation the slight difference  between the significance level for difference between means and to decide if required to take the most conservative one.
 

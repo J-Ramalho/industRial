@@ -11,62 +11,68 @@ description: >
 ---
 
 ```{r setup, include=FALSE}
+library(tidyverse)
 library(learnr)
 # battery_charging <- write_rds(battery_charging, "battery_charging.rds")
 battery_charging <- readr::read_rds("battery_charging.rds")
 knitr::opts_chunk$set(echo = FALSE, message = FALSE, warning = FALSE)
 ```
 
-# Design of Experiments - Response Surface Model
+# Design of Experiments - Response Surface Methods
 
-## Review: inputs and outputs
+## Review: design output plots
 
-To get a new industrial product to the market there is often a long process that goes from the initial discussions and briefings to the start of production on the shop floor. For products produced in millions or billions of units this process can take several years but then once its completed the regular production will generally also remain for years. This is why it is important to assess the capability of a manufacturing process and to put a statistical process control in place where needed.
+There are multiple plots to visualize the information coming out of a well designed experiment. These can show simply one of the output variables but it is possible and often necessary to go much further to see how variables relate to each other and how solid the design finally is.
 
-## Question: response surface plots
+## Question: design output plots
 
-```{r question-cpk}
-quiz(
-  question("Which is the primary use of the anova in an industrial DoE (design of experiment)?",
-    answer(
-      "Compare variances", 
-      message = "The name analysis of variance can be considered misleading. In fact the variances (or to be more specific the sums of the squares) are calculated but this is not the primary outcome we're looking for."
-      ),
-    answer("Compare standard deviations"),
-    answer(
-      "Compare means",
-      "That's it! This approach allows to compare more that two means, thus extending the t.test. It establishes if their difference is statistically different. This provides an indication if the experiment has had an effect.",
-      correct = TRUE)
-    ,
-    answer("Compare ranges"),
-    allow_retry = TRUE
-  )
+```{r quizz-doeplots}
+question_checkbox(
+  "What kind of plots can be established from a DoE data?",
+  answer("Raw data scatter plots.", correct = TRUE),
+  answer("Residuals qq plot.", correct = TRUE),
+  answer("Residuals timeseries.", correct = TRUE),
+  answer("Main effects plots.", correct = TRUE),
+  answer("Interaction plots.", correct = TRUE),
+  answer("Response surface plots", correct = TRUE),
+  answer("Contour plots.", correct = TRUE),
+  answer("Parliament plots.", FALSE, message = "Parliament plots are used to represent the share of seats in a parliament usualy with nice colors and pictograms. Their utilization in DOEs is still to be seen!"),
+  random_answer_order = TRUE,
+  allow_retry = TRUE
 )
 ```
 
-## Exercise: reduced linear model
+## Exercise: linear model
 
-For the coming exercises we're using the data set ebike_hardening. This data set comes in a *wide* format typically used in day to day data collection situations. For someone in a laboratory or factory shopfloor it is often easier to simple create a new column and add new measurements. Sometimes unfortunately this leads to not very clear headers. Also for ggplots is necessary to specify the factors clearly so a *longer* format makes it easier to deal with in R.
+There are several packages in R to establish 3D plots although they may be generic such as `{plot3D}` or related with cartography such as `{rayshader}`. In the domain of the design of experiments the `{rsm}` package brings some specific advantages such as building the surface plots directly from the design models.
 
-In the following exercise convert the dataset to a narrow format and take the opportunity to calculate the means by group leading to a tibble such as:
+In this exercise we're then going to prepare the model for out surface plot. We're going to use the battery_charging dataset of which we're showing below the first 5 lines:
 
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
-
+battery_charging %>%
+  head()
 ```
 
+Use all the 4 entry variables to establish a linear model of the charging time:
 
-```{r ebike, exercise=TRUE, exercise.lines = 5, exercise.eval=TRUE}
-
+```{r model, exercise=TRUE, exercise.lines = 5, exercise.eval=FALSE}
+battery_lm <- lm(
+  
+)
+summary(battery_lm)
 ```
 
-```{r ebike-hint}
-# start with the ebike_hardening dataset and use the function pivot_longer()
-# then group by temperature to calculate the means for each treatment group
+```{r model-hint}
+# An lm function takes a dataset and a formula expressed with ~ 
+# Checking ?lm and ?formula gives many details of the syntax
+# The adjusted R-squared of the full model it should be 0.3832 (not great)
 ```
 
 ## Play: surface app
 
-Observe the p value on the interaction term.
+Surface response plots give a clear idea of what the interaction plots are: in the interaction plots we see the front and back edges of the surface, when the input factor is either at its min or at its max. If the lines cross each other we can see its because the surface is bent. In this case we say there is an interaction and the p value on the interaction term goes beyond 0.05.
+
+Check out this situation with the inputs A and C, what is the interaction p value? What about A-B and BC?
 
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
 library(stats)
@@ -199,30 +205,41 @@ fluidPage(
   })
 ```
 
-We can see that to get to a p value greater than 0.05 we have to get the means very close. In other words the treatment does not have an effect or in our case the ebike frame hardening process wouldn't have an effect on its aging resistance.
+## Exercise: reduced model
 
-## Exercise: 
+As we could see several terms and interactions are non significative so a model with a better adjustment to the date can be prepared by removing them. This should in principle even improve the adjusted R-square. What is the adjusted R-square for a model with just the C factor and its interaction with A?
 
-```{r histogram, exercise=TRUE, exercise.lines = 5}
 
+```{r reduced-model, exercise=TRUE, exercise.lines = 5}
+battery_reduced_lm <- lm(
+
+  )
+summary(battery_reduced_lm)
 ```
 
+```{r reduced-model-hint}
+# An lm function takes a dataset and a formula expressed with ~ 
+# Checking ?lm and ?formula gives many details of the syntax
+# The adjusted R-squared of the full model it should be 0.455 (still not great...)
+```
 
-## Quizz: interactions
+## Quizz: adjusted R-square
 
-Although we tend to take it as a direct calculation when using excel, minitab or another software the anova calculation has many steps to get to the p value and to fully grasp its meaning it is helpful to dig into those aspects.
+We end this tutorial with a slightly advanced topic, still recurrent in design of experiments and important to decide which factors to take into account: to choose between different models and select which factors to keep the Adjusted R2 is more appropriate than the Multiple R-squared.
 
 ```{r quizz-cpk, echo = FALSE}
-question_checkbox(
-  "What is the exact mathematical formula to calculate the Cpk",
-  answer("", correct = TRUE),
-  answer("the group standard deviations", correct = TRUE),
-  answer("the sample size", correct = TRUE),
-  answer("The absolute value of the output", correct = FALSE, message = "the sample size has no influence if the ratios are the same the p value is the same, e.g. if the lifecycles were all divided by 10"),
+question(
+  "Why using the adjusted R-square to compare models and choose which factors to keep?",
+  answer("Because the factors are coded as +/- 1", correct = FALSE, message = "Factors coding doesn't affect the R-square neither the adjusted R-square even if the contrasts are not correctly set."),
+  answer("Because R-squared keeps increasing even if non significant levels are added to the model.", correct = TRUE),
+  answer("Because the number of input factors is greater than 3.", correct = FALSE, message = "The R-squared can be calculated with any number of input factors."),
+  answer("Because the p value is greater than 0.05", correct = FALSE, message = "The p value gives an indication of the significance of each individual factor and interaction."),
   random_answer_order = TRUE,
   allow_retry = TRUE
 )
 ```
 
+There's a good wikipedia article on the topic:
+[adjusted R-squared](https://en.wikipedia.org/wiki/Coefficient_of_determination#Adjusted_R2)
 
-inputs and output, distribution of the inputs, the inputs means and variability, the split of the input factors in groups, differences between the means of those factors, the ratio between the groups variabilitiy.
+

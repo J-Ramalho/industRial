@@ -621,9 +621,10 @@ library(rsm)
 ```r
 persp(
   battery_reduced_lm, 
-  C ~ A, 
+  A ~ C, 
   bounds = list(A = c(-1,1), C = c(-1,1)),
-  theta = -40, phi = 20, r = 10,
+  col = viridis(12)[8],
+  theta = -40, phi = 20, r = 5,
   zlab = "Charging Time",
   main = "Litium-ion battery\ncharging time test"
 )
@@ -635,13 +636,15 @@ Due to the interaction between factors A and C the surface is slightly bent. Thi
 
 
 ```r
-interaction.plot(x.factor = battery_charging$A, 
-                 trace.factor = battery_charging$C,
+interaction.plot(x.factor = battery_charging$C, 
+                 trace.factor = battery_charging$A,
                  fun = mean,
                  response = battery_charging$charging_time,
                  legend = TRUE,
-                 xlab = "A",
-                 trace.label = "C",
+                 xlab = "C",
+                 trace.label = "A",
+                 lwd = 2,
+                 col = c(viridis(12)[10], col = viridis(12)[6]),
                  ylab = "Charging Time",
                  main = "Litium-ion battery\ncharging time test")
 ```

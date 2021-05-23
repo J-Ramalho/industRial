@@ -84,7 +84,7 @@ We're highlighting now some specific packages that are used in the book and that
 
 ## six sigma
 
-SixSigma is a very complete and robust package by Emilio L.Cano [@Cano2015]. It provides well many well tested functions in the area of quality management.
+SixSigma is a very complete and robust package by Emilio L.Cano [@Cano2015]. It provides many well tested functions in the area of quality management.
 
 ## qcc
 
@@ -195,19 +195,21 @@ A set of practical exercises on key concepts presented throughout this book is a
 
 <br>
 
-**Run tutorials on the web**
+## On the web
 
-the exercises are published on the shinyapp.io server and can be freely accessed with the links below:
+the tutorials in the list below are published on the shinyapp.io server and can be freely accessed with the links below:
 
 | Topic/Link | Content                                        |
 |------------|------------------------------------------------|
-| [Pareto](https://j-ramalho.shinyapps.io/pareto/) | This tutorial builds on the *The dial polishing workshop* case study from the Design for Six Sigma chapter, train building pareto charts using the `{qichart2}` package and explore how playing with different variables gives new insights into apparently simple data collections. |
-| [Anova](https://j-ramalho.shinyapps.io/anova/)   | This tutorial explores how the p value is calculated by playing with a dynamic anova chart. This exercise is based on the *The e-bike frame hardening process* of the DOE Interactions chapter. |
-| [Response Surfaces](https://j-ramalho.shinyapps.io/surface/) | This tutorial tests 3D visualization skills by playing with 3D response surface plots and the related interaction plots. Additionally it shows how the p value of the model interactions change with the surface shape.| 
+| [Pareto chart](https://j-ramalho.shinyapps.io/pareto/) | This tutorial builds on the *The dial polishing workshop* case study from the Design for Six Sigma chapter, train building pareto charts using the `{qichart2}` package and explore how playing with different variables gives new insights into apparently simple data collections. |
+| [DOE Anova](https://j-ramalho.shinyapps.io/anova/)   | This tutorial explores how the p value is calculated by playing with a dynamic anova chart. This exercise is based on the *The e-bike frame hardening process* of the DOE Interactions chapter. |
+| [Response Surface](https://j-ramalho.shinyapps.io/surface/) | This tutorial tests 3D visualization skills by playing with 3D response surface plots and the related interaction plots using the battery_charging dataset and the `{rsm}` package.| 
+| [Process Capability](https://j-ramalho.shinyapps.io/capability/) | In this tutorial we can play with the process centering variability and see how this is translated in the process indicators "percentage out of spec" and Cpk.| 
+
 
 <br><br>
 
-**Run tutorials locally**
+## Locally
 
 The same set of tutorials can also be run locally which can be convenient as they load faster. This also allows for further exploration as the original tutorial code becomes available.
 

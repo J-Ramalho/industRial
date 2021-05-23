@@ -1,11 +1,36 @@
+
+# References {#references}
+
+A good mastership of the vast domain of Industrial Data Science can take several years and can only be obtained by a strong combination of theory and practice. As mentionned in the introduction chapter, our book is focused on the practice and in this bibliography we find some the necessary supporting theory. 
+
+The list below collects websites, books and articles referenced throughout this book. It is a curated set of some of the most relevant works available today in Six Sigma, Statistics, Data Science and programming with R.
+
+
+
+<div id="refs"></div>
+
 # Imprint
 
 Many packages are available for editing documentation, from notes to blogs up to complete websites. In this book we've opted to use the R package `{Bookdown}` from Yihui Xie further customized with a layout developed by [Matthew J. C. Crump](https://community.rstudio.com/t/bookdown-contest-submission-gitbook-style-tufte-style-for-web-book/11666). 
 
 An important aspect to ensure reproducibility of the examples along the time and between users is to have the same programming setup. We're showing below our setup at the time of rendering the book. 
 
-```{r}
+
+```r
 devtools::session_info()[[1]]
+```
+
+```
+##  setting  value                       
+##  version  R version 4.0.5 (2021-03-31)
+##  os       Ubuntu 20.04.2 LTS          
+##  system   x86_64, linux-gnu           
+##  ui       X11                         
+##  language (EN)                        
+##  collate  en_US.UTF-8                 
+##  ctype    en_US.UTF-8                 
+##  tz       Europe/Zurich               
+##  date     2021-05-23
 ```
 
 **Disclaimer**

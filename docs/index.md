@@ -2,14 +2,14 @@
 title: "indust<b style='color:#38598CFF'>R</b>ial data science"
 subtitle: Case studies in product development and manufacturing
 author: "João Ramalho"
-date: "2021-05-22"
+date: "2021-05-23"
 # output: pdf_document
 site: bookdown::bookdown_site
 output: 
   bookdown::gitbook:
     includes:
       in_header: includeme.html
-    css: industRialds.css
+    css: css/industRialds.css
     fontsettings:
       theme: white
       family: sans

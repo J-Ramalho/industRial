@@ -530,7 +530,7 @@ We're now going to use the function process stats to calculate several statistic
 
 
 ```r
-weight_statistics_data <- process_stats(tablet_weight, 9)
+weight_statistics_data <- process_stats(tablet_weight, 10)
 ```
 
 this being done we can now convert this data into an easy readable format for reporting of for a future integration in a shiny app for example. We're exploring the package `{gt}` that has a specific very neat look rather different from the `{kable}` package used in most of the book. 
@@ -541,12 +541,12 @@ process_stats_table(weight_statistics_data)
 ```
 
 ```{=html}
-<div id="zgtukrliuu" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="tfrjkuqndq" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>html {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
 }
 
-#zgtukrliuu .gt_table {
+#tfrjkuqndq .gt_table {
   display: table;
   border-collapse: collapse;
   margin-left: auto;
@@ -571,7 +571,7 @@ process_stats_table(weight_statistics_data)
   border-left-color: #D3D3D3;
 }
 
-#zgtukrliuu .gt_heading {
+#tfrjkuqndq .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -583,7 +583,7 @@ process_stats_table(weight_statistics_data)
   border-right-color: #D3D3D3;
 }
 
-#zgtukrliuu .gt_title {
+#tfrjkuqndq .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -593,7 +593,7 @@ process_stats_table(weight_statistics_data)
   border-bottom-width: 0;
 }
 
-#zgtukrliuu .gt_subtitle {
+#tfrjkuqndq .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -603,13 +603,13 @@ process_stats_table(weight_statistics_data)
   border-top-width: 0;
 }
 
-#zgtukrliuu .gt_bottom_border {
+#tfrjkuqndq .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#zgtukrliuu .gt_col_headings {
+#tfrjkuqndq .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -624,7 +624,7 @@ process_stats_table(weight_statistics_data)
   border-right-color: #D3D3D3;
 }
 
-#zgtukrliuu .gt_col_heading {
+#tfrjkuqndq .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -644,7 +644,7 @@ process_stats_table(weight_statistics_data)
   overflow-x: hidden;
 }
 
-#zgtukrliuu .gt_column_spanner_outer {
+#tfrjkuqndq .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -656,15 +656,15 @@ process_stats_table(weight_statistics_data)
   padding-right: 4px;
 }
 
-#zgtukrliuu .gt_column_spanner_outer:first-child {
+#tfrjkuqndq .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#zgtukrliuu .gt_column_spanner_outer:last-child {
+#tfrjkuqndq .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#zgtukrliuu .gt_column_spanner {
+#tfrjkuqndq .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -676,7 +676,7 @@ process_stats_table(weight_statistics_data)
   width: 100%;
 }
 
-#zgtukrliuu .gt_group_heading {
+#tfrjkuqndq .gt_group_heading {
   padding: 8px;
   color: #333333;
   background-color: #FFFFFF;
@@ -698,7 +698,7 @@ process_stats_table(weight_statistics_data)
   vertical-align: middle;
 }
 
-#zgtukrliuu .gt_empty_group_heading {
+#tfrjkuqndq .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -713,15 +713,15 @@ process_stats_table(weight_statistics_data)
   vertical-align: middle;
 }
 
-#zgtukrliuu .gt_from_md > :first-child {
+#tfrjkuqndq .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#zgtukrliuu .gt_from_md > :last-child {
+#tfrjkuqndq .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#zgtukrliuu .gt_row {
+#tfrjkuqndq .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -740,7 +740,7 @@ process_stats_table(weight_statistics_data)
   overflow-x: hidden;
 }
 
-#zgtukrliuu .gt_stub {
+#tfrjkuqndq .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -752,7 +752,7 @@ process_stats_table(weight_statistics_data)
   padding-left: 12px;
 }
 
-#zgtukrliuu .gt_summary_row {
+#tfrjkuqndq .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -762,7 +762,7 @@ process_stats_table(weight_statistics_data)
   padding-right: 5px;
 }
 
-#zgtukrliuu .gt_first_summary_row {
+#tfrjkuqndq .gt_first_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -772,7 +772,7 @@ process_stats_table(weight_statistics_data)
   border-top-color: #D3D3D3;
 }
 
-#zgtukrliuu .gt_grand_summary_row {
+#tfrjkuqndq .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -782,7 +782,7 @@ process_stats_table(weight_statistics_data)
   padding-right: 5px;
 }
 
-#zgtukrliuu .gt_first_grand_summary_row {
+#tfrjkuqndq .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -792,11 +792,11 @@ process_stats_table(weight_statistics_data)
   border-top-color: #D3D3D3;
 }
 
-#zgtukrliuu .gt_striped {
+#tfrjkuqndq .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#zgtukrliuu .gt_table_body {
+#tfrjkuqndq .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -805,7 +805,7 @@ process_stats_table(weight_statistics_data)
   border-bottom-color: #D3D3D3;
 }
 
-#zgtukrliuu .gt_footnotes {
+#tfrjkuqndq .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -819,13 +819,13 @@ process_stats_table(weight_statistics_data)
   border-right-color: #D3D3D3;
 }
 
-#zgtukrliuu .gt_footnote {
+#tfrjkuqndq .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding: 4px;
 }
 
-#zgtukrliuu .gt_sourcenotes {
+#tfrjkuqndq .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -839,41 +839,41 @@ process_stats_table(weight_statistics_data)
   border-right-color: #D3D3D3;
 }
 
-#zgtukrliuu .gt_sourcenote {
+#tfrjkuqndq .gt_sourcenote {
   font-size: 90%;
   padding: 4px;
 }
 
-#zgtukrliuu .gt_left {
+#tfrjkuqndq .gt_left {
   text-align: left;
 }
 
-#zgtukrliuu .gt_center {
+#tfrjkuqndq .gt_center {
   text-align: center;
 }
 
-#zgtukrliuu .gt_right {
+#tfrjkuqndq .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#zgtukrliuu .gt_font_normal {
+#tfrjkuqndq .gt_font_normal {
   font-weight: normal;
 }
 
-#zgtukrliuu .gt_font_bold {
+#tfrjkuqndq .gt_font_bold {
   font-weight: bold;
 }
 
-#zgtukrliuu .gt_font_italic {
+#tfrjkuqndq .gt_font_italic {
   font-style: italic;
 }
 
-#zgtukrliuu .gt_super {
+#tfrjkuqndq .gt_super {
   font-size: 65%;
 }
 
-#zgtukrliuu .gt_footnote_marks {
+#tfrjkuqndq .gt_footnote_marks {
   font-style: italic;
   font-weight: normal;
   font-size: 65%;
@@ -901,13 +901,13 @@ process_stats_table(weight_statistics_data)
 <td class="gt_row gt_right">0.90</td>
 <td class="gt_row gt_left">g</td></tr>
     <tr><td class="gt_row gt_left">Spec min</td>
-<td class="gt_row gt_right">0.82</td>
+<td class="gt_row gt_right">0.81</td>
 <td class="gt_row gt_left">g</td></tr>
     <tr><td class="gt_row gt_left">Spec max</td>
-<td class="gt_row gt_right">0.98</td>
+<td class="gt_row gt_right">0.99</td>
 <td class="gt_row gt_left">g</td></tr>
     <tr><td class="gt_row gt_left">Out of spec</td>
-<td class="gt_row gt_right">2.39</td>
+<td class="gt_row gt_right">0.71</td>
 <td class="gt_row gt_left">%</td></tr>
     <tr><td class="gt_row gt_left">Sample size</td>
 <td class="gt_row gt_right">137</td>

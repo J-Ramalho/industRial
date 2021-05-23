@@ -66,7 +66,7 @@ We're highlighting now some specific packages that are used in the book and that
 
 ## six sigma
 
-SixSigma is a very complete and robust package by Emilio L.Cano [@Cano2015]. It provides well many well tested functions in the area of quality management.
+SixSigma is a very complete and robust package by Emilio L.Cano [@Cano2015]. It provides many well tested functions in the area of quality management.
 
 ## qcc
 
@@ -140,7 +140,7 @@ A set of practical exercises on key concepts presented throughout this book is a
 
 <br>
 
-**Run tutorials on the web**
+## On the web
 
 the tutorials in the list below are published on the shinyapp.io server and can be freely accessed with the links below:
 
@@ -154,7 +154,7 @@ the tutorials in the list below are published on the shinyapp.io server and can 
 
 <br><br>
 
-**Run tutorials locally**
+## Locally
 
 The same set of tutorials can also be run locally which can be convenient as they load faster. This also allows for further exploration as the original tutorial code becomes available.
 

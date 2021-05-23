@@ -302,20 +302,21 @@ We can now establish a simple table using the functions created before, to prese
 
 ```{r}
 sigma_limits <- tibble(
-  UCL = c(1, 2, 3, 4, 5, 6),
-  LCL = -UCL,
+  sigma_plus = c(1, 2, 3, 4, 5, 6),
+  sigma_minus = -sigma_plus,
   mean = 0,
   sd = 1
 )
 
 sigma_limits %>%
   mutate(
-    in_spec_percent = 100 - off_spec(UCL, LCL, mean, sd),
-    Cpk = process_Cpk(UCL, LCL, mean, sd),
+    off_spec_perc = off_spec(sigma_plus, sigma_minus, mean, sd),
+    Cpk = process_Cpk(sigma_plus, sigma_minus, mean, sd),
     ppm_defects = formatC(
-      off_spec(UCL, LCL, mean, sd) * 10000,
+      off_spec(sigma_plus, sigma_minus, mean, sd) * 10000,
       format = "d",
       big.mark = "'")) %>%
+  select(sigma_minus, sigma_plus, off_spec_perc, Cpk, ppm_defects) %>%
   kable(align = "c", digits = 2)
 ```
 

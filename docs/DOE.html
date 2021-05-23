@@ -252,7 +252,7 @@ div.csl-indent {
 </ul></li>
 <li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#general-factorial-designs"><i class="fa fa-check"></i>General factorial designs</a>
 <ul>
-<li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#design-generaction"><i class="fa fa-check"></i>Design generaction</a></li>
+<li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#design-generation"><i class="fa fa-check"></i>Design generation</a></li>
 <li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#main-effects-plots"><i class="fa fa-check"></i>Main effects plots</a></li>
 <li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#interactions-plots"><i class="fa fa-check"></i>Interactions plots</a></li>
 <li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#anova-with-3rd-level-interactions"><i class="fa fa-check"></i>Anova with 3rd level interactions</a></li>
@@ -764,7 +764,7 @@ F-statistic:  66.8 on 3 and 16 DF,  p-value: 2.883e-09</code></pre>
 <div class="sourceCode" id="cb94"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb94-1"><a href="DOE.html#cb94-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(car)</span></code></pre></div>
 <div class="sourceCode" id="cb95"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb95-1"><a href="DOE.html#cb95-1" aria-hidden="true" tabindex="-1"></a><span class="fu">durbinWatsonTest</span>(ebike_lm_factor)</span></code></pre></div>
 <pre><code> lag Autocorrelation D-W Statistic p-value
-   1      -0.5343347      2.960893   0.096
+   1      -0.5343347      2.960893   0.086
  Alternative hypothesis: rho != 0</code></pre>
 <p>Although the output shows Autocorrelation of -0.53 we have to consider that the p value is greater than 0.05 thus there is not enough significance to say that there is autocorrelation.</p>
 </div>
@@ -1561,8 +1561,8 @@ Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&
 <p>First we load the DoE.base package:</p>
 <div class="sourceCode" id="cb158"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb158-1"><a href="DOE.html#cb158-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(DoE.base)</span></code></pre></div>
 <p>and then generate the doe with the fac.design function.</p>
-<div id="design-generaction" class="section level3">
-<h3>Design generaction</h3>
+<div id="design-generation" class="section level3">
+<h3>Design generation</h3>
 <p><span id="fac.design"></span></p>
 <div class="sourceCode" id="cb159"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb159-1"><a href="DOE.html#cb159-1" aria-hidden="true" tabindex="-1"></a>juice_doe <span class="ot">&lt;-</span> <span class="fu">fac.design</span>(</span>
 <span id="cb159-2"><a href="DOE.html#cb159-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">randomize =</span> <span class="cn">FALSE</span>,</span>

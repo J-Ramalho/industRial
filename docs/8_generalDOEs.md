@@ -20,7 +20,7 @@ library(DoE.base)
 
 and then generate the doe with the fac.design function.
 
-### Design generaction 
+### Design generation 
 
 []{#fac.design}
 

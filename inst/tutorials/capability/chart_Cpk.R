@@ -38,5 +38,5 @@ chart_Cpk <- function(data) {
       y = "Count",
       caption = "data source: Line1"
     ) +
-    industRial::theme_qcc()
+    theme_qcc()
 }

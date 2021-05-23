@@ -235,7 +235,8 @@ Available tutorials:
 * industRial
   - anova      : "industRial practice"
   - capability : "industRial practice"
-  - pareto     : "industRial practice" 
+  - pareto     : "industRial practice"
+  - surface    : "industRial practice" 
 ```
 
 choose a tutorial and run it as follows:

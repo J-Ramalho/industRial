@@ -12,6 +12,7 @@ description: >
 
 ```{r setup, include=FALSE}
 library(tidyverse)
+library(janitor)
 library(stats)
 library(gt)
 library(learnr)
@@ -30,91 +31,116 @@ knitr::opts_chunk$set(echo = FALSE, message = FALSE, warning = FALSE)
 
 # Statistical Process Control - Process Capability
 
-## Review: specifications and control
+## Review: specs and process control
 
-To get a new industrial product to the market there is often a long process that goes from the initial discussions and briefings to the start of production on the shop floor. For products produced in millions or billions of units this process can take several years but then once its completed the regular production will generally also remain for years. This is why it is important to assess the capability of a manufacturing process and to put a statistical process control in place where needed.
+To get a new industrial product to the market there is often a long process that goes from the initial discussions and briefings to the start of production on the shop floor. For products produced in millions or billions of units this process can take several years but once its completed the specifications often remain stable for years.
 
-## Question: calculation of Cpk
+This is why it is important to assess the capability of the manufacturing processes and to define good specifications from the start. For the characteristics that are critical to quality (CTQ) we may decide to implement a statistical process control (SPC).
 
-```{r question-cpk}
-quiz(
-  question("Which is the primary use of the anova in an industrial DoE (design of experiment)?",
-    answer(
-      "Compare variances", 
-      message = "The name analysis of variance can be considered misleading. In fact the variances (or to be more specific the sums of the squares) are calculated but this is not the primary outcome we're looking for."
-      ),
-    answer("Compare standard deviations"),
-    answer(
-      "Compare means",
-      "That's it! This approach allows to compare more that two means, thus extending the t.test. It establishes if their difference is statistically different. This provides an indication if the experiment has had an effect.",
-      correct = TRUE)
-    ,
-    answer("Compare ranges"),
-    allow_retry = TRUE
+## Question: capability indexes
+
+Quality control is know for its many acronyms (we've just seen already seen CTQ, SPC). Would you know some more?
+
+
+```{r cpk-question, echo = FALSE}
+question(
+  "Write down the acronyms of upper control limit, lower control limit, upper specification limit, lower specification limit, parts per million, standard operating procedure.",
+  answer("UCL,LCL,USL,LSL,PPM,SOP", correct = TRUE),
+  type = "learnr_text",
+  try_again = "Use capitals, separated by a comma and no spaces (e.g: CTQ,SPC,...).",
+  post_message = "Well done.",
+  allow_retry = TRUE,
+  options = list(
+    placeholder = "USL,...",
+    trim = TRUE
   )
 )
 ```
 
 ## Exercise: summary statistics
 
-For the coming exercises we're using the data set ebike_hardening. This data set comes in a *wide* format typically used in day to day data collection situations. For someone in a laboratory or factory shopfloor it is often easier to simple create a new column and add new measurements. Sometimes unfortunately this leads to not very clear headers. Also for ggplots is necessary to specify the factors clearly so a *longer* format makes it easier to deal with in R.
+For this exercise we've loaded the {industRial} package in memory with library(industRial). It comes with various simple functions in the area of SPC that can be used as a starting point to build dashboards and advanced applications, e.g. off_spec() and process_Cpk(). How can we easily check the arguments that the functions take? 
 
-In the following exercise convert the dataset to a narrow format and take the opportunity to calculate the means by group leading to a tibble such as:
-
-```{r echo=FALSE, message=FALSE, warning=FALSE}
+```{r arguments, exercise=TRUE, exercise.lines = 5, exercise.eval=FALSE}
 
 ```
 
+```{r arguments-hint}
+dput(formals(process_Cpk))
+```
 
-```{r ebike, exercise=TRUE, exercise.lines = 5, exercise.eval=TRUE}
+It was useful to see in the previous question what USL means!
+
+What about if we wanted to see the code inside the function? We're giving a hint but better workout your memory before!
+
+```{r body, exercise=TRUE, exercise.lines = 5, exercise.eval=FALSE}
 
 ```
 
-```{r ebike-hint}
-# start with the ebike_hardening dataset and use the function pivot_longer()
-# then group by temperature to calculate the means for each treatment group
+```{r body-hint}
+body(process_Cpk)
 ```
+
+As said its a rather simple function but it proves very helpful if we know the specification limits, the process mean and its standard deviation.
 
 ## Play: capability app
 
-The anova output can be sometimes tricky to interpret as many things are at play. In the application below we start with a plot similar to the plot of the Anova chapter. It presents boxplots of the distribution of the different treatment groups of the ebike frame hardening process. Outputs correspond to the lifecycle of the frame (in number of cycles to failure) and the groups correspond each to a specific furnace temperature. You can play with the group means, standard deviation and population size.
+Lets now try all these ideas together in a dynamic context. In the app below the specification limits are calculated as a percentage of the specification target, starting with 10%. This means that for a target of 0.90 we have a min of 0.81 and a max of 0.99 [g]. In these circumstances the percentage out of specification is of 2.39%, very high for industry standards.
 
-Try to get to a non significant p value of more than <b style='color:#ff0000'>0.05</b> by playing with the means (and standard deviations if needed). The boxes colors will change from greenish to reddish reflecting the book examples. 
+Check the following points below:
+
+
+* Could we get to zero defects in percentage just by re-centering the process? By how much (in grams).
+* How much is the Cpk in this case?
+* Could we further narrow the specification below 10% and still have zero % out of spec?
 
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
 fluidPage(
   titlePanel("Process Capability Study"),
 
-    fluidPage(
-      column(
-        6,
-        plotOutput("capability_chart"),
+    fluidRow(
+      column(6, plotOutput("capability_chart")), 
+      column(6, gt_output("statistics_table")
+      )
+      ),
+    fluidRow(
+      # column(3),
+      column(3,
         sliderInput(
-          width = 100,
+          width = 150,
           "spec_perc",
-          "Tolerance [%]",
+          "Specification tolerance [%]",
           min = 1,
           max = 16,
           value = 9,
           step = 1
-        ),
-      ), 
-      column(6, gt_output("statistics_table")
+        )
+      ),
+      column(3,
+        sliderInput(
+          width = 150,
+          "spec_deviation",
+          "Specification deviation [g]",
+          min = -0.1,
+          max = +0.2,
+          value = 0.0,
+          step = 0.01
+        )
       )
-    )
-
+      )
 )
 ```
 
 ```{r context="server"}
-filter <- dplyr::filter
-select <- dplyr::select
-  tablet_weight <- tablet_weight %>%
-    janitor::clean_names(case = "snake")
+  tablet_weight_clean <- reactive({
+    tablet_weight %>%
+      janitor::clean_names(case = "snake") %>%
+      mutate(weight_target_value = weight_target_value + input$spec_deviation)
+  })
   
   weight_statistics_data <- reactive({
     process_stats(
-      data = tablet_weight, 
+      data = tablet_weight_clean(), 
       part_spec_percent = input$spec_perc
     )
   })
@@ -127,6 +153,8 @@ select <- dplyr::select
     ) %>%
     as_tibble()
   })
+
+  observe({print(weight_normal())})
   
   output$capability_chart <- renderPlot({
 
@@ -147,30 +175,50 @@ select <- dplyr::select
   })
 ```
 
-We can see that to get to a p value greater than 0.05 we have to get the means very close. In other words the treatment does not have an effect or in our case the ebike frame hardening process wouldn't have an effect on its aging resistance.
-
 ## Exercise: histogram
 
-```{r histogram, exercise=TRUE, exercise.lines = 5}
+Finally a process capability chart is nothing more than our old histogram:
 
+```{r echo=FALSE}
+tablet_weight %>%
+  clean_names() %>%
+  ggplot(aes(x = weight_value)) +
+  geom_histogram(fill = "grey80", color = "grey20") +
+  labs(
+    title = "Tablet weight process control",
+    subtitle = "Process Capability chart",
+    x = "Part Weight [g]",
+    y = "Count",
+    caption = "data source: Line1"
+  ) +
+  theme_qcc()
+```
+
+Enter below the code to obtain this histogram, using the tablet_weight data set:
+
+```{r histogram, exercise=TRUE, exercise.lines = 5, exercise.eval=FALSE}
+tablet_weight %>%
+  clean_names()
+```
+
+```{r histogram-hint}
+# Check out the chart_Cpk() function body, although there is more than a simple histogram the base is the same:
+body(chart_Cpk)
 ```
 
 
 ## Quizz: Cpk formula
 
-Although we tend to take it as a direct calculation when using excel, minitab or another software the anova calculation has many steps to get to the p value and to fully grasp its meaning it is helpful to dig into those aspects.
+There are many different ways of expressing the process capability with various indexes that all resemble a bit. We've mostly been looking into the Cpk which takes into account the off centering of the process. From the function explored before we can now find out its mathematical formula.
 
 ```{r quizz-cpk, echo = FALSE}
-question_checkbox(
-  "What is the exact mathematical formula to calculate the Cpk",
-  answer("", correct = TRUE),
-  answer("the group standard deviations", correct = TRUE),
-  answer("the sample size", correct = TRUE),
-  answer("The absolute value of the output", correct = FALSE, message = "the sample size has no influence if the ratios are the same the p value is the same, e.g. if the lifecycles were all divided by 10"),
-  random_answer_order = TRUE,
+question(
+  "What is the exact mathematical formula to calculate the Cpk? (sd corresponds to the process standard deviation and sdLT to the long term standard deviation).",
+  answer("(USL-LSL)/6sd", correct = FALSE, message = "This formula corresponds to the index Cp"),
+  answer("6sd/(USL-LSL)", correct = FALSE, message = "This formula corresponds to the index Cr"),
+  answer("min{(xbar-LSL)/3sd;(USL-xbar)/3sd}", correct = TRUE, message = "This formula corresponds to the index Cpk"),
+  answer("(USL-LSL)/6sdLT", correct = FALSE, message = "This formula corresponds to the index Pp"),
   allow_retry = TRUE
 )
 ```
 
-
-inputs and output, distribution of the inputs, the inputs means and variability, the split of the input factors in groups, differences between the means of those factors, the ratio between the groups variabilitiy.

@@ -37,6 +37,9 @@ to the measurement room conditions (not listed).
   \item{Temperature [°C]}{Room temperature}
 }
 }
+\examples{
+data(tablet_thickness)
+}
 \references{
 For a complete case study application refer to \url{https://j-ramalho.github.io/industRial/}
 }

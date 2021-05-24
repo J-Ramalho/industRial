@@ -1,5 +1,5 @@
 
-# Table of Contents {#contents}
+# Index {#index}
 
 
 
@@ -246,6 +246,12 @@
    <td style="text-align:left;"> I-MR charts </td>
    <td style="text-align:left;"> tablet_weight </td>
    <td style="text-align:left;"> [industRial::off_spec](#offspec) </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;">  </td>
+   <td style="text-align:left;">  </td>
+   <td style="text-align:left;">  </td>
+   <td style="text-align:left;"> [industRial::off_spec](#process_Cpk) </td>
   </tr>
 </tbody>
 </table>

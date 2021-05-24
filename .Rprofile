@@ -15,7 +15,9 @@ ds_pkgs <- c(
   "industRial",
   "viridis",
   "broom",
-  "patchwork"
+  "patchwork",
+  "usethis",
+  "devtools"
 )
 purrr::map(ds_pkgs, library, character.only = TRUE)
 filter <- dplyr::filter

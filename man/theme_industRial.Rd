@@ -44,6 +44,18 @@ of his book \href{https://clauswilke.com/dataviz/}{Fundamentals of Data Visualiz
 Apply this theme by adding it at the end of the code of any \code{\link[ggplot2]{ggplot}} chart.
 It basically combines the half open theme with a grid background from {cowplot}
 }
+\examples{
+library(ggplot2)
+
+pet_delivery \%>\% 
+   ggplot(aes(x = A)) +
+   geom_histogram(color = "grey", fill = "grey90") +
+   labs(title = "PET clothing case study",
+      subtitle = "Raw data plot",
+      x = "Treatment",
+      y = "Tensile strength [MPa]") +
+      theme_industRial()
+}
 \references{
 For a complete case study application refer to \url{https://j-ramalho.github.io/industRial/}
 }

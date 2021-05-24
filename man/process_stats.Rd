@@ -4,13 +4,13 @@
 \alias{process_stats}
 \title{Calculate summary statistics for Statistical Process Control}
 \usage{
-process_stats(data, pod_spec_percent)
+process_stats(data, part_spec_percent)
 }
 \arguments{
 \item{data}{This function takes the dataset tablet_thickness cleaned with the clean_names function from 
 the {janitor} package}
 
-\item{pod_spec_percent}{the process tolerance in percentage.}
+\item{part_spec_percent}{the process tolerance in percentage.}
 }
 \value{
 This function returns an object with class tibble (tbl_df)

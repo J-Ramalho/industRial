@@ -23,6 +23,9 @@ approximately a normal distribution.
   \item{B}{Tensile strenght measurements for product B [Mpa] (numeric)}
 }
 }
+\examples{
+data(pet_delivery)
+}
 \references{
 For a complete case study application refer to \url{https://j-ramalho.github.io/industRial/}.
 }

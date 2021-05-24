@@ -1,5 +1,7 @@
 
-# Table of Contents {#contents}
+# (PART) APPENDIX {-}
+
+# Index {#contents}
 
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
 source(here::here("inst/book/setup.R"))

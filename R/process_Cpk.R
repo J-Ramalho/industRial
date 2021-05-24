@@ -17,6 +17,7 @@
 #' @export
 #'
 #' @examples
+#' process_Cpk(100, 0, 10, 3)
 process_Cpk <- function(UCL, LCL, mean, sd) {
   pmin(
     (abs(mean - abs(LCL)) / (3 * sd)),

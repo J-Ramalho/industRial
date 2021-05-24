@@ -1,7 +1,5 @@
 
 
-# (PART) APPENDIX {-}
-
 # Glossary {#glossary}
 
 ## Statistics
@@ -267,7 +265,11 @@ Below key definitions from @Montgomery2012, complemented with Wikipedia article 
 
 **Randomization:** both the allocation of the experimental material and the order in which the individual runs of the experiment are to be performed are randomly determined.
 
-**Replicate:** independent repeat run of each factor combination.
+**Run:** unique combination of the input factors.
+
+**Replicate:** independent repeat of a run.
+
+**Experiment:** series of runs.
 
 **Factorial design:** in each complete trial or replicate of the experiment all possible combinations of the levels of the factors are investigated.
 
@@ -279,4 +281,13 @@ Below key definitions from @Montgomery2012, complemented with Wikipedia article 
 
 **Orthogonal contrasts:** two contrasts with coefficients ${c_i}$ and ${d_i}$ are orthogonal if: $\sum_{i=1}^{a}c_id_i$. In a balanced one-way analysis of variance, using orthogonal contrasts has the advantage of completely partitioning the treatment sum of squares into non-overlapping additive components that represent the variation due to each contrast. Contrasts then allow for the comparison between the different means.
 
-**sparsity of effects principle:** states that most systems are dominated by some of the main effects and low-order interactions, and most high-order interactions are negligible.
+**Sparsity of effects principle:** states that most systems are dominated by some of the main effects and low-order interactions, and most high-order interactions are negligible.
+
+## SPC
+
+**Process capability:** is the ability of a manufacturing process to produce an output within the product specification limits.
+
+**[Process Capability Index](https://en.wikipedia.org/wiki/Process_capability_index):** a statistical measure of the process capability. Different indexes have been defined: Cp, Cpk, Cpm, Cpkm.
+
+
+

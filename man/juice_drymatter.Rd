@@ -33,6 +33,16 @@ performed.
   \item{drymatter_REF}{Drymatter content measured with reference device}
 }
 }
+\examples{
+library(dplyr)
+# Calculate the bias between the new device and the reference:
+juice_drymatter <- juice_drymatter \%>\% dplyr::mutate(bias = drymatter_DRX - drymatter_REF)
+# Establish the analysis of variance:
+juice_drymatter_aov <- aov(
+     bias ~ drymatter_TGT * speed * particle_size,
+     data = juice_drymatter)
+summary(juice_drymatter_aov)
+}
 \references{
 For a complete case study application refer to \url{https://j-ramalho.github.io/industRial/}.
 }

@@ -1,4 +1,46 @@
-Domain,Area,Package,Used
+Topic,Domain,Package,Download
+Model,industrial stats,qicharts2,suggests
+Model,industrial stats,qcc,suggests
+Model,industrial stats,SixSigma,suggests
+,industrial stats,DoE.base,suggests
+datascience,industrial stats,rsm,suggests
+Visualise (niche),networks,ggraph,suggests
+Visualise (niche),networks,tidygraph,suggests
+,networks,igraph,suggests
+,networks,ggforce,suggests
+Communicate,publishing,bookdown,suggests
+Communicate,publishing,knitr,suggests
+,industrial stats,agricolae,suggests
+,statistics,car,suggests
+,statistics,RcmdrMisc,suggests
+Visualise (polish),publishing,kableextra,suggests
+,publishing,gt,suggests
+Visualise (customise),colors,viridis,imports
+Import,data loading,readr,imports
+Transform,data wrangling,dplyr,imports
+Transform,data wrangling,forcats,imports
+Tidy,data wrangling,janitor,imports
+Transform,data wrangling,magrittr,imports
+datascience,data wrangling,tibble,imports
+datascience,data wrangling,tidyr,imports
+Program,data wrangling,purrr,imports
+Visualise (customise),plotting,patchwork,imports
+Visualise,plotting,ggplot2,imports
+Visualise (customise),plotting,scales,imports
+Tidy,statistics,broom,imports
+Model,statistics,stats,imports
+Transform,data wrangling,glue,imports
+Transform,data wrangling,stringr,imports
+,plotting,ggtext,imports
+Visualise (customise),colors,rcartocolor,
+Training,data,datasets,
+Import,data loading,readxl,
+Tidy,data wrangling,hms,
+Tidy,data wrangling,lubridate,
+datascience,data wrangling,tidyverse,
+Model,statistics,tidymodels,
+,statistics,lsr,
+Program,sysadmin,fs,
 Visualise (niche),alluvial plots,ggalluvial,
 Visualise (niche),alluvial plots,ggforce,
 Visualise (polish),animation,gganimate,
@@ -11,37 +53,19 @@ Visualise (niche),cartography,mapview,
 Visualise (niche),cartography,raster,
 Visualise (niche),cartography,sf,
 Visualise (specialities),chord diagrams,circlize,
-Visualise (customise),colors,rcartocolor,y
 Visualise (customise),colors,RColorBrewer,
-Visualise (customise),colors,viridis,y
-Tidy,datascience,broom,y
 Tidy,data,data.table,
-Training,data,datasets,y
 Import,data,DBI,
-Transform,data science,dplyr,y
-Transform,data science,forcats,y
-Tidy,data science,hms,y
-Tidy,data science,janitor,y
-Tidy,data science,lubridate,y
-Transform,data science,magrittr,y
 Import,data,openxlsx,
-Import,data loading,readr,y
-Import,data loading,readxl,y
 Import,data,RPostgres,
 Import,data,RSQLite,
-datascience,data science,tibble,y
-datascience,data science,tidyr,y
 datascience,data,visdat,
 Import,data,webscrapping,
-datascience,datascience,tidyverse,y
 Visualise (specialities),diverging,barplot,
 Visualise (specialities),diverging,lollipop,
 Program,extend,Rcpp,
 Program,extend,reticulate,
 Program,functional programming,foreach,
-Program,functional programming,purrr,y
-Model,statistics,stats,y
-Model,statistics,tidymodels,y
 Visualise,ggplot2,donnut chart,
 Visualise,ggplot2,geom_area,
 Visualise,ggplot2,geom_bar,
@@ -62,46 +86,35 @@ Visualise (niche),government,ggpol,
 Visualise (niche),government,waffle,
 Visualise (polish),grammar of tables,DT,
 Visualise (polish),grammar of tables,gt,
-Visualise (polish),grammar of tables,kableextra,
 Visualise (specialities),heatmap / mosaic,ggmosaic,
 Visualise (polish),images,ggimage,
 Visualise (polish),images,magik,
-Model,industrial stats,qicharts2,y
-Model,industrial stats,qcc,y
-Model,industrial stats,SixSigma,y
-Visualise (niche),networks,ggraph,
-Visualise (niche),networks,tidygraph,
+,industrial stats,FrF2,
 Program,package development,devtools,
 Visualise (customise),panels,facet_wrap,
 Visualise (customise),panels,ggextra,
-Visualise (customise),plotting,patchwork,y
 Visualise (specialities),parallel coordinates,GGally,
-Visualise,plotting,ggplot2,y
 Visualise,plotting,graphics,
 Visualise,plotting,lattice,
 Communicate,publishing,blogdown,
+,publishing,officer,
 Visualise (specialities),radar charts,ggradar,
 Communicate,Rmarkdown,blogdown,
-Communicate,publishing,bookdown,y
-Communicate,publishing,knitr,y
 Communicate,Rmarkdown,remedy,
 Setup,Rstudio,Rstartup,
-Visualise (customise),plotting,scales,y
 Communicate,Shiny,shinycssloaders,
 Communicate,Shiny,waiter,
-,statistics,agricolae,y
-,statistics,car,y
 Visualise (specialities),statistics,ggppointdensity,
 Visualise (specialities),statistics,ggridges,
-,statistics,RcmdrMisc,y
 Visualise (niche),statistics,streamgraph,
 Visualise (specialities),statistics,tidybayes,
 Visualise (specialities),statistics,treemappify,
+datascience,statistics,DescTools,
+datascience,statistics,skimr,
 Setup,support software,anaconda,
 Setup,support software,Colorpicker,
 Setup,support software,dbBrowser,
 Setup,support software,Miktek,
-Program,sysadmin,fs,y
 Program,sysadmin,microbenchmark,
 Deploy,sysadmin,packrat,
 Program,sysadmin,proofvis,
@@ -110,15 +123,14 @@ Deploy,sysadmin,RSConnect,
 Deploy,sysadmin,ShinyApps.io,
 Program,sysadmin,tidylog,
 Program,sysadmin,utils,
+,sysadmin,conflicted,
 Visualise (customise),text,extrafont,
 Visualise (customise),text,ggfittext,
 Visualise (customise),text,ggrepel,
 Visualise (customise),text,ggtext,
-Transform,text,glue,y
 Visualise (customise),text,gridtext,
 Visualise (customise),text,shadowtext,
 Transform,text,stringi,
-Transform,text,stringr,y
 Visualise (polish),themes,ggthemes,
 Visualise (polish),themes,hrbrthemes,
 Model,timeseries,feasts,
@@ -197,15 +209,12 @@ Model,timeseries,tsibble,
 ,,geojsonsf,
 ,,geometries,
 ,,gert,
-,,ggforce,
 ,,ggimage,
 ,,ggiraph,
 ,,ggplot2,
 ,,ggplotify,
-,,ggraph,
 ,,ggrepel,
 ,,ggspc,
-,,ggtext,
 ,,ggthemes,
 ,,gh,
 ,,gitcreds,
@@ -220,7 +229,6 @@ Model,timeseries,tsibble,
 Visualise,,gridExtra,
 ,,gridGraphics,
 ,,gridtext,
-,,gt,
 ,,gtable,
 ,,haven,
 ,,highr,
@@ -233,7 +241,6 @@ Visualise,,gridExtra,
 ,,httpuv,
 ,,httr,
 ,,hunspell,
-,,igraph,
 ,,industrialthemes,
 ,,ini,
 ,,isoband,
@@ -259,7 +266,6 @@ Visualise,,gridExtra,
 ,,leafsync,
 ,,lifecycle,
 ,,lme4,
-,statistics,lsr,y
 ,,lubridate,
 ,,lwgeom,
 ,,magick,
@@ -405,7 +411,6 @@ Program,,snakecase,
 ,,testthat,
 ,,tfruns,
 ,,tibble,
-,,tidygraph,
 ,,tidyr,
 ,,tidyselect,
 ,,tidytext,
@@ -447,10 +452,3 @@ Webdevelopment,,shinipsum,
 Webdevelopment,,golem,
 Program,,sloop,
 Program,,thinkr,
-,publishing,officer,
-datascience,statistics,DescTools,
-datascience,statistics,skimr,
-,industrial stats,DoE.base,y
-,industrial stats,FrF2,
-,sysadmin,conflicted,
-datascience,industrial stats,rsm,y

@@ -4,8 +4,7 @@ Title: Companion To IndustRial Data Science Book
 Version: 0.1.0
 Authors@R: person("João", "Ramalho", email = "ramalho.joao@protonmail.com", role = c("aut", "cre"))
 Maintainer: The package maintainer <ramalho.joao@protonmail.com>
-Description: More about what it does (maybe more than one line)
-    Use four spaces when indenting paragraphs within the Description.
+Description: Companion package to the book industRial Data Science. Provides data sets and functions to complete the case studies and contains the book original files and exercises.
 License: GPL (>= 3)
 Encoding: UTF-8
 LazyData: true
@@ -24,14 +23,26 @@ Imports:
     tidyr,
     tibble,
     magrittr,
-    gt,
-    qcc,
-    DoE.base,
-    qicharts2,
-    SixSigma,
-    car
+    glue,
+    ggtext
 Depends: 
     R (>= 3.5.0)
 RoxygenNote: 7.1.1
 Suggests: 
-    learnr
+    SixSigma,
+    learnr,
+    DoE.base,
+    qcc,
+    car,
+    qicharts2,
+    rsm,
+    ggforce,
+    ggraph,
+    tidygraph,
+    igraph,
+    bookdown,
+    rmarkdown,
+    knitr,
+    agricolae,
+    RcmdrMisc,
+    gt

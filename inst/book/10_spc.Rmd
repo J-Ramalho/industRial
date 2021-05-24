@@ -277,6 +277,8 @@ By looking at the histogram of the Bamako lightning dataset we confirm the extre
 
 We can also calculate the Cpk
 
+[](#process_Cpk)
+
 ```{r}
 process_Cpk <- function(UCL, LCL, mean, sd) {
   pmin(

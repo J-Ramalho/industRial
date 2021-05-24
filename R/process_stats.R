@@ -16,7 +16,6 @@
 #' This function returns an object with class tibble (tbl_df)
 #' @export
 #'
-#' @examples
 process_stats <- function(data, part_spec_percent) {
   data %>%
     dplyr::filter(!is.na(weight_value), weight_value >= 0) %>%

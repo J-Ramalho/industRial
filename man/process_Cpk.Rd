@@ -22,6 +22,9 @@ This function returns an object of class numeric
 This function takes process variables and calculates the Cpk index which 
 is a measure of the process centering and variability against specification.
 }
+\examples{
+process_Cpk(100, 0, 10, 3)
+}
 \references{
 For a complete case study application refer to \url{https://j-ramalho.github.io/industRial/}
 }

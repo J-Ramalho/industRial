@@ -18,4 +18,5 @@
 #' For a complete case study application refer to \url{https://j-ramalho.github.io/industRial/}.
 #' 
 #' @examples
+#' data(pet_delivery)
 "pet_delivery"

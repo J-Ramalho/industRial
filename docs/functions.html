@@ -24,7 +24,7 @@
 <meta name="author" content="João Ramalho" />
 
 
-<meta name="date" content="2021-05-23" />
+<meta name="date" content="2021-05-24" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -178,13 +178,18 @@ div.csl-indent {
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Welcome</a></li>
 <li class="chapter" data-level="" data-path="contents.html"><a href="contents.html"><i class="fa fa-check"></i>Table of Contents</a></li>
 <li class="part"><span><b>I TOOLBOX</b></span></li>
-<li class="chapter" data-level="" data-path="r-packages.html"><a href="r-packages.html"><i class="fa fa-check"></i>R Packages</a>
+<li class="chapter" data-level="" data-path="r-and-rstudio.html"><a href="r-and-rstudio.html"><i class="fa fa-check"></i>R and RStudio</a></li>
+<li class="chapter" data-level="" data-path="packages.html"><a href="packages.html"><i class="fa fa-check"></i>Packages</a>
 <ul>
-<li class="chapter" data-level="" data-path="r-packages.html"><a href="r-packages.html#six-sigma"><i class="fa fa-check"></i>six sigma</a></li>
-<li class="chapter" data-level="" data-path="r-packages.html"><a href="r-packages.html#qcc"><i class="fa fa-check"></i>qcc</a></li>
-<li class="chapter" data-level="" data-path="r-packages.html"><a href="r-packages.html#qicharts2"><i class="fa fa-check"></i>qicharts2</a></li>
-<li class="chapter" data-level="" data-path="r-packages.html"><a href="r-packages.html#doe.base"><i class="fa fa-check"></i>DoE.base</a></li>
-<li class="chapter" data-level="" data-path="r-packages.html"><a href="r-packages.html#car"><i class="fa fa-check"></i>car</a></li>
+<li class="chapter" data-level="" data-path="packages.html"><a href="packages.html#installation"><i class="fa fa-check"></i>Installation</a></li>
+<li class="chapter" data-level="" data-path="packages.html"><a href="packages.html#highlights"><i class="fa fa-check"></i>Highlights</a>
+<ul>
+<li class="chapter" data-level="" data-path="packages.html"><a href="packages.html#six-sigma"><i class="fa fa-check"></i>six sigma</a></li>
+<li class="chapter" data-level="" data-path="packages.html"><a href="packages.html#qcc"><i class="fa fa-check"></i>qcc</a></li>
+<li class="chapter" data-level="" data-path="packages.html"><a href="packages.html#qicharts2"><i class="fa fa-check"></i>qicharts2</a></li>
+<li class="chapter" data-level="" data-path="packages.html"><a href="packages.html#doe.base"><i class="fa fa-check"></i>DoE.base</a></li>
+<li class="chapter" data-level="" data-path="packages.html"><a href="packages.html#car"><i class="fa fa-check"></i>car</a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="datasets.html"><a href="datasets.html"><i class="fa fa-check"></i>Datasets</a></li>
 <li class="chapter" data-level="" data-path="functions.html"><a href="functions.html"><i class="fa fa-check"></i>Functions</a></li>
@@ -302,6 +307,7 @@ div.csl-indent {
 </ul></li>
 <li class="chapter" data-level="" data-path="glossary.html"><a href="glossary.html#msa"><i class="fa fa-check"></i>MSA</a></li>
 <li class="chapter" data-level="" data-path="glossary.html"><a href="glossary.html#doe"><i class="fa fa-check"></i>DOE</a></li>
+<li class="chapter" data-level="" data-path="glossary.html"><a href="glossary.html#spc"><i class="fa fa-check"></i>SPC</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="chapter" data-level="" data-path="imprint.html"><a href="imprint.html"><i class="fa fa-check"></i>Imprint</a></li>
@@ -326,18 +332,52 @@ div.csl-indent {
 <h1>Functions</h1>
 <p>Besides the data sets the <code>{industRial}</code> package also contains toy functions to plot Statistical Process Control (SPC) charts. The objective here is to showcase how to build such functions and their scope of application is limited to the book case studies. For complete and robust SPC functions we recommend using the <code>{QCC}</code> package also described below.</p>
 <p>Additionally the package contains theme functions to print and customize the aesthetics of spc charts and other charts. These themes are built on top of the <code>{ggplot2}</code> by H.Wickham and <code>{cowplot}</code> package by Claus O.Wilke. The main objective is to give the reader a starting point for customization of charts in this domain.</p>
-<p>The complete list of datasets, themes and functions can be seen by listing all objects from the package with ls():</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="functions.html#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span>(<span class="st">&quot;package:industRial&quot;</span>)</span></code></pre></div>
-<pre><code> [1] &quot;%&gt;%&quot;                 &quot;battery_charging&quot;    &quot;chart_Cpk&quot;          
- [4] &quot;chart_I&quot;             &quot;chart_IMR&quot;           &quot;dial_control&quot;       
- [7] &quot;ebike_hardening&quot;     &quot;ebike_hardening2&quot;    &quot;juice_drymatter&quot;    
-[10] &quot;off_spec&quot;            &quot;perfume_experiment&quot;  &quot;pet_delivery&quot;       
-[13] &quot;pet_doe&quot;             &quot;process_Cpk&quot;         &quot;process_stats&quot;      
-[16] &quot;process_stats_table&quot; &quot;solarcell_fill&quot;      &quot;solarcell_output&quot;   
-[19] &quot;syringe_diameter&quot;    &quot;tablet_thickness&quot;    &quot;tablet_weight&quot;      
-[22] &quot;theme_industRial&quot;    &quot;theme_qcc&quot;          </code></pre>
-<p>or conveniently on the console with industRial:: and then tab. For each function a help page is available and can be obtained the same way as any other R data sets, themes and functions with <code>?&lt;object&gt;</code> (e.g. ?chart_xbar)</p>
-<p>To go even deeper the text book and get access to all the code, the original Rmd files are also bundled in the package and can be seen in the book folder. A way to get the exact path is with:</p>
+<p>A functions can conveniently be accessed on the console with <code>industRial::</code> and then tab. The complete list of themes and functions can be seen with:</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="functions.html#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">lsf.str</span>(<span class="st">&quot;package:industRial&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb7-2"><a href="functions.html#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unclass</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb7-3"><a href="functions.html#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as_tibble</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb7-4"><a href="functions.html#cb7-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable</span>()</span></code></pre></div>
+<table>
+<thead>
+<tr class="header">
+<th align="left">value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">%&gt;%</td>
+</tr>
+<tr class="even">
+<td align="left">chart_Cpk</td>
+</tr>
+<tr class="odd">
+<td align="left">chart_I</td>
+</tr>
+<tr class="even">
+<td align="left">chart_IMR</td>
+</tr>
+<tr class="odd">
+<td align="left">off_spec</td>
+</tr>
+<tr class="even">
+<td align="left">process_Cpk</td>
+</tr>
+<tr class="odd">
+<td align="left">process_stats</td>
+</tr>
+<tr class="even">
+<td align="left">process_stats_table</td>
+</tr>
+<tr class="odd">
+<td align="left">theme_industRial</td>
+</tr>
+<tr class="even">
+<td align="left">theme_qcc</td>
+</tr>
+</tbody>
+</table>
+<p>For each function a help page is available and can be obtained the same way as any other R data sets, themes and functions with <code>?&lt;object&gt;</code> (e.g. ?chart_xbar)</p>
+<p>To go even deeper and get access to all the code, the original book Rmd files are also bundled in the package and can be seen in the book folder. A way to get the exact folder path is:</p>
 <div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="functions.html#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">paste0</span>(<span class="fu">.libPaths</span>()[<span class="dv">1</span>], <span class="st">&quot;/industRial/book&quot;</span>)</span></code></pre></div>
 <pre><code>[1] &quot;/home/joao/R/x86_64-pc-linux-gnu-library/4.0/industRial/book&quot;</code></pre>
 </div>

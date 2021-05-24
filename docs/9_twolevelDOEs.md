@@ -379,7 +379,7 @@ plotMeans(response = pet_fct$tensile_strength,
 
 3 factors 2 levels
 
-**The litium-ion battery charging time test**
+**The lithium-ion battery charging time test**
 
 A - temperature 
 B - previous cycles (within warranty)
@@ -626,7 +626,7 @@ persp(
   col = viridis(12)[8],
   theta = -40, phi = 20, r = 5,
   zlab = "Charging Time",
-  main = "Litium-ion battery\ncharging time test"
+  main = "Lithium-ion battery\ncharging time test"
 )
 ```
 
@@ -646,7 +646,7 @@ interaction.plot(x.factor = battery_charging$C,
                  lwd = 2,
                  col = c(viridis(12)[10], col = viridis(12)[6]),
                  ylab = "Charging Time",
-                 main = "Litium-ion battery\ncharging time test")
+                 main = "Lithium-ion battery\ncharging time test")
 ```
 
 <img src="9_twolevelDOEs_files/figure-html/unnamed-chunk-33-1.png" width="80%" />
@@ -655,7 +655,7 @@ Just like in the surface plot we can see here in the interaction plot that the r
 
 ### Single replicate designs
 
-**The litium-ion battery charging time test (cont.)**
+**The lithium-ion battery charging time test (cont.)**
 
 m factors 2 levels 
 

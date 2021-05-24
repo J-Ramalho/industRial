@@ -26,6 +26,11 @@ coded as +/- and 3 replicates for each combination.
   \item{yield}{the output variable measured on the PET, (numerical)}
 }
 }
+\examples{
+data(pet_doe)
+contrasts(pet_doe$A)
+
+}
 \references{
 For a complete case study application refer to \url{https://j-ramalho.github.io/industRial/}
 }

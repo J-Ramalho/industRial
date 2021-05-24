@@ -21,6 +21,16 @@
 #' @export
 #'
 #' @examples
+#' library(ggplot2)
+#' 
+#' pet_delivery %>% 
+#'    ggplot(aes(x = A)) +
+#'    geom_histogram(color = "grey", fill = "grey90") +
+#'    labs(title = "PET clothing case study",
+#'       subtitle = "Raw data plot",
+#'       x = "Treatment",
+#'       y = "Tensile strength [MPa]") +
+#'       theme_qcc()
 theme_qcc <- function(base_size = 12, base_family = "") {
   
   theme_grey(base_size = base_size, base_family = base_family) %+replace%

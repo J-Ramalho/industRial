@@ -21,4 +21,7 @@
 #' For a complete case study application refer to \url{https://j-ramalho.github.io/industRial/}
 #' 
 #' @examples
+#' data(pet_doe)
+#' contrasts(pet_doe$A)
+#' 
 "pet_doe"

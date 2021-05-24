@@ -24,14 +24,14 @@
 <meta name="author" content="João Ramalho" />
 
 
-<meta name="date" content="2021-05-23" />
+<meta name="date" content="2021-05-24" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="SPC.html"/>
+<link rel="prev" href="contents.html"/>
 <link rel="next" href="references.html"/>
 <script src="libs/header-attrs-2.8/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
@@ -175,19 +175,19 @@ div.csl-indent {
 <li><a href="./">industRial data science</a></li>
 
 <li class="divider"></li>
+<li class="part"><span><b>I INTRODUCTION</b></span></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Welcome</a></li>
-<li class="chapter" data-level="" data-path="contents.html"><a href="contents.html"><i class="fa fa-check"></i>Table of Contents</a></li>
-<li class="part"><span><b>I TOOLBOX</b></span></li>
-<li class="chapter" data-level="" data-path="r-packages.html"><a href="r-packages.html"><i class="fa fa-check"></i>R Packages</a>
+<li class="chapter" data-level="" data-path="toolbox.html"><a href="toolbox.html"><i class="fa fa-check"></i>Toolbox</a>
 <ul>
-<li class="chapter" data-level="" data-path="r-packages.html"><a href="r-packages.html#six-sigma"><i class="fa fa-check"></i>six sigma</a></li>
-<li class="chapter" data-level="" data-path="r-packages.html"><a href="r-packages.html#qcc"><i class="fa fa-check"></i>qcc</a></li>
-<li class="chapter" data-level="" data-path="r-packages.html"><a href="r-packages.html#qicharts2"><i class="fa fa-check"></i>qicharts2</a></li>
-<li class="chapter" data-level="" data-path="r-packages.html"><a href="r-packages.html#doe.base"><i class="fa fa-check"></i>DoE.base</a></li>
-<li class="chapter" data-level="" data-path="r-packages.html"><a href="r-packages.html#car"><i class="fa fa-check"></i>car</a></li>
+<li class="chapter" data-level="" data-path="toolbox.html"><a href="toolbox.html#r-and-rstudio"><i class="fa fa-check"></i>R and RStudio</a></li>
+<li class="chapter" data-level="" data-path="toolbox.html"><a href="toolbox.html#packages"><i class="fa fa-check"></i>Packages</a>
+<ul>
+<li class="chapter" data-level="" data-path="toolbox.html"><a href="toolbox.html#installation"><i class="fa fa-check"></i>Installation</a></li>
+<li class="chapter" data-level="" data-path="toolbox.html"><a href="toolbox.html#highlights"><i class="fa fa-check"></i>Highlights</a></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="datasets.html"><a href="datasets.html"><i class="fa fa-check"></i>Datasets</a></li>
-<li class="chapter" data-level="" data-path="functions.html"><a href="functions.html"><i class="fa fa-check"></i>Functions</a></li>
+<li class="chapter" data-level="" data-path="toolbox.html"><a href="toolbox.html#datasets"><i class="fa fa-check"></i>Datasets</a></li>
+<li class="chapter" data-level="" data-path="toolbox.html"><a href="toolbox.html#functions"><i class="fa fa-check"></i>Functions</a></li>
+</ul></li>
 <li class="chapter" data-level="" data-path="tutorials.html"><a href="tutorials.html"><i class="fa fa-check"></i>Tutorials</a>
 <ul>
 <li class="chapter" data-level="" data-path="tutorials.html"><a href="tutorials.html#on-the-web"><i class="fa fa-check"></i>On the web</a></li>
@@ -286,6 +286,7 @@ div.csl-indent {
 </ul></li>
 </ul></li>
 <li class="part"><span><b>III APPENDIX</b></span></li>
+<li class="chapter" data-level="" data-path="contents.html"><a href="contents.html"><i class="fa fa-check"></i>Index</a></li>
 <li class="chapter" data-level="" data-path="glossary.html"><a href="glossary.html"><i class="fa fa-check"></i>Glossary</a>
 <ul>
 <li class="chapter" data-level="" data-path="glossary.html"><a href="glossary.html#statistics"><i class="fa fa-check"></i>Statistics</a>
@@ -302,6 +303,7 @@ div.csl-indent {
 </ul></li>
 <li class="chapter" data-level="" data-path="glossary.html"><a href="glossary.html#msa"><i class="fa fa-check"></i>MSA</a></li>
 <li class="chapter" data-level="" data-path="glossary.html"><a href="glossary.html#doe"><i class="fa fa-check"></i>DOE</a></li>
+<li class="chapter" data-level="" data-path="glossary.html"><a href="glossary.html#spc"><i class="fa fa-check"></i>SPC</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="chapter" data-level="" data-path="imprint.html"><a href="imprint.html"><i class="fa fa-check"></i>Imprint</a></li>
@@ -509,13 +511,20 @@ Comparison of the variability of a production process with its engineered specif
 <h2>DOE</h2>
 <p>Below key definitions from <span class="citation"><a href="#ref-Montgomery2012" role="doc-biblioref">Montgomery</a> (<a href="#ref-Montgomery2012" role="doc-biblioref">2012</a>)</span>, complemented with Wikipedia article details on the same topics.</p>
 <p><strong>Randomization:</strong> both the allocation of the experimental material and the order in which the individual runs of the experiment are to be performed are randomly determined.</p>
-<p><strong>Replicate:</strong> independent repeat run of each factor combination.</p>
+<p><strong>Run:</strong> unique combination of the input factors.</p>
+<p><strong>Replicate:</strong> independent repeat of a run.</p>
+<p><strong>Experiment:</strong> series of runs.</p>
 <p><strong>Factorial design:</strong> in each complete trial or replicate of the experiment all possible combinations of the levels of the factors are investigated.</p>
 <p><strong>Crossed factors:</strong> factors arranged in a factorial design.</p>
 <p><strong>Coded variable:</strong> the <span class="math inline">\(\pm\)</span> 1 coding for the low and high levels of the factors. Coded variables are very effective for determining the relative size of factor effects. In almost all situations, the coded unit analysis is preferable.</p>
 <p><strong>Contrast:</strong> a linear combination of parameters in the form <span class="math inline">\(\tau=\sum_{i=1}^{a}c_i\mu_i\)</span> where the contrast constants <span class="math inline">\(c_1,c_2, ..., c_a\)</span> sum to zero; that is, <span class="math inline">\(\sum_{i=1}^{a}c_i=0\)</span>.</p>
 <p><strong>Orthogonal contrasts:</strong> two contrasts with coefficients <span class="math inline">\({c_i}\)</span> and <span class="math inline">\({d_i}\)</span> are orthogonal if: <span class="math inline">\(\sum_{i=1}^{a}c_id_i\)</span>. In a balanced one-way analysis of variance, using orthogonal contrasts has the advantage of completely partitioning the treatment sum of squares into non-overlapping additive components that represent the variation due to each contrast. Contrasts then allow for the comparison between the different means.</p>
 <p><strong>Sparsity of effects principle:</strong> states that most systems are dominated by some of the main effects and low-order interactions, and most high-order interactions are negligible.</p>
+</div>
+<div id="spc" class="section level2">
+<h2>SPC</h2>
+<p><strong>Process capability:</strong> is the ability of a manufacturing process to produce an output within the product specification limits.</p>
+<p><strong><a href="https://en.wikipedia.org/wiki/Process_capability_index">Process Capability Index</a>:</strong> a statistical measure of the process capability. Different indexes have been defined: Cp, Cpk, Cpm, Cpkm.</p>
 
 </div>
 </div>
@@ -545,7 +554,7 @@ Yakir, Benjamin. 2011. <em>Introduction to Statistical Thinking (with r, Without
           </div>
         </div>
       </div>
-<a href="SPC.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="contents.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
 <a href="references.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>

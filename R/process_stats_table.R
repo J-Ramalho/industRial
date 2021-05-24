@@ -14,7 +14,6 @@
 #' This function returns an object with classes gt_tbl and list
 #' @export
 #'
-#' @examples
 process_stats_table <- function(data) {
   data %>%
     dplyr::group_by(weight_target_value) %>%

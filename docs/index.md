@@ -2,7 +2,7 @@
 title: "indust<b style='color:#38598CFF'>R</b>ial data science"
 subtitle: Case studies in product development and manufacturing
 author: "João Ramalho"
-date: "2021-05-23"
+date: "2021-05-24"
 # output: pdf_document
 site: bookdown::bookdown_site
 output: 
@@ -31,6 +31,8 @@ cover-image: "img/cover3.png"
 
 
 
+# (PART) INTRODUCTION {-}
+
 # Welcome {-}
 
 <a href="">
@@ -45,15 +47,13 @@ Additionally Data Science brings new powerful approaches to the engineering and 
 
 **How to use this book**
 
-We assume the reader is familiar with product development and manufacturing quality methodologies such as dmaic and six sigma and the associated statistical concepts. Furthermore it is considered that he brings at least a beginner knowledge on R. The book focus is on putting these areas together.
+We assume the reader is familiar with product development and manufacturing quality methodologies such as dmaic and six sigma and the associated statistical concepts. Furthermore it is considered that he/she brings at least a beginner knowledge on R. The book focus is on putting these areas together.
 
-Being a collection of case studies, the book is better used as a reference book. The navigation bar on the left is organized by domain and a full list of the Case Studies, Datasets and R functions is available in the section [Table of contents](#contents). 
+This book is better used as a reference book by using the navigation bar on the left to go a specific industrial domain. To reproduce the examples all the case studies data sets, example functions and the textbook original files can be downloaded as a package called `{industRial}`. For guidelines on how to use them refer to the sections [Datasets](#datasets) and [Functions](#functions)
 
-Complementing the text, a series of tutorials can be accessed either on line or locally to practice dynamically key statistical concepts. For the online option no specific software installation is required. A list of web links and detailed instructions on local installation can be seen in the section [Tutorials](#tutorials).
+Complementing the text, a series of tutorials can be accessed either online or locally to practice dynamically key statistical concepts. For the online option no specific software installation is required. A list of web links and detailed instructions on local installation can be seen in the section [Tutorials](#tutorials).
 
-To go even further all the case studies data sets, selected example functions and the textbook original files can be downloaded as a package called `{industRial}`. For guidelines on how to use them refer to the sections [Datasets](#datasets) and [Functions](#functions)
-
-Finally we refer to several good quality books on both Data Science and Product Development that have served to provide the required theoretical  background. These cover key disciplines such as six sigma, statistics and computer programming. This book aims complementing them and showcase how to benefit from recent software in this area. A full list can be found in [References](#references).
+In the appendix we provide a detailed [Index](#contents) and a [Glossary](#glossary) and we refer to several good quality books on both Data Science and Product Development that have served to provide the required theoretical background. These cover key disciplines such as six sigma, statistics and computer programming. This book aims complementing them and showcase how to benefit from recent software in this area. A full list can be found in [References](#references).
 
 **Content overview**
 

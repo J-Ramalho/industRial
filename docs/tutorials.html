@@ -24,14 +24,14 @@
 <meta name="author" content="João Ramalho" />
 
 
-<meta name="date" content="2021-05-23" />
+<meta name="date" content="2021-05-24" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="functions.html"/>
+<link rel="prev" href="toolbox.html"/>
 <link rel="next" href="design-for-six-sigma.html"/>
 <script src="libs/header-attrs-2.8/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
@@ -175,19 +175,19 @@ div.csl-indent {
 <li><a href="./">industRial data science</a></li>
 
 <li class="divider"></li>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Welcome</a></li>
-<li class="chapter" data-level="" data-path="contents.html"><a href="contents.html"><i class="fa fa-check"></i>Table of Contents</a></li>
-<li class="part"><span><b>I TOOLBOX</b></span></li>
-<li class="chapter" data-level="" data-path="r-packages.html"><a href="r-packages.html"><i class="fa fa-check"></i>R Packages</a>
+<li class="part"><span><b>I INTRODUCTION</b></span></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>output: pdf_document</a></li>
+<li class="chapter" data-level="" data-path="toolbox.html"><a href="toolbox.html"><i class="fa fa-check"></i>Toolbox</a>
 <ul>
-<li class="chapter" data-level="" data-path="r-packages.html"><a href="r-packages.html#six-sigma"><i class="fa fa-check"></i>six sigma</a></li>
-<li class="chapter" data-level="" data-path="r-packages.html"><a href="r-packages.html#qcc"><i class="fa fa-check"></i>qcc</a></li>
-<li class="chapter" data-level="" data-path="r-packages.html"><a href="r-packages.html#qicharts2"><i class="fa fa-check"></i>qicharts2</a></li>
-<li class="chapter" data-level="" data-path="r-packages.html"><a href="r-packages.html#doe.base"><i class="fa fa-check"></i>DoE.base</a></li>
-<li class="chapter" data-level="" data-path="r-packages.html"><a href="r-packages.html#car"><i class="fa fa-check"></i>car</a></li>
+<li class="chapter" data-level="" data-path="toolbox.html"><a href="toolbox.html#r-and-rstudio"><i class="fa fa-check"></i>R and RStudio</a></li>
+<li class="chapter" data-level="" data-path="toolbox.html"><a href="toolbox.html#packages"><i class="fa fa-check"></i>Packages</a>
+<ul>
+<li class="chapter" data-level="" data-path="toolbox.html"><a href="toolbox.html#installation"><i class="fa fa-check"></i>Installation</a></li>
+<li class="chapter" data-level="" data-path="toolbox.html"><a href="toolbox.html#highlights"><i class="fa fa-check"></i>Highlights</a></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="datasets.html"><a href="datasets.html"><i class="fa fa-check"></i>Datasets</a></li>
-<li class="chapter" data-level="" data-path="functions.html"><a href="functions.html"><i class="fa fa-check"></i>Functions</a></li>
+<li class="chapter" data-level="" data-path="toolbox.html"><a href="toolbox.html#datasets"><i class="fa fa-check"></i>Datasets</a></li>
+<li class="chapter" data-level="" data-path="toolbox.html"><a href="toolbox.html#functions"><i class="fa fa-check"></i>Functions</a></li>
+</ul></li>
 <li class="chapter" data-level="" data-path="tutorials.html"><a href="tutorials.html"><i class="fa fa-check"></i>Tutorials</a>
 <ul>
 <li class="chapter" data-level="" data-path="tutorials.html"><a href="tutorials.html#on-the-web"><i class="fa fa-check"></i>On the web</a></li>
@@ -286,6 +286,7 @@ div.csl-indent {
 </ul></li>
 </ul></li>
 <li class="part"><span><b>III APPENDIX</b></span></li>
+<li class="chapter" data-level="" data-path="contents.html"><a href="contents.html"><i class="fa fa-check"></i>Index</a></li>
 <li class="chapter" data-level="" data-path="glossary.html"><a href="glossary.html"><i class="fa fa-check"></i>Glossary</a>
 <ul>
 <li class="chapter" data-level="" data-path="glossary.html"><a href="glossary.html#statistics"><i class="fa fa-check"></i>Statistics</a>
@@ -302,9 +303,9 @@ div.csl-indent {
 </ul></li>
 <li class="chapter" data-level="" data-path="glossary.html"><a href="glossary.html#msa"><i class="fa fa-check"></i>MSA</a></li>
 <li class="chapter" data-level="" data-path="glossary.html"><a href="glossary.html#doe"><i class="fa fa-check"></i>DOE</a></li>
+<li class="chapter" data-level="" data-path="glossary.html"><a href="glossary.html#spc"><i class="fa fa-check"></i>SPC</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
-<li class="chapter" data-level="" data-path="imprint.html"><a href="imprint.html"><i class="fa fa-check"></i>Imprint</a></li>
 </ul>
 
       </nav>
@@ -331,7 +332,7 @@ div.csl-indent {
 <p>the tutorials in the list below are published on the shinyapp.io server and can be freely accessed with the links below:</p>
 <table>
 <colgroup>
-<col width="20%" />
+<col width="19%" />
 <col width="80%" />
 </colgroup>
 <thead>
@@ -363,15 +364,12 @@ div.csl-indent {
 </div>
 <div id="locally" class="section level2">
 <h2>Locally</h2>
-<p>The same set of tutorials can also be run locally which can be convenient as they load faster. This also allows for further exploration as the original tutorial code becomes available.</p>
-<p>Install locally the <code>{industRial}</code> and <code>{learnr}</code> packages, with:</p>
-<pre><code>devtools::install_github(&quot;J-Ramalho/industRial&quot;)
-install.packages(&quot;learnr)</code></pre>
-<p>load the packages:</p>
+<p>The same set of tutorials can also be run locally which can be convenient as they load faster. This also allows for further exploration as the original tutorial code becomes available. For downloading instructions refer to the packages (#installation) session.</p>
+<p>Next load the packages:</p>
 <pre><code>library(industRial)
 library(learnr)</code></pre>
 <p>and list the tutorials with:</p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="tutorials.html#cb12-1" aria-hidden="true" tabindex="-1"></a>learnr<span class="sc">::</span><span class="fu">available_tutorials</span>(<span class="at">package =</span> <span class="st">&quot;industRial&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="tutorials.html#cb11-1" aria-hidden="true" tabindex="-1"></a>learnr<span class="sc">::</span><span class="fu">available_tutorials</span>(<span class="at">package =</span> <span class="st">&quot;industRial&quot;</span>)</span></code></pre></div>
 <pre><code>Available tutorials:
 * industRial
   - anova      : &quot;industRial practice&quot;
@@ -395,7 +393,7 @@ library(learnr)</code></pre>
           </div>
         </div>
       </div>
-<a href="functions.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="toolbox.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
 <a href="design-for-six-sigma.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
@@ -442,20 +440,6 @@ gitbook.start({
 });
 </script>
 
-<!-- dynamically load mathjax for compatibility with self-contained -->
-<script>
-  (function () {
-    var script = document.createElement("script");
-    script.type = "text/javascript";
-    var src = "true";
-    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
-    if (location.protocol !== "file:")
-      if (/^https?:/.test(src))
-        src = src.replace(/^https?:/, '');
-    script.src = src;
-    document.getElementsByTagName("head")[0].appendChild(script);
-  })();
-</script>
 </body>
 
 </html>

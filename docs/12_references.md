@@ -30,7 +30,7 @@ devtools::session_info()[[1]]
 ##  collate  en_US.UTF-8                 
 ##  ctype    en_US.UTF-8                 
 ##  tz       Europe/Zurich               
-##  date     2021-05-23
+##  date     2021-05-24
 ```
 
 **Disclaimer**

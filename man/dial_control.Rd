@@ -26,6 +26,9 @@ function like \code{\link[qicharts2]{paretochart}}.
   \item{Location}{Position on the watch dial refered to as the hour (1h, 2h)}
 }
 }
+\examples{
+head(dial_control)
+}
 \references{
 For a complete case study application refer to \url{https://j-ramalho.github.io/industRial/}.
 }

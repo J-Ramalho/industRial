@@ -11,11 +11,17 @@
 #'   \item{g1}{group 1, remaining groups have names g2 to g5}
 #' }
 #' 
+#' @details The ebike_hardening2 dataset contains alternative data that gives
+#' non significant results in the analysis of variance study.
+#' 
 #' @source
 #' Original data set.
 #' 
 #' @references 
 #' For a complete case study application refer to \url{https://j-ramalho.github.io/industRial/}.
 #' 
+#' @aliases ebike_hardening2
+#' 
 #' @examples
+#' data(ebike_hardening)
 "ebike_hardening"

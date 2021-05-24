@@ -25,6 +25,18 @@ Apply this theme by adding it at the end of the code of any \code{\link[ggplot2]
 It #' basically provides a grey background and some highlights to help reading key
 process statistics such as the population mean.
 }
+\examples{
+library(ggplot2)
+
+pet_delivery \%>\% 
+   ggplot(aes(x = A)) +
+   geom_histogram(color = "grey", fill = "grey90") +
+   labs(title = "PET clothing case study",
+      subtitle = "Raw data plot",
+      x = "Treatment",
+      y = "Tensile strength [MPa]") +
+      theme_qcc()
+}
 \references{
 For a complete case study application refer to \url{https://j-ramalho.github.io/industRial/}
 }

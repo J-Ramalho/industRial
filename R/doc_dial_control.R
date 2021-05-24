@@ -21,4 +21,5 @@
 #' For a complete case study application refer to \url{https://j-ramalho.github.io/industRial/}.
 #' 
 #' @examples
+#' head(dial_control)
 "dial_control"

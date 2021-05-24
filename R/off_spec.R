@@ -17,6 +17,7 @@
 #' @export
 #'
 #' @examples
+#' off_spec(100, 0, 10, 3)
 off_spec <- function(UCL, LCL, mean, sd) {
   round(100 - ((stats::pnorm(UCL, mean, sd) - stats::pnorm(LCL, mean, sd))*100), 2)
 }

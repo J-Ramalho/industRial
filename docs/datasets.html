@@ -24,14 +24,14 @@
 <meta name="author" content="João Ramalho" />
 
 
-<meta name="date" content="2021-05-23" />
+<meta name="date" content="2021-05-24" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="r-packages.html"/>
+<link rel="prev" href="packages.html"/>
 <link rel="next" href="functions.html"/>
 <script src="libs/header-attrs-2.8/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
@@ -178,13 +178,18 @@ div.csl-indent {
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Welcome</a></li>
 <li class="chapter" data-level="" data-path="contents.html"><a href="contents.html"><i class="fa fa-check"></i>Table of Contents</a></li>
 <li class="part"><span><b>I TOOLBOX</b></span></li>
-<li class="chapter" data-level="" data-path="r-packages.html"><a href="r-packages.html"><i class="fa fa-check"></i>R Packages</a>
+<li class="chapter" data-level="" data-path="r-and-rstudio.html"><a href="r-and-rstudio.html"><i class="fa fa-check"></i>R and RStudio</a></li>
+<li class="chapter" data-level="" data-path="packages.html"><a href="packages.html"><i class="fa fa-check"></i>Packages</a>
 <ul>
-<li class="chapter" data-level="" data-path="r-packages.html"><a href="r-packages.html#six-sigma"><i class="fa fa-check"></i>six sigma</a></li>
-<li class="chapter" data-level="" data-path="r-packages.html"><a href="r-packages.html#qcc"><i class="fa fa-check"></i>qcc</a></li>
-<li class="chapter" data-level="" data-path="r-packages.html"><a href="r-packages.html#qicharts2"><i class="fa fa-check"></i>qicharts2</a></li>
-<li class="chapter" data-level="" data-path="r-packages.html"><a href="r-packages.html#doe.base"><i class="fa fa-check"></i>DoE.base</a></li>
-<li class="chapter" data-level="" data-path="r-packages.html"><a href="r-packages.html#car"><i class="fa fa-check"></i>car</a></li>
+<li class="chapter" data-level="" data-path="packages.html"><a href="packages.html#installation"><i class="fa fa-check"></i>Installation</a></li>
+<li class="chapter" data-level="" data-path="packages.html"><a href="packages.html#highlights"><i class="fa fa-check"></i>Highlights</a>
+<ul>
+<li class="chapter" data-level="" data-path="packages.html"><a href="packages.html#six-sigma"><i class="fa fa-check"></i>six sigma</a></li>
+<li class="chapter" data-level="" data-path="packages.html"><a href="packages.html#qcc"><i class="fa fa-check"></i>qcc</a></li>
+<li class="chapter" data-level="" data-path="packages.html"><a href="packages.html#qicharts2"><i class="fa fa-check"></i>qicharts2</a></li>
+<li class="chapter" data-level="" data-path="packages.html"><a href="packages.html#doe.base"><i class="fa fa-check"></i>DoE.base</a></li>
+<li class="chapter" data-level="" data-path="packages.html"><a href="packages.html#car"><i class="fa fa-check"></i>car</a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="datasets.html"><a href="datasets.html"><i class="fa fa-check"></i>Datasets</a></li>
 <li class="chapter" data-level="" data-path="functions.html"><a href="functions.html"><i class="fa fa-check"></i>Functions</a></li>
@@ -302,6 +307,7 @@ div.csl-indent {
 </ul></li>
 <li class="chapter" data-level="" data-path="glossary.html"><a href="glossary.html#msa"><i class="fa fa-check"></i>MSA</a></li>
 <li class="chapter" data-level="" data-path="glossary.html"><a href="glossary.html#doe"><i class="fa fa-check"></i>DOE</a></li>
+<li class="chapter" data-level="" data-path="glossary.html"><a href="glossary.html#spc"><i class="fa fa-check"></i>SPC</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="chapter" data-level="" data-path="imprint.html"><a href="imprint.html"><i class="fa fa-check"></i>Imprint</a></li>
@@ -324,14 +330,85 @@ div.csl-indent {
             <section class="normal" id="section-">
 <div id="datasets" class="section level1">
 <h1>Datasets</h1>
-<p>An original package with the name <code>{industRial}</code> has been developed as a companion package for this book. It can be downloaded from github with the following command:</p>
-<pre><code>devtools::install_github(&quot;J-Ramalho/industRial&quot;)</code></pre>
-<p>The primary package goal is to make easily available all the data sets from all case studies. All dataset presented throughout the book are published either fully anonymized. Once the package is correctly installed it can be loaded in the R session as usual with the library() function:</p>
-<pre><code>library(industRial)</code></pre>
-<p>Once loaded the data sets become immediately available in memory and can directly be used in the examples presented or for further exploration. Lets confirm this invoking the first data set:</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="datasets.html#cb4-1" aria-hidden="true" tabindex="-1"></a>dial_control <span class="sc">%&gt;%</span></span>
-<span id="cb4-2"><a href="datasets.html#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb4-3"><a href="datasets.html#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable</span>()</span></code></pre></div>
+<p>All datasets presented throughout the book are fully anonymized. Once the package is correctly installed it can be loaded in the R session as usual with the library() function.</p>
+<pre><code>devtools::install_github(&quot;J-Ramalho/industRial&quot;)
+library(industRial)</code></pre>
+<p>The primary goal of <code>{industRial}</code> is to make easily available all the data sets from all case studies. We can easily look for a data set by typing <code>industRial::</code> and tab. The complete list can also be obtained with the snippet below:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="datasets.html#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="at">package =</span> <span class="st">&quot;industRial&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb4-2"><a href="datasets.html#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pluck</span>(<span class="st">&quot;results&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb4-3"><a href="datasets.html#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as_tibble</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb4-4"><a href="datasets.html#cb4-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(Item, Title) <span class="sc">%&gt;%</span></span>
+<span id="cb4-5"><a href="datasets.html#cb4-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable</span>()</span></code></pre></div>
+<table>
+<colgroup>
+<col width="17%" />
+<col width="82%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="left">Item</th>
+<th align="left">Title</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">battery_charging</td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="left">dial_control</td>
+<td align="left">Collection of visual defects on watch dial production.</td>
+</tr>
+<tr class="odd">
+<td align="left">ebike_hardening</td>
+<td align="left">Cycles to failure of ebikes frames after temperature treatment.</td>
+</tr>
+<tr class="even">
+<td align="left">ebike_hardening2</td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="left">juice_drymatter</td>
+<td align="left">Dry matter content of different juices obtained with two different measurement devices.</td>
+</tr>
+<tr class="even">
+<td align="left">perfume_experiment</td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="left">pet_delivery</td>
+<td align="left">Tensile strength values on PET raw material for the clothing industry.</td>
+</tr>
+<tr class="even">
+<td align="left">pet_doe</td>
+<td align="left">A factorial design for the improvement of PET film tensile strength.</td>
+</tr>
+<tr class="odd">
+<td align="left">solarcell_fill</td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="left">solarcell_output</td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="left">syringe_diameter</td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="left">tablet_thickness</td>
+<td align="left">Thickness measurements of pharmaceutical tablets</td>
+</tr>
+<tr class="odd">
+<td align="left">tablet_weight</td>
+<td align="left"></td>
+</tr>
+</tbody>
+</table>
+<p>Once the package is loaded the data objects become immediately available in memory and can directly be used in the examples presented or for further exploration. Lets confirm this invoking the first data set:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="datasets.html#cb5-1" aria-hidden="true" tabindex="-1"></a>dial_control <span class="sc">%&gt;%</span></span>
+<span id="cb5-2"><a href="datasets.html#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb5-3"><a href="datasets.html#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable</span>()</span></code></pre></div>
 <table>
 <thead>
 <tr class="header">
@@ -381,11 +458,11 @@ div.csl-indent {
 </tbody>
 </table>
 <p>The dateset can be used and manipulated like any other dataset created in the session or loaded otherwise. For example it can be filtered and assigned to a new variable name:</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="datasets.html#cb5-1" aria-hidden="true" tabindex="-1"></a>dial_peter <span class="ot">&lt;-</span> dial_control <span class="sc">%&gt;%</span></span>
-<span id="cb5-2"><a href="datasets.html#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Operator <span class="sc">==</span> <span class="st">&quot;Peter&quot;</span>) </span>
-<span id="cb5-3"><a href="datasets.html#cb5-3" aria-hidden="true" tabindex="-1"></a>dial_peter <span class="sc">%&gt;%</span></span>
-<span id="cb5-4"><a href="datasets.html#cb5-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>(<span class="dv">2</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb5-5"><a href="datasets.html#cb5-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="datasets.html#cb6-1" aria-hidden="true" tabindex="-1"></a>dial_peter <span class="ot">&lt;-</span> dial_control <span class="sc">%&gt;%</span></span>
+<span id="cb6-2"><a href="datasets.html#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Operator <span class="sc">==</span> <span class="st">&quot;Peter&quot;</span>) </span>
+<span id="cb6-3"><a href="datasets.html#cb6-3" aria-hidden="true" tabindex="-1"></a>dial_peter <span class="sc">%&gt;%</span></span>
+<span id="cb6-4"><a href="datasets.html#cb6-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>(<span class="dv">2</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb6-5"><a href="datasets.html#cb6-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable</span>()</span></code></pre></div>
 <table>
 <thead>
 <tr class="header">
@@ -416,7 +493,7 @@ div.csl-indent {
           </div>
         </div>
       </div>
-<a href="r-packages.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="packages.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
 <a href="functions.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>

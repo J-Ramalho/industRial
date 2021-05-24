@@ -22,6 +22,9 @@ This function returns an object of class numeric
 This function takes process variables and calculates the probability that
 parts are produced out of specification on the long run.
 }
+\examples{
+off_spec(100, 0, 10, 3)
+}
 \references{
 For a complete case study application refer to \url{https://j-ramalho.github.io/industRial/}
 }

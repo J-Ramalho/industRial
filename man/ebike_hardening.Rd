@@ -3,6 +3,7 @@
 \docType{data}
 \name{ebike_hardening}
 \alias{ebike_hardening}
+\alias{ebike_hardening2}
 \title{Cycles to failure of ebikes frames after temperature treatment.}
 \format{
 A tibble with 4 observations on 6 variables.
@@ -22,6 +23,13 @@ the number of cycles to failure for each level of treatment temperature-
   \item{temperature}{Position of the part on the device}
   \item{g1}{group 1, remaining groups have names g2 to g5}
 }
+}
+\details{
+The ebike_hardening2 dataset contains alternative data that gives
+non significant results in the analysis of variance study.
+}
+\examples{
+data(ebike_hardening)
 }
 \references{
 For a complete case study application refer to \url{https://j-ramalho.github.io/industRial/}.

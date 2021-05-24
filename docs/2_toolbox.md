@@ -141,7 +141,7 @@ data(package = "industRial") %>%
 |battery_charging   |Charging time of a lithium-ion battery.                                                   |
 |dial_control       |Collection of visual defects on watch dial production.                                    |
 |ebike_hardening    |Cycles to failure of ebikes frames after temperature treatment.                           |
-|ebike_hardening2   |                                                                                          |
+|ebike_hardening2   |Cycles to failure of ebikes frames after temperature treatment.                           |
 |juice_drymatter    |Dry matter content of different juices obtained with two different measurement devices.   |
 |perfume_experiment |Correlation matrix of the input variables of an experiment design in perfume formulation. |
 |pet_delivery       |Tensile strength values on PET raw material for the clothing industry.                    |
@@ -150,7 +150,7 @@ data(package = "industRial") %>%
 |solarcell_output   |Yearly outputs of solarcells of different types.                                          |
 |syringe_diameter   |Production measurements of the inner diameter of syringes barrels.                        |
 |tablet_thickness   |Thickness measurements of pharmaceutical tablets                                          |
-|tablet_weight      |                                                                                          |
+|tablet_weight      |Weight measurements of pharmaceutical tablets                                             |
 
 Once the package is loaded the data objects become immediately available in memory and can directly be used in the examples presented or for further exploration. Lets confirm this invoking the first data set:
 

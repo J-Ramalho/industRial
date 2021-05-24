@@ -21,9 +21,7 @@ library(DoE.base)
 
 and then generate the doe with the fac.design function.
 
-### Design generation 
-
-[]{#fac.design}
+### Factorial design {#fac.design}
 
 ```{r}
 juice_doe <- fac.design(
@@ -128,57 +126,88 @@ This kind of plots gives already important insights in to the experiement outcom
 * higher particle_size and higher speed result in higher bias weight deviation
 * beyond 10.5% drymatter_TGT level the bias weight is always higher than the target
 
-### Interactions plots
+### Interactions plots (custom) (#errorbar)
 
 In designs like these with 3 factors we have 3 possible interactions (A-B, A-C, B-C) corresponding the the possible combination between them. This results in three interaction plots that we're presenting below. The approach here goes beyond the interaction.plot function from the `{stats}` package presented previously in the two factors multiple levels case. We are developping here the plots with {ggplot2} which provides much more control on the plot attibutes but on the other hand requires that additional code is added to calculate the means by group.
 
 ```{r}
 drymatter_TGT_particle_size_plot <- juice_drymatter %>%  
+  mutate(particle_size = as_factor(particle_size)) %>%
   group_by(drymatter_TGT, particle_size) %>%
-  summarise(drymatter_TGT_bias_mean = mean(bias)) %>%
-  ggplot(aes(x = drymatter_TGT, y = drymatter_TGT_bias_mean)) +
-  geom_point(aes(group = particle_size)) +
-  geom_line(aes(group = particle_size, linetype = as_factor(particle_size))) +
-  scale_linetype(name = "particle_size") +
+  summarise(drymatter_bias_mean = mean(bias), drymatter_bias_sd = sd(bias)) %>%
+  ggplot(aes(x = drymatter_TGT, y = drymatter_bias_mean, color = particle_size, linetype = particle_size)) +
+  geom_point(aes(group = particle_size), size = 2) +
+  geom_line(aes(group = particle_size, linetype = particle_size)) +
+  scale_linetype(name = "Particle Size") +
+  geom_errorbar(aes(
+    ymin = drymatter_bias_mean - 2 * drymatter_bias_sd,
+    ymax = drymatter_bias_mean + 2 * drymatter_bias_sd,
+    width = .5
+  )) +
+  scale_linetype(guide=FALSE) +
+  scale_color_viridis_d(option = "C", begin = 0.3, end = 0.7, name = "Particle size") +
   coord_cartesian(
     xlim = c(9,21),
     ylim = c(-1,0), expand = TRUE) +
+  annotate(geom = "text", x = Inf, y = 0, label = "Error bars are +/- 2xSD", 
+    hjust = 1, vjust = -1, colour = "grey30", size = 3, 
+    fontface = "italic") +
   labs(
     title = "Juice bottling problem",
     subtitle = "Interaction plots",
-    x = "drymatter_TGT",
+    x = "Drymatter target",
     y = "Average bias deviation [g]"
   ) +
   theme_industRial() +
   theme(legend.justification=c(1,0), legend.position=c(1,0))
 
 drymatter_TGT_speed_plot <- juice_drymatter %>%  
+  mutate(speed = as_factor(speed)) %>%
   group_by(drymatter_TGT, speed) %>%
-  summarise(drymatter_TGT_bias_mean = mean(bias)) %>%
-  ggplot(aes(x = drymatter_TGT, y = drymatter_TGT_bias_mean)) +
-  geom_point(aes(group = speed)) +
-  geom_line(aes(group = speed, linetype = as_factor(speed))) +
-  scale_linetype(name = "Speed") +
+  summarise(drymatter_bias_mean = mean(bias), drymatter_bias_sd = sd(bias)) %>%
+  ggplot(aes(x = drymatter_TGT, y = drymatter_bias_mean, color = speed)) +
+  geom_point(aes(group = speed), size = 2) +
+  geom_line(aes(group = speed, linetype = speed)) +
+  scale_linetype(guide=FALSE) +
+  scale_color_viridis_d(option = "C", begin = 0.3, end = 0.7, name = "Speed") +
+  geom_errorbar(aes(
+    ymin = drymatter_bias_mean - 2 * drymatter_bias_sd,
+    ymax = drymatter_bias_mean + 2 * drymatter_bias_sd,
+    width = .5
+  )) +
   coord_cartesian(
     xlim = c(9, 21),
     ylim = c(-1,0), expand = TRUE) +
+  annotate(geom = "text", x = Inf, y = 0, label = "Error bars are +/- 2xSD", 
+    hjust = 1, vjust = -1, colour = "grey30", size = 3, 
+    fontface = "italic") +
   labs(
-    x = "drymatter_TGT",
+    x = "Dry matter target",
     y = "Average bias deviation [g]"
   ) +
   theme_industRial() +
   theme(legend.justification=c(1,0), legend.position=c(1,0))
 
 speed_particle_size_plot <- juice_drymatter %>%  
+  mutate(particle_size = as_factor(particle_size)) %>%
   group_by(speed, particle_size) %>%
-  summarise(speed_bias_mean = mean(bias)) %>%
-  ggplot(aes(x = speed, y = speed_bias_mean)) +
-  geom_point(aes(group = particle_size)) +
-  geom_line(aes(group = particle_size, linetype = as_factor(particle_size))) +
-  scale_linetype(name = "particle_size") +
+  summarise(drymatter_bias_mean = mean(bias), drymatter_bias_sd = sd(bias)) %>%
+  ggplot(aes(x = speed, y = drymatter_bias_mean, color = particle_size)) +
+  geom_point(aes(group = particle_size), size = 2) +
+  geom_line(aes(group = particle_size, linetype = particle_size)) +
+  scale_linetype(guide=FALSE) +
+  scale_color_viridis_d(option = "C", begin = 0.3, end = 0.7, name = "Particle size") +
+  geom_errorbar(aes(
+    ymin = drymatter_bias_mean - 2 * drymatter_bias_sd,
+    ymax = drymatter_bias_mean + 2 * drymatter_bias_sd,
+    width = .5
+  )) +
   coord_cartesian(
     xlim = c(19, 26),
     ylim = c(-1,0), expand = TRUE) +
+  annotate(geom = "text", x = Inf, y = 0, label = "Error bars are +/- 2xSD", 
+    hjust = 1, vjust = -1, colour = "grey30", size = 3, 
+    fontface = "italic") +
   labs(
     x = "Speed",
     y = "Average bias deviation [g]"

@@ -60,7 +60,7 @@ The team leader promotes a culture of fact based assessment of the quality measu
 
 A first example of the pareto of the types of defects:
 
-[]{#paretochart}
+### Pareto chart {#paretochart}
 
 
 ```r
@@ -130,6 +130,8 @@ So far the Lab Team has full confidence in the equipement supplier and the Lab M
 
 The supplier checked the equipment and having seen no reason for the variability proposes to work with the lab team on identifying the potential causes for the high uncertainty in their measurements. They decided to consider a larger scope that the equipment and take the full measurement method as described in the laboratory operating procedure. They list different reasons related with they're work and group them:
 
+### Fishbone diagram {#fishbone}
+
 
 ```r
 operators <- c("Supplier", "Lab Technician", "Lab Manager")
@@ -142,8 +144,6 @@ effect <- "Too high uncertainty"
 ```
 
 And then load the qcc package and quickly obtain a simple diagram that allows for a quick visualisation of these influencing factors.
-
-[]{#fishbone}
 
 
 ```r
@@ -172,9 +172,9 @@ cause.and.effect(
 
 The listed factors can then be adressed one by one or in combined experiments to evaluate their impact on the measurement method.
 
-## Correlation matrix
+## Correlation
 
-A matrix diagram is a way to discover relationships between groups of items as described by  described in the Six Sigma book by @Munro2015. 
+A correlation matrix is a way to discover relationships between groups of items as described by  described in the Six Sigma book by @Munro2015. 
 
 These matrix can be used to select which measurement to do in a design of experiments. In exploratory phases when the experiments are repeated several time with slightly different configurations, secondary outputs that are strongly correlated to main outputs can be eliminated 
 
@@ -200,6 +200,8 @@ The typical DOE analysis results linking inputs to outputs are presented with ef
 In our present case note that the first DOE has not yet been executed, only a preparatory session has taken place with the project manager to review the potential outputs and anticipate what will be the DOE results. This allowed to go deeper in the technology understanding and to confirm that the plan was constructed in a meaning full way. The experts input has been captured in a 1/2 of a two entry table named "Perfume".
 
 As the industRial package was already loaded in the Pareto section, we can then access directly to the Perfume dataset of which we're showing a subset:
+
+### Matrix {#matrix}
 
 
 ```r
@@ -241,7 +243,7 @@ perfume_long <- perfume_experiment %>%
   mutate(correlation = as_factor(correlation))
 ```
 
-[]{#tileplot}
+### Tileplot {#tileplot}
 
 
 ```r
@@ -387,6 +389,8 @@ perfum_tbl_graph <- perfum_tbl_graph %>%
 ```
 
 and produce a final plot, selecting group optimal that with some testing has proven to be the algorithm that gives the best clustering results. The correlations strengths are here represented by the edges width for optimal visualization.
+
+### Network plot {#network_plot}
 
 
 ```r

@@ -19,11 +19,9 @@ knitr::include_graphics("img/bike_frames_bw.jpg")
 
 </div>
 
-### Linear regression
+### Linear regression {#linear_regression}
 
 We will present here a first example of the utilisation of linear regression techniques and establish a linear model. These models are going to be used extensively in the upcoming cases.
-
-**Data loading**
 
 ```{r}
 ebike_narrow <- ebike_hardening %>%

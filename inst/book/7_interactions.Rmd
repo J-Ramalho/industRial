@@ -95,7 +95,7 @@ outlierTest(solarcell_factor_lm)
 
 which gives a high Bonferroni p value thus excluding this possibility.
 
-### Interaction plot 
+### Interaction plot (base)
 
 In this experiement instead of just plotting a linear regression we need to go for a more elaborate plot that shows the response as a function of the two factors. Many different approaches are possible in R and here we're starting with a rather simple one - the interaction plot from the stats package:
 

@@ -21,9 +21,9 @@ In the literature we often see the simbolic notation $a^k$ but we've opted for m
 
 In this chapter we cover introductory designs of experiments and take it progressively until the general 2^k factorial designs. In any case this pretends to be an introduction to the topic with only a subset of the many types of DoEs used in the industry.
 
-### Means comparison
+### Means comparison {#means_comparison}
 
-#### t-test one sample
+#### t-test one sample 
 
 **The Winter Sports clothing manufacturer**
 
@@ -66,7 +66,7 @@ pet_delivery %>%
 
 The mean is just slightly below the target mean defined for acceptance and she also observes a certain variability in the batch. She decides then to perform a t-test to assess if the average calculated can be really be considered statistically different than the target value.
 
-[]{#tTest}
+
 
 ```{r}
 t.test(x = pet_delivery$A, mu = pet_spec)
@@ -151,13 +151,11 @@ t.test(tensile_strength ~ sample, data = pet_delivery_long, var.equal = TRUE)
 
 We see that p \< 0.05 thus the means differ significantly. Furthemore the mean difference is estimated with 95% confidence, to be between -0.55 and -0.01 (to be noted that zero is obviously not included in this interval). There is an effect in our treatment that explains the difference in means between the two samples.
 
-### Variances comparison
+### Variances comparison {#var_comparison)
 
 #### F-test 
 
 We're now confirming this with a variance test from the stats package.
-
-[]{#FTest}
 
 ```{r}
 var.test(tensile_strength ~ sample, pet_delivery_long)
@@ -170,8 +168,6 @@ The F-test is accurate only for normally distributed data. Any small deviation f
 #### Levene test
 
 This test is assessing the homogeneity of variances (homoscedasticity).
-
-[]{#leveneTest}
 
 ```{r}
 library(car)

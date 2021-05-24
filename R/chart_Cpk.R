@@ -18,8 +18,6 @@
 #' @return
 #' This function returns an object of class ggplot
 #' @export
-#'
-#' @examples
 chart_Cpk <- function(data) {
   data %>%
     ggplot2::ggplot() +

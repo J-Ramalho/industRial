@@ -17,8 +17,6 @@
 #' @return
 #' This function returns an object of class ggplot
 #' @export
-#'
-#' @examples
 chart_I <- function(data) {
   data %>%
     ggplot2::ggplot(ggplot2::aes(x = part_id, y = weight_value)) +

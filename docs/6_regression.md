@@ -18,11 +18,9 @@ Mountain bikes frames are submitted to many different efforts, namely bending, c
 
 </div>
 
-### Linear regression
+### Linear regression {#linear_regression}
 
 We will present here a first example of the utilisation of linear regression techniques and establish a linear model. These models are going to be used extensively in the upcoming cases.
-
-**Data loading**
 
 
 ```r
@@ -256,7 +254,7 @@ durbinWatsonTest(ebike_lm_factor)
 
 ```
  lag Autocorrelation D-W Statistic p-value
-   1      -0.5343347      2.960893   0.106
+   1      -0.5343347      2.960893   0.068
  Alternative hypothesis: rho != 0
 ```
 

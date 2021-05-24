@@ -67,9 +67,7 @@ summary(juice_drymatter$bias)
 We immediatly see a median bias of -0.2 
 Lets explore further.
 
-### Bias plot
-
-[]{#geom_smooth}
+### Bias plot {#bias_plot}
 
 
 ```r
@@ -90,7 +88,7 @@ juice_drymatter %>%
 
 The linear model is well adapted in this case, this by seing the position of the slope close to the averages of each level of the factor. Nevertheless the slope is rather steep showing a clear increase of the bias (in the negative direction) with the increase in dry matter content.
 
-### Bias report
+### Bias report {#bias_report}
 
 
 ```r
@@ -186,43 +184,11 @@ tablet_L <- tablet_thickness %>%
   filter(size == "L")
 ```
 
-### Base Anova
+Below we're doing the same analysis with the ss.rr function from the Six Sigma package. As the function allows to input the limits we're also providing in the function arguments the current upper and lower limit of the specification.
 
-We're feeding the aov function from the stats package with operator and tablet factors.
+tablet L 1'800mm3 +/- 25mm3 (18.0ml +/- 0.25ml)
 
-
-```r
-tablet_L_lm <- lm(
-  thickness_micron ~ (
-    # main effects
-    tablet +
-    operator +
-    # 2nd order interactions
-    operator:tablet
-    ),
-    data = tablet_L
-)
-tablet_L_aov <- aov(tablet_L_lm)
-summary(tablet_L_aov)
-```
-
-```
-                 Df Sum Sq Mean Sq F value Pr(>F)    
-tablet            4 1707.1   426.8 271.457 <2e-16 ***
-operator          2   13.1     6.6   4.177 0.0166 *  
-tablet:operator   8   11.2     1.4   0.892 0.5237    
-Residuals       210  330.1     1.6                   
----
-Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-```
-
-Below we're recreating the same analysis with the ss.rr function from the Six Sigma package. As the function allows to input the limits we're also providing in the function arguments the current upper and lower limit of the specification.
-
-tablet L 18'000mm3 +/- 250mm3 (18.0ml +/- 0.25ml)
-
-### gage r&R 
-
-[]{#gageRnR}
+### Gage r&R {#gageRnR}
 
 
 ```r
@@ -280,18 +246,15 @@ Total Variation   11.09345930 3.3306845 19.984107    100.00      39.97
 Number of Distinct Categories = 3 
 ```
 
-<img src="4_msa_files/figure-html/unnamed-chunk-13-1.png" width="80%" />
+<img src="4_msa_files/figure-html/unnamed-chunk-12-1.png" width="80%" />
 
 We can observe that the SixSigma package recreates exactly the same anova table, just calling Repeatability to the Residuals and adding an additional line with the total degrees of freedom and the total sum of squares. 
 
 Note that the argument alphaLim has been set to 1 to avoid suppressing the interaction which is in this case non significative.
 
-### Acceptance on Variance
+### Gage acceptance {#gage_acceptance}
 
-**Criteria for measurement system acceptance:**
-
-
-
+#### Variance criteria
 
 To evaluate your process variation, compare the Total Gage R&R contribution in the %Contrib column with the values in the list below:
 
@@ -301,11 +264,9 @@ To evaluate your process variation, compare the Total Gage R&R contribution in t
 
 * Greater than 9%: the measurement system is not acceptable and should be improved.
 
-### Acceptance on SD
+#### Standard deviation criteria
 
 The study variation table is established by calculating the square root of each variance (the standard deviation) and by multiplying it by 6 (the six sigma) and then again by comparing each variation with the total variation. Standard deviations are usualy more speaking to the industry professionals. This table also provides a comparison with the specification.
-
-**Criteria for measurement system acceptance:**
 
 According to the guidelines from the @AIAG2010, if your system variation is less than 10% of the process variation, then it is acceptable.
 
@@ -333,39 +294,7 @@ In a nutshell two questions are answered:
 
 * can the method be used to sort good parts from bad: yes but can be improved, the measurement system variation equals 15.3% of the tolerance.
 
-### Interaction plots
-
-The Six Sigma package plots are similar to the interaction plots provided by other DoE packages but don't have error bars. These can nevertheless easily be established on a needed basis as in the example below where we're recreating the tablet:operator interaction plot with a +/- 1 standard deviation error bars.
-
-
-```r
-tablet_L %>%
-  group_by(tablet, operator) %>%
-  summarise(vol_mean = mean(thickness_micron), vol_sd = sd(thickness_micron)) %>%
-  ggplot(aes(x = tablet, y = vol_mean, color = operator)) +
-  geom_point(aes(group = operator), size = 2) +
-  geom_line(aes(group = operator, linetype = operator)) +
-  geom_errorbar(aes(ymin = vol_mean - vol_sd, 
-                    ymax = vol_mean + vol_sd),
-                width = .1) +
-  scale_y_continuous(labels = label_number(big.mark = "'")) +
-  scale_color_viridis_d(option = "C", begin = 0.1, end = 0.9) +
-  # coord_cartesian(ylim = c(17950, 18150)) +
-  annotate(geom = "text", x = Inf, y = -Inf, label = "Error bars are +/- 1xSD", 
-    hjust = 1, vjust = -1, colour = "grey30", size = 3, 
-    fontface = "italic") +
-  theme_industRial() +
-  labs(title = "Tablet thickness method validation",
-       subtitle = "Interaction plot - L tablet x Operator",
-       x = "",
-       y = "thickness [mm]",
-       caption = "Data source: QA Lab")
-```
-
-<img src="4_msa_files/figure-html/unnamed-chunk-14-1.png" width="80%" />
-
-
-### Negative Variations
+#### Negative variance
 
 Two important limitations exist in the current approach:
 
@@ -441,21 +370,11 @@ Total Variation   11.08146189 3.3288830 19.973298    100.00      39.95
 Number of Distinct Categories = 3 
 ```
 
-<img src="4_msa_files/figure-html/unnamed-chunk-15-1.png" width="80%" />
+<img src="4_msa_files/figure-html/unnamed-chunk-13-1.png" width="80%" />
 
 In our case when comparing the total gage r&R with and without the interaction we see it changing from 38.46% to 38.38%.
 
-### Beyond two factors
-
-The ss.rr function only accepts 2 factors so it is not possible to obtain all the tables and plots with for example the day as a factor.
-
-This significantly limits the calculation of the total uncertainty for some measurement methods. Next steps in our study will be to prepare an R function to deal with more than 2 factors.
-
-### Conclusions
-
-The Six Sigma package r&R approach can be applied with no issue to simple cases with 2 factors (e.g. operators and parts) where the Variance Component of the Reproducibility is not negative.
-
-## Uncertainty
+## Uncertainty {#uncertainty}
 
 A final step in the validation of our measurement device is now the calculation of the total measurement uncertainty. 
 

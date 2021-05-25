@@ -6,12 +6,12 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Measurement System Analysis | industRial data science</title>
   <meta name="description" content="Measurement System Analysis | industRial data science" />
-  <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.20 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Measurement System Analysis | industRial data science" />
   <meta property="og:type" content="book" />
   
-  <meta property="og:image" content="/img/cover3.png" />
+  <meta property="og:image" content="img/cover3.png" />
   
   <meta name="github-repo" content="J-Ramalho/industRialds" />
 
@@ -19,12 +19,12 @@
   <meta name="twitter:title" content="Measurement System Analysis | industRial data science" />
   
   
-  <meta name="twitter:image" content="/img/cover3.png" />
+  <meta name="twitter:image" content="img/cover3.png" />
 
 <meta name="author" content="João Ramalho" />
 
 
-<meta name="date" content="2021-05-24" />
+<meta name="date" content="2021-05-25" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -33,7 +33,7 @@
   
 <link rel="prev" href="design-for-six-sigma.html"/>
 <link rel="next" href="DOE.html"/>
-<script src="libs/header-attrs-2.8/header-attrs.js"></script>
+<script src="libs/header-attrs-2.7/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -51,8 +51,6 @@
 
 
 
-<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
-<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
 <script src="libs/kePrint-0.0.1/kePrint.js"></script>
 <link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
 <!-- Global site tag (gtag.js) - Google Analytics -->
@@ -75,7 +73,6 @@ mattcrump=1;
 pre > code.sourceCode { white-space: pre; position: relative; }
 pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
 pre.sourceCode { margin: 0; }
 @media screen {
@@ -134,29 +131,6 @@ code span.st { color: #4070a0; } /* String */
 code span.va { color: #19177c; } /* Variable */
 code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
-</style>
-
-<style type="text/css">
-/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
-div.csl-bib-body { }
-div.csl-entry {
-  clear: both;
-}
-.hanging div.csl-entry {
-  margin-left:2em;
-  text-indent:-2em;
-}
-div.csl-left-margin {
-  min-width:2em;
-  float:left;
-}
-div.csl-right-inline {
-  margin-left:2em;
-  padding-left:1em;
-}
-div.csl-indent {
-  margin-left: 2em;
-}
 </style>
 
 <link rel="stylesheet" href="css/industRialds.css" type="text/css" />
@@ -230,66 +204,108 @@ div.csl-indent {
 </ul></li>
 <li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html"><i class="fa fa-check"></i>Design of Experiments</a>
 <ul>
-<li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#simple-experiments"><i class="fa fa-check"></i>Simple experiments</a>
+<li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#means-comparison"><i class="fa fa-check"></i>Means comparison</a>
 <ul>
-<li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#means_comparison"><i class="fa fa-check"></i>Means comparison</a></li>
-<li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#variances-comparison-var_comparison"><i class="fa fa-check"></i>Variances comparison {#var_comparison)</a></li>
+<li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#t.test"><i class="fa fa-check"></i>t-test one sample</a></li>
+<li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#t-test-two-samples"><i class="fa fa-check"></i>t-test two samples</a></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#regression-and-anova"><i class="fa fa-check"></i>Regression and anova</a>
+<li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#variances-comparison"><i class="fa fa-check"></i>Variances comparison</a>
 <ul>
-<li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#linear_regression"><i class="fa fa-check"></i>Linear regression</a></li>
-<li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#residuals-model-check"><i class="fa fa-check"></i>Residuals &amp; model check</a></li>
-<li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#multiple-means-comparison"><i class="fa fa-check"></i>Multiple means comparison</a></li>
-<li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#pairwise-comparisons"><i class="fa fa-check"></i>Pairwise comparisons</a></li>
-<li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#prediction"><i class="fa fa-check"></i>Prediction</a></li>
+<li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#var.test"><i class="fa fa-check"></i>F-test</a></li>
+<li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#levene.test"><i class="fa fa-check"></i>Levene test</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#linear-regression"><i class="fa fa-check"></i>Linear regression</a>
+<ul>
+<li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#lm"><i class="fa fa-check"></i>Linear model</a></li>
+<li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#contr.treatment"><i class="fa fa-check"></i>Contrasts treatment</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#residuals-analysis"><i class="fa fa-check"></i>Residuals analysis</a>
+<ul>
+<li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#augment"><i class="fa fa-check"></i>Model augment</a></li>
+<li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#residuals_timeseries"><i class="fa fa-check"></i>Timeseries plot</a></li>
+<li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#autocorrelation"><i class="fa fa-check"></i>Autocorrelation test</a></li>
+<li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#residuals_fit"><i class="fa fa-check"></i>Residuals-Fit plot</a></li>
+<li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#homocedasticity"><i class="fa fa-check"></i>Homocedasticity</a></li>
+<li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#geom_qq"><i class="fa fa-check"></i>Normality plot</a></li>
+<li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#shapiroTest"><i class="fa fa-check"></i>Normality test</a></li>
+<li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#std_residuals_fit"><i class="fa fa-check"></i>Standard Residuals-Fit plot</a></li>
+<li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#outliers"><i class="fa fa-check"></i>Outliers test</a></li>
+<li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#cooks"><i class="fa fa-check"></i>Cooks distance</a></li>
+<li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#R-squared"><i class="fa fa-check"></i>Coefficient of determination</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#multiple-means-comparison"><i class="fa fa-check"></i>Multiple means comparison</a>
+<ul>
+<li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#aov"><i class="fa fa-check"></i>Analysis of variance</a></li>
+<li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#tukey"><i class="fa fa-check"></i>Pairwise comparison</a></li>
+<li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#fisherLSD"><i class="fa fa-check"></i>Least significant difference</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#forecasting"><i class="fa fa-check"></i>Forecasting</a>
+<ul>
+<li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#predict"><i class="fa fa-check"></i>Predict</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#interactions"><i class="fa fa-check"></i>Interactions</a>
 <ul>
-<li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#lm-with-interactions"><i class="fa fa-check"></i>lm with interactions</a></li>
-<li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#outliers-and-model-check"><i class="fa fa-check"></i>Outliers and model check</a></li>
-<li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#interaction-plot-base"><i class="fa fa-check"></i>Interaction plot (base)</a></li>
-<li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#effects-significance"><i class="fa fa-check"></i>Effects significance</a></li>
-<li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#removing-interaction"><i class="fa fa-check"></i>Removing interaction</a></li>
+<li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#formula"><i class="fa fa-check"></i>Model formulae</a></li>
+<li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#interaction.plot"><i class="fa fa-check"></i>Interaction plot</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#residuals-check"><i class="fa fa-check"></i>Residuals check</a>
+<ul>
+<li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#simple_timeseries"><i class="fa fa-check"></i>Simplified timeseries</a></li>
+<li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#plot_model"><i class="fa fa-check"></i>Residuals summary</a></li>
+<li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#cooks_histogram"><i class="fa fa-check"></i>Cooks histogram</a></li>
+<li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#anova"><i class="fa fa-check"></i>Anova check</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#covariance"><i class="fa fa-check"></i>Covariance</a>
 <ul>
-<li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#correlation-strenght"><i class="fa fa-check"></i>Correlation strenght</a></li>
-<li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#ancova"><i class="fa fa-check"></i>Ancova</a></li>
-<li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#comparison-with-anova"><i class="fa fa-check"></i>Comparison with anova</a></li>
+<li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#cor.test"><i class="fa fa-check"></i>Correlation test</a></li>
+<li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#ancova"><i class="fa fa-check"></i>Analysis of covariance</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#general-factorial-designs"><i class="fa fa-check"></i>General factorial designs</a>
 <ul>
 <li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#fac.design"><i class="fa fa-check"></i>Factorial design</a></li>
-<li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#main-effects-plots"><i class="fa fa-check"></i>Main effects plots</a></li>
-<li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#interactions-plots-custom-errorbar"><i class="fa fa-check"></i>Interactions plots (custom) (#errorbar)</a></li>
-<li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#anova-with-3rd-level-interactions"><i class="fa fa-check"></i>Anova with 3rd level interactions</a></li>
+<li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#main_effects"><i class="fa fa-check"></i>Main effects plots</a></li>
+<li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#interaction_plot"><i class="fa fa-check"></i>Interaction plots (custom)</a></li>
+<li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#anova_three"><i class="fa fa-check"></i>Anova with 3rd level interactions</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#two-level-designs"><i class="fa fa-check"></i>Two level designs</a>
 <ul>
-<li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#coding-factors"><i class="fa fa-check"></i>Coding factors</a></li>
-<li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#coding-natural-values"><i class="fa fa-check"></i>Coding natural values</a></li>
-<li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#single-replicate-designs"><i class="fa fa-check"></i>Single replicate designs</a></li>
+<li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#coding_levels"><i class="fa fa-check"></i>Coding levels</a></li>
+<li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#plotMeans"><i class="fa fa-check"></i>Interaction plots with SE</a></li>
+<li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#adj_Rsquare"><i class="fa fa-check"></i>Adjusted R-squared</a></li>
+<li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#coding_inputs"><i class="fa fa-check"></i>Coding inputs</a></li>
+<li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#coded_prediction"><i class="fa fa-check"></i>Coded prediction</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#response-surface"><i class="fa fa-check"></i>Response surface</a>
+<ul>
+<li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#persp"><i class="fa fa-check"></i>Perspective plot</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#single-replicate-designs"><i class="fa fa-check"></i>Single replicate designs</a>
+<ul>
+<li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#qqPlot"><i class="fa fa-check"></i>Effects normal plot</a></li>
+<li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#effects_contribution"><i class="fa fa-check"></i>Effects contribution table</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="SPC.html"><a href="SPC.html"><i class="fa fa-check"></i>Statistical Process Control</a>
 <ul>
 <li class="chapter" data-level="" data-path="SPC.html"><a href="SPC.html#xbar-r-charts"><i class="fa fa-check"></i>xbar-R charts</a>
 <ul>
-<li class="chapter" data-level="" data-path="SPC.html"><a href="SPC.html#mean-chart"><i class="fa fa-check"></i>Mean chart</a></li>
-<li class="chapter" data-level="" data-path="SPC.html"><a href="SPC.html#range-chart"><i class="fa fa-check"></i>Range chart</a></li>
-<li class="chapter" data-level="" data-path="SPC.html"><a href="SPC.html#control-limits"><i class="fa fa-check"></i>Control limits</a></li>
+<li class="chapter" data-level="" data-path="SPC.html"><a href="SPC.html#xbar_chart"><i class="fa fa-check"></i>Mean chart</a></li>
+<li class="chapter" data-level="" data-path="SPC.html"><a href="SPC.html#Rchart"><i class="fa fa-check"></i>Range chart</a></li>
+<li class="chapter" data-level="" data-path="SPC.html"><a href="SPC.html#limits.xbar"><i class="fa fa-check"></i>Control limits</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="SPC.html"><a href="SPC.html#cpk-charts"><i class="fa fa-check"></i>Cpk charts</a>
 <ul>
-<li class="chapter" data-level="" data-path="SPC.html"><a href="SPC.html#off-spec"><i class="fa fa-check"></i>Off spec</a></li>
-<li class="chapter" data-level="" data-path="SPC.html"><a href="SPC.html#capability-chart"><i class="fa fa-check"></i>Capability chart</a></li>
+<li class="chapter" data-level="" data-path="SPC.html"><a href="SPC.html#off_spec"><i class="fa fa-check"></i>Off specification</a></li>
+<li class="chapter" data-level="" data-path="SPC.html"><a href="SPC.html#process_Cpk"><i class="fa fa-check"></i>Process Capability</a></li>
+<li class="chapter" data-level="" data-path="SPC.html"><a href="SPC.html#sigma_table"><i class="fa fa-check"></i>Sigma conversion table</a></li>
+<li class="chapter" data-level="" data-path="SPC.html"><a href="SPC.html#process.capability"><i class="fa fa-check"></i>Capability chart</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="SPC.html"><a href="SPC.html#i-mr-charts"><i class="fa fa-check"></i>I-MR charts</a>
 <ul>
-<li class="chapter" data-level="" data-path="SPC.html"><a href="SPC.html#process-stats"><i class="fa fa-check"></i>Process stats</a></li>
-<li class="chapter" data-level="" data-path="SPC.html"><a href="SPC.html#individual-chart"><i class="fa fa-check"></i>Individual chart</a></li>
-<li class="chapter" data-level="" data-path="SPC.html"><a href="SPC.html#moving-range-chart"><i class="fa fa-check"></i>Moving range chart</a></li>
-<li class="chapter" data-level="" data-path="SPC.html"><a href="SPC.html#capability-chart-ii"><i class="fa fa-check"></i>Capability chart II</a></li>
+<li class="chapter" data-level="" data-path="SPC.html"><a href="SPC.html#process_stats"><i class="fa fa-check"></i>Process statistics</a></li>
+<li class="chapter" data-level="" data-path="SPC.html"><a href="SPC.html#chart_I"><i class="fa fa-check"></i>Individual chart</a></li>
+<li class="chapter" data-level="" data-path="SPC.html"><a href="SPC.html#chart_IMR"><i class="fa fa-check"></i>Moving range chart</a></li>
+<li class="chapter" data-level="" data-path="SPC.html"><a href="SPC.html#chart_Cpk"><i class="fa fa-check"></i>Capability chart (custom)</a></li>
 </ul></li>
 </ul></li>
 <li class="part"><span><b>III APPENDIX</b></span></li>
@@ -443,7 +459,7 @@ Figure 5: Tablet thickness micrometer
 <p><strong>Data loading</strong></p>
 <p>We use here the data from the tablet thickness method validation:</p>
 <div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="MSA.html#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(tablet_thickness)</span></code></pre></div>
-<pre><code>spec_tbl_df[,11] [675 × 11] (S3: spec_tbl_df/tbl_df/tbl/data.frame)
+<pre><code>tibble [675 x 11] (S3: spec_tbl_df/tbl_df/tbl/data.frame)
  $ Position             : chr [1:675] &quot;Position 1&quot; &quot;Position 1&quot; &quot;Position 1&quot; &quot;Position 1&quot; ...
  $ Size                 : chr [1:675] &quot;L&quot; &quot;L&quot; &quot;L&quot; &quot;L&quot; ...
  $ Tablet               : chr [1:675] &quot;L001&quot; &quot;L001&quot; &quot;L001&quot; &quot;L001&quot; ...
@@ -481,18 +497,19 @@ Figure 5: Tablet thickness micrometer
 <div id="gageRnR" class="section level3">
 <h3>Gage r&amp;R</h3>
 <div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb46-1"><a href="MSA.html#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(SixSigma)</span></code></pre></div>
-<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb47-1"><a href="MSA.html#cb47-1" aria-hidden="true" tabindex="-1"></a>tablet_L_rr <span class="ot">&lt;-</span> <span class="fu">ss.rr</span>(</span>
-<span id="cb47-2"><a href="MSA.html#cb47-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> tablet_L, </span>
-<span id="cb47-3"><a href="MSA.html#cb47-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">var =</span> thickness_micron, </span>
-<span id="cb47-4"><a href="MSA.html#cb47-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">part =</span> tablet, </span>
-<span id="cb47-5"><a href="MSA.html#cb47-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">appr =</span> operator, </span>
-<span id="cb47-6"><a href="MSA.html#cb47-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">alphaLim =</span> <span class="dv">1</span>,</span>
-<span id="cb47-7"><a href="MSA.html#cb47-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">errorTerm =</span> <span class="st">&quot;repeatability&quot;</span>, <span class="co"># very important otherwise F test not identical to base aov</span></span>
-<span id="cb47-8"><a href="MSA.html#cb47-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">main =</span> <span class="st">&quot;Micrometer FTR600</span><span class="sc">\n</span><span class="st">r&amp;R for tablet thickness&quot;</span>,</span>
-<span id="cb47-9"><a href="MSA.html#cb47-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">sub =</span> <span class="st">&quot;Tablet L&quot;</span>,</span>
-<span id="cb47-10"><a href="MSA.html#cb47-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">lsl =</span> <span class="dv">1775</span>,</span>
-<span id="cb47-11"><a href="MSA.html#cb47-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">usl =</span> <span class="dv">1825</span></span>
-<span id="cb47-12"><a href="MSA.html#cb47-12" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<pre><code>Error in get(genname, envir = envir) : objet &#39;testthat_print&#39; introuvable</code></pre>
+<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb48-1"><a href="MSA.html#cb48-1" aria-hidden="true" tabindex="-1"></a>tablet_L_rr <span class="ot">&lt;-</span> <span class="fu">ss.rr</span>(</span>
+<span id="cb48-2"><a href="MSA.html#cb48-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> tablet_L, </span>
+<span id="cb48-3"><a href="MSA.html#cb48-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">var =</span> thickness_micron, </span>
+<span id="cb48-4"><a href="MSA.html#cb48-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">part =</span> tablet, </span>
+<span id="cb48-5"><a href="MSA.html#cb48-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">appr =</span> operator, </span>
+<span id="cb48-6"><a href="MSA.html#cb48-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">alphaLim =</span> <span class="dv">1</span>,</span>
+<span id="cb48-7"><a href="MSA.html#cb48-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">errorTerm =</span> <span class="st">&quot;repeatability&quot;</span>, <span class="co"># very important otherwise F test not identical to base aov</span></span>
+<span id="cb48-8"><a href="MSA.html#cb48-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">main =</span> <span class="st">&quot;Micrometer FTR600</span><span class="sc">\n</span><span class="st">r&amp;R for tablet thickness&quot;</span>,</span>
+<span id="cb48-9"><a href="MSA.html#cb48-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">sub =</span> <span class="st">&quot;Tablet L&quot;</span>,</span>
+<span id="cb48-10"><a href="MSA.html#cb48-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">lsl =</span> <span class="dv">1775</span>,</span>
+<span id="cb48-11"><a href="MSA.html#cb48-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">usl =</span> <span class="dv">1825</span></span>
+<span id="cb48-12"><a href="MSA.html#cb48-12" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
 <pre><code>Complete model (with interaction):
 
                  Df Sum Sq Mean Sq F value Pr(&gt;F)
@@ -543,7 +560,7 @@ Number of Distinct Categories = 3 </code></pre>
 <div id="standard-deviation-criteria" class="section level4">
 <h4>Standard deviation criteria</h4>
 <p>The study variation table is established by calculating the square root of each variance (the standard deviation) and by multiplying it by 6 (the six sigma) and then again by comparing each variation with the total variation. Standard deviations are usualy more speaking to the industry professionals. This table also provides a comparison with the specification.</p>
-<p>According to the guidelines from the <span class="citation"><a href="#ref-AIAG2010" role="doc-biblioref">Automotive Industry Action Group</a> (<a href="#ref-AIAG2010" role="doc-biblioref">2010</a>)</span>, if your system variation is less than 10% of the process variation, then it is acceptable.</p>
+<p>According to the guidelines from the <span class="citation"><a href="references.html#ref-AIAG2010" role="doc-biblioref">Automotive Industry Action Group</a> (<a href="references.html#ref-AIAG2010" role="doc-biblioref">2010</a>)</span>, if your system variation is less than 10% of the process variation, then it is acceptable.</p>
 <p>To evaluate your process variation, compare the Total Gage R&amp;R contribution in the %StudyVar column with the values in the list below:</p>
 <ul>
 <li><p>Less than 10%: the measurement system is acceptable</p></li>
@@ -567,24 +584,24 @@ Number of Distinct Categories = 3 </code></pre>
 <ol style="list-style-type: decimal">
 <li>when the operators reproducibility is negative it is converted to zero.</li>
 </ol>
-<p><span class="citation">(<a href="#ref-Montgomery2012" role="doc-biblioref">Montgomery 2012</a>)</span> in page 557 adresses this case in the following way:</p>
+<p><span class="citation">(<a href="references.html#ref-Montgomery2012" role="doc-biblioref">Montgomery 2012</a>)</span> in page 557 adresses this case in the following way:</p>
 <p><em>Notice that the estimate of one of the variance components,is negative. This is certainly not reasonable because by definition variances are nonnegative. Unfortunately, negative estimates of variance components can result when we use the analysis of variance method of estimation (this is considered one of its drawbacks). We can deal with this negative result in a variety of ways:</em></p>
 <p><em>1) one possibility is to assume that the negative estimate means that the variance component is really zero and just set it to zero, leaving the other nonnegative estimates unchanged.</em></p>
 <p><em>2) Another approach is to estimate the variance components with a method that assures nonnegative estimates (this can be done with the maximum likelihood approach).</em></p>
 <p><em>3) Finally, we could note that the P-value for the interaction term … is very large, take this as evidence that really is zero and that there is no interaction effect, and then fit a reduced model of the form that does not include the interaction term. This is a relatively easy approach and one that often works nearly as well as more sophisticated methods.</em></p>
 <p>This final approach is also what the SixSigma package creators have foreseen and if we leave the argument alphaLim empty the non significant terms will be suppressed from the model, the Anova recalculated and the remaining tables updated accordingly. This can be finetuned with the argument alphaLim. Usually we consider a p value of 0.05 but we recommend to start with higher values such as 0.1 or 0.2 to avoid suppressing too quickly the factor which would result in a transfer of their variability into the repeatability.</p>
-<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb49-1"><a href="MSA.html#cb49-1" aria-hidden="true" tabindex="-1"></a>tablet_L_rr2 <span class="ot">&lt;-</span> <span class="fu">ss.rr</span>(</span>
-<span id="cb49-2"><a href="MSA.html#cb49-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> tablet_L, </span>
-<span id="cb49-3"><a href="MSA.html#cb49-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">var =</span> thickness_micron, </span>
-<span id="cb49-4"><a href="MSA.html#cb49-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">part =</span> tablet, </span>
-<span id="cb49-5"><a href="MSA.html#cb49-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">appr =</span> operator, </span>
-<span id="cb49-6"><a href="MSA.html#cb49-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">alphaLim =</span> <span class="fl">0.2</span>, <span class="co"># instead of 0.05 it is recommended to start higher</span></span>
-<span id="cb49-7"><a href="MSA.html#cb49-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">errorTerm =</span> <span class="st">&quot;repeatability&quot;</span>,</span>
-<span id="cb49-8"><a href="MSA.html#cb49-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">main =</span> <span class="st">&quot;Micrometer FTR600</span><span class="sc">\n</span><span class="st">r&amp;R for tablet thickness&quot;</span>,</span>
-<span id="cb49-9"><a href="MSA.html#cb49-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">sub =</span> <span class="st">&quot;Tablet L&quot;</span>,</span>
-<span id="cb49-10"><a href="MSA.html#cb49-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">lsl =</span> <span class="dv">1775</span>,</span>
-<span id="cb49-11"><a href="MSA.html#cb49-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">usl =</span> <span class="dv">1825</span></span>
-<span id="cb49-12"><a href="MSA.html#cb49-12" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb50-1"><a href="MSA.html#cb50-1" aria-hidden="true" tabindex="-1"></a>tablet_L_rr2 <span class="ot">&lt;-</span> <span class="fu">ss.rr</span>(</span>
+<span id="cb50-2"><a href="MSA.html#cb50-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> tablet_L, </span>
+<span id="cb50-3"><a href="MSA.html#cb50-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">var =</span> thickness_micron, </span>
+<span id="cb50-4"><a href="MSA.html#cb50-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">part =</span> tablet, </span>
+<span id="cb50-5"><a href="MSA.html#cb50-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">appr =</span> operator, </span>
+<span id="cb50-6"><a href="MSA.html#cb50-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">alphaLim =</span> <span class="fl">0.2</span>, <span class="co"># instead of 0.05 it is recommended to start higher</span></span>
+<span id="cb50-7"><a href="MSA.html#cb50-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">errorTerm =</span> <span class="st">&quot;repeatability&quot;</span>,</span>
+<span id="cb50-8"><a href="MSA.html#cb50-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">main =</span> <span class="st">&quot;Micrometer FTR600</span><span class="sc">\n</span><span class="st">r&amp;R for tablet thickness&quot;</span>,</span>
+<span id="cb50-9"><a href="MSA.html#cb50-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">sub =</span> <span class="st">&quot;Tablet L&quot;</span>,</span>
+<span id="cb50-10"><a href="MSA.html#cb50-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">lsl =</span> <span class="dv">1775</span>,</span>
+<span id="cb50-11"><a href="MSA.html#cb50-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">usl =</span> <span class="dv">1825</span></span>
+<span id="cb50-12"><a href="MSA.html#cb50-12" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
 <pre><code>Complete model (with interaction):
 
                  Df Sum Sq Mean Sq F value Pr(&gt;F)
@@ -643,12 +660,12 @@ u_{repeat}^2 = σ_{repeat}^2\\
 u_{reprod}^2 = σ_{reprod}^2
 \]</span>
 These variance components can be directly obtained from the object generated by the function ss.rr of the {SixSigma} package. If we name our variable <span class="math inline">\(σ_{repeat}^2\)</span> as repeat_var in R we have:</p>
-<div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb51-1"><a href="MSA.html#cb51-1" aria-hidden="true" tabindex="-1"></a>repeat_var <span class="ot">&lt;-</span> tablet_L_rr<span class="sc">$</span>varComp[<span class="dv">2</span>,<span class="dv">1</span>]</span>
-<span id="cb51-2"><a href="MSA.html#cb51-2" aria-hidden="true" tabindex="-1"></a>repeat_var</span></code></pre></div>
+<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb52-1"><a href="MSA.html#cb52-1" aria-hidden="true" tabindex="-1"></a>repeat_var <span class="ot">&lt;-</span> tablet_L_rr<span class="sc">$</span>varComp[<span class="dv">2</span>,<span class="dv">1</span>]</span>
+<span id="cb52-2"><a href="MSA.html#cb52-2" aria-hidden="true" tabindex="-1"></a>repeat_var</span></code></pre></div>
 <pre><code>[1] 1.572125</code></pre>
 <p>and for the reproducibility we have:</p>
-<div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb53-1"><a href="MSA.html#cb53-1" aria-hidden="true" tabindex="-1"></a>reprod_var <span class="ot">&lt;-</span> tablet_L_rr<span class="sc">$</span>varComp[<span class="dv">3</span>,<span class="dv">1</span>]</span>
-<span id="cb53-2"><a href="MSA.html#cb53-2" aria-hidden="true" tabindex="-1"></a>reprod_var</span></code></pre></div>
+<div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb54-1"><a href="MSA.html#cb54-1" aria-hidden="true" tabindex="-1"></a>reprod_var <span class="ot">&lt;-</span> tablet_L_rr<span class="sc">$</span>varComp[<span class="dv">3</span>,<span class="dv">1</span>]</span>
+<span id="cb54-2"><a href="MSA.html#cb54-2" aria-hidden="true" tabindex="-1"></a>reprod_var</span></code></pre></div>
 <pre><code>[1] 0.06885705</code></pre>
 <p>The equipment manual mentions an accuracy of 0.001 mm. If we take this as the calibration uncertainty expressed as a standard deviation, this means we have:</p>
 <p><span class="math display">\[
@@ -656,32 +673,20 @@ u_{cal} = 0.001 mm \Leftrightarrow 1 \mu m\\
 u_{cal}^2 = 1^2 = 1
 \]</span>
 that we can assign in R to the variable calibration_var.</p>
-<div class="sourceCode" id="cb55"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb55-1"><a href="MSA.html#cb55-1" aria-hidden="true" tabindex="-1"></a>calibration_var <span class="ot">&lt;-</span> <span class="dv">1</span></span></code></pre></div>
+<div class="sourceCode" id="cb56"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb56-1"><a href="MSA.html#cb56-1" aria-hidden="true" tabindex="-1"></a>calibration_var <span class="ot">&lt;-</span> <span class="dv">1</span></span></code></pre></div>
 <p>We thus we have a uncertainty of:</p>
-<div class="sourceCode" id="cb56"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb56-1"><a href="MSA.html#cb56-1" aria-hidden="true" tabindex="-1"></a>u <span class="ot">&lt;-</span> <span class="fu">sqrt</span>(reprod_var <span class="sc">+</span> repeat_var <span class="sc">+</span> calibration_var)</span>
-<span id="cb56-2"><a href="MSA.html#cb56-2" aria-hidden="true" tabindex="-1"></a>u</span></code></pre></div>
+<div class="sourceCode" id="cb57"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb57-1"><a href="MSA.html#cb57-1" aria-hidden="true" tabindex="-1"></a>u <span class="ot">&lt;-</span> <span class="fu">sqrt</span>(reprod_var <span class="sc">+</span> repeat_var <span class="sc">+</span> calibration_var)</span>
+<span id="cb57-2"><a href="MSA.html#cb57-2" aria-hidden="true" tabindex="-1"></a>u</span></code></pre></div>
 <pre><code>[1] 1.62511</code></pre>
 <p>Finally what is usually reported is the expanded uncertainty corresponding to 2 standard deviations. To be recalled that <span class="math inline">\(\pm\)</span> 2 std corresponds to 95% of the values when a repeative measurement is done. In this case we have <span class="math inline">\(U = 2*u\)</span>:</p>
-<div class="sourceCode" id="cb58"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb58-1"><a href="MSA.html#cb58-1" aria-hidden="true" tabindex="-1"></a>U <span class="ot">&lt;-</span> <span class="dv">2</span> <span class="sc">*</span> u</span>
-<span id="cb58-2"><a href="MSA.html#cb58-2" aria-hidden="true" tabindex="-1"></a>U</span></code></pre></div>
+<div class="sourceCode" id="cb59"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb59-1"><a href="MSA.html#cb59-1" aria-hidden="true" tabindex="-1"></a>U <span class="ot">&lt;-</span> <span class="dv">2</span> <span class="sc">*</span> u</span>
+<span id="cb59-2"><a href="MSA.html#cb59-2" aria-hidden="true" tabindex="-1"></a>U</span></code></pre></div>
 <pre><code>[1] 3.25022</code></pre>
 <p>For a specific measurement of say 1’800 <span class="math inline">\(\mu m\)</span> we then say: the tablet thickness is 1’800 <span class="math inline">\(\mu m\)</span> <span class="math inline">\(\pm\)</span> 3.3 <span class="math inline">\(\mu m\)</span>, at the 95 percent confidence level. Or written in short:</p>
 <p>1’800 <span class="math inline">\(\mu m\)</span> <span class="math inline">\(\pm\)</span> 3.3 <span class="math inline">\(\mu m\)</span>, at a level of confidence of 95%</p>
 <p>Knowing that the specification is [1’775; 1’825] <span class="math inline">\(\mu\)</span>m we have a specification range of 500. The expanded uncertainty corresponds to 13 %. This is another way of looking into the ratio between method variation and specification. This {SixSigma} package gave a similar result of 15.37%. To be noted that the calculation in by the package corresponds to 3 standard deviations and does not comprise the supplier calibration.</p>
-<p>For further reading on the topic we recommend the booklet from <span class="citation"><a href="#ref-Bell2001" role="doc-biblioref">Bell</a> (<a href="#ref-Bell2001" role="doc-biblioref">2001</a>)</span>.</p>
+<p>For further reading on the topic we recommend the booklet from <span class="citation"><a href="references.html#ref-Bell2001" role="doc-biblioref">Bell</a> (<a href="references.html#ref-Bell2001" role="doc-biblioref">2001</a>)</span>.</p>
 
-</div>
-</div>
-<h3>References</h3>
-<div id="refs" class="references csl-bib-body hanging-indent">
-<div id="ref-AIAG2010" class="csl-entry">
-Automotive Industry Action Group, AIAG -, ed. 2010. <a href="https://www.aiag.org/store/publications/details?ProductCode=MSA-4">https://www.aiag.org/store/publications/details?ProductCode=MSA-4</a>.
-</div>
-<div id="ref-Bell2001" class="csl-entry">
-Bell, Stéphanie. 2001. <em>The Beginers Guide to Uncertainty of Measurement</em>. 2nd ed. Teddington, Middlesex, United Kingdom: National Phisical Laboratory. <a href="https://www.npl.co.uk/special-pages/guides/gpg11_uncertainty">https://www.npl.co.uk/special-pages/guides/gpg11_uncertainty</a>.
-</div>
-<div id="ref-Montgomery2012" class="csl-entry">
-Montgomery, Douglas C. 2012. <em>Design and Analysis of Experiments</em>. 8th ed. Wiley.
 </div>
 </div>
             </section>

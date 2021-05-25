@@ -10,12 +10,15 @@ library(kableExtra)
 ```
 
 ```{r echo=FALSE}
-read_csv("contents.csv") %>%
-  select(Course, Subject, Unit, Functions, Datasets) %>%
+readxl::read_xlsx("contents.xlsx") %>%
+  select(Subject, Unit, Functions, Datasets) %>%
   kable(align = "l") %>%
-  # collapse_rows(columns = c(1,2,3), valign = "middle") %>%
-  row_spec(row = c(1, 7, 13, 39), background = "#e6e6e6", color = "#104e8b")
-  # row_spec(row = 5, background = "#e6e6e6", color = "#104e8b")
-  # row_spec(row = 1:33 ,background = "white")
+  # column_spec() %>%
+  row_spec(row = 1:66 ,background = "white") %>%
+  row_spec(
+    row = c(1, 7, 13, 55),
+    background = "#e6e6e6", color = "#104e8b", bold = TRUE
+    )
+  
 ```
 

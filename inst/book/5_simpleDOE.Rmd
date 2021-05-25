@@ -15,15 +15,11 @@ For example if we added 2 additional factors with 4 levels each to the previous 
 
 In the literature we often see the simbolic notation $a^k$ but we've opted for mF-nL (m factors, n levels) in this book for simplification.
 
-## Simple experiments
-
 1 factor 2 levels
 
 In this chapter we cover introductory designs of experiments and take it progressively until the general 2^k factorial designs. In any case this pretends to be an introduction to the topic with only a subset of the many types of DoEs used in the industry.
 
-### Means comparison {#means_comparison}
-
-#### t-test one sample 
+## Means comparison
 
 **The Winter Sports clothing manufacturer**
 
@@ -66,7 +62,7 @@ pet_delivery %>%
 
 The mean is just slightly below the target mean defined for acceptance and she also observes a certain variability in the batch. She decides then to perform a t-test to assess if the average calculated can be really be considered statistically different than the target value.
 
-
+### t-test one sample {#t.test}
 
 ```{r}
 t.test(x = pet_delivery$A, mu = pet_spec)
@@ -76,7 +72,7 @@ The basic assumption of the test is that the means are equal and the alternative
 
 The test result tells us that for a population average of 69, the probability of obtaining a sample with a value as extreme as 68.71 is of 29.17% (p = 0.2917). This probability value higher than the limit of 5% that she had defined to reject the null hypothesis. She cannot conclude that the sample commes from a population with a mean different than 69 and thus decides to accept the batch.
 
-#### t-test two samples
+### t-test two samples
 
 Comparing means
 
@@ -151,9 +147,9 @@ t.test(tensile_strength ~ sample, data = pet_delivery_long, var.equal = TRUE)
 
 We see that p \< 0.05 thus the means differ significantly. Furthemore the mean difference is estimated with 95% confidence, to be between -0.55 and -0.01 (to be noted that zero is obviously not included in this interval). There is an effect in our treatment that explains the difference in means between the two samples.
 
-### Variances comparison {#var_comparison)
+## Variances comparison
 
-#### F-test 
+### F-test {#var.test}
 
 We're now confirming this with a variance test from the stats package.
 
@@ -165,7 +161,7 @@ The test null hypothesis is that the variances are equal. Since the p value is m
 
 The F-test is accurate only for normally distributed data. Any small deviation from normality can cause the F-test to be inaccurate, even with large samples. However, if the data conform well to the normal distribution, then the F-test is usually more powerful than Levene's test.
 
-#### Levene test
+### Levene test {#levene.test}
 
 This test is assessing the homogeneity of variances (homoscedasticity).
 

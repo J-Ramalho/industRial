@@ -102,7 +102,7 @@ juice_drymatter <- juice_drymatter %>%
   mutate(bias = drymatter_DRX - drymatter_REF)
 ```
 
-### Main effects plots
+### Main effects plots {#main_effects}
 
 As the number of factors and levels of a design increase, more thinking is required to obtain good visualisation of the data. 
 
@@ -164,7 +164,7 @@ This kind of plots gives already important insights in to the experiement outcom
 * higher particle_size and higher speed result in higher bias weight deviation
 * beyond 10.5% drymatter_TGT level the bias weight is always higher than the target
 
-### Interactions plots (custom) (#errorbar)
+### Interaction plots (custom) {#interaction_plot}
 
 In designs like these with 3 factors we have 3 possible interactions (A-B, A-C, B-C) corresponding the the possible combination between them. This results in three interaction plots that we're presenting below. The approach here goes beyond the interaction.plot function from the `{stats}` package presented previously in the two factors multiple levels case. We are developping here the plots with {ggplot2} which provides much more control on the plot attibutes but on the other hand requires that additional code is added to calculate the means by group.
 
@@ -263,7 +263,7 @@ The plots indicate no interaction between the different factors as all lines do 
 
 In most cases the anova would be performed first and only the plot for the significant interactions would be plotted, if any.
 
-### Anova with 3rd level interactions
+### Anova with 3rd level interactions {#anova_three}
 
 The sources of variation for the Anova table for three-factor fixed effects model are: A, B, C, AB, AC, BC, ABC. To be noted that like in the two-factors we must have at least two parts (n>2) to determine the sum of squares due to error if all possible interactions are to be included in the model.
 

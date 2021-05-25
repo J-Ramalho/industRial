@@ -58,9 +58,7 @@ Now we load the qcc package that has the required quality control tools:
 
 In order to establish a control chart it is recommended to run a "calibration run". The calibration run is used to calculate the control limits before entering "regular production". Using the first 10 samples we call the qcc() function to make the required calculations.
 
-### Mean chart
-
-[]{#xbarchart}
+### Mean chart {#xbar_chart}
 
 
 ```r
@@ -181,11 +179,9 @@ plot(syringe_xbar)
 
 <img src="10_spc_files/figure-html/unnamed-chunk-11-1.png" width="80%" />
 
-### Range chart 
+### Range chart {#Rchart}
 
 Using the same 10 first samples we also obtain the corresponding R chart:
-
-[]{#Rchart}
 
 
 ```r
@@ -239,11 +235,9 @@ In this case all the points are within the previously defined control limits.
 
 More tight controls can be put in place by clearly identifying warning limits in a narrower range than the control limits. These measures need to be accompaigned by clear decision criteria and proper training to avoid the typical problem of overeacting and destabilizing the process by introducing unintented special causes of variation.
 
-### Control limits
+### Control limits {#limits.xbar}
 
 We add warning limits in the plot with as follows:
-
-[]{#limitsxbar}
 
 
 ```r
@@ -300,7 +294,7 @@ Tightening a product specification without increasing the cost of a manufacturin
 
 ## Cpk charts
 
-### Off spec
+### Off specification {#off_spec}
 
 
 ```r
@@ -376,7 +370,7 @@ By looking at the histogram of the Bamako lightning dataset we confirm the extre
 
 We can also calculate the Cpk
 
-[](#process_Cpk)
+### Process Capability {#process_Cpk}
 
 
 ```r
@@ -412,6 +406,8 @@ The expected population below the LSL is 1,3% which is very high for industry st
 
 We can now establish a simple table using the functions created before, to present the expected percentage that falls within certain limits. To make it useful as a reference table we're putting this limits from $\pm$ 1 to $\pm$ 6 standard deviations
 
+### Sigma conversion table {#sigma_table}
+
 
 ```r
 sigma_limits <- tibble(
@@ -444,11 +440,9 @@ sigma_limits %>%
 |     -5      |     5      |     0.00      | 1.67 |      0      |
 |     -6      |     6      |     0.00      | 2.00 |      0      |
 
-### Capability chart
+### Capability chart {#process.capability}
 
 
-
-[]{#processcapability}
 
 
 ```r
@@ -506,8 +500,6 @@ and for a complete review we can open the function help page with:
 
 Lets give some data and use the function:
 
-[]{#offspec}
-
 
 ```r
 off_spec(0.981, 0.819, 0.943, 0.019)
@@ -519,7 +511,7 @@ off_spec(0.981, 0.819, 0.943, 0.019)
 
 we get 2.28% parts out of spec. We'll see this calculation in action in a moment.
 
-### Process stats
+### Process statistics {#process_stats}
 
 **The tablet weight control procedure**
 
@@ -544,12 +536,11 @@ process_stats_table(weight_statistics_data)
 ```
 
 ```{=html}
-<div id="iyoxgysqxg" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>html {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
 }
 
-#iyoxgysqxg .gt_table {
+#yeehqyjdyo .gt_table {
   display: table;
   border-collapse: collapse;
   margin-left: auto;
@@ -574,7 +565,7 @@ process_stats_table(weight_statistics_data)
   border-left-color: #D3D3D3;
 }
 
-#iyoxgysqxg .gt_heading {
+#yeehqyjdyo .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -586,7 +577,7 @@ process_stats_table(weight_statistics_data)
   border-right-color: #D3D3D3;
 }
 
-#iyoxgysqxg .gt_title {
+#yeehqyjdyo .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -596,7 +587,7 @@ process_stats_table(weight_statistics_data)
   border-bottom-width: 0;
 }
 
-#iyoxgysqxg .gt_subtitle {
+#yeehqyjdyo .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -606,13 +597,13 @@ process_stats_table(weight_statistics_data)
   border-top-width: 0;
 }
 
-#iyoxgysqxg .gt_bottom_border {
+#yeehqyjdyo .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#iyoxgysqxg .gt_col_headings {
+#yeehqyjdyo .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -627,7 +618,7 @@ process_stats_table(weight_statistics_data)
   border-right-color: #D3D3D3;
 }
 
-#iyoxgysqxg .gt_col_heading {
+#yeehqyjdyo .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -647,7 +638,7 @@ process_stats_table(weight_statistics_data)
   overflow-x: hidden;
 }
 
-#iyoxgysqxg .gt_column_spanner_outer {
+#yeehqyjdyo .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -659,15 +650,15 @@ process_stats_table(weight_statistics_data)
   padding-right: 4px;
 }
 
-#iyoxgysqxg .gt_column_spanner_outer:first-child {
+#yeehqyjdyo .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#iyoxgysqxg .gt_column_spanner_outer:last-child {
+#yeehqyjdyo .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#iyoxgysqxg .gt_column_spanner {
+#yeehqyjdyo .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -679,7 +670,7 @@ process_stats_table(weight_statistics_data)
   width: 100%;
 }
 
-#iyoxgysqxg .gt_group_heading {
+#yeehqyjdyo .gt_group_heading {
   padding: 8px;
   color: #333333;
   background-color: #FFFFFF;
@@ -701,7 +692,7 @@ process_stats_table(weight_statistics_data)
   vertical-align: middle;
 }
 
-#iyoxgysqxg .gt_empty_group_heading {
+#yeehqyjdyo .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -716,15 +707,15 @@ process_stats_table(weight_statistics_data)
   vertical-align: middle;
 }
 
-#iyoxgysqxg .gt_from_md > :first-child {
+#yeehqyjdyo .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#iyoxgysqxg .gt_from_md > :last-child {
+#yeehqyjdyo .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#iyoxgysqxg .gt_row {
+#yeehqyjdyo .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -743,7 +734,7 @@ process_stats_table(weight_statistics_data)
   overflow-x: hidden;
 }
 
-#iyoxgysqxg .gt_stub {
+#yeehqyjdyo .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -755,7 +746,7 @@ process_stats_table(weight_statistics_data)
   padding-left: 12px;
 }
 
-#iyoxgysqxg .gt_summary_row {
+#yeehqyjdyo .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -765,7 +756,7 @@ process_stats_table(weight_statistics_data)
   padding-right: 5px;
 }
 
-#iyoxgysqxg .gt_first_summary_row {
+#yeehqyjdyo .gt_first_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -775,7 +766,7 @@ process_stats_table(weight_statistics_data)
   border-top-color: #D3D3D3;
 }
 
-#iyoxgysqxg .gt_grand_summary_row {
+#yeehqyjdyo .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -785,7 +776,7 @@ process_stats_table(weight_statistics_data)
   padding-right: 5px;
 }
 
-#iyoxgysqxg .gt_first_grand_summary_row {
+#yeehqyjdyo .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -795,11 +786,11 @@ process_stats_table(weight_statistics_data)
   border-top-color: #D3D3D3;
 }
 
-#iyoxgysqxg .gt_striped {
+#yeehqyjdyo .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#iyoxgysqxg .gt_table_body {
+#yeehqyjdyo .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -808,7 +799,7 @@ process_stats_table(weight_statistics_data)
   border-bottom-color: #D3D3D3;
 }
 
-#iyoxgysqxg .gt_footnotes {
+#yeehqyjdyo .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -822,13 +813,13 @@ process_stats_table(weight_statistics_data)
   border-right-color: #D3D3D3;
 }
 
-#iyoxgysqxg .gt_footnote {
+#yeehqyjdyo .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding: 4px;
 }
 
-#iyoxgysqxg .gt_sourcenotes {
+#yeehqyjdyo .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -842,52 +833,53 @@ process_stats_table(weight_statistics_data)
   border-right-color: #D3D3D3;
 }
 
-#iyoxgysqxg .gt_sourcenote {
+#yeehqyjdyo .gt_sourcenote {
   font-size: 90%;
   padding: 4px;
 }
 
-#iyoxgysqxg .gt_left {
+#yeehqyjdyo .gt_left {
   text-align: left;
 }
 
-#iyoxgysqxg .gt_center {
+#yeehqyjdyo .gt_center {
   text-align: center;
 }
 
-#iyoxgysqxg .gt_right {
+#yeehqyjdyo .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#iyoxgysqxg .gt_font_normal {
+#yeehqyjdyo .gt_font_normal {
   font-weight: normal;
 }
 
-#iyoxgysqxg .gt_font_bold {
+#yeehqyjdyo .gt_font_bold {
   font-weight: bold;
 }
 
-#iyoxgysqxg .gt_font_italic {
+#yeehqyjdyo .gt_font_italic {
   font-style: italic;
 }
 
-#iyoxgysqxg .gt_super {
+#yeehqyjdyo .gt_super {
   font-size: 65%;
 }
 
-#iyoxgysqxg .gt_footnote_marks {
+#yeehqyjdyo .gt_footnote_marks {
   font-style: italic;
-  font-weight: normal;
   font-size: 65%;
 }
 </style>
-<table class="gt_table">
+<div id="yeehqyjdyo" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;"><table class="gt_table">
   <thead class="gt_header">
     <tr>
-      <th colspan="3" class="gt_heading gt_title gt_font_normal gt_bottom_border" style>Process Summary Statistics</th>
+      <th colspan="3" class="gt_heading gt_title gt_font_normal" style>Process Summary Statistics</th>
     </tr>
-    
+    <tr>
+      <th colspan="3" class="gt_heading gt_subtitle gt_font_normal gt_bottom_border" style></th>
+    </tr>
   </thead>
   <thead class="gt_col_headings">
     <tr>
@@ -897,35 +889,43 @@ process_stats_table(weight_statistics_data)
     </tr>
   </thead>
   <tbody class="gt_table_body">
-    <tr><td class="gt_row gt_left">Weight mean</td>
-<td class="gt_row gt_right">0.9400000</td>
-<td class="gt_row gt_left">g</td></tr>
-    <tr><td class="gt_row gt_left">Spec target</td>
-<td class="gt_row gt_right">0.9000000</td>
-<td class="gt_row gt_left">g</td></tr>
-    <tr><td class="gt_row gt_left">Spec min</td>
-<td class="gt_row gt_right">0.8100000</td>
-<td class="gt_row gt_left">g</td></tr>
-    <tr><td class="gt_row gt_left">Spec max</td>
-<td class="gt_row gt_right">0.9900000</td>
-<td class="gt_row gt_left">g</td></tr>
-    <tr><td class="gt_row gt_left" style="font-weight: bold;">Out of spec</td>
-<td class="gt_row gt_right" style="font-weight: bold;">0.7100000</td>
-<td class="gt_row gt_left" style="font-weight: bold;">%</td></tr>
-    <tr><td class="gt_row gt_left" style="font-weight: bold;">Cpk</td>
-<td class="gt_row gt_right" style="font-weight: bold;">0.8178525</td>
-<td class="gt_row gt_left" style="font-weight: bold;"></td></tr>
-    <tr><td class="gt_row gt_left">Sample size</td>
-<td class="gt_row gt_right">137</td>
-<td class="gt_row gt_left">parts</td></tr>
+    <tr>
+      <td class="gt_row gt_left">Weight mean</td>
+      <td class="gt_row gt_right">0.94</td>
+      <td class="gt_row gt_left">g</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">Spec target</td>
+      <td class="gt_row gt_right">0.90</td>
+      <td class="gt_row gt_left">g</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">Spec min</td>
+      <td class="gt_row gt_right">0.81</td>
+      <td class="gt_row gt_left">g</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">Spec max</td>
+      <td class="gt_row gt_right">0.99</td>
+      <td class="gt_row gt_left">g</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">Out of spec</td>
+      <td class="gt_row gt_right">0.71</td>
+      <td class="gt_row gt_left">%</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">Sample size</td>
+      <td class="gt_row gt_right">137</td>
+      <td class="gt_row gt_left">parts</td>
+    </tr>
   </tbody>
   
   
-</table>
-</div>
+</table></div>
 ```
 
-### Individual chart
+### Individual chart {#chart_I}
 
 The data set being available we're feeding it into the chart_I() function:
 
@@ -936,7 +936,7 @@ chart_I(weight_statistics_data)
 
 <img src="10_spc_files/figure-html/unnamed-chunk-37-1.png" width="80%" />
 
-### Moving range chart
+### Moving range chart {#chart_IMR}
 
 The companion of the I chart is the MR chart, where MR stands for moving range. This chart can be called with:
 
@@ -947,7 +947,7 @@ chart_IMR(weight_statistics_data)
 
 <img src="10_spc_files/figure-html/unnamed-chunk-38-1.png" width="80%" />
 
-### Capability chart II
+### Capability chart (custom) {#chart_Cpk}
 
 And a final chart for this session the capability chart:
 

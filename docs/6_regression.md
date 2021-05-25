@@ -1,7 +1,7 @@
 
 
 
-## Regression and anova
+## Linear regression
 
 One factor multiple levels
 
@@ -17,8 +17,6 @@ Mountain bikes frames are submitted to many different efforts, namely bending, c
 </div>
 
 </div>
-
-### Linear regression {#linear_regression}
 
 We will present here a first example of the utilisation of linear regression techniques and establish a linear model. These models are going to be used extensively in the upcoming cases.
 
@@ -54,8 +52,7 @@ Table: (\#tab:unnamed-chunk-4)e-bike hardening experiment data
 |     160     |     g4      | 539000 |   551200    |
 |     160     |     g5      | 570000 |   551200    |
 
-#### Raw data plot
- 
+
 
 ```r
 ggplot(data = ebike_narrow) +
@@ -71,11 +68,9 @@ ggplot(data = ebike_narrow) +
 
 <img src="6_regression_files/figure-html/unnamed-chunk-5-1.png" width="80%" />
 
-#### Linear model
+### Linear model {#lm}
 
 We start by establishing the model, ensuring for now that we leave the variable `temperature` as a numeric vector. 
-
-[]{#linearModel}
 
 
 ```r
@@ -106,8 +101,6 @@ F-statistic: 137.6 on 1 and 18 DF,  p-value: 7.263e-10
 
 With the summary function we can many different outputs such as the coefficients and the R-squared which we will look into more detail now. As usual, we first inspect the data with a first plot. In this case we're adding a smoothing geometry with the lm method:
 
-#### Linear model plot
-
 
 ```r
 ggplot(ebike_narrow) +
@@ -124,7 +117,7 @@ ggplot(ebike_narrow) +
 
 <img src="6_regression_files/figure-html/unnamed-chunk-7-1.png" width="80%" />
 
-#### Linear model fixed effects
+### Contrasts treatment {#contr.treatment}
 
 In our case the experiementer has selected to control the levels of the temperature variable in what is called a fixed effects model, accepting that conclusions in the comparisons of the levels cannot be extended to levels that were not tested. For this we're now going to convert the variable to a factor and establish again the model and note that it will give the same R squared but naturally different coefficients. 
 
@@ -177,7 +170,7 @@ getOption("contrasts")
 
 We're now ready to assess the validity of the model in order to be ready for our main task which is the comparison of the means using an anova.
 
-### Residuals & model check
+## Residuals analysis
 
 In order to assess the model performance we're going to look into the residuals. R provides direct ploting functions with the base and stats packages but in this first example we're going to break down the analysis and further customise the plots. We are also going to make usage of some additional statistical tests to confirm our observations from the plots. In subsequent chapters we'll have a more selective approach, where plots and tests are made on a needed basis.
 
@@ -185,7 +178,7 @@ We start by loading the package broom which will help us retrieving the data fro
 
 Now we build and show below an extract of the "augmented" dataframe
 
-[]{#augment}
+### Model augment {#augment}
 
 
 ```r
@@ -203,18 +196,18 @@ ebike_aug %>%
 
 
 
-| cycles | temperature | .fitted | .resid | .hat |  .sigma  |  .cooksd  | .std.resid | index |
-|:------:|:-----------:|:-------:|:------:|:----:|:--------:|:---------:|:----------:|:-----:|
-| 575000 |     160     | 551200  | 23800  | 0.2  | 17571.09 | 0.1326135 | 1.4566455  |   1   |
-| 542000 |     160     | 551200  | -9200  | 0.2  | 18678.69 | 0.0198157 | -0.5630730 |   2   |
-| 530000 |     160     | 551200  | -21200 | 0.2  | 17846.38 | 0.1052218 | -1.2975161 |   3   |
-| 539000 |     160     | 551200  | -12200 | 0.2  | 18534.92 | 0.0348460 | -0.7466838 |   4   |
-| 570000 |     160     | 551200  | 18800  | 0.2  | 18069.13 | 0.0827465 | 1.1506275  |   5   |
-| 565000 |     180     | 587400  | -22400 | 0.2  | 17723.81 | 0.1174708 | -1.3709604 |   6   |
+| cycles | temperature | .fitted | .resid | .std.resid | .hat |  .sigma  |  .cooksd  | index |
+|:------:|:-----------:|:-------:|:------:|:----------:|:----:|:--------:|:---------:|:-----:|
+| 575000 |     160     | 551200  | 23800  | 1.4566455  | 0.2  | 17571.09 | 0.1326135 |   1   |
+| 542000 |     160     | 551200  | -9200  | -0.5630730 | 0.2  | 18678.69 | 0.0198157 |   2   |
+| 530000 |     160     | 551200  | -21200 | -1.2975161 | 0.2  | 17846.38 | 0.1052218 |   3   |
+| 539000 |     160     | 551200  | -12200 | -0.7466838 | 0.2  | 18534.92 | 0.0348460 |   4   |
+| 570000 |     160     | 551200  | 18800  | 1.1506275  | 0.2  | 18069.13 | 0.0827465 |   5   |
+| 565000 |     180     | 587400  | -22400 | -1.3709604 | 0.2  | 17723.81 | 0.1174708 |   6   |
 
 We can see we've obtained detailed model parameters such us fitted values and residuals for each DOE run.
 
-#### Time sequence plot
+### Timeseries plot {#residuals_timeseries}
 
 For this plot we need to ensure that the order of plotting in the x axis corresponds exactly to the original data collection order. This plot allows us to assess for strange patterns such as a  tendency to have runs of positive of negative results which indicates that the independency assumption does not hold. If patterns emerge then there may be correlation in the residuals.
 
@@ -236,11 +229,9 @@ ebike_aug %>%
 
 Nothing pattern emerges from the current plot and the design presents itself ^well randomised.
 
-#### Autocorrelation test 
+### Autocorrelation test {#autocorrelation}
 
 It is always good to keep in mind that all visual observations can be complemented with a statistical test. In this case we're going to use the durbinWatson test from the car package (Companion to Applied Regression).
-
-[]{#residualsCorrelation}
 
 
 ```r
@@ -254,13 +245,13 @@ durbinWatsonTest(ebike_lm_factor)
 
 ```
  lag Autocorrelation D-W Statistic p-value
-   1      -0.5343347      2.960893   0.068
+   1      -0.5343347      2.960893   0.076
  Alternative hypothesis: rho != 0
 ```
 
 Although the output shows Autocorrelation of -0.53 we have to consider that the p value is greater than 0.05 thus there is not enough significance to say that there is autocorrelation. 
 
-#### Residuals vs fit plot
+### Residuals-Fit plot {#residuals_fit}
 
 If the model is correct and the assumptions hold, the residuals should be structureless. In particular they should be unrelated to any other variable including the predicted response.
 
@@ -283,11 +274,12 @@ ebike_aug %>%
 
 In this plot we see no variance anomalies such as a higher variance for a certain factor level or other types of skweness.
 
-#### Equality of variance test 
+### Homocedasticity {#homocedasticity}
+
+Equality of variances
 
 In the e-bike hardening process, the normality assumption is not in question, so we can apply Bartlett’s test to the etch rate data.
 
-[]{#barlettTest}
 
 
 ```r
@@ -308,7 +300,7 @@ Notes:
 * the var.test function cannot be used here as it applies to the two levels case only
 * this test is sensitive to the normality assumption, consequently, when the validity of this assumption is doubtful, the Bartlett test should not be used and replace by the modified Levene test for example
 
-#### Normality plot
+### Normality plot {#geom_qq}
 
 As the sample size is relatively small we're going to use a qq plot instead of an histogram to assess the normality of the residuals.
 
@@ -332,9 +324,7 @@ ebike_aug %>%
 The plot suggests normal distribution. We see that the error distribution is aproximately normal. In the fixed effects model we give more importance to the center of the values and here we consider acceptable that the extremes of the data tend to bend away from the straight line.
 The verification can be completed by a test. For populations < 50 use the shapiro-wilk normality test.
 
-#### Shapiro test 
-
-[]{#shapiroTest}
+### Normality test {#shapiroTest}
 
 
 ```r
@@ -351,7 +341,7 @@ W = 0.93752, p-value = 0.2152
 
 p > 0.05 indicates that the residuals do not differ significantly from a normally distributed population.
 
-#### Std residuals vs fit plot
+### Standard Residuals-Fit plot {#std_residuals_fit}
 
 This specific Standardized residuals graph also help detecting outliers in the residuals (any residual > 3 standard deviations is a potential outlier).
 
@@ -371,7 +361,7 @@ ebike_aug %>%
 
 The plot shows no outliers to consider in this DOE.
 
-#### Outlier test
+### Outliers test {#outliers}
 
 In a case where we were doubtfull we could go further and make a statistical test to assess if a certain value was an outlier. A usefull test is available in the car package.
 
@@ -389,7 +379,7 @@ Largest |rstudent|:
 
 In this case, the Bonferroni adjusted p value comes as NA confirming that there is no outlier in the data.   
 
-#### Cooks distance plot
+### Cooks distance {#cooks}
 
 
 ```r
@@ -405,9 +395,7 @@ ebike_aug %>%
 
 <img src="6_regression_files/figure-html/unnamed-chunk-21-1.png" width="80%" />
 
-#### R squared 
-
-R² the coefficient of determination
+### Coefficient of determination {#R-squared}
 
 The R square can be extracted from the linear model that has been used to build the Anova model.
 
@@ -427,9 +415,7 @@ Anova fixed effects assumes that:
 
 As the number of residuals is too small we're not checking the normality via the histogram but rather with a a Q-Q plot.
 
-### Multiple means comparison
-
-#### Box plot of raw data
+## Multiple means comparison
 
 We can also compare medians and get a sense of the effect of the treatment levels by looking into the box plot:
 
@@ -454,11 +440,9 @@ Similar to the t-test but extended - this test allows to compare the means betwe
 
 ANOVA principle: the total variability in the data, as measured by the total corrected sum of squares, can be partitioned into a sum of squares of the differences between the treatment averages and the grand average plus a sum of squares of the differences of observations within treatments from the treatment average
 
-#### Anova fixed effects 
+### Analysis of variance {#aov}
 
 In R the anova is built by passing the linear model to the anova or aov functions. The output of the anova function is just the anova table as shown here for this first example. The output of the aov function is a list.
-
-[]{#anova}
 
 
 ```r
@@ -476,8 +460,6 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
 Note that the RF temperature or between-treatment mean square (22,290.18) is many times larger than the within-treatment or error mean square (333.70). This indicates that it is unlikely that the treatment means are equal. 
 Also p < 0.05 thus we can reject the null hypothesis and conclude that the means are significantly different.
-
-#### Anova (no significance)
 
 Anova on plasma etching, modification of the example to achieve a p > 0.05:
 
@@ -527,13 +509,9 @@ ggplot(ebike_factor2,
 
 P > 0.05 - there is no significant difference between the means
 
-### Pairwise comparisons
-
-#### Tukey's test 
+### Pairwise comparison {#tukey}
 
 The Anova may indicate that the treament means differ but it won't indicate which ones. In this case we may want to compare pairs of means.
-
-[]{#tukeyTest}
 
 
 ```r
@@ -572,11 +550,9 @@ plot(ebike_tukey)
 
 <img src="6_regression_files/figure-html/unnamed-chunk-29-1.png" width="80%" />
 
-#### Fisher's LSD 
+### Least significant difference {#fisherLSD}
 
 Fisher's Least Significant difference is an alternative to Tuckey's test.
-
-[]{#fisherLSD}
 
 
 ```r
@@ -594,7 +570,7 @@ ebike_LSD <- LSD.test(y = ebike_factor$cycles,
          alpha = 0.05)
 ```
 
-The Fisher procedure provides us with many additional information. A first outcome is the difference between means (of life cycles) that can be considered significant, indicated in the table below by LSD = 24.49.
+The Fisher procedure provides us with additional information. A first outcome is the difference between means (of life cycles) that can be considered significant, indicated in the table below by LSD = 24.49.
 
 
 ```r
@@ -701,13 +677,13 @@ As often with statistical tools, there is debate on the best approach to use. We
 
 To go further in the Anova F-test we recommend this interesting article from @minitab_anovaftest.
 
-### Prediction 
+## Forecasting
+
+### Predict {#predict}
 
 Following the residuals analysis and the anova our model is validated. 
 
 A model is usefull for predictions. In a random effects model where conclusions can applied to the all the population we can predict values at any value of the input variables. In that case reusing the model with temperature as a numeric vector we could have a prediction for various temperature values such as:
-
-[]{#predict}
 
 
 ```r

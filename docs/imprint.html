@@ -6,12 +6,12 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Imprint | industRial data science</title>
   <meta name="description" content="Imprint | industRial data science" />
-  <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.20 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Imprint | industRial data science" />
   <meta property="og:type" content="book" />
   
-  <meta property="og:image" content="/img/cover3.png" />
+  <meta property="og:image" content="img/cover3.png" />
   
   <meta name="github-repo" content="J-Ramalho/industRialds" />
 
@@ -19,12 +19,12 @@
   <meta name="twitter:title" content="Imprint | industRial data science" />
   
   
-  <meta name="twitter:image" content="/img/cover3.png" />
+  <meta name="twitter:image" content="img/cover3.png" />
 
 <meta name="author" content="João Ramalho" />
 
 
-<meta name="date" content="2021-05-24" />
+<meta name="date" content="2021-05-25" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -33,7 +33,7 @@
   
 <link rel="prev" href="references.html"/>
 
-<script src="libs/header-attrs-2.8/header-attrs.js"></script>
+<script src="libs/header-attrs-2.7/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -51,8 +51,6 @@
 
 
 
-<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
-<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
 <script src="libs/kePrint-0.0.1/kePrint.js"></script>
 <link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
 <!-- Global site tag (gtag.js) - Google Analytics -->
@@ -75,7 +73,6 @@ mattcrump=1;
 pre > code.sourceCode { white-space: pre; position: relative; }
 pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
 pre.sourceCode { margin: 0; }
 @media screen {
@@ -134,29 +131,6 @@ code span.st { color: #4070a0; } /* String */
 code span.va { color: #19177c; } /* Variable */
 code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
-</style>
-
-<style type="text/css">
-/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
-div.csl-bib-body { }
-div.csl-entry {
-  clear: both;
-}
-.hanging div.csl-entry {
-  margin-left:2em;
-  text-indent:-2em;
-}
-div.csl-left-margin {
-  min-width:2em;
-  float:left;
-}
-div.csl-right-inline {
-  margin-left:2em;
-  padding-left:1em;
-}
-div.csl-indent {
-  margin-left: 2em;
-}
 </style>
 
 <link rel="stylesheet" href="css/industRialds.css" type="text/css" />
@@ -230,66 +204,108 @@ div.csl-indent {
 </ul></li>
 <li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html"><i class="fa fa-check"></i>Design of Experiments</a>
 <ul>
-<li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#simple-experiments"><i class="fa fa-check"></i>Simple experiments</a>
+<li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#means-comparison"><i class="fa fa-check"></i>Means comparison</a>
 <ul>
-<li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#means_comparison"><i class="fa fa-check"></i>Means comparison</a></li>
-<li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#variances-comparison-var_comparison"><i class="fa fa-check"></i>Variances comparison {#var_comparison)</a></li>
+<li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#t.test"><i class="fa fa-check"></i>t-test one sample</a></li>
+<li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#t-test-two-samples"><i class="fa fa-check"></i>t-test two samples</a></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#regression-and-anova"><i class="fa fa-check"></i>Regression and anova</a>
+<li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#variances-comparison"><i class="fa fa-check"></i>Variances comparison</a>
 <ul>
-<li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#linear_regression"><i class="fa fa-check"></i>Linear regression</a></li>
-<li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#residuals-model-check"><i class="fa fa-check"></i>Residuals &amp; model check</a></li>
-<li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#multiple-means-comparison"><i class="fa fa-check"></i>Multiple means comparison</a></li>
-<li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#pairwise-comparisons"><i class="fa fa-check"></i>Pairwise comparisons</a></li>
-<li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#prediction"><i class="fa fa-check"></i>Prediction</a></li>
+<li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#var.test"><i class="fa fa-check"></i>F-test</a></li>
+<li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#levene.test"><i class="fa fa-check"></i>Levene test</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#linear-regression"><i class="fa fa-check"></i>Linear regression</a>
+<ul>
+<li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#lm"><i class="fa fa-check"></i>Linear model</a></li>
+<li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#contr.treatment"><i class="fa fa-check"></i>Contrasts treatment</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#residuals-analysis"><i class="fa fa-check"></i>Residuals analysis</a>
+<ul>
+<li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#augment"><i class="fa fa-check"></i>Model augment</a></li>
+<li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#residuals_timeseries"><i class="fa fa-check"></i>Timeseries plot</a></li>
+<li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#autocorrelation"><i class="fa fa-check"></i>Autocorrelation test</a></li>
+<li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#residuals_fit"><i class="fa fa-check"></i>Residuals-Fit plot</a></li>
+<li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#homocedasticity"><i class="fa fa-check"></i>Homocedasticity</a></li>
+<li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#geom_qq"><i class="fa fa-check"></i>Normality plot</a></li>
+<li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#shapiroTest"><i class="fa fa-check"></i>Normality test</a></li>
+<li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#std_residuals_fit"><i class="fa fa-check"></i>Standard Residuals-Fit plot</a></li>
+<li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#outliers"><i class="fa fa-check"></i>Outliers test</a></li>
+<li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#cooks"><i class="fa fa-check"></i>Cooks distance</a></li>
+<li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#R-squared"><i class="fa fa-check"></i>Coefficient of determination</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#multiple-means-comparison"><i class="fa fa-check"></i>Multiple means comparison</a>
+<ul>
+<li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#aov"><i class="fa fa-check"></i>Analysis of variance</a></li>
+<li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#tukey"><i class="fa fa-check"></i>Pairwise comparison</a></li>
+<li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#fisherLSD"><i class="fa fa-check"></i>Least significant difference</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#forecasting"><i class="fa fa-check"></i>Forecasting</a>
+<ul>
+<li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#predict"><i class="fa fa-check"></i>Predict</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#interactions"><i class="fa fa-check"></i>Interactions</a>
 <ul>
-<li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#lm-with-interactions"><i class="fa fa-check"></i>lm with interactions</a></li>
-<li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#outliers-and-model-check"><i class="fa fa-check"></i>Outliers and model check</a></li>
-<li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#interaction-plot-base"><i class="fa fa-check"></i>Interaction plot (base)</a></li>
-<li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#effects-significance"><i class="fa fa-check"></i>Effects significance</a></li>
-<li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#removing-interaction"><i class="fa fa-check"></i>Removing interaction</a></li>
+<li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#formula"><i class="fa fa-check"></i>Model formulae</a></li>
+<li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#interaction.plot"><i class="fa fa-check"></i>Interaction plot</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#residuals-check"><i class="fa fa-check"></i>Residuals check</a>
+<ul>
+<li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#simple_timeseries"><i class="fa fa-check"></i>Simplified timeseries</a></li>
+<li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#plot_model"><i class="fa fa-check"></i>Residuals summary</a></li>
+<li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#cooks_histogram"><i class="fa fa-check"></i>Cooks histogram</a></li>
+<li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#anova"><i class="fa fa-check"></i>Anova check</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#covariance"><i class="fa fa-check"></i>Covariance</a>
 <ul>
-<li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#correlation-strenght"><i class="fa fa-check"></i>Correlation strenght</a></li>
-<li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#ancova"><i class="fa fa-check"></i>Ancova</a></li>
-<li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#comparison-with-anova"><i class="fa fa-check"></i>Comparison with anova</a></li>
+<li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#cor.test"><i class="fa fa-check"></i>Correlation test</a></li>
+<li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#ancova"><i class="fa fa-check"></i>Analysis of covariance</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#general-factorial-designs"><i class="fa fa-check"></i>General factorial designs</a>
 <ul>
 <li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#fac.design"><i class="fa fa-check"></i>Factorial design</a></li>
-<li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#main-effects-plots"><i class="fa fa-check"></i>Main effects plots</a></li>
-<li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#interactions-plots-custom-errorbar"><i class="fa fa-check"></i>Interactions plots (custom) (#errorbar)</a></li>
-<li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#anova-with-3rd-level-interactions"><i class="fa fa-check"></i>Anova with 3rd level interactions</a></li>
+<li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#main_effects"><i class="fa fa-check"></i>Main effects plots</a></li>
+<li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#interaction_plot"><i class="fa fa-check"></i>Interaction plots (custom)</a></li>
+<li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#anova_three"><i class="fa fa-check"></i>Anova with 3rd level interactions</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#two-level-designs"><i class="fa fa-check"></i>Two level designs</a>
 <ul>
-<li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#coding-factors"><i class="fa fa-check"></i>Coding factors</a></li>
-<li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#coding-natural-values"><i class="fa fa-check"></i>Coding natural values</a></li>
-<li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#single-replicate-designs"><i class="fa fa-check"></i>Single replicate designs</a></li>
+<li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#coding_levels"><i class="fa fa-check"></i>Coding levels</a></li>
+<li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#plotMeans"><i class="fa fa-check"></i>Interaction plots with SE</a></li>
+<li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#adj_Rsquare"><i class="fa fa-check"></i>Adjusted R-squared</a></li>
+<li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#coding_inputs"><i class="fa fa-check"></i>Coding inputs</a></li>
+<li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#coded_prediction"><i class="fa fa-check"></i>Coded prediction</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#response-surface"><i class="fa fa-check"></i>Response surface</a>
+<ul>
+<li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#persp"><i class="fa fa-check"></i>Perspective plot</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#single-replicate-designs"><i class="fa fa-check"></i>Single replicate designs</a>
+<ul>
+<li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#qqPlot"><i class="fa fa-check"></i>Effects normal plot</a></li>
+<li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#effects_contribution"><i class="fa fa-check"></i>Effects contribution table</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="SPC.html"><a href="SPC.html"><i class="fa fa-check"></i>Statistical Process Control</a>
 <ul>
 <li class="chapter" data-level="" data-path="SPC.html"><a href="SPC.html#xbar-r-charts"><i class="fa fa-check"></i>xbar-R charts</a>
 <ul>
-<li class="chapter" data-level="" data-path="SPC.html"><a href="SPC.html#mean-chart"><i class="fa fa-check"></i>Mean chart</a></li>
-<li class="chapter" data-level="" data-path="SPC.html"><a href="SPC.html#range-chart"><i class="fa fa-check"></i>Range chart</a></li>
-<li class="chapter" data-level="" data-path="SPC.html"><a href="SPC.html#control-limits"><i class="fa fa-check"></i>Control limits</a></li>
+<li class="chapter" data-level="" data-path="SPC.html"><a href="SPC.html#xbar_chart"><i class="fa fa-check"></i>Mean chart</a></li>
+<li class="chapter" data-level="" data-path="SPC.html"><a href="SPC.html#Rchart"><i class="fa fa-check"></i>Range chart</a></li>
+<li class="chapter" data-level="" data-path="SPC.html"><a href="SPC.html#limits.xbar"><i class="fa fa-check"></i>Control limits</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="SPC.html"><a href="SPC.html#cpk-charts"><i class="fa fa-check"></i>Cpk charts</a>
 <ul>
-<li class="chapter" data-level="" data-path="SPC.html"><a href="SPC.html#off-spec"><i class="fa fa-check"></i>Off spec</a></li>
-<li class="chapter" data-level="" data-path="SPC.html"><a href="SPC.html#capability-chart"><i class="fa fa-check"></i>Capability chart</a></li>
+<li class="chapter" data-level="" data-path="SPC.html"><a href="SPC.html#off_spec"><i class="fa fa-check"></i>Off specification</a></li>
+<li class="chapter" data-level="" data-path="SPC.html"><a href="SPC.html#process_Cpk"><i class="fa fa-check"></i>Process Capability</a></li>
+<li class="chapter" data-level="" data-path="SPC.html"><a href="SPC.html#sigma_table"><i class="fa fa-check"></i>Sigma conversion table</a></li>
+<li class="chapter" data-level="" data-path="SPC.html"><a href="SPC.html#process.capability"><i class="fa fa-check"></i>Capability chart</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="SPC.html"><a href="SPC.html#i-mr-charts"><i class="fa fa-check"></i>I-MR charts</a>
 <ul>
-<li class="chapter" data-level="" data-path="SPC.html"><a href="SPC.html#process-stats"><i class="fa fa-check"></i>Process stats</a></li>
-<li class="chapter" data-level="" data-path="SPC.html"><a href="SPC.html#individual-chart"><i class="fa fa-check"></i>Individual chart</a></li>
-<li class="chapter" data-level="" data-path="SPC.html"><a href="SPC.html#moving-range-chart"><i class="fa fa-check"></i>Moving range chart</a></li>
-<li class="chapter" data-level="" data-path="SPC.html"><a href="SPC.html#capability-chart-ii"><i class="fa fa-check"></i>Capability chart II</a></li>
+<li class="chapter" data-level="" data-path="SPC.html"><a href="SPC.html#process_stats"><i class="fa fa-check"></i>Process statistics</a></li>
+<li class="chapter" data-level="" data-path="SPC.html"><a href="SPC.html#chart_I"><i class="fa fa-check"></i>Individual chart</a></li>
+<li class="chapter" data-level="" data-path="SPC.html"><a href="SPC.html#chart_IMR"><i class="fa fa-check"></i>Moving range chart</a></li>
+<li class="chapter" data-level="" data-path="SPC.html"><a href="SPC.html#chart_Cpk"><i class="fa fa-check"></i>Capability chart (custom)</a></li>
 </ul></li>
 </ul></li>
 <li class="part"><span><b>III APPENDIX</b></span></li>
@@ -335,17 +351,18 @@ div.csl-indent {
 <h1>Imprint</h1>
 <p>Many packages are available for editing documentation, from notes to blogs up to complete websites. In this book we’ve opted to use the R package <code>{Bookdown}</code> from Yihui Xie further customized with a layout developed by <a href="https://community.rstudio.com/t/bookdown-contest-submission-gitbook-style-tufte-style-for-web-book/11666">Matthew J. C. Crump</a>.</p>
 <p>An important aspect to ensure reproducibility of the examples along the time and between users is to have the same programming setup. We’re showing below our setup at the time of rendering the book.</p>
-<div class="sourceCode" id="cb274"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb274-1"><a href="imprint.html#cb274-1" aria-hidden="true" tabindex="-1"></a>devtools<span class="sc">::</span><span class="fu">session_info</span>()[[<span class="dv">1</span>]]</span></code></pre></div>
+<div class="sourceCode" id="cb278"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb278-1"><a href="imprint.html#cb278-1" aria-hidden="true" tabindex="-1"></a>devtools<span class="sc">::</span><span class="fu">session_info</span>()[[<span class="dv">1</span>]]</span></code></pre></div>
+<pre><code>## Error in get(genname, envir = envir) : objet &#39;testthat_print&#39; introuvable</code></pre>
 <pre><code>##  setting  value                       
-##  version  R version 4.0.5 (2021-03-31)
-##  os       Ubuntu 20.04.2 LTS          
-##  system   x86_64, linux-gnu           
-##  ui       X11                         
+##  version  R version 4.0.2 (2020-06-22)
+##  os       Windows 10 x64              
+##  system   x86_64, mingw32             
+##  ui       RTerm                       
 ##  language (EN)                        
-##  collate  en_US.UTF-8                 
-##  ctype    en_US.UTF-8                 
-##  tz       Europe/Zurich               
-##  date     2021-05-24</code></pre>
+##  collate  French_Switzerland.1252     
+##  ctype    French_Switzerland.1252     
+##  tz       Europe/Berlin               
+##  date     2021-05-25</code></pre>
 <p><strong>Disclaimer</strong></p>
 <p>This book presents a variety of software tools and recommended approaches for industrial data analysis. It is incumbent upon the user to execute judgment in their use. The author does not provide any guarantee, expressed or implied, with regard to the general or specific applicability of the software, the range of errors that may be associated with it, or the appropriateness of using them in any subsequent calculation, design, or decision process. The author accepts no responsibility for damages, if any, suffered by any reader or user of this handbook as a result of decisions made or actions taken on information contained therein.</p>
 <p><strong>Licence</strong></p>

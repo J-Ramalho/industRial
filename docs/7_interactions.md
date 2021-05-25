@@ -38,12 +38,22 @@ solarcell_factor <- solarcell_output %>%
   ) %>% mutate(across(c(material, temperature), as_factor))
 ```
 
-### lm with interactions
+### Model formulae {#formula}
+
+
+```r
+solarcell_formula <- output ~ temperature + material + temperature:material
+class(solarcell_formula)
+```
+
+```
+[1] "formula"
+```
 
 
 ```r
 solarcell_factor_lm <- lm(
-  output ~ temperature + material + temperature:material, 
+  formula = solarcell_formula, 
   data = solarcell_factor
   )
 summary(solarcell_factor_lm)
@@ -52,8 +62,7 @@ summary(solarcell_factor_lm)
 ```
 
 Call:
-lm(formula = output ~ temperature + material + temperature:material, 
-    data = solarcell_factor)
+lm(formula = solarcell_formula, data = solarcell_factor)
 
 Residuals:
     Min      1Q  Median      3Q     Max 
@@ -80,18 +89,43 @@ F-statistic:    11 on 8 and 27 DF,  p-value: 9.426e-07
 
 Looking at the output we see that R-squared is equal to 0.7652. This means about 77 percent of the variability in the battery life is explained by the plate material in the battery, the temperature, and the material type–temperature interaction. We're going to go more in details now to validate the model and understand the effects and interactions of the different factors.
 
-### Outliers and model check 
+### Interaction plot {#interaction.plot}
 
-We start by an assessment of the residuals, starting by the timeseries of residuals:
+In this experiement instead of just plotting a linear regression we need to go for a more elaborate plot that shows the response as a function of the two factors. Many different approaches are possible in R and here we're starting with a rather simple one - the interaction plot from the stats package:
+
+
+```r
+interaction.plot(x.factor = solarcell_factor$temperature, 
+                 trace.factor = solarcell_factor$material,
+                 fun = mean,
+                 response = solarcell_factor$output,
+                 trace.label = "Material",
+                 legend = TRUE,
+                 main = "Temperature-Material interaction plot",
+                 xlab = "temperature [°C]",
+                 ylab = "output [kWh/yr equivalent]")
+```
+
+<img src="7_interactions_files/figure-html/unnamed-chunk-7-1.png" width="672" />
+
+Although simple many important learnings can be extracted from this plot. We get the indication of the mean value of battery life for the different data groups at each temperature level for each material. Also we see immediatly that batteries tend to have longer lifes at lower temperature for all material types. We also see that there is certainly an interaction between material and temperature as the lines cross each other.
+
+## Residuals check
+
+We do now a quick assessment of the residuals, starting by the timeseries of residuals:
+
+### Simplified timeseries {#simple_timeseries}
 
 
 ```r
 plot(solarcell_factor_lm$residuals)
 ```
 
-<img src="7_interactions_files/figure-html/unnamed-chunk-6-1.png" width="672" />
+<img src="7_interactions_files/figure-html/unnamed-chunk-8-1.png" width="672" />
 
 No specific pattern is apparent so now we check all the remaining plots grouped into one single output:
+
+### Residuals summary {#plot_model}
 
 
 ```r
@@ -99,9 +133,19 @@ par(mfrow = c(2,2))
 plot(solarcell_factor_lm)
 ```
 
-<img src="7_interactions_files/figure-html/unnamed-chunk-7-1.png" width="672" />
+<img src="7_interactions_files/figure-html/unnamed-chunk-9-1.png" width="672" />
 
 Residuals versus fit presents a rather simetrical distribution around zero indicating equality of variances at all levels and the qq plot presents good adherence to the centel line indicating a normal distributed population of residuals, all ok for these. The scale location plot though, shows a center line that is not horizontal which suggest the presence of outliers.
+
+### Cooks histogram {#cooks_histogram}
+
+
+```r
+plot(solarcell_factor_lm, which = 4)
+```
+
+<img src="7_interactions_files/figure-html/unnamed-chunk-10-1.png" width="672" />
+
 
 We can extract the absolute maximum residual with:
 
@@ -117,8 +161,6 @@ solarcell_factor_lm$residuals %>% abs() %>% max()
 Inspecting again the residuals plots we see that this corresponds to the point labeled with 2 for which the standardized value is greater than 2 standard deviations. 
 
 We're therefore apply the outlier test from the car package:
-
-[]{#outlierTest}
 
 
 ```r
@@ -139,45 +181,24 @@ Largest |rstudent|:
 
 which gives a high Bonferroni p value thus excluding this possibility.
 
-### Interaction plot (base)
-
-In this experiement instead of just plotting a linear regression we need to go for a more elaborate plot that shows the response as a function of the two factors. Many different approaches are possible in R and here we're starting with a rather simple one - the interaction plot from the stats package:
-
-[]{#interactionPlot}
-
-
-```r
-interaction.plot(x.factor = solarcell_factor$temperature, 
-                 trace.factor = solarcell_factor$material,
-                 fun = mean,
-                 response = solarcell_factor$output,
-                 trace.label = "Material",
-                 legend = TRUE,
-                 main = "Temperature-Material interaction plot",
-                 xlab = "temperature [°C]",
-                 ylab = "output [kWh/yr equivalent]")
-```
-
-<img src="7_interactions_files/figure-html/unnamed-chunk-11-1.png" width="672" />
-
-Although simple many important learnings can be extracted from this plot. We get the indication of the mean value of battery life for the different data groups at each temperature level for each material. Also we see immediatly that batteries tend to have longer lifes at lower temperature for all material types. We also see that there is certainly an interaction between material and temperature as the lines cross each other.
-
-### Effects significance
-
 As the R-squared was rather high and there were no issues with residuals we considere the model as acceptable and move ahead with the assessment of the significance of the different effects. For that we apply the anova to the linear model:
 
+### Anova check {#anova}
+
 
 ```r
-solarcell_factor_aov <- aov(solarcell_factor_lm)
-summary(solarcell_factor_aov)
+anova(solarcell_factor_lm)
 ```
 
 ```
-                     Df Sum Sq Mean Sq F value   Pr(>F)    
-temperature           2  39119   19559  28.968 1.91e-07 ***
-material              2  10684    5342   7.911  0.00198 ** 
-temperature:material  4   9614    2403   3.560  0.01861 *  
-Residuals            27  18231     675                     
+Analysis of Variance Table
+
+Response: output
+                     Df Sum Sq Mean Sq F value    Pr(>F)    
+temperature           2  39119 19559.4 28.9677 1.909e-07 ***
+material              2  10684  5341.9  7.9114  0.001976 ** 
+temperature:material  4   9614  2403.4  3.5595  0.018611 *  
+Residuals            27  18231   675.2                      
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ```
@@ -185,8 +206,6 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 We see in the output little stars in front of the p value of the different factors. Three stars for temperature corresponding to an extremely low p value indicating that the means of the lifetime at different levels of temperature are significantly different, confirming that temperature has an effect on lifetime. With a lower significance but still clearly impacting lifetime depends on the material. Finally it is confirmed that there is an interaction between both factors has the temperature:material term has a p value of 0.01861 which us lower than the treshold of 0.05.
 
 The interaction here corresponds to the fact that increasing temperature from 15 to 70 decreases lifetime for material 2 but increases for material 3.
-
-### Removing interaction
 
 Its interesting to consider what would have been the analysis if the interaction was not put in the model. We can easily assess that by creating a new model in R without the temperature:material term.
 
@@ -225,15 +244,17 @@ The model still presents a reasonably high R-square of 0.64. We now apply the an
 
 
 ```r
-battery_aov_no_int <- aov(solarcell_factor_lm_no_int)
-summary(battery_aov_no_int)
+anova(solarcell_factor_lm_no_int)
 ```
 
 ```
-            Df Sum Sq Mean Sq F value   Pr(>F)    
-temperature  2  39119   19559  21.776 1.24e-06 ***
-material     2  10684    5342   5.947  0.00651 ** 
-Residuals   31  27845     898                     
+Analysis of Variance Table
+
+Response: output
+            Df Sum Sq Mean Sq F value    Pr(>F)    
+temperature  2  39119 19559.4 21.7759 1.239e-06 ***
+material     2  10684  5341.9  5.9472  0.006515 ** 
+Residuals   31  27845   898.2                      
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ```
@@ -246,7 +267,7 @@ par(mfrow = c(2,2))
 plot(solarcell_factor_lm_no_int)
 ```
 
-<img src="7_interactions_files/figure-html/unnamed-chunk-15-1.png" width="672" />
+<img src="7_interactions_files/figure-html/unnamed-chunk-17-1.png" width="672" />
 
 We see in the Residuals vs Fitted a clear pattern with residuals moving from positive to negative and then again to positive along the fitted values axis which indicates that there is an interaction at play.
 
@@ -305,9 +326,9 @@ solarcell_fill %>%
   )
 ```
 
-<img src="7_interactions_files/figure-html/unnamed-chunk-17-1.png" width="672" />
+<img src="7_interactions_files/figure-html/unnamed-chunk-19-1.png" width="672" />
 
-### Correlation strenght
+### Correlation test {#cor.test}
 
 And a short test to assess the strenght of the correlation:
 
@@ -355,7 +376,7 @@ solarcell_fill %>%
   )
 ```
 
-<img src="7_interactions_files/figure-html/unnamed-chunk-20-1.png" width="672" />
+<img src="7_interactions_files/figure-html/unnamed-chunk-22-1.png" width="672" />
 
 Visually this is the case, going from one level to the other is not changing the relationship between thickness and strenght - increasing thickness increases stenght. Visually the slopes are similar but the number of points is small. In a real case this verification could be extended with the correlation test for each level or/and a statistical test between slopes.
 
@@ -364,9 +385,7 @@ The way to feed the R function arguments is obtained from https://www.datanovia.
 
 *Three different machines produce a monofilament fiber for a textile company. The process engineer is interested in determining if there is a difference in the breaking strength of the fiber produced by the three machines. However, the strength of a fiber is related to its diameter, with thicker fibers being generally stronger than thinner ones. A random sample of five fiber specimens is selected from each machine.*
 
-### Ancova
-
-[]{#ancova}
+### Analysis of covariance {#ancova}
 
 
 ```r
@@ -399,9 +418,9 @@ Conclusions from the book in page 662:
 
 (I did not go further here as it goes beyond the scope of the assessment)
 
-### Comparison with anova
+Comparison with anova
 
-Below I'm doing the common approach we've been using at NSTC in design of experiments.
+Below the common approach we've been using in design of experiments.
 
 
 ```r

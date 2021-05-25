@@ -3,7 +3,7 @@
 
 ## Two level designs
 
-### Coding factors
+Coding factors
 
 2 factors 2 levels
 
@@ -62,7 +62,9 @@ pet_doe <- bind_cols(
 )
 ```
 
-#### Factors as +/-
+### Coding levels {#coding_levels}
+
+Factors as +/-
 
 In this first model we're using a design where the inputs levels have been defined as plus and minus, sometimes also called high and low. The actual naming is not important, what is critical is to ensure that those input parameters are coded as factors. 
 
@@ -73,8 +75,6 @@ pet_fct <- pet_doe %>%
 ```
 
 Another detail is to put the higher level as the reference otherwise we will get inverted signs in the lm output:
-
-[]{#relevel}
 
 
 ```r
@@ -97,8 +97,6 @@ contrasts(pet_fct$A)
 ```
 
 So we change this with:
-
-[]{#contrasts}
 
 
 ```r
@@ -173,7 +171,7 @@ predict(pet_ctr_lm, newdata = list(A = "+", B = "+"))
 69 
 ```
 
-#### Factors as +/- 1 
+Factors as +/- 1
 
 In this example we convert the levels to factors still using the +/-1 notation. This will also be helpfull to apply what are called the Yates tables.
 
@@ -241,7 +239,7 @@ predict(pet_ctr2_lm, newdata = list(cA = "1", cB = "1"))
 69 
 ```
 
-#### Factors as +/- 1 numeric
+Factors as +/- 1 numeric
 
 In this example we're going to code the levels with +1/-1 but we're going use the numeric coding:
 
@@ -345,11 +343,9 @@ pet_num %>%
 
 As seen on the plot the output of our prediction is 69 corresponding the high level of A when B is at 1. To be precise we need to multiply all the coefficients by the levels of the factors as : 63.250 + 9.583x(+1) - 5.750x(+1) + 1.917
 
-#### sd bars in interaction plots 
+### Interaction plots with SE {#plotMeans}
 
 Here we're making a step further in the representation of interaction plots, we're adding error bars to the means. There are many ways to do this and we're providing a simple approach with the function plotMeans from the package RcmdrMisc.
-
-[]{#plotMeans}
 
 
 ```r
@@ -374,8 +370,6 @@ plotMeans(response = pet_fct$tensile_strength,
 ```
 
 <img src="9_twolevelDOEs_files/figure-html/unnamed-chunk-19-1.png" width="80%" />
-
-### Coding natural values
 
 3 factors 2 levels
 
@@ -403,8 +397,6 @@ battery_charging %>%
 |  1|  1| -1| -1|         1|          6.42|
 | -1| -1|  1| -1|         1|         10.37|
 |  1| -1|  1| -1|         1|          7.49|
-
-#### lm and anova
 
 
 ```r
@@ -464,7 +456,7 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
 The main effects of Gap and Power are highly significant (both have very small P-values). The AC interaction is also highly significant; thus, there is a strong interaction between Gap and Power.
 
-#### R^2 and Adjusted R^2
+### Adjusted R-squared {#adj_Rsquare}
 
 The ordinary R^2 is 0.9661 and it measures the proportion of total variability explained by the model. A potential problem with this statistic is that it always increases as factors are added to the model, even if these factors are not significant. The adjusted R^2 is obtained by dividing the Sums of Squares by the degrees of freedom, and is adjusted for the size of the model, that is the number of factors.
 
@@ -500,8 +492,6 @@ Multiple R-squared:  0.5185,	Adjusted R-squared:  0.4669
 F-statistic: 10.05 on 3 and 28 DF,  p-value: 0.0001157
 ```
 
-[]{#glance}
-
 Besides the base summary() function, R squared and adjusted R squared can also be easily retrieved with the glance function from the {broom} package. We're extracting them here for the complete and for reduced model:
 
 
@@ -521,7 +511,7 @@ glance(battery_lm)[1:2] %>%
 
 Adjusted R² has improved. Removing the nonsignificant terms from the full model has produced a final model that is likely to function more effectively as a predictor of new data.
 
-#### Coding natural values
+### Coding inputs {#coding_inputs}
 
 Now that we have model often we will want to predict the response at a certainly specific level between the coded factor levels of $\pm$ 1.
 
@@ -547,7 +537,6 @@ cA
 [1] -0.5
 ```
 
-
 To be noted that the opposite conversion looks like:
 
 
@@ -570,7 +559,7 @@ nA
 [1] 0.9
 ```
 
-#### Coded values prediction
+### Coded prediction {#coded_prediction}
 
 And now we can feed our linear model and make predictions:
 
@@ -606,11 +595,11 @@ battery_charging %>%
 
 <img src="9_twolevelDOEs_files/figure-html/unnamed-chunk-30-1.png" width="80%" />
 
-#### Response surface plot 
+## Response surface
 
 We are introducing here response surface plots which is yet another way to visualize the experiment outputs as a function of the inputs. We're doing this with the persp() function from the {rsm} package which provides an extremely fast rendering, easy parametrization and a readable output. To be noted that this function is an extension of the base R persp() consisting from the R point of view in an S3 method for the lm class. This allows to simply provide directly the lm object to the function to obtain the response surface.
 
-[]{#persp}
+### Perspective plot {#persp}
 
 
 ```r
@@ -653,7 +642,7 @@ interaction.plot(x.factor = battery_charging$C,
 
 Just like in the surface plot we can see here in the interaction plot that the response of yield on gap is different depending on the level of power. When power is high it decreases and when power is low it increases. As a reminder this is what is called an interaction between these two factors.
 
-### Single replicate designs
+## Single replicate designs
 
 **The lithium-ion battery charging time test (cont.)**
 
@@ -692,13 +681,10 @@ battery_charging %>%
 ```
 
 
-#### lm
-
-
 ```r
 battery_lm3 <- lm(
   formula = charging_time ~ A * B * C * D, 
-  data = battery_charging %>% filter(Replicate ==1))
+  data = battery_charging %>% filter(Replicate == 1))
 summary(battery_lm3)
 ```
 
@@ -737,17 +723,14 @@ F-statistic:   NaN on 15 and 0 DF,  p-value: NA
 
 We can see that being a single replicate design no statistics have been calculated for the effects in the model. A recommended approach in this case is to look into the normal probability plot of the model effects. 
 
-#### qqPlot 
-
 Here we are going to prepare this plot with the function qqPlot() from the {car} package:
+
+### Effects normal plot {#qqPlot}
 
 
 ```r
 library(car)
 ```
-
-
-[]{#qqPlot}
 
 
 ```r
@@ -767,6 +750,8 @@ main_effects_plot <- qqPlot(
 <img src="9_twolevelDOEs_files/figure-html/unnamed-chunk-38-1.png" width="80%" />
 
 In plot we can see that the effects that have the highest influence on the output are the effects A, C and D and their interactions. We can still confirm these observations with a calculation of the percentage contribution of each effect as follows:
+
+### Effects contribution table {#effects_contribution}
 
 
 ```r
@@ -799,7 +784,7 @@ battery_lm_tidy3 %>%
 |A:B   |         0.24875|                    14.82|
 |A:D   |        -0.24875|                    14.82|
 
-#### Reduced model
+Reduced model
 
 Following the previous analysis we are removing the factor B from the model and keeping only the 2nd order interactions assuming the system also respects the sparcity of effects principle.
 
@@ -836,7 +821,7 @@ F-statistic: 10.05 on 3 and 28 DF,  p-value: 0.0001157
 
 We can now see that we've regained degrees of freedom and obtained a sort of hidden replication allowing to calculate statistics and error terms on the model.
 
-#### Residuals analysis
+Residuals analysis
 
 Checking the residuals we see the significant effect of the remaining interactions. The residuals are not completely normal but the in the standardized residuals the deviations are contained within 1.2 sd.
 

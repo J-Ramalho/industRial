@@ -26,6 +26,7 @@ It #' basically provides a grey background and some highlights to help reading k
 process statistics such as the population mean.
 }
 \examples{
+library(dplyr)
 library(ggplot2)
 
 pet_delivery \%>\% 

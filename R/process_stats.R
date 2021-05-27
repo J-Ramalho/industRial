@@ -18,17 +18,17 @@
 #'
 process_stats <- function(data, part_spec_percent) {
   data %>%
-    dplyr::filter(!is.na(weight_value), weight_value >= 0) %>%
-    dplyr::group_by(weight_target_value) %>%
+    dplyr::filter(!is.na(data$weight_value), data$weight_value >= 0) %>%
+    dplyr::group_by(data$weight_target_value) %>%
     dplyr::mutate(
       part_spec_percent = part_spec_percent,
-      spec_min = weight_target_value - weight_target_value * part_spec_percent / 100,
-      spec_max = weight_target_value + weight_target_value * part_spec_percent / 100,
-      weight_mean = mean(weight_value),
-      weight_sd = stats::sd(weight_value),
-      weight_out_perc = off_spec(spec_max, spec_min, weight_mean, weight_sd),
-      Cpk = process_Cpk(spec_max, spec_min, weight_mean, weight_sd),
-      weight_MR = abs(weight_value - dplyr::lag(weight_value)),
+      spec_min = data$weight_target_value - data$weight_target_value * part_spec_percent / 100,
+      spec_max = data$weight_target_value + data$weight_target_value * part_spec_percent / 100,
+      weight_mean = mean(data$weight_value),
+      weight_sd = stats::sd(data$weight_value),
+      weight_out_perc = industRial::off_spec(spec_max, spec_min, weight_mean, weight_sd),
+      Cpk = industRial::process_Cpk(spec_max, spec_min, weight_mean, weight_sd),
+      weight_MR = abs(data$weight_value - dplyr::lag(data$weight_value)),
       weight_MR_mean = mean(weight_MR, na.rm = TRUE),
       # to be modified by -1
       MR_max = 3.688 * weight_MR_mean,
@@ -36,7 +36,7 @@ process_stats <- function(data, part_spec_percent) {
       I_LCL = round((weight_mean - 2.66 * weight_MR_mean), 2),
       I_UCL = round((weight_mean + 2.66 * weight_MR_mean), 2),
       weight_out_limits = dplyr::if_else(
-        condition = (weight_value > I_UCL | weight_value < I_LCL), 
-        weight_value, false = NA_real_)
+        condition = (data$weight_value > I_UCL | data$weight_value < I_LCL), 
+        data$weight_value, false = NA_real_)
     )
 }

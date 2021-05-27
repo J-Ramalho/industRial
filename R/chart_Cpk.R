@@ -18,16 +18,17 @@
 #' @return
 #' This function returns an object of class ggplot
 #' @export
+#' @importFrom magrittr %>%
 chart_Cpk <- function(data) {
   data %>%
     ggplot2::ggplot() +
     ggplot2::geom_histogram(
-      ggplot2::aes(x = weight_value, y = ..count..),
+      ggplot2::aes(x = data$weight_value),
       fill = "grey80",
       color = "grey20") +
-    ggplot2::geom_vline(ggplot2::aes(xintercept = spec_min), color = "red", linetype = 3) +
-    ggplot2::geom_vline(ggplot2::aes(xintercept = spec_max), color = "red", linetype = 3) +
-    ggplot2::geom_vline(ggplot2::aes(xintercept = weight_target_value), color = "red", linetype = 2) +
+    ggplot2::geom_vline(ggplot2::aes(xintercept = data$spec_min), color = "red", linetype = 3) +
+    ggplot2::geom_vline(ggplot2::aes(xintercept = data$spec_max), color = "red", linetype = 3) +
+    ggplot2::geom_vline(ggplot2::aes(xintercept = data$weight_target_value), color = "red", linetype = 2) +
     ggplot2::theme_light() +
     ggplot2::labs(
       title = "Tablet weight process control",

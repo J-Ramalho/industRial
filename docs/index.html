@@ -6,12 +6,12 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>industRial data science</title>
   <meta name="description" content="industRial data science" />
-  <meta name="generator" content="bookdown 0.20 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
 
   <meta property="og:title" content="industRial data science" />
   <meta property="og:type" content="book" />
   
-  <meta property="og:image" content="img/cover3.png" />
+  <meta property="og:image" content="/img/cover3.png" />
   
   <meta name="github-repo" content="J-Ramalho/industRialds" />
 
@@ -19,7 +19,7 @@
   <meta name="twitter:title" content="industRial data science" />
   
   
-  <meta name="twitter:image" content="img/cover3.png" />
+  <meta name="twitter:image" content="/img/cover3.png" />
 
 <meta name="author" content="João Ramalho" />
 
@@ -33,7 +33,7 @@
   
 
 <link rel="next" href="toolbox.html"/>
-<script src="libs/header-attrs-2.7/header-attrs.js"></script>
+<script src="libs/header-attrs-2.8/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -51,6 +51,8 @@
 
 
 
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
 <script src="libs/kePrint-0.0.1/kePrint.js"></script>
 <link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
 <!-- Global site tag (gtag.js) - Google Analytics -->
@@ -73,6 +75,7 @@ mattcrump=1;
 pre > code.sourceCode { white-space: pre; position: relative; }
 pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
 pre.sourceCode { margin: 0; }
 @media screen {
@@ -131,6 +134,29 @@ code span.st { color: #4070a0; } /* String */
 code span.va { color: #19177c; } /* Variable */
 code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
 </style>
 
 <link rel="stylesheet" href="css/industRialds.css" type="text/css" />
@@ -351,7 +377,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h1 class="title">indust<b style='color:#38598CFF'>R</b>ial data science</h1>
 <h2 class="subtitle"><em>Case studies in product development and manufacturing</em></h2>
 <p class="author"><em>João Ramalho</em></p>
-<p class="date"><em>2021-05-28</em></p>
+<p class="date" style="margin-top: 1.5em;"><em>2021-05-28</em></p>
 </div>
 <div id="welcome" class="section level1 unnumbered">
 <h1>Welcome</h1>
@@ -362,12 +388,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Product Development and Manufacturing are very important activities in society because bringing innovative products to the market has an immense potential to improve the quality of life of everyone.</p>
 <p>Additionally Data Science brings new powerful approaches to the engineering and manufacturing of consumer goods, helping minimizing environmental impact, improving quality and keeping costs under control.</p>
 <p><strong>How to use this book</strong></p>
-<p>We assume the reader is familiar with product development and manufacturing quality methodologies such as dmaic and six sigma and the associated statistical concepts. Furthermore it is considered that he/she brings at least a beginner knowledge on R. The book focus is on putting these areas together.</p>
+<p>We assume the reader is familiar with product development and manufacturing quality methodologies such as dmaic and six sigma and the related statistical concepts. We also assume the reader is already a user of the R programming language. The Case Studies then bring all the areas together in a practical way.</p>
 <p>This book is better used as a reference book by using the navigation bar on the left to go a specific industrial domain. To reproduce the examples all the case studies data sets, example functions and the textbook original files can be downloaded as a package called <code>{industRial}</code>. For guidelines on how to use them refer to the sections <a href="toolbox.html#datasets">Datasets</a> and <a href="toolbox.html#functions">Functions</a></p>
 <p>Complementing the text, a series of tutorials can be accessed either online or locally to practice dynamically key statistical concepts. For the online option no specific software installation is required. A list of web links and detailed instructions on local installation can be seen in the section <a href="tutorials.html#tutorials">Tutorials</a>.</p>
 <p>In the appendix we provide a detailed <a href="contents.html#contents">Index</a> and a <a href="glossary.html#glossary">Glossary</a> and we refer to several good quality books on both Data Science and Product Development that have served to provide the required theoretical background. These cover key disciplines such as six sigma, statistics and computer programming. This book aims complementing them and showcase how to benefit from recent software in this area. A full list can be found in <a href="references.html#references">References</a>.</p>
 <p><strong>Content overview</strong></p>
-<p>The case studies are organized according the a logical product development flow. The text starts with case studies in the domain of Design for Six Sigma. These are some practical tools in that help prioritizing problems and get focus on how to tackle them. The next group of case studies covers the domain of Measurement System Analysis, an initial important step when developing a product or manufacturing process. Here is discussed how to analyze the response of a measurement device in terms of its bias and its uncertainty. The next large group of case studies is the Design of Experiments. This corresponds to the core of the R&amp;D activities and provides approaches to minimize the quantity of trials and time to reach to a sufficient knowledge of how the product or system works. Also on how to obtain the right balance on its features and properties to obtain the desired output. A final group of case studies presents ways to get the manufacturing process in control according to what was defined in the product development phase. These are the well known Statistical Process Control and Capability studies.</p>
+<p>The case studies are organized according the a logical product development flow. The text starts with case studies in the domain of Design for Six Sigma. These are some practical tools in that help prioritizing problems and get focus on how to tackle them. The next group of case studies covers the domain of Measurement System Analysis, an initial important step when developing a product or manufacturing process. Here is discussed how to analyze the response of a measurement device in terms of its bias and its uncertainty. The next large group of case studies is the Design of Experiments. This corresponds to the core of the R&amp;D activities and provides approaches to minimize the quantity of trials and time to reach to a sufficient knowledge of how the product or system works. Also on how to obtain the right balance on its features and properties to get the desired output. A final group of case studies presents ways to get the manufacturing process in control according to what was defined in the product development phase. These are the well known Statistical Process Control and Capability studies.</p>
 <p><strong>Acknowledgements</strong></p>
 <p>I would like to express my gratitude to the instructors and colleagues who have spent time sharing their knowledge, answering my questions and giving me inputs: Enrico Chavez, Iegor Rudnytskyi, Giulia Ruggeri, Harry Handerson and Bobby Stuijfzand from the EPFL ADSCV team; Jean-Vincent Le Bé, Jasmine Petry, Yvan Bouza, James Clulow and Akos Spiegel from the Nestlé STC team; Frank Paris from DOQS; Théophile Emmanouilidis and Sélim Ach from Thoth.</p>
 <p>To report any issue or make suggestions please open an issue on the book repository:

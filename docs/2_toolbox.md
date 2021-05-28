@@ -50,38 +50,38 @@ The column *Download* precises if a package is downloaded automatically when the
 
 |Download |Package    |Domain           |Version |Depends                                       |
 |:--------|:----------|:----------------|:-------|:---------------------------------------------|
-|imports  |viridis    |colors           |0.5.1   |R (>= 2.10), viridisLite (>= 0.3.0)           |
-|imports  |readr      |data loading     |1.3.1   |R (>= 3.1)                                    |
-|imports  |dplyr      |data wrangling   |1.0.2   |R (>= 3.2.0)                                  |
-|imports  |forcats    |data wrangling   |0.5.0   |R (>= 3.2)                                    |
-|imports  |janitor    |data wrangling   |2.0.1   |R (>= 3.1.2)                                  |
-|imports  |magrittr   |data wrangling   |1.5     |NA                                            |
-|imports  |tibble     |data wrangling   |3.0.3   |R (>= 3.1.0)                                  |
-|imports  |tidyr      |data wrangling   |1.1.1   |R (>= 3.1)                                    |
+|imports  |viridis    |colors           |0.6.1   |R (>= 2.10), viridisLite (>= 0.4.0)           |
+|imports  |readr      |data loading     |1.4.0   |R (>= 3.1)                                    |
+|imports  |dplyr      |data wrangling   |1.0.6   |R (>= 3.3.0)                                  |
+|imports  |forcats    |data wrangling   |0.5.1   |R (>= 3.2)                                    |
+|imports  |janitor    |data wrangling   |2.1.0   |R (>= 3.1.2)                                  |
+|imports  |magrittr   |data wrangling   |2.0.1   |NA                                            |
+|imports  |tibble     |data wrangling   |3.1.2   |R (>= 3.1.0)                                  |
+|imports  |tidyr      |data wrangling   |1.1.3   |R (>= 3.1)                                    |
 |imports  |purrr      |data wrangling   |0.3.4   |R (>= 3.2)                                    |
-|imports  |glue       |data wrangling   |1.4.1   |R (>= 3.1)                                    |
+|imports  |glue       |data wrangling   |1.4.2   |R (>= 3.2)                                    |
 |imports  |stringr    |data wrangling   |1.4.0   |R (>= 3.1)                                    |
-|imports  |patchwork  |plotting         |1.0.1   |NA                                            |
-|imports  |ggplot2    |plotting         |3.3.2   |R (>= 3.2)                                    |
+|imports  |patchwork  |plotting         |1.1.1   |NA                                            |
+|imports  |ggplot2    |plotting         |3.3.3   |R (>= 3.2)                                    |
 |imports  |scales     |plotting         |1.1.1   |R (>= 3.2)                                    |
-|imports  |ggtext     |plotting         |0.1.0   |R (>= 3.5)                                    |
-|imports  |broom      |statistics       |0.7.0   |R (>= 3.1)                                    |
-|imports  |stats      |statistics       |4.0.2   |NA                                            |
+|imports  |ggtext     |plotting         |0.1.1   |R (>= 3.5)                                    |
+|imports  |broom      |statistics       |0.7.6   |R (>= 3.1)                                    |
+|imports  |stats      |statistics       |4.0.5   |NA                                            |
 |suggests |qicharts2  |industrial stats |0.7.1   |R (>= 3.0.0)                                  |
 |suggests |qcc        |industrial stats |2.7     |R (>= 3.0)                                    |
 |suggests |SixSigma   |industrial stats |0.9-52  |R (>= 2.14.0)                                 |
 |suggests |DoE.base   |industrial stats |1.1-6   |R (>= 2.10), grid, conf.design                |
 |suggests |rsm        |industrial stats |2.10.2  |NA                                            |
 |suggests |agricolae  |industrial stats |1.3-3   |R (>= 2.10)                                   |
-|suggests |ggraph     |networks         |2.0.3   |R (>= 2.10), ggplot2 (>= 3.0.0)               |
+|suggests |ggraph     |networks         |2.0.5   |R (>= 2.10), ggplot2 (>= 3.0.0)               |
 |suggests |tidygraph  |networks         |1.2.0   |NA                                            |
-|suggests |igraph     |networks         |1.2.5   |methods                                       |
-|suggests |ggforce    |networks         |0.3.2   |ggplot2 (>= 3.0.0), R (>= 3.3.0)              |
-|suggests |bookdown   |publishing       |0.20    |NA                                            |
-|suggests |knitr      |publishing       |1.29    |R (>= 3.2.3)                                  |
+|suggests |igraph     |networks         |1.2.6   |methods                                       |
+|suggests |ggforce    |networks         |0.3.3   |ggplot2 (>= 3.0.0), R (>= 3.3.0)              |
+|suggests |bookdown   |publishing       |0.22    |NA                                            |
+|suggests |knitr      |publishing       |1.33    |R (>= 3.2.3)                                  |
 |suggests |kableextra |publishing       |NA      |NA                                            |
-|suggests |gt         |publishing       |0.2.2   |R (>= 3.2.0)                                  |
-|suggests |car        |statistics       |3.0-9   |R (>= 3.5.0), carData (>= 3.0-0)              |
+|suggests |gt         |publishing       |0.3.0   |R (>= 3.2.0)                                  |
+|suggests |car        |statistics       |3.0-10  |R (>= 3.5.0), carData (>= 3.0-0)              |
 |suggests |RcmdrMisc  |statistics       |2.7-1   |R (>= 3.5.0), utils, car (>= 3.0-0), sandwich |
 
 In the book text we don't see the loading instructions for the installed packages over and over again everytime an example is given to avoid repetition (e.g. running `library(dplyr)` before each code chunk). Be sure to load at minimum the packages below before trying any example:
@@ -102,24 +102,22 @@ We're highlighting now some specific packages that are used in the book and that
 
 #### qcc
 
-`{qcc}` is another extremely complete and solid package. It was developped and is maintained by Luca Scrucca and offers a very large range of statistical process control charts and capability analysis. This package has started long ago much before the `{tidyverse}` but has made the turn and revamped all its plots with `{ggplot2}`. At the moment of writing this version is not yet in CRAN but can be obtained from github with:
+`{qcc}` is another extremely complete and solid package. It was developped and is maintained by Luca Scrucca and offers a very large range of statistical process control charts and capability analysis. This package has started long ago, long before the `{tidyverse}` but has made the turn and revamped all its plots with `{ggplot2}`. At the moment of writing this version is not yet in CRAN but can be obtained from github with:
 
 ```{}
 # install.packages("devtools")
 devtools::install_github("luca-scr/qcc", build = TRUE, build_opts = c("--no-resave-data", "--no-manual"))
 ```
 
-You can find examples of the control charts in its vignette: [qcc vignette](https://luca-scr.github.io/qcc/articles/qcc.html). We build and develop further on our SPC Case Studies.
+Several examples of the control charts are available in its vignette: [qcc vignette](https://luca-scr.github.io/qcc/articles/qcc.html). We build and develop further on our SPC Case Studies.
 
 #### qicharts2
 
-I recommend qichart2 specifically for the nice pareto plots. As many niche packages we need to be awere that the number of contributers is small meaning that it cannot be as thouroughly tested as community packages.
+We recommend `{qichart2}` specifically for the nice pareto plots which are alreay based on `{ggplot2}`. As many niche packages we need to be awere that the number of contributers is small meaning that it cannot be as thouroughly tested as community packages.
 
 #### DoE.base
 
-This package is one of the most complete and vast packages in Design of Experiements. It is a first of a large suite of packages on the topic, it has vast functionality and is extremely well documented.
-
-[DoE.base](http://prof.beuth-hochschule.de/groemping/software/doe/?L=1&print=1)
+This package is one of the most complete and vast packages in Design of Experiements. It is a first of a large suite of packages on the topic, it has vast functionality and is extremely well documented. We do some exploration of the automatic generation of designs in the DOE case studies. Full documentation available under: [DoE.base](http://prof.beuth-hochschule.de/groemping/software/doe/?L=1&print=1)
 
 #### car
 
@@ -239,7 +237,7 @@ paste0(.libPaths()[1], "/industRial/book")
 ```
 
 ```
-[1] "C:/R/R-4.0.2/jr_library/industRial/book"
+[1] "/home/joao/R/x86_64-pc-linux-gnu-library/4.0/industRial/book"
 ```
 
 # Tutorials {#tutorials}

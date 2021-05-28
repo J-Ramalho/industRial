@@ -6,12 +6,12 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Design for Six Sigma | industRial data science</title>
   <meta name="description" content="Design for Six Sigma | industRial data science" />
-  <meta name="generator" content="bookdown 0.20 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Design for Six Sigma | industRial data science" />
   <meta property="og:type" content="book" />
   
-  <meta property="og:image" content="img/cover3.png" />
+  <meta property="og:image" content="/img/cover3.png" />
   
   <meta name="github-repo" content="J-Ramalho/industRialds" />
 
@@ -19,7 +19,7 @@
   <meta name="twitter:title" content="Design for Six Sigma | industRial data science" />
   
   
-  <meta name="twitter:image" content="img/cover3.png" />
+  <meta name="twitter:image" content="/img/cover3.png" />
 
 <meta name="author" content="João Ramalho" />
 
@@ -33,7 +33,7 @@
   
 <link rel="prev" href="tutorials.html"/>
 <link rel="next" href="MSA.html"/>
-<script src="libs/header-attrs-2.7/header-attrs.js"></script>
+<script src="libs/header-attrs-2.8/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -51,6 +51,8 @@
 
 
 
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
 <script src="libs/kePrint-0.0.1/kePrint.js"></script>
 <link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
 <!-- Global site tag (gtag.js) - Google Analytics -->
@@ -73,6 +75,7 @@ mattcrump=1;
 pre > code.sourceCode { white-space: pre; position: relative; }
 pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
 pre.sourceCode { margin: 0; }
 @media screen {
@@ -131,6 +134,29 @@ code span.st { color: #4070a0; } /* String */
 code span.va { color: #19177c; } /* Variable */
 code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
 </style>
 
 <link rel="stylesheet" href="css/industRialds.css" type="text/css" />
@@ -364,12 +390,12 @@ Figure 1: watch dial inspection
 </div>
 <p><strong>Loading packages and data:</strong></p>
 <p>getting the dial dataset:</p>
-<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="design-for-six-sigma.html#cb15-1" aria-hidden="true" tabindex="-1"></a>dial_control <span class="ot">&lt;-</span>  industRial<span class="sc">::</span>dial_control</span></code></pre></div>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="design-for-six-sigma.html#cb16-1" aria-hidden="true" tabindex="-1"></a>dial_control <span class="ot">&lt;-</span>  industRial<span class="sc">::</span>dial_control</span></code></pre></div>
 <p>A first look at the dataset now:</p>
-<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="design-for-six-sigma.html#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(dial_control) <span class="sc">%&gt;%</span> </span>
-<span id="cb16-2"><a href="design-for-six-sigma.html#cb16-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable</span>(<span class="at">align =</span> <span class="st">&quot;c&quot;</span>, </span>
-<span id="cb16-3"><a href="design-for-six-sigma.html#cb16-3" aria-hidden="true" tabindex="-1"></a>        <span class="at">caption =</span> <span class="st">&quot;dial control data&quot;</span>, </span>
-<span id="cb16-4"><a href="design-for-six-sigma.html#cb16-4" aria-hidden="true" tabindex="-1"></a>        <span class="at">booktabs =</span> T)</span></code></pre></div>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="design-for-six-sigma.html#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(dial_control) <span class="sc">%&gt;%</span> </span>
+<span id="cb17-2"><a href="design-for-six-sigma.html#cb17-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable</span>(<span class="at">align =</span> <span class="st">&quot;c&quot;</span>, </span>
+<span id="cb17-3"><a href="design-for-six-sigma.html#cb17-3" aria-hidden="true" tabindex="-1"></a>        <span class="at">caption =</span> <span class="st">&quot;dial control data&quot;</span>, </span>
+<span id="cb17-4"><a href="design-for-six-sigma.html#cb17-4" aria-hidden="true" tabindex="-1"></a>        <span class="at">booktabs =</span> T)</span></code></pre></div>
 <table>
 <caption><span id="tab:unnamed-chunk-4">Table 1: </span>dial control data</caption>
 <thead>
@@ -424,28 +450,28 @@ Figure 1: watch dial inspection
 <p>A first example of the pareto of the types of defects:</p>
 <div id="paretochart" class="section level3">
 <h3>Pareto chart</h3>
-<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="design-for-six-sigma.html#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(qicharts2)</span></code></pre></div>
-<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="design-for-six-sigma.html#cb18-1" aria-hidden="true" tabindex="-1"></a>d_type <span class="ot">&lt;-</span> dial_control <span class="sc">%&gt;%</span> <span class="fu">pull</span>(Defect) <span class="sc">%&gt;%</span> <span class="fu">as.character</span>()</span>
-<span id="cb18-2"><a href="design-for-six-sigma.html#cb18-2" aria-hidden="true" tabindex="-1"></a>d_type_p <span class="ot">&lt;-</span> <span class="fu">paretochart</span>(d_type, </span>
-<span id="cb18-3"><a href="design-for-six-sigma.html#cb18-3" aria-hidden="true" tabindex="-1"></a>                           <span class="at">title =</span> <span class="st">&quot;Watch Dial polishing&quot;</span>,</span>
-<span id="cb18-4"><a href="design-for-six-sigma.html#cb18-4" aria-hidden="true" tabindex="-1"></a>                           <span class="at">subtitle =</span> <span class="st">&quot;Pareto chart&quot;</span>, </span>
-<span id="cb18-5"><a href="design-for-six-sigma.html#cb18-5" aria-hidden="true" tabindex="-1"></a>                           <span class="at">ylab =</span> <span class="st">&quot;Percentage of deffects&quot;</span>,</span>
-<span id="cb18-6"><a href="design-for-six-sigma.html#cb18-6" aria-hidden="true" tabindex="-1"></a>                           <span class="at">xlab =</span> <span class="st">&quot;Deffect type&quot;</span>,</span>
-<span id="cb18-7"><a href="design-for-six-sigma.html#cb18-7" aria-hidden="true" tabindex="-1"></a>                           <span class="at">caption =</span> <span class="st">&quot;Source: Dial Production Team&quot;</span>)</span>
-<span id="cb18-8"><a href="design-for-six-sigma.html#cb18-8" aria-hidden="true" tabindex="-1"></a>d_type_p <span class="sc">+</span> </span>
-<span id="cb18-9"><a href="design-for-six-sigma.html#cb18-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_industRial</span>()</span></code></pre></div>
-<p><img src="3_sixsigma_files/figure-html/unnamed-chunk-6-1.png" width="80%" /></p>
-<p>As often happens we can see that the first two deffects account for more than 80% of the problems. Identation and scratching are the things to tackle here.</p>
-<p>From the available data presented before in table we can go deeper and establish a pareto of the defect location:</p>
-<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="design-for-six-sigma.html#cb19-1" aria-hidden="true" tabindex="-1"></a>d_location <span class="ot">&lt;-</span> dial_control <span class="sc">%&gt;%</span> <span class="fu">pull</span>(Location) <span class="sc">%&gt;%</span> <span class="fu">as.character</span>()</span>
-<span id="cb19-2"><a href="design-for-six-sigma.html#cb19-2" aria-hidden="true" tabindex="-1"></a>d_location_p <span class="ot">&lt;-</span> <span class="fu">paretochart</span>(d_location, </span>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="design-for-six-sigma.html#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(qicharts2)</span></code></pre></div>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="design-for-six-sigma.html#cb19-1" aria-hidden="true" tabindex="-1"></a>d_type <span class="ot">&lt;-</span> dial_control <span class="sc">%&gt;%</span> <span class="fu">pull</span>(Defect) <span class="sc">%&gt;%</span> <span class="fu">as.character</span>()</span>
+<span id="cb19-2"><a href="design-for-six-sigma.html#cb19-2" aria-hidden="true" tabindex="-1"></a>d_type_p <span class="ot">&lt;-</span> <span class="fu">paretochart</span>(d_type, </span>
 <span id="cb19-3"><a href="design-for-six-sigma.html#cb19-3" aria-hidden="true" tabindex="-1"></a>                           <span class="at">title =</span> <span class="st">&quot;Watch Dial polishing&quot;</span>,</span>
 <span id="cb19-4"><a href="design-for-six-sigma.html#cb19-4" aria-hidden="true" tabindex="-1"></a>                           <span class="at">subtitle =</span> <span class="st">&quot;Pareto chart&quot;</span>, </span>
 <span id="cb19-5"><a href="design-for-six-sigma.html#cb19-5" aria-hidden="true" tabindex="-1"></a>                           <span class="at">ylab =</span> <span class="st">&quot;Percentage of deffects&quot;</span>,</span>
-<span id="cb19-6"><a href="design-for-six-sigma.html#cb19-6" aria-hidden="true" tabindex="-1"></a>                           <span class="at">xlab =</span> <span class="st">&quot;Deffect location (hour)&quot;</span>,</span>
+<span id="cb19-6"><a href="design-for-six-sigma.html#cb19-6" aria-hidden="true" tabindex="-1"></a>                           <span class="at">xlab =</span> <span class="st">&quot;Deffect type&quot;</span>,</span>
 <span id="cb19-7"><a href="design-for-six-sigma.html#cb19-7" aria-hidden="true" tabindex="-1"></a>                           <span class="at">caption =</span> <span class="st">&quot;Source: Dial Production Team&quot;</span>)</span>
-<span id="cb19-8"><a href="design-for-six-sigma.html#cb19-8" aria-hidden="true" tabindex="-1"></a>d_location_p <span class="sc">+</span></span>
+<span id="cb19-8"><a href="design-for-six-sigma.html#cb19-8" aria-hidden="true" tabindex="-1"></a>d_type_p <span class="sc">+</span> </span>
 <span id="cb19-9"><a href="design-for-six-sigma.html#cb19-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_industRial</span>()</span></code></pre></div>
+<p><img src="3_sixsigma_files/figure-html/unnamed-chunk-6-1.png" width="80%" /></p>
+<p>As often happens we can see that the first two deffects account for more than 80% of the problems. Identation and scratching are the things to tackle here.</p>
+<p>From the available data presented before in table we can go deeper and establish a pareto of the defect location:</p>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="design-for-six-sigma.html#cb20-1" aria-hidden="true" tabindex="-1"></a>d_location <span class="ot">&lt;-</span> dial_control <span class="sc">%&gt;%</span> <span class="fu">pull</span>(Location) <span class="sc">%&gt;%</span> <span class="fu">as.character</span>()</span>
+<span id="cb20-2"><a href="design-for-six-sigma.html#cb20-2" aria-hidden="true" tabindex="-1"></a>d_location_p <span class="ot">&lt;-</span> <span class="fu">paretochart</span>(d_location, </span>
+<span id="cb20-3"><a href="design-for-six-sigma.html#cb20-3" aria-hidden="true" tabindex="-1"></a>                           <span class="at">title =</span> <span class="st">&quot;Watch Dial polishing&quot;</span>,</span>
+<span id="cb20-4"><a href="design-for-six-sigma.html#cb20-4" aria-hidden="true" tabindex="-1"></a>                           <span class="at">subtitle =</span> <span class="st">&quot;Pareto chart&quot;</span>, </span>
+<span id="cb20-5"><a href="design-for-six-sigma.html#cb20-5" aria-hidden="true" tabindex="-1"></a>                           <span class="at">ylab =</span> <span class="st">&quot;Percentage of deffects&quot;</span>,</span>
+<span id="cb20-6"><a href="design-for-six-sigma.html#cb20-6" aria-hidden="true" tabindex="-1"></a>                           <span class="at">xlab =</span> <span class="st">&quot;Deffect location (hour)&quot;</span>,</span>
+<span id="cb20-7"><a href="design-for-six-sigma.html#cb20-7" aria-hidden="true" tabindex="-1"></a>                           <span class="at">caption =</span> <span class="st">&quot;Source: Dial Production Team&quot;</span>)</span>
+<span id="cb20-8"><a href="design-for-six-sigma.html#cb20-8" aria-hidden="true" tabindex="-1"></a>d_location_p <span class="sc">+</span></span>
+<span id="cb20-9"><a href="design-for-six-sigma.html#cb20-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_industRial</span>()</span></code></pre></div>
 <p><img src="3_sixsigma_files/figure-html/unnamed-chunk-7-1.png" width="80%" /></p>
 <p>Here a third bucket could be included in the priorities: to reach 80% of the count we consider the defects that appear at 4 o’clock, 3 o’clock and 5 o’clock.</p>
 <p>During the reviews the team can also identify other types of data for follow up such as the dial model or the material type. With a simple excel file and an upload in R this can be finetuned from week to week according to the progress of the improvement measures.</p>
@@ -455,7 +481,7 @@ Figure 1: watch dial inspection
 <h2>Ishikawa</h2>
 <p>Usually called Fishbone or Ishikawa diagrams this simple tool has proven to be extremely practical and helpful in structuring team discussions.</p>
 <p>With it we can easily identify and list the expected influencing factors for example to design an experiment. Such selection and grouping of parameters can be useful for among others in defining the right mix of ingredients in a new product or material, in selecting the machine parameters in a manufacturing line or in the definition of a draft operating procedure for a measurement. In each of these situations it helps seeing the big picture and not fall into the trap of relying only in the data and findings obtained by statistical analysis.</p>
-<p>Below we’re showing an example building on the qcc package. The package author describes in his book <span class="citation"><a href="references.html#ref-Cano2012" role="doc-biblioref">Emilio L. Cano</a> (<a href="references.html#ref-Cano2012" role="doc-biblioref">2012</a>)</span> the advantages of using R for the design of these diagrams. In our view it strongly complements the data analysis making the full case easilly reproducible and easily updatable.</p>
+<p>Below we’re showing an example building on the qcc package. The package author describes in his book <span class="citation"><a href="#ref-Cano2012" role="doc-biblioref">Emilio L. Cano</a> (<a href="#ref-Cano2012" role="doc-biblioref">2012</a>)</span> the advantages of using R for the design of these diagrams. In our view it strongly complements the data analysis making the full case easilly reproducible and easily updatable.</p>
 <p><strong>The dental prosthesis laboratory</strong></p>
 <p>An optical measurement device has just been installed in a large Dental Prosthesis Manufacturing Laboratory. This is a very expensive device based on laser technology installed in a dedicated stabilized workbench. Despite all the precautions it has been reported and now demonstrated with some specific trials that the measurements have a higher variation which makes it unsuitable to be used for what is was used for: the precise measurement of dental impressions that serve as models for the production of the crowns and bridges.</p>
 <div class="marginnote">
@@ -470,26 +496,26 @@ Figure 2: dental impression measurement
 <p>The supplier checked the equipment and having seen no reason for the variability proposes to work with the lab team on identifying the potential causes for the high uncertainty in their measurements. They decided to consider a larger scope that the equipment and take the full measurement method as described in the laboratory operating procedure. They list different reasons related with they’re work and group them:</p>
 <div id="fishbone" class="section level3">
 <h3>Fishbone diagram</h3>
-<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="design-for-six-sigma.html#cb20-1" aria-hidden="true" tabindex="-1"></a>operators <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Supplier&quot;</span>, <span class="st">&quot;Lab Technician&quot;</span>, <span class="st">&quot;Lab Manager&quot;</span>)</span>
-<span id="cb20-2"><a href="design-for-six-sigma.html#cb20-2" aria-hidden="true" tabindex="-1"></a>materials <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Silicon&quot;</span>, <span class="st">&quot;Alginate&quot;</span>, <span class="st">&quot;Polyethers&quot;</span>)</span>
-<span id="cb20-3"><a href="design-for-six-sigma.html#cb20-3" aria-hidden="true" tabindex="-1"></a>machines <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Brightness&quot;</span>, <span class="st">&quot;Fixture&quot;</span>, <span class="st">&quot;Dimensional algorithm&quot;</span>)</span>
-<span id="cb20-4"><a href="design-for-six-sigma.html#cb20-4" aria-hidden="true" tabindex="-1"></a>methods <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Fixture&quot;</span>, <span class="st">&quot;Holding time&quot;</span>, <span class="st">&quot;Resolution&quot;</span>)</span>
-<span id="cb20-5"><a href="design-for-six-sigma.html#cb20-5" aria-hidden="true" tabindex="-1"></a>measurements <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Recording method&quot;</span>, <span class="st">&quot;Rounding&quot;</span>, <span class="st">&quot;Resolution&quot;</span>)</span>
-<span id="cb20-6"><a href="design-for-six-sigma.html#cb20-6" aria-hidden="true" tabindex="-1"></a>groups <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Operator&quot;</span>, <span class="st">&quot;Material&quot;</span>, <span class="st">&quot;Machine&quot;</span>, <span class="st">&quot;Method&quot;</span>, <span class="st">&quot;Measurement&quot;</span>)</span>
-<span id="cb20-7"><a href="design-for-six-sigma.html#cb20-7" aria-hidden="true" tabindex="-1"></a>effect <span class="ot">&lt;-</span> <span class="st">&quot;Too high uncertainty&quot;</span></span></code></pre></div>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="design-for-six-sigma.html#cb21-1" aria-hidden="true" tabindex="-1"></a>operators <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Supplier&quot;</span>, <span class="st">&quot;Lab Technician&quot;</span>, <span class="st">&quot;Lab Manager&quot;</span>)</span>
+<span id="cb21-2"><a href="design-for-six-sigma.html#cb21-2" aria-hidden="true" tabindex="-1"></a>materials <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Silicon&quot;</span>, <span class="st">&quot;Alginate&quot;</span>, <span class="st">&quot;Polyethers&quot;</span>)</span>
+<span id="cb21-3"><a href="design-for-six-sigma.html#cb21-3" aria-hidden="true" tabindex="-1"></a>machines <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Brightness&quot;</span>, <span class="st">&quot;Fixture&quot;</span>, <span class="st">&quot;Dimensional algorithm&quot;</span>)</span>
+<span id="cb21-4"><a href="design-for-six-sigma.html#cb21-4" aria-hidden="true" tabindex="-1"></a>methods <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Fixture&quot;</span>, <span class="st">&quot;Holding time&quot;</span>, <span class="st">&quot;Resolution&quot;</span>)</span>
+<span id="cb21-5"><a href="design-for-six-sigma.html#cb21-5" aria-hidden="true" tabindex="-1"></a>measurements <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Recording method&quot;</span>, <span class="st">&quot;Rounding&quot;</span>, <span class="st">&quot;Resolution&quot;</span>)</span>
+<span id="cb21-6"><a href="design-for-six-sigma.html#cb21-6" aria-hidden="true" tabindex="-1"></a>groups <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Operator&quot;</span>, <span class="st">&quot;Material&quot;</span>, <span class="st">&quot;Machine&quot;</span>, <span class="st">&quot;Method&quot;</span>, <span class="st">&quot;Measurement&quot;</span>)</span>
+<span id="cb21-7"><a href="design-for-six-sigma.html#cb21-7" aria-hidden="true" tabindex="-1"></a>effect <span class="ot">&lt;-</span> <span class="st">&quot;Too high uncertainty&quot;</span></span></code></pre></div>
 <p>And then load the qcc package and quickly obtain a simple diagram that allows for a quick visualisation of these influencing factors.</p>
-<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="design-for-six-sigma.html#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(qcc)</span></code></pre></div>
-<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="design-for-six-sigma.html#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cause.and.effect</span>(</span>
-<span id="cb22-2"><a href="design-for-six-sigma.html#cb22-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">title =</span> <span class="st">&quot;Potential causes for uncertainty increase during a measurement&quot;</span>,</span>
-<span id="cb22-3"><a href="design-for-six-sigma.html#cb22-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">cause =</span> <span class="fu">list</span>(</span>
-<span id="cb22-4"><a href="design-for-six-sigma.html#cb22-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">Operator =</span> operators,</span>
-<span id="cb22-5"><a href="design-for-six-sigma.html#cb22-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">Material =</span> materials,</span>
-<span id="cb22-6"><a href="design-for-six-sigma.html#cb22-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">Machine =</span> machines,</span>
-<span id="cb22-7"><a href="design-for-six-sigma.html#cb22-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">Method =</span> methods,</span>
-<span id="cb22-8"><a href="design-for-six-sigma.html#cb22-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">Measurement =</span> measurements</span>
-<span id="cb22-9"><a href="design-for-six-sigma.html#cb22-9" aria-hidden="true" tabindex="-1"></a>  ),</span>
-<span id="cb22-10"><a href="design-for-six-sigma.html#cb22-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">effect =</span> effect</span>
-<span id="cb22-11"><a href="design-for-six-sigma.html#cb22-11" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="design-for-six-sigma.html#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(qcc)</span></code></pre></div>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="design-for-six-sigma.html#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cause.and.effect</span>(</span>
+<span id="cb23-2"><a href="design-for-six-sigma.html#cb23-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">title =</span> <span class="st">&quot;Potential causes for uncertainty increase during a measurement&quot;</span>,</span>
+<span id="cb23-3"><a href="design-for-six-sigma.html#cb23-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">cause =</span> <span class="fu">list</span>(</span>
+<span id="cb23-4"><a href="design-for-six-sigma.html#cb23-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">Operator =</span> operators,</span>
+<span id="cb23-5"><a href="design-for-six-sigma.html#cb23-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">Material =</span> materials,</span>
+<span id="cb23-6"><a href="design-for-six-sigma.html#cb23-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">Machine =</span> machines,</span>
+<span id="cb23-7"><a href="design-for-six-sigma.html#cb23-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">Method =</span> methods,</span>
+<span id="cb23-8"><a href="design-for-six-sigma.html#cb23-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">Measurement =</span> measurements</span>
+<span id="cb23-9"><a href="design-for-six-sigma.html#cb23-9" aria-hidden="true" tabindex="-1"></a>  ),</span>
+<span id="cb23-10"><a href="design-for-six-sigma.html#cb23-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">effect =</span> effect</span>
+<span id="cb23-11"><a href="design-for-six-sigma.html#cb23-11" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:fig-ishikawa"></span>
 <img src="3_sixsigma_files/figure-html/fig-ishikawa-1.png" alt="ishikawa diagram aplication" width="100%" />
 <p class="caption">
@@ -501,7 +527,7 @@ Figure 3: ishikawa diagram aplication
 </div>
 <div id="correlation" class="section level2">
 <h2>Correlation</h2>
-<p>A correlation matrix is a way to discover relationships between groups of items as described by described in the Six Sigma book by <span class="citation"><a href="references.html#ref-Munro2015" role="doc-biblioref">Roderik A.Munro and J.Zrymiak</a> (<a href="references.html#ref-Munro2015" role="doc-biblioref">2015</a>)</span>.</p>
+<p>A correlation matrix is a way to discover relationships between groups of items as described by described in the Six Sigma book by <span class="citation"><a href="#ref-Munro2015" role="doc-biblioref">Roderik A.Munro and J.Zrymiak</a> (<a href="#ref-Munro2015" role="doc-biblioref">2015</a>)</span>.</p>
 <p>These matrix can be used to select which measurement to do in a design of experiments. In exploratory phases when the experiments are repeated several time with slightly different configurations, secondary outputs that are strongly correlated to main outputs can be eliminated</p>
 <p>In an industrial setup the cost of experimenting is often very high. With this approach engineers can keep the quantities test quantities in control by avoiding measurements until final stages of implementation.</p>
 <p>We provide here two different techniques, one with a tile plot and another with a network plot.</p>
@@ -520,11 +546,11 @@ Figure 4: Perfume destillation line
 <p>As the industRial package was already loaded in the Pareto section, we can then access directly to the Perfume dataset of which we’re showing a subset:</p>
 <div id="matrix" class="section level3">
 <h3>Matrix</h3>
-<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="design-for-six-sigma.html#cb23-1" aria-hidden="true" tabindex="-1"></a>perfume_experiment[<span class="dv">1</span><span class="sc">:</span><span class="dv">8</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">8</span>] <span class="sc">%&gt;%</span></span>
-<span id="cb23-2"><a href="design-for-six-sigma.html#cb23-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable</span>(</span>
-<span id="cb23-3"><a href="design-for-six-sigma.html#cb23-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">caption =</span> <span class="st">&quot;perfume DoE output variables&quot;</span>,</span>
-<span id="cb23-4"><a href="design-for-six-sigma.html#cb23-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">booktabs =</span> T</span>
-<span id="cb23-5"><a href="design-for-six-sigma.html#cb23-5" aria-hidden="true" tabindex="-1"></a>  ) </span></code></pre></div>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="design-for-six-sigma.html#cb24-1" aria-hidden="true" tabindex="-1"></a>perfume_experiment[<span class="dv">1</span><span class="sc">:</span><span class="dv">8</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">8</span>] <span class="sc">%&gt;%</span></span>
+<span id="cb24-2"><a href="design-for-six-sigma.html#cb24-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable</span>(</span>
+<span id="cb24-3"><a href="design-for-six-sigma.html#cb24-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">caption =</span> <span class="st">&quot;perfume DoE output variables&quot;</span>,</span>
+<span id="cb24-4"><a href="design-for-six-sigma.html#cb24-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">booktabs =</span> T</span>
+<span id="cb24-5"><a href="design-for-six-sigma.html#cb24-5" aria-hidden="true" tabindex="-1"></a>  ) </span></code></pre></div>
 <table>
 <caption><span id="tab:unnamed-chunk-12">Table 2: </span>perfume DoE output variables</caption>
 <thead>
@@ -624,29 +650,29 @@ Figure 4: Perfume destillation line
 </table>
 <p>Variables are named with coded names made of two letter. They represent the production Line Parameters and the Perfume Attributes (e.g. t = temperature, o = opening, pw = power). We can see in the table what the team has noted as expected correlation strenght, with 10 being the highest.</p>
 <p>Now we filter correlations higher or equal to 7 which have been considered as the potential targets for the simplification in future designs:</p>
-<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="design-for-six-sigma.html#cb24-1" aria-hidden="true" tabindex="-1"></a>perfume_long <span class="ot">&lt;-</span> perfume_experiment <span class="sc">%&gt;%</span></span>
-<span id="cb24-2"><a href="design-for-six-sigma.html#cb24-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(</span>
-<span id="cb24-3"><a href="design-for-six-sigma.html#cb24-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">cols =</span> <span class="sc">-</span>yy,</span>
-<span id="cb24-4"><a href="design-for-six-sigma.html#cb24-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">values_to =</span> <span class="st">&quot;correlation&quot;</span>,</span>
-<span id="cb24-5"><a href="design-for-six-sigma.html#cb24-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">names_to =</span> <span class="st">&quot;xx&quot;</span></span>
-<span id="cb24-6"><a href="design-for-six-sigma.html#cb24-6" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
-<span id="cb24-7"><a href="design-for-six-sigma.html#cb24-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(correlation <span class="sc">&gt;=</span> <span class="dv">7</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb24-8"><a href="design-for-six-sigma.html#cb24-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">correlation =</span> <span class="fu">as_factor</span>(correlation))</span></code></pre></div>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="design-for-six-sigma.html#cb25-1" aria-hidden="true" tabindex="-1"></a>perfume_long <span class="ot">&lt;-</span> perfume_experiment <span class="sc">%&gt;%</span></span>
+<span id="cb25-2"><a href="design-for-six-sigma.html#cb25-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(</span>
+<span id="cb25-3"><a href="design-for-six-sigma.html#cb25-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">cols =</span> <span class="sc">-</span>yy,</span>
+<span id="cb25-4"><a href="design-for-six-sigma.html#cb25-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">values_to =</span> <span class="st">&quot;correlation&quot;</span>,</span>
+<span id="cb25-5"><a href="design-for-six-sigma.html#cb25-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">names_to =</span> <span class="st">&quot;xx&quot;</span></span>
+<span id="cb25-6"><a href="design-for-six-sigma.html#cb25-6" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb25-7"><a href="design-for-six-sigma.html#cb25-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(correlation <span class="sc">&gt;=</span> <span class="dv">7</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb25-8"><a href="design-for-six-sigma.html#cb25-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">correlation =</span> <span class="fu">as_factor</span>(correlation))</span></code></pre></div>
 </div>
 <div id="tileplot" class="section level3">
 <h3>Tileplot</h3>
-<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="design-for-six-sigma.html#cb25-1" aria-hidden="true" tabindex="-1"></a>perfume_long <span class="sc">%&gt;%</span></span>
-<span id="cb25-2"><a href="design-for-six-sigma.html#cb25-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> xx, <span class="at">y =</span> yy, <span class="at">fill =</span> correlation)) <span class="sc">+</span></span>
-<span id="cb25-3"><a href="design-for-six-sigma.html#cb25-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_viridis_d</span>(<span class="at">direction =</span> <span class="sc">-</span><span class="dv">1</span>, <span class="at">name =</span> <span class="st">&quot;Correlation</span><span class="sc">\n</span><span class="st">Strength&quot;</span>) <span class="sc">+</span></span>
-<span id="cb25-4"><a href="design-for-six-sigma.html#cb25-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_tile</span>() <span class="sc">+</span> </span>
-<span id="cb25-5"><a href="design-for-six-sigma.html#cb25-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
-<span id="cb25-6"><a href="design-for-six-sigma.html#cb25-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">&quot;The Perfume destilation experiment&quot;</span>,</span>
-<span id="cb25-7"><a href="design-for-six-sigma.html#cb25-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="st">&quot;Input variables correlation plot &quot;</span>,</span>
-<span id="cb25-8"><a href="design-for-six-sigma.html#cb25-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">&quot;&quot;</span>,</span>
-<span id="cb25-9"><a href="design-for-six-sigma.html#cb25-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">&quot;&quot;</span>,</span>
-<span id="cb25-10"><a href="design-for-six-sigma.html#cb25-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">caption =</span> <span class="st">&quot;Data variables anonymized&quot;</span></span>
-<span id="cb25-11"><a href="design-for-six-sigma.html#cb25-11" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb25-12"><a href="design-for-six-sigma.html#cb25-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_industRial</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="design-for-six-sigma.html#cb26-1" aria-hidden="true" tabindex="-1"></a>perfume_long <span class="sc">%&gt;%</span></span>
+<span id="cb26-2"><a href="design-for-six-sigma.html#cb26-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> xx, <span class="at">y =</span> yy, <span class="at">fill =</span> correlation)) <span class="sc">+</span></span>
+<span id="cb26-3"><a href="design-for-six-sigma.html#cb26-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_viridis_d</span>(<span class="at">direction =</span> <span class="sc">-</span><span class="dv">1</span>, <span class="at">name =</span> <span class="st">&quot;Correlation</span><span class="sc">\n</span><span class="st">Strength&quot;</span>) <span class="sc">+</span></span>
+<span id="cb26-4"><a href="design-for-six-sigma.html#cb26-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_tile</span>() <span class="sc">+</span> </span>
+<span id="cb26-5"><a href="design-for-six-sigma.html#cb26-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb26-6"><a href="design-for-six-sigma.html#cb26-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">&quot;The Perfume destilation experiment&quot;</span>,</span>
+<span id="cb26-7"><a href="design-for-six-sigma.html#cb26-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="st">&quot;Input variables correlation plot &quot;</span>,</span>
+<span id="cb26-8"><a href="design-for-six-sigma.html#cb26-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">&quot;&quot;</span>,</span>
+<span id="cb26-9"><a href="design-for-six-sigma.html#cb26-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">&quot;&quot;</span>,</span>
+<span id="cb26-10"><a href="design-for-six-sigma.html#cb26-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">caption =</span> <span class="st">&quot;Data variables anonymized&quot;</span></span>
+<span id="cb26-11"><a href="design-for-six-sigma.html#cb26-11" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb26-12"><a href="design-for-six-sigma.html#cb26-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_industRial</span>()</span></code></pre></div>
 <p><img src="3_sixsigma_files/figure-html/unnamed-chunk-14-1.png" width="80%" /></p>
 <p>The plot shows that many parameters are expected to move together, for example with maximum correlation we have hp moving with d, oc moving with o and so on.</p>
 <p>After this first DoE the real correlations will be established and the team expects to be able to avoid a significant part of the measurements that have a correlation higher than 50% from the second DoE onwards.</p>
@@ -657,26 +683,26 @@ Figure 4: Perfume destillation line
 <p>In this variant we explore a more advanced but more powerfull approach using network plots. It provides an automatic clustering of the factors and a specific way to read such clusters.</p>
 <p>We’re going to build a weighed non directional network(tbl_graph) object. Several steps of conversion are required for this approach first with igraph and then to tidygraph.</p>
 <p>We start by loading the required packages:</p>
-<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="design-for-six-sigma.html#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(igraph)</span>
-<span id="cb26-2"><a href="design-for-six-sigma.html#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidygraph)</span>
-<span id="cb26-3"><a href="design-for-six-sigma.html#cb26-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggraph)</span>
-<span id="cb26-4"><a href="design-for-six-sigma.html#cb26-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggforce)</span>
-<span id="cb26-5"><a href="design-for-six-sigma.html#cb26-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggtext)</span></code></pre></div>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="design-for-six-sigma.html#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(igraph)</span>
+<span id="cb27-2"><a href="design-for-six-sigma.html#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidygraph)</span>
+<span id="cb27-3"><a href="design-for-six-sigma.html#cb27-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggraph)</span>
+<span id="cb27-4"><a href="design-for-six-sigma.html#cb27-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggforce)</span>
+<span id="cb27-5"><a href="design-for-six-sigma.html#cb27-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggtext)</span></code></pre></div>
 <p>The first step consists in converting the “Perfume” tibble to a matrix format:</p>
-<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="design-for-six-sigma.html#cb27-1" aria-hidden="true" tabindex="-1"></a>perfume_matrix <span class="ot">&lt;-</span> perfume_experiment <span class="sc">%&gt;%</span></span>
-<span id="cb27-2"><a href="design-for-six-sigma.html#cb27-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">column_to_rownames</span>(<span class="st">&quot;yy&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb27-3"><a href="design-for-six-sigma.html#cb27-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as.matrix</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="design-for-six-sigma.html#cb28-1" aria-hidden="true" tabindex="-1"></a>perfume_matrix <span class="ot">&lt;-</span> perfume_experiment <span class="sc">%&gt;%</span></span>
+<span id="cb28-2"><a href="design-for-six-sigma.html#cb28-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">column_to_rownames</span>(<span class="st">&quot;yy&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb28-3"><a href="design-for-six-sigma.html#cb28-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as.matrix</span>()</span></code></pre></div>
 <p>Then using the {igraph} package we convert the matrix into a graph object:</p>
-<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="design-for-six-sigma.html#cb28-1" aria-hidden="true" tabindex="-1"></a>perfume_graph <span class="ot">&lt;-</span> <span class="fu">graph_from_adjacency_matrix</span>(</span>
-<span id="cb28-2"><a href="design-for-six-sigma.html#cb28-2" aria-hidden="true" tabindex="-1"></a>  perfume_matrix, <span class="at">mode =</span> <span class="st">&quot;undirected&quot;</span>, <span class="at">weighted =</span> <span class="cn">TRUE</span></span>
-<span id="cb28-3"><a href="design-for-six-sigma.html#cb28-3" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
+<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="design-for-six-sigma.html#cb29-1" aria-hidden="true" tabindex="-1"></a>perfume_graph <span class="ot">&lt;-</span> <span class="fu">graph_from_adjacency_matrix</span>(</span>
+<span id="cb29-2"><a href="design-for-six-sigma.html#cb29-2" aria-hidden="true" tabindex="-1"></a>  perfume_matrix, <span class="at">mode =</span> <span class="st">&quot;undirected&quot;</span>, <span class="at">weighted =</span> <span class="cn">TRUE</span></span>
+<span id="cb29-3"><a href="design-for-six-sigma.html#cb29-3" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
 <p>to finaly convert it into a tibble graph with tidygraph package:</p>
-<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="design-for-six-sigma.html#cb29-1" aria-hidden="true" tabindex="-1"></a>perfum_tbl_graph <span class="ot">&lt;-</span> <span class="fu">as_tbl_graph</span>(perfume_graph, <span class="at">add.rownames =</span> <span class="st">&quot;nodes_names&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="design-for-six-sigma.html#cb30-1" aria-hidden="true" tabindex="-1"></a>perfum_tbl_graph <span class="ot">&lt;-</span> <span class="fu">as_tbl_graph</span>(perfume_graph, <span class="at">add.rownames =</span> <span class="st">&quot;nodes_names&quot;</span>)</span></code></pre></div>
 <p>The users have provided the correlation strength in a simple scale from 1 to 10 which was easier for the discussion. We’re here converting it back to the 0 to 1 which is more common in the statistics community. For simplicity, negative correlations were not considered just the strength, enabling the network to be unidirectional.</p>
-<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="design-for-six-sigma.html#cb30-1" aria-hidden="true" tabindex="-1"></a>perfum_tbl_graph <span class="ot">&lt;-</span> perfum_tbl_graph <span class="sc">%&gt;%</span></span>
-<span id="cb30-2"><a href="design-for-six-sigma.html#cb30-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">activate</span>(edges) <span class="sc">%&gt;%</span></span>
-<span id="cb30-3"><a href="design-for-six-sigma.html#cb30-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">weight =</span> weight<span class="sc">/</span><span class="dv">10</span>)</span>
-<span id="cb30-4"><a href="design-for-six-sigma.html#cb30-4" aria-hidden="true" tabindex="-1"></a>perfum_tbl_graph</span></code></pre></div>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="design-for-six-sigma.html#cb31-1" aria-hidden="true" tabindex="-1"></a>perfum_tbl_graph <span class="ot">&lt;-</span> perfum_tbl_graph <span class="sc">%&gt;%</span></span>
+<span id="cb31-2"><a href="design-for-six-sigma.html#cb31-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">activate</span>(edges) <span class="sc">%&gt;%</span></span>
+<span id="cb31-3"><a href="design-for-six-sigma.html#cb31-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">weight =</span> weight<span class="sc">/</span><span class="dv">10</span>)</span>
+<span id="cb31-4"><a href="design-for-six-sigma.html#cb31-4" aria-hidden="true" tabindex="-1"></a>perfum_tbl_graph</span></code></pre></div>
 <pre><code># A tbl_graph: 22 nodes and 85 edges
 #
 # An undirected simple graph with 7 components
@@ -690,7 +716,7 @@ Figure 4: Perfume destillation line
 4     1     5    0.2
 5     1     6    0.2
 6     1     8    0.8
-# ... with 79 more rows
+# … with 79 more rows
 #
 # Node Data: 22 x 1
   name 
@@ -698,80 +724,89 @@ Figure 4: Perfume destillation line
 1 pw   
 2 w    
 3 pm   
-# ... with 19 more rows</code></pre>
+# … with 19 more rows</code></pre>
 <p>In the previous chunk output we see a preview of the tibble graph object with the first few nodes and edges.</p>
 <p>Now we create a vector with various igraph layouts to allow for easier selection when making the plots:</p>
-<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="design-for-six-sigma.html#cb32-1" aria-hidden="true" tabindex="-1"></a>igraph_layouts <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&#39;star&#39;</span>, <span class="st">&#39;circle&#39;</span>, <span class="st">&#39;gem&#39;</span>, <span class="st">&#39;dh&#39;</span>, <span class="st">&#39;graphopt&#39;</span>, <span class="st">&#39;grid&#39;</span>, <span class="st">&#39;mds&#39;</span>, </span>
-<span id="cb32-2"><a href="design-for-six-sigma.html#cb32-2" aria-hidden="true" tabindex="-1"></a>                    <span class="st">&#39;randomly&#39;</span>, <span class="st">&#39;fr&#39;</span>, <span class="st">&#39;kk&#39;</span>, <span class="st">&#39;drl&#39;</span>, <span class="st">&#39;lgl&#39;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="design-for-six-sigma.html#cb33-1" aria-hidden="true" tabindex="-1"></a>igraph_layouts <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&#39;star&#39;</span>, <span class="st">&#39;circle&#39;</span>, <span class="st">&#39;gem&#39;</span>, <span class="st">&#39;dh&#39;</span>, <span class="st">&#39;graphopt&#39;</span>, <span class="st">&#39;grid&#39;</span>, <span class="st">&#39;mds&#39;</span>, </span>
+<span id="cb33-2"><a href="design-for-six-sigma.html#cb33-2" aria-hidden="true" tabindex="-1"></a>                    <span class="st">&#39;randomly&#39;</span>, <span class="st">&#39;fr&#39;</span>, <span class="st">&#39;kk&#39;</span>, <span class="st">&#39;drl&#39;</span>, <span class="st">&#39;lgl&#39;</span>)</span></code></pre></div>
 <p>and do a first network plot to check data upload:</p>
-<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="design-for-six-sigma.html#cb33-1" aria-hidden="true" tabindex="-1"></a>perfum_tbl_graph <span class="sc">%&gt;%</span> </span>
-<span id="cb33-2"><a href="design-for-six-sigma.html#cb33-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggraph</span>(<span class="at">layout =</span> <span class="st">&quot;igraph&quot;</span>, <span class="at">algorithm =</span> igraph_layouts[<span class="dv">7</span>]) <span class="sc">+</span></span>
-<span id="cb33-3"><a href="design-for-six-sigma.html#cb33-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_edge_link</span>(<span class="fu">aes</span>(<span class="at">edge_alpha =</span> weight)) <span class="sc">+</span></span>
-<span id="cb33-4"><a href="design-for-six-sigma.html#cb33-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_node_label</span>(<span class="fu">aes</span>(<span class="at">label =</span> name), <span class="at">repel =</span> <span class="cn">TRUE</span>) <span class="sc">+</span></span>
-<span id="cb33-5"><a href="design-for-six-sigma.html#cb33-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_graph</span>() <span class="sc">+</span></span>
-<span id="cb33-6"><a href="design-for-six-sigma.html#cb33-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;DOE Perfume Formulation - Inputs&quot;</span>,</span>
-<span id="cb33-7"><a href="design-for-six-sigma.html#cb33-7" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="st">&quot;Most important expected correlations&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="design-for-six-sigma.html#cb34-1" aria-hidden="true" tabindex="-1"></a>perfum_tbl_graph <span class="sc">%&gt;%</span> </span>
+<span id="cb34-2"><a href="design-for-six-sigma.html#cb34-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggraph</span>(<span class="at">layout =</span> <span class="st">&quot;igraph&quot;</span>, <span class="at">algorithm =</span> igraph_layouts[<span class="dv">7</span>]) <span class="sc">+</span></span>
+<span id="cb34-3"><a href="design-for-six-sigma.html#cb34-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_edge_link</span>(<span class="fu">aes</span>(<span class="at">edge_alpha =</span> weight)) <span class="sc">+</span></span>
+<span id="cb34-4"><a href="design-for-six-sigma.html#cb34-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_node_label</span>(<span class="fu">aes</span>(<span class="at">label =</span> name), <span class="at">repel =</span> <span class="cn">TRUE</span>) <span class="sc">+</span></span>
+<span id="cb34-5"><a href="design-for-six-sigma.html#cb34-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_graph</span>() <span class="sc">+</span></span>
+<span id="cb34-6"><a href="design-for-six-sigma.html#cb34-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;DOE Perfume Formulation - Inputs&quot;</span>,</span>
+<span id="cb34-7"><a href="design-for-six-sigma.html#cb34-7" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="st">&quot;Most important expected correlations&quot;</span>)</span></code></pre></div>
 <p><img src="3_sixsigma_files/figure-html/unnamed-chunk-21-1.png" width="80%" /></p>
 <p>Data loading is confirmed to have been done correctly, we can now move into the clustering and analysis.</p>
 <p>We use different clusters algorithms like in part 3 to generate the groups:</p>
-<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="design-for-six-sigma.html#cb34-1" aria-hidden="true" tabindex="-1"></a>perfum_tbl_graph <span class="ot">&lt;-</span> perfum_tbl_graph <span class="sc">%&gt;%</span></span>
-<span id="cb34-2"><a href="design-for-six-sigma.html#cb34-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">activate</span>(nodes) <span class="sc">%&gt;%</span></span>
-<span id="cb34-3"><a href="design-for-six-sigma.html#cb34-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">group_components =</span> <span class="fu">group_components</span>(),</span>
-<span id="cb34-4"><a href="design-for-six-sigma.html#cb34-4" aria-hidden="true" tabindex="-1"></a>          <span class="at">group_edge_betweenness =</span> <span class="fu">group_edge_betweenness</span>(),</span>
-<span id="cb34-5"><a href="design-for-six-sigma.html#cb34-5" aria-hidden="true" tabindex="-1"></a>          <span class="at">group_fast_greedy =</span> <span class="fu">group_fast_greedy</span>(),</span>
-<span id="cb34-6"><a href="design-for-six-sigma.html#cb34-6" aria-hidden="true" tabindex="-1"></a>          <span class="at">group_infomap =</span> <span class="fu">group_infomap</span>(),</span>
-<span id="cb34-7"><a href="design-for-six-sigma.html#cb34-7" aria-hidden="true" tabindex="-1"></a>          <span class="at">group_label_prop =</span> <span class="fu">group_label_prop</span>(),</span>
-<span id="cb34-8"><a href="design-for-six-sigma.html#cb34-8" aria-hidden="true" tabindex="-1"></a>          <span class="at">group_leading_eigen =</span> <span class="fu">group_leading_eigen</span>(),</span>
-<span id="cb34-9"><a href="design-for-six-sigma.html#cb34-9" aria-hidden="true" tabindex="-1"></a>          <span class="at">group_louvain =</span> <span class="fu">group_louvain</span>(),</span>
-<span id="cb34-10"><a href="design-for-six-sigma.html#cb34-10" aria-hidden="true" tabindex="-1"></a>          <span class="at">group_walktrap =</span> <span class="fu">group_walktrap</span>()</span>
-<span id="cb34-11"><a href="design-for-six-sigma.html#cb34-11" aria-hidden="true" tabindex="-1"></a>         )</span></code></pre></div>
+<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="design-for-six-sigma.html#cb35-1" aria-hidden="true" tabindex="-1"></a>perfum_tbl_graph <span class="ot">&lt;-</span> perfum_tbl_graph <span class="sc">%&gt;%</span></span>
+<span id="cb35-2"><a href="design-for-six-sigma.html#cb35-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">activate</span>(nodes) <span class="sc">%&gt;%</span></span>
+<span id="cb35-3"><a href="design-for-six-sigma.html#cb35-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">group_components =</span> <span class="fu">group_components</span>(),</span>
+<span id="cb35-4"><a href="design-for-six-sigma.html#cb35-4" aria-hidden="true" tabindex="-1"></a>          <span class="at">group_edge_betweenness =</span> <span class="fu">group_edge_betweenness</span>(),</span>
+<span id="cb35-5"><a href="design-for-six-sigma.html#cb35-5" aria-hidden="true" tabindex="-1"></a>          <span class="at">group_fast_greedy =</span> <span class="fu">group_fast_greedy</span>(),</span>
+<span id="cb35-6"><a href="design-for-six-sigma.html#cb35-6" aria-hidden="true" tabindex="-1"></a>          <span class="at">group_infomap =</span> <span class="fu">group_infomap</span>(),</span>
+<span id="cb35-7"><a href="design-for-six-sigma.html#cb35-7" aria-hidden="true" tabindex="-1"></a>          <span class="at">group_label_prop =</span> <span class="fu">group_label_prop</span>(),</span>
+<span id="cb35-8"><a href="design-for-six-sigma.html#cb35-8" aria-hidden="true" tabindex="-1"></a>          <span class="at">group_leading_eigen =</span> <span class="fu">group_leading_eigen</span>(),</span>
+<span id="cb35-9"><a href="design-for-six-sigma.html#cb35-9" aria-hidden="true" tabindex="-1"></a>          <span class="at">group_louvain =</span> <span class="fu">group_louvain</span>(),</span>
+<span id="cb35-10"><a href="design-for-six-sigma.html#cb35-10" aria-hidden="true" tabindex="-1"></a>          <span class="at">group_walktrap =</span> <span class="fu">group_walktrap</span>()</span>
+<span id="cb35-11"><a href="design-for-six-sigma.html#cb35-11" aria-hidden="true" tabindex="-1"></a>         )</span></code></pre></div>
 <p>and produce a final plot, selecting group optimal that with some testing has proven to be the algorithm that gives the best clustering results. The correlations strengths are here represented by the edges width for optimal visualization.</p>
 <div id="network_plot" class="section level3">
 <h3>Network plot</h3>
-<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="design-for-six-sigma.html#cb35-1" aria-hidden="true" tabindex="-1"></a>perfum_tg_2 <span class="ot">&lt;-</span> perfum_tbl_graph <span class="sc">%&gt;%</span> </span>
-<span id="cb35-2"><a href="design-for-six-sigma.html#cb35-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">activate</span>(edges) <span class="sc">%&gt;%</span> </span>
-<span id="cb35-3"><a href="design-for-six-sigma.html#cb35-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">weight2 =</span> <span class="fu">if_else</span>(weight <span class="sc">&gt;=</span> <span class="fl">0.8</span>, <span class="dv">1</span>, <span class="fu">if_else</span>(weight <span class="sc">&gt;=</span> <span class="fl">0.5</span>, <span class="fl">0.5</span>, <span class="fl">0.1</span>)))</span>
-<span id="cb35-4"><a href="design-for-six-sigma.html#cb35-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-5"><a href="design-for-six-sigma.html#cb35-5" aria-hidden="true" tabindex="-1"></a>my_palette <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fu">viridis</span>(<span class="dv">12</span>)[<span class="dv">3</span>], <span class="fu">viridis</span>(<span class="dv">12</span>)[<span class="dv">9</span>], </span>
-<span id="cb35-6"><a href="design-for-six-sigma.html#cb35-6" aria-hidden="true" tabindex="-1"></a>                <span class="st">&quot;gray40&quot;</span>, <span class="st">&quot;gray40&quot;</span>, <span class="st">&quot;gray40&quot;</span>, <span class="st">&quot;gray40&quot;</span>, </span>
-<span id="cb35-7"><a href="design-for-six-sigma.html#cb35-7" aria-hidden="true" tabindex="-1"></a>                <span class="st">&quot;gray40&quot;</span>, <span class="st">&quot;gray40&quot;</span>, <span class="st">&quot;gray40&quot;</span>, <span class="st">&quot;gray40&quot;</span>)</span>
-<span id="cb35-8"><a href="design-for-six-sigma.html#cb35-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-9"><a href="design-for-six-sigma.html#cb35-9" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">48</span>)</span>
-<span id="cb35-10"><a href="design-for-six-sigma.html#cb35-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-11"><a href="design-for-six-sigma.html#cb35-11" aria-hidden="true" tabindex="-1"></a>perfum_tg_2 <span class="sc">%&gt;%</span> </span>
-<span id="cb35-12"><a href="design-for-six-sigma.html#cb35-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">activate</span>(nodes) <span class="sc">%&gt;%</span> </span>
-<span id="cb35-13"><a href="design-for-six-sigma.html#cb35-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">group =</span> group_louvain) <span class="sc">%&gt;%</span> </span>
-<span id="cb35-14"><a href="design-for-six-sigma.html#cb35-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(group <span class="sc">%in%</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>)) <span class="sc">%&gt;%</span> </span>
-<span id="cb35-15"><a href="design-for-six-sigma.html#cb35-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggraph</span>(<span class="at">layout =</span> <span class="st">&quot;igraph&quot;</span>, <span class="at">algorithm =</span> igraph_layouts[<span class="dv">7</span>]) <span class="sc">+</span></span>
-<span id="cb35-16"><a href="design-for-six-sigma.html#cb35-16" aria-hidden="true" tabindex="-1"></a>   <span class="fu">geom_mark_hull</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(x, y, </span>
-<span id="cb35-17"><a href="design-for-six-sigma.html#cb35-17" aria-hidden="true" tabindex="-1"></a>                               <span class="at">group =</span> <span class="fu">as_factor</span>(group), </span>
-<span id="cb35-18"><a href="design-for-six-sigma.html#cb35-18" aria-hidden="true" tabindex="-1"></a>                               <span class="at">fill =</span> <span class="fu">as_factor</span>(group)),</span>
-<span id="cb35-19"><a href="design-for-six-sigma.html#cb35-19" aria-hidden="true" tabindex="-1"></a>               <span class="at">concavity =</span> <span class="fl">0.5</span>,</span>
-<span id="cb35-20"><a href="design-for-six-sigma.html#cb35-20" aria-hidden="true" tabindex="-1"></a>               <span class="at">expand =</span> <span class="fu">unit</span>(<span class="dv">4</span>, <span class="st">&#39;mm&#39;</span>),</span>
-<span id="cb35-21"><a href="design-for-six-sigma.html#cb35-21" aria-hidden="true" tabindex="-1"></a>               <span class="at">alpha =</span> <span class="fl">0.25</span>,</span>
-<span id="cb35-22"><a href="design-for-six-sigma.html#cb35-22" aria-hidden="true" tabindex="-1"></a>               <span class="at">colour =</span> <span class="st">&#39;white&#39;</span>,</span>
-<span id="cb35-23"><a href="design-for-six-sigma.html#cb35-23" aria-hidden="true" tabindex="-1"></a>               <span class="at">show.legend =</span> <span class="cn">FALSE</span>) <span class="sc">+</span> </span>
-<span id="cb35-24"><a href="design-for-six-sigma.html#cb35-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_edge_link</span>(<span class="fu">aes</span>(<span class="at">edge_alpha =</span> weight2, <span class="at">edge_width =</span> weight2)) <span class="sc">+</span> </span>
-<span id="cb35-25"><a href="design-for-six-sigma.html#cb35-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_node_point</span>(<span class="at">size =</span> <span class="dv">3</span>) <span class="sc">+</span></span>
-<span id="cb35-26"><a href="design-for-six-sigma.html#cb35-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_node_label</span>(<span class="fu">aes</span>(<span class="at">label =</span> name), <span class="at">repel =</span> <span class="cn">TRUE</span>) <span class="sc">+</span></span>
-<span id="cb35-27"><a href="design-for-six-sigma.html#cb35-27" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_edge_width</span>(<span class="at">range =</span> <span class="fu">c</span>(<span class="fl">0.2</span>, <span class="dv">1</span>), <span class="at">name =</span> <span class="st">&quot;Correlation strength&quot;</span>) <span class="sc">+</span></span>
-<span id="cb35-28"><a href="design-for-six-sigma.html#cb35-28" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_edge_alpha</span>(<span class="at">range =</span> <span class="fu">c</span>(<span class="fl">0.05</span>, <span class="fl">0.2</span>), <span class="at">name =</span> <span class="st">&quot;Correlation strength&quot;</span>) <span class="sc">+</span> </span>
-<span id="cb35-29"><a href="design-for-six-sigma.html#cb35-29" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> my_palette) <span class="sc">+</span> </span>
-<span id="cb35-30"><a href="design-for-six-sigma.html#cb35-30" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_graph</span>() <span class="sc">+</span></span>
-<span id="cb35-31"><a href="design-for-six-sigma.html#cb35-31" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
-<span id="cb35-32"><a href="design-for-six-sigma.html#cb35-32" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="fu">str_c</span>(<span class="st">&quot;&lt;span style=&#39;color:#433E85FF&#39;&gt;Line Parameters&lt;/span&gt;&quot;</span>, </span>
-<span id="cb35-33"><a href="design-for-six-sigma.html#cb35-33" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot; and &quot;</span>, <span class="st">&quot;&lt;span style=&#39;color:#51C56AFF&#39;&gt;Perfume Attributes&lt;/span&gt;&quot;</span>),</span>
-<span id="cb35-34"><a href="design-for-six-sigma.html#cb35-34" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="st">&quot;Clustering the outputs of Perfume Formulation DOE01&quot;</span>,</span>
-<span id="cb35-35"><a href="design-for-six-sigma.html#cb35-35" aria-hidden="true" tabindex="-1"></a>    <span class="at">caption =</span> <span class="st">&quot;Clustering by multi-level modularity optimisation (louvain)&quot;</span>) <span class="sc">+</span></span>
-<span id="cb35-36"><a href="design-for-six-sigma.html#cb35-36" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">plot.title =</span> <span class="fu">element_markdown</span>(<span class="at">family =</span> <span class="st">&quot;Helvetica&quot;</span>,</span>
-<span id="cb35-37"><a href="design-for-six-sigma.html#cb35-37" aria-hidden="true" tabindex="-1"></a>                                      <span class="at">size =</span> <span class="dv">14</span>, </span>
-<span id="cb35-38"><a href="design-for-six-sigma.html#cb35-38" aria-hidden="true" tabindex="-1"></a>                                      <span class="at">face =</span> <span class="st">&quot;bold&quot;</span>)) </span></code></pre></div>
+<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="design-for-six-sigma.html#cb36-1" aria-hidden="true" tabindex="-1"></a>perfum_tg_2 <span class="ot">&lt;-</span> perfum_tbl_graph <span class="sc">%&gt;%</span> </span>
+<span id="cb36-2"><a href="design-for-six-sigma.html#cb36-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">activate</span>(edges) <span class="sc">%&gt;%</span> </span>
+<span id="cb36-3"><a href="design-for-six-sigma.html#cb36-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">weight2 =</span> <span class="fu">if_else</span>(weight <span class="sc">&gt;=</span> <span class="fl">0.8</span>, <span class="dv">1</span>, <span class="fu">if_else</span>(weight <span class="sc">&gt;=</span> <span class="fl">0.5</span>, <span class="fl">0.5</span>, <span class="fl">0.1</span>)))</span>
+<span id="cb36-4"><a href="design-for-six-sigma.html#cb36-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-5"><a href="design-for-six-sigma.html#cb36-5" aria-hidden="true" tabindex="-1"></a>my_palette <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fu">viridis</span>(<span class="dv">12</span>)[<span class="dv">3</span>], <span class="fu">viridis</span>(<span class="dv">12</span>)[<span class="dv">9</span>], </span>
+<span id="cb36-6"><a href="design-for-six-sigma.html#cb36-6" aria-hidden="true" tabindex="-1"></a>                <span class="st">&quot;gray40&quot;</span>, <span class="st">&quot;gray40&quot;</span>, <span class="st">&quot;gray40&quot;</span>, <span class="st">&quot;gray40&quot;</span>, </span>
+<span id="cb36-7"><a href="design-for-six-sigma.html#cb36-7" aria-hidden="true" tabindex="-1"></a>                <span class="st">&quot;gray40&quot;</span>, <span class="st">&quot;gray40&quot;</span>, <span class="st">&quot;gray40&quot;</span>, <span class="st">&quot;gray40&quot;</span>)</span>
+<span id="cb36-8"><a href="design-for-six-sigma.html#cb36-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-9"><a href="design-for-six-sigma.html#cb36-9" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">48</span>)</span>
+<span id="cb36-10"><a href="design-for-six-sigma.html#cb36-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-11"><a href="design-for-six-sigma.html#cb36-11" aria-hidden="true" tabindex="-1"></a>perfum_tg_2 <span class="sc">%&gt;%</span> </span>
+<span id="cb36-12"><a href="design-for-six-sigma.html#cb36-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">activate</span>(nodes) <span class="sc">%&gt;%</span> </span>
+<span id="cb36-13"><a href="design-for-six-sigma.html#cb36-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">group =</span> group_louvain) <span class="sc">%&gt;%</span> </span>
+<span id="cb36-14"><a href="design-for-six-sigma.html#cb36-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(group <span class="sc">%in%</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb36-15"><a href="design-for-six-sigma.html#cb36-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggraph</span>(<span class="at">layout =</span> <span class="st">&quot;igraph&quot;</span>, <span class="at">algorithm =</span> igraph_layouts[<span class="dv">7</span>]) <span class="sc">+</span></span>
+<span id="cb36-16"><a href="design-for-six-sigma.html#cb36-16" aria-hidden="true" tabindex="-1"></a>   <span class="fu">geom_mark_hull</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(x, y, </span>
+<span id="cb36-17"><a href="design-for-six-sigma.html#cb36-17" aria-hidden="true" tabindex="-1"></a>                               <span class="at">group =</span> <span class="fu">as_factor</span>(group), </span>
+<span id="cb36-18"><a href="design-for-six-sigma.html#cb36-18" aria-hidden="true" tabindex="-1"></a>                               <span class="at">fill =</span> <span class="fu">as_factor</span>(group)),</span>
+<span id="cb36-19"><a href="design-for-six-sigma.html#cb36-19" aria-hidden="true" tabindex="-1"></a>               <span class="at">concavity =</span> <span class="fl">0.5</span>,</span>
+<span id="cb36-20"><a href="design-for-six-sigma.html#cb36-20" aria-hidden="true" tabindex="-1"></a>               <span class="at">expand =</span> <span class="fu">unit</span>(<span class="dv">4</span>, <span class="st">&#39;mm&#39;</span>),</span>
+<span id="cb36-21"><a href="design-for-six-sigma.html#cb36-21" aria-hidden="true" tabindex="-1"></a>               <span class="at">alpha =</span> <span class="fl">0.25</span>,</span>
+<span id="cb36-22"><a href="design-for-six-sigma.html#cb36-22" aria-hidden="true" tabindex="-1"></a>               <span class="at">colour =</span> <span class="st">&#39;white&#39;</span>,</span>
+<span id="cb36-23"><a href="design-for-six-sigma.html#cb36-23" aria-hidden="true" tabindex="-1"></a>               <span class="at">show.legend =</span> <span class="cn">FALSE</span>) <span class="sc">+</span> </span>
+<span id="cb36-24"><a href="design-for-six-sigma.html#cb36-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_edge_link</span>(<span class="fu">aes</span>(<span class="at">edge_alpha =</span> weight2, <span class="at">edge_width =</span> weight2)) <span class="sc">+</span> </span>
+<span id="cb36-25"><a href="design-for-six-sigma.html#cb36-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_node_point</span>(<span class="at">size =</span> <span class="dv">3</span>) <span class="sc">+</span></span>
+<span id="cb36-26"><a href="design-for-six-sigma.html#cb36-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_node_label</span>(<span class="fu">aes</span>(<span class="at">label =</span> name), <span class="at">repel =</span> <span class="cn">TRUE</span>) <span class="sc">+</span></span>
+<span id="cb36-27"><a href="design-for-six-sigma.html#cb36-27" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_edge_width</span>(<span class="at">range =</span> <span class="fu">c</span>(<span class="fl">0.2</span>, <span class="dv">1</span>), <span class="at">name =</span> <span class="st">&quot;Correlation strength&quot;</span>) <span class="sc">+</span></span>
+<span id="cb36-28"><a href="design-for-six-sigma.html#cb36-28" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_edge_alpha</span>(<span class="at">range =</span> <span class="fu">c</span>(<span class="fl">0.05</span>, <span class="fl">0.2</span>), <span class="at">name =</span> <span class="st">&quot;Correlation strength&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb36-29"><a href="design-for-six-sigma.html#cb36-29" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> my_palette) <span class="sc">+</span> </span>
+<span id="cb36-30"><a href="design-for-six-sigma.html#cb36-30" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_graph</span>() <span class="sc">+</span></span>
+<span id="cb36-31"><a href="design-for-six-sigma.html#cb36-31" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb36-32"><a href="design-for-six-sigma.html#cb36-32" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="fu">str_c</span>(<span class="st">&quot;&lt;span style=&#39;color:#433E85FF&#39;&gt;Line Parameters&lt;/span&gt;&quot;</span>, </span>
+<span id="cb36-33"><a href="design-for-six-sigma.html#cb36-33" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot; and &quot;</span>, <span class="st">&quot;&lt;span style=&#39;color:#51C56AFF&#39;&gt;Perfume Attributes&lt;/span&gt;&quot;</span>),</span>
+<span id="cb36-34"><a href="design-for-six-sigma.html#cb36-34" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="st">&quot;Clustering the outputs of Perfume Formulation DOE01&quot;</span>,</span>
+<span id="cb36-35"><a href="design-for-six-sigma.html#cb36-35" aria-hidden="true" tabindex="-1"></a>    <span class="at">caption =</span> <span class="st">&quot;Clustering by multi-level modularity optimisation (louvain)&quot;</span>) <span class="sc">+</span></span>
+<span id="cb36-36"><a href="design-for-six-sigma.html#cb36-36" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">plot.title =</span> <span class="fu">element_markdown</span>(<span class="at">family =</span> <span class="st">&quot;Helvetica&quot;</span>,</span>
+<span id="cb36-37"><a href="design-for-six-sigma.html#cb36-37" aria-hidden="true" tabindex="-1"></a>                                      <span class="at">size =</span> <span class="dv">14</span>, </span>
+<span id="cb36-38"><a href="design-for-six-sigma.html#cb36-38" aria-hidden="true" tabindex="-1"></a>                                      <span class="at">face =</span> <span class="st">&quot;bold&quot;</span>)) </span></code></pre></div>
 <p><img src="3_sixsigma_files/figure-html/unnamed-chunk-23-1.png" width="80%" /></p>
 <p><br></p>
 <p>We can see that the algorithm is grouping elements that have a strong correlation. Most stronger correlations are present within elements of each cluster with some exceptions such as oc with pw and y with pe.</p>
 <p>The code presented can now easily be reused once the DOE is executed to compare with the real correlations measured.</p>
 
 </div>
+</div>
+</div>
+<h3>References</h3>
+<div id="refs" class="references csl-bib-body hanging-indent">
+<div id="ref-Cano2012" class="csl-entry">
+Emilio L. Cano, Andrés Redchuk, Javier M. Moguerza. 2012. <em>Six Sigma with r</em>. 1th ed. Vol. 36. Use r! Springer New York Heidelberg Dordrecht London: Springer.
+</div>
+<div id="ref-Munro2015" class="csl-entry">
+Roderik A.Munro, Govindarajan Ramu, and Daniel J.Zrymiak. 2015. <em>The Certified Six Sigma Green Belt Handbook</em>. 2nd ed. Milwaukee, Winsconsin: ASQ Quality Press.
 </div>
 </div>
             </section>

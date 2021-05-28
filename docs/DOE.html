@@ -6,12 +6,12 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Design of Experiments | industRial data science</title>
   <meta name="description" content="Design of Experiments | industRial data science" />
-  <meta name="generator" content="bookdown 0.20 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Design of Experiments | industRial data science" />
   <meta property="og:type" content="book" />
   
-  <meta property="og:image" content="img/cover3.png" />
+  <meta property="og:image" content="/img/cover3.png" />
   
   <meta name="github-repo" content="J-Ramalho/industRialds" />
 
@@ -19,7 +19,7 @@
   <meta name="twitter:title" content="Design of Experiments | industRial data science" />
   
   
-  <meta name="twitter:image" content="img/cover3.png" />
+  <meta name="twitter:image" content="/img/cover3.png" />
 
 <meta name="author" content="João Ramalho" />
 
@@ -33,7 +33,7 @@
   
 <link rel="prev" href="MSA.html"/>
 <link rel="next" href="SPC.html"/>
-<script src="libs/header-attrs-2.7/header-attrs.js"></script>
+<script src="libs/header-attrs-2.8/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -51,6 +51,8 @@
 
 
 
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
 <script src="libs/kePrint-0.0.1/kePrint.js"></script>
 <link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
 <!-- Global site tag (gtag.js) - Google Analytics -->
@@ -73,6 +75,7 @@ mattcrump=1;
 pre > code.sourceCode { white-space: pre; position: relative; }
 pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
 pre.sourceCode { margin: 0; }
 @media screen {
@@ -131,6 +134,29 @@ code span.st { color: #4070a0; } /* String */
 code span.va { color: #19177c; } /* Variable */
 code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
 </style>
 
 <link rel="stylesheet" href="css/industRialds.css" type="text/css" />
@@ -392,7 +418,7 @@ Figure 1: PET tensile test
 <h3>t-test one sample</h3>
 <div class="sourceCode" id="cb64"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb64-1"><a href="DOE.html#cb64-1" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(<span class="at">x =</span> pet_delivery<span class="sc">$</span>A, <span class="at">mu =</span> pet_spec)</span></code></pre></div>
 <pre><code>
-	One Sample t-test
+    One Sample t-test
 
 data:  pet_delivery$A
 t = -1.0754, df = 27, p-value = 0.2917
@@ -454,7 +480,7 @@ mean of x
 <div class="sourceCode" id="cb70"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb70-1"><a href="DOE.html#cb70-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(stats)</span></code></pre></div>
 <div class="sourceCode" id="cb71"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb71-1"><a href="DOE.html#cb71-1" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(tensile_strength <span class="sc">~</span> sample, <span class="at">data =</span> pet_delivery_long, <span class="at">var.equal =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
 <pre><code>
-	Two Sample t-test
+    Two Sample t-test
 
 data:  tensile_strength by sample
 t = -2.3956, df = 54, p-value = 0.02009
@@ -474,7 +500,7 @@ mean in group A mean in group B
 <p>We’re now confirming this with a variance test from the stats package.</p>
 <div class="sourceCode" id="cb73"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb73-1"><a href="DOE.html#cb73-1" aria-hidden="true" tabindex="-1"></a><span class="fu">var.test</span>(tensile_strength <span class="sc">~</span> sample, pet_delivery_long)</span></code></pre></div>
 <pre><code>
-	F test to compare two variances
+    F test to compare two variances
 
 data:  tensile_strength by sample
 F = 1.2755, num df = 27, denom df = 27, p-value = 0.5315
@@ -497,7 +523,7 @@ ratio of variances
 group  1  0.0118 0.9139
       54               </code></pre>
 <p>Pr &gt; 0.05 thus there is homogeneity of the variances (they do not differ significantly).</p>
-<p>Further elaborations on the variance can be found under <span class="citation"><a href="references.html#ref-minitab_variances" role="doc-biblioref">Minitab</a> (<a href="references.html#ref-minitab_variances" role="doc-biblioref">2019a</a>)</span>.</p>
+<p>Further elaborations on the variance can be found under <span class="citation"><a href="#ref-minitab_variances" role="doc-biblioref">Minitab</a> (<a href="#ref-minitab_variances" role="doc-biblioref">2019a</a>)</span>.</p>
 
 </div>
 </div>
@@ -601,7 +627,7 @@ temperature   2527.0      215.4  11.731 7.26e-10 ***
 Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
 
 Residual standard error: 21540 on 18 degrees of freedom
-Multiple R-squared:  0.8843,	Adjusted R-squared:  0.8779 
+Multiple R-squared:  0.8843,    Adjusted R-squared:  0.8779 
 F-statistic: 137.6 on 1 and 18 DF,  p-value: 7.263e-10</code></pre>
 <p>With the summary function we can many different outputs such as the coefficients and the R-squared which we will look into more detail now. As usual, we first inspect the data with a first plot. In this case we’re adding a smoothing geometry with the lm method:</p>
 <div class="sourceCode" id="cb83"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb83-1"><a href="DOE.html#cb83-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(ebike_narrow) <span class="sc">+</span></span>
@@ -645,7 +671,7 @@ temperature220   155800      11553  13.485 3.73e-10 ***
 Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
 
 Residual standard error: 18270 on 16 degrees of freedom
-Multiple R-squared:  0.9261,	Adjusted R-squared:  0.9122 
+Multiple R-squared:  0.9261,    Adjusted R-squared:  0.9122 
 F-statistic:  66.8 on 3 and 16 DF,  p-value: 2.883e-09</code></pre>
 <p>In order to be precise, we’re making explicit in the lm function that the contrasts argument is “contr.treatment,” although this is the default in R. More on contrasts on the Case Study on <span class="math inline">\(2^k\)</span> designs. The current contrasts settings can be seen as follows:</p>
 <div class="sourceCode" id="cb86"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb86-1"><a href="DOE.html#cb86-1" aria-hidden="true" tabindex="-1"></a><span class="fu">getOption</span>(<span class="st">&quot;contrasts&quot;</span>)</span></code></pre></div>
@@ -674,10 +700,10 @@ F-statistic:  66.8 on 3 and 16 DF,  p-value: 2.883e-09</code></pre>
 <th align="center">temperature</th>
 <th align="center">.fitted</th>
 <th align="center">.resid</th>
-<th align="center">.std.resid</th>
 <th align="center">.hat</th>
 <th align="center">.sigma</th>
 <th align="center">.cooksd</th>
+<th align="center">.std.resid</th>
 <th align="center">index</th>
 </tr>
 </thead>
@@ -687,10 +713,10 @@ F-statistic:  66.8 on 3 and 16 DF,  p-value: 2.883e-09</code></pre>
 <td align="center">160</td>
 <td align="center">551200</td>
 <td align="center">23800</td>
-<td align="center">1.4566455</td>
 <td align="center">0.2</td>
 <td align="center">17571.09</td>
 <td align="center">0.1326135</td>
+<td align="center">1.4566455</td>
 <td align="center">1</td>
 </tr>
 <tr class="even">
@@ -698,10 +724,10 @@ F-statistic:  66.8 on 3 and 16 DF,  p-value: 2.883e-09</code></pre>
 <td align="center">160</td>
 <td align="center">551200</td>
 <td align="center">-9200</td>
-<td align="center">-0.5630730</td>
 <td align="center">0.2</td>
 <td align="center">18678.69</td>
 <td align="center">0.0198157</td>
+<td align="center">-0.5630730</td>
 <td align="center">2</td>
 </tr>
 <tr class="odd">
@@ -709,10 +735,10 @@ F-statistic:  66.8 on 3 and 16 DF,  p-value: 2.883e-09</code></pre>
 <td align="center">160</td>
 <td align="center">551200</td>
 <td align="center">-21200</td>
-<td align="center">-1.2975161</td>
 <td align="center">0.2</td>
 <td align="center">17846.38</td>
 <td align="center">0.1052218</td>
+<td align="center">-1.2975161</td>
 <td align="center">3</td>
 </tr>
 <tr class="even">
@@ -720,10 +746,10 @@ F-statistic:  66.8 on 3 and 16 DF,  p-value: 2.883e-09</code></pre>
 <td align="center">160</td>
 <td align="center">551200</td>
 <td align="center">-12200</td>
-<td align="center">-0.7466838</td>
 <td align="center">0.2</td>
 <td align="center">18534.92</td>
 <td align="center">0.0348460</td>
+<td align="center">-0.7466838</td>
 <td align="center">4</td>
 </tr>
 <tr class="odd">
@@ -731,10 +757,10 @@ F-statistic:  66.8 on 3 and 16 DF,  p-value: 2.883e-09</code></pre>
 <td align="center">160</td>
 <td align="center">551200</td>
 <td align="center">18800</td>
-<td align="center">1.1506275</td>
 <td align="center">0.2</td>
 <td align="center">18069.13</td>
 <td align="center">0.0827465</td>
+<td align="center">1.1506275</td>
 <td align="center">5</td>
 </tr>
 <tr class="even">
@@ -742,10 +768,10 @@ F-statistic:  66.8 on 3 and 16 DF,  p-value: 2.883e-09</code></pre>
 <td align="center">180</td>
 <td align="center">587400</td>
 <td align="center">-22400</td>
-<td align="center">-1.3709604</td>
 <td align="center">0.2</td>
 <td align="center">17723.81</td>
 <td align="center">0.1174708</td>
+<td align="center">-1.3709604</td>
 <td align="center">6</td>
 </tr>
 </tbody>
@@ -774,7 +800,7 @@ F-statistic:  66.8 on 3 and 16 DF,  p-value: 2.883e-09</code></pre>
 <div class="sourceCode" id="cb91"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb91-1"><a href="DOE.html#cb91-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(car)</span></code></pre></div>
 <div class="sourceCode" id="cb92"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb92-1"><a href="DOE.html#cb92-1" aria-hidden="true" tabindex="-1"></a><span class="fu">durbinWatsonTest</span>(ebike_lm_factor)</span></code></pre></div>
 <pre><code> lag Autocorrelation D-W Statistic p-value
-   1      -0.5343347      2.960893    0.09
+   1      -0.5343347      2.960893    0.11
  Alternative hypothesis: rho != 0</code></pre>
 <p>Although the output shows Autocorrelation of -0.53 we have to consider that the p value is greater than 0.05 thus there is not enough significance to say that there is autocorrelation.</p>
 </div>
@@ -801,7 +827,7 @@ F-statistic:  66.8 on 3 and 16 DF,  p-value: 2.883e-09</code></pre>
 <p>In the e-bike hardening process, the normality assumption is not in question, so we can apply Bartlett’s test to the etch rate data.</p>
 <div class="sourceCode" id="cb95"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb95-1"><a href="DOE.html#cb95-1" aria-hidden="true" tabindex="-1"></a><span class="fu">bartlett.test</span>(cycles <span class="sc">~</span> temperature, <span class="at">data =</span> ebike_factor)</span></code></pre></div>
 <pre><code>
-	Bartlett test of homogeneity of variances
+    Bartlett test of homogeneity of variances
 
 data:  cycles by temperature
 Bartlett&#39;s K-squared = 0.43349, df = 3, p-value = 0.9332</code></pre>
@@ -832,7 +858,7 @@ The verification can be completed by a test. For populations &lt; 50 use the sha
 <h3>Normality test</h3>
 <div class="sourceCode" id="cb98"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb98-1"><a href="DOE.html#cb98-1" aria-hidden="true" tabindex="-1"></a><span class="fu">shapiro.test</span>(ebike_aug<span class="sc">$</span>.resid)</span></code></pre></div>
 <pre><code>
-	Shapiro-Wilk normality test
+    Shapiro-Wilk normality test
 
 data:  ebike_aug$.resid
 W = 0.93752, p-value = 0.2152</code></pre>
@@ -1178,7 +1204,7 @@ Residuals   16 6.552e+09 409500000               </code></pre>
 <span id="cb121-19"><a href="DOE.html#cb121-19" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">&quot;Cycles to failure [n]&quot;</span>)</span></code></pre></div>
 <p><img src="6_regression_files/figure-html/unnamed-chunk-36-1.png" width="80%" /></p>
 <p>As often with statistical tools, there is debate on the best approach to use. We recommend to combine the Tukey test with the Fisher’s LSD completementary R functions. The Tukey test giving a first indication of the levels that have an effect and calculating the means differences and the Fisher function to provide much more additional information on each level. To be considered in each situation the slight difference between the significance level for difference between means and to decide if required to take the most conservative one.</p>
-<p>To go further in the Anova F-test we recommend this interesting article from <span class="citation"><a href="references.html#ref-minitab_anovaftest" role="doc-biblioref">Minitab</a> (<a href="references.html#ref-minitab_anovaftest" role="doc-biblioref">2016</a>)</span>.</p>
+<p>To go further in the Anova F-test we recommend this interesting article from <span class="citation"><a href="#ref-minitab_anovaftest" role="doc-biblioref">Minitab</a> (<a href="#ref-minitab_anovaftest" role="doc-biblioref">2016</a>)</span>.</p>
 </div>
 </div>
 <div id="forecasting" class="section level2">
@@ -1259,7 +1285,7 @@ temperatureT50:materialmultijunction    18.75      25.98   0.722 0.476759
 Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
 
 Residual standard error: 25.98 on 27 degrees of freedom
-Multiple R-squared:  0.7652,	Adjusted R-squared:  0.6956 
+Multiple R-squared:  0.7652,    Adjusted R-squared:  0.6956 
 F-statistic:    11 on 8 and 27 DF,  p-value: 9.426e-07</code></pre>
 <p>Looking at the output we see that R-squared is equal to 0.7652. This means about 77 percent of the variability in the battery life is explained by the plate material in the battery, the temperature, and the material type–temperature interaction. We’re going to go more in details now to validate the model and understand the effects and interactions of the different factors.</p>
 </div>
@@ -1351,7 +1377,7 @@ materialmultijunction    41.92      12.24   3.426  0.00175 **
 Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
 
 Residual standard error: 29.97 on 31 degrees of freedom
-Multiple R-squared:  0.6414,	Adjusted R-squared:  0.5951 
+Multiple R-squared:  0.6414,    Adjusted R-squared:  0.5951 
 F-statistic: 13.86 on 4 and 31 DF,  p-value: 1.367e-06</code></pre>
 <p>The model still presents a reasonably high R-square of 0.64. We now apply the anova on this new model:</p>
 <div class="sourceCode" id="cb145"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb145-1"><a href="DOE.html#cb145-1" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(solarcell_factor_lm_no_int)</span></code></pre></div>
@@ -1374,7 +1400,7 @@ Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&
 <div id="covariance" class="section level2">
 <h2>Covariance</h2>
 <p>We assess here the potential utilisation of the analysis of covariance (ancova) in situations where a continuous variable may be influencing the measured value. This technique complements the analysis of variance (anova) allowing for a more accurate assessment of the effects of the categorical variables.</p>
-<p>Below a description of the approach taken from <span class="citation">(<a href="references.html#ref-Montgomery2012" role="doc-biblioref">Montgomery 2012</a>)</span>, pag.655:</p>
+<p>Below a description of the approach taken from <span class="citation">(<a href="#ref-Montgomery2012" role="doc-biblioref">Montgomery 2012</a>)</span>, pag.655:</p>
 <p><em>Suppose that in an experiment with a response variable y there is another variable, say x, and that y is linearly related to x. Furthermore, suppose that x cannot be controlled by the experimenter but can be observed along with y. The variable x is called a covariate or concomitant variable. The analysis of covariance involves adjusting the observed response variable for the effect of the concomitant variable.</em></p>
 <p><em>If such an adjustment is not performed, the concomitant variable could inflate the error mean square and make true differences in the response due to treatments harder to detect. Thus, the analysis of covariance is a method of adjusting for the effects of an uncontrollable nuisance variable. As we will see, the procedure is a combination of analysis of variance and regression analysis.</em></p>
 <p><em>As an example of an experiment in which the analysis of covariance may be employed, consider a study performed to determine if there is a difference in the strength of a monofilament fiber produced by three different machines. The data from this experiment are shown in Table 15.10 (below). Figure 15.3 presents a scatter diagram of strength (y) versus the diameter (or thickness) of the sample. Clearly, the strength of the fiber is also affected by its thickness; consequently, a thicker fiber will generally be stronger than a thinner one. The analysis of covariance could be used to remove the effect of thickness (x) on strength (y) when testing for differences in strength between machines.</em></p>
@@ -1486,7 +1512,7 @@ Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&
 <p><span id="corTest"></span></p>
 <div class="sourceCode" id="cb151"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb151-1"><a href="DOE.html#cb151-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cor.test</span>(solarcell_fill<span class="sc">$</span>output, solarcell_fill<span class="sc">$</span>fillfactor)</span></code></pre></div>
 <pre><code>
-	Pearson&#39;s product-moment correlation
+    Pearson&#39;s product-moment correlation
 
 data:  solarcell_fill$output and solarcell_fill$fillfactor
 t = 9.8039, df = 13, p-value = 2.263e-07
@@ -1496,7 +1522,7 @@ alternative hypothesis: true correlation is not equal to 0
 sample estimates:
      cor 
 0.938542 </code></pre>
-<p>Going further and using the approach from <span class="citation">(<a href="references.html#ref-Broc2016" role="doc-biblioref">Broc 2016</a>)</span> I’m faceting the scatterplots to assess if the coefficient of the linear regression is similar for all the levels of the machine factor:</p>
+<p>Going further and using the approach from <span class="citation">(<a href="#ref-Broc2016" role="doc-biblioref">Broc 2016</a>)</span> I’m faceting the scatterplots to assess if the coefficient of the linear regression is similar for all the levels of the machine factor:</p>
 <div class="sourceCode" id="cb153"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb153-1"><a href="DOE.html#cb153-1" aria-hidden="true" tabindex="-1"></a>solarcell_fill <span class="sc">%&gt;%</span></span>
 <span id="cb153-2"><a href="DOE.html#cb153-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> fillfactor, <span class="at">y =</span> output)) <span class="sc">+</span></span>
 <span id="cb153-3"><a href="DOE.html#cb153-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
@@ -1942,7 +1968,7 @@ A1:B1          1.917      1.314   1.459  0.18278
 Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
 
 Residual standard error: 4.552 on 8 degrees of freedom
-Multiple R-squared:  0.903,	Adjusted R-squared:  0.8666 
+Multiple R-squared:  0.903, Adjusted R-squared:  0.8666 
 F-statistic: 24.82 on 3 and 8 DF,  p-value: 0.0002093</code></pre>
 <p>We can observe in the output that the p value of the effects is the same in the lm and in the the aov functions. This confirms that the contrasts have been correctly specified with contr.sum</p>
 <p>Note that we’ve had to adjust the contrasts in the lm function with contr.sum which applies to cases where the sum of the contrasts is zero (the R default is contr.treatment which applies to cases where the levels are coded as 0 and 1).</p>
@@ -1984,7 +2010,7 @@ cA1:cB1        1.917      1.314   1.459  0.18278
 Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
 
 Residual standard error: 4.552 on 8 degrees of freedom
-Multiple R-squared:  0.903,	Adjusted R-squared:  0.8666 
+Multiple R-squared:  0.903, Adjusted R-squared:  0.8666 
 F-statistic: 24.82 on 3 and 8 DF,  p-value: 0.0002093</code></pre>
 <p>Note that a coefficient in a regression equation is the change in the response when the corresponding variable changes by +1. Special attention to the + and - needs to be taken with the R output.</p>
 <p>As A or B changes from its low level to its high level, the coded variable changes by 1 − (−1) = +2, so the change in the response is twice the regression coefficient.</p>
@@ -2019,7 +2045,7 @@ cA:cB          1.917      1.314   1.459  0.18278
 Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
 
 Residual standard error: 4.552 on 8 degrees of freedom
-Multiple R-squared:  0.903,	Adjusted R-squared:  0.8666 
+Multiple R-squared:  0.903, Adjusted R-squared:  0.8666 
 F-statistic: 24.82 on 3 and 8 DF,  p-value: 0.0002093</code></pre>
 <p>In this case we did not define any contrasts. Looking into the lm We can see we’ve obtained exactly the same outputs.</p>
 <div class="sourceCode" id="cb193"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb193-1"><a href="DOE.html#cb193-1" aria-hidden="true" tabindex="-1"></a><span class="fu">predict</span>(pet_num_lm, <span class="at">newdata =</span> <span class="fu">list</span>(<span class="at">cA =</span> <span class="dv">1</span>, <span class="at">cB =</span> <span class="dv">1</span>))</span></code></pre></div>
@@ -2179,7 +2205,7 @@ A:B:C        0.03281    0.26542   0.124 0.902640
 Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
 
 Residual standard error: 1.501 on 24 degrees of freedom
-Multiple R-squared:  0.5225,	Adjusted R-squared:  0.3832 
+Multiple R-squared:  0.5225,    Adjusted R-squared:  0.3832 
 F-statistic: 3.751 on 7 and 24 DF,  p-value: 0.006963</code></pre>
 <div class="sourceCode" id="cb202"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb202-1"><a href="DOE.html#cb202-1" aria-hidden="true" tabindex="-1"></a>battery_aov <span class="ot">&lt;-</span> <span class="fu">aov</span>(battery_lm)</span>
 <span id="cb202-2"><a href="DOE.html#cb202-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(battery_aov)</span></code></pre></div>
@@ -2222,7 +2248,7 @@ A:C          -0.8091     0.2467  -3.279 0.002786 **
 Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
 
 Residual standard error: 1.396 on 28 degrees of freedom
-Multiple R-squared:  0.5185,	Adjusted R-squared:  0.4669 
+Multiple R-squared:  0.5185,    Adjusted R-squared:  0.4669 
 F-statistic: 10.05 on 3 and 28 DF,  p-value: 0.0001157</code></pre>
 <p>Besides the base summary() function, R squared and adjusted R squared can also be easily retrieved with the glance function from the {broom} package. We’re extracting them here for the complete and for reduced model:</p>
 <div class="sourceCode" id="cb206"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb206-1"><a href="DOE.html#cb206-1" aria-hidden="true" tabindex="-1"></a><span class="fu">glance</span>(battery_lm)[<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>] <span class="sc">%&gt;%</span></span>
@@ -2374,7 +2400,7 @@ B:C:D        0.03688         NA      NA       NA
 A:B:C:D     -0.03688         NA      NA       NA
 
 Residual standard error: NaN on 0 degrees of freedom
-Multiple R-squared:      1,	Adjusted R-squared:    NaN 
+Multiple R-squared:      1, Adjusted R-squared:    NaN 
 F-statistic:   NaN on 15 and 0 DF,  p-value: NA</code></pre>
 <p>We can see that being a single replicate design no statistics have been calculated for the effects in the model. A recommended approach in this case is to look into the normal probability plot of the model effects.</p>
 <p>Here we are going to prepare this plot with the function qqPlot() from the {car} package:</p>
@@ -2486,7 +2512,7 @@ A:C          -0.8091     0.2467  -3.279 0.002786 **
 Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
 
 Residual standard error: 1.396 on 28 degrees of freedom
-Multiple R-squared:  0.5185,	Adjusted R-squared:  0.4669 
+Multiple R-squared:  0.5185,    Adjusted R-squared:  0.4669 
 F-statistic: 10.05 on 3 and 28 DF,  p-value: 0.0001157</code></pre>
 <p>We can now see that we’ve regained degrees of freedom and obtained a sort of hidden replication allowing to calculate statistics and error terms on the model.</p>
 <p>Residuals analysis</p>
@@ -2497,6 +2523,21 @@ F-statistic: 10.05 on 3 and 28 DF,  p-value: 0.0001157</code></pre>
 <p>We can now establish the main effects and interaction plots and conclude on the optimal settings to maximize the output: A and D should be on the max and C on the min.</p>
 
 </div>
+</div>
+</div>
+<h3>References</h3>
+<div id="refs" class="references csl-bib-body hanging-indent">
+<div id="ref-Broc2016" class="csl-entry">
+Broc, Guillaume. 2016. <em>Stats Faciles Avec r</em>. 1th ed. deBoeck.
+</div>
+<div id="ref-minitab_anovaftest" class="csl-entry">
+Minitab. 2016. <span>“Understanding Analysis of Variance (ANOVA) and the f-Test.”</span> <a href="https://blog.minitab.com/en/adventures-in-statistics-2/understanding-analysis-of-variance-anova-and-the-f-test">https://blog.minitab.com/en/adventures-in-statistics-2/understanding-analysis-of-variance-anova-and-the-f-test</a>.
+</div>
+<div id="ref-minitab_variances" class="csl-entry">
+———. 2019a. <span>“Interpret the Key Results for 2 Variances.”</span> <a href="https://support.minitab.com/en-us/minitab/18/help-and-how-to/statistics/basic-statistics/how-to/2-variances/interpret-the-results/key-results/">https://support.minitab.com/en-us/minitab/18/help-and-how-to/statistics/basic-statistics/how-to/2-variances/interpret-the-results/key-results/</a>.
+</div>
+<div id="ref-Montgomery2012" class="csl-entry">
+Montgomery, Douglas C. 2012. <em>Design and Analysis of Experiments</em>. 8th ed. Wiley.
 </div>
 </div>
             </section>

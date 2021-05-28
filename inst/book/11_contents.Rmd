@@ -10,7 +10,7 @@ library(kableExtra)
 ```
 
 ```{r echo=FALSE}
-readxl::read_xlsx("contents.xlsx") %>%
+read_csv("contents.csv") %>%
   select(Subject, Unit, Functions, Datasets) %>%
   kable(align = "l") %>%
   # column_spec() %>%

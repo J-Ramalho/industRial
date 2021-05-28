@@ -18,20 +18,20 @@ process_stats_table <- function(data) {
   data %>%
     dplyr::group_by(weight_target_value) %>%
     dplyr::summarise(
-      weight_mean = mean(weight_value) %>% round(2),
-      spec_min = mean(spec_min) %>% round(2),
-      spec_max = mean(spec_max) %>% round(2),
-      weight_out_perc = mean(weight_out_perc) %>% round(2),
-      capability_index = mean(Cpk),
+      weight_mean = mean(data$weight_value) %>% round(2),
+      spec_min = mean(data$spec_min) %>% round(2),
+      spec_max = mean(data$spec_max) %>% round(2),
+      weight_out_perc = mean(data$weight_out_perc) %>% round(2),
+      capability_index = mean(data$Cpk),
       part_count = dplyr::n()
     ) %>%
     dplyr::select(
       weight_mean, weight_target_value, spec_min, spec_max, weight_out_perc, 
       capability_index, part_count) %>%
-    tidyr::pivot_longer(cols = everything(),
+    tidyr::pivot_longer(cols = tidyr::everything(),
                         names_to = "variable",
                         values_to = "Value") %>%
-    dplyr::mutate(Variable = case_when(
+    dplyr::mutate(Variable = dplyr::case_when(
       variable == "weight_mean" ~ "Weight mean",
       variable == "weight_target_value" ~ "Spec target",
       variable == "spec_min" ~ "Spec min",

@@ -17,19 +17,20 @@
 #' @return
 #' This function returns an object of class ggplot
 #' @export
+#' @importFrom magrittr %>%
 chart_I <- function(data) {
   data %>%
-    ggplot2::ggplot(ggplot2::aes(x = part_id, y = weight_value)) +
+    ggplot2::ggplot(ggplot2::aes(x = data$part_id, y = data$weight_value)) +
     ggplot2::geom_line() +
     ggplot2::geom_point() +
-    ggplot2::geom_hline(ggplot2::aes(yintercept = spec_min), color = "red", linetype = 3) +
-    ggplot2::geom_hline(ggplot2::aes(yintercept = spec_max), color = "red", linetype = 3) +
-    ggplot2::geom_hline(ggplot2::aes(yintercept = weight_target_value), color = "red", linetype = 2) +
-    ggplot2::geom_hline(ggplot2::aes(yintercept = I_UCL), color = "deepskyblue4", linetype = 3) +
-    ggplot2::geom_hline(ggplot2::aes(yintercept = I_LCL), color = "deepskyblue4", linetype = 3) +
-    ggplot2::geom_hline(ggplot2::aes(yintercept = weight_mean), color = "deepskyblue4", linetype = 2) +
-    ggplot2::geom_point(ggplot2::aes(x = part_id, y = weight_out_limits), color = "red") +
-    scale_y_continuous(n.breaks = 10) +
+    ggplot2::geom_hline(ggplot2::aes(yintercept = data$spec_min), color = "red", linetype = 3) +
+    ggplot2::geom_hline(ggplot2::aes(yintercept = data$spec_max), color = "red", linetype = 3) +
+    ggplot2::geom_hline(ggplot2::aes(yintercept = data$weight_target_value), color = "red", linetype = 2) +
+    ggplot2::geom_hline(ggplot2::aes(yintercept = data$I_UCL), color = "deepskyblue4", linetype = 3) +
+    ggplot2::geom_hline(ggplot2::aes(yintercept = data$I_LCL), color = "deepskyblue4", linetype = 3) +
+    ggplot2::geom_hline(ggplot2::aes(yintercept = data$weight_mean), color = "deepskyblue4", linetype = 2) +
+    ggplot2::geom_point(ggplot2::aes(x = data$part_id, y = data$weight_out_limits), color = "red") +
+    ggplot2::scale_y_continuous(n.breaks = 10) +
     ggplot2::theme_light() +
     ggplot2::theme(axis.text.x = ggplot2::element_text(size = 8)) +
     ggplot2::labs(
@@ -39,5 +40,5 @@ chart_I <- function(data) {
       y = "Weight Mean [g]",
       caption = "data source: Line1"
     ) +
-    theme_qcc()
+    industRial::theme_qcc()
 }

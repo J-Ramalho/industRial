@@ -45,6 +45,7 @@ Apply this theme by adding it at the end of the code of any \code{\link[ggplot2]
 It basically combines the half open theme with a grid background from {cowplot}
 }
 \examples{
+library(dplyr)
 library(ggplot2)
 
 pet_delivery \%>\% 
@@ -55,6 +56,7 @@ pet_delivery \%>\%
       x = "Treatment",
       y = "Tensile strength [MPa]") +
       theme_industRial()
+      
 }
 \references{
 For a complete case study application refer to \url{https://j-ramalho.github.io/industRial/}

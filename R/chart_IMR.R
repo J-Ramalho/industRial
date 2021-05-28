@@ -17,14 +17,15 @@
 #' @return
 #' This function returns an object of class ggplot
 #' @export
+#' @importFrom magrittr %>%
 chart_IMR <- function(data) {
   data %>%
-    ggplot2::ggplot(ggplot2::aes(x = part_id, y = weight_MR)) +
+    ggplot2::ggplot(ggplot2::aes(x = data$part_id, y = data$weight_MR)) +
     ggplot2::geom_line() +
     ggplot2::geom_point() +
-    ggplot2::geom_hline(ggplot2::aes(yintercept = MR_max), color = "deepskyblue4", linetype = 3) +
+    ggplot2::geom_hline(ggplot2::aes(yintercept = data$MR_max), color = "deepskyblue4", linetype = 3) +
     ggplot2::geom_hline(ggplot2::aes(yintercept = 0), color = "red", linetype = 2) +
-    ggplot2::geom_point(ggplot2::aes(x = part_id, y = R_out_limits), color = "red") +
+    ggplot2::geom_point(ggplot2::aes(x = data$part_id, y = data$R_out_limits), color = "red") +
     ggplot2::theme_light() +
     ggplot2::theme(axis.text.x = ggplot2::element_text(size = 8)) +
     ggplot2::labs(
@@ -34,5 +35,5 @@ chart_IMR <- function(data) {
       y = "Weight Moving Range [g]",
       caption = "data source: Line1"
     ) +
-    theme_qcc()
+    industRial::theme_qcc()
 }

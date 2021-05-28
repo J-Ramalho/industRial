@@ -150,7 +150,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <li class="divider"></li>
 <li class="part"><span><b>I INTRODUCTION</b></span></li>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Welcome</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>output: pdf_document</a></li>
 <li class="chapter" data-level="" data-path="toolbox.html"><a href="toolbox.html"><i class="fa fa-check"></i>Toolbox</a>
 <ul>
 <li class="chapter" data-level="" data-path="toolbox.html"><a href="toolbox.html#r-and-rstudio"><i class="fa fa-check"></i>R and RStudio</a></li>
@@ -329,7 +329,6 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="glossary.html"><a href="glossary.html#spc"><i class="fa fa-check"></i>SPC</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
-<li class="chapter" data-level="" data-path="imprint.html"><a href="imprint.html"><i class="fa fa-check"></i>Imprint</a></li>
 </ul>
 
       </nav>
@@ -360,30 +359,25 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul>
 <p>Choosing the right set of tools for Data Science is often not a very scientific task. Mostly is a matter of what is available and what our colleagues, customers or suppliers use. As with everything it is important to remain open to evaluate new tools and approaches and even to be able to combine them.</p>
 <p>In this book we’ve chosen to provide all examples in R which is a free software environment for statistical computing and graphics. Besides taste and personal preference R brings a significant number of specific advantages in the field of Industrial Data Science:</p>
-<ol style="list-style-type: decimal">
-<li>R allows for reproducible research</li>
-</ol>
+<p>R allows for reproducible research</p>
 <p>This because the algorithms and functions defined to make the calculations can be inspected and all results can be fully reproduced and audited. This is known as reproducible research and is a critical aspect in all areas where a proof is needed such as in equipment validation and product quality reporting.</p>
-<ol start="2" style="list-style-type: decimal">
-<li>R functions, tools and programs can be adapted and improved</li>
-</ol>
-<p>Being an open source language, all R libraries and packages added to the basic environment can be not only audited but adapted and improved This is very important as when we enter into details every industry has a slight different way of doing things, different naming conventions, different coeficients and so on.</p>
-<ol start="3" style="list-style-type: decimal">
-<li>R is extensible</li>
-</ol>
+<p>R functions and tools can be audited and improved</p>
+<p>Being an open source language, all R libraries and packages added to the basic environment can be audited, adapted and improved. This is very important because when we enter into details every industry has a slight different way of doing things, different naming conventions, different coeficients and so on.</p>
+<p>R is extensible</p>
 <p>R is compatible with most other software on the market and is an excellent “glue” tool allowing for example for data loading from excel files, producing reports in pdf and even building complete dashboards in the form of web pages.</p>
 <p>Large documentation is available on installing and learning R, starting with the official sites <a href="https://www.r-project.org/">R-project</a> and <a href="https://www.rstudio.com/">RStudio</a>.</p>
 </div>
 <div id="packages" class="section level2">
 <h2>Packages</h2>
 <p>All industry specific tools applied throughout this book are available in the form of packages of the programming language R. As with all open source code, they’re all available for download with freedom to modification and at no cost.</p>
-<p>The amount of packages available is extremely large and growing very fast. When selecting new packages it is recommended to check the latest package update. Packages that have had no improvements since more than a couple of years should be questioned. The field evolves rapidly and compatibility and other issues can become painful. A way to obtain statistics on package history is on <a href="https://www.r-pkg.org/">metacran</a> or <a href="https://packagemanager.rstudio.com/">RStudio package manager</a>.</p>
-<p>Additionally an original package with the name <code>{industRial}</code> has been developed as a companion package for this book.</p>
+<p>The amount of packages available is extremely large and growing very fast. When selecting new packages it is recommended to check the latest package update. Packages that have had no improvements since more than a couple of years should be questioned. The field evolves rapidly and compatibility and other issues can become painful. Two ways of obtaining statistics on package history are <a href="https://www.r-pkg.org/">metacran</a> and <a href="https://packagemanager.rstudio.com/">RStudio package manager</a>.</p>
+<p>Additionally an original package named <code>{industRial}</code> has been developed as a companion package for this book.</p>
 <div id="installation" class="section level3">
 <h3>Installation</h3>
 <p>The companion package to this book can downloaded from github with the following command:</p>
 <pre><code>devtools::install_github(&quot;J-Ramalho/industRial&quot;)</code></pre>
-<p>The list below identifies which are the remainin packages required to run the examples in this book. The column <em>Download</em> precises if a package is downloaded automatically when the <code>{industRial}</code> package is downloaded (imports) or if it needs be downloaded manually by the reader (suggests). In technical terms this differentiation corresponds to the DESCRIPTION file and allows for a progressive installation of the required software.</p>
+<p>The list below identifies which are the remaining packages required to run all the coded of the book examples. Note that it is not required to download them all at once.</p>
+<p>The column <em>Download</em> precises if a package is downloaded automatically when the <code>{industRial}</code> package is downloaded (imports) or if it needs be downloaded manually by the reader (suggests). In technical terms this differentiation corresponds to the DESCRIPTION file and allows for a progressive installation of the required software.</p>
 <table>
 <colgroup>
 <col width="9%" />
@@ -635,22 +629,25 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </tr>
 </tbody>
 </table>
-<p>The imported packages are loaded implicitly and in the book text we don’t see the loading instructions over and over again, e.g. <code>library(dplyr)</code>. Be sure to load at minimum the packages below before trying any example:</p>
+<p>In the book text we don’t see the loading instructions for the installed packages over and over again everytime an example is given to avoid repetition (e.g. running <code>library(dplyr)</code> before each code chunk). Be sure to load at minimum the packages below before trying any example:</p>
 <pre><code>ds_pkgs &lt;- c(&quot;tidyverse&quot;, &quot;scales&quot;, &quot;janitor&quot;, &quot;knitr&quot;, &quot;stats&quot;, &quot;industRial&quot;,
   &quot;viridis&quot;, &quot;broom&quot;, &quot;patchwork&quot;)
 purrr::map(ds_pkgs, library, character.only = TRUE)</code></pre>
-<p>A common issue in R when compared to python for instance is <strong>function masking</strong>. As we tend to load all the sets of functions from each package we end up with conflicting function names. In the scope of this text it is mostly the function filter() from <code>{dplyr}</code> which conflicts with the function with the same name from <code>{stats}</code>. We use the most simple technique which is to add <code>filter &lt;- dplyr::filter</code> in the beginning of our script to precise which function we want to give priority and we pre-append the package name to all calls of the other function such as <code>stats::filter</code>. For more sophisticated ways to handle this issue we suggest the package <code>{import}</code>.</p>
+<p>Beware of the common issue of <em>function masking</em>. This happens more often in R when compared to python. As we tend to load all the sets of functions from each package we end up with conflicting function names. In the scope of this text it is mostly the function filter() from <code>{dplyr}</code> which conflicts with the function with the same name from <code>{stats}</code>. We tackle this with the simple technique of adding <code>filter &lt;- dplyr::filter</code> in the beginning of our script to precise which function we want to give priority and we pre-append the package name to all calls of the other function such as <code>stats::filter</code>. For more sophisticated ways to handle this issue we suggest the package <code>{import}</code>.</p>
 </div>
 <div id="highlights" class="section level3">
 <h3>Highlights</h3>
-<p>We’re highlighting now some specific packages that are used in the book and that bring powerful features in analysis of data from R&amp;D and Operations. Wherever they are required in the book they are loaded explicitly so that we know where the functions come from.</p>
+<p>We’re highlighting now some specific packages that are used in the book and that bring powerful features in analysis of data from R&amp;D and Operations. Wherever they are required in the book we loaded them explicitly in the text to help tracking where the specific functions come from.</p>
 <div id="six-sigma" class="section level4">
 <h4>six sigma</h4>
-<p>SixSigma is a very complete and robust package by Emilio L.Cano <span class="citation">(<a href="references.html#ref-Cano2015" role="doc-biblioref">Emilio L. Cano • Javier M. Moguerza 2015</a>)</span>. It provides many well tested functions in the area of quality management.</p>
+<p><code>{SixSigma}</code> is a very complete and robust R package. It provides many well tested functions in the area of quality and process improvement. We’re preseting a full example with the gage r&amp;R function in our MSA Case Study. As many other industrial packages, the <code>{SixSigma}</code> package is from before the <code>{tidyverse}</code> era and its plots have been not been developed with <code>{ggplot2}</code>. This makes integration in newer approaches harder. The data output is still nevertheless fully exploitable and very useful. The package is part of an excellent book with the same name published by <span class="citation"><a href="references.html#ref-Cano2012" role="doc-biblioref">Emilio L. Cano</a> (<a href="references.html#ref-Cano2012" role="doc-biblioref">2012</a>)</span>.</p>
 </div>
 <div id="qcc" class="section level4">
 <h4>qcc</h4>
-<p>qcc is another extremely complete and solid package. It was developped and is maintained by Luca Scrucca and offers a very large range of statistical process control charts and capability analysis. Short examples in its vignette: <a href="https://luca-scr.github.io/qcc/articles/qcc.html">qcc vignette</a></p>
+<p><code>{qcc}</code> is another extremely complete and solid package. It was developped and is maintained by Luca Scrucca and offers a very large range of statistical process control charts and capability analysis. This package has started long ago much before the <code>{tidyverse}</code> but has made the turn and revamped all its plots with <code>{ggplot2}</code>. At the moment of writing this version is not yet in CRAN but can be obtained from github with:</p>
+<pre><code># install.packages(&quot;devtools&quot;)
+devtools::install_github(&quot;luca-scr/qcc&quot;, build = TRUE, build_opts = c(&quot;--no-resave-data&quot;, &quot;--no-manual&quot;))</code></pre>
+<p>You can find examples of the control charts in its vignette: <a href="https://luca-scr.github.io/qcc/articles/qcc.html">qcc vignette</a>. We build and develop further on our SPC Case Studies.</p>
 </div>
 <div id="qicharts2" class="section level4">
 <h4>qicharts2</h4>
@@ -673,11 +670,11 @@ purrr::map(ds_pkgs, library, character.only = TRUE)</code></pre>
 <pre><code>devtools::install_github(&quot;J-Ramalho/industRial&quot;)
 library(industRial)</code></pre>
 <p>The primary goal of <code>{industRial}</code> is to make easily available all the data sets from all case studies. We can easily look for a data set by typing <code>industRial::</code> and tab. The complete list can also be obtained with the snippet below:</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="toolbox.html#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="at">package =</span> <span class="st">&quot;industRial&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb4-2"><a href="toolbox.html#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pluck</span>(<span class="st">&quot;results&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb4-3"><a href="toolbox.html#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as_tibble</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb4-4"><a href="toolbox.html#cb4-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(Item, Title) <span class="sc">%&gt;%</span></span>
-<span id="cb4-5"><a href="toolbox.html#cb4-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="toolbox.html#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="at">package =</span> <span class="st">&quot;industRial&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb5-2"><a href="toolbox.html#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pluck</span>(<span class="st">&quot;results&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb5-3"><a href="toolbox.html#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as_tibble</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb5-4"><a href="toolbox.html#cb5-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(Item, Title) <span class="sc">%&gt;%</span></span>
+<span id="cb5-5"><a href="toolbox.html#cb5-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable</span>()</span></code></pre></div>
 <table>
 <colgroup>
 <col width="17%" />
@@ -745,9 +742,9 @@ library(industRial)</code></pre>
 </tbody>
 </table>
 <p>Once the package is loaded the data objects become immediately available in memory and can directly be used in the examples presented or for further exploration. Lets confirm this invoking the first data set:</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="toolbox.html#cb5-1" aria-hidden="true" tabindex="-1"></a>dial_control <span class="sc">%&gt;%</span></span>
-<span id="cb5-2"><a href="toolbox.html#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb5-3"><a href="toolbox.html#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="toolbox.html#cb6-1" aria-hidden="true" tabindex="-1"></a>dial_control <span class="sc">%&gt;%</span></span>
+<span id="cb6-2"><a href="toolbox.html#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb6-3"><a href="toolbox.html#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable</span>()</span></code></pre></div>
 <table>
 <thead>
 <tr class="header">
@@ -797,11 +794,11 @@ library(industRial)</code></pre>
 </tbody>
 </table>
 <p>The dateset can be used and manipulated like any other dataset created in the session or loaded otherwise. For example it can be filtered and assigned to a new variable name:</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="toolbox.html#cb6-1" aria-hidden="true" tabindex="-1"></a>dial_peter <span class="ot">&lt;-</span> dial_control <span class="sc">%&gt;%</span></span>
-<span id="cb6-2"><a href="toolbox.html#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Operator <span class="sc">==</span> <span class="st">&quot;Peter&quot;</span>) </span>
-<span id="cb6-3"><a href="toolbox.html#cb6-3" aria-hidden="true" tabindex="-1"></a>dial_peter <span class="sc">%&gt;%</span></span>
-<span id="cb6-4"><a href="toolbox.html#cb6-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>(<span class="dv">2</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb6-5"><a href="toolbox.html#cb6-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="toolbox.html#cb7-1" aria-hidden="true" tabindex="-1"></a>dial_peter <span class="ot">&lt;-</span> dial_control <span class="sc">%&gt;%</span></span>
+<span id="cb7-2"><a href="toolbox.html#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Operator <span class="sc">==</span> <span class="st">&quot;Peter&quot;</span>) </span>
+<span id="cb7-3"><a href="toolbox.html#cb7-3" aria-hidden="true" tabindex="-1"></a>dial_peter <span class="sc">%&gt;%</span></span>
+<span id="cb7-4"><a href="toolbox.html#cb7-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>(<span class="dv">2</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb7-5"><a href="toolbox.html#cb7-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable</span>()</span></code></pre></div>
 <table>
 <thead>
 <tr class="header">
@@ -832,10 +829,10 @@ library(industRial)</code></pre>
 <p>Besides the data sets the <code>{industRial}</code> package also contains toy functions to plot Statistical Process Control (SPC) charts. The objective here is to showcase how to build such functions and their scope of application is limited to the book case studies. For complete and robust SPC functions we recommend using the <code>{QCC}</code> package also described below.</p>
 <p>Additionally the package contains theme functions to print and customize the aesthetics of spc charts and other charts. These themes are built on top of the <code>{ggplot2}</code> by H.Wickham and <code>{cowplot}</code> package by Claus O.Wilke. The main objective is to give the reader a starting point for customization of charts in this domain.</p>
 <p>A functions can conveniently be accessed on the console with <code>industRial::</code> and then tab. The complete list of themes and functions can be seen with:</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="toolbox.html#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">lsf.str</span>(<span class="st">&quot;package:industRial&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb7-2"><a href="toolbox.html#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unclass</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb7-3"><a href="toolbox.html#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as_tibble</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb7-4"><a href="toolbox.html#cb7-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="toolbox.html#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">lsf.str</span>(<span class="st">&quot;package:industRial&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb8-2"><a href="toolbox.html#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unclass</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb8-3"><a href="toolbox.html#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as_tibble</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb8-4"><a href="toolbox.html#cb8-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable</span>()</span></code></pre></div>
 <table>
 <thead>
 <tr class="header">
@@ -874,7 +871,7 @@ library(industRial)</code></pre>
 </table>
 <p>For each function a help page is available and can be obtained the same way as any other R data sets, themes and functions with <code>?&lt;object&gt;</code> (e.g. ?chart_xbar)</p>
 <p>To go even deeper and get access to all the code, the original book Rmd files are also bundled in the package and can be seen in the book folder. A way to get the exact folder path is:</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="toolbox.html#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">paste0</span>(<span class="fu">.libPaths</span>()[<span class="dv">1</span>], <span class="st">&quot;/industRial/book&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="toolbox.html#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">paste0</span>(<span class="fu">.libPaths</span>()[<span class="dv">1</span>], <span class="st">&quot;/industRial/book&quot;</span>)</span></code></pre></div>
 <pre><code>[1] &quot;C:/R/R-4.0.2/jr_library/industRial/book&quot;</code></pre>
 </div>
 </div>
@@ -930,20 +927,6 @@ gitbook.start({
 });
 </script>
 
-<!-- dynamically load mathjax for compatibility with self-contained -->
-<script>
-  (function () {
-    var script = document.createElement("script");
-    script.type = "text/javascript";
-    var src = "true";
-    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
-    if (location.protocol !== "file:")
-      if (/^https?:/.test(src))
-        src = src.replace(/^https?:/, '');
-    script.src = src;
-    document.getElementsByTagName("head")[0].appendChild(script);
-  })();
-</script>
 </body>
 
 </html>

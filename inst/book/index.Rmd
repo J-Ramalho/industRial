@@ -58,7 +58,7 @@ Additionally Data Science brings new powerful approaches to the engineering and 
 
 **How to use this book**
 
-We assume the reader is familiar with product development and manufacturing quality methodologies such as dmaic and six sigma and the associated statistical concepts. Furthermore it is considered that he/she brings at least a beginner knowledge on R. The book focus is on putting these areas together.
+We assume the reader is familiar with product development and manufacturing quality methodologies such as dmaic and six sigma and the related statistical concepts. We also assume the reader is already a user of the R programming language. The Case Studies then bring all the areas together in a practical way.
 
 This book is better used as a reference book by using the navigation bar on the left to go a specific industrial domain. To reproduce the examples all the case studies data sets, example functions and the textbook original files can be downloaded as a package called `{industRial}`. For guidelines on how to use them refer to the sections [Datasets](#datasets) and [Functions](#functions)
 
@@ -68,7 +68,7 @@ In the appendix we provide a detailed [Index](#contents) and a [Glossary](#gloss
 
 **Content overview**
 
-The case studies are organized according the a logical product development flow. The text starts with case studies in the domain of Design for Six Sigma. These are some practical tools in that help prioritizing problems and get focus on how to tackle them. The next group of case studies covers the domain of Measurement System Analysis, an initial important step when developing a product or manufacturing process. Here is discussed how to analyze the response of a measurement device in terms of its bias and its uncertainty. The next large group of case studies is the Design of Experiments. This corresponds to the core of the R&D activities and provides approaches to minimize the quantity of trials and time to reach to a sufficient knowledge of how the product or system works. Also on how to obtain the right balance on its features and properties to obtain the desired output. A final group of case studies presents ways to get the manufacturing process in control according to what was defined in the product development phase. These are the well known Statistical Process Control and Capability studies.
+The case studies are organized according the a logical product development flow. The text starts with case studies in the domain of Design for Six Sigma. These are some practical tools in that help prioritizing problems and get focus on how to tackle them. The next group of case studies covers the domain of Measurement System Analysis, an initial important step when developing a product or manufacturing process. Here is discussed how to analyze the response of a measurement device in terms of its bias and its uncertainty. The next large group of case studies is the Design of Experiments. This corresponds to the core of the R&D activities and provides approaches to minimize the quantity of trials and time to reach to a sufficient knowledge of how the product or system works. Also on how to obtain the right balance on its features and properties to get the desired output. A final group of case studies presents ways to get the manufacturing process in control according to what was defined in the product development phase. These are the well known Statistical Process Control and Capability studies.
 
 **Acknowledgements**
 

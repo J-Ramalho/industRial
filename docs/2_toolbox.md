@@ -15,15 +15,15 @@ Choosing the right set of tools for Data Science is often not a very scientific 
 
 In this book we've chosen to provide all examples in R which is a free software environment for statistical computing and graphics. Besides taste and personal preference R brings a significant number of specific advantages in the field of Industrial Data Science:
 
-1.  R allows for reproducible research
+R allows for reproducible research
 
 This because the algorithms and functions defined to make the calculations can be inspected and all results can be fully reproduced and audited. This is known as reproducible research and is a critical aspect in all areas where a proof is needed such as in equipment validation and product quality reporting.
 
-2.  R functions, tools and programs can be adapted and improved
+R functions and tools can be audited and improved 
 
-Being an open source language, all R libraries and packages added to the basic environment can be not only audited but adapted and improved This is very important as when we enter into details every industry has a slight different way of doing things, different naming conventions, different coeficients and so on.
+Being an open source language, all R libraries and packages added to the basic environment can be audited, adapted and improved. This is very important because when we enter into details every industry has a slight different way of doing things, different naming conventions, different coeficients and so on.
 
-3.  R is extensible
+R is extensible
 
 R is compatible with most other software on the market and is an excellent "glue" tool allowing for example for data loading from excel files, producing reports in pdf and even building complete dashboards in the form of web pages.
 
@@ -33,9 +33,9 @@ Large documentation is available on installing and learning R, starting with the
 
 All industry specific tools applied throughout this book are available in the form of packages of the programming language R. As with all open source code, they're all available for download with freedom to modification and at no cost.
 
-The amount of packages available is extremely large and growing very fast. When selecting new packages it is recommended to check the latest package update. Packages that have had no improvements since more than a couple of years should be questioned. The field evolves rapidly and compatibility and other issues can become painful. A way to obtain statistics on package history is on [metacran](https://www.r-pkg.org/) or [RStudio package manager](https://packagemanager.rstudio.com/).
+The amount of packages available is extremely large and growing very fast. When selecting new packages it is recommended to check the latest package update. Packages that have had no improvements since more than a couple of years should be questioned. The field evolves rapidly and compatibility and other issues can become painful. Two ways of obtaining statistics on package history are [metacran](https://www.r-pkg.org/) and [RStudio package manager](https://packagemanager.rstudio.com/).
 
-Additionally an original package with the name `{industRial}` has been developed as a companion package for this book. 
+Additionally an original package named `{industRial}` has been developed as a companion package for this book. 
 
 ### Installation {#installation}
 
@@ -43,7 +43,9 @@ The companion package to this book can downloaded from github with the following
 
     devtools::install_github("J-Ramalho/industRial")
 
-The list below identifies which are the remainin packages required to run the examples in this book. The column *Download* precises if a package is downloaded automatically when the `{industRial}` package is downloaded (imports) or if it needs be downloaded manually by the reader (suggests). In technical terms this differentiation corresponds to the DESCRIPTION file and allows for a progressive installation of the required software.
+The list below identifies which are the remaining packages required to run all the coded of the book examples. Note that it is not required to download them all at once.
+
+The column *Download* precises if a package is downloaded automatically when the `{industRial}` package is downloaded (imports) or if it needs be downloaded manually by the reader (suggests). In technical terms this differentiation corresponds to the DESCRIPTION file and allows for a progressive installation of the required software.
 
 
 |Download |Package    |Domain           |Version |Depends                                       |
@@ -82,25 +84,32 @@ The list below identifies which are the remainin packages required to run the ex
 |suggests |car        |statistics       |3.0-9   |R (>= 3.5.0), carData (>= 3.0-0)              |
 |suggests |RcmdrMisc  |statistics       |2.7-1   |R (>= 3.5.0), utils, car (>= 3.0-0), sandwich |
 
-The imported packages are loaded implicitly and in the book text we don't see the loading instructions over and over again, e.g. `library(dplyr)`. Be sure to load at minimum the packages below before trying any example:
+In the book text we don't see the loading instructions for the installed packages over and over again everytime an example is given to avoid repetition (e.g. running `library(dplyr)` before each code chunk). Be sure to load at minimum the packages below before trying any example:
 
     ds_pkgs <- c("tidyverse", "scales", "janitor", "knitr", "stats", "industRial",
       "viridis", "broom", "patchwork")
     purrr::map(ds_pkgs, library, character.only = TRUE)
 
-A common issue in R when compared to python for instance is **function masking**. As we tend to load all the sets of functions from each package we end up with conflicting function names. In the scope of this text it is mostly the function filter() from `{dplyr}` which conflicts with the function with the same name from `{stats}`. We use the most simple technique which is to add `filter <- dplyr::filter` in the beginning of our script to precise which function we want to give priority and we pre-append the package name to all calls of the other function such as `stats::filter`. For more sophisticated ways to handle this issue we suggest the package `{import}`.
+Beware of the common issue of *function masking*. This happens more often in R when compared to python. As we tend to load all the sets of functions from each package we end up with conflicting function names. In the scope of this text it is mostly the function filter() from `{dplyr}` which conflicts with the function with the same name from `{stats}`. We tackle this with the simple technique of adding `filter <- dplyr::filter` in the beginning of our script to precise which function we want to give priority and we pre-append the package name to all calls of the other function such as `stats::filter`. For more sophisticated ways to handle this issue we suggest the package `{import}`.
 
 ### Highlights
 
-We're highlighting now some specific packages that are used in the book and that bring powerful features in analysis of data from R&D and Operations. Wherever they are required in the book they are loaded explicitly so that we know where the functions come from.
+We're highlighting now some specific packages that are used in the book and that bring powerful features in analysis of data from R&D and Operations. Wherever they are required in the book we loaded them explicitly in the text to help tracking where the specific functions come from.
 
 #### six sigma
 
-SixSigma is a very complete and robust package by Emilio L.Cano [@Cano2015]. It provides many well tested functions in the area of quality management.
+`{SixSigma}` is a very complete and robust R package. It provides many well tested functions in the area of quality and process improvement. We're preseting a full example with the gage r&R function in our MSA Case Study. As many other industrial packages, the `{SixSigma}` package is from before the `{tidyverse}` era and its plots have been not been developed with `{ggplot2}`. This makes integration in newer approaches harder. The data output is still nevertheless fully exploitable and very useful. The package is part of an excellent book with the same name published by @Cano2012.
 
 #### qcc
 
-qcc is another extremely complete and solid package. It was developped and is maintained by Luca Scrucca and offers a very large range of statistical process control charts and capability analysis. Short examples in its vignette: [qcc vignette](https://luca-scr.github.io/qcc/articles/qcc.html)
+`{qcc}` is another extremely complete and solid package. It was developped and is maintained by Luca Scrucca and offers a very large range of statistical process control charts and capability analysis. This package has started long ago much before the `{tidyverse}` but has made the turn and revamped all its plots with `{ggplot2}`. At the moment of writing this version is not yet in CRAN but can be obtained from github with:
+
+```{}
+# install.packages("devtools")
+devtools::install_github("luca-scr/qcc", build = TRUE, build_opts = c("--no-resave-data", "--no-manual"))
+```
+
+You can find examples of the control charts in its vignette: [qcc vignette](https://luca-scr.github.io/qcc/articles/qcc.html). We build and develop further on our SPC Case Studies.
 
 #### qicharts2
 

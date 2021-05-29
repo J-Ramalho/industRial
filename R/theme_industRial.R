@@ -25,6 +25,7 @@
 #' This function returns an object of classes theme and gg from the ggplot2 package
 #' @export
 #'
+#' @importFrom ggplot2 %+replace%
 #' @examples
 #' library(dplyr)
 #' library(ggplot2)
@@ -37,8 +38,6 @@
 #'       x = "Treatment",
 #'       y = "Tensile strength [MPa]") +
 #'       theme_industRial()
-#'       
-#' @importFrom ggplot2 %+replace%
 theme_industRial <- function (font_size = 14, font_family = "", line_size = 0.5,
                               rel_small = 12/14, rel_tiny = 11/14, rel_large = 16/14,
                               base_size = font_size, base_family = font_family)

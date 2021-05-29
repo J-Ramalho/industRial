@@ -15,28 +15,49 @@
 #' @return
 #' This function returns an object with class tibble (tbl_df)
 #' @export
-#'
+#' @importFrom rlang .data
 process_stats <- function(data, part_spec_percent) {
-  data %>%
-    dplyr::filter(!is.na(data$weight_value), data$weight_value >= 0) %>%
-    dplyr::group_by(data$weight_target_value) %>%
+  # establish weight specs and mean
+  process_data <- data %>%
+    dplyr::filter(!is.na(.data$weight_value), .data$weight_value >= 0) %>%
+    dplyr::group_by(.data$weight_target_value) %>%
     dplyr::mutate(
       part_spec_percent = part_spec_percent,
-      spec_min = data$weight_target_value - data$weight_target_value * part_spec_percent / 100,
-      spec_max = data$weight_target_value + data$weight_target_value * part_spec_percent / 100,
-      weight_mean = mean(data$weight_value),
-      weight_sd = stats::sd(data$weight_value),
-      weight_out_perc = industRial::off_spec(spec_max, spec_min, weight_mean, weight_sd),
-      Cpk = industRial::process_Cpk(spec_max, spec_min, weight_mean, weight_sd),
-      weight_MR = abs(data$weight_value - dplyr::lag(data$weight_value)),
-      weight_MR_mean = mean(weight_MR, na.rm = TRUE),
+      spec_min = .data$weight_target_value - .data$weight_target_value * part_spec_percent / 100,
+      spec_max = .data$weight_target_value + .data$weight_target_value * part_spec_percent / 100,
+      weight_mean = mean(.data$weight_value),
+      weight_sd = stats::sd(.data$weight_value))
+  # calculate out of specs, Cpk and Moving range
+  process_data <- process_data %>%
+    dplyr::mutate(
+      weight_out_perc = industRial::off_spec(
+        process_data$spec_max, process_data$spec_min, 
+        process_data$weight_mean, process_data$weight_sd),
+      Cpk = industRial::process_Cpk(
+        process_data$spec_max, process_data$spec_min, 
+        process_data$weight_mean, process_data$weight_sd),
+      weight_MR = abs(.data$weight_value - dplyr::lag(.data$weight_value))
+      )
+  # calculate MR mean and max
+  process_data <- process_data %>%
+    dplyr::mutate(
+      weight_MR_mean = mean(process_data$weight_MR, na.rm = TRUE)
       # to be modified by -1
-      MR_max = 3.688 * weight_MR_mean,
-      R_out_limits = dplyr::if_else(condition = weight_MR > MR_max, weight_MR, NA_real_),
-      I_LCL = round((weight_mean - 2.66 * weight_MR_mean), 2),
-      I_UCL = round((weight_mean + 2.66 * weight_MR_mean), 2),
+    )
+  # calculate control limits
+  process_data <- process_data %>%
+    dplyr::mutate(
+      MR_max = 3.688 * process_data$weight_MR_mean)
+  process_data <- process_data %>% 
+    dplyr::mutate(
+      R_out_limits = dplyr::if_else(
+        condition = process_data$weight_MR > process_data$MR_max, process_data$weight_MR, NA_real_),
+      I_LCL = round((process_data$weight_mean - 2.66 * process_data$weight_MR_mean), 2),
+      I_UCL = round((process_data$weight_mean + 2.66 * process_data$weight_MR_mean), 2))
+  process_data <- process_data %>%
+    dplyr::mutate(
       weight_out_limits = dplyr::if_else(
-        condition = (data$weight_value > I_UCL | data$weight_value < I_LCL), 
-        data$weight_value, false = NA_real_)
+        condition = (.data$weight_value > process_data$I_UCL | .data$weight_value < process_data$I_LCL), 
+        .data$weight_value, false = NA_real_)
     )
 }

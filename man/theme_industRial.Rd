@@ -56,7 +56,6 @@ pet_delivery \%>\%
       x = "Treatment",
       y = "Tensile strength [MPa]") +
       theme_industRial()
-      
 }
 \references{
 For a complete case study application refer to \url{https://j-ramalho.github.io/industRial/}

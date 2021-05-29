@@ -125,6 +125,8 @@ h4.author, h4.date {
 
 .danger { color: red; }
 
+.highlight { color: #2D708EFF;}
+
 article { position: relative;
           padding: 5rem 0rem; }
 

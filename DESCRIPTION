@@ -1,5 +1,6 @@
 Package: industRial
 Type: Package
+Date: 28.05.2021
 Title: Companion To IndustRial Data Science Book
 Version: 0.1.0
 Authors@R: person("João", "Ramalho", email = "ramalho.joao@protonmail.com", role = c("aut", "cre"))

@@ -195,7 +195,7 @@ as the threshold.
 
 ## DFSS
 
-Quality tools have been grouped under varied names and methodologies being Six Sigma one of the most comprehensives ones. One way of summarising the Six Sigma framework is presented below in a step by step approach with definitions. Each steps consists of an analyis of the product development and production process that progressively refines the final product specifications.
+One way of summarising the Six Sigma framework is presented below in a step by step approach with definitions. Each steps consists of an analyis of the product development and production process that progressively refines the final product specifications.
 
 For a more detailed description we recommend reviewing the comprehensive Six Sigma certification reference book by @Munro2015.
 

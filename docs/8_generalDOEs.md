@@ -157,7 +157,7 @@ speed_plot <- juice_drymatter %>%
 drymatter_TGT_plot + particle_size_plot + speed_plot
 ```
 
-<img src="8_generalDOEs_files/figure-html/unnamed-chunk-8-1.png" width="80%" />
+<img src="8_generalDOEs_files/figure-html/unnamed-chunk-8-1.png" width="100%" />
 
 This kind of plots gives already important insights in to the experiement outcome, even before any deeper analysis with a linear model and anova. In our case:
 
@@ -257,7 +257,7 @@ speed_particle_size_plot <- juice_drymatter %>%
 drymatter_TGT_particle_size_plot + drymatter_TGT_speed_plot + speed_particle_size_plot
 ```
 
-<img src="8_generalDOEs_files/figure-html/unnamed-chunk-9-1.png" width="80%" />
+<img src="8_generalDOEs_files/figure-html/unnamed-chunk-9-1.png" width="100%" />
 
 The plots indicate no interaction between the different factors as all lines do not intercept and are mostly parallel.
 

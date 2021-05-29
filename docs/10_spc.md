@@ -177,7 +177,7 @@ We are now ready to finally we can see this all together in a plot:
 plot(syringe_xbar)
 ```
 
-<img src="10_spc_files/figure-html/unnamed-chunk-11-1.png" width="80%" />
+<img src="10_spc_files/figure-html/unnamed-chunk-11-1.png" width="100%" />
 
 ### Range chart {#Rchart}
 
@@ -193,7 +193,7 @@ syringe_R <- qcc(
   )
 ```
 
-<img src="10_spc_files/figure-html/unnamed-chunk-12-1.png" width="80%" />
+<img src="10_spc_files/figure-html/unnamed-chunk-12-1.png" width="100%" />
 
 <b>Regular production</b>
 
@@ -210,7 +210,7 @@ syringe_xbar <- qcc(
   )
 ```
 
-<img src="10_spc_files/figure-html/unnamed-chunk-13-1.png" width="80%" />
+<img src="10_spc_files/figure-html/unnamed-chunk-13-1.png" width="100%" />
 
 We can see that the data point corresponding to the average of the measurements of the samplegroup 17 is plotted in red because it is outside of the control limits.
 
@@ -227,7 +227,7 @@ syringe_R <- qcc(
   )
 ```
 
-<img src="10_spc_files/figure-html/unnamed-chunk-14-1.png" width="80%" />
+<img src="10_spc_files/figure-html/unnamed-chunk-14-1.png" width="100%" />
 
 In this case all the points are within the previously defined control limits.
 
@@ -255,7 +255,7 @@ plot(
 abline(h = warn.limits, lty = 3, col = "chocolate")
 ```
 
-<img src="10_spc_files/figure-html/unnamed-chunk-15-1.png" width="80%" />
+<img src="10_spc_files/figure-html/unnamed-chunk-15-1.png" width="100%" />
 
 A manufacturing process under control has a variation that is lower than the product specifications and ideally it is centered. Therefore it is usually good practice to follow the control chart rules refering to the process control limits. 
 
@@ -283,7 +283,7 @@ plot(
 abline(h = specs, lty = 3, col = "red")
 ```
 
-<img src="10_spc_files/figure-html/unnamed-chunk-17-1.png" width="80%" />
+<img src="10_spc_files/figure-html/unnamed-chunk-17-1.png" width="100%" />
 
 In the previous example we see a situation that happens in practice and that requires action: the data plotted is still within the min max specification limits for this relativelly small number of data points. Furthermore the variation is overall well contained within the process limits. Nevertheless we see it is extremelly off centered when compared with the product specification. A process capability study should help determining the causes for this offcentering and help correcting it.
 
@@ -364,7 +364,7 @@ syringe_long %>%
     subtitle = {plot_subtitle})
 ```
 
-<img src="10_spc_files/figure-html/unnamed-chunk-24-1.png" width="80%" />
+<img src="10_spc_files/figure-html/unnamed-chunk-24-1.png" width="100%" />
 
 By looking at the histogram of the Bamako lightning dataset we confirm the extreme offcentering of the production. We also see that although there are no measurements beyond the lower specification limit (LSL) it is very likely this will happen soon.
 
@@ -457,7 +457,7 @@ syringe_cpk <- process.capability(
 )
 ```
 
-<img src="10_spc_files/figure-html/unnamed-chunk-30-1.png" width="80%" />
+<img src="10_spc_files/figure-html/unnamed-chunk-30-1.png" width="100%" />
 
 A fine tuning of the forecast of the number of expected parts out of specification can be done with the parameter std.dev. The input value will be used in the probability distribution function. Different approaches can be considered: calculating the sandard deviation within each subgroup or the standard deviation of the entire population and also correcting the standard deviation dividing by n or by n - 1. In this example we re-use the standard deviation calculated on the entire set of datapoints as the group is small but for a case with more data it would be interesting to used the subgroups that tend to give smaller standard deviations.
 
@@ -536,12 +536,12 @@ process_stats_table(weight_statistics_data)
 ```
 
 ```{=html}
-<div id="sradamhihk" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="pghesfuuco" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>html {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
 }
 
-#sradamhihk .gt_table {
+#pghesfuuco .gt_table {
   display: table;
   border-collapse: collapse;
   margin-left: auto;
@@ -566,7 +566,7 @@ process_stats_table(weight_statistics_data)
   border-left-color: #D3D3D3;
 }
 
-#sradamhihk .gt_heading {
+#pghesfuuco .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -578,7 +578,7 @@ process_stats_table(weight_statistics_data)
   border-right-color: #D3D3D3;
 }
 
-#sradamhihk .gt_title {
+#pghesfuuco .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -588,7 +588,7 @@ process_stats_table(weight_statistics_data)
   border-bottom-width: 0;
 }
 
-#sradamhihk .gt_subtitle {
+#pghesfuuco .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -598,13 +598,13 @@ process_stats_table(weight_statistics_data)
   border-top-width: 0;
 }
 
-#sradamhihk .gt_bottom_border {
+#pghesfuuco .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#sradamhihk .gt_col_headings {
+#pghesfuuco .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -619,7 +619,7 @@ process_stats_table(weight_statistics_data)
   border-right-color: #D3D3D3;
 }
 
-#sradamhihk .gt_col_heading {
+#pghesfuuco .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -639,7 +639,7 @@ process_stats_table(weight_statistics_data)
   overflow-x: hidden;
 }
 
-#sradamhihk .gt_column_spanner_outer {
+#pghesfuuco .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -651,15 +651,15 @@ process_stats_table(weight_statistics_data)
   padding-right: 4px;
 }
 
-#sradamhihk .gt_column_spanner_outer:first-child {
+#pghesfuuco .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#sradamhihk .gt_column_spanner_outer:last-child {
+#pghesfuuco .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#sradamhihk .gt_column_spanner {
+#pghesfuuco .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -671,7 +671,7 @@ process_stats_table(weight_statistics_data)
   width: 100%;
 }
 
-#sradamhihk .gt_group_heading {
+#pghesfuuco .gt_group_heading {
   padding: 8px;
   color: #333333;
   background-color: #FFFFFF;
@@ -693,7 +693,7 @@ process_stats_table(weight_statistics_data)
   vertical-align: middle;
 }
 
-#sradamhihk .gt_empty_group_heading {
+#pghesfuuco .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -708,15 +708,15 @@ process_stats_table(weight_statistics_data)
   vertical-align: middle;
 }
 
-#sradamhihk .gt_from_md > :first-child {
+#pghesfuuco .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#sradamhihk .gt_from_md > :last-child {
+#pghesfuuco .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#sradamhihk .gt_row {
+#pghesfuuco .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -735,7 +735,7 @@ process_stats_table(weight_statistics_data)
   overflow-x: hidden;
 }
 
-#sradamhihk .gt_stub {
+#pghesfuuco .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -747,7 +747,7 @@ process_stats_table(weight_statistics_data)
   padding-left: 12px;
 }
 
-#sradamhihk .gt_summary_row {
+#pghesfuuco .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -757,7 +757,7 @@ process_stats_table(weight_statistics_data)
   padding-right: 5px;
 }
 
-#sradamhihk .gt_first_summary_row {
+#pghesfuuco .gt_first_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -767,7 +767,7 @@ process_stats_table(weight_statistics_data)
   border-top-color: #D3D3D3;
 }
 
-#sradamhihk .gt_grand_summary_row {
+#pghesfuuco .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -777,7 +777,7 @@ process_stats_table(weight_statistics_data)
   padding-right: 5px;
 }
 
-#sradamhihk .gt_first_grand_summary_row {
+#pghesfuuco .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -787,11 +787,11 @@ process_stats_table(weight_statistics_data)
   border-top-color: #D3D3D3;
 }
 
-#sradamhihk .gt_striped {
+#pghesfuuco .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#sradamhihk .gt_table_body {
+#pghesfuuco .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -800,7 +800,7 @@ process_stats_table(weight_statistics_data)
   border-bottom-color: #D3D3D3;
 }
 
-#sradamhihk .gt_footnotes {
+#pghesfuuco .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -814,13 +814,13 @@ process_stats_table(weight_statistics_data)
   border-right-color: #D3D3D3;
 }
 
-#sradamhihk .gt_footnote {
+#pghesfuuco .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding: 4px;
 }
 
-#sradamhihk .gt_sourcenotes {
+#pghesfuuco .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -834,41 +834,41 @@ process_stats_table(weight_statistics_data)
   border-right-color: #D3D3D3;
 }
 
-#sradamhihk .gt_sourcenote {
+#pghesfuuco .gt_sourcenote {
   font-size: 90%;
   padding: 4px;
 }
 
-#sradamhihk .gt_left {
+#pghesfuuco .gt_left {
   text-align: left;
 }
 
-#sradamhihk .gt_center {
+#pghesfuuco .gt_center {
   text-align: center;
 }
 
-#sradamhihk .gt_right {
+#pghesfuuco .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#sradamhihk .gt_font_normal {
+#pghesfuuco .gt_font_normal {
   font-weight: normal;
 }
 
-#sradamhihk .gt_font_bold {
+#pghesfuuco .gt_font_bold {
   font-weight: bold;
 }
 
-#sradamhihk .gt_font_italic {
+#pghesfuuco .gt_font_italic {
   font-style: italic;
 }
 
-#sradamhihk .gt_super {
+#pghesfuuco .gt_super {
   font-size: 65%;
 }
 
-#sradamhihk .gt_footnote_marks {
+#pghesfuuco .gt_footnote_marks {
   font-style: italic;
   font-weight: normal;
   font-size: 65%;
@@ -926,7 +926,7 @@ The data set being available we're feeding it into the chart_I() function:
 chart_I(weight_statistics_data)
 ```
 
-<img src="10_spc_files/figure-html/unnamed-chunk-37-1.png" width="80%" />
+<img src="10_spc_files/figure-html/unnamed-chunk-37-1.png" width="100%" />
 
 ### Moving range chart {#chart_IMR}
 
@@ -937,7 +937,7 @@ The companion of the I chart is the MR chart, where MR stands for moving range. 
 chart_IMR(weight_statistics_data)
 ```
 
-<img src="10_spc_files/figure-html/unnamed-chunk-38-1.png" width="80%" />
+<img src="10_spc_files/figure-html/unnamed-chunk-38-1.png" width="100%" />
 
 ### Capability chart (custom) {#chart_Cpk}
 
@@ -948,6 +948,6 @@ And a final chart for this session the capability chart:
 chart_Cpk(weight_statistics_data)
 ```
 
-<img src="10_spc_files/figure-html/unnamed-chunk-39-1.png" width="80%" />
+<img src="10_spc_files/figure-html/unnamed-chunk-39-1.png" width="100%" />
 
 

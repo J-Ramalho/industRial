@@ -7,11 +7,11 @@ Validation of a measurement device
 
 ## Trueness
 
-**The juice production plant**
-
-The Quality Control Manager of a Juice producing plant acquired a faster dry matter content measurement device from the supplier DRX. An important reduction of the control time was the rational for the acquisition and now before finally putting it into operation its performance is being assessed and validated.
-
 <div class="marginnote">
+
+**Case study: juice production plant**
+
+The Quality Control Manager has acquired a fast dry matter content measurement device from the supplier DRX. The rational for the acquisition has been the important reduction of the control time. Now before finally putting it into operation its performance is being assessed and validated.
 
 <div class="figure" style="text-align: center">
 <img src="img/juice_bottling_bw.jpg" alt="juice bottling line" width="100%" />
@@ -84,7 +84,7 @@ juice_drymatter %>%
        caption = "Dataset: juice_drymatter233A, Operator: S.Jonathan)")
 ```
 
-<img src="4_msa_files/figure-html/unnamed-chunk-5-1.png" width="80%" />
+<img src="4_msa_files/figure-html/unnamed-chunk-5-1.png" width="100%" />
 
 The linear model is well adapted in this case, this by seing the position of the slope close to the averages of each level of the factor. Nevertheless the slope is rather steep showing a clear increase of the bias (in the negative direction) with the increase in dry matter content.
 
@@ -246,7 +246,7 @@ Total Variation   11.09345930 3.3306845 19.984107    100.00      39.97
 Number of Distinct Categories = 3 
 ```
 
-<img src="4_msa_files/figure-html/unnamed-chunk-12-1.png" width="80%" />
+<img src="4_msa_files/figure-html/unnamed-chunk-12-1.png" width="100%" />
 
 We can observe that the SixSigma package recreates exactly the same anova table, just calling Repeatability to the Residuals and adding an additional line with the total degrees of freedom and the total sum of squares. 
 
@@ -370,7 +370,7 @@ Total Variation   11.08146189 3.3288830 19.973298    100.00      39.95
 Number of Distinct Categories = 3 
 ```
 
-<img src="4_msa_files/figure-html/unnamed-chunk-13-1.png" width="80%" />
+<img src="4_msa_files/figure-html/unnamed-chunk-13-1.png" width="100%" />
 
 In our case when comparing the total gage r&R with and without the interaction we see it changing from 38.46% to 38.38%.
 

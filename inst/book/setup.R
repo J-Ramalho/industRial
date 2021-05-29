@@ -23,5 +23,5 @@ knitr::opts_chunk$set(
   message = FALSE,
   warning = FALSE,
   comment = NA,
-  out.width = "80%"
+  out.width = '100%'
 )

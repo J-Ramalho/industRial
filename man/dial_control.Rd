@@ -24,6 +24,7 @@ function like \code{\link[qicharts2]{paretochart}}.
   \item{Date}{Data collection date}
   \item{Defect}{Defect type ("Indent", "Scratch")}
   \item{Location}{Position on the watch dial refered to as the hour (1h, 2h)}
+  \item{id}{Part unique id number}
 }
 }
 \examples{

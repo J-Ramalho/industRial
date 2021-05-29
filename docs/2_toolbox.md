@@ -98,30 +98,44 @@ We're highlighting now some specific packages that are used in the book and that
 
 #### six sigma
 
-`{SixSigma}` is a very complete and robust R package. It provides many well tested functions in the area of quality and process improvement. We're preseting a full example with the gage r&R function in our MSA Case Study. As many other industrial packages, the `{SixSigma}` package is from before the `{tidyverse}` era and its plots have been not been developed with `{ggplot2}`. This makes integration in newer approaches harder. The data output is still nevertheless fully exploitable and very useful. The package is part of an excellent book with the same name published by @Cano2012.
+`{SixSigma}` is a complete and robust R package. It provides many well tested functions in the area of quality and process improvement. We're presenting a full example with the gage r&R function in our MSA Case Study. As many other industrial packages, the `{SixSigma}` package is from before the `{tidyverse}` era and its plots have been not been developed with `{ggplot2}`. This makes integration in newer approaches harder. The data output is still nevertheless fully exploitable and very useful. The package is part of an excellent book with the same name published by @Cano2012.
 
 #### qcc
 
-`{qcc}` is another extremely complete and solid package. It was developped and is maintained by Luca Scrucca and offers a very large range of statistical process control charts and capability analysis. This package has started long ago, long before the `{tidyverse}` but has made the turn and revamped all its plots with `{ggplot2}`. At the moment of writing this version is not yet in CRAN but can be obtained from github with:
+The Quality Control Charts package, `{qcc}` is another very complete and solid package. It offers a very large range of statistical process control charts and capability analysis. Several examples of the control charts are available in its vignette: [qcc vignette](https://luca-scr.github.io/qcc/articles/qcc.html) that we develop further in our SPC Case Studies.
 
-```{}
-# install.packages("devtools")
-devtools::install_github("luca-scr/qcc", build = TRUE, build_opts = c("--no-resave-data", "--no-manual"))
-```
+#### qicharts2 {#qicharts2}
 
-Several examples of the control charts are available in its vignette: [qcc vignette](https://luca-scr.github.io/qcc/articles/qcc.html). We build and develop further on our SPC Case Studies.
-
-#### qicharts2
-
-We recommend `{qichart2}` specifically for the nice pareto plots which are alreay based on `{ggplot2}`. As many niche packages we need to be awere that the number of contributers is small meaning that it cannot be as thouroughly tested as community packages.
+We recommend `{qichart2}` specifically for the good pareto plots. The package also provides statistical process control charts which are based on `{ggplot2}` and can serve as an easier alternative to the `{qcc}` package. As many niche packages we need to be aware that the number of contributors is small meaning that it cannot be as thoroughly tested as community packages.
 
 #### DoE.base
 
-This package is one of the most complete and vast packages in Design of Experiements. It is a first of a large suite of packages on the topic, it has vast functionality and is extremely well documented. We do some exploration of the automatic generation of designs in the DOE case studies. Full documentation available under: [DoE.base](http://prof.beuth-hochschule.de/groemping/software/doe/?L=1&print=1)
+This package is one of the most complete and vast packages in Design of Experiments. `{DoE.base}` is a first of a large suite of packages on the topic, it has vast functionality and is very well documented. We do some exploration of the automatic generation of designs in the DOE case studies. Full documentation available under: [DoE.base](http://prof.beuth-hochschule.de/groemping/software/doe/?L=1&print=1)
+
+
+#### agricolae
+
+Agricolae is a long tested package in the domain of design of experiments. It has been developed for the domain of Agricultural Research but can be used elsewhere. We make a small use, specifically to obtain the function fisher LSD but believe the package has a wealth of functions and methodologies to be explored.
+
+#### rsm
+
+The Response Surface Methods `{rsm}` is the best option in our view to produce 3D plots from linear models. It has specific features to use directly the models removing all the work to produce the data and feed generic 3D plotting functions. The package is larger than this and contains many support functions in the domain of design of experiments.
 
 #### car
 
-The Companion for Applied Regression is also used extensively as it contains many usefull functions to assess the performance of linear models and anova.
+The `{car}` package which stands for Companion for Applied Regression is also used in many occasions as it contains many useful functions to assess the performance of linear models and anova. This package is combined with a complete book by @Fox2019.
+
+#### RcmdrMisc
+
+This package by the same author of the `{car}` provides additional miscellaneous functions for statistical analysis. Although it is part of a point and click interface for R we value it for its functions and plots in the domain of linear regression.
+
+#### broom
+
+The mission of `{broom}` is to *Convert statistical objects into tidy tibbles*. This is quite usefull when we want to reuse the output of the statistical analysis such as the R-squared in data pipelines with `{tidyverse}` packages. It becomes specially handy to obtain printing quality outputs in `{Rmarkdown}` documents with tables rendered with `{kable}` and in `{shiny}` apps. Several examples are present throughtout our book and mostly in the tutorials.
+
+#### stats
+
+Many functions from the packages discussed before are built on the large and extremely well tested `{stats}` package. This package is installed directly with R and consolidates software code that has been improving and tested for decades. As an example the source code of the [lm](https://svn.r-project.org/R/trunk/src/library/stats/R/lm.R) function has close to 1000 lines. The complete package has more than 400 functions that can be listed with `library(help = "stats")` or `ls("package:stats")` 
 
 ## Datasets {#datasets}
 
@@ -170,14 +184,14 @@ dial_control %>%
 
 
 
-|Operator |Date       |Defect  |Location |
-|:--------|:----------|:-------|:--------|
-|Jane     |2018.01.31 |Indent  |3h       |
-|Jane     |2018.02.02 |Indent  |3h       |
-|Jane     |2018.02.02 |Indent  |4h       |
-|Peter    |2018.02.02 |Indent  |10h      |
-|Jane     |2018.02.03 |Scratch |3h       |
-|Jane     |2018.02.03 |Indent  |3h       |
+|Operator |Date       |Defect  |Location |id    |
+|:--------|:----------|:-------|:--------|:-----|
+|Jane     |2018.01.31 |Indent  |3h       |D2354 |
+|Jane     |2018.02.02 |Indent  |3h       |D2355 |
+|Jane     |2018.02.02 |Indent  |4h       |D2356 |
+|Peter    |2018.02.02 |Indent  |10h      |D2357 |
+|Jane     |2018.02.03 |Scratch |3h       |D2358 |
+|Jane     |2018.02.03 |Indent  |3h       |D2359 |
 
 The dateset can be used and manipulated like any other dataset created in the session or loaded otherwise. For example it can be filtered and assigned to a new variable name:
 
@@ -192,10 +206,10 @@ dial_peter %>%
 
 
 
-|Operator |Date       |Defect  |Location |
-|:--------|:----------|:-------|:--------|
-|Peter    |2018.02.02 |Indent  |10h      |
-|Peter    |2018.02.03 |Scratch |4h       |
+|Operator |Date       |Defect  |Location |id    |
+|:--------|:----------|:-------|:--------|:-----|
+|Peter    |2018.02.02 |Indent  |10h      |D2357 |
+|Peter    |2018.02.03 |Scratch |4h       |D2360 |
 
 ## Functions {#functions}
 

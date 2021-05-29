@@ -5,33 +5,37 @@
 
 # Design for Six Sigma
 
+Quality tools have been grouped under varied names and methodologies being Six Sigma one of the most well known and comprehensives ones. The domain is vast as seen in the dozens of tools collected in the Six Sigma book by @Munro2015. For this section we've selected a few cases that strongly support Measurement System Analysis, Design of Experiments and Statistical Process Control. Beside supporting the remaining sections, they also pretend to showcase how R can be used also for other purposes than data wrangling and visualization in the domain of industrial data science, typically to obtain easily reproducible diagrams. 
+
+We start with a case on a dial workshop in the watch making industrial where the pareto chart comes handy. We then move to a dental prosthesis laboratory to see how a simple fishbone diagram can help pinpoint special causes of the measurement variation of an optical device and we finish we two different approaches on how to optimize experiment execution by assess the correlation between the outputs in order to minimize the parameters to measure.
+
 ## Pareto
 
-The pareto chart has always proven an effective way of defining priorities and keeping workload under control. It is known for helping focusing on the few important elements that account for most problems. It builds on the well known insight that a few reasons explain or allow to control most of the outcome. This applies particularly well in the technological and industrial context.
-
-**The dial polishing workshop**
-
-The example here comes from a dial polishing workshop in the watchmaking industry. Dials are received from the stamping process and polished before being sent to the final assembly. As part of the authonomous quality control performed by the polishing operators a count of the defects observed on the dials each day is kept in a file. 
-
 <div class="marginnote">
+<b class="highlight">Case study: dial polishing workshop</b>
+
+Watch dials are received from the stamping process and polished before being sent to the final assembly. As part of the autonomous quality control performed by the polishing operators a count of the defects observed on the dials each day is logged in a spreadsheet. 
 
 <div class="figure" style="text-align: center">
 <img src="img/assemblage_cadran_bw.jpg" alt="watch dial inspection" width="100%" />
-<p class="caption">(\#fig:unnamed-chunk-2)watch dial inspection</p>
+<p class="caption">(\#fig:img-dial)watch dial inspection</p>
 </div>
 
 </div>
 
-**Loading packages and data:**
+The pareto chart has always proven an effective way of defining priorities and keeping workload under control. It is known for helping focusing on the few important elements that account for most problems. It builds on the well known insight that a few reasons explain or allow to control most of the outcome. This applies particularly well in the technological and industrial context.
 
-getting the dial dataset:
+Often in workshop setups the priorities of day are set by the informal discussions between team members. It is important to be sensitive to the last problem observed or the latest request from management but it is also important to look at data, particularly over a period of time. When looking at simple things as counts and frequencies we sometimes get surprised of how different our perception is from the reality shown by the data collected.
 
+Collecting data can be done in many different forms and there's no right or wrong. It can be noted on a board, log book, spreadsheet or in a dedicated software. 
 
-```r
-dial_control <-  industRial::dial_control
-```
+In a <b class="highlight">dial polishing workshop</b> of a watchmaking manufacture, the assembly operators have been collecting dial defects in a spreadsheet. Logging a defect doesn't mean the dial is directly scrapped. Putting away parts has strong impact on the cost of the operation and has to be done on clear criteria. Sometimes the parts can be rework with minor effort. The datalog corresponds to the status of the dials as they arrive from the stamping and before entering the polishing operation. Their dataset with the name `dial_control` shows each dial unique number and the general and defect information noted by the operators.
 
-A first look at the dataset now:
+<div class="marginnote">
+All datasets are available by loading the book companion package with `library(industRial)`. Full instructions in the [datasets](#datasets) session.
+</div>
+
+### Collecting defects
 
 
 ```r
@@ -43,24 +47,28 @@ head(dial_control) %>%
 
 
 
-Table: (\#tab:unnamed-chunk-4)dial control data
+Table: (\#tab:tab-dial)dial control data
 
-| Operator |    Date    | Defect  | Location |
-|:--------:|:----------:|:-------:|:--------:|
-|   Jane   | 2018.01.31 | Indent  |    3h    |
-|   Jane   | 2018.02.02 | Indent  |    3h    |
-|   Jane   | 2018.02.02 | Indent  |    4h    |
-|  Peter   | 2018.02.02 | Indent  |   10h    |
-|   Jane   | 2018.02.03 | Scratch |    3h    |
-|   Jane   | 2018.02.03 | Indent  |    3h    |
+| Operator |    Date    | Defect  | Location |  id   |
+|:--------:|:----------:|:-------:|:--------:|:-----:|
+|   Jane   | 2018.01.31 | Indent  |    3h    | D2354 |
+|   Jane   | 2018.02.02 | Indent  |    3h    | D2355 |
+|   Jane   | 2018.02.02 | Indent  |    4h    | D2356 |
+|  Peter   | 2018.02.02 | Indent  |   10h    | D2357 |
+|   Jane   | 2018.02.03 | Scratch |    3h    | D2358 |
+|   Jane   | 2018.02.03 | Indent  |    3h    | D2359 |
 
 We can see that the count includes both the deffect type and the location (the hour in the dial) and that it is traced to the day and operator.
 
-The team leader promotes a culture of fact based assessment of the quality measurements. Every week the team looks back and observes the weekly counts. This is important because it helps moving away from perception into a more solid assessment. The volume of data is higher like this enabling trends to start becoming apparent. The team can discuss potential actions and prepare reporting to the supplier of the parts (the stamping workshop). It also helps calibrating between operators and agreeing on acceptance criteria and what is and what is not a defect.
+The team leader promotes a culture of fact based assessment of the quality measurements. Every week the team looks back and observes the weekly counts. When the quantity of data get bigger trends to start becoming apparent. The team can discuss potential actions and prepare reporting to the supplier of the parts (the stamping workshop). It also helps calibrating between operators and agreeing on acceptance criteria and what is and what is not a defect. 
 
-A first example of the pareto of the types of defects:
+Recently there have been lots of talk about scratched dials and there's a big focus on how to get rid of them. For their weekly review Christophe has prepared a pareto chart in R.
 
 ### Pareto chart {#paretochart}
+
+<div class="marginnote">
+See [{qicharts2}](#qicharts2) for more details on this R package
+</div>
 
 
 ```r
@@ -71,66 +79,77 @@ library(qicharts2)
 ```r
 d_type <- dial_control %>% pull(Defect) %>% as.character()
 d_type_p <- paretochart(d_type, 
-                           title = "Watch Dial polishing",
+                           title = "Watch dial Defects",
                            subtitle = "Pareto chart", 
                            ylab = "Percentage of deffects",
                            xlab = "Deffect type",
-                           caption = "Source: Dial Production Team")
+                           caption = "Source: dial polishing workshop")
 d_type_p + 
   theme_industRial()
 ```
 
-<img src="3_sixsigma_files/figure-html/unnamed-chunk-6-1.png" width="80%" />
+<div class="figure" style="text-align: center">
+<img src="3_sixsigma_files/figure-html/fig-pareto1-1.png" alt="pareto chart example" width="100%" />
+<p class="caption">(\#fig:fig-pareto1)pareto chart example</p>
+</div>
 
-As often happens we can see that the first two deffects account for more than 80% of the problems. Identation and scratching are the things to tackle here.
+As often happens we can see that the first two defects account for more than 80% of the problems. Scratching levels are in fact high but they realize indentation is even higher. Is it clear what indentation is? Have we been noting sometimes indentation for scratches? Where to draw the line? and are the causes of these two defects the same?
 
-From the available data presented before in table we can go deeper and establish a pareto of the defect location:
+The decides to go deeper in the analysis and Peter says that a potential cause is the fixing tool that holds the dial on the right. To check Peter's hypothesis Jane prepares another plot by location for the next week review.
 
 
 ```r
 d_location <- dial_control %>% pull(Location) %>% as.character()
 d_location_p <- paretochart(d_location, 
-                           title = "Watch Dial polishing",
+                           title = "Watch dial deffects",
                            subtitle = "Pareto chart", 
                            ylab = "Percentage of deffects",
                            xlab = "Deffect location (hour)",
-                           caption = "Source: Dial Production Team")
+                           caption = "Source: Dial workshop")
 d_location_p +
   theme_industRial()
 ```
 
-<img src="3_sixsigma_files/figure-html/unnamed-chunk-7-1.png" width="80%" />
+<div class="figure" style="text-align: center">
+<img src="3_sixsigma_files/figure-html/fig-pareto2-1.png" alt="pareto chart example" width="100%" />
+<p class="caption">(\#fig:fig-pareto2)pareto chart example</p>
+</div>
 
-Here a third bucket could be included in the priorities: to reach 80% of the count we consider the defects that appear at 4 o'clock, 3 o'clock and 5 o'clock.
+Effectively there are many defects at 3h corresponding to the position on the right of the dial (and even more at 4h). Peter's assumption may be right, the team decides to gather in the first polishing workbench and share openly how each of them fixes the dial to try to understand if there is a specific procedure or applied force that creates the defect. 
 
-During the reviews the team can also identify other types of data for follow up such as the dial model or the material type. With a simple excel file and an upload in R this can be finetuned from week to week according to the progress of the improvement measures.
+This example shows how data collecting can be simple and effective. if no one in the team is using R yet, a simple pareto chart could be done more simply with a spreadsheet. What R brings is the possibility to quickly scale up: handling very large and constantly changing files for example and also the possibility to directly and simply produce pdf reports or dynamic web applications to collect and visualize the data.
+
+To practice and go further in the exploration of pareto charts checkout the tutorials section.
 
 ## Ishikawa
 
-Usually called Fishbone or Ishikawa diagrams this simple tool has proven to be extremely practical and helpful in structuring team discussions. 
-
-With it we can easily identify and list the expected influencing factors for example to design an experiment. Such selection and grouping of parameters can be useful for among others in defining the right mix of ingredients in a new product or material, in selecting the machine parameters in a manufacturing line or in the definition of a draft operating procedure for a measurement. In each of these situations it helps seeing the big picture and not fall into the trap of relying only in the data and findings obtained by statistical analysis.
-
-Below we're showing an example building on the qcc package. The package author describes in his book @Cano2012 the advantages of using R for the design of these diagrams. In our view it strongly complements the data analysis making the full case easilly reproducible and easily updatable.
-
-**The dental prosthesis laboratory**
-
-An optical measurement device has just been installed in a large Dental Prosthesis Manufacturing Laboratory. This is a very expensive device based on laser technology installed in a dedicated stabilized workbench. Despite all the precautions it has been reported and now demonstrated with some specific trials that the measurements have a higher variation which makes it unsuitable to be used for what is was used for: the precise measurement of dental impressions that serve as models for the production of the crowns and bridges.
-
 <div class="marginnote">
+<b class="highlight">Case study: dental prosthesis laboratory</b>
+
+An optical measurement device has just been installed in a large Dental Prosthesis Manufacturing Laboratory. It is precise but expensive device based on laser technology which has been installed in a dedicated stabilized workbench. 
 
 <div class="figure" style="text-align: center">
 <img src="img/dental_scan2.png" alt="dental impression measurement" width="100%" />
-<p class="caption">(\#fig:unnamed-chunk-8)dental impression measurement</p>
+<p class="caption">(\#fig:img-dental)dental impression measurement</p>
 </div>
 
 </div>
 
-So far the Lab Team has full confidence in the equipement supplier and the Lab Manager has seen a similar equipment from the same supplier operating in another laboratory he has visited.
+Usually called Fishbone or Ishikawa diagrams this simple tool has proven to be extremely practical and helpful in structuring team discussions. 
 
-The supplier checked the equipment and having seen no reason for the variability proposes to work with the lab team on identifying the potential causes for the high uncertainty in their measurements. They decided to consider a larger scope that the equipment and take the full measurement method as described in the laboratory operating procedure. They list different reasons related with they're work and group them:
+With it we can easily identify and list the expected influencing factors in various contexts such as the preparation of an experiment design. Selection and grouping input parameters can be useful in defining for example the right mix of ingredients in a new product, in selecting manufacturing parameters in an industrial production line or in the definition of a draft operating procedure for a measurement device. In each of these situations it helps seeing the big picture and not fall into the trap of relying only in the data and findings obtained by statistical analysis.
 
-### Fishbone diagram {#fishbone}
+In this case study we're exploring the creation of Ishikawa diagrams with the `{qcc}` package. @Cano2012 recommends the utilization of R even for such simple diagrams with clear arguments on reproducibility and ease of update. If R and programming is already part of the working culture and there's someone in the team this makes perfect sense.
+
+The lab manager of a <b class="highlight">dental prosthesis laboratory</b> has acquired a optical device for the precise measurement of the dental impressions that serve as models for the production of the crowns and bridges.
+
+The lab has been having complains and several parts have been returned from the dentists and had to be partially or totally reworked. Besides the potential troubles to patients and the already incurred financial losses there is a reputation loss of which the lab manager is very concerned with. Regardless of all this the acquisition decision has taken more than a year.
+
+After installation and in spite all the precautions it has been reported and now demonstrated with some specific trials that the measurements have a high variation which is preventing putting it in operation. Until now the laboratory team has always had full confidence in the equipment supplier and the Lab Manager has even seen the same equipment operating in another laboratory from the group.
+
+The supplier has been called on site to check the equipment and having seen no reason for the variability proposes to work with the lab team on identifying the potential causes for the high uncertainty in their measurements. They decided to consider a larger scope than just the equipment and take the full measurement method as described in the laboratory operating procedure. They list different reasons related with they're work and group them.
+
+### Listing root causes
 
 
 ```r
@@ -138,12 +157,14 @@ operators <- c("Supplier", "Lab Technician", "Lab Manager")
 materials <- c("Silicon", "Alginate", "Polyethers")
 machines <- c("Brightness", "Fixture", "Dimensional algorithm")
 methods <- c("Fixture", "Holding time", "Resolution")
-measurements <- c("Recording method", "Rounding", "Resolution")
+measurements <- c("Recording method", "Rounding", "Log")
 groups <- c("Operator", "Material", "Machine", "Method", "Measurement")
 effect <- "Too high uncertainty"
 ```
 
-And then load the qcc package and quickly obtain a simple diagram that allows for a quick visualisation of these influencing factors.
+One of the team members is using R and he has generating all previous reports on the topic with R markdown. He simply adds to the last report a call to the `{qcc}` package and quickly obtains a simple diagram that allows for a quick visualization of these influencing factors.
+
+### Fishbone diagram {#fishbone}
 
 
 ```r
@@ -153,7 +174,7 @@ library(qcc)
 
 ```r
 cause.and.effect(
-  title = "Potential causes for uncertainty increase during a measurement",
+  title = "Potential causes for optical measurement variation",
   cause = list(
     Operator = operators,
     Material = materials,
@@ -166,70 +187,65 @@ cause.and.effect(
 ```
 
 <div class="figure" style="text-align: center">
-<img src="3_sixsigma_files/figure-html/fig-ishikawa-1.png" alt="ishikawa diagram aplication" width="100%" />
-<p class="caption">(\#fig:fig-ishikawa)ishikawa diagram aplication</p>
+<img src="3_sixsigma_files/figure-html/fig-fishbone, fig-ishikawa-1.png" alt="ishikawa diagram example" width="100%" />
+<p class="caption">(\#fig:fig-fishbone, fig-ishikawa)ishikawa diagram example</p>
 </div>
 
-The listed factors can then be adressed one by one or in combined experiments to evaluate their impact on the measurement method.
+The listed factors can now be addressed either one by one or in combined experiments to evaluate their impact on the measurement method. The lab team has decided to assess the method robustness to the brightness and to the dimensional algorithm and will prepare an experiment design with several combinations of these parameters to evaluate them. Using the diagram they can easily keep track of what has been listed, tested and can be eliminated as root cause.
 
 ## Correlation
 
-A correlation matrix is a way to discover relationships between groups of items as described by  described in the Six Sigma book by @Munro2015. 
-
-These matrix can be used to select which measurement to do in a design of experiments. In exploratory phases when the experiments are repeated several time with slightly different configurations, secondary outputs that are strongly correlated to main outputs can be eliminated 
-
-In an industrial setup the cost of experimenting is often very high. With this approach engineers can keep the quantities test quantities in control by avoiding measurements until final stages of implementation. 
-
-We provide here two different techniques, one with a tile plot and another with a network plot.
-
-**The Perfume destilation experiment**
-
 <div class="marginnote">
+
+<b class="highlight">Case study: perfume distillation experiment</b>
+
+A Project Manager in perfume formulation needs to understand in detail the impact of the perfume manufacturing line parameters variation (e.g. temperature, pressure and others) in typical perfume sensorial characteristics such as the floral notes.
 
 <div class="figure" style="text-align: center">
 <img src="img/parfum.jpg" alt="Perfume destillation line" width="100%" />
-<p class="caption">(\#fig:unnamed-chunk-11)Perfume destillation line</p>
+<p class="caption">(\#fig:img-perfume)Perfume destillation line</p>
 </div>
 
 </div>
 
-DOEs consist in a series of trials where several inputs are combined in specific levels and important outputs are measured (further details can be seen in the DOE chapter). The case below refers to a DOE on Perfume Formulation Development. The Product Development team would like to understand the impact of the perfum manufacturing line parameters variation (e.g. temperature, pressure and others) in typical perfume sensorial characteristics such as the floral notes.
+A correlation matrix is a way to discover relationships between groups of items. Such matrix can also be used to select which output measurement should be done in priority in a design of experiments (DOE). In exploratory phases when the experiments are repeated several time with slightly different configurations, secondary outputs that are strongly correlated to main outputs can be eliminated 
 
-The typical DOE analysis results linking inputs to outputs are presented with effects plots and interaction plots. Here though it is another analysis that interests us: the correlation between the outputs, where there is not always necessary a cause effect but where it is interesting to see if groups of outputs move together. This type of analysis is most commonly presented in a tile plot.
+In an industrial setup the cost of experimenting is often very high. With this approach engineers and scientists can keep the test quantities in control and avoiding measurements until final stages of implementation. We explore in this case study two different techniques, one with a tile plot and another more advanced with a network plot.
 
-In our present case note that the first DOE has not yet been executed, only a preparatory session has taken place with the project manager to review the potential outputs and anticipate what will be the DOE results. This allowed to go deeper in the technology understanding and to confirm that the plan was constructed in a meaning full way. The experts input has been captured in a 1/2 of a two entry table named "Perfume".
+A DOE consists in a series of trials where several inputs are combined together and important outputs are measured (further details can be seen in the DOE chapter). Commonly DOE analysis results linking inputs to outputs are presented with effects plots and interaction plots but before getting it is important to check the correlation between the outputs. Often there groups of outputs move together even if there is no cause and effect relationship between them. We can see this correlation in a tile plot.
 
-As the industRial package was already loaded in the Pareto section, we can then access directly to the Perfume dataset of which we're showing a subset:
+A team of experts of a manufacturer of fragrances has listed 23 different output variables of interest for an exploratory <b class="highlight">perfume distillation experiment</b>. Facing such extensive list the Project Manager decided to put the team together a second time to try to set priorities. The approach was to guess the results of the experiment which allowed to go deeper in the technology and to construct an experiment plan in a meaningful way. The experts inputs have been captured in a a two entry table named `perfume_experiement`.
 
 ### Matrix {#matrix}
 
 
 ```r
-perfume_experiment[1:8, 1:8] %>%
+perfume_experiment[1:6, 1:7]%>%
   kable(
-    caption = "perfume DoE output variables",
+    align = "c",
+    caption = "perfume DoE correlation matrix of the outputs",
     booktabs = T
   ) 
 ```
 
 
 
-Table: (\#tab:unnamed-chunk-12)perfume DoE output variables
+Table: (\#tab:tab-perfume)perfume DoE correlation matrix of the outputs
 
-|yy | pw|  w| pm| pe|  f| it| ew|
-|:--|--:|--:|--:|--:|--:|--:|--:|
-|pw |  0| 10|  3|  3|  2|  2|  0|
-|w  |  0|  0|  3|  3|  2|  2|  0|
-|pm |  0|  0|  0|  6|  6|  0|  0|
-|pe |  0|  0|  0|  0|  6|  0|  0|
-|f  |  0|  0|  0|  0|  0|  7|  0|
-|it |  0|  0|  0|  0|  0|  0|  0|
-|ew |  0|  0|  0|  0|  0|  0|  0|
-|c  |  0|  0|  0|  0|  0|  0|  0|
+| yy | pw | w  | pm | pe | f | it |
+|:--:|:--:|:--:|:--:|:--:|:-:|:--:|
+| pw | 0  | 10 | 3  | 3  | 2 | 2  |
+| w  | 0  | 0  | 3  | 3  | 2 | 2  |
+| pm | 0  | 0  | 0  | 6  | 6 | 0  |
+| pe | 0  | 0  | 0  | 0  | 6 | 0  |
+| f  | 0  | 0  | 0  | 0  | 0 | 7  |
+| it | 0  | 0  | 0  | 0  | 0 | 0  |
 
-Variables are named with coded names made of two letter. They represent the production Line Parameters and the Perfume Attributes (e.g. t = temperature, o = opening, pw = power). We can see in the table what the team has noted as expected correlation strenght, with 10 being the highest.
+In the matrix the experiment output variables are named with coded names made of two letters. They represent the production Line Parameters (e.g. t = temperature, o = opening, pw = power) and the Perfume Attributes (f = flower). We can see in the table what the experts have noted the expected correlation strengths in an unusual way from 1 to 10, with 10 being the highest. In order to prepare a visual representation with a tile plot from `{ggplot2}` the data is transformed to long format. An additional trick is to convert the values at zero to NA so that they get directly transparent on the plot.
 
-Now we filter correlations higher or equal to 7 which have been considered as the potential targets for the simplification in future designs:
+<div class="marginnote">
+Values at zero in the dataset are converted to type NA_real_ to obtain a transparent background in the the tileplot. 
+</div>
 
 
 ```r
@@ -239,7 +255,8 @@ perfume_long <- perfume_experiment %>%
     values_to = "correlation",
     names_to = "xx"
   ) %>%
-  filter(correlation >= 7) %>%
+  mutate(correlation = if_else(
+    correlation == 0, NA_real_, correlation)) %>%
   mutate(correlation = as_factor(correlation))
 ```
 
@@ -253,38 +270,39 @@ perfume_long %>%
   geom_tile() + 
   labs(
     title = "The Perfume destilation experiment",
-    subtitle = "Input variables correlation plot ",
+    subtitle = "Output variables correlation plot ",
     x = "",
     y = "",
-    caption = "Data variables anonymized"
+    caption = "Anonymised data"
   ) +
   theme_industRial()
 ```
 
-<img src="3_sixsigma_files/figure-html/unnamed-chunk-14-1.png" width="80%" />
+<div class="figure" style="text-align: center">
+<img src="3_sixsigma_files/figure-html/fig-perfumetileplot-1.png" alt="tileplot example" width="100%" />
+<p class="caption">(\#fig:fig-perfumetileplot)tileplot example</p>
+</div>
 
-The plot shows that many parameters are expected to move together, for example with maximum correlation we have hp moving with d, oc moving with o and so on.
- 
-After this first DoE the real correlations will be established and the team expects to be able to avoid a significant part of the measurements that have a correlation higher than 50% from the second DoE onwards.
+The plot shows that many parameters are expected to move together. Looking in detail the flow aroma moves together with other sensory attributes such as hp, o and oc. After this first DoE the real correlations will be established and the team expects to be able to avoid a significant part of the measurements that have a correlation higher than 50% from the second DoE onward.
 
 ## Clustering
 
-In this variant we explore a more advanced but more powerfull approach using network plots. It provides an automatic clustering of the factors and a specific way to read such clusters.
+In this second analysis of the <b class="highlight">perfume distillation experiment</b> we present a more advanced but more powerful approach using network plots. It explores an automatic way to clustering the variables and a specific way to present such clusters.
 
-We're going to build a weighed non directional network(tbl_graph) object. Several steps of conversion are required for this approach first with igraph and then to tidygraph.
-
-We start by loading the required packages: 
+Technically we're going to build a weighed non directional network(tbl_graph) object. Several steps of conversion are required for this approach first with functions from various packages from the networks domain.
 
 
 ```r
 library(igraph)
 library(tidygraph)
 library(ggraph)
-library(ggforce)
-library(ggtext)
 ```
 
 The first step consists in converting the "Perfume" tibble to a matrix format:
+
+<div class="marginnote">
+The perfume_experiment is originaly coded as a tibble object. 
+</div>
 
 
 ```r
@@ -293,7 +311,7 @@ perfume_matrix <- perfume_experiment %>%
   as.matrix()
 ```
 
-Then using the {igraph} package we convert the matrix into a graph object:
+Then using the `{igraph}` package we convert the matrix into a graph object:
 
 
 ```r
@@ -302,14 +320,14 @@ perfume_graph <- graph_from_adjacency_matrix(
   )
 ```
 
-to finaly convert it into a tibble graph with tidygraph package:
+to finally convert it into a tibble graph with `{tidygraph}` package:
 
 
 ```r
 perfum_tbl_graph <- as_tbl_graph(perfume_graph, add.rownames = "nodes_names")
 ```
 
-The users have provided the correlation strength in a simple scale from 1 to 10 which was easier for the discussion. We're here converting it back to the 0 to 1 which is more common in the statistics community. For simplicity, negative correlations were not considered just the strength, enabling the network to be unidirectional.
+As mentioned the experts have provided the correlation strength in the unusual scale from 1 to 10 which was easier for them during discussion. Here we're here converting it back to the 0 to 1 which is more common in the statistics community. For simplicity, negative correlations were not considered just the strength, enabling the network to be unidirectional.
 
 
 ```r
@@ -344,9 +362,7 @@ perfum_tbl_graph
 # … with 19 more rows
 ```
 
-In the previous chunk output we see a preview of the tibble graph object with the first few nodes and edges.
-
-Now we create a vector with various igraph layouts to allow for easier selection when making the plots:
+In the previous chunk output we see a preview of the tibble graph object with the first few nodes and edges. Now we create a vector with various igraph layouts to allow for easier selection when making the plots:
 
 
 ```r
@@ -367,11 +383,14 @@ perfum_tbl_graph %>%
        subtitle = "Most important expected correlations")
 ```
 
-<img src="3_sixsigma_files/figure-html/unnamed-chunk-21-1.png" width="80%" />
+<div class="figure">
+<img src="3_sixsigma_files/figure-html/fig-network1-1.png" alt="raw network plot example" width="100%" />
+<p class="caption">(\#fig:fig-network1)raw network plot example</p>
+</div>
 
-Data loading is confirmed to have been done correctly, we can now move into the clustering and analysis.
+Data loading is now confirmed to have been done correctly and we can now move into the clustering analysis. We use different clusters algorithms to generate the groups.
 
-We use different clusters algorithms like in part 3 to generate the groups:
+### Clustering algorithms
 
 
 ```r
@@ -388,7 +407,15 @@ perfum_tbl_graph <- perfum_tbl_graph %>%
          )
 ```
 
-and produce a final plot, selecting group optimal that with some testing has proven to be the algorithm that gives the best clustering results. The correlations strengths are here represented by the edges width for optimal visualization.
+There's extensive research behind of each of these algorithms and detailed information can be obtained starting simply with the R help system. For example for one selected here type `?group_louvain` or `?cluster_louvain` on the console. Digging deeper it is possible to find the author names and the papers explaining how and when to use them.
+
+To produce the final plot some trial and error is needed to select the algorithm that gives the best clustering results. Now for the final step we also need to load some specific support packages for advanced plotting.
+
+
+```r
+library(ggforce)
+library(ggtext)
+```
 
 ### Network plot {#network_plot}
 
@@ -434,13 +461,14 @@ perfum_tg_2 %>%
                                       face = "bold")) 
 ```
 
-<img src="3_sixsigma_files/figure-html/unnamed-chunk-23-1.png" width="80%" />
+<div class="figure">
+<img src="3_sixsigma_files/figure-html/fig-network2-1.png" alt="network plot example" width="100%" />
+<p class="caption">(\#fig:fig-network2)network plot example</p>
+</div>
 
 <br>
 
-We can see that the algorithm is grouping elements that have a strong correlation. Most stronger correlations are present within elements of each cluster with some exceptions such as oc with pw and y with pe. 
-
-The code presented can now easily be reused once the DOE is executed to compare with the real correlations measured.
+We can see that the algorithm is grouping elements that have a strong correlation. Most stronger correlations are mostly presented within elements of each cluster. This is expected as certain perfume sensorial attributes are strongly correlated and the same for certain Line Parameters.e The code presented can now easily be reused once the DOE is executed to compare with the real correlations measured. Once knowledge is built and confirmed on which outputs are strongly correlated a selection of the key parameters can be done. This strongly simplifies the experiments by reducing the number of outputs to measure and reduces the cost and lead time of new formulations.
 
 
 

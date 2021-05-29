@@ -9,11 +9,11 @@ Validation of a measurement device
 
 ## Trueness
 
-**The juice production plant**
-
-The Quality Control Manager of a Juice producing plant acquired a faster dry matter content measurement device from the supplier DRX. An important reduction of the control time was the rational for the acquisition and now before finally putting it into operation its performance is being assessed and validated.
-
 <div class="marginnote">
+
+**Case study: juice production plant**
+
+The Quality Control Manager has acquired a fast dry matter content measurement device from the supplier DRX. The rational for the acquisition has been the important reduction of the control time. Now before finally putting it into operation its performance is being assessed and validated.
 
 ```{r echo=FALSE, fig.align='center', fig.cap="juice bottling line", out.width="100%"}
 knitr::include_graphics("img/juice_bottling_bw.jpg")

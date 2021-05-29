@@ -6,7 +6,7 @@ Correlation,[Matrix](#matrix),,perfume_experiment,The perfume destilation experi
 ,[Tileplot](#tileplot),`ggplot2::geom_tile`,,,,,,
 Clustering,[Network plot](#network_plot),`ggraph::ggraph`,perfume_experiment,The perfume destilation experiment,Perfume,ok,Completed,ok
 MSA,,,,,,,,ok
-Trueness,[Bias plot](#bias_plot),`ggplot2::geom_smooth`,juice_drymatter,The juice production plant,Food,ok,Completed,ok
+Calibration,[Bias plot](#bias_plot),`ggplot2::geom_smooth`,juice_drymatter,The juice production plant,Food,ok,Completed,ok
 ,[Bias report](#bias_report),,,,,,,
 Precision,[Gage r&R](#gageRnR),`SixSigma::ss.rr`,tablet_thickness,The tablet compaction process,Pharma,ok,On going,ok
 ,[Gage acceptance](#gage_acceptance),,,,,,,

@@ -38,7 +38,7 @@ All datasets are available by loading the book companion package with `library(i
 
 ### Collecting defects
 
-```{r tab-dial}
+```{r tbl-dial}
 head(dial_control) %>% 
   kable(align = "c", 
         caption = "dial control data", 
@@ -184,7 +184,7 @@ A team of experts of a manufacturer of fragrances has listed 23 different output
 
 ### Matrix {#matrix}
 
-```{r tab-perfume}
+```{r tbl-perfume}
 perfume_experiment[1:6, 1:7]%>%
   kable(
     align = "c",

@@ -110,7 +110,7 @@ Visualise (niche),statistics,streamgraph,
 Visualise (specialities),statistics,tidybayes,
 Visualise (specialities),statistics,treemappify,
 datascience,statistics,DescTools,
-datascience,statistics,skimr,
+datascience,statistics,skimr,imports
 Setup,support software,anaconda,
 Setup,support software,Colorpicker,
 Setup,support software,dbBrowser,

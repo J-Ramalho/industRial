@@ -3,69 +3,87 @@
 
 # Measurement System Analysis {#MSA}
 
-Validation of a measurement device
+Analyzing and validating measurement methods and tools is the base for ensuring the quality of manufacturing products. For most commercial products it goes beyond simply satisfying consumer expectations and has regulatory and legal implications. Using measurement tools in industrial setups for high volume production goes naturally beyond buying and installing an equipment. It requires clear operating procedures, trained operators and tested devices for the specific range applications and products. 
 
-## Trueness
+There are many different normalizing bodies in the metrology domain with different approaches and terminology. The cases in this section follow a simplified step by step approach aiming at giving an overview of how data treatment can be done with R.
+
+The first case treats the calibration of a recently acquired measurement device by comparing it to a reference device. It provides statistical analysis of the bias of the method compared with the reference for the full measurement range. The following case deals with the estimation of the method precision, namely the measurement repeatability and reproducibility under regular utilization conditions. It provides examples on acceptance criteria typical in industrial context. The final case study presents calculation of the method uncertainty, a more comprehensive indicator taking into account the calculations done in the previous cases.
+
+## Calibration
 
 <div class="marginnote">
 
-**Case study: juice production plant**
+<b class="highlight">Case study: juice production plant</b>
 
-The Quality Control Manager has acquired a fast dry matter content measurement device from the supplier DRX. The rational for the acquisition has been the important reduction of the control time. Now before finally putting it into operation its performance is being assessed and validated.
+The Quality Assurance Head has acquired a fast dry matter content measurement device from the supplier DRX. The rational for the acquisition has been the important reduction of the control time. Before it enters operation its performance is being assessed and validated.
 
 <div class="figure" style="text-align: center">
 <img src="img/juice_bottling_bw.jpg" alt="juice bottling line" width="100%" />
-<p class="caption">(\#fig:unnamed-chunk-2)juice bottling line</p>
+<p class="caption">(\#fig:img-juice)juice bottling line</p>
 </div>
 
 </div>
 
-In this case study we will look into the assessment of the linearity which is the difference in average bias throughout the measurement range. 
+A first step after a measurement equipment acquisition is the assessment of the response over the entire measurement range. In particular it is important to verify its linearity and variability and determine the average bias throughout the measurement range. 
 
-Dry matter content for the company top seller juice_bottling have around  12% dry matter as for example Premium Fresh Apple juice: 12.4 % and Austrian Beetroot: 13.2% and some other specialities may have a higher content up such as Organic Carrot with 16.3%.
-
-It has been decided to start by checking the equipement in the range of 10 to 20% dry matter content.
-
-Lets look into the measurements obtained on the juice bottling process:
+In a <b class="highlight">juice production plant</b> the dry matter content for the top seller is around 13% dry matter content. Typical specifications are the Premium fresh apple juice with 12.4 % and the Austrian beetroot juice with 13.2%. Some other specialties may have a higher content up such as the Organic carrot that has 16.3%. After consulting with the Manufacturing Team Leader, the Quality Assurance Head selects checking the equipment in the range of 10 to 20% dry matter content. For the calibration assessment samples are produced at target values set at round numbers (10%, 15% and so on). This data is captured in the `juice_drymatter` dataset of which we're checki
 
 
 ```r
-summary(juice_drymatter)
+juice_drymatter %>%
+  head(5) %>%
+  kable(
+    align = "c",
+    caption = "juice dry matter data"
+        )
 ```
 
-```
-   product          drymatter_TGT     speed      particle_size      part  
- Length:108         Min.   :10    Min.   :20.0   Min.   :250   Min.   :1  
- Class :character   1st Qu.:10    1st Qu.:20.0   1st Qu.:250   1st Qu.:1  
- Mode  :character   Median :15    Median :22.5   Median :275   Median :2  
-                    Mean   :15    Mean   :22.5   Mean   :275   Mean   :2  
-                    3rd Qu.:20    3rd Qu.:25.0   3rd Qu.:300   3rd Qu.:3  
-                    Max.   :20    Max.   :25.0   Max.   :300   Max.   :3  
- drymatter_DRX    drymatter_REF  
- Min.   : 9.720   Min.   : 9.97  
- 1st Qu.: 9.898   1st Qu.:10.02  
- Median :14.700   Median :15.01  
- Mean   :14.706   Mean   :15.00  
- 3rd Qu.:19.503   3rd Qu.:20.00  
- Max.   :19.710   Max.   :20.03  
-```
 
-we see raw data for the DRX and Ref equipment allowing us to calculate the difference between the two devices for each measurement:
+
+Table: (\#tab:code-juicesummary)juice dry matter data
+
+| product  | drymatter_TGT | speed | particle_size | part | drymatter_DRX | drymatter_REF |
+|:--------:|:-------------:|:-----:|:-------------:|:----:|:-------------:|:-------------:|
+|  apple   |      10       |  20   |      250      |  1   |     9.80      |     10.05     |
+|  apple   |      10       |  20   |      250      |  2   |     9.82      |     10.05     |
+|  apple   |      10       |  20   |      250      |  3   |     9.82      |     10.05     |
+| beetroot |      10       |  20   |      250      |  1   |     9.79      |     10.03     |
+| beetroot |      10       |  20   |      250      |  2   |     9.75      |     10.03     |
+
+We see in this raw dataset that it contains the same samples dry matter content measured twice. First with the with the new equipment (DRX) and then with the reference equipment (Ref). The reference equipment is considered as such because it has been validated and accepted by the head quarters quality department. The difference between the two devices for each measurement is calculated below and allocated to a new variable with the name bias.
 
 
 ```r
 juice_drymatter <- juice_drymatter %>%
   mutate(bias = drymatter_DRX - drymatter_REF, part = as_factor(part))
-summary(juice_drymatter$bias)
 ```
 
-```
-   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
--0.6300 -0.4025 -0.2850 -0.2979 -0.1875 -0.0700 
+A first look at the bias with the `skim()` function from `{skimr}` gives already an indication that the bias is not constant along the measurement range.
+
+<div class="marginnote">
+See [{skimr}](#skimr) for more details on this R package, an alternative to base::summary()
+</div>
+
+
+```r
+library(skimr)
 ```
 
-We immediatly see a median bias of -0.2 
-Lets explore further.
+
+```r
+skim(juice_drymatter$bias) %>%
+  yank("numeric")
+```
+
+
+
+**Variable type: numeric**
+
+|skim_variable | n_missing| complete_rate| mean|   sd|    p0|  p25|   p50|   p75|  p100|hist  |
+|:-------------|---------:|-------------:|----:|----:|-----:|----:|-----:|-----:|-----:|:-----|
+|data          |         0|             1| -0.3| 0.14| -0.63| -0.4| -0.29| -0.19| -0.07|▂▅▆▇▇ |
+
+Such results are not encouraging because a non regular bias along the range may require specific correction for different product which may be not practical and prone to error. Often this requires to dig into detail to understand the causes of the bias and determine if they are related with the physical phenomena and if there are clear controllable causes. Ultimately this could result is narrowing the measurement range and validating a specific device and method for a specific product specification target. For the Quality Assurance Manager it is too early to draw conclusions and he establishes a more detailed plot with `{ggplot2}` to better visualize the data.
 
 ### Bias plot {#bias_plot}
 
@@ -84,109 +102,142 @@ juice_drymatter %>%
        caption = "Dataset: juice_drymatter233A, Operator: S.Jonathan)")
 ```
 
-<img src="4_msa_files/figure-html/unnamed-chunk-5-1.png" width="100%" />
+<div class="figure" style="text-align: center">
+<img src="4_msa_files/figure-html/fig-juicebiasplot-1.png" alt="bias plot example" width="100%" />
+<p class="caption">(\#fig:fig-juicebiasplot)bias plot example</p>
+</div>
 
-The linear model is well adapted in this case, this by seing the position of the slope close to the averages of each level of the factor. Nevertheless the slope is rather steep showing a clear increase of the bias (in the negative direction) with the increase in dry matter content.
+This type of plot is usually called *bias plot* and provides a view of how the difference between the measurements obtained with the new device and the reference device compare allong the measuremen range. In the plot generated an additional regression line has been introduced with `geom_smooth` from `{ggplot2}`. There are several ways to assess the linearity. In this case we're going to remain at a visual check only leaving to the Design of Experiments case study a more thourough verification.
+
+The linear model appears as well adapted in this case. The first check is the observation that regression line passes close to the averages of each level of the dry matter factor. Nevertheless the slope is rather steep showing a clear increase of the bias (in the negative direction) with the increase in dry matter content.
 
 ### Bias report {#bias_report}
+
+Using well known `{dplyr}` function the plot is complemented with statistics of the bias for each level of dry matter target: mean, median, standard deviation. A good practice that took some time to adopt but now is well anchored is to always present the sample size which speaks for the relevance of the statistical indicators.
 
 
 ```r
 juice_drymatter %>%
   group_by(drymatter_TGT) %>%
   summarise(bias_mean = mean(bias, na.rm = TRUE), 
-            bias_median = median(bias, na.rm = TRUE)) %>%
-  select(drymatter_TGT, bias_mean, bias_median) %>%
+            bias_median = median(bias, na.rm = TRUE),
+            bias_sd = sd(bias, na.rm = TRUE), 
+            bias_n = n()) %>%
+  # select(drymatter_TGT, bias_mean, bias_median) %>%
   kable(align = "c", digits = 2)
 ```
 
 
 
-| drymatter_TGT | bias_mean | bias_median |
-|:-------------:|:---------:|:-----------:|
-|      10       |   -0.17   |    -0.15    |
-|      15       |   -0.29   |    -0.31    |
-|      20       |   -0.44   |    -0.44    |
+| drymatter_TGT | bias_mean | bias_median | bias_sd | bias_n |
+|:-------------:|:---------:|:-----------:|:-------:|:------:|
+|      10       |   -0.17   |    -0.15    |  0.07   |   36   |
+|      15       |   -0.29   |    -0.31    |  0.10   |   36   |
+|      20       |   -0.44   |    -0.44    |  0.10   |   36   |
 
-Mean and median bias are very close. A decision now needs to be taken on which systematic offset to apply depending on the operational context. If most products on the line where the device is used a simplified operational procedure with a unique offset of 0.2 can be sufficient.
+Mean and median bias are very close which indicates that the data is equally distributed around the mean The standard deviation is also very similar from level to level indicating that the measurement variability is not depending on the range of measurement. A decision now needs to be taken on which systematic offset to apply depending on the operational context. As mentioned most commercial products on the production line where the device is used have a target specification around 13% therefore the Quality Assurance Head decides together with Manufacturing Team Leader to put in the operating procedure of the device a unique offset of 0.3 g.
 
 ## Precision
 
-**The tablet compaction process**
+<div class="marginnote">
+
+<b class="highlight">Case study: tablet compaction process</b>
 
 Modern pharmaceutical tablet presses reach output volumes of up to 1,700,000 tablets per hour. These huge volumes require frequent in-process quality control for the tablet weight, thickness and hardness.
 
-In our case study we're going to measurement the precision of the measurement method used to determine the thickness of the tablet.
-
-<div class="marginnote">
-
 <div class="figure" style="text-align: center">
 <img src="img/tablet_micrometer.png" alt="Tablet thickness micrometer" width="100%" />
-<p class="caption">(\#fig:unnamed-chunk-7)Tablet thickness micrometer</p>
+<p class="caption">(\#fig:img-tablet)Tablet thickness micrometer</p>
 </div>
 
 </div>
 
-According to the ISO 5725 the Precision of a measurement method is the combination of the Reproductibility & Reproducibility.
+Pharmaceutical production setups combine uniquely extreme high volumes with stringent quality demands. In a pharmaceutical <b class="highlight">tablet compaction process</b> the quality measurement system requires the Production Operator to sample tablets on a regular basis and log the thickness in a spreadsheet on the line. Although many companies have now inline automatic measurement devices providing automatic data collection to a central database it is not uncommon to see hand held devices and manual log of measurements in spreadsheets. In an age of machine learning and sophisticated predictive tools this may seem awkward but it is common to see coexisting old and new approaches on the shop floor.
 
-**Data loading**
+A recurring check of measurement devices is the famous gage r&R. r&R stands for reproducibility and Reproductibility which combined give the instrument precision, according to the ISO 5725.
 
-We use here the data from the tablet thickness method validation:
+In fact besides thickness, the quality measurement system requires the operator to collect quite an large variety of parameters including room conditions. Elaborating on this a Quality Engineer has prepared a specific file for the gage r&R that also included the replicate number. As it is common practice he asked the measurements to be done by several operators. This data has been loaded into R and is available in the dataset `tablet_thickness` and an extract is presented here in raw:
 
 
 ```r
-str(tablet_thickness)
+tablet_thickness %>%
+  head(3) %>%
+  kable(
+    align = "c",
+    caption = "tablet thickness gage r&R data"
+  )
 ```
 
-```
-spec_tbl_df[,11] [675 × 11] (S3: spec_tbl_df/tbl_df/tbl/data.frame)
- $ Position             : chr [1:675] "Position 1" "Position 1" "Position 1" "Position 1" ...
- $ Size                 : chr [1:675] "L" "L" "L" "L" ...
- $ Tablet               : chr [1:675] "L001" "L001" "L001" "L001" ...
- $ Replicate            : num [1:675] 1 2 3 4 5 1 2 3 4 5 ...
- $ Day                  : chr [1:675] "Day 1" "Day 1" "Day 1" "Day 1" ...
- $ Date [DD.MM.YYYY]    : chr [1:675] "18/11/2020" "18/11/2020" "18/11/2020" "18/11/2020" ...
- $ Operator             : chr [1:675] "Paulo" "Paulo" "Paulo" "Paulo" ...
- $ Thickness [micron]   : num [1:675] 1803 1803 1804 1804 1803 ...
- $ Temperature [°C]     : num [1:675] 22.3 22.3 22.3 22.4 22.6 22.9 22.8 22.8 22.7 22.7 ...
- $ Relative Humidity [%]: num [1:675] 32.7 32.8 32.8 33.4 33.4 36 36.3 36.4 36.6 36.3 ...
- $ Luminescence [lux]   : num [1:675] 569 580 580 584 594 ...
- - attr(*, "spec")=
-  .. cols(
-  ..   Position = col_character(),
-  ..   Size = col_character(),
-  ..   Tablet = col_character(),
-  ..   Replicate = col_double(),
-  ..   Day = col_character(),
-  ..   `Date [DD.MM.YYYY]` = col_character(),
-  ..   Operator = col_character(),
-  ..   `Thickness [micron]` = col_double(),
-  ..   `Temperature [°C]` = col_double(),
-  ..   `Relative Humidity [%]` = col_double(),
-  ..   `Luminescence [lux]` = col_double()
-  .. )
+
+
+Table: (\#tab:tbl-tabletthickness)tablet thickness gage r&R data
+
+|  Position  | Size | Tablet | Replicate |  Day  | Date [DD.MM.YYYY] | Operator | Thickness [micron] | Temperature [°C] | Relative Humidity [%] | Luminescence [lux] |
+|:----------:|:----:|:------:|:---------:|:-----:|:-----------------:|:--------:|:------------------:|:----------------:|:---------------------:|:------------------:|
+| Position 1 |  L   |  L001  |     1     | Day 1 |    18/11/2020     |  Paulo   |      1802.519      |       22.3       |         32.7          |       568.6        |
+| Position 1 |  L   |  L001  |     2     | Day 1 |    18/11/2020     |  Paulo   |      1802.783      |       22.3       |         32.8          |       580.4        |
+| Position 1 |  L   |  L001  |     3     | Day 1 |    18/11/2020     |  Paulo   |      1803.989      |       22.3       |         32.8          |       580.5        |
+
+It is an excellent practice to look at raw data because it gives an immediate perception of general aspects such as the number of variables, their levels and their datatypes. Although this is irreplaceable it is possible to go further and `skim()` provides an excellent complement and summary. Below we see that the test requested by the Quality Engineer has required 675 measurements on 11 different variables by 3 different operators. We can see room conditions are stable, rather normally distributed and having small standard deviations and we can even see that thickness appears with 3 groups which seems related with the 3 sizes noted in the Size column.
+
+
+```r
+skim(tablet_thickness) 
 ```
 
-We see that quite an extensive variaty of parameters was collected here including room conditions. We are mostly interested in the tablet size, thickness and operator who has performed the measurement. As these parameters are coded as characters we are going to convert them to factors:
+
+Table: (\#tab:tbl-tabletskim)Data summary
+
+|                         |                 |
+|:------------------------|:----------------|
+|Name                     |tablet_thickness |
+|Number of rows           |675              |
+|Number of columns        |11               |
+|_______________________  |                 |
+|Column type frequency:   |                 |
+|character                |6                |
+|numeric                  |5                |
+|________________________ |                 |
+|Group variables          |None             |
+
+
+**Variable type: character**
+
+|skim_variable     | n_missing| complete_rate| min| max| empty| n_unique| whitespace|
+|:-----------------|---------:|-------------:|---:|---:|-----:|--------:|----------:|
+|Position          |         0|             1|  10|  10|     0|        3|          0|
+|Size              |         0|             1|   1|   1|     0|        3|          0|
+|Tablet            |         0|             1|   4|   4|     0|       15|          0|
+|Day               |         0|             1|   5|   5|     0|        3|          0|
+|Date [DD.MM.YYYY] |         0|             1|  10|  10|     0|        5|          0|
+|Operator          |         0|             1|   5|   5|     0|        3|          0|
+
+
+**Variable type: numeric**
+
+|skim_variable         | n_missing| complete_rate|    mean|     sd|      p0|     p25|     p50|     p75|    p100|hist  |
+|:---------------------|---------:|-------------:|-------:|------:|-------:|-------:|-------:|-------:|-------:|:-----|
+|Replicate             |         0|             1|    3.00|   1.42|    1.00|    2.00|    3.00|    4.00|    5.00|▇▇▇▇▇ |
+|Thickness [micron]    |         0|             1| 1523.01| 242.72| 1193.62| 1219.39| 1549.25| 1802.99| 1812.85|▇▁▇▁▇ |
+|Temperature [°C]      |         0|             1|   21.30|   1.52|   18.00|   20.00|   21.10|   22.70|   24.90|▂▇▅▇▂ |
+|Relative Humidity [%] |         0|             1|   33.08|   1.59|   29.70|   31.80|   32.70|   34.20|   36.70|▂▇▆▃▃ |
+|Luminescence [lux]    |         0|             1|  548.78|  48.05|  467.50|  528.50|  545.80|  552.50|  992.20|▇▁▁▁▁ |
+
+The initial idea of the Quality Engineer was to establish a separate gage r&R by tablet size. There is sometimes debate if in the study several different specification should be combined or not. In the last quality weekly meeting this was reason for lively discussions with various logical arguments from the Production Leader and the Engineering Manager. They ended up accepting the proposal of a separate gage per size on the logic that it is important to compare the measurement method variability not only with the process variability but also with the specification itself.
+
+Data in excel files to have most of the time human readable formats and the files being open they usually end up with long variable names. Unlike the classical `read.csv()` function from the base R the `read_csv()` function from `{readr}` is not converting character variables to factors. This is a good behavior in our view because it allows for better control and awareness of what is happening. In this case the Quality Engineer is acquainted to the `{tidyverse}` and is now making the conversion specifically on the desired variables size, tablet and operator. He also makes the filtering for the size L for which he will do the first r&R study.
 
 
 ```r
 tablet_thickness <- tablet_thickness %>%
   clean_names() %>%
   mutate(across(c(size, tablet, operator), as_factor))
-```
 
-We want to establish an independed r&R by specification size (S, M or L) and so we first filter only for the first size the L.
-
-
-```r
 tablet_L <- tablet_thickness %>%
   filter(size == "L")
 ```
 
-Below we're doing the same analysis with the ss.rr function from the Six Sigma package. As the function allows to input the limits we're also providing in the function arguments the current upper and lower limit of the specification.
-
-tablet L 1'800mm3 +/- 25mm3 (18.0ml +/- 0.25ml)
+Now that the dataset is clean and ready he moves forward with the `ss.rr()` function from the `{SixSigma}` package. As the function allows to input the limits he also provides in the arguments the current upper and lower limit of the specification, in this case of 1'800 $\mu m$ +/- 25 $\mu m$ for tablet L. Note that he sets the `alphaLim` argument to 1 in this first assessment to be able to see all the model terms including non significant one. In subsequent analysis this can be set to 0.05 the usual significance threshold.
 
 ### Gage r&R {#gageRnR}
 
@@ -246,11 +297,10 @@ Total Variation   11.09345930 3.3306845 19.984107    100.00      39.97
 Number of Distinct Categories = 3 
 ```
 
-<img src="4_msa_files/figure-html/unnamed-chunk-12-1.png" width="100%" />
-
-We can observe that the SixSigma package recreates exactly the same anova table, just calling Repeatability to the Residuals and adding an additional line with the total degrees of freedom and the total sum of squares. 
-
-Note that the argument alphaLim has been set to 1 to avoid suppressing the interaction which is in this case non significative.
+<div class="figure" style="text-align: center">
+<img src="4_msa_files/figure-html/fig-tableRnR-1.png" alt="r&amp;R example report" width="100%" />
+<p class="caption">(\#fig:fig-tableRnR)r&R example report</p>
+</div>
 
 ### Gage acceptance {#gage_acceptance}
 
@@ -370,7 +420,7 @@ Total Variation   11.08146189 3.3288830 19.973298    100.00      39.95
 Number of Distinct Categories = 3 
 ```
 
-<img src="4_msa_files/figure-html/unnamed-chunk-13-1.png" width="100%" />
+<img src="4_msa_files/figure-html/unnamed-chunk-2-1.png" width="100%" />
 
 In our case when comparing the total gage r&R with and without the interaction we see it changing from 38.46% to 38.38%.
 

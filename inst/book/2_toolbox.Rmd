@@ -49,7 +49,7 @@ The list below identifies which are the remaining packages required to run all t
 
 The column *Download* precises if a package is downloaded automatically when the `{industRial}` package is downloaded (imports) or if it needs be downloaded manually by the reader (suggests). In technical terms this differentiation corresponds to the DESCRIPTION file and allows for a progressive installation of the required software.
 
-```{r echo=FALSE}
+```{r code-packages, echo=FALSE}
 installed_packages <- bind_rows(
   installed.packages(lib.loc = .Library) %>% as_tibble(),
   installed.packages(lib.loc = .libPaths()[1]) %>% 
@@ -116,6 +116,10 @@ This package by the same author of the `{car}` provides additional miscellaneous
 #### broom
 
 The mission of `{broom}` is to *Convert statistical objects into tidy tibbles*. This is quite usefull when we want to reuse the output of the statistical analysis such as the R-squared in data pipelines with `{tidyverse}` packages. It becomes specially handy to obtain printing quality outputs in `{Rmarkdown}` documents with tables rendered with `{kable}` and in `{shiny}` apps. Several examples are present throughtout our book and mostly in the tutorials.
+
+#### skimr {#skimr}
+
+This package comes from [ropensci](https://ropensci.org/) a strong and open community supported by large global organizations such as the NASA. `{skimr}` is an interesting and powerful alternative to the base `summary()` function. Two main features make it a strong candidate for regular utilization: the first is its tight integrated with `{tidyverse}` and `{knitr}` making it possible to integrate it in pipelines, filtering and so on and in Rmarkdown chunks with specific printing arguments; the second is its extensive customization capabilities allowing to add and remove indicators, data types and presentation formats and agregration levels.
 
 #### stats
 

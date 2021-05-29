@@ -1,7 +1,7 @@
 Package: industRial
 Type: Package
 Date: 28.05.2021
-Title: Companion To IndustRial Data Science Book
+Title: Companion to industRial data science book
 Version: 0.1.0
 Authors@R: person("João", "Ramalho", email = "ramalho.joao@protonmail.com", role = c("aut", "cre"))
 Maintainer: The package maintainer <ramalho.joao@protonmail.com>
@@ -25,7 +25,6 @@ Imports:
     tibble,
     magrittr,
     glue,
-    ggtext,
     rlang
 Depends: 
     R (>= 3.5.0)
@@ -47,4 +46,6 @@ Suggests:
     knitr,
     agricolae,
     RcmdrMisc,
-    gt
+    gt,
+    skimr,
+    ggtext

@@ -47,7 +47,7 @@ head(dial_control) %>%
 
 
 
-Table: (\#tab:tab-dial)dial control data
+Table: (\#tab:tbl-dial)dial control data
 
 | Operator |    Date    | Defect  | Location |  id   |
 |:--------:|:----------:|:-------:|:--------:|:-----:|
@@ -230,7 +230,7 @@ perfume_experiment[1:6, 1:7]%>%
 
 
 
-Table: (\#tab:tab-perfume)perfume DoE correlation matrix of the outputs
+Table: (\#tab:tbl-perfume)perfume DoE correlation matrix of the outputs
 
 | yy | pw | w  | pm | pe | f | it |
 |:--:|:--:|:--:|:--:|:--:|:-:|:--:|

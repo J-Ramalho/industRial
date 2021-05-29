@@ -67,6 +67,7 @@ The column *Download* precises if a package is downloaded automatically when the
 |imports  |ggtext     |plotting         |0.1.1   |R (>= 3.5)                                    |
 |imports  |broom      |statistics       |0.7.6   |R (>= 3.1)                                    |
 |imports  |stats      |statistics       |4.0.5   |NA                                            |
+|imports  |skimr      |statistics       |2.1.3   |R (>= 3.1.2)                                  |
 |suggests |qicharts2  |industrial stats |0.7.1   |R (>= 3.0.0)                                  |
 |suggests |qcc        |industrial stats |2.7     |R (>= 3.0)                                    |
 |suggests |SixSigma   |industrial stats |0.9-52  |R (>= 2.14.0)                                 |
@@ -132,6 +133,10 @@ This package by the same author of the `{car}` provides additional miscellaneous
 #### broom
 
 The mission of `{broom}` is to *Convert statistical objects into tidy tibbles*. This is quite usefull when we want to reuse the output of the statistical analysis such as the R-squared in data pipelines with `{tidyverse}` packages. It becomes specially handy to obtain printing quality outputs in `{Rmarkdown}` documents with tables rendered with `{kable}` and in `{shiny}` apps. Several examples are present throughtout our book and mostly in the tutorials.
+
+#### skimr {#skimr}
+
+This package comes from [ropensci](https://ropensci.org/) a strong and open community supported by large global organizations such as the NASA. `{skimr}` is an interesting and powerful alternative to the base `summary()` function. Two main features make it a strong candidate for regular utilization: the first is its tight integrated with `{tidyverse}` and `{knitr}` making it possible to integrate it in pipelines, filtering and so on and in Rmarkdown chunks with specific printing arguments; the second is its extensive customization capabilities allowing to add and remove indicators, data types and presentation formats and agregration levels.
 
 #### stats
 

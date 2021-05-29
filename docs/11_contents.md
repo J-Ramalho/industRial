@@ -58,7 +58,7 @@
    <td style="text-align:left;background-color: white !important;font-weight: bold;color: #104e8b !important;background-color: #e6e6e6 !important;">  </td>
   </tr>
   <tr>
-   <td style="text-align:left;background-color: white !important;"> Trueness </td>
+   <td style="text-align:left;background-color: white !important;"> Calibration </td>
    <td style="text-align:left;background-color: white !important;"> [Bias plot](#bias_plot) </td>
    <td style="text-align:left;background-color: white !important;"> `ggplot2::geom_smooth` </td>
    <td style="text-align:left;background-color: white !important;"> juice_drymatter </td>

@@ -1,67 +1,68 @@
-Subject,Unit,Functions,Datasets,Case,Industry,Photo,Storyline,Data_packaged
-DFSS,,,,,,,,
-Pareto,[Pareto chart](#paretochart),`qicharts2::paretochart`,dial_control,The dial polishing workshop,Watch making,ok,Completed,ok
-Ishikawa,[Fishbone diagram](#fishbone),`qcc::cause.and.effect`,,The dental prosthesis laboratory,Medical devices,ok,Completed,ok
-Correlation,[Matrix](#matrix),,perfume_experiment,The perfume destilation experiment,Perfume,ok,Completed,ok
-,[Tileplot](#tileplot),`ggplot2::geom_tile`,,,,,,
-Clustering,[Network plot](#network_plot),`ggraph::ggraph`,perfume_experiment,The perfume destilation experiment,Perfume,ok,Completed,ok
-MSA,,,,,,,,ok
-Calibration,[Bias plot](#bias_plot),`ggplot2::geom_smooth`,juice_drymatter,The juice production plant,Food,ok,Completed,ok
-,[Bias report](#bias_report),,,,,,,
-Precision,[Gage r&R](#gageRnR),`SixSigma::ss.rr`,tablet_thickness,The tablet compaction process,Pharma,ok,On going,ok
-,[Gage acceptance](#gage_acceptance),,,,,,,
-Uncertainty,[Uncertainty](#uncertainty),,tablet_thickness,The tablet compaction process,Pharma,ok,On going,ok
-DOE,,,,,,,,ok
-Means comparison,[t-test one sample](#t.test),`stats::t.test`,pet_delivery,The winter sports clothing manufacturer,Clothing,ok,On going,ok
-Variances comparison,[F test](#var.test),`stats::var.test`,,,,ok,On going,ok
-,[Levene test](#levene.test),`car::leveneTest`,,,,ok,On going,ok
-Linear regression,[Linear model](#lm),`stats::lm`,ebike_hardening,The e-bike frame hardening process,Bicycle manufacturing,ok,On going,ok
-,[Contrasts treatment](#contr.treatment),,,,,,,
-Residuals analysis,[Model augment](#augment),`broom::augment`,,,,,,
-,[Timeseries plot](#residuals_timeseries),,,,,ok,On going,ok
-,[Autocorrelation test](#autocorrelation),`car::durbinWatsonTest`,,,,ok,On going,ok
-,[Residuals-Fit plot](#residuals_fit),,,,,,,
-,[Homocedasticity](#homocedasticity),`stats::bartlett.test`,,,,ok,On going,ok
-,[Normality plot](#geom_qq),`ggplot2::geom_qq`,,,,,,
-,[Normality test](#shapiroTest),`stats::shapiro.test`,,,,ok,On going,ok
-,[Standard Residuals-Fit plot](#std_residuals_fit),,,,,,,
-,[Outliers test](#outliers),`car::outlierTest`,,,,,,
-,[Cooks distance](#cooks),,,,,,,
-,[Coeficient of determination](#R-squared),`base::summary()$r.squared`,,,,,,
-Multiple means comparison,[Analysis of variance](#aov),`stats::aov`,,,,,,
-,[Pairwise comparison](#tukey),`stats::TukeyHSD`,,,,ok,On going,ok
-,[Least significant difference](#fisherLSD),`agricolae::LSD.test`,,,,ok,On going,ok
-Forecasting,[Predict](#predict),`stats::predict`,,,,ok,On going,ok
-Interactions,[Model formulae](#formula),`stats::formula`,solarcell_output,The solar cell ouput test,Solar energy,ok,On going,ok
-,[Interaction plot](#interaction.plot),`stats:interaction.plot`,,,,ok,On going,ok
-Residuals check,[Simplified timeseries](#simple_timeseries),`plot(model$residuals)`,,,,,,
-,[Residuals summary](#plot_model),`plot(model)`,,,,,,
-,[Cooks histogram](#cooks_histogram),"`plot(model, which = 4)`",,,,,,
-,[Anova check](#anova),`stats::anova`,,,,,,
-Covariance,[Correlation test](#cor.test),`stats::cor.test`,solarcell_fill,The solar cell ouput test,Solar energy,ok,On going,ok
-,[Analysis of covariance](#ancova),`stats::aov`,,,,ok,On going,ok
-General factorial designs,[Factorial design](#fac.design),`DoE.base::fac.design`,juice_drymatter,The juice production plant,Food,On going,On going,ok
-,[Main effects plots](#main_effects),,,,,,,
-,[Interactions plots (custom)](#interaction_plot),`ggplot2::geom_errorbar`,,,,,,
-,[Anova 3rd level interactions](#anova_three),,,,,,,
-Two level designs,[Coding levels](#coding_levels),`stats::relevel`,pet_doe,The PET clothing improvement DoE,Clothing,On going,On going,ok
-,,`stats::contrasts`,,,,,,
-,[Interaction plots with SE](#plotMeans),`RcmdrMisc::plotMeans`,,,,On going,On going,ok
-,[Adjusted R-square](#adj_Rsquare),`broom::glance`,battery_charging,The lithium-ion battery charging time test,Automotive,ok,On going,ok
-,[Coding inputs](#coding_inputs),,,,,,,
-,[Coding prediction](#coded_prediction),,,,,,,
-Response surface methods,[Perpective plot](#persp),`graphics::persp`,,,,ok,On going,ok
-Single replicate designs,[Effects normal plot](#qqPlot),`car::qqPlot`,,,,,,
-,[Effects contribution table](#effects_contribution),`boom::tidy`,,,,,,
-SPC,,,,,,,,ok
-Xbar-R charts,[Mean chart](#xbar_chart),`qcc::qcc`,syringe_diameter,The syringe injection molding process,Medical devices,ok,On going,ok
-,[Range chart](#Rchart),`qcc::qcc`,,,,ok,On going,ok
-,[Control limits](#limits.xbar),`qcc::limits.xbar`,,,,ok,On going,ok
-Cpk charts,[Off specification](#off_spec),`industRial::off_spec`,syringe_diameter,The syringe injection molding process,Medical devices,ok,On going,ok
-,[Process capability](#process_Cpk),`industRial::process_Cpk`,,,,,,
-,[Sigma conversion table](#sigma_table),,,,,,,
-,[Capability chart](#process.capability),`qcc::process.capability`,,,,,,
-I-MR charts,[Process statistics](#process_stats),,tablet_weight,The tablet weight control procedure,Pharma,-,On going,ok
-,[Individual chart](#chart_I),`industRial::chart_I`,,,,-,On going,ok
-,[Moving range chart](#chart_IMR),`industRial::chart_IMR`,,,,,,
-,[Capability chart (custom)](#chart_Cpk),`industRial::chart_Cpk`,,,,,,
+Subject,Unit,Functions,Datasets,Case,Industry
+DFSS,,,,,
+Pareto,[Pareto chart](#paretochart),`qicharts2::paretochart`,dial_control,The dial polishing workshop,Watch making
+Ishikawa,[Fishbone diagram](#fishbone),`qcc::cause.and.effect`,,The dental prosthesis laboratory,Medical devices
+Correlation,[Matrix](#matrix),,perfume_experiment,The perfume destilation experiment,Perfume
+,[Tileplot](#tileplot),`ggplot2::geom_tile`,,,
+Clustering,[Network plot](#network_plot),`ggraph::ggraph`,perfume_experiment,The perfume destilation experiment,Perfume
+MSA,,,,,
+Calibration,[Bias plot](#bias_plot),`ggplot2::geom_smooth`,juice_drymatter,The juice production plant,Food
+,[Bias report](#bias_report),,,,
+Precision,[Gage r&R](#gageRnR),`SixSigma::ss.rr`,tablet_thickness,The tablet compaction process,Pharma
+,[Gage acceptance](#gage_acceptance),,,,
+Uncertainty,[Uncertainty](#uncertainty),,tablet_thickness,The tablet compaction process,Pharma
+DOE,,,,,
+Means comparison,[Histogram](#histogram),`ggplot2::geom_histogram`,pet_delivery,The winter sports clothing manufacturer,Clothing
+,[t-test one sample](#t.test),`stats::t.test`,,,
+,[Normality plot](#geom_qq),`ggplot2::geom_qq`,,,
+Variances comparison,[F test](#var.test),`stats::var.test`,,,
+,[Levene test](#levene.test),`car::leveneTest`,,,
+Linear regression,[Linear model](#lm),`stats::lm`,ebike_hardening,The e-bike frame hardening process,Bicycle manufacturing
+,[Contrasts treatment](#contr.treatment),,,,
+Residuals analysis,[Model augment](#augment),`broom::augment`,,,
+,[Timeseries plot](#residuals_timeseries),,,,
+,[Autocorrelation test](#autocorrelation),`car::durbinWatsonTest`,,,
+,[Residuals-Fit plot](#residuals_fit),,,,
+,[Homocedasticity](#homocedasticity),`stats::bartlett.test`,,,
+,[Normality test](#shapiroTest),`stats::shapiro.test`,,,
+,[Standard Residuals-Fit plot](#std_residuals_fit),,,,
+,[Outliers test](#outliers),`car::outlierTest`,,,
+,[Cooks distance](#cooks),,,,
+,[Coeficient of determination](#R-squared),`base::summary()$r.squared`,,,
+Multiple means comparison,[Analysis of variance](#aov),`stats::aov`,,,
+,[Pairwise comparison](#tukey),`stats::TukeyHSD`,,,
+,[Least significant difference](#fisherLSD),`agricolae::LSD.test`,,,
+Forecasting,[Predict](#predict),`stats::predict`,,,
+Interactions,[Model formulae](#formula),`stats::formula`,solarcell_output,The solar cell ouput test,Solar energy
+,[Interaction plot](#interaction.plot),`stats:interaction.plot`,,,
+Residuals check,[Simplified timeseries](#simple_timeseries),`plot(model$residuals)`,,,
+,[Residuals summary](#plot_model),`plot(model)`,,,
+,[Cooks histogram](#cooks_histogram),"`plot(model, which = 4)`",,,
+,[Anova check](#anova),`stats::anova`,,,
+Covariance,[Correlation test](#cor.test),`stats::cor.test`,solarcell_fill,The solar cell ouput test,Solar energy
+,[Analysis of covariance](#ancova),`stats::aov`,,,
+General factorial designs,[Factorial design](#fac.design),`DoE.base::fac.design`,juice_drymatter,The juice production plant,Food
+,[Main effects plots](#main_effects),,,,
+,[Interactions plots (custom)](#interaction_plot),`ggplot2::geom_errorbar`,,,
+,[Anova 3rd level interactions](#anova_three),,,,
+Two level designs,[Coding levels](#coding_levels),`stats::relevel`,pet_doe,The PET clothing improvement DoE,Clothing
+,,`stats::contrasts`,,,
+,[Interaction plots with SE](#plotMeans),`RcmdrMisc::plotMeans`,,,
+,[Adjusted R-square](#adj_Rsquare),`broom::glance`,battery_charging,The lithium-ion battery charging time test,Automotive
+,[Coding inputs](#coding_inputs),,,,
+,[Coding prediction](#coded_prediction),,,,
+Response surface methods,[Perpective plot](#persp),`graphics::persp`,,,
+Single replicate designs,[Effects normal plot](#qqPlot),`car::qqPlot`,,,
+,[Effects contribution table](#effects_contribution),`boom::tidy`,,,
+SPC,,,,,
+Xbar-R charts,[Mean chart](#xbar_chart),`qcc::qcc`,syringe_diameter,The syringe injection molding process,Medical devices
+,[Range chart](#Rchart),`qcc::qcc`,,,
+,[Control limits](#limits.xbar),`qcc::limits.xbar`,,,
+Cpk charts,[Off specification](#off_spec),`industRial::off_spec`,syringe_diameter,The syringe injection molding process,Medical devices
+,[Process capability](#process_Cpk),`industRial::process_Cpk`,,,
+,[Sigma conversion table](#sigma_table),,,,
+,[Capability chart](#process.capability),`qcc::process.capability`,,,
+I-MR charts,[Process statistics](#process_stats),,tablet_weight,The tablet weight control procedure,Pharma
+,[Individual chart](#chart_I),`industRial::chart_I`,,,
+,[Moving range chart](#chart_IMR),`industRial::chart_IMR`,,,
+,[Capability chart (custom)](#chart_Cpk),`industRial::chart_Cpk`,,,

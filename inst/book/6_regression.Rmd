@@ -193,7 +193,7 @@ Notes:
 * the var.test function cannot be used here as it applies to the two levels case only
 * this test is sensitive to the normality assumption, consequently, when the validity of this assumption is doubtful, the Bartlett test should not be used and replace by the modified Levene test for example
 
-### Normality plot {#geom_qq}
+### Normality plot
 
 As the sample size is relatively small we're going to use a qq plot instead of an histogram to assess the normality of the residuals.
 

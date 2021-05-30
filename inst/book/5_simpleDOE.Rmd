@@ -5,29 +5,19 @@ source(here::here("inst/book/setup.R"))
 
 # Design of Experiments {#DOE}
 
-In a design of experiements we calculate the total number of trials with the expression $n^m$ where n is the number of levels, m the number of factors. A trial represents the number of unique combinations of the factors. To obtain the final number of test runs we have to multiply the number of trials by the number of replicates per trial.
+Companies manufacturing goods in industrial quantities have a permanent need to improve the features of their products. This is visible in any such industry be it car parts, watches, electronic components for cell phones, chocolates, clothing, medical devices, medicine, ... the list could go on forever. As consumers we expect flawless quality at affordable price and we want to remain free to choose another brand if our confidence has been damaged due to a defective product. Adding to this fortunately the last decades have seen an increasing pressure to develop sustainable products that are responsibly sourced, meet stringent regulations and can last for many years and be properly disposable. Another constraint that can be observed in Research and Development is the growing awareness of the public on ethical issues. There is an increasing expectation that trials generate minimal waste and are done in a way respectful of test subjects human and animal.
 
-In a design with 4 factors of 2 levels we have then $2^4 = 16$ runs and $16 \times 5 = 80$ replicates. 
+Experiment design provides ways to meet these important requirements by making us think upfront on what is required and how to best approach a test. Integrated in a complete solid design for quality approach it can provide deep insights on the principles of a system and support decision making based on data. A well prepared test plan minimizes trial and error and reduces the number of prototypes, measurements and time required. 
 
-If the design has a combination of factors with different number of levels the number of trials is the multiplication of both such as: $n^m \times n^m$. 
-
-For example if we added 2 additional factors with 4 levels each to the previous design we would obtain $2^4 \times 4^2 = 256$ which we would still need to multiply by the number of replicates to obtain the number of runs $256 \times 5 = 1280$.
-
-In the literature we often see the simbolic notation $a^k$ but we've opted for mF-nL (m factors, n levels) in this book for simplification.
-
-1 factor 2 levels
-
-In this chapter we cover introductory designs of experiments and take it progressively until the general 2^k factorial designs. In any case this pretends to be an introduction to the topic with only a subset of the many types of DoEs used in the industry.
+There are many well tested approaches, the domain is very large and our textbook can only cover a subset of the many types of DoEs used in the industry. For all these cases statistical notions are key to have a minimal preparation of the test and a valid interpretation of the results. Some statistical concepts every engineer, technician or scientist has to understand go around sampling, sample size, probability, correlation and variability. It is important to be clear about the vocabulary and the mathematics that are behind the constantly used statistics such as the mean, median, variance, standard deviation and so on. We provide a glossary and good bibliography that can be both a good starting point or a refresher. In particular the text and the case studies follow what we consider to be the most important book in this the domain, the *Design and Analysis of Experiments* by @Montgomery2012.
 
 ## Means comparison
 
-**The Winter Sports clothing manufacturer**
-
-Comparing mean to specification
-
-An engineer working the winter sports clothing industry has established a contract for PET textile raw material supply based on the following specification: the average tensile strength has to be greater than 69.0 $Mpa$ for each delivery. In the contract is also specified that the test protocol which is based on a 30 samples.
-
 <div class="marginnote">
+
+<b class="highlight">Winter Sports clothing manufacture</b>
+
+All winter sports clothing are virtually made with a mix of natural fibers and synthetic polymers. Upgrading to recyclable polymers while keeping performance requires extensive testing of raw material characteristics such as the tensile strength.
 
 ```{r echo=FALSE, out.width="100%", fig.align='center', fig.cap="PET tensile test"}
 knitr::include_graphics("img/tensile_test_bw.jpg")
@@ -35,29 +25,35 @@ knitr::include_graphics("img/tensile_test_bw.jpg")
 
 </div>
 
-A first delivery is submited and the customer wants to know if the lot average tensile strength exceeds the agreed level and if so, she wants to accept the lot.
+We start by exploring simple tests that compare results obtained in two samples. These cases happen all the time as everyone needs one moment or another to compare the behavior of a product in different conditions. It can be the result of a test before and after an improvement, it can be two different materials applied in the same assembly or still different results obtained by different teams at different moments. 
 
-The Quality Control department specialist at the reception starts by calculating the average, a first criteria to reject the batch:
+In this case, an engineer working in the <b class="highlight">winter sports clothing industry</b> has established a contract for PET textile raw material supply specifying that the average tensile strength has to be greater than 69.0 $Mpa$ in each delivery. In the contract is also specified that the test protocol which is based on a 30 samples.
+
+A first delivery is submitted and the incoming materials test laboratory measures 28 samples and issues a bulletin with the statement "refused". In small font is written batch mean = 67.7 [MPa]. The batch is returned to the supplier by an automatic workflow established by the Supply Chain department without the Engineer being informed and a few weeks later he gets an e-mail for the supplier key account manager asking for explanations. According to their tests the mean tensile strength of their delivery was slightly above target and they don't understand the reasons for the return. The Quality Engineer logs into his company ERP and with a bit of effort manages to obtain the raw data which he loads in R:
 
 ```{r}
-pet_spec <- 69
-pet_mean <- mean(pet_delivery$A)
-pet_mean
+summary(pet_delivery$A)
 ```
 
-The average is itself below the spec and the engineer could think to reject the batch right away. She decides nevertheless to observe the variability and for this she decides to plot the raw data on an histogram. An histogram is a very common plot showing counts for selected intervals.
+The mean is in fact lower that the specified contract value of 69 and the engineer could think to confirm the rejection the batch right away. She decides nevertheless to observe the variability and for this she decides to plot the raw data on an histogram. An histogram is a very common plot showing counts for selected intervals.
 
-```{r}
+### Histogram {#histogram}
+
+```{r fig-pethistogram, fig.cap="histogram example"}
+pet_spec <- 69
+pet_mean <- mean(pet_delivery$A)
 pet_delivery %>% 
   ggplot(aes(x = A)) +
   geom_histogram(color = viridis(12)[4], fill = "grey90") +
-  geom_vline(xintercept = pet_mean, color = "darkblue", linetype = 3) +
-  geom_vline(xintercept = pet_spec, color = "darkgreen", linetype = 2, 
+  scale_x_continuous(n.breaks = 10) +
+  geom_vline(xintercept = pet_mean, color = "darkblue", linetype = 2, size = 1) +
+  geom_vline(xintercept = pet_spec, color = "darkred", linetype = 2, 
              show.legend = TRUE) +
-  labs(title = "PET clothing case study",
-       subtitle = "Raw data plot",
-       x = "Treatment",
-       y = "Tensile strength [MPa]")
+  labs(title = "PET raw material delivery",
+       subtitle = "Histogram of resistance measurements",
+       y = "Count",
+       x = "Tensile strength [MPa]", 
+       caption = "Specification min in red, Batch mean in blue¨")
 ```
 
 The mean is just slightly below the target mean defined for acceptance and she also observes a certain variability in the batch. She decides then to perform a t-test to assess if the average calculated can be really be considered statistically different than the target value.
@@ -68,9 +64,9 @@ The mean is just slightly below the target mean defined for acceptance and she a
 t.test(x = pet_delivery$A, mu = pet_spec)
 ```
 
-The basic assumption of the test is that the means are equal and the alternative hypothesis is that the sample mean is different than the spec. The confidence interval selected is 95%.
+The basic assumption of the test is that the mean and the reference value are identical and the alternative hypothesis is that their different. The confidence interval selected is 95% as it is common practice in the laboratory. The test result tells us that for a population average of 69, the probability of obtaining a sample with a value as extreme as 68.71 is 29.17% (p = 0.2917). This probability value higher than the limit of 5% that she usually uses to reject the null hypothesis. In fact she cannot conclude that the sample comes from a population with a mean different than 69.
 
-The test result tells us that for a population average of 69, the probability of obtaining a sample with a value as extreme as 68.71 is of 29.17% (p = 0.2917). This probability value higher than the limit of 5% that she had defined to reject the null hypothesis. She cannot conclude that the sample commes from a population with a mean different than 69 and thus decides to accept the batch.
+She's not sure of this result and decides asking help to a colleague statistician from R&D: can she apply a t.test? is the sample normally distributed? is the specification correctly defined? or should it refer to the minimum sample value?
 
 ### t-test two samples
 
@@ -119,6 +115,8 @@ pet_delivery_long %>%
 We would like to understand if the treatment has an effect. Thus we want to compare the two population means. For that we use a t test using samples obtained independently and randomly. Before running the test we also have to check the normality of the samples distributions and equality of their variances.
 
 To do these checks we're using the stat_qq functions from the ggplot package and plotting the qq plots for both levels in the same plot:
+
+### Normality plot {#geom_qq}
 
 ```{r}
 pet_delivery_long %>%

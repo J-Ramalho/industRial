@@ -16,7 +16,7 @@ read_csv("contents.csv") %>%
   # column_spec() %>%
   row_spec(row = 1:66 ,background = "white") %>%
   row_spec(
-    row = c(1, 7, 13, 55),
+    row = c(1, 7, 13, 56),
     background = "#e6e6e6", color = "#104e8b", bold = TRUE
     )
 ```

@@ -38,17 +38,20 @@ render_book(
   )
 )
 
-bookdown::render_book("index.Rmd",
+bookdown::render_book(
+  input = here("inst/book/index.Rmd"),
   pdf_book(
     toc = TRUE,
     number_sections = TRUE,
     fig_caption = TRUE,
     pandoc_args = NULL,
     base_format = rmarkdown::pdf_document,
+    latex_engine = "xelatex",
     toc_unnumbered = TRUE,
     toc_appendix = FALSE,
     toc_bib = TRUE,
     quote_footer = NULL,
-    highlight_bw = FALSE
+    highlight_bw = FALSE,
+    output_dir = here("docs")
   )
 )

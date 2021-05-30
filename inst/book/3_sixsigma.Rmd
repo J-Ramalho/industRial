@@ -7,7 +7,7 @@ source(here::here("inst/book/setup.R"))
 
 # Design for Six Sigma
 
-Quality tools have been grouped under varied names and methodologies being Six Sigma one of the most well known and comprehensives ones. The domain is vast as seen in the dozens of tools collected in the Six Sigma book by @Munro2015. For this section we've selected a few cases that strongly support Measurement System Analysis, Design of Experiments and Statistical Process Control. Beside supporting the remaining sections, they also pretend to showcase how R can be used also for other purposes than data wrangling and visualization in the domain of industrial data science, typically to obtain easily reproducible diagrams. 
+Quality tools have been grouped under varied names and methodologies being Six Sigma one of the most well known and comprehensives ones. The domain is vast as seen in the many tools collected and described in the Six Sigma book by @Munro2015. For this section we've selected a few cases that strongly support Measurement System Analysis, Design of Experiments and Statistical Process Control. Beside supporting the remaining sections, they also pretend to showcase how R can be used also for other purposes than data wrangling and visualization in the domain of industrial data science, typically to obtain easily reproducible diagrams. 
 
 We start with a case on a dial workshop in the watch making industrial where the pareto chart comes handy. We then move to a dental prosthesis laboratory to see how a simple fishbone diagram can help pinpoint special causes of the measurement variation of an optical device and we finish we two different approaches on how to optimize experiment execution by assess the correlation between the outputs in order to minimize the parameters to measure.
 
@@ -288,10 +288,10 @@ and do a first network plot to check data upload:
 
 ```{r fig-network1, fig.width = 7, fig.height = 6, warning = FALSE, fig.cap = 'raw network plot example'}
 perfum_tbl_graph %>% 
-  ggraph(layout = "igraph", algorithm = igraph_layouts[7]) +
+  ggraph::ggraph(layout = "igraph", algorithm = igraph_layouts[7]) +
   geom_edge_link(aes(edge_alpha = weight)) +
   geom_node_label(aes(label = name), repel = TRUE) +
-  theme_graph() +
+  # theme_graph() +
   labs(title = "DOE Perfume Formulation - Inputs",
        subtitle = "Most important expected correlations")
 ```
@@ -355,7 +355,7 @@ perfum_tg_2 %>%
   scale_edge_width(range = c(0.2, 1), name = "Correlation strength") +
   scale_edge_alpha(range = c(0.05, 0.2), name = "Correlation strength") + 
   scale_fill_manual(values = my_palette) + 
-  theme_graph() +
+  # theme_graph() +
   labs(
     title = str_c("<span style='color:#433E85FF'>Line Parameters</span>", 
     " and ", "<span style='color:#51C56AFF'>Perfume Attributes</span>"),

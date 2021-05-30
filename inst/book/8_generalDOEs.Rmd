@@ -5,6 +5,16 @@ source(here::here("inst/book/setup.R"))
 
 ## General factorial designs
 
+In a design of experiments we calculate the total number of trials with the expression $n^m$ where n is the number of levels, m the number of factors. A trial represents the number of unique combinations of the factors. To obtain the final number of test runs we have to multiply the number of trials by the number of replicates per trial.
+
+In a design with 4 factors of 2 levels we have then $2^4 = 16$ runs and $16 \times 5 = 80$ replicates. 
+
+If the design has a combination of factors with different number of levels the number of trials is the multiplication of both such as: $n^m \times n^m$. 
+
+For example if we added 2 additional factors with 4 levels each to the previous design we would obtain $2^4 \times 4^2 = 256$ which we would still need to multiply by the number of replicates to obtain the number of runs $256 \times 5 = 1280$.
+
+In the literature we often see the simbolic notation $a^k$ but we've opted for mF-nL (m factors, n levels) in this book for simplification.
+
 m factors n levels designs
 
 **The juice production plant**

@@ -26,8 +26,8 @@
     left: -300px;
     bottom: 0;
     z-index: 1;
-	font-size:13px; /* JR: change here the toc font size */
-	line-height:0;
+	  font-size:13px; /* JR: change here the toc font size */
+	  line-height:0;
     width: 200px;
     color: #364149;
     background: #fafafa;

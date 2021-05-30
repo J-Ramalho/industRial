@@ -243,6 +243,7 @@ lsf.str("package:industRial") %>%
 |process_Cpk         |
 |process_stats       |
 |process_stats_table |
+|ss.rr.plots         |
 |theme_industRial    |
 |theme_qcc           |
 

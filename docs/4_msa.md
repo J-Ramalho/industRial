@@ -3,7 +3,7 @@
 
 # Measurement System Analysis {#MSA}
 
-Analyzing and validating measurement methods and tools is the base for ensuring the quality of manufacturing products. For most commercial products it goes beyond simply satisfying consumer expectations and has regulatory and legal implications. Using measurement tools in industrial setups for high volume production goes naturally beyond buying and installing an equipment. It requires clear operating procedures, trained operators and tested devices for the specific range applications and products. 
+Analyzing and validating measurement methods and tools is the base for ensuring the quality of manufacturing products. For most commercial products it is not simply about satisfying consumer expectations but has regulatory and legal implications. Using measurement tools in industrial setups for high volume production goes naturally beyond buying and installing an equipment. It requires clear operating procedures, trained operators and tested devices for the specific range applications and products. 
 
 There are many different normalizing bodies in the metrology domain with different approaches and terminology. The cases in this section follow a simplified step by step approach aiming at giving an overview of how data treatment can be done with R.
 
@@ -117,13 +117,13 @@ Using well known `{dplyr}` function the plot is complemented with statistics of 
 
 
 ```r
-juice_drymatter %>%
+juice_drymatter_bias <- juice_drymatter %>%
   group_by(drymatter_TGT) %>%
   summarise(bias_mean = mean(bias, na.rm = TRUE), 
             bias_median = median(bias, na.rm = TRUE),
             bias_sd = sd(bias, na.rm = TRUE), 
-            bias_n = n()) %>%
-  # select(drymatter_TGT, bias_mean, bias_median) %>%
+            bias_n = n())
+juice_drymatter_bias %>%
   kable(align = "c", digits = 2)
 ```
 
@@ -135,7 +135,14 @@ juice_drymatter %>%
 |      15       |   -0.29   |    -0.31    |  0.10   |   36   |
 |      20       |   -0.44   |    -0.44    |  0.10   |   36   |
 
-Mean and median bias are very close which indicates that the data is equally distributed around the mean The standard deviation is also very similar from level to level indicating that the measurement variability is not depending on the range of measurement. A decision now needs to be taken on which systematic offset to apply depending on the operational context. As mentioned most commercial products on the production line where the device is used have a target specification around 13% therefore the Quality Assurance Head decides together with Manufacturing Team Leader to put in the operating procedure of the device a unique offset of 0.3 g.
+Mean and median bias are very close which indicates that the data is equally distributed around the mean The standard deviation is also very similar from level to level indicating that the measurement variability is not depending on the range of measurement. A decision now needs to be taken on which systematic offset to apply depending on the operational context. As mentioned most commercial products on the production line where the device is used have a target specification around 13% therefore the Quality Assurance Head decides together with Manufacturing Team Leader to put in the operating procedure of the device a unique offset of 0.3 g. This value is assigned to a new variable called `juice_cal_u` that will be needed later to calculate the measurement uncertainty. 
+
+
+```r
+u_cal <- as_vector(juice_drymatter_bias[2,4])
+names(u_cal) <- NULL # we're removing the original name to avoid confusion later.
+```
+
 
 ## Precision
 
@@ -322,20 +329,20 @@ The standard deviation values from the study can be pulled from the list with th
 
 ```r
 tablet_L_rr$studyVar %>%
-  kable()
+  kable(digits = 1)
 ```
 
 
 
-|                |    StdDev|  StudyVar| %StudyVar| %Tolerance|
-|:---------------|---------:|---------:|---------:|----------:|
-|Total Gage R&R  | 1.2810082|  7.686049|     38.46|      15.37|
-|Repeatability   | 1.2538441|  7.523064|     37.65|      15.05|
-|Reproducibility | 0.2624063|  1.574438|      7.88|       3.15|
-|operator        | 0.2624063|  1.574438|      7.88|       3.15|
-|tablet:operator | 0.0000000|  0.000000|      0.00|       0.00|
-|Part-To-Part    | 3.0744881| 18.446929|     92.31|      36.89|
-|Total Variation | 3.3306845| 19.984107|    100.00|      39.97|
+|                | StdDev| StudyVar| %StudyVar| %Tolerance|
+|:---------------|------:|--------:|---------:|----------:|
+|Total Gage R&R  |    1.3|      7.7|      38.5|       15.4|
+|Repeatability   |    1.3|      7.5|      37.6|       15.1|
+|Reproducibility |    0.3|      1.6|       7.9|        3.1|
+|operator        |    0.3|      1.6|       7.9|        3.1|
+|tablet:operator |    0.0|      0.0|       0.0|        0.0|
+|Part-To-Part    |    3.1|     18.4|      92.3|       36.9|
+|Total Variation |    3.3|     20.0|     100.0|       40.0|
 
 The study variation table is has several columns. The StdDev column contains the square root of each individual variance. The StudyVar column has each StdDev multiplied by 6 which corresponds to the max variability for each component. Then each StudyVar is divided by the Total Variation and expressed in percentage in the %StudyVar column. The last column %Tolerance contains the division of the StudyVar by the specification interval (+/- 25 $\mu m$ in this case) expressed in percentage.
 
@@ -346,44 +353,115 @@ The Quality Engineer is now is a position to progress is assessment. According t
 the cost of the measurement device, cost of repair, or other factors
 * Greater that 30%: the measurement system is not acceptable and should be improved.
 
+As he already knew, the variability is mostly coming from the repeatability. With this approach he can also compare with the product specification tolerance which is 15.37%. The part to part variation corresponds to the bulk of the variability and this is what is expected.
+
+Although the Quality Assurance department is not fully validating a measurement method with these figures there seems to be potential to improve the situation. At this moment we can consider that the micrometer allows to sort good parts from bad because the variability is lower than 30% of specification tolerance but it cannot be used to drive production as the variation is higher than 30% of the production process variation. 
+
+### Gage plots
+
+Besides the Variance the Standard Deviation components the `ss.rr` function generates a full report. We're going to look into at each of the plots by generating them with the custom function `ss.rr.plots`. The details of the function itself are presented afterwards.
+
+
+```r
+tablet_L_rr_plots <- ss.rr.plots(
+  data = tablet_L, 
+  var = thickness_micron, 
+  part = tablet, 
+  appr = operator, 
+  alphaLim = 1,
+  errorTerm = "repeatability",
+  main = "Micrometer FTR600\nr&R for tablet thickness",
+  sub = "Tablet L",
+  lsl = 1775,
+  usl = 1825
+)
+```
+
+
+```r
+plot(tablet_L_rr_plots$plot1)
+```
+
+<div class="figure">
+<img src="4_msa_files/figure-html/fig-tabletPlot1-1.png" alt="example of gage r&amp;R components of variation plot" width="95%" />
+<p class="caption">(\#fig:fig-tabletPlot1)example of gage r&R components of variation plot</p>
+</div>
+
+This first bar plot presents in a graphical way the gage results in percentage and we can quickly grasp if we're on target by looking at the pink bars and comparing them with the dashed bars. We can see that the G.R&R is above 30% and thus is not acceptable from a Study Variation criteria. In green we see that compared with the specification we're above 10% but below 30% so acceptable but requiring improvement. We're now looking into the measurements themselves:
+
+
+```r
+plot(tablet_L_rr_plots$plot6)
+```
+
+<div class="figure">
+<img src="4_msa_files/figure-html/fig-tabletPlot5-1.png" alt="example of gage r&amp;R run chart" width="95%" />
+<p class="caption">(\#fig:fig-tabletPlot5-1)example of gage r&R run chart</p>
+</div>
+
+```r
+plot(tablet_L_rr_plots$plot5)
+```
+
+<div class="figure">
+<img src="4_msa_files/figure-html/fig-tabletPlot5-2.png" alt="example of gage r&amp;R run chart" width="95%" />
+<p class="caption">(\#fig:fig-tabletPlot5-2)example of gage r&R run chart</p>
+</div>
+
+The previous two plots show the measurements for each operator. The first is the Ranges plot showing the differences between the min and max measurement for each part and the second plot is the means plot showing the mean thickness for each part by operator. These help showing that there is a consistency between operators and help as a diagnosis tool to identify if there would be strange patterns appearing where one of the operators would be for instance systematically measuring very high values. The next two plots show average values by part with all operators combined:
+
+
+```r
+plot(tablet_L_rr_plots$plot2)
+```
+
+<div class="figure">
+<img src="4_msa_files/figure-html/fig-tabletPlot2-1.png" alt="example of gage r&amp;R main effects plot" width="95%" />
+<p class="caption">(\#fig:fig-tabletPlot2-1)example of gage r&R main effects plot</p>
+</div>
+
+```r
+plot(tablet_L_rr_plots$plot3)
+```
+
+<div class="figure">
+<img src="4_msa_files/figure-html/fig-tabletPlot2-2.png" alt="example of gage r&amp;R main effects plot" width="95%" />
+<p class="caption">(\#fig:fig-tabletPlot2-2)example of gage r&R main effects plot</p>
+</div>
+
+We quickly see the measurements tend to be simetrically distributed around their means and that the means between the different operators are very similar. This confirms the low reproducibility what has been seen in the Variance Components. 
+
+
+```r
+plot(tablet_L_rr_plots$plot4)
+```
+
+<div class="figure">
+<img src="4_msa_files/figure-html/fig-tabletPlot4-1.png" alt="example of gage r&amp;R interaction plot" width="95%" />
+<p class="caption">(\#fig:fig-tabletPlot4)example of gage r&R interaction plot</p>
+</div>
+
+This final plot is the so called interaction plot and if there were diverting and strongly crossed lines would indicate that different operators measure the parts in different ways. Again here this confirms the low value obtained for the interaction in the Variance Components table.
+
 <div class="marginnote">
 
-Tablet thickness process variability obtained from a gage r&R study done on a pharmaceutical tablet compaction process.
+Tablet thickness measurements obtained with a gage r&R study done on a pharmaceutical tablet compaction process. Red dashed lines corresponds to the thickness specification limits.
 
-<img src="4_msa_files/figure-html/unnamed-chunk-2-1.png" width="100%" />
+<img src="4_msa_files/figure-html/fig-tablethistogram-1.png" width="100%" />
 
 </div>
 
-As he already knew, the variability is coming mostly from the repeatability. With this approach he can also compare with the product specification tolerance which is 15.37%. The part to part variation corresponds to the bulk of the variability and this is what is expected.
+When the gage report was shared with the Production Leader and the Engineering Manager they raised concerns regarding which is how big is our process variability and how much is the process centered. These are valid points as we often go back and forth between measurement validation, product development and process control. Measurement validation makes us look into details on the measured values and question their validity. Taking conscience that the production specification is not adapted, too large or too narrow. Often we realise that production is systematically slightly off centered. Depending on the diagnostic a new gage r&R plan and sampling may need to be prepared and the process or the specification adjusted. Such topics will be further discussed in the Design of Experiments and in the Statistical Process Control subjects.
 
-Although the Quality Assurance department is not fully validating a measurement method with these figures there seems to be potential to improve the situation. At this moment we can consider that the micrometer allows to sort good parts from bad because the variability is lower than 30% of specification tolerance but it cannot be used to drive production as the variation is higher than 30% of the production process variation. When communicating this information to the Production Leader and the Engineering Manager they naturally raise different concerns which is how big is our process variability and how much is the process centered and such questions will be address in the Statistical Process Control subject.
+### Negative variance
 
-#### Gage report
+We've started the gage assessment by setting the `errorTerm` to 1. This made that factors that were non significant remained visible, in our case this happened with the tablet:operator interaction. Although the `ss.rr` function is always showing zero for non significant factors it may happen that in reality the calculated value is negative.
 
-<div class="figure" style="text-align: center">
-<img src="img/SixSigma.png" alt="gage r&amp;R report example" width="100%" />
-<p class="caption">(\#fig:img-tabletrnR)gage r&R report example</p>
-</div>
+We refer to page 557 @Montgomery2012 to get guidance on how to adresses this case:
 
-To go further and check other examples, a good printed book from Springer written by the `{SixSigma}` package author @Cano2012.
+*note that the P-value for the interaction term [...] is very large, take this as evidence that it really is zero and that there is no interaction effect, and then fit a reduced model of the form that does not include the interaction term. This is a relatively easy approach and one that often works nearly as well as more sophisticated methods.*
 
-#### Negative variance
-
-Two important limitations exist in the current approach:
-
-1) when the operators reproducibility is negative it is converted to zero.
-
-[@Montgomery2012] in page 557 adresses this case in the following way:
-
-*Notice that the estimate of one of the variance components,is negative. This is certainly not reasonable because by definition variances are nonnegative. Unfortunately, negative estimates of variance components can result when we use the analysis of variance method of estimation (this is considered one of its drawbacks). We can deal with this negative result in a variety of ways:*
-
-*1) one possibility is to assume that the negative estimate means that the variance component is really zero and just set it to zero, leaving the other nonnegative estimates unchanged.*
-
-*2) Another approach is to estimate the variance components with a method that assures nonnegative estimates (this can be done with the maximum likelihood approach).*
-
-*3) Finally, we could note that the P-value for the interaction term ... is very large, take this as evidence that really is zero and that there is no interaction effect, and then fit a reduced model of the form that does not include the interaction term. This is a relatively easy approach and one that often works nearly as well as more sophisticated methods.*
-
-This final approach is also what the SixSigma package creators have foreseen and if we leave the argument alphaLim empty the non significant terms will be suppressed from the model, the Anova recalculated and the remaining tables updated accordingly. This can be finetuned with the argument alphaLim. Usually we consider a p value of 0.05 but we recommend to start with higher values such as 0.1 or 0.2 to avoid suppressing too quickly the factor which would result in a transfer of their variability into the repeatability.
+This approach is the one implemented in `{SixSigma}`. When we leave the argument `alphaLim` empty the non significant terms are be suppressed from the model, the Anova is recalculated and the remaining tables updated accordingly. We can control this behavior by playing with different values. Usually we consider a p value of 0.05 but we recommend to start with higher values such as 0.1 or 0.2 to avoid suppressing too quickly the factor which would result in a transfer of their variability into the repeatability. Below we run again the `ss.rr` function with a limit at 0.05 and get the entire data and plot output in one single step. In our case adjusting the p value has had a very limited impact in the total gage r&R which has changed only from 38.46% to 38.38%.
 
 
 ```r
@@ -392,7 +470,7 @@ tablet_L_rr2 <- ss.rr(
   var = thickness_micron, 
   part = tablet, 
   appr = operator, 
-  alphaLim = 0.2, # instead of 0.05 it is recommended to start higher
+  alphaLim = 0.05,
   errorTerm = "repeatability",
   main = "Micrometer FTR600\nr&R for tablet thickness",
   sub = "Tablet L",
@@ -411,7 +489,7 @@ tablet:operator   8   11.2     1.4   0.892 0.5237
 Repeatability   210  330.1     1.6               
 Total           224 2061.6                       
 
-alpha for removing interaction: 0.2 
+alpha for removing interaction: 0.05 
 
 
 Reduced model (without interaction):
@@ -443,77 +521,97 @@ Total Variation   11.08146189 3.3288830 19.973298    100.00      39.95
 Number of Distinct Categories = 3 
 ```
 
-<img src="4_msa_files/figure-html/unnamed-chunk-3-1.png" width="100%" />
+<img src="4_msa_files/figure-html/fig-tabletNegativeVar-1.png" width="100%" />
 
-In our case when comparing the total gage r&R with and without the interaction we see it changing from 38.46% to 38.38%.
+Further developments on the gage r&R in the excellent book from Springer by the `{SixSigma}` package author @Cano2012.
+
+### Custom functions
+
+The original report generated by the `ss.rr`function is produced as a single plot and there is no option in the function to suppress it when we just want to look at the data output. The individual plots presented in this unit have been obtained by modifying directly the package source code. We're briefly describing here the steps to do it.
+
+First lets notice that R is fully open system and end users have the freedom to run, study, share, and modify the software. We can confirm this by looking at the `{SixSigma}` package license:
+
+
+```r
+SixSigmaDescription <- utils::packageDescription("SixSigma") 
+SixSigmaDescription$License
+```
+
+```
+[1] "GPL (>= 2)"
+```
+
+Wikipedia as an article with the full details on the user rights given by [GNU license](https://en.wikipedia.org/wiki/GNU_General_Public_License) licenses.
+
+The `ss.rr` function code can the be obtained in RStudio by selecting the package environment in the environment pane and looking for the function. A more direct approach is by simply typing `ss.rr` on the console. The full code is then revealed and can be copied and modified. For the `{industRial}` package we've copied the code in a new function which we called `ss.rr.plots` that generates as output a list of plots. Each plot can then be plotted individually.
 
 ## Uncertainty {#uncertainty}
 
-A final step in the validation of our measurement device is now the calculation of the total measurement uncertainty. 
-
-In some reports the terminology uncertainty is prefered instead of gage r&R.
-In this case the formula usually used to evaluate the measurement uncertainty is:
+In the Pharmaceutical company described in this case study, the final formal Measurement System Analysis reports are issued with a statement on uncertainty. This is a way to combine this various intermediate assessments described before and to communicate the result in a format that can be interpreted by the persons who read measurement results such as Product Development scientists and the R&D management. Different companies adopt more or less sophisticated norms which provide a detailed way of calculating the combined uncertainty that comes from the different assessments performed. In this case study we're presenting a simple summation in quadrature equivalento to the one described by @Bell2001 page 14:
 
 $$
-u^2=u_{repeat.}^2+ u_{reprod.}^2+ u_{cal.}^2
+u=\sqrt{u_{man.}^2 + u_{cal.}^2 + u_{repeat.}^2+ u_{reprod.}^2}
 $$
 
-where the repeatability and reproducibility members can be obtained from the variances calculated in the r&R study
+This formula consists in taking the square root of the sum of the squares of the standard deviations obtained in the different tests. 
 
-$$
-u_{repeat}^2 = σ_{repeat}^2\\
-u_{reprod}^2 = σ_{reprod}^2
-$$
-These variance components can be directly obtained from the object generated by the function ss.rr of the {SixSigma} package. If we name our variable $σ_{repeat}^2$ as repeat_var in R we have:
+The first term is coming from the micrometer manufacturer which mentions in the equipment guide an accuracy of 0.001 mm which corresponds to 1 $\mu$. We assign this in R to the u_man variable:
 
 
 ```r
-repeat_var <- tablet_L_rr$varComp[2,1]
-repeat_var
+u_man <- 1
+u_man
 ```
 
 ```
-[1] 1.572125
+[1] 1
 ```
 
-and for the reproducibility we have:
+The calibration uncertainty has been established before in the calibration study :
 
 
 ```r
-reprod_var <- tablet_L_rr$varComp[3,1]
-reprod_var
+u_cal
 ```
 
 ```
-[1] 0.06885705
+[1] 0.1024416
 ```
 
-The equipment manual mentions an accuracy of 0.001 mm. If we take this as the calibration uncertainty expressed as a standard deviation, this means we have:
-
-$$
-u_{cal} = 0.001 mm \Leftrightarrow 1 \mu m\\
-u_{cal}^2 = 1^2 = 1
-$$
-that we can assign in R to the variable calibration_var. 
-
-```r
-calibration_var <- 1
-```
-
-
-We thus we have a uncertainty of:
+The repeatability and reproducibility uncertainties correspond to the standard deviations calculated in the r&R study. In our case we can even obtain them directly from the Variance Components table generated by the `ss.rr` function of the {SixSigma} package that has bee discussed in details the Gage acceptance unit. We are going to name $u_{repeat}^2$ as u_repeat $u_{reprod}^2$ as u_reprod getting:
 
 
 ```r
-u <- sqrt(reprod_var + repeat_var + calibration_var)
+u_repeat <- tablet_L_rr$studyVar[2,1]
+u_repeat
+```
+
+```
+[1] 1.253844
+```
+
+```r
+u_reprod <- tablet_L_rr$studyVar[3,1]
+u_reprod
+```
+
+```
+[1] 0.2624063
+```
+
+Now putting it all together in the uncertainty formula we have:
+
+
+```r
+u <- sqrt(u_man^2 + u_cal^2 + u_repeat^2 + u_reprod^2)
 u
 ```
 
 ```
-[1] 1.62511
+[1] 1.628335
 ```
 
-Finally what is usually reported is the expanded uncertainty corresponding to 2 standard deviations. To be recalled that $\pm$ 2 std corresponds to 95% of the values when a repeative measurement is done. In this case we have $U = 2*u$:
+Finally what is usually reported is the expanded uncertainty corresponding to 2 standard deviations. To be recalled that $\pm$ 2 std corresponds to 95% of the values when a repetitive measurement is made. In this case we have $U = 2*u$:
 
 
 ```r
@@ -522,13 +620,11 @@ U
 ```
 
 ```
-[1] 3.25022
+[1] 3.256671
 ```
 
-For a specific measurement of say 1'800 $\mu m$ we then say: the tablet thickness is 1'800 $\mu m$ $\pm$ 3.3 $\mu m$, at the 95 percent confidence level. Or written in short:
+For a specific measurement of say 1'800 $\mu m$ we then say: the tablet thickness is 1'800 $\mu m$ $\pm$ 3.3 $\mu m$, at the 95 percent confidence level. Written in short is:
 
-1'800 $\mu m$ $\pm$ 3.3 $\mu m$, at a level of confidence of 95%
+**1'800 $\mu m$ $\pm$ 3.3 $\mu m$, at a level of confidence of 95%**
 
-Knowing that the specification is [1'775; 1'825] $\mu$m we have a specification range of 500. The expanded uncertainty corresponds to 13 %. This is another way of looking into the ratio between method variation and specification. This {SixSigma} package gave a similar result of 15.37%. To be noted that the calculation in by the package corresponds to 3 standard deviations and does not comprise the supplier calibration.
-
-For further reading on the topic we recommend the booklet from @Bell2001.
+Knowing that the specification is [1'775; 1'825] $\mu$m we have a specification range of 50. The expanded uncertainty corresponds to 13.03 %. This is another way of looking into the ratio between method variation and specification. The `{SixSigma}` package gave a similar result of 15.37%. To be noted that the calculation in by the package corresponds to 3 standard deviations and does not comprise the supplier calibration.

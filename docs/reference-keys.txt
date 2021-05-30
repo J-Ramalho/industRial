@@ -14,7 +14,12 @@ fig:fig-juicebiasplot
 fig:img-tablet
 tab:tbl-tabletthickness
 tab:tbl-tabletskim
-fig:fig-tableRnR
+fig:fig-tabletPlot1
+fig:fig-tabletPlot5-1
+fig:fig-tabletPlot5-2
+fig:fig-tabletPlot2-1
+fig:fig-tabletPlot2-2
+fig:fig-tabletPlot4
 fig:unnamed-chunk-2
 tab:unnamed-chunk-4
 tab:unnamed-chunk-28
@@ -23,4 +28,3 @@ tab:unnamed-chunk-33
 tab:unnamed-chunk-34
 fig:unnamed-chunk-3
 fig:unnamed-chunk-34
-fig:img-tabletrnR

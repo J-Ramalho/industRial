@@ -24,7 +24,7 @@
 <meta name="author" content="João Ramalho" />
 
 
-<meta name="date" content="2021-05-29" />
+<meta name="date" content="2021-05-30" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -176,7 +176,7 @@ div.csl-indent {
 
 <li class="divider"></li>
 <li class="part"><span><b>I INTRODUCTION</b></span></li>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>output: pdf_document</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Welcome</a></li>
 <li class="chapter" data-level="" data-path="toolbox.html"><a href="toolbox.html"><i class="fa fa-check"></i>Toolbox</a>
 <ul>
 <li class="chapter" data-level="" data-path="toolbox.html"><a href="toolbox.html#r-and-rstudio"><i class="fa fa-check"></i>R and RStudio</a></li>
@@ -187,8 +187,11 @@ div.csl-indent {
 </ul></li>
 <li class="chapter" data-level="" data-path="toolbox.html"><a href="toolbox.html#datasets"><i class="fa fa-check"></i>Datasets</a></li>
 <li class="chapter" data-level="" data-path="toolbox.html"><a href="toolbox.html#functions"><i class="fa fa-check"></i>Functions</a></li>
-<li class="chapter" data-level="" data-path="toolbox.html"><a href="toolbox.html#on-the-web"><i class="fa fa-check"></i>On the web</a></li>
-<li class="chapter" data-level="" data-path="toolbox.html"><a href="toolbox.html#locally"><i class="fa fa-check"></i>Locally</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="tutorials.html"><a href="tutorials.html"><i class="fa fa-check"></i>Tutorials</a>
+<ul>
+<li class="chapter" data-level="" data-path="tutorials.html"><a href="tutorials.html#on-the-web"><i class="fa fa-check"></i>On the web</a></li>
+<li class="chapter" data-level="" data-path="tutorials.html"><a href="tutorials.html#locally"><i class="fa fa-check"></i>Locally</a></li>
 </ul></li>
 <li class="part"><span><b>II CASE STUDIES</b></span></li>
 <li class="chapter" data-level="" data-path="design-for-six-sigma.html"><a href="design-for-six-sigma.html"><i class="fa fa-check"></i>Design for Six Sigma</a>
@@ -225,6 +228,9 @@ div.csl-indent {
 <ul>
 <li class="chapter" data-level="" data-path="MSA.html"><a href="MSA.html#gageRnR"><i class="fa fa-check"></i>Gage r&amp;R</a></li>
 <li class="chapter" data-level="" data-path="MSA.html"><a href="MSA.html#gage_acceptance"><i class="fa fa-check"></i>Gage acceptance</a></li>
+<li class="chapter" data-level="" data-path="MSA.html"><a href="MSA.html#gage-plots"><i class="fa fa-check"></i>Gage plots</a></li>
+<li class="chapter" data-level="" data-path="MSA.html"><a href="MSA.html#negative-variance"><i class="fa fa-check"></i>Negative variance</a></li>
+<li class="chapter" data-level="" data-path="MSA.html"><a href="MSA.html#custom-functions"><i class="fa fa-check"></i>Custom functions</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="MSA.html"><a href="MSA.html#uncertainty"><i class="fa fa-check"></i>Uncertainty</a></li>
 </ul></li>
@@ -355,6 +361,7 @@ div.csl-indent {
 <li class="chapter" data-level="" data-path="glossary.html"><a href="glossary.html#spc"><i class="fa fa-check"></i>SPC</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+<li class="chapter" data-level="" data-path="imprint.html"><a href="imprint.html"><i class="fa fa-check"></i>Imprint</a></li>
 </ul>
 
       </nav>
@@ -374,7 +381,7 @@ div.csl-indent {
             <section class="normal" id="section-">
 <div id="MSA" class="section level1">
 <h1>Measurement System Analysis</h1>
-<p>Analyzing and validating measurement methods and tools is the base for ensuring the quality of manufacturing products. For most commercial products it goes beyond simply satisfying consumer expectations and has regulatory and legal implications. Using measurement tools in industrial setups for high volume production goes naturally beyond buying and installing an equipment. It requires clear operating procedures, trained operators and tested devices for the specific range applications and products.</p>
+<p>Analyzing and validating measurement methods and tools is the base for ensuring the quality of manufacturing products. For most commercial products it is not simply about satisfying consumer expectations but has regulatory and legal implications. Using measurement tools in industrial setups for high volume production goes naturally beyond buying and installing an equipment. It requires clear operating procedures, trained operators and tested devices for the specific range applications and products.</p>
 <p>There are many different normalizing bodies in the metrology domain with different approaches and terminology. The cases in this section follow a simplified step by step approach aiming at giving an overview of how data treatment can be done with R.</p>
 <p>The first case treats the calibration of a recently acquired measurement device by comparing it to a reference device. It provides statistical analysis of the bias of the method compared with the reference for the full measurement range. The following case deals with the estimation of the method precision, namely the measurement repeatability and reproducibility under regular utilization conditions. It provides examples on acceptance criteria typical in industrial context. The final case study presents calculation of the method uncertainty, a more comprehensive indicator taking into account the calculations done in the previous cases.</p>
 <div id="calibration" class="section level2">
@@ -385,20 +392,20 @@ div.csl-indent {
 <div class="figure" style="text-align: center"><span id="fig:img-juice"></span>
 <img src="img/juice_bottling_bw.jpg" alt="juice bottling line" width="100%" />
 <p class="caption">
-Figure 1: juice bottling line
+Figure 9: juice bottling line
 </p>
 </div>
 </div>
 <p>A first step after a measurement equipment acquisition is the assessment of the response over the entire measurement range. In particular it is important to verify its linearity and variability and determine the average bias throughout the measurement range.</p>
 <p>In a <b class="highlight">juice production plant</b> the dry matter content for the top seller is around 13% dry matter content. Typical specifications are the Premium fresh apple juice with 12.4 % and the Austrian beetroot juice with 13.2%. Some other specialties may have a higher content up such as the Organic carrot that has 16.3%. After consulting with the Manufacturing Team Leader, the Quality Assurance Head selects checking the equipment in the range of 10 to 20% dry matter content. For the calibration assessment samples are produced at target values set at round numbers (10%, 15% and so on). This data is captured in the <code>juice_drymatter</code> dataset of which we’re checki</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="MSA.html#cb1-1" aria-hidden="true" tabindex="-1"></a>juice_drymatter <span class="sc">%&gt;%</span></span>
-<span id="cb1-2"><a href="MSA.html#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>(<span class="dv">5</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb1-3"><a href="MSA.html#cb1-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable</span>(</span>
-<span id="cb1-4"><a href="MSA.html#cb1-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">align =</span> <span class="st">&quot;c&quot;</span>,</span>
-<span id="cb1-5"><a href="MSA.html#cb1-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">caption =</span> <span class="st">&quot;juice dry matter data&quot;</span></span>
-<span id="cb1-6"><a href="MSA.html#cb1-6" aria-hidden="true" tabindex="-1"></a>        )</span></code></pre></div>
+<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="MSA.html#cb36-1" aria-hidden="true" tabindex="-1"></a>juice_drymatter <span class="sc">%&gt;%</span></span>
+<span id="cb36-2"><a href="MSA.html#cb36-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>(<span class="dv">5</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb36-3"><a href="MSA.html#cb36-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable</span>(</span>
+<span id="cb36-4"><a href="MSA.html#cb36-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">align =</span> <span class="st">&quot;c&quot;</span>,</span>
+<span id="cb36-5"><a href="MSA.html#cb36-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">caption =</span> <span class="st">&quot;juice dry matter data&quot;</span></span>
+<span id="cb36-6"><a href="MSA.html#cb36-6" aria-hidden="true" tabindex="-1"></a>        )</span></code></pre></div>
 <table>
-<caption><span id="tab:code-juicesummary">Table 1: </span>juice dry matter data</caption>
+<caption><span id="tab:code-juicesummary">Table 3: </span>juice dry matter data</caption>
 <thead>
 <tr class="header">
 <th align="center">product</th>
@@ -459,15 +466,15 @@ Figure 1: juice bottling line
 </tbody>
 </table>
 <p>We see in this raw dataset that it contains the same samples dry matter content measured twice. First with the with the new equipment (DRX) and then with the reference equipment (Ref). The reference equipment is considered as such because it has been validated and accepted by the head quarters quality department. The difference between the two devices for each measurement is calculated below and allocated to a new variable with the name bias.</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="MSA.html#cb2-1" aria-hidden="true" tabindex="-1"></a>juice_drymatter <span class="ot">&lt;-</span> juice_drymatter <span class="sc">%&gt;%</span></span>
-<span id="cb2-2"><a href="MSA.html#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">bias =</span> drymatter_DRX <span class="sc">-</span> drymatter_REF, <span class="at">part =</span> <span class="fu">as_factor</span>(part))</span></code></pre></div>
+<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="MSA.html#cb37-1" aria-hidden="true" tabindex="-1"></a>juice_drymatter <span class="ot">&lt;-</span> juice_drymatter <span class="sc">%&gt;%</span></span>
+<span id="cb37-2"><a href="MSA.html#cb37-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">bias =</span> drymatter_DRX <span class="sc">-</span> drymatter_REF, <span class="at">part =</span> <span class="fu">as_factor</span>(part))</span></code></pre></div>
 <p>A first look at the bias with the <code>skim()</code> function from <code>{skimr}</code> gives already an indication that the bias is not constant along the measurement range.</p>
 <div class="marginnote">
 <p>See <a href="toolbox.html#skimr">{skimr}</a> for more details on this R package, an alternative to base::summary()</p>
 </div>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="MSA.html#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(skimr)</span></code></pre></div>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="MSA.html#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">skim</span>(juice_drymatter<span class="sc">$</span>bias) <span class="sc">%&gt;%</span></span>
-<span id="cb4-2"><a href="MSA.html#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">yank</span>(<span class="st">&quot;numeric&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="MSA.html#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(skimr)</span></code></pre></div>
+<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="MSA.html#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="fu">skim</span>(juice_drymatter<span class="sc">$</span>bias) <span class="sc">%&gt;%</span></span>
+<span id="cb39-2"><a href="MSA.html#cb39-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">yank</span>(<span class="st">&quot;numeric&quot;</span>)</span></code></pre></div>
 <p><strong>Variable type: numeric</strong></p>
 <table>
 <thead>
@@ -504,21 +511,21 @@ Figure 1: juice bottling line
 <p>Such results are not encouraging because a non regular bias along the range may require specific correction for different product which may be not practical and prone to error. Often this requires to dig into detail to understand the causes of the bias and determine if they are related with the physical phenomena and if there are clear controllable causes. Ultimately this could result is narrowing the measurement range and validating a specific device and method for a specific product specification target. For the Quality Assurance Manager it is too early to draw conclusions and he establishes a more detailed plot with <code>{ggplot2}</code> to better visualize the data.</p>
 <div id="bias_plot" class="section level3">
 <h3>Bias plot</h3>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="MSA.html#cb5-1" aria-hidden="true" tabindex="-1"></a>juice_drymatter <span class="sc">%&gt;%</span></span>
-<span id="cb5-2"><a href="MSA.html#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> drymatter_REF, <span class="at">y =</span> bias)) <span class="sc">+</span></span>
-<span id="cb5-3"><a href="MSA.html#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb5-4"><a href="MSA.html#cb5-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">&quot;lm&quot;</span>, <span class="at">se =</span> T, ) <span class="sc">+</span></span>
-<span id="cb5-5"><a href="MSA.html#cb5-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_cartesian</span>(</span>
-<span id="cb5-6"><a href="MSA.html#cb5-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">xlim =</span> <span class="fu">c</span>(<span class="dv">9</span>,<span class="dv">21</span>),</span>
-<span id="cb5-7"><a href="MSA.html#cb5-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">ylim =</span> <span class="fu">c</span>(<span class="sc">-</span>.<span class="dv">75</span>,<span class="dv">0</span>), <span class="at">expand =</span> <span class="cn">TRUE</span>) <span class="sc">+</span></span>
-<span id="cb5-8"><a href="MSA.html#cb5-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_industRial</span>() <span class="sc">+</span></span>
-<span id="cb5-9"><a href="MSA.html#cb5-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Dry matter method validation&quot;</span>,</span>
-<span id="cb5-10"><a href="MSA.html#cb5-10" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="st">&quot;Gage Linearity&quot;</span>,</span>
-<span id="cb5-11"><a href="MSA.html#cb5-11" aria-hidden="true" tabindex="-1"></a>       <span class="at">caption =</span> <span class="st">&quot;Dataset: juice_drymatter233A, Operator: S.Jonathan)&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="MSA.html#cb40-1" aria-hidden="true" tabindex="-1"></a>juice_drymatter <span class="sc">%&gt;%</span></span>
+<span id="cb40-2"><a href="MSA.html#cb40-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> drymatter_REF, <span class="at">y =</span> bias)) <span class="sc">+</span></span>
+<span id="cb40-3"><a href="MSA.html#cb40-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb40-4"><a href="MSA.html#cb40-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">&quot;lm&quot;</span>, <span class="at">se =</span> T, ) <span class="sc">+</span></span>
+<span id="cb40-5"><a href="MSA.html#cb40-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_cartesian</span>(</span>
+<span id="cb40-6"><a href="MSA.html#cb40-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">xlim =</span> <span class="fu">c</span>(<span class="dv">9</span>,<span class="dv">21</span>),</span>
+<span id="cb40-7"><a href="MSA.html#cb40-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">ylim =</span> <span class="fu">c</span>(<span class="sc">-</span>.<span class="dv">75</span>,<span class="dv">0</span>), <span class="at">expand =</span> <span class="cn">TRUE</span>) <span class="sc">+</span></span>
+<span id="cb40-8"><a href="MSA.html#cb40-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_industRial</span>() <span class="sc">+</span></span>
+<span id="cb40-9"><a href="MSA.html#cb40-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Dry matter method validation&quot;</span>,</span>
+<span id="cb40-10"><a href="MSA.html#cb40-10" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="st">&quot;Gage Linearity&quot;</span>,</span>
+<span id="cb40-11"><a href="MSA.html#cb40-11" aria-hidden="true" tabindex="-1"></a>       <span class="at">caption =</span> <span class="st">&quot;Dataset: juice_drymatter233A, Operator: S.Jonathan)&quot;</span>)</span></code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:fig-juicebiasplot"></span>
 <img src="4_msa_files/figure-html/fig-juicebiasplot-1.png" alt="bias plot example" width="100%" />
 <p class="caption">
-Figure 2: bias plot example
+Figure 10: bias plot example
 </p>
 </div>
 <p>This type of plot is usually called <em>bias plot</em> and provides a view of how the difference between the measurements obtained with the new device and the reference device compare allong the measuremen range. In the plot generated an additional regression line has been introduced with <code>geom_smooth</code> from <code>{ggplot2}</code>. There are several ways to assess the linearity. In this case we’re going to remain at a visual check only leaving to the Design of Experiments case study a more thourough verification.</p>
@@ -527,14 +534,14 @@ Figure 2: bias plot example
 <div id="bias_report" class="section level3">
 <h3>Bias report</h3>
 <p>Using well known <code>{dplyr}</code> function the plot is complemented with statistics of the bias for each level of dry matter target: mean, median, standard deviation. A good practice that took some time to adopt but now is well anchored is to always present the sample size which speaks for the relevance of the statistical indicators.</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="MSA.html#cb6-1" aria-hidden="true" tabindex="-1"></a>juice_drymatter <span class="sc">%&gt;%</span></span>
-<span id="cb6-2"><a href="MSA.html#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(drymatter_TGT) <span class="sc">%&gt;%</span></span>
-<span id="cb6-3"><a href="MSA.html#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">bias_mean =</span> <span class="fu">mean</span>(bias, <span class="at">na.rm =</span> <span class="cn">TRUE</span>), </span>
-<span id="cb6-4"><a href="MSA.html#cb6-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">bias_median =</span> <span class="fu">median</span>(bias, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb6-5"><a href="MSA.html#cb6-5" aria-hidden="true" tabindex="-1"></a>            <span class="at">bias_sd =</span> <span class="fu">sd</span>(bias, <span class="at">na.rm =</span> <span class="cn">TRUE</span>), </span>
-<span id="cb6-6"><a href="MSA.html#cb6-6" aria-hidden="true" tabindex="-1"></a>            <span class="at">bias_n =</span> <span class="fu">n</span>()) <span class="sc">%&gt;%</span></span>
-<span id="cb6-7"><a href="MSA.html#cb6-7" aria-hidden="true" tabindex="-1"></a>  <span class="co"># select(drymatter_TGT, bias_mean, bias_median) %&gt;%</span></span>
-<span id="cb6-8"><a href="MSA.html#cb6-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable</span>(<span class="at">align =</span> <span class="st">&quot;c&quot;</span>, <span class="at">digits =</span> <span class="dv">2</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb41-1"><a href="MSA.html#cb41-1" aria-hidden="true" tabindex="-1"></a>juice_drymatter_bias <span class="ot">&lt;-</span> juice_drymatter <span class="sc">%&gt;%</span></span>
+<span id="cb41-2"><a href="MSA.html#cb41-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(drymatter_TGT) <span class="sc">%&gt;%</span></span>
+<span id="cb41-3"><a href="MSA.html#cb41-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">bias_mean =</span> <span class="fu">mean</span>(bias, <span class="at">na.rm =</span> <span class="cn">TRUE</span>), </span>
+<span id="cb41-4"><a href="MSA.html#cb41-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">bias_median =</span> <span class="fu">median</span>(bias, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb41-5"><a href="MSA.html#cb41-5" aria-hidden="true" tabindex="-1"></a>            <span class="at">bias_sd =</span> <span class="fu">sd</span>(bias, <span class="at">na.rm =</span> <span class="cn">TRUE</span>), </span>
+<span id="cb41-6"><a href="MSA.html#cb41-6" aria-hidden="true" tabindex="-1"></a>            <span class="at">bias_n =</span> <span class="fu">n</span>())</span>
+<span id="cb41-7"><a href="MSA.html#cb41-7" aria-hidden="true" tabindex="-1"></a>juice_drymatter_bias <span class="sc">%&gt;%</span></span>
+<span id="cb41-8"><a href="MSA.html#cb41-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable</span>(<span class="at">align =</span> <span class="st">&quot;c&quot;</span>, <span class="at">digits =</span> <span class="dv">2</span>)</span></code></pre></div>
 <table>
 <thead>
 <tr class="header">
@@ -569,7 +576,9 @@ Figure 2: bias plot example
 </tr>
 </tbody>
 </table>
-<p>Mean and median bias are very close which indicates that the data is equally distributed around the mean The standard deviation is also very similar from level to level indicating that the measurement variability is not depending on the range of measurement. A decision now needs to be taken on which systematic offset to apply depending on the operational context. As mentioned most commercial products on the production line where the device is used have a target specification around 13% therefore the Quality Assurance Head decides together with Manufacturing Team Leader to put in the operating procedure of the device a unique offset of 0.3 g.</p>
+<p>Mean and median bias are very close which indicates that the data is equally distributed around the mean The standard deviation is also very similar from level to level indicating that the measurement variability is not depending on the range of measurement. A decision now needs to be taken on which systematic offset to apply depending on the operational context. As mentioned most commercial products on the production line where the device is used have a target specification around 13% therefore the Quality Assurance Head decides together with Manufacturing Team Leader to put in the operating procedure of the device a unique offset of 0.3 g. This value is assigned to a new variable called <code>juice_cal_u</code> that will be needed later to calculate the measurement uncertainty.</p>
+<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="MSA.html#cb42-1" aria-hidden="true" tabindex="-1"></a>u_cal <span class="ot">&lt;-</span> <span class="fu">as_vector</span>(juice_drymatter_bias[<span class="dv">2</span>,<span class="dv">4</span>])</span>
+<span id="cb42-2"><a href="MSA.html#cb42-2" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(u_cal) <span class="ot">&lt;-</span> <span class="cn">NULL</span> <span class="co"># we&#39;re removing the original name to avoid confusion later.</span></span></code></pre></div>
 </div>
 </div>
 <div id="precision" class="section level2">
@@ -580,21 +589,21 @@ Figure 2: bias plot example
 <div class="figure" style="text-align: center"><span id="fig:img-tablet"></span>
 <img src="img/tablet_micrometer.png" alt="Tablet thickness micrometer" width="100%" />
 <p class="caption">
-Figure 3: Tablet thickness micrometer
+Figure 11: Tablet thickness micrometer
 </p>
 </div>
 </div>
 <p>Pharmaceutical production setups combine extreme high volumes with stringent quality demands. In this context many manufacturing plants have inline automatic measurement devices providing automatic data collection to a central database but it is not uncommon to see hand held devices and manual log of measurements in spreadsheets. In an age of machine learning and sophisticated predictive tools this may seem awkward but it is common to see coexisting old and new approaches on the shop floor. A recurring check of measurement devices is the famous gage r&amp;R. r&amp;R stands for reproducibility and Reproductibility which combined give the instrument precision, according to the ISO 5725. In any case automatic or manual the way to assess the measuremen device should follow the same approach.</p>
 <p>In our case we’re looking into a pharmaceutical company where a <b class="highlight">tablet compaction process</b> the quality measurement system requires the Production Operator to sample tablets on a regular basis and log the thickness in a spreadsheet on the line. Measurements are done with a micrometer build and acquired specifically for this purpose that has a fixture developed to fit the shape of the tablet.</p>
 <p>Besides thickness, the quality measurement system requires the operator to collect quite an large variety of parameters including room conditions too. Elaborating on this a Quality Engineer has prepared a specific file for the gage r&amp;R that also included the replicate number. As it is common practice he asked the measurements to be done by several operators. This data has been loaded into R and is available in the dataset <code>tablet_thickness</code> and an extract is presented here in raw:</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="MSA.html#cb7-1" aria-hidden="true" tabindex="-1"></a>tablet_thickness <span class="sc">%&gt;%</span></span>
-<span id="cb7-2"><a href="MSA.html#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>(<span class="dv">3</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb7-3"><a href="MSA.html#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable</span>(</span>
-<span id="cb7-4"><a href="MSA.html#cb7-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">align =</span> <span class="st">&quot;c&quot;</span>,</span>
-<span id="cb7-5"><a href="MSA.html#cb7-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">caption =</span> <span class="st">&quot;tablet thickness gage r&amp;R data&quot;</span></span>
-<span id="cb7-6"><a href="MSA.html#cb7-6" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
+<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb43-1"><a href="MSA.html#cb43-1" aria-hidden="true" tabindex="-1"></a>tablet_thickness <span class="sc">%&gt;%</span></span>
+<span id="cb43-2"><a href="MSA.html#cb43-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>(<span class="dv">3</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb43-3"><a href="MSA.html#cb43-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable</span>(</span>
+<span id="cb43-4"><a href="MSA.html#cb43-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">align =</span> <span class="st">&quot;c&quot;</span>,</span>
+<span id="cb43-5"><a href="MSA.html#cb43-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">caption =</span> <span class="st">&quot;tablet thickness gage r&amp;R data&quot;</span></span>
+<span id="cb43-6"><a href="MSA.html#cb43-6" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
 <table>
-<caption><span id="tab:tbl-tabletthickness">Table 2: </span>tablet thickness gage r&amp;R data</caption>
+<caption><span id="tab:tbl-tabletthickness">Table 4: </span>tablet thickness gage r&amp;R data</caption>
 <colgroup>
 <col width="7%" />
 <col width="3%" />
@@ -666,9 +675,9 @@ Figure 3: Tablet thickness micrometer
 </tbody>
 </table>
 <p>It is an excellent practice to look at raw data because it gives an immediate perception of general aspects such as the number of variables, their levels and their datatypes. Although this is irreplaceable it is possible to go further and <code>skim()</code> provides an excellent complement and summary. Below we see that the test requested by the Quality Engineer has required 675 measurements on 11 different variables by 3 different operators. We can see room conditions are stable, rather normally distributed and having small standard deviations and we can even see that thickness appears with 3 groups which seems related with the 3 sizes noted in the Size column.</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="MSA.html#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">skim</span>(tablet_thickness) </span></code></pre></div>
+<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="MSA.html#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="fu">skim</span>(tablet_thickness) </span></code></pre></div>
 <table>
-<caption><span id="tab:tbl-tabletskim">Table 3: </span>Data summary</caption>
+<caption><span id="tab:tbl-tabletskim">Table 5: </span>Data summary</caption>
 <tbody>
 <tr class="odd">
 <td align="left">Name</td>
@@ -885,32 +894,32 @@ Figure 3: Tablet thickness micrometer
 </table>
 <p>The initial idea of the Quality Engineer was to establish a separate gage r&amp;R by tablet size. There is sometimes debate if in the study several different specification should be combined or not. In the last quality weekly meeting this was reason for lively discussions with various logical arguments from the Production Leader and the Engineering Manager. They ended up accepting the proposal of a separate gage per size on the logic that it is important to compare the measurement method variability not only with the process variability but also with the specification itself.</p>
 <p>Data in excel files to have most of the time human readable formats and the files being open they usually end up with long variable names. Unlike the classical <code>read.csv()</code> function from the base R the <code>read_csv()</code> function from <code>{readr}</code> is not converting character variables to factors. This is a good behavior in our view because it allows for better control and awareness of what is happening. In this case the Quality Engineer is acquainted to the <code>{tidyverse}</code> and is now making the conversion specifically on the desired variables size, tablet and operator. He also makes the filtering for the size L for which he will do the first r&amp;R study.</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="MSA.html#cb9-1" aria-hidden="true" tabindex="-1"></a>tablet_thickness <span class="ot">&lt;-</span> tablet_thickness <span class="sc">%&gt;%</span></span>
-<span id="cb9-2"><a href="MSA.html#cb9-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">clean_names</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb9-3"><a href="MSA.html#cb9-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="fu">across</span>(<span class="fu">c</span>(size, tablet, operator), as_factor))</span>
-<span id="cb9-4"><a href="MSA.html#cb9-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-5"><a href="MSA.html#cb9-5" aria-hidden="true" tabindex="-1"></a>tablet_L <span class="ot">&lt;-</span> tablet_thickness <span class="sc">%&gt;%</span></span>
-<span id="cb9-6"><a href="MSA.html#cb9-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(size <span class="sc">==</span> <span class="st">&quot;L&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb45-1"><a href="MSA.html#cb45-1" aria-hidden="true" tabindex="-1"></a>tablet_thickness <span class="ot">&lt;-</span> tablet_thickness <span class="sc">%&gt;%</span></span>
+<span id="cb45-2"><a href="MSA.html#cb45-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">clean_names</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb45-3"><a href="MSA.html#cb45-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="fu">across</span>(<span class="fu">c</span>(size, tablet, operator), as_factor))</span>
+<span id="cb45-4"><a href="MSA.html#cb45-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-5"><a href="MSA.html#cb45-5" aria-hidden="true" tabindex="-1"></a>tablet_L <span class="ot">&lt;-</span> tablet_thickness <span class="sc">%&gt;%</span></span>
+<span id="cb45-6"><a href="MSA.html#cb45-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(size <span class="sc">==</span> <span class="st">&quot;L&quot;</span>)</span></code></pre></div>
 <p>Now that the dataset is clean and ready he moves forward with the <code>ss.rr()</code> function from the <code>{SixSigma}</code> package.</p>
 <div id="gageRnR" class="section level3">
 <h3>Gage r&amp;R</h3>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="MSA.html#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(SixSigma)</span></code></pre></div>
-<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="MSA.html#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># dimensions for chunk output when included: fig.dim=c(8, 10)</span></span>
-<span id="cb11-2"><a href="MSA.html#cb11-2" aria-hidden="true" tabindex="-1"></a>tablet_L_rr <span class="ot">&lt;-</span> <span class="fu">ss.rr</span>(</span>
-<span id="cb11-3"><a href="MSA.html#cb11-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> tablet_L, </span>
-<span id="cb11-4"><a href="MSA.html#cb11-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">var =</span> thickness_micron, </span>
-<span id="cb11-5"><a href="MSA.html#cb11-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">part =</span> tablet, </span>
-<span id="cb11-6"><a href="MSA.html#cb11-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">appr =</span> operator, </span>
-<span id="cb11-7"><a href="MSA.html#cb11-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">alphaLim =</span> <span class="dv">1</span>,</span>
-<span id="cb11-8"><a href="MSA.html#cb11-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">errorTerm =</span> <span class="st">&quot;repeatability&quot;</span>,</span>
-<span id="cb11-9"><a href="MSA.html#cb11-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">main =</span> <span class="st">&quot;Micrometer FTR600</span><span class="sc">\n</span><span class="st">r&amp;R for tablet thickness&quot;</span>,</span>
-<span id="cb11-10"><a href="MSA.html#cb11-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">sub =</span> <span class="st">&quot;Tablet L&quot;</span>,</span>
-<span id="cb11-11"><a href="MSA.html#cb11-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">lsl =</span> <span class="dv">1775</span>,</span>
-<span id="cb11-12"><a href="MSA.html#cb11-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">usl =</span> <span class="dv">1825</span></span>
-<span id="cb11-13"><a href="MSA.html#cb11-13" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb46-1"><a href="MSA.html#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(SixSigma)</span></code></pre></div>
+<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb47-1"><a href="MSA.html#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="co"># dimensions for chunk output when included: fig.dim=c(8, 10)</span></span>
+<span id="cb47-2"><a href="MSA.html#cb47-2" aria-hidden="true" tabindex="-1"></a>tablet_L_rr <span class="ot">&lt;-</span> <span class="fu">ss.rr</span>(</span>
+<span id="cb47-3"><a href="MSA.html#cb47-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> tablet_L, </span>
+<span id="cb47-4"><a href="MSA.html#cb47-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">var =</span> thickness_micron, </span>
+<span id="cb47-5"><a href="MSA.html#cb47-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">part =</span> tablet, </span>
+<span id="cb47-6"><a href="MSA.html#cb47-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">appr =</span> operator, </span>
+<span id="cb47-7"><a href="MSA.html#cb47-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">alphaLim =</span> <span class="dv">1</span>,</span>
+<span id="cb47-8"><a href="MSA.html#cb47-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">errorTerm =</span> <span class="st">&quot;repeatability&quot;</span>,</span>
+<span id="cb47-9"><a href="MSA.html#cb47-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">main =</span> <span class="st">&quot;Micrometer FTR600</span><span class="sc">\n</span><span class="st">r&amp;R for tablet thickness&quot;</span>,</span>
+<span id="cb47-10"><a href="MSA.html#cb47-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">sub =</span> <span class="st">&quot;Tablet L&quot;</span>,</span>
+<span id="cb47-11"><a href="MSA.html#cb47-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">lsl =</span> <span class="dv">1775</span>,</span>
+<span id="cb47-12"><a href="MSA.html#cb47-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">usl =</span> <span class="dv">1825</span></span>
+<span id="cb47-13"><a href="MSA.html#cb47-13" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
 <p>The <code>ss.rr</code> function takes the filtered <code>tablet_L</code> dataset and <code>var</code>, <code>part</code> and the arguments <code>appr</code> to precise what is the measurement variable, the part and the operator in this order. Then to be noted that the <code>alphaLim</code> argument is set to 1 in this first assessment. This is to keep all the model terms including non significant one. In future analysis this can be set to 0.05 the usual significance threshold and those non significant terms are omitted. Another detail important to ensure is to select the repeatability as the <code>errorTerm</code> otherwise we get different results than those obtained with base anova and other software aligned with the <span class="citation"><a href="#ref-AIAG2010" role="doc-biblioref">Automotive Industry Action Group</a> (<a href="#ref-AIAG2010" role="doc-biblioref">2010</a>)</span> guidelines such as Minitab. Finally the function also allows to input the limits he also provides in the arguments the current upper and lower limit of the specification, in this case of 1’800 <span class="math inline">\(\mu m\)</span> +/- 25 <span class="math inline">\(\mu m\)</span> for tablet L.</p>
 <p>The output of this function is a list with several elements inside and an automatically generated report.</p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="MSA.html#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(tablet_L_rr)</span></code></pre></div>
+<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb48-1"><a href="MSA.html#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(tablet_L_rr)</span></code></pre></div>
 <pre><code>[1] &quot;anovaTable&quot; &quot;anovaRed&quot;   &quot;varComp&quot;    &quot;studyVar&quot;   &quot;ncat&quot;      </code></pre>
 <p>We’re now looking more in detail in some of them.</p>
 </div>
@@ -920,8 +929,8 @@ Figure 3: Tablet thickness micrometer
 <div id="variance-components" class="section level4">
 <h4>Variance components</h4>
 <p>A common way to quickly judge if an equipment variability is high is to look at its variance. In our case the Quality Engineer can look at the variance components of the gage r&amp;R study by calling them from the <code>ss.rr</code> list.</p>
-<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="MSA.html#cb14-1" aria-hidden="true" tabindex="-1"></a>tablet_L_rr<span class="sc">$</span>varComp <span class="sc">%&gt;%</span></span>
-<span id="cb14-2"><a href="MSA.html#cb14-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable</span>(<span class="at">digits =</span> <span class="dv">1</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb50-1"><a href="MSA.html#cb50-1" aria-hidden="true" tabindex="-1"></a>tablet_L_rr<span class="sc">$</span>varComp <span class="sc">%&gt;%</span></span>
+<span id="cb50-2"><a href="MSA.html#cb50-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable</span>(<span class="at">digits =</span> <span class="dv">1</span>)</span></code></pre></div>
 <table>
 <thead>
 <tr class="header">
@@ -981,8 +990,8 @@ the cost of the measurement device, cost of repair, or other factors</li>
 <div id="standard-deviation-components" class="section level4">
 <h4>Standard deviation components</h4>
 <p>The standard deviation values from the study can be pulled from the list with the same approach as before.</p>
-<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="MSA.html#cb15-1" aria-hidden="true" tabindex="-1"></a>tablet_L_rr<span class="sc">$</span>studyVar <span class="sc">%&gt;%</span></span>
-<span id="cb15-2"><a href="MSA.html#cb15-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb51-1"><a href="MSA.html#cb51-1" aria-hidden="true" tabindex="-1"></a>tablet_L_rr<span class="sc">$</span>studyVar <span class="sc">%&gt;%</span></span>
+<span id="cb51-2"><a href="MSA.html#cb51-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable</span>(<span class="at">digits =</span> <span class="dv">1</span>)</span></code></pre></div>
 <table>
 <thead>
 <tr class="header">
@@ -996,52 +1005,52 @@ the cost of the measurement device, cost of repair, or other factors</li>
 <tbody>
 <tr class="odd">
 <td align="left">Total Gage R&amp;R</td>
-<td align="right">1.2810082</td>
-<td align="right">7.686049</td>
-<td align="right">38.46</td>
-<td align="right">15.37</td>
+<td align="right">1.3</td>
+<td align="right">7.7</td>
+<td align="right">38.5</td>
+<td align="right">15.4</td>
 </tr>
 <tr class="even">
 <td align="left">Repeatability</td>
-<td align="right">1.2538441</td>
-<td align="right">7.523064</td>
-<td align="right">37.65</td>
-<td align="right">15.05</td>
+<td align="right">1.3</td>
+<td align="right">7.5</td>
+<td align="right">37.6</td>
+<td align="right">15.1</td>
 </tr>
 <tr class="odd">
 <td align="left">Reproducibility</td>
-<td align="right">0.2624063</td>
-<td align="right">1.574438</td>
-<td align="right">7.88</td>
-<td align="right">3.15</td>
+<td align="right">0.3</td>
+<td align="right">1.6</td>
+<td align="right">7.9</td>
+<td align="right">3.1</td>
 </tr>
 <tr class="even">
 <td align="left">operator</td>
-<td align="right">0.2624063</td>
-<td align="right">1.574438</td>
-<td align="right">7.88</td>
-<td align="right">3.15</td>
+<td align="right">0.3</td>
+<td align="right">1.6</td>
+<td align="right">7.9</td>
+<td align="right">3.1</td>
 </tr>
 <tr class="odd">
 <td align="left">tablet:operator</td>
-<td align="right">0.0000000</td>
-<td align="right">0.000000</td>
-<td align="right">0.00</td>
-<td align="right">0.00</td>
+<td align="right">0.0</td>
+<td align="right">0.0</td>
+<td align="right">0.0</td>
+<td align="right">0.0</td>
 </tr>
 <tr class="even">
 <td align="left">Part-To-Part</td>
-<td align="right">3.0744881</td>
-<td align="right">18.446929</td>
-<td align="right">92.31</td>
-<td align="right">36.89</td>
+<td align="right">3.1</td>
+<td align="right">18.4</td>
+<td align="right">92.3</td>
+<td align="right">36.9</td>
 </tr>
 <tr class="odd">
 <td align="left">Total Variation</td>
-<td align="right">3.3306845</td>
-<td align="right">19.984107</td>
-<td align="right">100.00</td>
-<td align="right">39.97</td>
+<td align="right">3.3</td>
+<td align="right">20.0</td>
+<td align="right">100.0</td>
+<td align="right">40.0</td>
 </tr>
 </tbody>
 </table>
@@ -1053,47 +1062,95 @@ the cost of the measurement device, cost of repair, or other factors</li>
 the cost of the measurement device, cost of repair, or other factors</li>
 <li>Greater that 30%: the measurement system is not acceptable and should be improved.</li>
 </ul>
-<div class="marginnote">
-<p>Tablet thickness process variability obtained from a gage r&amp;R study done on a pharmaceutical tablet compaction process.</p>
-<p><img src="4_msa_files/figure-html/unnamed-chunk-2-1.png" width="100%" /></p>
+<p>As he already knew, the variability is mostly coming from the repeatability. With this approach he can also compare with the product specification tolerance which is 15.37%. The part to part variation corresponds to the bulk of the variability and this is what is expected.</p>
+<p>Although the Quality Assurance department is not fully validating a measurement method with these figures there seems to be potential to improve the situation. At this moment we can consider that the micrometer allows to sort good parts from bad because the variability is lower than 30% of specification tolerance but it cannot be used to drive production as the variation is higher than 30% of the production process variation.</p>
 </div>
-<p>As he already knew, the variability is coming mostly from the repeatability. With this approach he can also compare with the product specification tolerance which is 15.37%. The part to part variation corresponds to the bulk of the variability and this is what is expected.</p>
-<p>Although the Quality Assurance department is not fully validating a measurement method with these figures there seems to be potential to improve the situation. At this moment we can consider that the micrometer allows to sort good parts from bad because the variability is lower than 30% of specification tolerance but it cannot be used to drive production as the variation is higher than 30% of the production process variation. When communicating this information to the Production Leader and the Engineering Manager they naturally raise different concerns which is how big is our process variability and how much is the process centered and such questions will be address in the Statistical Process Control subject.</p>
 </div>
-<div id="gage-report" class="section level4">
-<h4>Gage report</h4>
-<div class="figure" style="text-align: center"><span id="fig:img-tabletrnR"></span>
-<img src="img/SixSigma.png" alt="gage r&amp;R report example" width="100%" />
+<div id="gage-plots" class="section level3">
+<h3>Gage plots</h3>
+<p>Besides the Variance the Standard Deviation components the <code>ss.rr</code> function generates a full report. We’re going to look into at each of the plots by generating them with the custom function <code>ss.rr.plots</code>. The details of the function itself are presented afterwards.</p>
+<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb52-1"><a href="MSA.html#cb52-1" aria-hidden="true" tabindex="-1"></a>tablet_L_rr_plots <span class="ot">&lt;-</span> <span class="fu">ss.rr.plots</span>(</span>
+<span id="cb52-2"><a href="MSA.html#cb52-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> tablet_L, </span>
+<span id="cb52-3"><a href="MSA.html#cb52-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">var =</span> thickness_micron, </span>
+<span id="cb52-4"><a href="MSA.html#cb52-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">part =</span> tablet, </span>
+<span id="cb52-5"><a href="MSA.html#cb52-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">appr =</span> operator, </span>
+<span id="cb52-6"><a href="MSA.html#cb52-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">alphaLim =</span> <span class="dv">1</span>,</span>
+<span id="cb52-7"><a href="MSA.html#cb52-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">errorTerm =</span> <span class="st">&quot;repeatability&quot;</span>,</span>
+<span id="cb52-8"><a href="MSA.html#cb52-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">main =</span> <span class="st">&quot;Micrometer FTR600</span><span class="sc">\n</span><span class="st">r&amp;R for tablet thickness&quot;</span>,</span>
+<span id="cb52-9"><a href="MSA.html#cb52-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">sub =</span> <span class="st">&quot;Tablet L&quot;</span>,</span>
+<span id="cb52-10"><a href="MSA.html#cb52-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">lsl =</span> <span class="dv">1775</span>,</span>
+<span id="cb52-11"><a href="MSA.html#cb52-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">usl =</span> <span class="dv">1825</span></span>
+<span id="cb52-12"><a href="MSA.html#cb52-12" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb53-1"><a href="MSA.html#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(tablet_L_rr_plots<span class="sc">$</span>plot1)</span></code></pre></div>
+<div class="figure"><span id="fig:fig-tabletPlot1"></span>
+<img src="4_msa_files/figure-html/fig-tabletPlot1-1.png" alt="example of gage r&amp;R components of variation plot" width="95%" />
 <p class="caption">
-Figure 4: gage r&amp;R report example
+Figure 12: example of gage r&amp;R components of variation plot
 </p>
 </div>
-<p>To go further and check other examples, a good printed book from Springer written by the <code>{SixSigma}</code> package author <span class="citation"><a href="#ref-Cano2012" role="doc-biblioref">Emilio L. Cano</a> (<a href="#ref-Cano2012" role="doc-biblioref">2012</a>)</span>.</p>
+<p>This first bar plot presents in a graphical way the gage results in percentage and we can quickly grasp if we’re on target by looking at the pink bars and comparing them with the dashed bars. We can see that the G.R&amp;R is above 30% and thus is not acceptable from a Study Variation criteria. In green we see that compared with the specification we’re above 10% but below 30% so acceptable but requiring improvement. We’re now looking into the measurements themselves:</p>
+<div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb54-1"><a href="MSA.html#cb54-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(tablet_L_rr_plots<span class="sc">$</span>plot6)</span></code></pre></div>
+<div class="figure"><span id="fig:fig-tabletPlot5-1"></span>
+<img src="4_msa_files/figure-html/fig-tabletPlot5-1.png" alt="example of gage r&amp;R run chart" width="95%" />
+<p class="caption">
+Figure 13: example of gage r&amp;R run chart
+</p>
 </div>
-<div id="negative-variance" class="section level4">
-<h4>Negative variance</h4>
-<p>Two important limitations exist in the current approach:</p>
-<ol style="list-style-type: decimal">
-<li>when the operators reproducibility is negative it is converted to zero.</li>
-</ol>
-<p><span class="citation">(<a href="#ref-Montgomery2012" role="doc-biblioref">Montgomery 2012</a>)</span> in page 557 adresses this case in the following way:</p>
-<p><em>Notice that the estimate of one of the variance components,is negative. This is certainly not reasonable because by definition variances are nonnegative. Unfortunately, negative estimates of variance components can result when we use the analysis of variance method of estimation (this is considered one of its drawbacks). We can deal with this negative result in a variety of ways:</em></p>
-<p><em>1) one possibility is to assume that the negative estimate means that the variance component is really zero and just set it to zero, leaving the other nonnegative estimates unchanged.</em></p>
-<p><em>2) Another approach is to estimate the variance components with a method that assures nonnegative estimates (this can be done with the maximum likelihood approach).</em></p>
-<p><em>3) Finally, we could note that the P-value for the interaction term … is very large, take this as evidence that really is zero and that there is no interaction effect, and then fit a reduced model of the form that does not include the interaction term. This is a relatively easy approach and one that often works nearly as well as more sophisticated methods.</em></p>
-<p>This final approach is also what the SixSigma package creators have foreseen and if we leave the argument alphaLim empty the non significant terms will be suppressed from the model, the Anova recalculated and the remaining tables updated accordingly. This can be finetuned with the argument alphaLim. Usually we consider a p value of 0.05 but we recommend to start with higher values such as 0.1 or 0.2 to avoid suppressing too quickly the factor which would result in a transfer of their variability into the repeatability.</p>
-<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="MSA.html#cb16-1" aria-hidden="true" tabindex="-1"></a>tablet_L_rr2 <span class="ot">&lt;-</span> <span class="fu">ss.rr</span>(</span>
-<span id="cb16-2"><a href="MSA.html#cb16-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> tablet_L, </span>
-<span id="cb16-3"><a href="MSA.html#cb16-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">var =</span> thickness_micron, </span>
-<span id="cb16-4"><a href="MSA.html#cb16-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">part =</span> tablet, </span>
-<span id="cb16-5"><a href="MSA.html#cb16-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">appr =</span> operator, </span>
-<span id="cb16-6"><a href="MSA.html#cb16-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">alphaLim =</span> <span class="fl">0.2</span>, <span class="co"># instead of 0.05 it is recommended to start higher</span></span>
-<span id="cb16-7"><a href="MSA.html#cb16-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">errorTerm =</span> <span class="st">&quot;repeatability&quot;</span>,</span>
-<span id="cb16-8"><a href="MSA.html#cb16-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">main =</span> <span class="st">&quot;Micrometer FTR600</span><span class="sc">\n</span><span class="st">r&amp;R for tablet thickness&quot;</span>,</span>
-<span id="cb16-9"><a href="MSA.html#cb16-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">sub =</span> <span class="st">&quot;Tablet L&quot;</span>,</span>
-<span id="cb16-10"><a href="MSA.html#cb16-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">lsl =</span> <span class="dv">1775</span>,</span>
-<span id="cb16-11"><a href="MSA.html#cb16-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">usl =</span> <span class="dv">1825</span></span>
-<span id="cb16-12"><a href="MSA.html#cb16-12" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb55"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb55-1"><a href="MSA.html#cb55-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(tablet_L_rr_plots<span class="sc">$</span>plot5)</span></code></pre></div>
+<div class="figure"><span id="fig:fig-tabletPlot5-2"></span>
+<img src="4_msa_files/figure-html/fig-tabletPlot5-2.png" alt="example of gage r&amp;R run chart" width="95%" />
+<p class="caption">
+Figure 14: example of gage r&amp;R run chart
+</p>
+</div>
+<p>The previous two plots show the measurements for each operator. The first is the Ranges plot showing the differences between the min and max measurement for each part and the second plot is the means plot showing the mean thickness for each part by operator. These help showing that there is a consistency between operators and help as a diagnosis tool to identify if there would be strange patterns appearing where one of the operators would be for instance systematically measuring very high values. The next two plots show average values by part with all operators combined:</p>
+<div class="sourceCode" id="cb56"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb56-1"><a href="MSA.html#cb56-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(tablet_L_rr_plots<span class="sc">$</span>plot2)</span></code></pre></div>
+<div class="figure"><span id="fig:fig-tabletPlot2-1"></span>
+<img src="4_msa_files/figure-html/fig-tabletPlot2-1.png" alt="example of gage r&amp;R main effects plot" width="95%" />
+<p class="caption">
+Figure 15: example of gage r&amp;R main effects plot
+</p>
+</div>
+<div class="sourceCode" id="cb57"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb57-1"><a href="MSA.html#cb57-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(tablet_L_rr_plots<span class="sc">$</span>plot3)</span></code></pre></div>
+<div class="figure"><span id="fig:fig-tabletPlot2-2"></span>
+<img src="4_msa_files/figure-html/fig-tabletPlot2-2.png" alt="example of gage r&amp;R main effects plot" width="95%" />
+<p class="caption">
+Figure 16: example of gage r&amp;R main effects plot
+</p>
+</div>
+<p>We quickly see the measurements tend to be simetrically distributed around their means and that the means between the different operators are very similar. This confirms the low reproducibility what has been seen in the Variance Components.</p>
+<div class="sourceCode" id="cb58"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb58-1"><a href="MSA.html#cb58-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(tablet_L_rr_plots<span class="sc">$</span>plot4)</span></code></pre></div>
+<div class="figure"><span id="fig:fig-tabletPlot4"></span>
+<img src="4_msa_files/figure-html/fig-tabletPlot4-1.png" alt="example of gage r&amp;R interaction plot" width="95%" />
+<p class="caption">
+Figure 17: example of gage r&amp;R interaction plot
+</p>
+</div>
+<p>This final plot is the so called interaction plot and if there were diverting and strongly crossed lines would indicate that different operators measure the parts in different ways. Again here this confirms the low value obtained for the interaction in the Variance Components table.</p>
+<div class="marginnote">
+<p>Tablet thickness measurements obtained with a gage r&amp;R study done on a pharmaceutical tablet compaction process. Red dashed lines corresponds to the thickness specification limits.</p>
+<p><img src="4_msa_files/figure-html/fig-tablethistogram-1.png" width="100%" /></p>
+</div>
+<p>When the gage report was shared with the Production Leader and the Engineering Manager they raised concerns regarding which is how big is our process variability and how much is the process centered. These are valid points as we often go back and forth between measurement validation, product development and process control. Measurement validation makes us look into details on the measured values and question their validity. Taking conscience that the production specification is not adapted, too large or too narrow. Often we realise that production is systematically slightly off centered. Depending on the diagnostic a new gage r&amp;R plan and sampling may need to be prepared and the process or the specification adjusted. Such topics will be further discussed in the Design of Experiments and in the Statistical Process Control subjects.</p>
+</div>
+<div id="negative-variance" class="section level3">
+<h3>Negative variance</h3>
+<p>We’ve started the gage assessment by setting the <code>errorTerm</code> to 1. This made that factors that were non significant remained visible, in our case this happened with the tablet:operator interaction. Although the <code>ss.rr</code> function is always showing zero for non significant factors it may happen that in reality the calculated value is negative.</p>
+<p>We refer to page 557 <span class="citation"><a href="#ref-Montgomery2012" role="doc-biblioref">Montgomery</a> (<a href="#ref-Montgomery2012" role="doc-biblioref">2012</a>)</span> to get guidance on how to adresses this case:</p>
+<p><em>note that the P-value for the interaction term […] is very large, take this as evidence that it really is zero and that there is no interaction effect, and then fit a reduced model of the form that does not include the interaction term. This is a relatively easy approach and one that often works nearly as well as more sophisticated methods.</em></p>
+<p>This approach is the one implemented in <code>{SixSigma}</code>. When we leave the argument <code>alphaLim</code> empty the non significant terms are be suppressed from the model, the Anova is recalculated and the remaining tables updated accordingly. We can control this behavior by playing with different values. Usually we consider a p value of 0.05 but we recommend to start with higher values such as 0.1 or 0.2 to avoid suppressing too quickly the factor which would result in a transfer of their variability into the repeatability. Below we run again the <code>ss.rr</code> function with a limit at 0.05 and get the entire data and plot output in one single step. In our case adjusting the p value has had a very limited impact in the total gage r&amp;R which has changed only from 38.46% to 38.38%.</p>
+<div class="sourceCode" id="cb59"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb59-1"><a href="MSA.html#cb59-1" aria-hidden="true" tabindex="-1"></a>tablet_L_rr2 <span class="ot">&lt;-</span> <span class="fu">ss.rr</span>(</span>
+<span id="cb59-2"><a href="MSA.html#cb59-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> tablet_L, </span>
+<span id="cb59-3"><a href="MSA.html#cb59-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">var =</span> thickness_micron, </span>
+<span id="cb59-4"><a href="MSA.html#cb59-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">part =</span> tablet, </span>
+<span id="cb59-5"><a href="MSA.html#cb59-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">appr =</span> operator, </span>
+<span id="cb59-6"><a href="MSA.html#cb59-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">alphaLim =</span> <span class="fl">0.05</span>,</span>
+<span id="cb59-7"><a href="MSA.html#cb59-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">errorTerm =</span> <span class="st">&quot;repeatability&quot;</span>,</span>
+<span id="cb59-8"><a href="MSA.html#cb59-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">main =</span> <span class="st">&quot;Micrometer FTR600</span><span class="sc">\n</span><span class="st">r&amp;R for tablet thickness&quot;</span>,</span>
+<span id="cb59-9"><a href="MSA.html#cb59-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">sub =</span> <span class="st">&quot;Tablet L&quot;</span>,</span>
+<span id="cb59-10"><a href="MSA.html#cb59-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">lsl =</span> <span class="dv">1775</span>,</span>
+<span id="cb59-11"><a href="MSA.html#cb59-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">usl =</span> <span class="dv">1825</span></span>
+<span id="cb59-12"><a href="MSA.html#cb59-12" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
 <pre><code>Complete model (with interaction):
 
                  Df Sum Sq Mean Sq F value Pr(&gt;F)
@@ -1103,7 +1160,7 @@ tablet:operator   8   11.2     1.4   0.892 0.5237
 Repeatability   210  330.1     1.6               
 Total           224 2061.6                       
 
-alpha for removing interaction: 0.2 
+alpha for removing interaction: 0.05 
 
 
 Reduced model (without interaction):
@@ -1133,51 +1190,52 @@ Part-To-Part       9.44885739 3.0738994 18.443396     92.34      36.89
 Total Variation   11.08146189 3.3288830 19.973298    100.00      39.95
 
 Number of Distinct Categories = 3 </code></pre>
-<p><img src="4_msa_files/figure-html/unnamed-chunk-3-1.png" width="100%" /></p>
-<p>In our case when comparing the total gage r&amp;R with and without the interaction we see it changing from 38.46% to 38.38%.</p>
+<p><img src="4_msa_files/figure-html/fig-tabletNegativeVar-1.png" width="100%" /></p>
+<p>Further developments on the gage r&amp;R in the excellent book from Springer by the <code>{SixSigma}</code> package author <span class="citation"><a href="#ref-Cano2012" role="doc-biblioref">Emilio L. Cano</a> (<a href="#ref-Cano2012" role="doc-biblioref">2012</a>)</span>.</p>
 </div>
+<div id="custom-functions" class="section level3">
+<h3>Custom functions</h3>
+<p>The original report generated by the <code>ss.rr</code>function is produced as a single plot and there is no option in the function to suppress it when we just want to look at the data output. The individual plots presented in this unit have been obtained by modifying directly the package source code. We’re briefly describing here the steps to do it.</p>
+<p>First lets notice that R is fully open system and end users have the freedom to run, study, share, and modify the software. We can confirm this by looking at the <code>{SixSigma}</code> package license:</p>
+<div class="sourceCode" id="cb61"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb61-1"><a href="MSA.html#cb61-1" aria-hidden="true" tabindex="-1"></a>SixSigmaDescription <span class="ot">&lt;-</span> utils<span class="sc">::</span><span class="fu">packageDescription</span>(<span class="st">&quot;SixSigma&quot;</span>) </span>
+<span id="cb61-2"><a href="MSA.html#cb61-2" aria-hidden="true" tabindex="-1"></a>SixSigmaDescription<span class="sc">$</span>License</span></code></pre></div>
+<pre><code>[1] &quot;GPL (&gt;= 2)&quot;</code></pre>
+<p>Wikipedia as an article with the full details on the user rights given by <a href="https://en.wikipedia.org/wiki/GNU_General_Public_License">GNU license</a> licenses.</p>
+<p>The <code>ss.rr</code> function code can the be obtained in RStudio by selecting the package environment in the environment pane and looking for the function. A more direct approach is by simply typing <code>ss.rr</code> on the console. The full code is then revealed and can be copied and modified. For the <code>{industRial}</code> package we’ve copied the code in a new function which we called <code>ss.rr.plots</code> that generates as output a list of plots. Each plot can then be plotted individually.</p>
 </div>
 </div>
 <div id="uncertainty" class="section level2">
 <h2>Uncertainty</h2>
-<p>A final step in the validation of our measurement device is now the calculation of the total measurement uncertainty.</p>
-<p>In some reports the terminology uncertainty is prefered instead of gage r&amp;R.
-In this case the formula usually used to evaluate the measurement uncertainty is:</p>
+<p>In the Pharmaceutical company described in this case study, the final formal Measurement System Analysis reports are issued with a statement on uncertainty. This is a way to combine this various intermediate assessments described before and to communicate the result in a format that can be interpreted by the persons who read measurement results such as Product Development scientists and the R&amp;D management. Different companies adopt more or less sophisticated norms which provide a detailed way of calculating the combined uncertainty that comes from the different assessments performed. In this case study we’re presenting a simple summation in quadrature equivalento to the one described by <span class="citation"><a href="#ref-Bell2001" role="doc-biblioref">Bell</a> (<a href="#ref-Bell2001" role="doc-biblioref">2001</a>)</span> page 14:</p>
 <p><span class="math display">\[
-u^2=u_{repeat.}^2+ u_{reprod.}^2+ u_{cal.}^2
+u=\sqrt{u_{man.}^2 + u_{cal.}^2 + u_{repeat.}^2+ u_{reprod.}^2}
 \]</span></p>
-<p>where the repeatability and reproducibility members can be obtained from the variances calculated in the r&amp;R study</p>
-<p><span class="math display">\[
-u_{repeat}^2 = σ_{repeat}^2\\
-u_{reprod}^2 = σ_{reprod}^2
-\]</span>
-These variance components can be directly obtained from the object generated by the function ss.rr of the {SixSigma} package. If we name our variable <span class="math inline">\(σ_{repeat}^2\)</span> as repeat_var in R we have:</p>
-<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="MSA.html#cb18-1" aria-hidden="true" tabindex="-1"></a>repeat_var <span class="ot">&lt;-</span> tablet_L_rr<span class="sc">$</span>varComp[<span class="dv">2</span>,<span class="dv">1</span>]</span>
-<span id="cb18-2"><a href="MSA.html#cb18-2" aria-hidden="true" tabindex="-1"></a>repeat_var</span></code></pre></div>
-<pre><code>[1] 1.572125</code></pre>
-<p>and for the reproducibility we have:</p>
-<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="MSA.html#cb20-1" aria-hidden="true" tabindex="-1"></a>reprod_var <span class="ot">&lt;-</span> tablet_L_rr<span class="sc">$</span>varComp[<span class="dv">3</span>,<span class="dv">1</span>]</span>
-<span id="cb20-2"><a href="MSA.html#cb20-2" aria-hidden="true" tabindex="-1"></a>reprod_var</span></code></pre></div>
-<pre><code>[1] 0.06885705</code></pre>
-<p>The equipment manual mentions an accuracy of 0.001 mm. If we take this as the calibration uncertainty expressed as a standard deviation, this means we have:</p>
-<p><span class="math display">\[
-u_{cal} = 0.001 mm \Leftrightarrow 1 \mu m\\
-u_{cal}^2 = 1^2 = 1
-\]</span>
-that we can assign in R to the variable calibration_var.</p>
-<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="MSA.html#cb22-1" aria-hidden="true" tabindex="-1"></a>calibration_var <span class="ot">&lt;-</span> <span class="dv">1</span></span></code></pre></div>
-<p>We thus we have a uncertainty of:</p>
-<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="MSA.html#cb23-1" aria-hidden="true" tabindex="-1"></a>u <span class="ot">&lt;-</span> <span class="fu">sqrt</span>(reprod_var <span class="sc">+</span> repeat_var <span class="sc">+</span> calibration_var)</span>
-<span id="cb23-2"><a href="MSA.html#cb23-2" aria-hidden="true" tabindex="-1"></a>u</span></code></pre></div>
-<pre><code>[1] 1.62511</code></pre>
-<p>Finally what is usually reported is the expanded uncertainty corresponding to 2 standard deviations. To be recalled that <span class="math inline">\(\pm\)</span> 2 std corresponds to 95% of the values when a repeative measurement is done. In this case we have <span class="math inline">\(U = 2*u\)</span>:</p>
-<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="MSA.html#cb25-1" aria-hidden="true" tabindex="-1"></a>U <span class="ot">&lt;-</span> <span class="dv">2</span> <span class="sc">*</span> u</span>
-<span id="cb25-2"><a href="MSA.html#cb25-2" aria-hidden="true" tabindex="-1"></a>U</span></code></pre></div>
-<pre><code>[1] 3.25022</code></pre>
-<p>For a specific measurement of say 1’800 <span class="math inline">\(\mu m\)</span> we then say: the tablet thickness is 1’800 <span class="math inline">\(\mu m\)</span> <span class="math inline">\(\pm\)</span> 3.3 <span class="math inline">\(\mu m\)</span>, at the 95 percent confidence level. Or written in short:</p>
-<p>1’800 <span class="math inline">\(\mu m\)</span> <span class="math inline">\(\pm\)</span> 3.3 <span class="math inline">\(\mu m\)</span>, at a level of confidence of 95%</p>
-<p>Knowing that the specification is [1’775; 1’825] <span class="math inline">\(\mu\)</span>m we have a specification range of 500. The expanded uncertainty corresponds to 13 %. This is another way of looking into the ratio between method variation and specification. This {SixSigma} package gave a similar result of 15.37%. To be noted that the calculation in by the package corresponds to 3 standard deviations and does not comprise the supplier calibration.</p>
-<p>For further reading on the topic we recommend the booklet from <span class="citation"><a href="#ref-Bell2001" role="doc-biblioref">Bell</a> (<a href="#ref-Bell2001" role="doc-biblioref">2001</a>)</span>.</p>
+<p>This formula consists in taking the square root of the sum of the squares of the standard deviations obtained in the different tests.</p>
+<p>The first term is coming from the micrometer manufacturer which mentions in the equipment guide an accuracy of 0.001 mm which corresponds to 1 <span class="math inline">\(\mu\)</span>. We assign this in R to the u_man variable:</p>
+<div class="sourceCode" id="cb63"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb63-1"><a href="MSA.html#cb63-1" aria-hidden="true" tabindex="-1"></a>u_man <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb63-2"><a href="MSA.html#cb63-2" aria-hidden="true" tabindex="-1"></a>u_man</span></code></pre></div>
+<pre><code>[1] 1</code></pre>
+<p>The calibration uncertainty has been established before in the calibration study :</p>
+<div class="sourceCode" id="cb65"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb65-1"><a href="MSA.html#cb65-1" aria-hidden="true" tabindex="-1"></a>u_cal</span></code></pre></div>
+<pre><code>[1] 0.1024416</code></pre>
+<p>The repeatability and reproducibility uncertainties correspond to the standard deviations calculated in the r&amp;R study. In our case we can even obtain them directly from the Variance Components table generated by the <code>ss.rr</code> function of the {SixSigma} package that has bee discussed in details the Gage acceptance unit. We are going to name <span class="math inline">\(u_{repeat}^2\)</span> as u_repeat <span class="math inline">\(u_{reprod}^2\)</span> as u_reprod getting:</p>
+<div class="sourceCode" id="cb67"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb67-1"><a href="MSA.html#cb67-1" aria-hidden="true" tabindex="-1"></a>u_repeat <span class="ot">&lt;-</span> tablet_L_rr<span class="sc">$</span>studyVar[<span class="dv">2</span>,<span class="dv">1</span>]</span>
+<span id="cb67-2"><a href="MSA.html#cb67-2" aria-hidden="true" tabindex="-1"></a>u_repeat</span></code></pre></div>
+<pre><code>[1] 1.253844</code></pre>
+<div class="sourceCode" id="cb69"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb69-1"><a href="MSA.html#cb69-1" aria-hidden="true" tabindex="-1"></a>u_reprod <span class="ot">&lt;-</span> tablet_L_rr<span class="sc">$</span>studyVar[<span class="dv">3</span>,<span class="dv">1</span>]</span>
+<span id="cb69-2"><a href="MSA.html#cb69-2" aria-hidden="true" tabindex="-1"></a>u_reprod</span></code></pre></div>
+<pre><code>[1] 0.2624063</code></pre>
+<p>Now putting it all together in the uncertainty formula we have:</p>
+<div class="sourceCode" id="cb71"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb71-1"><a href="MSA.html#cb71-1" aria-hidden="true" tabindex="-1"></a>u <span class="ot">&lt;-</span> <span class="fu">sqrt</span>(u_man<span class="sc">^</span><span class="dv">2</span> <span class="sc">+</span> u_cal<span class="sc">^</span><span class="dv">2</span> <span class="sc">+</span> u_repeat<span class="sc">^</span><span class="dv">2</span> <span class="sc">+</span> u_reprod<span class="sc">^</span><span class="dv">2</span>)</span>
+<span id="cb71-2"><a href="MSA.html#cb71-2" aria-hidden="true" tabindex="-1"></a>u</span></code></pre></div>
+<pre><code>[1] 1.628335</code></pre>
+<p>Finally what is usually reported is the expanded uncertainty corresponding to 2 standard deviations. To be recalled that <span class="math inline">\(\pm\)</span> 2 std corresponds to 95% of the values when a repetitive measurement is made. In this case we have <span class="math inline">\(U = 2*u\)</span>:</p>
+<div class="sourceCode" id="cb73"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb73-1"><a href="MSA.html#cb73-1" aria-hidden="true" tabindex="-1"></a>U <span class="ot">&lt;-</span> <span class="dv">2</span> <span class="sc">*</span> u</span>
+<span id="cb73-2"><a href="MSA.html#cb73-2" aria-hidden="true" tabindex="-1"></a>U</span></code></pre></div>
+<pre><code>[1] 3.256671</code></pre>
+<p>For a specific measurement of say 1’800 <span class="math inline">\(\mu m\)</span> we then say: the tablet thickness is 1’800 <span class="math inline">\(\mu m\)</span> <span class="math inline">\(\pm\)</span> 3.3 <span class="math inline">\(\mu m\)</span>, at the 95 percent confidence level. Written in short is:</p>
+<p><strong>1’800 <span class="math inline">\(\mu m\)</span> <span class="math inline">\(\pm\)</span> 3.3 <span class="math inline">\(\mu m\)</span>, at a level of confidence of 95%</strong></p>
+<p>Knowing that the specification is [1’775; 1’825] <span class="math inline">\(\mu\)</span>m we have a specification range of 50. The expanded uncertainty corresponds to 13.03 %. This is another way of looking into the ratio between method variation and specification. The <code>{SixSigma}</code> package gave a similar result of 15.37%. To be noted that the calculation in by the package corresponds to 3 standard deviations and does not comprise the supplier calibration.</p>
 
 </div>
 </div>

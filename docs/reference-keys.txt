@@ -23,3 +23,4 @@ tab:unnamed-chunk-33
 tab:unnamed-chunk-34
 fig:unnamed-chunk-3
 fig:unnamed-chunk-34
+fig:img-tabletrnR

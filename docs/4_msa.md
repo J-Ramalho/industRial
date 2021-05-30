@@ -152,11 +152,11 @@ Modern pharmaceutical tablet presses reach output volumes of up to 1,700,000 tab
 
 </div>
 
-Pharmaceutical production setups combine uniquely extreme high volumes with stringent quality demands. In a pharmaceutical <b class="highlight">tablet compaction process</b> the quality measurement system requires the Production Operator to sample tablets on a regular basis and log the thickness in a spreadsheet on the line. Although many companies have now inline automatic measurement devices providing automatic data collection to a central database it is not uncommon to see hand held devices and manual log of measurements in spreadsheets. In an age of machine learning and sophisticated predictive tools this may seem awkward but it is common to see coexisting old and new approaches on the shop floor.
+Pharmaceutical production setups combine extreme high volumes with stringent quality demands. In this context many manufacturing plants have inline automatic measurement devices providing automatic data collection to a central database but it is not uncommon to see hand held devices and manual log of measurements in spreadsheets. In an age of machine learning and sophisticated predictive tools this may seem awkward but it is common to see coexisting old and new approaches on the shop floor. A recurring check of measurement devices is the famous gage r&R. r&R stands for reproducibility and Reproductibility which combined give the instrument precision, according to the ISO 5725. In any case automatic or manual the way to assess the measuremen device should follow the same approach.
 
-A recurring check of measurement devices is the famous gage r&R. r&R stands for reproducibility and Reproductibility which combined give the instrument precision, according to the ISO 5725.
+In our case we're looking into a pharmaceutical company where a <b class="highlight">tablet compaction process</b> the quality measurement system requires the Production Operator to sample tablets on a regular basis and log the thickness in a spreadsheet on the line. Measurements are done with a micrometer build and acquired specifically for this purpose that has a fixture developed to fit the shape of the tablet. 
 
-In fact besides thickness, the quality measurement system requires the operator to collect quite an large variety of parameters including room conditions. Elaborating on this a Quality Engineer has prepared a specific file for the gage r&R that also included the replicate number. As it is common practice he asked the measurements to be done by several operators. This data has been loaded into R and is available in the dataset `tablet_thickness` and an extract is presented here in raw:
+Besides thickness, the quality measurement system requires the operator to collect quite an large variety of parameters including room conditions too. Elaborating on this a Quality Engineer has prepared a specific file for the gage r&R that also included the replicate number. As it is common practice he asked the measurements to be done by several operators. This data has been loaded into R and is available in the dataset `tablet_thickness` and an extract is presented here in raw:
 
 
 ```r
@@ -237,7 +237,7 @@ tablet_L <- tablet_thickness %>%
   filter(size == "L")
 ```
 
-Now that the dataset is clean and ready he moves forward with the `ss.rr()` function from the `{SixSigma}` package. As the function allows to input the limits he also provides in the arguments the current upper and lower limit of the specification, in this case of 1'800 $\mu m$ +/- 25 $\mu m$ for tablet L. Note that he sets the `alphaLim` argument to 1 in this first assessment to be able to see all the model terms including non significant one. In subsequent analysis this can be set to 0.05 the usual significance threshold.
+Now that the dataset is clean and ready he moves forward with the `ss.rr()` function from the `{SixSigma}` package.
 
 ### Gage r&R {#gageRnR}
 
@@ -248,13 +248,14 @@ library(SixSigma)
 
 
 ```r
+# dimensions for chunk output when included: fig.dim=c(8, 10)
 tablet_L_rr <- ss.rr(
   data = tablet_L, 
   var = thickness_micron, 
   part = tablet, 
   appr = operator, 
   alphaLim = 1,
-  errorTerm = "repeatability", # very important otherwise F test not identical to base aov
+  errorTerm = "repeatability",
   main = "Micrometer FTR600\nr&R for tablet thickness",
   sub = "Tablet L",
   lsl = 1775,
@@ -262,87 +263,109 @@ tablet_L_rr <- ss.rr(
 )
 ```
 
-```
-Complete model (with interaction):
+The `ss.rr` function takes the filtered `tablet_L` dataset and `var`, `part` and the arguments `appr` to precise what is the measurement variable, the part and the operator in this order. Then to be noted that the `alphaLim` argument is set to 1 in this first assessment. This is to keep all the model terms including non significant one. In future analysis this can be set to 0.05 the usual significance threshold and those non significant terms are omitted. Another detail important to ensure is to select the repeatability as the `errorTerm` otherwise we get different results than those obtained with base anova and other software aligned with the @AIAG2010 guidelines such as Minitab. Finally the function also allows to input the limits he also provides in the arguments the current upper and lower limit of the specification, in this case of 1'800 $\mu m$ +/- 25 $\mu m$ for tablet L. 
 
-                 Df Sum Sq Mean Sq F value Pr(>F)
-tablet            4 1707.1   426.8 271.457 <2e-16
-operator          2   13.1     6.6   4.177 0.0166
-tablet:operator   8   11.2     1.4   0.892 0.5237
-Repeatability   210  330.1     1.6               
-Total           224 2061.6                       
+The output of this function is a list with several elements inside and an automatically generated report. 
 
-alpha for removing interaction: 1 
 
-Gage R&R
-
-                      VarComp %Contrib
-Total Gage R&R     1.64098201    14.79
-  Repeatability    1.57212495    14.17
-  Reproducibility  0.06885705     0.62
-    operator       0.06885705     0.62
-tablet:operator    0.00000000     0.00
-Part-To-Part       9.45247729    85.21
-Total Variation   11.09345930   100.00
-
-                      VarComp    StdDev  StudyVar %StudyVar %Tolerance
-Total Gage R&R     1.64098201 1.2810082  7.686049     38.46      15.37
-  Repeatability    1.57212495 1.2538441  7.523064     37.65      15.05
-  Reproducibility  0.06885705 0.2624063  1.574438      7.88       3.15
-    operator       0.06885705 0.2624063  1.574438      7.88       3.15
-tablet:operator    0.00000000 0.0000000  0.000000      0.00       0.00
-Part-To-Part       9.45247729 3.0744881 18.446929     92.31      36.89
-Total Variation   11.09345930 3.3306845 19.984107    100.00      39.97
-
-Number of Distinct Categories = 3 
+```r
+names(tablet_L_rr)
 ```
 
-<div class="figure" style="text-align: center">
-<img src="4_msa_files/figure-html/fig-tableRnR-1.png" alt="r&amp;R example report" width="100%" />
-<p class="caption">(\#fig:fig-tableRnR)r&R example report</p>
-</div>
+```
+[1] "anovaTable" "anovaRed"   "varComp"    "studyVar"   "ncat"      
+```
+
+We're now looking more in detail in some of them.
 
 ### Gage acceptance {#gage_acceptance}
 
-#### Variance criteria
+Measurement system acceptance can be done based on varied criteria and is often done in progressive stages. In Research and Development contexts it is common that the measurement method is developed simultaneously with the end product. There are stages where the teams are conceiving the full industrial setup and there may be an overlap between product sub-assembly, assembly machine and measurement device. These different components of the production or assembly line may not reach maturity all at the same time. In such cases the Quality Assurance may give an approval for the measurement device based on tests done on products that cannot yet be commercialized. This means that the final conditions of usage are not fully tested. In other cases the measurement method is complex but time presses and the teams test the quality of the parts by other means such as the failure rates of the assemblies where the parts go. For all these reasons it is important to clarify at all times the assumptions used in the assessment of the  measurement method. 
 
-To evaluate your process variation, compare the Total Gage R&R contribution in the %Contrib column with the values in the list below:
+#### Variance components
+
+A common way to quickly judge if an equipment variability is high is to look at its variance. In our case the Quality Engineer can look at the variance components of the gage r&R study by calling them from the `ss.rr` list.
+
+
+```r
+tablet_L_rr$varComp %>%
+  kable(digits = 1)
+```
+
+
+
+|                | VarComp| %Contrib|
+|:---------------|-------:|--------:|
+|Total Gage R&R  |     1.6|     14.8|
+|Repeatability   |     1.6|     14.2|
+|Reproducibility |     0.1|      0.6|
+|operator        |     0.1|      0.6|
+|tablet:operator |     0.0|      0.0|
+|Part-To-Part    |     9.5|     85.2|
+|Total Variation |    11.1|    100.0|
+
+Looking at the column %Contrib he sees that the total gage R&R is too high when comparing with the established guidelines for gage acceptance:
 
 * Less than 1%: the measurement system is acceptable
-
-* Between 1% and 9%: the measurement system is acceptable depending on the application, the cost of the measurement device, cost of repair, or other factors
-
+* Between 1% and 9%: the measurement system is acceptable depending on the application,    
+the cost of the measurement device, cost of repair, or other factors
 * Greater than 9%: the measurement system is not acceptable and should be improved.
 
-#### Standard deviation criteria
+Another direct information from this assessment is that this variability comes from the repeatability mostly and not from the operator or from the interaction. This is very useful as a clue to start identifying where the variability comes from and how to try to improve it.
 
-The study variation table is established by calculating the square root of each variance (the standard deviation) and by multiplying it by 6 (the six sigma) and then again by comparing each variation with the total variation. Standard deviations are usualy more speaking to the industry professionals. This table also provides a comparison with the specification.
+Although quick and providing a first impression, variance is not a very intuitive statistic as is not expressed in the measurement units. A much more common and speaking approach is to look into the standard deviation and compare it with the process variation but also with the specification itself.
 
-According to the guidelines from the @AIAG2010, if your system variation is less than 10% of the process variation, then it is acceptable.
+#### Standard deviation components
 
-To evaluate your process variation, compare the Total Gage R&R contribution in the %StudyVar column with the values in the list below:
+The standard deviation values from the study can be pulled from the list with the same approach as before.
+
+
+```r
+tablet_L_rr$studyVar %>%
+  kable()
+```
+
+
+
+|                |    StdDev|  StudyVar| %StudyVar| %Tolerance|
+|:---------------|---------:|---------:|---------:|----------:|
+|Total Gage R&R  | 1.2810082|  7.686049|     38.46|      15.37|
+|Repeatability   | 1.2538441|  7.523064|     37.65|      15.05|
+|Reproducibility | 0.2624063|  1.574438|      7.88|       3.15|
+|operator        | 0.2624063|  1.574438|      7.88|       3.15|
+|tablet:operator | 0.0000000|  0.000000|      0.00|       0.00|
+|Part-To-Part    | 3.0744881| 18.446929|     92.31|      36.89|
+|Total Variation | 3.3306845| 19.984107|    100.00|      39.97|
+
+The study variation table is has several columns. The StdDev column contains the square root of each individual variance. The StudyVar column has each StdDev multiplied by 6 which corresponds to the max variability for each component. Then each StudyVar is divided by the Total Variation and expressed in percentage in the %StudyVar column. The last column %Tolerance contains the division of the StudyVar by the specification interval (+/- 25 $\mu m$ in this case) expressed in percentage.
+
+The Quality Engineer is now is a position to progress is assessment. According to the guidelines followed in the company the measurement method variation needs to be less than 10% of the process variation to be considered directly accepted. This is expressed here in the column %StudyVar and is 38.46% which is much above this limit. The guidelines state:
 
 * Less than 10%: the measurement system is acceptable
-
-* Between 10% and 30%: the measurement system is acceptable depending on the application, the cost of the measurement device, cost of repair, or other factors
-
+* Between 10% and 30%: the measurement system is acceptable depending on the application,   
+the cost of the measurement device, cost of repair, or other factors
 * Greater that 30%: the measurement system is not acceptable and should be improved.
 
-If the p-value for the operator and part interaction is 0.05 or higher, the system removes the interaction because it is not significant and generates a second ANOVA table without the interaction.
+<div class="marginnote">
 
-The AIAG also states that the number of distinct categories into which the measurement system divides process output should be greater or equal to 5.
+Tablet thickness process variability obtained from a gage r&R study done on a pharmaceutical tablet compaction process.
 
-The part to part variation is high which is what is expected in a study like this.
+<img src="4_msa_files/figure-html/unnamed-chunk-2-1.png" width="100%" />
 
-In our specific example we observe that the device cannot be accepted as the Study variation for the Total Gage r&R is 38.46% thus much higher than 30%. Furhtermore the number of distinc categories is only of 3. 
+</div>
 
-Finaly to be noted that the total variation rather low when compared with the specification.
+As he already knew, the variability is coming mostly from the repeatability. With this approach he can also compare with the product specification tolerance which is 15.37%. The part to part variation corresponds to the bulk of the variability and this is what is expected.
 
-In a nutshell two questions are answered:
+Although the Quality Assurance department is not fully validating a measurement method with these figures there seems to be potential to improve the situation. At this moment we can consider that the micrometer allows to sort good parts from bad because the variability is lower than 30% of specification tolerance but it cannot be used to drive production as the variation is higher than 30% of the production process variation. When communicating this information to the Production Leader and the Engineering Manager they naturally raise different concerns which is how big is our process variability and how much is the process centered and such questions will be address in the Statistical Process Control subject.
 
-* can the method be used to assess process performance: no the measurement system variation equals 38.4% of the process variation,
+#### Gage report
 
-* can the method be used to sort good parts from bad: yes but can be improved, the measurement system variation equals 15.3% of the tolerance.
+<div class="figure" style="text-align: center">
+<img src="img/SixSigma.png" alt="gage r&amp;R report example" width="100%" />
+<p class="caption">(\#fig:img-tabletrnR)gage r&R report example</p>
+</div>
+
+To go further and check other examples, a good printed book from Springer written by the `{SixSigma}` package author @Cano2012.
 
 #### Negative variance
 
@@ -420,7 +443,7 @@ Total Variation   11.08146189 3.3288830 19.973298    100.00      39.95
 Number of Distinct Categories = 3 
 ```
 
-<img src="4_msa_files/figure-html/unnamed-chunk-2-1.png" width="100%" />
+<img src="4_msa_files/figure-html/unnamed-chunk-3-1.png" width="100%" />
 
 In our case when comparing the total gage r&R with and without the interaction we see it changing from 38.46% to 38.38%.
 

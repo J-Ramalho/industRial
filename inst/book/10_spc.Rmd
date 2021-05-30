@@ -309,13 +309,14 @@ sigma_limits <- tibble(
 sigma_limits %>%
   mutate(
     off_spec_perc = off_spec(sigma_plus, sigma_minus, mean, sd),
+    in_spec_perc = 100 - off_spec_perc,
     Cpk = process_Cpk(sigma_plus, sigma_minus, mean, sd),
     ppm_defects = formatC(
       off_spec(sigma_plus, sigma_minus, mean, sd) * 10000,
       format = "d",
       big.mark = "'")) %>%
-  select(sigma_minus, sigma_plus, off_spec_perc, Cpk, ppm_defects) %>%
-  kable(align = "c", digits = 2)
+  select(sigma_minus, sigma_plus, off_spec_perc, in_spec_perc, Cpk, ppm_defects) %>%
+  kable(align = "c", digits = 3)
 ```
 
 ### Capability chart {#process.capability}

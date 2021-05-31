@@ -1,5 +1,8 @@
 
 
+```
+## Error in get(genname, envir = envir) : objet 'testthat_print' introuvable
+```
 
 ## Two level designs
 
@@ -595,8 +598,6 @@ battery_charging %>%
 
 <img src="9_twolevelDOEs_files/figure-html/unnamed-chunk-30-1.png" width="100%" />
 
-## Response surface
-
 We are introducing here response surface plots which is yet another way to visualize the experiment outputs as a function of the inputs. We're doing this with the persp() function from the {rsm} package which provides an extremely fast rendering, easy parametrization and a readable output. To be noted that this function is an extension of the base R persp() consisting from the R point of view in an S3 method for the lm class. This allows to simply provide directly the lm object to the function to obtain the response surface.
 
 ### Perspective plot {#persp}
@@ -654,10 +655,7 @@ Possible approaches:
 
 <div class="marginnote">
 
-<div class="figure" style="text-align: center">
-<img src="img/electrical_car_bw.png" alt="electrical car platform" width="100%" />
-<p class="caption">(\#fig:unnamed-chunk-34)electrical car platform</p>
-</div>
+<img src="img/electrical_car_bw.png" width="100%" />
 
 </div>
 

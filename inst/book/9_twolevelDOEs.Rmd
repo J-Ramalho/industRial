@@ -358,8 +358,6 @@ battery_charging %>%
     subtitle = "Prediction with reduced model")
 ```
 
-## Response surface
-
 We are introducing here response surface plots which is yet another way to visualize the experiment outputs as a function of the inputs. We're doing this with the persp() function from the {rsm} package which provides an extremely fast rendering, easy parametrization and a readable output. To be noted that this function is an extension of the base R persp() consisting from the R point of view in an S3 method for the lm class. This allows to simply provide directly the lm object to the function to obtain the response surface.
 
 ### Perspective plot {#persp}

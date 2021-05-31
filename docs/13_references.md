@@ -21,16 +21,20 @@ devtools::session_info()[[1]]
 ```
 
 ```
+## Error in get(genname, envir = envir) : objet 'testthat_print' introuvable
+```
+
+```
 ##  setting  value                       
-##  version  R version 4.0.5 (2021-03-31)
-##  os       Ubuntu 20.04.2 LTS          
-##  system   x86_64, linux-gnu           
-##  ui       X11                         
+##  version  R version 4.0.2 (2020-06-22)
+##  os       Windows 10 x64              
+##  system   x86_64, mingw32             
+##  ui       RTerm                       
 ##  language (EN)                        
-##  collate  en_US.UTF-8                 
-##  ctype    en_US.UTF-8                 
-##  tz       Europe/Zurich               
-##  date     2021-05-30
+##  collate  French_Switzerland.1252     
+##  ctype    French_Switzerland.1252     
+##  tz       Europe/Berlin               
+##  date     2021-05-31
 ```
 
 **Disclaimer**

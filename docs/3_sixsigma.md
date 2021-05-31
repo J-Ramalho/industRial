@@ -1,11 +1,14 @@
 
 
+```
+## Error in get(genname, envir = envir) : objet 'testthat_print' introuvable
+```
 
 # (PART) CASE STUDIES {-}
 
 # Design for Six Sigma
 
-Quality tools have been grouped under varied names and methodologies being Six Sigma one of the most well known and comprehensives ones. The domain is vast as seen in the dozens of tools collected in the Six Sigma book by @Munro2015. For this section we've selected a few cases that strongly support Measurement System Analysis, Design of Experiments and Statistical Process Control. Beside supporting the remaining sections, they also pretend to showcase how R can be used also for other purposes than data wrangling and visualization in the domain of industrial data science, typically to obtain easily reproducible diagrams. 
+Quality tools have been grouped under varied names and methodologies being Six Sigma one of the most well known and comprehensives ones. The domain is vast as seen in the many tools collected and described in the Six Sigma book by @Munro2015. For this section we've selected a few cases that strongly support Measurement System Analysis, Design of Experiments and Statistical Process Control. Beside supporting the remaining sections, they also pretend to showcase how R can be used also for other purposes than data wrangling and visualization in the domain of industrial data science, typically to obtain easily reproducible diagrams. 
 
 We start with a case on a dial workshop in the watch making industrial where the pareto chart comes handy. We then move to a dental prosthesis laboratory to see how a simple fishbone diagram can help pinpoint special causes of the measurement variation of an optical device and we finish we two different approaches on how to optimize experiment execution by assess the correlation between the outputs in order to minimize the parameters to measure.
 
@@ -16,10 +19,7 @@ We start with a case on a dial workshop in the watch making industrial where the
 
 Watch dials are received from the stamping process and polished before being sent to the final assembly. As part of the autonomous quality control performed by the polishing operators a count of the defects observed on the dials each day is logged in a spreadsheet. 
 
-<div class="figure" style="text-align: center">
-<img src="img/assemblage_cadran_bw.jpg" alt="watch dial inspection" width="100%" />
-<p class="caption">(\#fig:img-dial)watch dial inspection</p>
-</div>
+<img src="img/assemblage_cadran_bw.jpg" width="100%" />
 
 </div>
 
@@ -31,11 +31,11 @@ Collecting data can be done in many different forms and there's no right or wron
 
 In a <b class="highlight">dial polishing workshop</b> of a watchmaking manufacture, the assembly operators have been collecting dial defects in a spreadsheet. Logging a defect doesn't mean the dial is directly scrapped. Putting away parts has strong impact on the cost of the operation and has to be done on clear criteria. Sometimes the parts can be rework with minor effort. The datalog corresponds to the status of the dials as they arrive from the stamping and before entering the polishing operation. Their dataset with the name `dial_control` shows each dial unique number and the general and defect information noted by the operators.
 
+### Collecting defects
+
 <div class="marginnote">
 All datasets are available by loading the book companion package with `library(industRial)`. Full instructions in the [datasets](#datasets) session.
 </div>
-
-### Collecting defects
 
 
 ```r
@@ -88,10 +88,7 @@ d_type_p +
   theme_industRial()
 ```
 
-<div class="figure" style="text-align: center">
-<img src="3_sixsigma_files/figure-html/fig-pareto1-1.png" alt="pareto chart example" width="100%" />
-<p class="caption">(\#fig:fig-pareto1)pareto chart example</p>
-</div>
+<img src="3_sixsigma_files/figure-html/fig-pareto1-1.png" width="100%" />
 
 As often happens we can see that the first two defects account for more than 80% of the problems. Scratching levels are in fact high but they realize indentation is even higher. Is it clear what indentation is? Have we been noting sometimes indentation for scratches? Where to draw the line? and are the causes of these two defects the same?
 
@@ -110,10 +107,7 @@ d_location_p +
   theme_industRial()
 ```
 
-<div class="figure" style="text-align: center">
-<img src="3_sixsigma_files/figure-html/fig-pareto2-1.png" alt="pareto chart example" width="100%" />
-<p class="caption">(\#fig:fig-pareto2)pareto chart example</p>
-</div>
+<img src="3_sixsigma_files/figure-html/fig-pareto2-1.png" width="100%" />
 
 Effectively there are many defects at 3h corresponding to the position on the right of the dial (and even more at 4h). Peter's assumption may be right, the team decides to gather in the first polishing workbench and share openly how each of them fixes the dial to try to understand if there is a specific procedure or applied force that creates the defect. 
 
@@ -128,10 +122,7 @@ To practice and go further in the exploration of pareto charts checkout the tuto
 
 An optical measurement device has just been installed in a large Dental Prosthesis Manufacturing Laboratory. It is precise but expensive device based on laser technology which has been installed in a dedicated stabilized workbench. 
 
-<div class="figure" style="text-align: center">
-<img src="img/dental_scan2.png" alt="dental impression measurement" width="100%" />
-<p class="caption">(\#fig:img-dental)dental impression measurement</p>
-</div>
+<img src="img/dental_scan2.png" width="100%" />
 
 </div>
 
@@ -186,10 +177,7 @@ cause.and.effect(
 )
 ```
 
-<div class="figure" style="text-align: center">
-<img src="3_sixsigma_files/figure-html/fig-fishbone, fig-ishikawa-1.png" alt="ishikawa diagram example" width="100%" />
-<p class="caption">(\#fig:fig-fishbone, fig-ishikawa)ishikawa diagram example</p>
-</div>
+<img src="3_sixsigma_files/figure-html/fig-fishbone-1.png" width="100%" />
 
 The listed factors can now be addressed either one by one or in combined experiments to evaluate their impact on the measurement method. The lab team has decided to assess the method robustness to the brightness and to the dimensional algorithm and will prepare an experiment design with several combinations of these parameters to evaluate them. Using the diagram they can easily keep track of what has been listed, tested and can be eliminated as root cause.
 
@@ -201,10 +189,7 @@ The listed factors can now be addressed either one by one or in combined experim
 
 A Project Manager in perfume formulation needs to understand in detail the impact of the perfume manufacturing line parameters variation (e.g. temperature, pressure and others) in typical perfume sensorial characteristics such as the floral notes.
 
-<div class="figure" style="text-align: center">
-<img src="img/parfum.jpg" alt="Perfume destillation line" width="100%" />
-<p class="caption">(\#fig:img-perfume)Perfume destillation line</p>
-</div>
+<img src="img/parfum.jpg" width="100%" />
 
 </div>
 
@@ -278,10 +263,7 @@ perfume_long %>%
   theme_industRial()
 ```
 
-<div class="figure" style="text-align: center">
-<img src="3_sixsigma_files/figure-html/fig-perfumetileplot-1.png" alt="tileplot example" width="100%" />
-<p class="caption">(\#fig:fig-perfumetileplot)tileplot example</p>
-</div>
+<img src="3_sixsigma_files/figure-html/fig-perfumetileplot-1.png" width="100%" />
 
 The plot shows that many parameters are expected to move together. Looking in detail the flow aroma moves together with other sensory attributes such as hp, o and oc. After this first DoE the real correlations will be established and the team expects to be able to avoid a significant part of the measurements that have a correlation higher than 50% from the second DoE onward.
 
@@ -351,7 +333,7 @@ perfum_tbl_graph
 4     1     5    0.2
 5     1     6    0.2
 6     1     8    0.8
-# … with 79 more rows
+# ... with 79 more rows
 #
 # Node Data: 22 x 1
   name 
@@ -359,7 +341,7 @@ perfum_tbl_graph
 1 pw   
 2 w    
 3 pm   
-# … with 19 more rows
+# ... with 19 more rows
 ```
 
 In the previous chunk output we see a preview of the tibble graph object with the first few nodes and edges. Now we create a vector with various igraph layouts to allow for easier selection when making the plots:
@@ -375,18 +357,15 @@ and do a first network plot to check data upload:
 
 ```r
 perfum_tbl_graph %>% 
-  ggraph(layout = "igraph", algorithm = igraph_layouts[7]) +
+  ggraph::ggraph(layout = "igraph", algorithm = igraph_layouts[7]) +
   geom_edge_link(aes(edge_alpha = weight)) +
   geom_node_label(aes(label = name), repel = TRUE) +
-  theme_graph() +
+  # theme_graph() +
   labs(title = "DOE Perfume Formulation - Inputs",
        subtitle = "Most important expected correlations")
 ```
 
-<div class="figure">
-<img src="3_sixsigma_files/figure-html/fig-network1-1.png" alt="raw network plot example" width="100%" />
-<p class="caption">(\#fig:fig-network1)raw network plot example</p>
-</div>
+<img src="3_sixsigma_files/figure-html/fig-network1-1.png" width="100%" />
 
 Data loading is now confirmed to have been done correctly and we can now move into the clustering analysis. We use different clusters algorithms to generate the groups.
 
@@ -450,7 +429,7 @@ perfum_tg_2 %>%
   scale_edge_width(range = c(0.2, 1), name = "Correlation strength") +
   scale_edge_alpha(range = c(0.05, 0.2), name = "Correlation strength") + 
   scale_fill_manual(values = my_palette) + 
-  theme_graph() +
+  # theme_graph() +
   labs(
     title = str_c("<span style='color:#433E85FF'>Line Parameters</span>", 
     " and ", "<span style='color:#51C56AFF'>Perfume Attributes</span>"),
@@ -461,10 +440,7 @@ perfum_tg_2 %>%
                                       face = "bold")) 
 ```
 
-<div class="figure">
-<img src="3_sixsigma_files/figure-html/fig-network2-1.png" alt="network plot example" width="100%" />
-<p class="caption">(\#fig:fig-network2)network plot example</p>
-</div>
+<img src="3_sixsigma_files/figure-html/fig-network2-1.png" width="100%" />
 
 <br>
 

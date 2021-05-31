@@ -4,13 +4,15 @@
 # Index {#contents}
 
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
-source(here::here("inst/book/setup.R"))
-knitr::opts_chunk$set(options(knitr.kable.NA = ''))
+library(readr)
+library(dplyr)
 library(kableExtra)
+knitr::opts_chunk$set(options(knitr.kable.NA = ''))
 ```
 
-```{r echo=FALSE}
-read_csv("contents.csv") %>%
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+read_delim(here::here("inst/book/contents.csv"), 
+    ";", escape_double = FALSE, trim_ws = TRUE) %>%
   select(Subject, Unit, Functions, Datasets) %>%
   kable(align = "l") %>%
   # column_spec() %>%

@@ -1,5 +1,8 @@
 
 
+```
+## Error in get(genname, envir = envir) : objet 'testthat_print' introuvable
+```
 
 # Measurement System Analysis {#MSA}
 
@@ -17,10 +20,7 @@ The first case treats the calibration of a recently acquired measurement device 
 
 The Quality Assurance Head has acquired a fast dry matter content measurement device from the supplier DRX. The rational for the acquisition has been the important reduction of the control time. Before it enters operation its performance is being assessed and validated.
 
-<div class="figure" style="text-align: center">
-<img src="img/juice_bottling_bw.jpg" alt="juice bottling line" width="100%" />
-<p class="caption">(\#fig:img-juice)juice bottling line</p>
-</div>
+<img src="img/juice_bottling_bw.jpg" width="100%" />
 
 </div>
 
@@ -79,8 +79,8 @@ skim(juice_drymatter$bias) %>%
 
 **Variable type: numeric**
 
-|skim_variable | n_missing| complete_rate| mean|   sd|    p0|  p25|   p50|   p75|  p100|hist  |
-|:-------------|---------:|-------------:|----:|----:|-----:|----:|-----:|-----:|-----:|:-----|
+|skim_variable | n_missing| complete_rate| mean|   sd|    p0|  p25|   p50|   p75|  p100|hist                                     |
+|:-------------|---------:|-------------:|----:|----:|-----:|----:|-----:|-----:|-----:|:----------------------------------------|
 |data          |         0|             1| -0.3| 0.14| -0.63| -0.4| -0.29| -0.19| -0.07|▂▅▆▇▇ |
 
 Such results are not encouraging because a non regular bias along the range may require specific correction for different product which may be not practical and prone to error. Often this requires to dig into detail to understand the causes of the bias and determine if they are related with the physical phenomena and if there are clear controllable causes. Ultimately this could result is narrowing the measurement range and validating a specific device and method for a specific product specification target. For the Quality Assurance Manager it is too early to draw conclusions and he establishes a more detailed plot with `{ggplot2}` to better visualize the data.
@@ -102,10 +102,7 @@ juice_drymatter %>%
        caption = "Dataset: juice_drymatter233A, Operator: S.Jonathan)")
 ```
 
-<div class="figure" style="text-align: center">
-<img src="4_msa_files/figure-html/fig-juicebiasplot-1.png" alt="bias plot example" width="100%" />
-<p class="caption">(\#fig:fig-juicebiasplot)bias plot example</p>
-</div>
+<img src="4_msa_files/figure-html/fig-juicebiasplot-1.png" width="100%" style="display: block; margin: auto;" />
 
 This type of plot is usually called *bias plot* and provides a view of how the difference between the measurements obtained with the new device and the reference device compare allong the measuremen range. In the plot generated an additional regression line has been introduced with `geom_smooth` from `{ggplot2}`. There are several ways to assess the linearity. In this case we're going to remain at a visual check only leaving to the Design of Experiments case study a more thourough verification.
 
@@ -152,10 +149,7 @@ names(u_cal) <- NULL # we're removing the original name to avoid confusion later
 
 Modern pharmaceutical tablet presses reach output volumes of up to 1,700,000 tablets per hour. These huge volumes require frequent in-process quality control for the tablet weight, thickness and hardness.
 
-<div class="figure" style="text-align: center">
-<img src="img/tablet_micrometer.png" alt="Tablet thickness micrometer" width="100%" />
-<p class="caption">(\#fig:img-tablet)Tablet thickness micrometer</p>
-</div>
+<img src="img/tablet_micrometer.png" width="100%" />
 
 </div>
 
@@ -191,44 +185,6 @@ It is an excellent practice to look at raw data because it gives an immediate pe
 ```r
 skim(tablet_thickness) 
 ```
-
-
-Table: (\#tab:tbl-tabletskim)Data summary
-
-|                         |                 |
-|:------------------------|:----------------|
-|Name                     |tablet_thickness |
-|Number of rows           |675              |
-|Number of columns        |11               |
-|_______________________  |                 |
-|Column type frequency:   |                 |
-|character                |6                |
-|numeric                  |5                |
-|________________________ |                 |
-|Group variables          |None             |
-
-
-**Variable type: character**
-
-|skim_variable     | n_missing| complete_rate| min| max| empty| n_unique| whitespace|
-|:-----------------|---------:|-------------:|---:|---:|-----:|--------:|----------:|
-|Position          |         0|             1|  10|  10|     0|        3|          0|
-|Size              |         0|             1|   1|   1|     0|        3|          0|
-|Tablet            |         0|             1|   4|   4|     0|       15|          0|
-|Day               |         0|             1|   5|   5|     0|        3|          0|
-|Date [DD.MM.YYYY] |         0|             1|  10|  10|     0|        5|          0|
-|Operator          |         0|             1|   5|   5|     0|        3|          0|
-
-
-**Variable type: numeric**
-
-|skim_variable         | n_missing| complete_rate|    mean|     sd|      p0|     p25|     p50|     p75|    p100|hist  |
-|:---------------------|---------:|-------------:|-------:|------:|-------:|-------:|-------:|-------:|-------:|:-----|
-|Replicate             |         0|             1|    3.00|   1.42|    1.00|    2.00|    3.00|    4.00|    5.00|▇▇▇▇▇ |
-|Thickness [micron]    |         0|             1| 1523.01| 242.72| 1193.62| 1219.39| 1549.25| 1802.99| 1812.85|▇▁▇▁▇ |
-|Temperature [°C]      |         0|             1|   21.30|   1.52|   18.00|   20.00|   21.10|   22.70|   24.90|▂▇▅▇▂ |
-|Relative Humidity [%] |         0|             1|   33.08|   1.59|   29.70|   31.80|   32.70|   34.20|   36.70|▂▇▆▃▃ |
-|Luminescence [lux]    |         0|             1|  548.78|  48.05|  467.50|  528.50|  545.80|  552.50|  992.20|▇▁▁▁▁ |
 
 The initial idea of the Quality Engineer was to establish a separate gage r&R by tablet size. There is sometimes debate if in the study several different specification should be combined or not. In the last quality weekly meeting this was reason for lively discussions with various logical arguments from the Production Leader and the Engineering Manager. They ended up accepting the proposal of a separate gage per size on the logic that it is important to compare the measurement method variability not only with the process variability but also with the specification itself.
 
@@ -382,10 +338,7 @@ tablet_L_rr_plots <- ss.rr.plots(
 plot(tablet_L_rr_plots$plot1)
 ```
 
-<div class="figure">
-<img src="4_msa_files/figure-html/fig-tabletPlot1-1.png" alt="example of gage r&amp;R components of variation plot" width="95%" />
-<p class="caption">(\#fig:fig-tabletPlot1)example of gage r&R components of variation plot</p>
-</div>
+<img src="4_msa_files/figure-html/fig-tabletPlot1-1.png" width="100%" />
 
 This first bar plot presents in a graphical way the gage results in percentage and we can quickly grasp if we're on target by looking at the pink bars and comparing them with the dashed bars. We can see that the G.R&R is above 30% and thus is not acceptable from a Study Variation criteria. In green we see that compared with the specification we're above 10% but below 30% so acceptable but requiring improvement. We're now looking into the measurements themselves:
 
@@ -394,19 +347,13 @@ This first bar plot presents in a graphical way the gage results in percentage a
 plot(tablet_L_rr_plots$plot6)
 ```
 
-<div class="figure">
-<img src="4_msa_files/figure-html/fig-tabletPlot5-1.png" alt="example of gage r&amp;R run chart" width="95%" />
-<p class="caption">(\#fig:fig-tabletPlot5-1)example of gage r&R run chart</p>
-</div>
+<img src="4_msa_files/figure-html/fig-tabletPlot5-1.png" width="100%" />
 
 ```r
 plot(tablet_L_rr_plots$plot5)
 ```
 
-<div class="figure">
-<img src="4_msa_files/figure-html/fig-tabletPlot5-2.png" alt="example of gage r&amp;R run chart" width="95%" />
-<p class="caption">(\#fig:fig-tabletPlot5-2)example of gage r&R run chart</p>
-</div>
+<img src="4_msa_files/figure-html/fig-tabletPlot5-2.png" width="100%" />
 
 The previous two plots show the measurements for each operator. The first is the Ranges plot showing the differences between the min and max measurement for each part and the second plot is the means plot showing the mean thickness for each part by operator. These help showing that there is a consistency between operators and help as a diagnosis tool to identify if there would be strange patterns appearing where one of the operators would be for instance systematically measuring very high values. The next two plots show average values by part with all operators combined:
 
@@ -415,19 +362,13 @@ The previous two plots show the measurements for each operator. The first is the
 plot(tablet_L_rr_plots$plot2)
 ```
 
-<div class="figure">
-<img src="4_msa_files/figure-html/fig-tabletPlot2-1.png" alt="example of gage r&amp;R main effects plot" width="95%" />
-<p class="caption">(\#fig:fig-tabletPlot2-1)example of gage r&R main effects plot</p>
-</div>
+<img src="4_msa_files/figure-html/fig-tabletPlot2-1.png" width="100%" />
 
 ```r
 plot(tablet_L_rr_plots$plot3)
 ```
 
-<div class="figure">
-<img src="4_msa_files/figure-html/fig-tabletPlot2-2.png" alt="example of gage r&amp;R main effects plot" width="95%" />
-<p class="caption">(\#fig:fig-tabletPlot2-2)example of gage r&R main effects plot</p>
-</div>
+<img src="4_msa_files/figure-html/fig-tabletPlot2-2.png" width="100%" />
 
 We quickly see the measurements tend to be simetrically distributed around their means and that the means between the different operators are very similar. This confirms the low reproducibility what has been seen in the Variance Components. 
 
@@ -436,10 +377,7 @@ We quickly see the measurements tend to be simetrically distributed around their
 plot(tablet_L_rr_plots$plot4)
 ```
 
-<div class="figure">
-<img src="4_msa_files/figure-html/fig-tabletPlot4-1.png" alt="example of gage r&amp;R interaction plot" width="95%" />
-<p class="caption">(\#fig:fig-tabletPlot4)example of gage r&R interaction plot</p>
-</div>
+<img src="4_msa_files/figure-html/fig-tabletPlot4-1.png" width="100%" />
 
 This final plot is the so called interaction plot and if there were diverting and strongly crossed lines would indicate that different operators measure the parts in different ways. Again here this confirms the low value obtained for the interaction in the Variance Components table.
 
@@ -527,9 +465,7 @@ Further developments on the gage r&R in the excellent book from Springer by the 
 
 ### Custom functions
 
-The original report generated by the `ss.rr`function is produced as a single plot and there is no option in the function to suppress it when we just want to look at the data output. The individual plots presented in this unit have been obtained by modifying directly the package source code. We're briefly describing here the steps to do it.
-
-First lets notice that R is fully open system and end users have the freedom to run, study, share, and modify the software. We can confirm this by looking at the `{SixSigma}` package license:
+The original report generated by the `ss.rr`function has the inconvenient of being generated as a single plot. Another inconvenient is that there is no option in the function to suppress it in case we just want to look at the data output. To present the individual plots presented in this unit the original function code has had to be modified. This possibility to reuse and modify the code from other authors is one of the great benefits of R. This is possible because are is distributed under a license from the Free Software Foundation. Licenses are long are difficult to read but by simply typing ` RShowDoc("GPL-3")` we can already read in the first few lines *you can change the software or use pieces of it in new free programs*. The `{SixSigma}` package itself is also under the same license:
 
 
 ```r
@@ -541,9 +477,7 @@ SixSigmaDescription$License
 [1] "GPL (>= 2)"
 ```
 
-Wikipedia as an article with the full details on the user rights given by [GNU license](https://en.wikipedia.org/wiki/GNU_General_Public_License) licenses.
-
-The `ss.rr` function code can the be obtained in RStudio by selecting the package environment in the environment pane and looking for the function. A more direct approach is by simply typing `ss.rr` on the console. The full code is then revealed and can be copied and modified. For the `{industRial}` package we've copied the code in a new function which we called `ss.rr.plots` that generates as output a list of plots. Each plot can then be plotted individually.
+This being all cleared out the `ss.rr` function code can the be obtained in RStudio by selecting the package environment in the environment pane and looking for the function. A more direct approach is by simply typing `ss.rr` on the console. The full code is then revealed and can be copied and modified. For the `{industRial}` package we've copied the code in a new function which we called `ss.rr.plots` that generates as output a list of plots. Each plot can now be plotted individually.
 
 ## Uncertainty {#uncertainty}
 

@@ -3,7 +3,7 @@
 source(here::here("inst/book/setup.R"))
 ```
 
-## General factorial designs
+## General designs
 
 In a design of experiments we calculate the total number of trials with the expression $n^m$ where n is the number of levels, m the number of factors. A trial represents the number of unique combinations of the factors. To obtain the final number of test runs we have to multiply the number of trials by the number of replicates per trial.
 

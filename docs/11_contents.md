@@ -94,13 +94,25 @@
    <td style="text-align:left;background-color: white !important;font-weight: bold;color: #104e8b !important;background-color: #e6e6e6 !important;">  </td>
   </tr>
   <tr>
-   <td style="text-align:left;background-color: white !important;"> Means comparison </td>
-   <td style="text-align:left;background-color: white !important;"> [t-test one sample](#t.test) </td>
-   <td style="text-align:left;background-color: white !important;"> `stats::t.test` </td>
+   <td style="text-align:left;background-color: white !important;"> Direct comparisons </td>
+   <td style="text-align:left;background-color: white !important;"> [Histogram](#histogram) </td>
+   <td style="text-align:left;background-color: white !important;"> `ggplot2::geom_histogram` </td>
    <td style="text-align:left;background-color: white !important;"> pet_delivery </td>
   </tr>
   <tr>
-   <td style="text-align:left;background-color: white !important;"> Variances comparison </td>
+   <td style="text-align:left;background-color: white !important;">  </td>
+   <td style="text-align:left;background-color: white !important;"> [t-test one sample](#t.test) </td>
+   <td style="text-align:left;background-color: white !important;"> `stats::t.test` </td>
+   <td style="text-align:left;background-color: white !important;">  </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;background-color: white !important;">  </td>
+   <td style="text-align:left;background-color: white !important;"> [Normality plot](#geom_qq) </td>
+   <td style="text-align:left;background-color: white !important;"> `ggplot2::geom_qq` </td>
+   <td style="text-align:left;background-color: white !important;">  </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;background-color: white !important;">  </td>
    <td style="text-align:left;background-color: white !important;"> [F test](#var.test) </td>
    <td style="text-align:left;background-color: white !important;"> `stats::var.test` </td>
    <td style="text-align:left;background-color: white !important;">  </td>
@@ -124,7 +136,13 @@
    <td style="text-align:left;background-color: white !important;">  </td>
   </tr>
   <tr>
-   <td style="text-align:left;background-color: white !important;"> Residuals analysis </td>
+   <td style="text-align:left;background-color: white !important;">  </td>
+   <td style="text-align:left;background-color: white !important;"> [Predict](#predict) </td>
+   <td style="text-align:left;background-color: white !important;"> `stats::predict` </td>
+   <td style="text-align:left;background-color: white !important;">  </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;background-color: white !important;">  </td>
    <td style="text-align:left;background-color: white !important;"> [Model augment](#augment) </td>
    <td style="text-align:left;background-color: white !important;"> `broom::augment` </td>
    <td style="text-align:left;background-color: white !important;">  </td>
@@ -151,12 +169,6 @@
    <td style="text-align:left;background-color: white !important;">  </td>
    <td style="text-align:left;background-color: white !important;"> [Homocedasticity](#homocedasticity) </td>
    <td style="text-align:left;background-color: white !important;"> `stats::bartlett.test` </td>
-   <td style="text-align:left;background-color: white !important;">  </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;background-color: white !important;">  </td>
-   <td style="text-align:left;background-color: white !important;"> [Normality plot](#geom_qq) </td>
-   <td style="text-align:left;background-color: white !important;"> `ggplot2::geom_qq` </td>
    <td style="text-align:left;background-color: white !important;">  </td>
   </tr>
   <tr>
@@ -190,7 +202,7 @@
    <td style="text-align:left;background-color: white !important;">  </td>
   </tr>
   <tr>
-   <td style="text-align:left;background-color: white !important;"> Multiple means comparison </td>
+   <td style="text-align:left;background-color: white !important;"> Anova &amp; Ancova </td>
    <td style="text-align:left;background-color: white !important;"> [Analysis of variance](#aov) </td>
    <td style="text-align:left;background-color: white !important;"> `stats::aov` </td>
    <td style="text-align:left;background-color: white !important;">  </td>
@@ -208,13 +220,7 @@
    <td style="text-align:left;background-color: white !important;">  </td>
   </tr>
   <tr>
-   <td style="text-align:left;background-color: white !important;"> Forecasting </td>
-   <td style="text-align:left;background-color: white !important;"> [Predict](#predict) </td>
-   <td style="text-align:left;background-color: white !important;"> `stats::predict` </td>
    <td style="text-align:left;background-color: white !important;">  </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;background-color: white !important;"> Interactions </td>
    <td style="text-align:left;background-color: white !important;"> [Model formulae](#formula) </td>
    <td style="text-align:left;background-color: white !important;"> `stats::formula` </td>
    <td style="text-align:left;background-color: white !important;"> solarcell_output </td>
@@ -226,7 +232,7 @@
    <td style="text-align:left;background-color: white !important;">  </td>
   </tr>
   <tr>
-   <td style="text-align:left;background-color: white !important;"> Residuals check </td>
+   <td style="text-align:left;background-color: white !important;">  </td>
    <td style="text-align:left;background-color: white !important;"> [Simplified timeseries](#simple_timeseries) </td>
    <td style="text-align:left;background-color: white !important;"> `plot(model$residuals)` </td>
    <td style="text-align:left;background-color: white !important;">  </td>
@@ -250,7 +256,7 @@
    <td style="text-align:left;background-color: white !important;">  </td>
   </tr>
   <tr>
-   <td style="text-align:left;background-color: white !important;"> Covariance </td>
+   <td style="text-align:left;background-color: white !important;">  </td>
    <td style="text-align:left;background-color: white !important;"> [Correlation test](#cor.test) </td>
    <td style="text-align:left;background-color: white !important;"> `stats::cor.test` </td>
    <td style="text-align:left;background-color: white !important;"> solarcell_fill </td>
@@ -262,7 +268,7 @@
    <td style="text-align:left;background-color: white !important;">  </td>
   </tr>
   <tr>
-   <td style="text-align:left;background-color: white !important;"> General factorial designs </td>
+   <td style="text-align:left;background-color: white !important;"> General designs </td>
    <td style="text-align:left;background-color: white !important;"> [Factorial design](#fac.design) </td>
    <td style="text-align:left;background-color: white !important;"> `DoE.base::fac.design` </td>
    <td style="text-align:left;background-color: white !important;"> juice_drymatter </td>
@@ -322,7 +328,7 @@
    <td style="text-align:left;background-color: white !important;">  </td>
   </tr>
   <tr>
-   <td style="text-align:left;background-color: white !important;"> Response surface methods </td>
+   <td style="text-align:left;background-color: white !important;">  </td>
    <td style="text-align:left;background-color: white !important;"> [Perpective plot](#persp) </td>
    <td style="text-align:left;background-color: white !important;"> `graphics::persp` </td>
    <td style="text-align:left;background-color: white !important;">  </td>
@@ -406,10 +412,10 @@
    <td style="text-align:left;background-color: white !important;">  </td>
   </tr>
   <tr>
-   <td style="text-align:left;background-color: white !important;">  </td>
-   <td style="text-align:left;background-color: white !important;"> [Capability chart (custom)](#chart_Cpk) </td>
-   <td style="text-align:left;background-color: white !important;"> `industRial::chart_Cpk` </td>
-   <td style="text-align:left;background-color: white !important;">  </td>
+   <td style="text-align:left;">  </td>
+   <td style="text-align:left;"> [Capability chart (custom)](#chart_Cpk) </td>
+   <td style="text-align:left;"> `industRial::chart_Cpk` </td>
+   <td style="text-align:left;">  </td>
   </tr>
 </tbody>
 </table>

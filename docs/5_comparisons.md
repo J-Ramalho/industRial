@@ -1,8 +1,5 @@
 
 
-```
-## Error in get(genname, envir = envir) : objet 'testthat_print' introuvable
-```
 
 # Design of Experiments {#DOE}
 
@@ -35,7 +32,7 @@ summary(pet_delivery$A)
 
 ```
    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
-  64.48   68.19   68.78   68.71   69.42   72.04 
+   64.5    68.2    68.8    68.7    69.4    72.0 
 ```
 
 The mean is in fact slightly lower that the specified contract value of 69 and the materials engineer could think to confirm the rejection the batch right away. She decides nevertheless to observe how do the measurements vary. She plots the raw data on an histogram which is a very common plot showing counts for selected intervals.
@@ -77,10 +74,10 @@ t.test(x = pet_delivery$A, mu = pet_spec)
 	One Sample t-test
 
 data:  pet_delivery$A
-t = -1.0754, df = 27, p-value = 0.2917
+t = -1.08, df = 27, p-value = 0.29
 alternative hypothesis: true mean is not equal to 69
 95 percent confidence interval:
- 68.15668 69.26332
+ 68.157 69.263
 sample estimates:
 mean of x 
     68.71 
@@ -141,7 +138,7 @@ PET_meandiff
 ```
 
 ```
-[1] -0.8628571
+[1] -0.86286
 ```
 
 To use the t.test it is important to have samples obtained independently and randomly, to check the normality of their distributions and the equality of their variances.
@@ -180,13 +177,13 @@ var.test(tensile_strength ~ sample, pet_delivery_long)
 	F test to compare two variances
 
 data:  tensile_strength by sample
-F = 1.2755, num df = 27, denom df = 27, p-value = 0.5315
+F = 1.28, num df = 27, denom df = 27, p-value = 0.53
 alternative hypothesis: true ratio of variances is not equal to 1
 95 percent confidence interval:
- 0.5902643 2.7563454
+ 0.59026 2.75635
 sample estimates:
 ratio of variances 
-          1.275528 
+            1.2755 
 ```
 
 The `var.test()` from the `{stats}` package us a simple and direct way to compare variances. The F-test is accurate only for normally distributed data. Any small deviation from normality can cause the F-test to be inaccurate, even with large samples. However, if the data conform well to the normal distribution, then the F-test is usually more powerful than Levene's test. The test null hypothesis is that the variances are equal. Since the p value is much greater than 0.05 we cannot reject the null hypotheses meaning that we can consider them equal.
@@ -202,7 +199,7 @@ leveneTest(tensile_strength ~ sample, data = pet_delivery_long)
 ```
 Levene's Test for Homogeneity of Variance (center = median)
       Df F value Pr(>F)
-group  1  0.0118 0.9139
+group  1    0.01   0.91
       54               
 ```
 
@@ -225,13 +222,13 @@ t.test(
 	Two Sample t-test
 
 data:  tensile_strength by sample
-t = -2.3956, df = 54, p-value = 0.02009
+t = -2.4, df = 54, p-value = 0.02
 alternative hypothesis: true difference in means is not equal to 0
 95 percent confidence interval:
- -1.5849965 -0.1407177
+ -1.58500 -0.14072
 sample estimates:
 mean in group A mean in group B 
-       68.71000        69.57286 
+         68.710          69.573 
 ```
 
-She sees that p < 0.05 and confirms the means differ significantly. The test output has also provided a confidence interval for the difference between the means at 95% probability and the mean difference calculated directly of -0.8628571 falls inside this interval (to be noted that zero is obviously not included in this interval). Things look promising in the new recyclable PET formulation.
+She sees that p < 0.05 and confirms the means differ significantly. The test output has also provided a confidence interval for the difference between the means at 95% probability and the mean difference calculated directly of -0.86286 falls inside this interval (to be noted that zero is obviously not included in this interval). Things look promising in the new recyclable PET formulation.

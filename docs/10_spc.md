@@ -1,8 +1,5 @@
 
 
-```
-## Error in get(genname, envir = envir) : objet 'testthat_print' introuvable
-```
 
 # Statistical Process Control {#SPC}
 
@@ -32,14 +29,14 @@ head(syringe_diameter) %>%
 
 
 
-|Hour  |  Sample1|  Sample2|  Sample3|  Sample4|  Sample5|  Sample6|
-|:-----|--------:|--------:|--------:|--------:|--------:|--------:|
-|Hour1 | 5.331433| 5.339867| 5.324400| 5.336267| 5.322833| 5.318133|
-|Hour2 | 5.324033| 5.321433| 5.314200| 5.323733| 5.341967| 5.339233|
-|Hour3 | 5.326267| 5.340433| 5.313567| 5.356533| 5.338700| 5.356967|
-|Hour4 | 5.355267| 5.360000| 5.317133| 5.331933| 5.344600| 5.347400|
-|Hour5 | 5.337867| 5.326367| 5.314967| 5.313433| 5.337467| 5.340700|
-|Hour6 | 5.343167| 5.335233| 5.323833| 5.346267| 5.333967| 5.320533|
+|Hour  | Sample1| Sample2| Sample3| Sample4| Sample5| Sample6|
+|:-----|-------:|-------:|-------:|-------:|-------:|-------:|
+|Hour1 |  5.3314|  5.3399|  5.3244|  5.3363|  5.3228|  5.3181|
+|Hour2 |  5.3240|  5.3214|  5.3142|  5.3237|  5.3420|  5.3392|
+|Hour3 |  5.3263|  5.3404|  5.3136|  5.3565|  5.3387|  5.3570|
+|Hour4 |  5.3553|  5.3600|  5.3171|  5.3319|  5.3446|  5.3474|
+|Hour5 |  5.3379|  5.3264|  5.3150|  5.3134|  5.3375|  5.3407|
+|Hour6 |  5.3432|  5.3352|  5.3238|  5.3463|  5.3340|  5.3205|
 
 We see that in this table each line corresponds to a sampling hour and each column corresponds to a sample number. 
 
@@ -139,7 +136,7 @@ syringe_xbar$std.dev
 ```
 
 ```
-[1] 0.01420679
+[1] 0.014207
 ```
 
 And if we want like to see a summary of all the data stored in the object we could apply the summary method:
@@ -157,17 +154,17 @@ qcc(data = syringe_clean[1:10, ], type = "xbar", plot = FALSE,     title = "Lamp
 xbar chart for syringe_clean[1:10, ] 
 
 Summary of group statistics:
-    Min.  1st Qu.   Median     Mean  3rd Qu.     Max. 
-5.325000 5.328333 5.333333 5.333333 5.337500 5.343333 
+   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+ 5.3250  5.3283  5.3333  5.3333  5.3375  5.3433 
 
 Group sample size:  6
 Number of groups:  10
-Center of group statistics:  5.333333
-Standard deviation:  0.01420679 
+Center of group statistics:  5.3333
+Standard deviation:  0.014207 
 
 Control limits:
-      LCL      UCL
- 5.315934 5.350733
+    LCL    UCL
+ 5.3159 5.3507
 ```
 
 We are now ready to finally we can see this all together in a plot:
@@ -388,7 +385,7 @@ process_Cpk(spec_max, spec_min, syringe_mean, syringe_sd)
 ```
 
 ```
-[1] 0.7158694
+[1] 0.71587
 ```
 
 And convert the percentage out of spec in parts per million. We're not considering the 1.5 shift that sometimes is presented in the literature but rather making a simple direct conversion of the proportion out of spec found before:
@@ -537,11 +534,12 @@ process_stats_table(weight_statistics_data)
 ```
 
 ```{=html}
+<div id="vaxsbvluui" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>html {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
 }
 
-#gxrumaxcvz .gt_table {
+#vaxsbvluui .gt_table {
   display: table;
   border-collapse: collapse;
   margin-left: auto;
@@ -566,7 +564,7 @@ process_stats_table(weight_statistics_data)
   border-left-color: #D3D3D3;
 }
 
-#gxrumaxcvz .gt_heading {
+#vaxsbvluui .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -578,7 +576,7 @@ process_stats_table(weight_statistics_data)
   border-right-color: #D3D3D3;
 }
 
-#gxrumaxcvz .gt_title {
+#vaxsbvluui .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -588,7 +586,7 @@ process_stats_table(weight_statistics_data)
   border-bottom-width: 0;
 }
 
-#gxrumaxcvz .gt_subtitle {
+#vaxsbvluui .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -598,13 +596,13 @@ process_stats_table(weight_statistics_data)
   border-top-width: 0;
 }
 
-#gxrumaxcvz .gt_bottom_border {
+#vaxsbvluui .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#gxrumaxcvz .gt_col_headings {
+#vaxsbvluui .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -619,7 +617,7 @@ process_stats_table(weight_statistics_data)
   border-right-color: #D3D3D3;
 }
 
-#gxrumaxcvz .gt_col_heading {
+#vaxsbvluui .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -639,7 +637,7 @@ process_stats_table(weight_statistics_data)
   overflow-x: hidden;
 }
 
-#gxrumaxcvz .gt_column_spanner_outer {
+#vaxsbvluui .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -651,15 +649,15 @@ process_stats_table(weight_statistics_data)
   padding-right: 4px;
 }
 
-#gxrumaxcvz .gt_column_spanner_outer:first-child {
+#vaxsbvluui .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#gxrumaxcvz .gt_column_spanner_outer:last-child {
+#vaxsbvluui .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#gxrumaxcvz .gt_column_spanner {
+#vaxsbvluui .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -671,7 +669,7 @@ process_stats_table(weight_statistics_data)
   width: 100%;
 }
 
-#gxrumaxcvz .gt_group_heading {
+#vaxsbvluui .gt_group_heading {
   padding: 8px;
   color: #333333;
   background-color: #FFFFFF;
@@ -693,7 +691,7 @@ process_stats_table(weight_statistics_data)
   vertical-align: middle;
 }
 
-#gxrumaxcvz .gt_empty_group_heading {
+#vaxsbvluui .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -708,15 +706,15 @@ process_stats_table(weight_statistics_data)
   vertical-align: middle;
 }
 
-#gxrumaxcvz .gt_from_md > :first-child {
+#vaxsbvluui .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#gxrumaxcvz .gt_from_md > :last-child {
+#vaxsbvluui .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#gxrumaxcvz .gt_row {
+#vaxsbvluui .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -735,7 +733,7 @@ process_stats_table(weight_statistics_data)
   overflow-x: hidden;
 }
 
-#gxrumaxcvz .gt_stub {
+#vaxsbvluui .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -747,7 +745,7 @@ process_stats_table(weight_statistics_data)
   padding-left: 12px;
 }
 
-#gxrumaxcvz .gt_summary_row {
+#vaxsbvluui .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -757,7 +755,7 @@ process_stats_table(weight_statistics_data)
   padding-right: 5px;
 }
 
-#gxrumaxcvz .gt_first_summary_row {
+#vaxsbvluui .gt_first_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -767,7 +765,7 @@ process_stats_table(weight_statistics_data)
   border-top-color: #D3D3D3;
 }
 
-#gxrumaxcvz .gt_grand_summary_row {
+#vaxsbvluui .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -777,7 +775,7 @@ process_stats_table(weight_statistics_data)
   padding-right: 5px;
 }
 
-#gxrumaxcvz .gt_first_grand_summary_row {
+#vaxsbvluui .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -787,11 +785,11 @@ process_stats_table(weight_statistics_data)
   border-top-color: #D3D3D3;
 }
 
-#gxrumaxcvz .gt_striped {
+#vaxsbvluui .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#gxrumaxcvz .gt_table_body {
+#vaxsbvluui .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -800,7 +798,7 @@ process_stats_table(weight_statistics_data)
   border-bottom-color: #D3D3D3;
 }
 
-#gxrumaxcvz .gt_footnotes {
+#vaxsbvluui .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -814,13 +812,13 @@ process_stats_table(weight_statistics_data)
   border-right-color: #D3D3D3;
 }
 
-#gxrumaxcvz .gt_footnote {
+#vaxsbvluui .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding: 4px;
 }
 
-#gxrumaxcvz .gt_sourcenotes {
+#vaxsbvluui .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -834,53 +832,52 @@ process_stats_table(weight_statistics_data)
   border-right-color: #D3D3D3;
 }
 
-#gxrumaxcvz .gt_sourcenote {
+#vaxsbvluui .gt_sourcenote {
   font-size: 90%;
   padding: 4px;
 }
 
-#gxrumaxcvz .gt_left {
+#vaxsbvluui .gt_left {
   text-align: left;
 }
 
-#gxrumaxcvz .gt_center {
+#vaxsbvluui .gt_center {
   text-align: center;
 }
 
-#gxrumaxcvz .gt_right {
+#vaxsbvluui .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#gxrumaxcvz .gt_font_normal {
+#vaxsbvluui .gt_font_normal {
   font-weight: normal;
 }
 
-#gxrumaxcvz .gt_font_bold {
+#vaxsbvluui .gt_font_bold {
   font-weight: bold;
 }
 
-#gxrumaxcvz .gt_font_italic {
+#vaxsbvluui .gt_font_italic {
   font-style: italic;
 }
 
-#gxrumaxcvz .gt_super {
+#vaxsbvluui .gt_super {
   font-size: 65%;
 }
 
-#gxrumaxcvz .gt_footnote_marks {
+#vaxsbvluui .gt_footnote_marks {
   font-style: italic;
+  font-weight: normal;
   font-size: 65%;
 }
 </style>
-<div id="gxrumaxcvz" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;"><table class="gt_table">
+<table class="gt_table">
   <thead class="gt_header">
     <tr>
-      <th colspan="3" class="gt_heading gt_title gt_font_normal" style>Process Summary Statistics</th>
+      <th colspan="3" class="gt_heading gt_title gt_font_normal gt_bottom_border" style>Process Summary Statistics</th>
     </tr>
-    <tr>
-      <th colspan="3" class="gt_heading gt_subtitle gt_font_normal gt_bottom_border" style></th>
-    </tr>
+    
   </thead>
   <thead class="gt_col_headings">
     <tr>
@@ -890,45 +887,32 @@ process_stats_table(weight_statistics_data)
     </tr>
   </thead>
   <tbody class="gt_table_body">
-    <tr>
-      <td class="gt_row gt_left">Weight mean</td>
-      <td class="gt_row gt_right">0.9400000</td>
-      <td class="gt_row gt_left">g</td>
-    </tr>
-    <tr>
-      <td class="gt_row gt_left">Spec target</td>
-      <td class="gt_row gt_right">0.9000000</td>
-      <td class="gt_row gt_left">g</td>
-    </tr>
-    <tr>
-      <td class="gt_row gt_left">Spec min</td>
-      <td class="gt_row gt_right">0.8100000</td>
-      <td class="gt_row gt_left">g</td>
-    </tr>
-    <tr>
-      <td class="gt_row gt_left">Spec max</td>
-      <td class="gt_row gt_right">0.9900000</td>
-      <td class="gt_row gt_left">g</td>
-    </tr>
-    <tr>
-      <td class="gt_row gt_left" style="font-weight: bold;">Out of spec</td>
-      <td class="gt_row gt_right" style="font-weight: bold;">0.7100000</td>
-      <td class="gt_row gt_left" style="font-weight: bold;">%</td>
-    </tr>
-    <tr>
-      <td class="gt_row gt_left" style="font-weight: bold;">Cpk</td>
-      <td class="gt_row gt_right" style="font-weight: bold;">0.8178525</td>
-      <td class="gt_row gt_left" style="font-weight: bold;"></td>
-    </tr>
-    <tr>
-      <td class="gt_row gt_left">Sample size</td>
-      <td class="gt_row gt_right">137</td>
-      <td class="gt_row gt_left">parts</td>
-    </tr>
+    <tr><td class="gt_row gt_left">Weight mean</td>
+<td class="gt_row gt_right">0.94000</td>
+<td class="gt_row gt_left">g</td></tr>
+    <tr><td class="gt_row gt_left">Spec target</td>
+<td class="gt_row gt_right">0.90000</td>
+<td class="gt_row gt_left">g</td></tr>
+    <tr><td class="gt_row gt_left">Spec min</td>
+<td class="gt_row gt_right">0.81000</td>
+<td class="gt_row gt_left">g</td></tr>
+    <tr><td class="gt_row gt_left">Spec max</td>
+<td class="gt_row gt_right">0.99000</td>
+<td class="gt_row gt_left">g</td></tr>
+    <tr><td class="gt_row gt_left" style="font-weight: bold;">Out of spec</td>
+<td class="gt_row gt_right" style="font-weight: bold;">0.71000</td>
+<td class="gt_row gt_left" style="font-weight: bold;">%</td></tr>
+    <tr><td class="gt_row gt_left" style="font-weight: bold;">Cpk</td>
+<td class="gt_row gt_right" style="font-weight: bold;">0.81785</td>
+<td class="gt_row gt_left" style="font-weight: bold;"></td></tr>
+    <tr><td class="gt_row gt_left">Sample size</td>
+<td class="gt_row gt_right">137</td>
+<td class="gt_row gt_left">parts</td></tr>
   </tbody>
   
   
-</table></div>
+</table>
+</div>
 ```
 
 ### Individual chart {#chart_I}

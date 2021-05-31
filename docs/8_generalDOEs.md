@@ -1,8 +1,5 @@
 
 
-```
-## Error in get(genname, envir = envir) : objet 'testthat_print' introuvable
-```
 
 ## General designs
 
@@ -292,14 +289,14 @@ summary(juice_drymatter_aov)
 
 ```
                                    Df Sum Sq Mean Sq F value Pr(>F)    
-drymatter_TGT                       1 1.3149  1.3149 486.057 <2e-16 ***
-speed                               1 0.0000  0.0000   0.000  0.985    
-particle_size                       1 0.6241  0.6241 230.705 <2e-16 ***
-drymatter_TGT:speed                 1 0.0007  0.0007   0.272  0.603    
-drymatter_TGT:particle_size         1 0.0028  0.0028   1.040  0.310    
-speed:particle_size                 1 0.0032  0.0032   1.191  0.278    
-drymatter_TGT:speed:particle_size   1 0.0039  0.0039   1.442  0.233    
-Residuals                         100 0.2705  0.0027                   
+drymatter_TGT                       1  1.315   1.315  486.06 <2e-16 ***
+speed                               1  0.000   0.000    0.00   0.99    
+particle_size                       1  0.624   0.624  230.70 <2e-16 ***
+drymatter_TGT:speed                 1  0.001   0.001    0.27   0.60    
+drymatter_TGT:particle_size         1  0.003   0.003    1.04   0.31    
+speed:particle_size                 1  0.003   0.003    1.19   0.28    
+drymatter_TGT:speed:particle_size   1  0.004   0.004    1.44   0.23    
+Residuals                         100  0.271   0.003                   
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ```

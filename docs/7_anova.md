@@ -1,8 +1,5 @@
 
 
-```
-## Error in get(genname, envir = envir) : objet 'testthat_print' introuvable
-```
 
 
 
@@ -43,9 +40,9 @@ summary(ebike_aov_factor)
 ```
 
 ```
-            Df    Sum Sq   Mean Sq F value   Pr(>F)    
-temperature  3 6.687e+10 2.229e+10    66.8 2.88e-09 ***
-Residuals   16 5.339e+09 3.337e+08                     
+            Df   Sum Sq  Mean Sq F value  Pr(>F)    
+temperature  3 6.69e+10 2.23e+10    66.8 2.9e-09 ***
+Residuals   16 5.34e+09 3.34e+08                    
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ```
@@ -77,9 +74,9 @@ anova(ebike_lm_factor2)
 Analysis of Variance Table
 
 Response: cycles
-            Df    Sum Sq   Mean Sq F value Pr(>F)
-temperature  3 1.476e+09 492000000  1.2015  0.341
-Residuals   16 6.552e+09 409500000               
+            Df   Sum Sq  Mean Sq F value Pr(>F)
+temperature  3 1.48e+09 4.92e+08     1.2   0.34
+Residuals   16 6.55e+09 4.10e+08               
 ```
 
 
@@ -122,14 +119,14 @@ head(ebike_tukey$temperature) %>%
 
 Table: (\#tab:unnamed-chunk-8)tukey test on e-bike frame hardening process
 
-|        |  diff  |    lwr     |    upr    |   p adj   |
-|:-------|:------:|:----------:|:---------:|:---------:|
-|180-160 | 36200  |  3145.624  | 69254.38  | 0.0294279 |
-|200-160 | 74200  | 41145.624  | 107254.38 | 0.0000455 |
-|220-160 | 155800 | 122745.624 | 188854.38 | 0.0000000 |
-|200-180 | 38000  |  4945.624  | 71054.38  | 0.0215995 |
-|220-180 | 119600 | 86545.624  | 152654.38 | 0.0000001 |
-|220-200 | 81600  | 48545.624  | 114654.38 | 0.0000146 |
+|        |  diff  |   lwr    |  upr   |  p adj  |
+|:-------|:------:|:--------:|:------:|:-------:|
+|180-160 | 36200  |  3145.6  | 69254  | 0.02943 |
+|200-160 | 74200  | 41145.6  | 107254 | 0.00005 |
+|220-160 | 155800 | 122745.6 | 188854 | 0.00000 |
+|200-180 | 38000  |  4945.6  | 71054  | 0.02160 |
+|220-180 | 119600 | 86545.6  | 152654 | 0.00000 |
+|220-200 | 81600  | 48545.6  | 114654 | 0.00001 |
 
 The test provides us a simple direct calculation of the differences between the treatment means and a confidence interval for those. Most importantly it provides us with the p value to help us confirm the significance of the difference and conclude factor level by factor level which differences are significant.
 
@@ -176,9 +173,9 @@ head(ebike_LSD$statistics) %>%
 
 Table: (\#tab:unnamed-chunk-12)Fisher LSD procedure on e-bike frame hardening: stats
 
-|   |  MSerror  | Df |  Mean  |    CV    | t.value  |   LSD    |
-|:--|:---------:|:--:|:------:|:--------:|:--------:|:--------:|
-|   | 333700000 | 16 | 617750 | 2.957095 | 2.119905 | 24492.02 |
+|   |  MSerror  | Df |  Mean  |   CV   | t.value |  LSD  |
+|:--|:---------:|:--:|:------:|:------:|:-------:|:-----:|
+|   | 333700000 | 16 | 617750 | 2.9571 | 2.1199  | 24492 |
 
 Furthermore it gives us a confidence interval for each treatment level mean:
 
@@ -197,12 +194,12 @@ head(ebike_LSD$means) %>%
 
 Table: (\#tab:unnamed-chunk-13)Fisher LSD procedure on e-bike frame hardening: means
 
-|    | cycles |   std    | r |   LCL    |   UCL    |
-|:---|:------:|:--------:|:-:|:--------:|:--------:|
-|160 | 551200 | 20017.49 | 5 | 533881.5 | 568518.5 |
-|180 | 587400 | 16742.16 | 5 | 570081.5 | 604718.5 |
-|200 | 625400 | 20525.59 | 5 | 608081.5 | 642718.5 |
-|220 | 707000 | 15247.95 | 5 | 689681.5 | 724318.5 |
+|    | cycles |  std  | r |  LCL   |  UCL   |
+|:---|:------:|:-----:|:-:|:------:|:------:|
+|160 | 551200 | 20017 | 5 | 533882 | 568518 |
+|180 | 587400 | 16742 | 5 | 570082 | 604718 |
+|200 | 625400 | 20526 | 5 | 608082 | 642718 |
+|220 | 707000 | 15248 | 5 | 689682 | 724318 |
 
 We can see for example that for temperature 220 °C the etch rate if on average 707.0 with a probability of 95% of being between 689.7 and 724.3 A/min.
 
@@ -318,26 +315,26 @@ Call:
 lm(formula = solarcell_formula, data = solarcell_factor)
 
 Residuals:
-    Min      1Q  Median      3Q     Max 
--60.750 -14.625   1.375  17.937  45.250 
+   Min     1Q Median     3Q    Max 
+-60.75 -14.63   1.38  17.94  45.25 
 
 Coefficients:
                                      Estimate Std. Error t value Pr(>|t|)    
-(Intercept)                            134.75      12.99  10.371 6.46e-11 ***
-temperatureT20                         -77.50      18.37  -4.218 0.000248 ***
-temperatureT50                         -77.25      18.37  -4.204 0.000257 ***
-materialchristaline                     21.00      18.37   1.143 0.263107    
-materialmultijunction                    9.25      18.37   0.503 0.618747    
-temperatureT20:materialchristaline      41.50      25.98   1.597 0.121886    
-temperatureT50:materialchristaline     -29.00      25.98  -1.116 0.274242    
-temperatureT20:materialmultijunction    79.25      25.98   3.050 0.005083 ** 
-temperatureT50:materialmultijunction    18.75      25.98   0.722 0.476759    
+(Intercept)                            134.75      12.99   10.37  6.5e-11 ***
+temperatureT20                         -77.50      18.37   -4.22  0.00025 ***
+temperatureT50                         -77.25      18.37   -4.20  0.00026 ***
+materialchristaline                     21.00      18.37    1.14  0.26311    
+materialmultijunction                    9.25      18.37    0.50  0.61875    
+temperatureT20:materialchristaline      41.50      25.98    1.60  0.12189    
+temperatureT50:materialchristaline     -29.00      25.98   -1.12  0.27424    
+temperatureT20:materialmultijunction    79.25      25.98    3.05  0.00508 ** 
+temperatureT50:materialmultijunction    18.75      25.98    0.72  0.47676    
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
-Residual standard error: 25.98 on 27 degrees of freedom
-Multiple R-squared:  0.7652,	Adjusted R-squared:  0.6956 
-F-statistic:    11 on 8 and 27 DF,  p-value: 9.426e-07
+Residual standard error: 26 on 27 degrees of freedom
+Multiple R-squared:  0.765,	Adjusted R-squared:  0.696 
+F-statistic:   11 on 8 and 27 DF,  p-value: 9.43e-07
 ```
 
 Looking at the output we see that R-squared is equal to 0.7652. This means about 77 percent of the variability in the battery life is explained by the plate material in the battery, the temperature, and the material type–temperature interaction. We're going to go more in details now to validate the model and understand the effects and interactions of the different factors.
@@ -426,8 +423,8 @@ outlierTest(solarcell_factor_lm)
 ```
 No Studentized residuals with Bonferroni p < 0.05
 Largest |rstudent|:
-   rstudent unadjusted p-value Bonferroni p
-4 -3.100368          0.0046065      0.16583
+  rstudent unadjusted p-value Bonferroni p
+4  -3.1004          0.0046065      0.16583
 ```
 
 which gives a high Bonferroni p value thus excluding this possibility.
@@ -445,11 +442,11 @@ anova(solarcell_factor_lm)
 Analysis of Variance Table
 
 Response: output
-                     Df Sum Sq Mean Sq F value    Pr(>F)    
-temperature           2  39119 19559.4 28.9677 1.909e-07 ***
-material              2  10684  5341.9  7.9114  0.001976 ** 
-temperature:material  4   9614  2403.4  3.5595  0.018611 *  
-Residuals            27  18231   675.2                      
+                     Df Sum Sq Mean Sq F value  Pr(>F)    
+temperature           2  39119   19559   28.97 1.9e-07 ***
+material              2  10684    5342    7.91   0.002 ** 
+temperature:material  4   9614    2403    3.56   0.019 *  
+Residuals            27  18231     675                    
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ```
@@ -473,22 +470,22 @@ Call:
 lm(formula = output ~ temperature + material, data = solarcell_factor)
 
 Residuals:
-    Min      1Q  Median      3Q     Max 
--54.389 -21.681   2.694  17.215  57.528 
+   Min     1Q Median     3Q    Max 
+-54.39 -21.68   2.69  17.22  57.53 
 
 Coefficients:
                       Estimate Std. Error t value Pr(>|t|)    
-(Intercept)             122.47      11.17  10.965 3.39e-12 ***
-temperatureT20          -37.25      12.24  -3.044  0.00472 ** 
-temperatureT50          -80.67      12.24  -6.593 2.30e-07 ***
-materialchristaline      25.17      12.24   2.057  0.04819 *  
-materialmultijunction    41.92      12.24   3.426  0.00175 ** 
+(Intercept)              122.5       11.2   10.97  3.4e-12 ***
+temperatureT20           -37.2       12.2   -3.04   0.0047 ** 
+temperatureT50           -80.7       12.2   -6.59  2.3e-07 ***
+materialchristaline       25.2       12.2    2.06   0.0482 *  
+materialmultijunction     41.9       12.2    3.43   0.0017 ** 
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
-Residual standard error: 29.97 on 31 degrees of freedom
-Multiple R-squared:  0.6414,	Adjusted R-squared:  0.5951 
-F-statistic: 13.86 on 4 and 31 DF,  p-value: 1.367e-06
+Residual standard error: 30 on 31 degrees of freedom
+Multiple R-squared:  0.641,	Adjusted R-squared:  0.595 
+F-statistic: 13.9 on 4 and 31 DF,  p-value: 1.37e-06
 ```
 
 The model still presents a reasonably high R-square of 0.64. We now apply the anova on this new model:
@@ -502,10 +499,10 @@ anova(solarcell_factor_lm_no_int)
 Analysis of Variance Table
 
 Response: output
-            Df Sum Sq Mean Sq F value    Pr(>F)    
-temperature  2  39119 19559.4 21.7759 1.239e-06 ***
-material     2  10684  5341.9  5.9472  0.006515 ** 
-Residuals   31  27845   898.2                      
+            Df Sum Sq Mean Sq F value  Pr(>F)    
+temperature  2  39119   19559   21.78 1.2e-06 ***
+material     2  10684    5342    5.95  0.0065 ** 
+Residuals   31  27845     898                    
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ```
@@ -600,13 +597,13 @@ cor.test(solarcell_fill$output, solarcell_fill$fillfactor)
 	Pearson's product-moment correlation
 
 data:  solarcell_fill$output and solarcell_fill$fillfactor
-t = 9.8039, df = 13, p-value = 2.263e-07
+t = 9.8, df = 13, p-value = 2.3e-07
 alternative hypothesis: true correlation is not equal to 0
 95 percent confidence interval:
- 0.8209993 0.9797570
+ 0.82100 0.97976
 sample estimates:
-     cor 
-0.938542 
+    cor 
+0.93854 
 ```
 
 Going further and using the approach from [@Broc2016] I'm faceting the scatterplots to assess if the coefficient of the linear regression is similar for all the levels of the machine factor:
@@ -647,10 +644,10 @@ summary(solarcell_ancova)
 ```
 
 ```
-            Df Sum Sq Mean Sq F value   Pr(>F)    
-fillfactor   1 2746.2  2746.2 119.933 2.96e-07 ***
-material     2  119.6    59.8   2.611    0.118    
-Residuals   11  251.9    22.9                     
+            Df Sum Sq Mean Sq F value Pr(>F)    
+fillfactor   1   2746    2746  119.93  3e-07 ***
+material     2    120      60    2.61   0.12    
+Residuals   11    252      23                   
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ```
@@ -681,8 +678,8 @@ summary(solarcell_aov)
 
 ```
             Df Sum Sq Mean Sq F value Pr(>F)  
-material     2   1264   631.8   4.089 0.0442 *
-Residuals   12   1854   154.5                 
+material     2   1264     632    4.09  0.044 *
+Residuals   12   1854     155                 
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ```

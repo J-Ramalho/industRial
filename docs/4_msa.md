@@ -1,8 +1,5 @@
 
 
-```
-## Error in get(genname, envir = envir) : objet 'testthat_print' introuvable
-```
 
 # Measurement System Analysis {#MSA}
 
@@ -79,8 +76,8 @@ skim(juice_drymatter$bias) %>%
 
 **Variable type: numeric**
 
-|skim_variable | n_missing| complete_rate| mean|   sd|    p0|  p25|   p50|   p75|  p100|hist                                     |
-|:-------------|---------:|-------------:|----:|----:|-----:|----:|-----:|-----:|-----:|:----------------------------------------|
+|skim_variable | n_missing| complete_rate| mean|   sd|    p0|  p25|   p50|   p75|  p100|hist  |
+|:-------------|---------:|-------------:|----:|----:|-----:|----:|-----:|-----:|-----:|:-----|
 |data          |         0|             1| -0.3| 0.14| -0.63| -0.4| -0.29| -0.19| -0.07|▂▅▆▇▇ |
 
 Such results are not encouraging because a non regular bias along the range may require specific correction for different product which may be not practical and prone to error. Often this requires to dig into detail to understand the causes of the bias and determine if they are related with the physical phenomena and if there are clear controllable causes. Ultimately this could result is narrowing the measurement range and validating a specific device and method for a specific product specification target. For the Quality Assurance Manager it is too early to draw conclusions and he establishes a more detailed plot with `{ggplot2}` to better visualize the data.
@@ -175,9 +172,9 @@ Table: (\#tab:tbl-tabletthickness)tablet thickness gage r&R data
 
 |  Position  | Size | Tablet | Replicate |  Day  | Date [DD.MM.YYYY] | Operator | Thickness [micron] | Temperature [°C] | Relative Humidity [%] | Luminescence [lux] |
 |:----------:|:----:|:------:|:---------:|:-----:|:-----------------:|:--------:|:------------------:|:----------------:|:---------------------:|:------------------:|
-| Position 1 |  L   |  L001  |     1     | Day 1 |    18/11/2020     |  Paulo   |      1802.519      |       22.3       |         32.7          |       568.6        |
-| Position 1 |  L   |  L001  |     2     | Day 1 |    18/11/2020     |  Paulo   |      1802.783      |       22.3       |         32.8          |       580.4        |
-| Position 1 |  L   |  L001  |     3     | Day 1 |    18/11/2020     |  Paulo   |      1803.989      |       22.3       |         32.8          |       580.5        |
+| Position 1 |  L   |  L001  |     1     | Day 1 |    18/11/2020     |  Paulo   |       1802.5       |       22.3       |         32.7          |       568.6        |
+| Position 1 |  L   |  L001  |     2     | Day 1 |    18/11/2020     |  Paulo   |       1802.8       |       22.3       |         32.8          |       580.4        |
+| Position 1 |  L   |  L001  |     3     | Day 1 |    18/11/2020     |  Paulo   |       1804.0       |       22.3       |         32.8          |       580.5        |
 
 It is an excellent practice to look at raw data because it gives an immediate perception of general aspects such as the number of variables, their levels and their datatypes. Although this is irreplaceable it is possible to go further and `skim()` provides an excellent complement and summary. Below we see that the test requested by the Quality Engineer has required 675 measurements on 11 different variables by 3 different operators. We can see room conditions are stable, rather normally distributed and having small standard deviations and we can even see that thickness appears with 3 groups which seems related with the 3 sizes noted in the Size column.
 
@@ -421,11 +418,11 @@ tablet_L_rr2 <- ss.rr(
 Complete model (with interaction):
 
                  Df Sum Sq Mean Sq F value Pr(>F)
-tablet            4 1707.1   426.8 271.457 <2e-16
-operator          2   13.1     6.6   4.177 0.0166
-tablet:operator   8   11.2     1.4   0.892 0.5237
-Repeatability   210  330.1     1.6               
-Total           224 2061.6                       
+tablet            4   1707     427  271.46 <2e-16
+operator          2     13       7    4.18  0.017
+tablet:operator   8     11       1    0.89  0.524
+Repeatability   210    330       2               
+Total           224   2062                       
 
 alpha for removing interaction: 0.05 
 
@@ -433,28 +430,28 @@ alpha for removing interaction: 0.05
 Reduced model (without interaction):
 
                Df Sum Sq Mean Sq F value Pr(>F)
-tablet          4 1707.1   426.8 272.533 <2e-16
-operator        2   13.1     6.6   4.194 0.0163
-Repeatability 218  341.4     1.6               
-Total         224 2061.6                       
+tablet          4   1707     427  272.53 <2e-16
+operator        2     13       7    4.19  0.016
+Repeatability 218    341       2               
+Total         224   2062                       
 
 Gage R&R
 
-                      VarComp %Contrib
-Total Gage R&R     1.63260451    14.73
-  Repeatability    1.56591940    14.13
-  Reproducibility  0.06668511     0.60
-    operator       0.06668511     0.60
-Part-To-Part       9.44885739    85.27
-Total Variation   11.08146189   100.00
+                    VarComp %Contrib
+Total Gage R&R     1.632605    14.73
+  Repeatability    1.565919    14.13
+  Reproducibility  0.066685     0.60
+    operator       0.066685     0.60
+Part-To-Part       9.448857    85.27
+Total Variation   11.081462   100.00
 
-                      VarComp    StdDev  StudyVar %StudyVar %Tolerance
-Total Gage R&R     1.63260451 1.2777341  7.666405     38.38      15.33
-  Repeatability    1.56591940 1.2513670  7.508202     37.59      15.02
-  Reproducibility  0.06668511 0.2582346  1.549408      7.76       3.10
-    operator       0.06668511 0.2582346  1.549408      7.76       3.10
-Part-To-Part       9.44885739 3.0738994 18.443396     92.34      36.89
-Total Variation   11.08146189 3.3288830 19.973298    100.00      39.95
+                    VarComp  StdDev StudyVar %StudyVar %Tolerance
+Total Gage R&R     1.632605 1.27773   7.6664     38.38      15.33
+  Repeatability    1.565919 1.25137   7.5082     37.59      15.02
+  Reproducibility  0.066685 0.25823   1.5494      7.76       3.10
+    operator       0.066685 0.25823   1.5494      7.76       3.10
+Part-To-Part       9.448857 3.07390  18.4434     92.34      36.89
+Total Variation   11.081462 3.32888  19.9733    100.00      39.95
 
 Number of Distinct Categories = 3 
 ```
@@ -509,7 +506,7 @@ u_cal
 ```
 
 ```
-[1] 0.1024416
+[1] 0.10244
 ```
 
 The repeatability and reproducibility uncertainties correspond to the standard deviations calculated in the r&R study. In our case we can even obtain them directly from the Variance Components table generated by the `ss.rr` function of the {SixSigma} package that has bee discussed in details the Gage acceptance unit. We are going to name $u_{repeat}^2$ as u_repeat $u_{reprod}^2$ as u_reprod getting:
@@ -521,7 +518,7 @@ u_repeat
 ```
 
 ```
-[1] 1.253844
+[1] 1.2538
 ```
 
 ```r
@@ -530,7 +527,7 @@ u_reprod
 ```
 
 ```
-[1] 0.2624063
+[1] 0.26241
 ```
 
 Now putting it all together in the uncertainty formula we have:
@@ -542,7 +539,7 @@ u
 ```
 
 ```
-[1] 1.628335
+[1] 1.6283
 ```
 
 Finally what is usually reported is the expanded uncertainty corresponding to 2 standard deviations. To be recalled that $\pm$ 2 std corresponds to 95% of the values when a repetitive measurement is made. In this case we have $U = 2*u$:
@@ -554,7 +551,7 @@ U
 ```
 
 ```
-[1] 3.256671
+[1] 3.2567
 ```
 
 For a specific measurement of say 1'800 $\mu m$ we then say: the tablet thickness is 1'800 $\mu m$ $\pm$ 3.3 $\mu m$, at the 95 percent confidence level. Written in short is:

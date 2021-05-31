@@ -1,8 +1,5 @@
 
 
-```
-## Error in get(genname, envir = envir) : objet 'testthat_print' introuvable
-```
 
 ## Two level designs
 
@@ -142,20 +139,20 @@ lm.default(formula = tensile_strength ~ A * B, data = pet_fct)
 
 Residuals:
    Min     1Q Median     3Q    Max 
--4.600 -3.067 -1.150  2.492  6.900 
+ -4.60  -3.07  -1.15   2.49   6.90 
 
 Coefficients:
             Estimate Std. Error t value Pr(>|t|)    
-(Intercept)   63.250      1.314  48.135 3.84e-11 ***
-A1             9.583      1.314   7.293 8.44e-05 ***
-B1            -5.750      1.314  -4.376  0.00236 ** 
-A1:B1          1.917      1.314   1.459  0.18278    
+(Intercept)    63.25       1.31   48.14  3.8e-11 ***
+A1              9.58       1.31    7.29  8.4e-05 ***
+B1             -5.75       1.31   -4.38   0.0024 ** 
+A1:B1           1.92       1.31    1.46   0.1828    
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
-Residual standard error: 4.552 on 8 degrees of freedom
-Multiple R-squared:  0.903,	Adjusted R-squared:  0.8666 
-F-statistic: 24.82 on 3 and 8 DF,  p-value: 0.0002093
+Residual standard error: 4.55 on 8 degrees of freedom
+Multiple R-squared:  0.903,	Adjusted R-squared:  0.867 
+F-statistic: 24.8 on 3 and 8 DF,  p-value: 0.000209
 ```
 
 We can observe in the output that the p value of the effects is the same in the lm and in the the aov functions. This confirms that the contrasts have been correctly specified with contr.sum
@@ -208,20 +205,20 @@ lm.default(formula = tensile_strength ~ cA * cB, data = pet_fct2,
 
 Residuals:
    Min     1Q Median     3Q    Max 
--4.600 -3.067 -1.150  2.492  6.900 
+ -4.60  -3.07  -1.15   2.49   6.90 
 
 Coefficients:
             Estimate Std. Error t value Pr(>|t|)    
-(Intercept)   63.250      1.314  48.135 3.84e-11 ***
-cA1            9.583      1.314   7.293 8.44e-05 ***
-cB1           -5.750      1.314  -4.376  0.00236 ** 
-cA1:cB1        1.917      1.314   1.459  0.18278    
+(Intercept)    63.25       1.31   48.14  3.8e-11 ***
+cA1             9.58       1.31    7.29  8.4e-05 ***
+cB1            -5.75       1.31   -4.38   0.0024 ** 
+cA1:cB1         1.92       1.31    1.46   0.1828    
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
-Residual standard error: 4.552 on 8 degrees of freedom
-Multiple R-squared:  0.903,	Adjusted R-squared:  0.8666 
-F-statistic: 24.82 on 3 and 8 DF,  p-value: 0.0002093
+Residual standard error: 4.55 on 8 degrees of freedom
+Multiple R-squared:  0.903,	Adjusted R-squared:  0.867 
+F-statistic: 24.8 on 3 and 8 DF,  p-value: 0.000209
 ```
 
 Note that a coefficient in a regression equation is the change in the response when the corresponding variable changes by +1. Special attention to the + and - needs to be taken with the R output.
@@ -263,20 +260,20 @@ lm.default(formula = tensile_strength ~ cA * cB, data = pet_num)
 
 Residuals:
    Min     1Q Median     3Q    Max 
--4.600 -3.067 -1.150  2.492  6.900 
+ -4.60  -3.07  -1.15   2.49   6.90 
 
 Coefficients:
             Estimate Std. Error t value Pr(>|t|)    
-(Intercept)   63.250      1.314  48.135 3.84e-11 ***
-cA             9.583      1.314   7.293 8.44e-05 ***
-cB            -5.750      1.314  -4.376  0.00236 ** 
-cA:cB          1.917      1.314   1.459  0.18278    
+(Intercept)    63.25       1.31   48.14  3.8e-11 ***
+cA              9.58       1.31    7.29  8.4e-05 ***
+cB             -5.75       1.31   -4.38   0.0024 ** 
+cA:cB           1.92       1.31    1.46   0.1828    
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
-Residual standard error: 4.552 on 8 degrees of freedom
-Multiple R-squared:  0.903,	Adjusted R-squared:  0.8666 
-F-statistic: 24.82 on 3 and 8 DF,  p-value: 0.0002093
+Residual standard error: 4.55 on 8 degrees of freedom
+Multiple R-squared:  0.903,	Adjusted R-squared:  0.867 
+F-statistic: 24.8 on 3 and 8 DF,  p-value: 0.000209
 ```
 
 In this case we did not define any contrasts. Looking into the lm We can see we've obtained exactly the same outputs.
@@ -416,25 +413,25 @@ Call:
 lm.default(formula = charging_time ~ A * B * C, data = battery_charging)
 
 Residuals:
-    Min      1Q  Median      3Q     Max 
--2.0950 -1.0025 -0.5288  0.9287  2.9825 
+   Min     1Q Median     3Q    Max 
+-2.095 -1.002 -0.529  0.929  2.982 
 
 Coefficients:
             Estimate Std. Error t value Pr(>|t|)    
-(Intercept)  7.41156    0.26542  27.924  < 2e-16 ***
-A            0.31469    0.26542   1.186 0.247370    
-B            0.06844    0.26542   0.258 0.798720    
-C            1.04031    0.26542   3.920 0.000646 ***
-A:B         -0.08719    0.26542  -0.328 0.745387    
-A:C         -0.80906    0.26542  -3.048 0.005532 ** 
-B:C          0.02594    0.26542   0.098 0.922963    
-A:B:C        0.03281    0.26542   0.124 0.902640    
+(Intercept)   7.4116     0.2654   27.92  < 2e-16 ***
+A             0.3147     0.2654    1.19  0.24737    
+B             0.0684     0.2654    0.26  0.79872    
+C             1.0403     0.2654    3.92  0.00065 ***
+A:B          -0.0872     0.2654   -0.33  0.74539    
+A:C          -0.8091     0.2654   -3.05  0.00553 ** 
+B:C           0.0259     0.2654    0.10  0.92296    
+A:B:C         0.0328     0.2654    0.12  0.90264    
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
-Residual standard error: 1.501 on 24 degrees of freedom
-Multiple R-squared:  0.5225,	Adjusted R-squared:  0.3832 
-F-statistic: 3.751 on 7 and 24 DF,  p-value: 0.006963
+Residual standard error: 1.5 on 24 degrees of freedom
+Multiple R-squared:  0.522,	Adjusted R-squared:  0.383 
+F-statistic: 3.75 on 7 and 24 DF,  p-value: 0.00696
 ```
 
 
@@ -444,15 +441,15 @@ summary(battery_aov)
 ```
 
 ```
-            Df Sum Sq Mean Sq F value   Pr(>F)    
-A            1   3.17    3.17   1.406 0.247370    
-B            1   0.15    0.15   0.066 0.798720    
-C            1  34.63   34.63  15.363 0.000646 ***
-A:B          1   0.24    0.24   0.108 0.745387    
-A:C          1  20.95   20.95   9.292 0.005532 ** 
-B:C          1   0.02    0.02   0.010 0.922963    
-A:B:C        1   0.03    0.03   0.015 0.902640    
-Residuals   24  54.10    2.25                     
+            Df Sum Sq Mean Sq F value  Pr(>F)    
+A            1    3.2     3.2    1.41 0.24737    
+B            1    0.1     0.1    0.07 0.79872    
+C            1   34.6    34.6   15.36 0.00065 ***
+A:B          1    0.2     0.2    0.11 0.74539    
+A:C          1   20.9    20.9    9.29 0.00553 ** 
+B:C          1    0.0     0.0    0.01 0.92296    
+A:B:C        1    0.0     0.0    0.02 0.90264    
+Residuals   24   54.1     2.3                    
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ```
@@ -478,21 +475,21 @@ Call:
 lm.default(formula = charging_time ~ A + C + A:C, data = battery_charging)
 
 Residuals:
-    Min      1Q  Median      3Q     Max 
--2.1463 -0.9950 -0.4575  0.8650  2.9050 
+   Min     1Q Median     3Q    Max 
+-2.146 -0.995 -0.458  0.865  2.905 
 
 Coefficients:
             Estimate Std. Error t value Pr(>|t|)    
-(Intercept)   7.4116     0.2467  30.037  < 2e-16 ***
-A             0.3147     0.2467   1.275 0.212663    
-C             1.0403     0.2467   4.216 0.000235 ***
-A:C          -0.8091     0.2467  -3.279 0.002786 ** 
+(Intercept)    7.412      0.247   30.04  < 2e-16 ***
+A              0.315      0.247    1.28  0.21266    
+C              1.040      0.247    4.22  0.00023 ***
+A:C           -0.809      0.247   -3.28  0.00279 ** 
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
-Residual standard error: 1.396 on 28 degrees of freedom
-Multiple R-squared:  0.5185,	Adjusted R-squared:  0.4669 
-F-statistic: 10.05 on 3 and 28 DF,  p-value: 0.0001157
+Residual standard error: 1.4 on 28 degrees of freedom
+Multiple R-squared:  0.519,	Adjusted R-squared:  0.467 
+F-statistic: 10.1 on 3 and 28 DF,  p-value: 0.000116
 ```
 
 Besides the base summary() function, R squared and adjusted R squared can also be easily retrieved with the glance function from the {broom} package. We're extracting them here for the complete and for reduced model:
@@ -574,8 +571,8 @@ pA
 ```
 
 ```
-       1 
-8.699062 
+     1 
+8.6991 
 ```
 
 We can visualize this outcome as follows:
@@ -697,26 +694,26 @@ ALL 16 residuals are 0: no residual degrees of freedom!
 
 Coefficients:
             Estimate Std. Error t value Pr(>|t|)
-(Intercept)  7.76062         NA      NA       NA
-A           -0.50812         NA      NA       NA
-B            0.03688         NA      NA       NA
-C            1.53063         NA      NA       NA
-D            0.15563         NA      NA       NA
-A:B         -0.12438         NA      NA       NA
-A:C         -0.76813         NA      NA       NA
-B:C         -0.01062         NA      NA       NA
-A:D          0.12437         NA      NA       NA
-B:D         -0.05563         NA      NA       NA
-C:D          0.16062         NA      NA       NA
-A:B:C        0.02812         NA      NA       NA
-A:B:D        0.08562         NA      NA       NA
-A:C:D        0.18438         NA      NA       NA
-B:C:D        0.03688         NA      NA       NA
-A:B:C:D     -0.03688         NA      NA       NA
+(Intercept)   7.7606         NA      NA       NA
+A            -0.5081         NA      NA       NA
+B             0.0369         NA      NA       NA
+C             1.5306         NA      NA       NA
+D             0.1556         NA      NA       NA
+A:B          -0.1244         NA      NA       NA
+A:C          -0.7681         NA      NA       NA
+B:C          -0.0106         NA      NA       NA
+A:D           0.1244         NA      NA       NA
+B:D          -0.0556         NA      NA       NA
+C:D           0.1606         NA      NA       NA
+A:B:C         0.0281         NA      NA       NA
+A:B:D         0.0856         NA      NA       NA
+A:C:D         0.1844         NA      NA       NA
+B:C:D         0.0369         NA      NA       NA
+A:B:C:D      -0.0369         NA      NA       NA
 
 Residual standard error: NaN on 0 degrees of freedom
-Multiple R-squared:      1,	Adjusted R-squared:    NaN 
-F-statistic:   NaN on 15 and 0 DF,  p-value: NA
+Multiple R-squared:     1,	Adjusted R-squared:   NaN 
+F-statistic:  NaN on 15 and 0 DF,  p-value: NA
 ```
 
 We can see that being a single replicate design no statistics have been calculated for the effects in the model. A recommended approach in this case is to look into the normal probability plot of the model effects. 
@@ -800,21 +797,21 @@ Call:
 lm.default(formula = charging_time ~ A + C + A:C, data = battery_charging)
 
 Residuals:
-    Min      1Q  Median      3Q     Max 
--2.1463 -0.9950 -0.4575  0.8650  2.9050 
+   Min     1Q Median     3Q    Max 
+-2.146 -0.995 -0.458  0.865  2.905 
 
 Coefficients:
             Estimate Std. Error t value Pr(>|t|)    
-(Intercept)   7.4116     0.2467  30.037  < 2e-16 ***
-A             0.3147     0.2467   1.275 0.212663    
-C             1.0403     0.2467   4.216 0.000235 ***
-A:C          -0.8091     0.2467  -3.279 0.002786 ** 
+(Intercept)    7.412      0.247   30.04  < 2e-16 ***
+A              0.315      0.247    1.28  0.21266    
+C              1.040      0.247    4.22  0.00023 ***
+A:C           -0.809      0.247   -3.28  0.00279 ** 
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
-Residual standard error: 1.396 on 28 degrees of freedom
-Multiple R-squared:  0.5185,	Adjusted R-squared:  0.4669 
-F-statistic: 10.05 on 3 and 28 DF,  p-value: 0.0001157
+Residual standard error: 1.4 on 28 degrees of freedom
+Multiple R-squared:  0.519,	Adjusted R-squared:  0.467 
+F-statistic: 10.1 on 3 and 28 DF,  p-value: 0.000116
 ```
 
 We can now see that we've regained degrees of freedom and obtained a sort of hidden replication allowing to calculate statistics and error terms on the model.

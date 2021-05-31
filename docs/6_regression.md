@@ -1,14 +1,13 @@
 
 
-```
-## Error in get(genname, envir = envir) : objet 'testthat_print' introuvable
-```
 
 ## Linear regression
 
 <div class="marginnote">
 
 <b class="highlight">Case study: e-bike frame hardening</b>
+
+Demand for electrical bicycles grows steadily and a global manufacturer is looking into improving the quality of his bicycle frames. A test program around different treatment temperatures is established to find the conditions that optimize the fatigue resistance.
 
 <img src="img/bike_frames_bw.jpg" width="80%" style="display: block; margin: auto;" />
 
@@ -18,7 +17,7 @@ A way to go beyond the statistical description of samples and direct comparison 
 
 Mountain bikes frames are submitted to many different efforts, namely bending, compression and vibration. Obviously no one expects a bike frame to break in regular usage and it is hard to commercialy claim resistance to failure as a big thing. Nevertheless on the long term a manufacturer reputation is made on performance features such as the number of cycles of effort that the frame resists. An e-bike manufacturing company is looking to increase the duration of its frames by improving the  <b class="highlight">e-bike frame hardening</b> process.
 
-A test has been run with five groups of 10 bike frames submitted to four different treatment temperature levels and the data collected in the R tibble `ebike_hardening` presented below:
+A test has been run with 5 groups of 30 bike frames submitted to 4 different treatment temperature levels and the data collected in the R tibble `ebike_hardening` presented below:
 
 
 ```r
@@ -35,7 +34,7 @@ head(ebike_hardening) %>%
 |     200     | 600000 | 651000 | 610000 | 637000 | 629000 |
 |     220     | 725000 | 700000 | 715000 | 685000 | 710000 |
 
-This type of two way entry is friendly for data collection but for manipulation with the `{tidyverse}` package functions it is often easier to transform it in a long format.
+This type of two way entry is friendly for data collection but for manipulation with the `{tidyverse}` package functions it is often better to transform it in a long format.
 
 
 ```r
@@ -56,7 +55,7 @@ slice_head(.data = ebike_narrow, n = 5) %>%
 
 
 
-Table: (\#tab:unnamed-chunk-2)e-bike hardening experiment data
+Table: (\#tab:fig-ebikenarrow)e-bike hardening experiment data
 
 | temperature | observation | cycles | cycles_mean |
 |:-----------:|:-----------:|:------:|:-----------:|
@@ -66,6 +65,7 @@ Table: (\#tab:unnamed-chunk-2)e-bike hardening experiment data
 |     160     |     g4      | 539000 |   551200    |
 |     160     |     g5      | 570000 |   551200    |
 
+The engineering team is looking forward to see the first results which have been prepared by the laboratory supervisor. He has prepared a series of plots and data models and sent out an draft report. The first plot is a simple dot plot having the raw data and in red the group means.  
 
 
 ```r
@@ -80,11 +80,11 @@ ggplot(data = ebike_narrow) +
        y = "Cycles to failure [n]")
 ```
 
-<img src="6_regression_files/figure-html/unnamed-chunk-3-1.png" width="100%" />
+<img src="6_regression_files/figure-html/fig-rawdataplot-1.png" width="100%" />
+
+Clearly the highest the furnace temperature the higher the number of cycles to failure. This is absolutely expected as higher temperatures, up to a certain level, allow to release mechanical tensions and make the material less prone to fracture. The team knows that other factors are at play such as the treatment duration, the pre-heating temperature and many others related with the welding of the frame parts, but has deliberately decided to look only into the temperature due to time constraints related with a new bike launch.
 
 ### Linear model {#lm}
-
-We start by establishing the model, ensuring for now that we leave the variable `temperature` as a numeric vector. 
 
 
 ```r
@@ -113,7 +113,9 @@ Multiple R-squared:  0.884,	Adjusted R-squared:  0.878
 F-statistic:  138 on 1 and 18 DF,  p-value: 7.26e-10
 ```
 
-With the summary function we can many different outputs such as the coefficients and the R-squared which we will look into more detail now. As usual, we first inspect the data with a first plot. In this case we're adding a smoothing geometry with the lm method:
+This last code chunk in lab supervisor draft report is a linear model built with the variable `temperature` as a numeric vector. The R `summary()` function produces a specific output for linear models and a dedicated help explaining each output value can be accessed with `?summary.lm`. Knowing that R uses specific "methods" to provide the summaries for many functions is useful to find their help pages and a way to list them is `apropos("summary)`.
+
+In this case we see a high R-squared suggesting a very good fit and that the temperature is significant by looking at the 3 *significance stars* next to its p-value. It is good to complement the raw data plot with a regression line corresponding to this linear model as done in the next chunk with the function `geom_smooth()`:
 
 
 ```r
@@ -129,11 +131,9 @@ ggplot(ebike_narrow) +
        y = "Cycles to failure [n]")
 ```
 
-<img src="6_regression_files/figure-html/unnamed-chunk-5-1.png" width="100%" />
+<img src="6_regression_files/figure-html/fig-ebikesmooth-1.png" width="100%" />
 
-### Contrasts treatment {#contr.treatment}
-
-In our case the experiementer has selected to control the levels of the temperature variable in what is called a fixed effects model, accepting that conclusions in the comparisons of the levels cannot be extended to levels that were not tested. For this we're now going to convert the variable to a factor and establish again the model and note that it will give the same R squared but naturally different coefficients. 
+The engineering team has selected to specify and control the temperature variable at specific levels in what is called a fixed effects model, limiting the conclusions to the levels tested. The lab supervisor updates his model by converting the temperature variable to a factor and establishes again the linear model. He explicitly introduces the argument `contrasts` as cont.treatment to make clear that this was his option. In principle this is not needed because this is default setting for the contrasts as seen with `getOption("contrasts")`.
 
 
 ```r
@@ -170,33 +170,81 @@ Multiple R-squared:  0.926,	Adjusted R-squared:  0.912
 F-statistic: 66.8 on 3 and 16 DF,  p-value: 2.88e-09
 ```
 
-In order to be precise, we're making explicit in the lm function that the contrasts argument is "contr.treatment", although this is the default in R. More on contrasts on the Case Study on $2^k$ designs. The current contrasts settings can be seen as follows:
+### Contrasts {#contr.treatment}
+
+We saw that from the first model to the second the R-squared has slightly improved and that he obtains slightly different model coefficients. In R the model coefficients depend on the variable variable data type. To obtain equivalent results with the different type coding it is necessary to carefully set the model **contrasts**. Factor type coding and contrasts define different lead to different linear regression equations. We can see the coefficients and use them to calculate the output with a matrix multiplication  as follows:
 
 
 ```r
-getOption("contrasts")
+ebike_lm$contrasts$temperature
 ```
 
 ```
-        unordered           ordered 
-"contr.treatment"      "contr.poly" 
+NULL
 ```
+
+```r
+ebike_lm$coefficients 
+```
+
+```
+(Intercept) temperature 
+     137620        2527 
+```
+
+```r
+ebike_lm$coefficients %*% c(1, 180)
+```
+
+```
+       [,1]
+[1,] 592480
+```
+
+this show that to calculate the output for an input of 180 we have 137620 + 180 x 2'527 = 592'480. Differently When the temperature is coded as a factor we have the following coefficients and output calculation:
+
+
+```r
+ebike_lm_factor$contrasts$temperature
+```
+
+```
+[1] "contr.treatment"
+```
+
+```r
+ebike_lm_factor$coefficients
+```
+
+```
+   (Intercept) temperature180 temperature200 temperature220 
+        551200          36200          74200         155800 
+```
+
+```r
+ebike_lm_factor$coefficients %*% c(1, 1, 0, 0)
+```
+
+```
+       [,1]
+[1,] 587400
+```
+
+The output is slightly different corresponding to 551'200 + 1 x 36'200 = 587'400.
 
 ### Predict {#predict}
 
-Following the residuals analysis and the anova our model is validated. 
-
-A model is usefull for predictions. In a random effects model where conclusions can applied to the all the population we can predict values at any value of the input variables. In that case reusing the model with temperature as a numeric vector we could have a prediction for various temperature values such as:
+A model is useful for predictions. In a random effects model where conclusions can applied to the all the population we can predict values at any value of the input variables. In that case reusing the model with temperature as a numeric vector we could have a prediction for various temperature values such as:
 
 
 ```r
-ebike_new <- tibble(temperature = c(170, 160, 200, 210))
+ebike_new <- tibble(temperature = c(180, 200, 210))
 predict(ebike_lm, newdata = ebike_new)
 ```
 
 ```
-     1      2      3      4 
-567210 541940 643020 668290 
+     1      2      3 
+592480 643020 668290 
 ```
 
 We can see that the prediction at the tested levels is slightly different from the measured averages at those levels. This is because the linear interpolation line is not passing exactly by the averages.
@@ -205,23 +253,18 @@ Anyway this is a fixed effects model and we can only take conclusions at the lev
 
 
 ```r
-ebike_new <- data.frame(temperature = as_factor(c("160", "200")))
+ebike_new <- data.frame(temperature = as_factor(c("180", "200")))
 predict(ebike_lm_factor, newdata = ebike_new)
 ```
 
 ```
      1      2 
-551200 625400 
+587400 625400 
 ```
 
+We find again exactly the same values calculated with the linear regression coefficients before. The `predict()` function has other advantages such as providing confidence intervals which will be explored in later case studies.
 
-We're now ready to assess the validity of the model in order to be ready for our main task which is the comparison of the means using an anova.
-
-In order to assess the model performance we're going to look into the residuals. R provides direct ploting functions with the base and stats packages but in this first example we're going to break down the analysis and further customise the plots. We are also going to make usage of some additional statistical tests to confirm our observations from the plots. In subsequent chapters we'll have a more selective approach, where plots and tests are made on a needed basis.
-
-We start by loading the package broom which will help us retrieving the data from the lm object into a data frame.
-
-Now we build and show below an extract of the "augmented" dataframe
+The lab supervisor is now ready to assess the validity of the model. This is required before entering the main objective which is comparing the treatment means using an anova. To do this assessment the model he is going to do a residuals analysis. R provides direct plotting functions with the base and stats packages but he opted to break down the analysis and use custom the plots. He also uses some additional statistical tests to confirm our observations from the plots. He starts by loading the package broom which will help him retrieving the data from the lm object into a data frame.
 
 ### Model augment {#augment}
 
@@ -241,14 +284,14 @@ ebike_aug %>%
 
 
 
-| cycles | temperature | .fitted | .resid | .std.resid | .hat | .sigma | .cooksd | index |
-|:------:|:-----------:|:-------:|:------:|:----------:|:----:|:------:|:-------:|:-----:|
-| 575000 |     160     | 551200  | 23800  |  1.45665   | 0.2  | 17571  | 0.13261 |   1   |
-| 542000 |     160     | 551200  | -9200  |  -0.56307  | 0.2  | 18679  | 0.01982 |   2   |
-| 530000 |     160     | 551200  | -21200 |  -1.29752  | 0.2  | 17846  | 0.10522 |   3   |
-| 539000 |     160     | 551200  | -12200 |  -0.74668  | 0.2  | 18535  | 0.03485 |   4   |
-| 570000 |     160     | 551200  | 18800  |  1.15063   | 0.2  | 18069  | 0.08275 |   5   |
-| 565000 |     180     | 587400  | -22400 |  -1.37096  | 0.2  | 17724  | 0.11747 |   6   |
+| cycles | temperature | .fitted | .resid | .hat | .sigma | .cooksd | .std.resid | index |
+|:------:|:-----------:|:-------:|:------:|:----:|:------:|:-------:|:----------:|:-----:|
+| 575000 |     160     | 551200  | 23800  | 0.2  | 17571  | 0.13261 |  1.45665   |   1   |
+| 542000 |     160     | 551200  | -9200  | 0.2  | 18679  | 0.01982 |  -0.56307  |   2   |
+| 530000 |     160     | 551200  | -21200 | 0.2  | 17846  | 0.10522 |  -1.29752  |   3   |
+| 539000 |     160     | 551200  | -12200 | 0.2  | 18535  | 0.03485 |  -0.74668  |   4   |
+| 570000 |     160     | 551200  | 18800  | 0.2  | 18069  | 0.08275 |  1.15063   |   5   |
+| 565000 |     180     | 587400  | -22400 | 0.2  | 17724  | 0.11747 |  -1.37096  |   6   |
 
 We can see we've obtained detailed model parameters such us fitted values and residuals for each DOE run.
 
@@ -270,7 +313,7 @@ ebike_aug %>%
   )
 ```
 
-<img src="6_regression_files/figure-html/unnamed-chunk-12-1.png" width="100%" />
+<img src="6_regression_files/figure-html/unnamed-chunk-6-1.png" width="100%" />
 
 Nothing pattern emerges from the current plot and the design presents itself ^well randomised.
 
@@ -290,7 +333,7 @@ durbinWatsonTest(ebike_lm_factor)
 
 ```
  lag Autocorrelation D-W Statistic p-value
-   1        -0.53433        2.9609   0.098
+   1        -0.53433        2.9609    0.09
  Alternative hypothesis: rho != 0
 ```
 
@@ -315,7 +358,7 @@ ebike_aug %>%
   )
 ```
 
-<img src="6_regression_files/figure-html/unnamed-chunk-15-1.png" width="100%" />
+<img src="6_regression_files/figure-html/unnamed-chunk-9-1.png" width="100%" />
 
 In this plot we see no variance anomalies such as a higher variance for a certain factor level or other types of skweness.
 
@@ -364,7 +407,7 @@ ebike_aug %>%
   )
 ```
 
-<img src="6_regression_files/figure-html/unnamed-chunk-17-1.png" width="100%" />
+<img src="6_regression_files/figure-html/unnamed-chunk-11-1.png" width="100%" />
 
 The plot suggests normal distribution. We see that the error distribution is aproximately normal. In the fixed effects model we give more importance to the center of the values and here we consider acceptable that the extremes of the data tend to bend away from the straight line.
 The verification can be completed by a test. For populations < 50 use the shapiro-wilk normality test.
@@ -402,7 +445,7 @@ ebike_aug %>%
        x = "Fitted values")
 ```
 
-<img src="6_regression_files/figure-html/unnamed-chunk-19-1.png" width="100%" />
+<img src="6_regression_files/figure-html/unnamed-chunk-13-1.png" width="100%" />
 
 The plot shows no outliers to consider in this DOE.
 
@@ -438,7 +481,7 @@ ebike_aug %>%
        x = "Cooks distance")
 ```
 
-<img src="6_regression_files/figure-html/unnamed-chunk-21-1.png" width="100%" />
+<img src="6_regression_files/figure-html/unnamed-chunk-15-1.png" width="100%" />
 
 ### Coefficient of determination {#R-squared}
 

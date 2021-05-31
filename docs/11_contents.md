@@ -246,8 +246,8 @@
   <tr>
    <td style="text-align:left;background-color: white !important;">  </td>
    <td style="text-align:left;background-color: white !important;"> [Cooks histogram](#cooks_histogram) </td>
-   <td style="text-align:left;background-color: white !important;"> `plot(model, which = 4)` </td>
-   <td style="text-align:left;background-color: white !important;">  </td>
+   <td style="text-align:left;background-color: white !important;"> `plot(model </td>
+   <td style="text-align:left;background-color: white !important;"> which = 4)` </td>
   </tr>
   <tr>
    <td style="text-align:left;background-color: white !important;">  </td>

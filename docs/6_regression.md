@@ -172,7 +172,7 @@ F-statistic: 66.8 on 3 and 16 DF,  p-value: 2.88e-09
 
 ### Contrasts {#contr.treatment}
 
-We saw that from the first model to the second the R-squared has slightly improved and that he obtains slightly different model coefficients. In R the model coefficients depend on the variable variable data type. To obtain equivalent results with the different type coding it is necessary to carefully set the model **contrasts**. Factor type coding and contrasts define different lead to different linear regression equations. We can see the coefficients and use them to calculate the output with a matrix multiplication  as follows:
+We saw that from the first model to the second the R-squared has slightly improved and that he obtains slightly different model coefficients. In R the model coefficients depend on the variable variable data type. To obtain equivalent results with the different type coding it is necessary to carefully set the model *contrasts*. Factor type coding and contrasts define different lead to different linear regression equations. We can see the coefficients and use them to calculate the output with a matrix multiplication  as follows:
 
 
 ```r
@@ -201,7 +201,7 @@ ebike_lm$coefficients %*% c(1, 180)
 [1,] 592480
 ```
 
-this show that to calculate the output for an input of 180 we have 137620 + 180 x 2'527 = 592'480. Differently When the temperature is coded as a factor we have the following coefficients and output calculation:
+this shows that to calculate the output for an input of 180 we have 137'620 + 180 x 2'527 = 592'480. On the other hand, when the temperature is coded as a factor we have the following coefficients and output calculation:
 
 
 ```r
@@ -284,20 +284,18 @@ ebike_aug %>%
 
 
 
-| cycles | temperature | .fitted | .resid | .hat | .sigma | .cooksd | .std.resid | index |
-|:------:|:-----------:|:-------:|:------:|:----:|:------:|:-------:|:----------:|:-----:|
-| 575000 |     160     | 551200  | 23800  | 0.2  | 17571  | 0.13261 |  1.45665   |   1   |
-| 542000 |     160     | 551200  | -9200  | 0.2  | 18679  | 0.01982 |  -0.56307  |   2   |
-| 530000 |     160     | 551200  | -21200 | 0.2  | 17846  | 0.10522 |  -1.29752  |   3   |
-| 539000 |     160     | 551200  | -12200 | 0.2  | 18535  | 0.03485 |  -0.74668  |   4   |
-| 570000 |     160     | 551200  | 18800  | 0.2  | 18069  | 0.08275 |  1.15063   |   5   |
-| 565000 |     180     | 587400  | -22400 | 0.2  | 17724  | 0.11747 |  -1.37096  |   6   |
+| cycles | temperature | .fitted | .resid | .std.resid | .hat | .sigma | .cooksd | index |
+|:------:|:-----------:|:-------:|:------:|:----------:|:----:|:------:|:-------:|:-----:|
+| 575000 |     160     | 551200  | 23800  |  1.45665   | 0.2  | 17571  | 0.13261 |   1   |
+| 542000 |     160     | 551200  | -9200  |  -0.56307  | 0.2  | 18679  | 0.01982 |   2   |
+| 530000 |     160     | 551200  | -21200 |  -1.29752  | 0.2  | 17846  | 0.10522 |   3   |
+| 539000 |     160     | 551200  | -12200 |  -0.74668  | 0.2  | 18535  | 0.03485 |   4   |
+| 570000 |     160     | 551200  | 18800  |  1.15063   | 0.2  | 18069  | 0.08275 |   5   |
+| 565000 |     180     | 587400  | -22400 |  -1.37096  | 0.2  | 17724  | 0.11747 |   6   |
 
-We can see we've obtained detailed model parameters such us fitted values and residuals for each DOE run.
+A deep structural change has happened in R since the `{tidyverse}`. The original S and R creators had developed a language where matrices, vectors, lists and dataframes had equivalent importance. The output of a function was often a list with a specific *S3* class comprising other vectors and data.frames inside. This allowed to use in a transparent way generic functions such as `summary()` to produce tailor made outputs because a method was working underneath. We've just seen an example of this with the `lm()` summary in the beginning of this case. For the `plot()` function there are more than a hundred different automatic plots as seens with `apropos("plot")`. This is a very important difference as in the `{tidyverse}` we add layers to obtain the required plot. On the data side since `{tidyverse}` has been introduced we've seen an increasing importance of the dataframe, now replaced by the `tibble`. The `agument()` does exactly this, extracts the coefficients, residuals and other data from the model and stores it in a `tibble` format. This has the advantage of making it easier to integrate these functions with the other `{tidyverse}` functions and pipelines while still allowing to keep the methods approach. An interesting reading on this co-existance is available under [tideness-modeling](https://www.tmwr.org/base-r.html#tidiness-modeling)
 
 ### Timeseries plot {#residuals_timeseries}
-
-For this plot we need to ensure that the order of plotting in the x axis corresponds exactly to the original data collection order. This plot allows us to assess for strange patterns such as a  tendency to have runs of positive of negative results which indicates that the independency assumption does not hold. If patterns emerge then there may be correlation in the residuals.
 
 
 ```r
@@ -313,21 +311,19 @@ ebike_aug %>%
   )
 ```
 
-<img src="6_regression_files/figure-html/unnamed-chunk-6-1.png" width="100%" />
+<img src="6_regression_files/figure-html/fig-ebikerestimeseries-1.png" width="100%" />
 
-Nothing pattern emerges from the current plot and the design presents itself ^well randomised.
+Before drawing conclusions on the significance of the input variables it is important to assess the validity of the model. The anova assumptions are similar to the t.test assumptions discussed before. In fact the anova can be considered extension of the t.test to factors with more than 2 levels. These assumptions are the common ones commining from statistical inference principles and the central limit theorem: independent and random samples, normality of the distributions, equality of variances. These assumptions could be checked in each variable group but this would be very time consuming and not fully robust. A better way is to analyse the model residuals which are the deviations of each datapoint from the linear regression line. 
+
+A first verification consists in confirming that the residuals have no patterns. This confirms that the sampling has been done randomly and there are none of the typical bias consisting in groups of values clustered from one operator the other or from one day to the other. This can be achieved with a residuals timeseries. If patterns emerge then there may be correlation in the residuals.
+
+For this plot we need to ensure that the order of plotting in the x axis corresponds exactly to the original data collection order. In this case the lab supervisor confirms that no specific pattern emerges from the current plot and the design presents itself well randomised.
 
 ### Autocorrelation test {#autocorrelation}
-
-It is always good to keep in mind that all visual observations can be complemented with a statistical test. In this case we're going to use the durbinWatson test from the car package (Companion to Applied Regression).
 
 
 ```r
 library(car)
-```
-
-
-```r
 durbinWatsonTest(ebike_lm_factor)
 ```
 
@@ -337,60 +333,11 @@ durbinWatsonTest(ebike_lm_factor)
  Alternative hypothesis: rho != 0
 ```
 
-Although the output shows Autocorrelation of -0.53 we have to consider that the p value is greater than 0.05 thus there is not enough significance to say that there is autocorrelation. 
+As already stated visual observations can most of the times be complemented with a statistical test. In this case we can apply the durbinWatson test from the `{car}` package (Car stands for Companion to Applied Regression) 
 
-### Residuals-Fit plot {#residuals_fit}
-
-If the model is correct and the assumptions hold, the residuals should be structureless. In particular they should be unrelated to any other variable including the predicted response.
-
-
-```r
-ebike_aug %>%
-  ggplot(aes(x = .fitted, y = .resid)) +
-  geom_point() +
-  geom_smooth(method = "loess", se = FALSE, color = "red") +
-  scale_y_continuous(n.breaks = 10, labels = label_number(big.mark = "'")) +
-  labs(
-    title = "e-bike frame hardening process",
-    subtitle = "Linear model - Residuals vs Fitted values",
-    y = "Residuals",
-    x = "Fitted values"
-  )
-```
-
-<img src="6_regression_files/figure-html/unnamed-chunk-9-1.png" width="100%" />
-
-In this plot we see no variance anomalies such as a higher variance for a certain factor level or other types of skweness.
-
-### Homocedasticity {#homocedasticity}
-
-Equality of variances
-
-In the e-bike hardening process, the normality assumption is not in question, so we can apply Bartlett’s test to the etch rate data.
-
-
-
-```r
-bartlett.test(cycles ~ temperature, data = ebike_factor)
-```
-
-```
-
-	Bartlett test of homogeneity of variances
-
-data:  cycles by temperature
-Bartlett's K-squared = 0.433, df = 3, p-value = 0.93
-```
-
-The P-value is P = 0.934, so we cannot reject the null hypothesis. There is no evidence to counter the claim that all five variances are the same. This is the same conclusion reached by analyzing the plot of residuals versus fitted values.
-
-Notes: 
-* the var.test function cannot be used here as it applies to the two levels case only
-* this test is sensitive to the normality assumption, consequently, when the validity of this assumption is doubtful, the Bartlett test should not be used and replace by the modified Levene test for example
+Although the output shows Autocorrelation of -0.53 we have to consider that the p value is slightly higher than 0.05 thus there is not enough significance to say that there is autocorrelation. The result is not a complete clear cut the lab supervisor remains alert for coming verifications.
 
 ### Normality plot
-
-As the sample size is relatively small we're going to use a qq plot instead of an histogram to assess the normality of the residuals.
 
 
 ```r
@@ -407,10 +354,9 @@ ebike_aug %>%
   )
 ```
 
-<img src="6_regression_files/figure-html/unnamed-chunk-11-1.png" width="100%" />
+<img src="6_regression_files/figure-html/ebike-qqplot-1.png" width="100%" />
 
-The plot suggests normal distribution. We see that the error distribution is aproximately normal. In the fixed effects model we give more importance to the center of the values and here we consider acceptable that the extremes of the data tend to bend away from the straight line.
-The verification can be completed by a test. For populations < 50 use the shapiro-wilk normality test.
+A good next check is to verify that the residuals are normaly distributed. As the sample size is relatively small it is better to use a qq plot instead of an histogram to assess the normality of the residuals. As we see on the plot values adhere to the straight line indicating an aproximately normal distribution. In the fixed effects model we give more importance to the center of the values and here we consider acceptable that the extremes of the data tend to bend away from the straight line. This verification can be completed by a normality test. 
 
 ### Normality test {#shapiroTest}
 
@@ -427,31 +373,65 @@ data:  ebike_aug$.resid
 W = 0.938, p-value = 0.22
 ```
 
-p > 0.05 indicates that the residuals do not differ significantly from a normally distributed population.
+For populations < 50 use the shapiro-wilk normality test, Here p > 0.05 indicates that the residuals do not differ significantly from a normally distributed population.
+
+### Residuals-Fit plot {#residuals_fit}
+
+
+```r
+ebike_aug %>%
+  ggplot(aes(x = .fitted, y = .resid)) +
+  geom_point() +
+  geom_smooth(method = stats::loess, se = FALSE, color = "red") +
+  scale_y_continuous(n.breaks = 10, labels = label_number(big.mark = "'")) +
+  labs(
+    title = "e-bike frame hardening process",
+    subtitle = "Linear model - Residuals vs Fitted values",
+    y = "Residuals",
+    x = "Fitted values"
+  )
+```
+
+<img src="6_regression_files/figure-html/fig-ebikeresresfit-1.png" width="100%" />
+
+If the model is correct and the assumptions hold, the residuals should be structureless. In particular they should be unrelated to any other variable including the predicted response. A plot of the residuals against the fitted values should reveal such structures. In this plot we see no variance anomalies such as a higher variance for a certain factor level or other types of skweness.
+
+### Homocedasticity {#homocedasticity}
+
+
+```r
+bartlett.test(cycles ~ temperature, data = ebike_factor)
+```
+
+```
+
+	Bartlett test of homogeneity of variances
+
+data:  cycles by temperature
+Bartlett's K-squared = 0.433, df = 3, p-value = 0.93
+```
+
+A complement to the residuals-fit plot is the equality of variances test. Tests for variance comparison have been introduced in the Direct Comparisons case studies but the `var.test()` cannot be used here. Here we have more than two levels for which the Bartlett test is most suited. The normal distribution of the residuals has already been confirmed. This test is sensitive to the normality assumption, consequently, when the validity of this assumption is doubtful, it should not be used and be replaced by the modified Levene test for example. Applying the test we obtain a p-value is P = 0.93 meaning we cannot reject the null hypothesis. In statistical terms, there is no evidence to counter the claim that all five variances are the same. This is the same conclusion reached by analyzing the plot of residuals versus fitted values.
 
 ### Standard Residuals-Fit plot {#std_residuals_fit}
-
-This specific Standardized residuals graph also help detecting outliers in the residuals (any residual > 3 standard deviations is a potential outlier).
 
 
 ```r
 ebike_aug %>% 
-  ggplot(aes(x = .fitted, y = .std.resid)) +
+  ggplot(aes(x = .fitted, y = abs(.std.resid))) +
   geom_point() +
-  geom_smooth(method = "loess", se = FALSE, color = "red") +
+  geom_smooth(method = stats::loess, se = FALSE, color = "red") +
   labs(title = "e-bike frame hardening process",
        subtitle = "Linear model - Standardised Residuals vs Fitted values",
        y = "Standardised Residuals",
        x = "Fitted values")
 ```
 
-<img src="6_regression_files/figure-html/unnamed-chunk-13-1.png" width="100%" />
+<img src="6_regression_files/figure-html/fig-ebikestdresfit-1.png" width="100%" />
 
-The plot shows no outliers to consider in this DOE.
+This Standardized residuals plot helps detecting outliers in the residuals (any residual > 3 standard deviations is a potential outlier). The plot shows no outliers to consider in this DOE.
 
 ### Outliers test {#outliers}
-
-In a case where we were doubtfull we could go further and make a statistical test to assess if a certain value was an outlier. A usefull test is available in the car package.
 
 
 ```r
@@ -465,27 +445,27 @@ Largest |rstudent|:
 12   1.6488            0.11997           NA
 ```
 
-In this case, the Bonferroni adjusted p value comes as NA confirming that there is no outlier in the data.   
+In a case where we were doubtfull we could go further and make a statistical test to assess if a certain value was an outlier. Another usefull test is available in the  `{car}` package in this case to test outliers. We get a *Bonferroni* adjusted p value as NA confirming that there is no outlier in the data.   
 
 ### Cooks distance {#cooks}
 
 
 ```r
 ebike_aug %>% 
-  ggplot(aes(x = .cooksd, y = .std.resid)) +
-  geom_point() +
-  geom_vline(xintercept = 0.5, color = "red") +
+  ggplot(aes(x = index, y = .cooksd)) +
+  geom_col(color = viridis(12)[4], fill = "grey90") +
+  geom_hline(yintercept = 1, color = "red") +
   labs(title = "e-bike frame hardening process",
        subtitle = "Residuals vs Leverage",
-       y = "Standardised Residuals",
-       x = "Cooks distance")
+  x = "Observation",
+  y = "Cooks distance")
 ```
 
-<img src="6_regression_files/figure-html/unnamed-chunk-15-1.png" width="100%" />
+<img src="6_regression_files/figure-html/fig-ebikecooks-1.png" width="100%" />
 
-### Coefficient of determination {#R-squared}
+Cooks distance is a complementary analysis to the residuals that can help identify specific data points that could have a strong influence in the model. Various cutoff points are suggested in the literature and we opted here for 1 following the short wikipedia article on the topic [cooks distance](https://en.wikipedia.org/wiki/Cook's_distance) 
 
-The R square can be extracted from the linear model that has been used to build the Anova model.
+### R-squared {#R-squared}
 
 
 ```r
@@ -496,10 +476,17 @@ summary(ebike_lm_factor)$r.squared
 [1] 0.92606
 ```
 
-Thus, in the e-bike hardening process, the factor “temperature” explains about 88% percent of the variability in etch rate.
+A final input in the draft report of the ebike hardnening linear model is the R-squared. When looking into the results the engineering team is suspicious. A model with such a good fit should raise questions. R-squared gives an indication of the quality of the model. In this case 93% of the output is explained by input. Our lab supervisor is also not confortable the residuals analysis has not shown any evidence of something wrong with the model so he decides to quickly calculate it "by hand". He knows that the R-squared, or coefficient of determination is obtained from the ratio between the residuals variance and the output variable variance showing exactly the proportion between the two and he gets its straight away from R using the data already available:
 
-Anova fixed effects assumes that:
-- errors are normally distributed and are independent
 
-As the number of residuals is too small we're not checking the normality via the histogram but rather with a a Q-Q plot.
+```r
+ebike_aug %>%
+  summarise(cycles_var = var(cycles), residuals_var = var(.resid)) %>%
+  mutate(Rsquared = 1 - residuals_var/cycles_var) %>% pull(Rsquared)
+```
 
+```
+[1] 0.92606
+```
+
+Remembering the original linear regression plot from the begining of the report he accepts this must not be so far away. It was clear that the temperature had a strong impact on the number of cycles and the variability for each level was small in the end. He accepts to leave as it is for now waiting for upcoming analysis of variance to see additional details.

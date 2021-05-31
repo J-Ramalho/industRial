@@ -1,11 +1,5 @@
-message("Hi João this is the .Rprofile in /home/Documents/data_science/industRial/")
 
-# Rstudio package manager adress:
-options(repos = c(REPO_NAME = "https://packagemanager.rstudio.com/all/latest"))
-message("The RStudio Package Manager Repository has been configured specifically for this Rproject folder:")
-options('repos')
-
-# Load data science packages:
+# Load packages:
 ds_pkgs <- c(
   "tidyverse",
   "scales",
@@ -30,9 +24,19 @@ dev_pkgs <- c(
 )
 purrr::map(dev_pkgs, library, character.only = TRUE)
 
-# general options:
+message("Hello, this R project has a startup file .Rprofile in its working folder: ")
+getwd()
+
+# Rstudio package manager address:
+options(repos = c(REPO_NAME = "https://packagemanager.rstudio.com/all/latest"))
+message("The RStudio Package Manager Repository has been configured specifically for this Rproject folder:")
+getOption('repos')
+
+# General options
 options(
-  digits = 3,
+  digits = 5,
   width = 69,
   tibble.width = 69
 )
+message("Digits set to: ")
+getOption("digits")

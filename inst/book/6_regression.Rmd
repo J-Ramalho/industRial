@@ -13,7 +13,7 @@ Mountain bikes frames are submitted to many different efforts, namely bending, c
 
 <div class="marginnote">
 
-```{r echo=FALSE, fig.align='center', fig.cap="e-bike frames entering hardening treatment", out.width="100%"}
+```{r echo=FALSE, fig.align='center'}
 knitr::include_graphics("img/bike_frames_bw.jpg")
 ```
 

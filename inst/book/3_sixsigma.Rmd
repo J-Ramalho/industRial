@@ -18,7 +18,7 @@ We start with a case on a dial workshop in the watch making industrial where the
 
 Watch dials are received from the stamping process and polished before being sent to the final assembly. As part of the autonomous quality control performed by the polishing operators a count of the defects observed on the dials each day is logged in a spreadsheet. 
 
-```{r img-dial, echo=FALSE, fig.align='center', fig.cap="watch dial inspection", out.width="100%"}
+```{r img-dial, echo=FALSE}
 knitr::include_graphics("img/assemblage_cadran_bw.jpg")
 ```
 
@@ -32,11 +32,11 @@ Collecting data can be done in many different forms and there's no right or wron
 
 In a <b class="highlight">dial polishing workshop</b> of a watchmaking manufacture, the assembly operators have been collecting dial defects in a spreadsheet. Logging a defect doesn't mean the dial is directly scrapped. Putting away parts has strong impact on the cost of the operation and has to be done on clear criteria. Sometimes the parts can be rework with minor effort. The datalog corresponds to the status of the dials as they arrive from the stamping and before entering the polishing operation. Their dataset with the name `dial_control` shows each dial unique number and the general and defect information noted by the operators.
 
+### Collecting defects
+
 <div class="marginnote">
 All datasets are available by loading the book companion package with `library(industRial)`. Full instructions in the [datasets](#datasets) session.
 </div>
-
-### Collecting defects
 
 ```{r tbl-dial}
 head(dial_control) %>% 
@@ -61,7 +61,7 @@ See [{qicharts2}](#qicharts2) for more details on this R package
 library(qicharts2)
 ```
 
-```{r fig-pareto1, fig.align='center', fig.cap = 'pareto chart example'}
+```{r fig-pareto1}
 d_type <- dial_control %>% pull(Defect) %>% as.character()
 d_type_p <- paretochart(d_type, 
                            title = "Watch dial Defects",
@@ -77,7 +77,7 @@ As often happens we can see that the first two defects account for more than 80%
 
 The decides to go deeper in the analysis and Peter says that a potential cause is the fixing tool that holds the dial on the right. To check Peter's hypothesis Jane prepares another plot by location for the next week review.
 
-```{r fig-pareto2, fig.align='center', fig.cap = 'pareto chart example'}
+```{r fig-pareto2}
 d_location <- dial_control %>% pull(Location) %>% as.character()
 d_location_p <- paretochart(d_location, 
                            title = "Watch dial deffects",
@@ -102,7 +102,7 @@ To practice and go further in the exploration of pareto charts checkout the tuto
 
 An optical measurement device has just been installed in a large Dental Prosthesis Manufacturing Laboratory. It is precise but expensive device based on laser technology which has been installed in a dedicated stabilized workbench. 
 
-```{r img-dental, echo=FALSE, fig.align='center', fig.cap="dental impression measurement", out.width="100%"}
+```{r img-dental, echo=FALSE}
 knitr::include_graphics("img/dental_scan2.png")
 # sources:
 # https://wiki.maestro3d.com/wiki/index.php?title=Maestro_3D_Easy_Dental_Scan_-_User_Manual
@@ -144,7 +144,7 @@ One of the team members is using R and he has generating all previous reports on
 library(qcc)
 ```
 
-```{r fig-fishbone, fig-ishikawa, fig.align='center', fig.cap = 'ishikawa diagram example'}
+```{r fig-fishbone}
 cause.and.effect(
   title = "Potential causes for optical measurement variation",
   cause = list(
@@ -168,7 +168,7 @@ The listed factors can now be addressed either one by one or in combined experim
 
 A Project Manager in perfume formulation needs to understand in detail the impact of the perfume manufacturing line parameters variation (e.g. temperature, pressure and others) in typical perfume sensorial characteristics such as the floral notes.
 
-```{r img-perfume, echo=FALSE, fig.align='center', fig.cap="Perfume destillation line", out.width="100%"}
+```{r img-perfume, echo=FALSE}
 knitr::include_graphics("img/parfum.jpg")
 ```
 
@@ -213,7 +213,7 @@ perfume_long <- perfume_experiment %>%
 
 ### Tileplot {#tileplot}
 
-```{r fig-perfumetileplot, fig.align='center', fig.cap = 'tileplot example'}
+```{r fig-perfumetileplot}
 perfume_long %>%
   ggplot(aes(x = xx, y = yy, fill = correlation)) +
   scale_fill_viridis_d(direction = -1, name = "Correlation\nStrength") +
@@ -286,7 +286,7 @@ igraph_layouts <- c('star', 'circle', 'gem', 'dh', 'graphopt', 'grid', 'mds',
 
 and do a first network plot to check data upload:
 
-```{r fig-network1, fig.width = 7, fig.height = 6, warning = FALSE, fig.cap = 'raw network plot example'}
+```{r fig-network1, fig.width = 7, fig.height = 6, warning = FALSE}
 perfum_tbl_graph %>% 
   ggraph::ggraph(layout = "igraph", algorithm = igraph_layouts[7]) +
   geom_edge_link(aes(edge_alpha = weight)) +
@@ -325,7 +325,7 @@ library(ggtext)
 
 ### Network plot {#network_plot}
 
-```{r fig-network2, warning = FALSE, fig.cap="network plot example"}
+```{r fig-network2, warning = FALSE}
 perfum_tg_2 <- perfum_tbl_graph %>% 
   activate(edges) %>% 
   mutate(weight2 = if_else(weight >= 0.8, 1, if_else(weight >= 0.5, 0.5, 0.1)))

@@ -19,29 +19,28 @@ There are many well tested approaches, the domain is very large and our textbook
 
 All winter sports clothing are virtually made with a mix of natural fibers and synthetic polymers. Upgrading to recyclable polymers while keeping performance requires extensive testing of raw material characteristics such as the tensile strength.
 
-```{r echo=FALSE, out.width="100%", fig.align='center', fig.cap="PET tensile test"}
+```{r img-PETtest, echo=FALSE}
 knitr::include_graphics("img/tensile_test_bw.jpg")
 ```
 
 </div>
 
-We start by exploring simple tests that compare results obtained in two samples. These cases happen all the time as everyone needs one moment or another to compare the behavior of a product in different conditions. It can be the result of a test before and after an improvement, it can be two different materials applied in the same assembly or still different results obtained by different teams at different moments. 
+We start by exploring simple tests that compare results obtained in two samples. These cases happen all the time as everyone needs one moment or another to compare things. It can be the result of a test before and after an improvement, it can be two different materials applied in the same assembly or still different results obtained by different teams at different moments. 
 
-In this case, an engineer working in the <b class="highlight">winter sports clothing industry</b> has established a contract for PET textile raw material supply specifying that the average tensile strength has to be greater than 69.0 $Mpa$ in each delivery. In the contract is also specified that the test protocol which is based on a 30 samples.
+In this case, a materials engineer working in the <b class="highlight">winter sports clothing industry</b> is working with a polymer company to develop a textile raw material based on PET for which the mean tensile strength has to be greater than 69.0 MPa. A first delivery of samples arrives, the materials laboratory measures 28 samples and reports that the test result is not meeting the contract specification. The materials engineer is informed and get hold of the raw data, in the lab system she can see the measurement summary:
 
-A first delivery is submitted and the incoming materials test laboratory measures 28 samples and issues a bulletin with the statement "refused". In small font is written batch mean = 67.7 [MPa]. The batch is returned to the supplier by an automatic workflow established by the Supply Chain department without the Engineer being informed and a few weeks later he gets an e-mail for the supplier key account manager asking for explanations. According to their tests the mean tensile strength of their delivery was slightly above target and they don't understand the reasons for the return. The Quality Engineer logs into his company ERP and with a bit of effort manages to obtain the raw data which he loads in R:
-
-```{r}
+```{r code-PETsummary}
 summary(pet_delivery$A)
 ```
 
-The mean is in fact lower that the specified contract value of 69 and the engineer could think to confirm the rejection the batch right away. She decides nevertheless to observe the variability and for this she decides to plot the raw data on an histogram. An histogram is a very common plot showing counts for selected intervals.
+The mean is in fact slightly lower that the specified contract value of 69 and the materials engineer could think to confirm the rejection the batch right away. She decides nevertheless to observe how do the measurements vary. She plots the raw data on an histogram which is a very common plot showing counts for selected intervals.
 
 ### Histogram {#histogram}
 
-```{r fig-pethistogram, fig.cap="histogram example"}
+```{r fig-pethistogram}
 pet_spec <- 69
 pet_mean <- mean(pet_delivery$A)
+
 pet_delivery %>% 
   ggplot(aes(x = A)) +
   geom_histogram(color = viridis(12)[4], fill = "grey90") +
@@ -56,41 +55,33 @@ pet_delivery %>%
        caption = "Specification min in red, Batch mean in blue¨")
 ```
 
-The mean is just slightly below the target mean defined for acceptance and she also observes a certain variability in the batch. She decides then to perform a t-test to assess if the average calculated can be really be considered statistically different than the target value.
+She also observes a certain variability in the batch with many samples with measurements below specification getting close to 64 MPa. She remembers that in this case a t-test could help assessing if the mean that was obtained can be really be considered statistically different from the target value.
 
 ### t-test one sample {#t.test}
 
-```{r}
+```{r code-PETttest}
 t.test(x = pet_delivery$A, mu = pet_spec)
 ```
 
-The basic assumption of the test is that the mean and the reference value are identical and the alternative hypothesis is that their different. The confidence interval selected is 95% as it is common practice in the laboratory. The test result tells us that for a population average of 69, the probability of obtaining a sample with a value as extreme as 68.71 is 29.17% (p = 0.2917). This probability value higher than the limit of 5% that she usually uses to reject the null hypothesis. In fact she cannot conclude that the sample comes from a population with a mean different than 69.
+The basic assumption of the test is that the mean and the reference value are identical and the alternative hypothesis is that their different. The confidence interval selected is 95% as it is common practice in the laboratory. The test result tells us that for a population average of 69, the probability of obtaining a sample with a value as extreme as 68.71 is 29% (p = 0.29). This probability value higher than the limit of 5% that she usually uses to reject the null hypothesis. In fact she cannot conclude that the sample comes from a population with a mean different than 69.
 
-She's not sure of this result and decides asking help to a colleague statistician from R&D: can she apply a t.test? is the sample normally distributed? is the specification correctly defined? or should it refer to the minimum sample value?
+She's not sure what to do of this result and decides asking help to a colleague statistician from R&D: has she applied the right? is the specification correctly defined or should it refer to the minimum sample value? Her colleague confirms that to compare means this is a good approach and as the standard deviation of the production is not available it is reasonable to use the standard deviation from the sample. This is a detail implicit that was not introduced as an argument in the R function. As we they are still in the initial steps of the new development they agree that it is a good idea to accept the batch. For the next deliveries the statistic recommends to try to improve the tensile strength average and reduce the variability. For the next delivery she also recommends to agree on a minimum sample size of 30 parts and to redo the t.test but for regular production the team should consider implementing a proper AQL protocol.
 
 ### t-test two samples
 
-Comparing means
+Improving recyclability while keeping current performance is no easy task. Often novel materials are expensive as their commercial volumes are small and suppliers claim a premium on their own R&D efforts. Consumers of clothing are getting more and more sensitive to waste and to recycling but they don't always choose products with a higher price to compensate.
 
-In order to avoid similar situations in the future the development engineer considers a new chemical compositions of pet that potentially increases the levels of strenght.
+Following the not fully successful experience with the first delivery of raw material with recyclable PET our materials engineer considers a new chemical composition that potentially increases the levels of strength. When the second delivery arrives she establishes a simple plot with the raw data to have a first grasp of the expected improvement. 
 
-**Data loading**
-
-```{r}
+```{r fig-PETscatterplot}
 pet_delivery_long <- pet_delivery %>%
   pivot_longer(
     cols = everything(), names_to = "sample", values_to = "tensile_strength"
   )
-```
 
-**Raw data plot**
-
-In data analysis it is good practice to start by plotting the raw data and have a first open look at what the first plots tell us.
-
-```{r}
 pet_delivery_long %>% 
   ggplot(aes(x = sample, y = tensile_strength)) +
-  geom_point() +
+  geom_point(size = 0.5) +
   theme(legend.position = "none") +
   labs(title = "PET clothing case study",
        subtitle = "Raw data plot",
@@ -98,12 +89,14 @@ pet_delivery_long %>%
        y = "Tensile strength [MPa]")
 ```
 
+The dot plot
 Another way to better understanding the bond distributions is to plot a box plot. This type of plot is somehow like the histogram seen before but more compact when several groups are required to be plotted.
 
 ```{r}
 pet_delivery_long %>% 
   ggplot(aes(x = sample, y = tensile_strength, fill = sample)) +
   geom_boxplot(width = 0.3) +
+  geom_point(size = 0.5) +
   scale_fill_viridis_d(begin = 0.5, end = 0.8) +
   theme(legend.position = "none") +
   labs(title = "PET clothing case study",

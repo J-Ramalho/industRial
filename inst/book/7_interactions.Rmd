@@ -24,7 +24,7 @@ Two factors multiple levels
 
 <div class="marginnote">
 
-```{r echo=FALSE, fig.align='center', fig.cap="solar panel test chamber", out.width="100%"}
+```{r echo=FALSE, fig.align='center'}
 knitr::include_graphics("img/solar_cell_test_bw.jpg")
 # sources: 
 # https://www.pse.de/test-equipment/photovoltaic-modules/uv-chamber/
@@ -174,7 +174,7 @@ Below a description of the approach taken from [@Montgomery2012], pag.655:
 
 *As an example of an experiment in which the analysis of covariance may be employed, consider a study performed to determine if there is a difference in the strength of a monofilament fiber produced by three different machines. The data from this experiment are shown in Table 15.10 (below). Figure 15.3 presents a scatter diagram of strength (y) versus the diameter (or thickness) of the sample. Clearly, the strength of the fiber is also affected by its thickness; consequently, a thicker fiber will generally be stronger than a thinner one. The analysis of covariance could be used to remove the effect of thickness (x) on strength (y) when testing for differences in strength between machines.*
 
-```{r, fig.cap = "table 15.10"}
+```{r}
 solarcell_fill %>% 
   kable()
 ```

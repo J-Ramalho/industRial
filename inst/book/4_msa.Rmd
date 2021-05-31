@@ -19,7 +19,7 @@ The first case treats the calibration of a recently acquired measurement device 
 
 The Quality Assurance Head has acquired a fast dry matter content measurement device from the supplier DRX. The rational for the acquisition has been the important reduction of the control time. Before it enters operation its performance is being assessed and validated.
 
-```{r img-juice, echo=FALSE, fig.align='center', fig.cap="juice bottling line", out.width="100%"}
+```{r img-juice, echo=FALSE}
 knitr::include_graphics("img/juice_bottling_bw.jpg")
 ```
 
@@ -64,7 +64,7 @@ Such results are not encouraging because a non regular bias along the range may 
 
 ### Bias plot {#bias_plot}
 
-```{r fig-juicebiasplot, fig.align='center', fig.cap="bias plot example"}
+```{r fig-juicebiasplot, fig.align='center'}
 juice_drymatter %>%
   ggplot(aes(x = drymatter_REF, y = bias)) +
   geom_point() +
@@ -113,7 +113,7 @@ names(u_cal) <- NULL # we're removing the original name to avoid confusion later
 
 Modern pharmaceutical tablet presses reach output volumes of up to 1,700,000 tablets per hour. These huge volumes require frequent in-process quality control for the tablet weight, thickness and hardness.
 
-```{r img-tablet, echo=FALSE, fig.align='center', fig.cap="Tablet thickness micrometer", out.width="100%"}
+```{r img-tablet, echo=FALSE}
 knitr::include_graphics("img/tablet_micrometer.png")
 # sources: 
 # https://en.wikipedia.org/wiki/Tablet_(pharmacy)#Manufacture_of_the_tablets
@@ -139,7 +139,7 @@ tablet_thickness %>%
 
 It is an excellent practice to look at raw data because it gives an immediate perception of general aspects such as the number of variables, their levels and their datatypes. Although this is irreplaceable it is possible to go further and `skim()` provides an excellent complement and summary. Below we see that the test requested by the Quality Engineer has required 675 measurements on 11 different variables by 3 different operators. We can see room conditions are stable, rather normally distributed and having small standard deviations and we can even see that thickness appears with 3 groups which seems related with the 3 sizes noted in the Size column.
 
-```{r tbl-tabletskim, eval=FALSE, include=FALSE}
+```{r tbl-tabletskim, eval=FALSE}
 skim(tablet_thickness) 
 ```
 
@@ -255,27 +255,27 @@ tablet_L_rr_plots <- ss.rr.plots(
 )
 ```
 
-```{r fig-tabletPlot1, out.width='95%', fig.cap="example of gage r&R components of variation plot"}
+```{r fig-tabletPlot1}
 plot(tablet_L_rr_plots$plot1)
 ```
 
 This first bar plot presents in a graphical way the gage results in percentage and we can quickly grasp if we're on target by looking at the pink bars and comparing them with the dashed bars. We can see that the G.R&R is above 30% and thus is not acceptable from a Study Variation criteria. In green we see that compared with the specification we're above 10% but below 30% so acceptable but requiring improvement. We're now looking into the measurements themselves:
 
-```{r fig-tabletPlot5, out.width='95%', fig.cap="example of gage r&R run chart"}
+```{r fig-tabletPlot5}
 plot(tablet_L_rr_plots$plot6)
 plot(tablet_L_rr_plots$plot5)
 ```
 
 The previous two plots show the measurements for each operator. The first is the Ranges plot showing the differences between the min and max measurement for each part and the second plot is the means plot showing the mean thickness for each part by operator. These help showing that there is a consistency between operators and help as a diagnosis tool to identify if there would be strange patterns appearing where one of the operators would be for instance systematically measuring very high values. The next two plots show average values by part with all operators combined:
 
-```{r fig-tabletPlot2, out.width='95%', fig.cap="example of gage r&R main effects plot"}
+```{r fig-tabletPlot2}
 plot(tablet_L_rr_plots$plot2)
 plot(tablet_L_rr_plots$plot3)
 ```
 
 We quickly see the measurements tend to be simetrically distributed around their means and that the means between the different operators are very similar. This confirms the low reproducibility what has been seen in the Variance Components. 
 
-```{r fig-tabletPlot4, out.width='95%', fig.cap="example of gage r&R interaction plot"}
+```{r fig-tabletPlot4}
 plot(tablet_L_rr_plots$plot4)
 ```
 

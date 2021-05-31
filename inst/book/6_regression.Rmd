@@ -122,7 +122,7 @@ ebike_lm_factor$coefficients
 ebike_lm_factor$coefficients %*% c(1, 1, 0, 0)
 ```
 
-The output is slightly different corresponding to 551'200 + 1 x 36'200 = 587'400.
+The output is slightly different corresponding to 551'200 + 1 x 36'200 = 587'400. More on this in the next section.
 
 ### Predict {#predict}
 
@@ -133,14 +133,14 @@ ebike_new <- tibble(temperature = c(180, 200, 210))
 predict(ebike_lm, newdata = ebike_new)
 ```
 
-We can see that the prediction at the tested levels is slightly different from the measured averages at those levels. This is because the linear interpolation line is not passing exactly by the averages. Anyway in our case the team has selected a fixed effects model and we can only take conclusions at the levels at which the input was tested. We can check that the predictions correspond exactly to the averages we've calculated for each level:
+We can see that the prediction at the tested levels is slightly different from the measured averages at those levels. This is because the linear regression line is not passing exactly by the averages. Anyway in our case the team has selected a fixed effects model and we can only take conclusions at the levels at which the input was tested. We can check that the predictions correspond exactly to the averages we've calculated for each level:
 
 ```{r code-ebikepredict2}
 ebike_new <- data.frame(temperature = as_factor(c("180", "200")))
 predict(ebike_lm_factor, newdata = ebike_new)
 ```
 
-We find again exactly the same values calculated with the linear regression coefficients before. The `predict()` function has other advantages such as providing confidence intervals which will be explored in later case studies.
+We find again exactly the same values calculated using the matrix multiplication of the linear regression coefficients with the input vector we used before. The `predict()` function has other advantages such as providing confidence intervals and taking into account the correct contrast coding, which will be explored in later case studies.
 
 The lab supervisor is now ready to assess the validity of the model. This is required before entering the main objective which is comparing the treatment means using an anova. To do this assessment the model he is going to do a residuals analysis. R provides direct plotting functions with the base and stats packages but he opted to break down the analysis and use custom the plots. He also uses some additional statistical tests to confirm our observations from the plots. He starts by loading the package broom which will help him retrieving the data from the lm object into a data frame.
 

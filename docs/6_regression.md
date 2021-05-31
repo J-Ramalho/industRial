@@ -172,7 +172,7 @@ F-statistic: 66.8 on 3 and 16 DF,  p-value: 2.88e-09
 
 ### Contrasts {#contr.treatment}
 
-We saw that from the first model to the second the R-squared has slightly improved and that he obtains slightly different model coefficients. In R the model coefficients depend on the variable variable data type. To obtain equivalent results with the different type coding it is necessary to carefully set the model *contrasts*. Factor type coding and contrasts define different lead to different linear regression equations. We can see the coefficients and use them to calculate the output with a matrix multiplication  as follows:
+We saw that from the first model to the second the R-squared has slightly improved and model coefficients are slightly different. In R the model coefficients depend on the variable variable data type. To obtain equivalent results with the different type coding it is necessary to carefully set the model *contrasts*. Lets see the contrasts for the two models established:
 
 
 ```r
@@ -182,6 +182,17 @@ ebike_lm$contrasts$temperature
 ```
 NULL
 ```
+
+```r
+ebike_lm_factor$contrasts$temperature
+```
+
+```
+[1] "contr.treatment"
+```
+
+Factor type coding and contrasts definition lead to different linear regression equations with different coefficients. It is important to use common sense and attention before using whatever output the system is giving us. We can see the coefficients and use them to calculate the output with a matrix multiplication  as follows:
+
 
 ```r
 ebike_lm$coefficients 
@@ -205,14 +216,6 @@ this shows that to calculate the output for an input of 180 we have 137'620 + 18
 
 
 ```r
-ebike_lm_factor$contrasts$temperature
-```
-
-```
-[1] "contr.treatment"
-```
-
-```r
 ebike_lm_factor$coefficients
 ```
 
@@ -230,11 +233,11 @@ ebike_lm_factor$coefficients %*% c(1, 1, 0, 0)
 [1,] 587400
 ```
 
-The output is slightly different corresponding to 551'200 + 1 x 36'200 = 587'400.
+The output is slightly different corresponding to 551'200 + 1 x 36'200 = 587'400. More on this in the next section.
 
 ### Predict {#predict}
 
-A model is useful for predictions. In a random effects model where conclusions can applied to the all the population we can predict values at any value of the input variables. In that case reusing the model with temperature as a numeric vector we could have a prediction for various temperature values such as:
+A model is useful for predictions. In a random effects model where conclusions can be applied to the all the population we can predict values at any value of the input variables. In that case reusing the model with temperature as a numeric vector we could have a prediction for various temperature values such as:
 
 
 ```r
@@ -247,9 +250,7 @@ predict(ebike_lm, newdata = ebike_new)
 592480 643020 668290 
 ```
 
-We can see that the prediction at the tested levels is slightly different from the measured averages at those levels. This is because the linear interpolation line is not passing exactly by the averages.
-
-Anyway this is a fixed effects model and we can only take conclusions at the levels at which the input was tested. We can check that the predictions correspond to the averages we've calculated for each level:
+We can see that the prediction at the tested levels is slightly different from the measured averages at those levels. This is because the linear regression line is not passing exactly by the averages. Anyway in our case the team has selected a fixed effects model and we can only take conclusions at the levels at which the input was tested. We can check that the predictions correspond exactly to the averages we've calculated for each level:
 
 
 ```r
@@ -262,7 +263,7 @@ predict(ebike_lm_factor, newdata = ebike_new)
 587400 625400 
 ```
 
-We find again exactly the same values calculated with the linear regression coefficients before. The `predict()` function has other advantages such as providing confidence intervals which will be explored in later case studies.
+We find again exactly the same values calculated using the matrix multiplication of the linear regression coefficients with the input vector we used before. The `predict()` function has other advantages such as providing confidence intervals and taking into account the correct contrast coding, which will be explored in later case studies.
 
 The lab supervisor is now ready to assess the validity of the model. This is required before entering the main objective which is comparing the treatment means using an anova. To do this assessment the model he is going to do a residuals analysis. R provides direct plotting functions with the base and stats packages but he opted to break down the analysis and use custom the plots. He also uses some additional statistical tests to confirm our observations from the plots. He starts by loading the package broom which will help him retrieving the data from the lm object into a data frame.
 
@@ -284,14 +285,14 @@ ebike_aug %>%
 
 
 
-| cycles | temperature | .fitted | .resid | .std.resid | .hat | .sigma | .cooksd | index |
-|:------:|:-----------:|:-------:|:------:|:----------:|:----:|:------:|:-------:|:-----:|
-| 575000 |     160     | 551200  | 23800  |  1.45665   | 0.2  | 17571  | 0.13261 |   1   |
-| 542000 |     160     | 551200  | -9200  |  -0.56307  | 0.2  | 18679  | 0.01982 |   2   |
-| 530000 |     160     | 551200  | -21200 |  -1.29752  | 0.2  | 17846  | 0.10522 |   3   |
-| 539000 |     160     | 551200  | -12200 |  -0.74668  | 0.2  | 18535  | 0.03485 |   4   |
-| 570000 |     160     | 551200  | 18800  |  1.15063   | 0.2  | 18069  | 0.08275 |   5   |
-| 565000 |     180     | 587400  | -22400 |  -1.37096  | 0.2  | 17724  | 0.11747 |   6   |
+| cycles | temperature | .fitted | .resid | .hat | .sigma | .cooksd | .std.resid | index |
+|:------:|:-----------:|:-------:|:------:|:----:|:------:|:-------:|:----------:|:-----:|
+| 575000 |     160     | 551200  | 23800  | 0.2  | 17571  | 0.13261 |  1.45665   |   1   |
+| 542000 |     160     | 551200  | -9200  | 0.2  | 18679  | 0.01982 |  -0.56307  |   2   |
+| 530000 |     160     | 551200  | -21200 | 0.2  | 17846  | 0.10522 |  -1.29752  |   3   |
+| 539000 |     160     | 551200  | -12200 | 0.2  | 18535  | 0.03485 |  -0.74668  |   4   |
+| 570000 |     160     | 551200  | 18800  | 0.2  | 18069  | 0.08275 |  1.15063   |   5   |
+| 565000 |     180     | 587400  | -22400 | 0.2  | 17724  | 0.11747 |  -1.37096  |   6   |
 
 A deep structural change has happened in R since the `{tidyverse}`. The original S and R creators had developed a language where matrices, vectors, lists and dataframes had equivalent importance. The output of a function was often a list with a specific *S3* class comprising other vectors and data.frames inside. This allowed to use in a transparent way generic functions such as `summary()` to produce tailor made outputs because a method was working underneath. We've just seen an example of this with the `lm()` summary in the beginning of this case. For the `plot()` function there are more than a hundred different automatic plots as seens with `apropos("plot")`. This is a very important difference as in the `{tidyverse}` we add layers to obtain the required plot. On the data side since `{tidyverse}` has been introduced we've seen an increasing importance of the dataframe, now replaced by the `tibble`. The `agument()` does exactly this, extracts the coefficients, residuals and other data from the model and stores it in a `tibble` format. This has the advantage of making it easier to integrate these functions with the other `{tidyverse}` functions and pipelines while still allowing to keep the methods approach. An interesting reading on this co-existance is available under [tideness-modeling](https://www.tmwr.org/base-r.html#tidiness-modeling)
 
@@ -329,7 +330,7 @@ durbinWatsonTest(ebike_lm_factor)
 
 ```
  lag Autocorrelation D-W Statistic p-value
-   1        -0.53433        2.9609    0.09
+   1        -0.53433        2.9609    0.12
  Alternative hypothesis: rho != 0
 ```
 

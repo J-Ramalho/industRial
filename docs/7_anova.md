@@ -633,7 +633,7 @@ The way to feed the R function arguments is obtained from https://www.datanovia.
 
 *Three different machines produce a monofilament fiber for a textile company. The process engineer is interested in determining if there is a difference in the breaking strength of the fiber produced by the three machines. However, the strength of a fiber is related to its diameter, with thicker fibers being generally stronger than thinner ones. A random sample of five fiber specimens is selected from each machine.*
 
-### ancova {#ancova}
+### Ancova {#ancova}
 
 
 ```r

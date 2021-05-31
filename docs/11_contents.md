@@ -161,6 +161,12 @@
   </tr>
   <tr>
    <td style="text-align:left;background-color: white !important;">  </td>
+   <td style="text-align:left;background-color: white !important;"> [Normality test](#shapiroTest) </td>
+   <td style="text-align:left;background-color: white !important;"> `stats::shapiro.test` </td>
+   <td style="text-align:left;background-color: white !important;">  </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;background-color: white !important;">  </td>
    <td style="text-align:left;background-color: white !important;"> [Residuals-Fit plot](#residuals_fit) </td>
    <td style="text-align:left;background-color: white !important;">  </td>
    <td style="text-align:left;background-color: white !important;">  </td>
@@ -169,12 +175,6 @@
    <td style="text-align:left;background-color: white !important;">  </td>
    <td style="text-align:left;background-color: white !important;"> [Homocedasticity](#homocedasticity) </td>
    <td style="text-align:left;background-color: white !important;"> `stats::bartlett.test` </td>
-   <td style="text-align:left;background-color: white !important;">  </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;background-color: white !important;">  </td>
-   <td style="text-align:left;background-color: white !important;"> [Normality test](#shapiroTest) </td>
-   <td style="text-align:left;background-color: white !important;"> `stats::shapiro.test` </td>
    <td style="text-align:left;background-color: white !important;">  </td>
   </tr>
   <tr>
@@ -246,8 +246,8 @@
   <tr>
    <td style="text-align:left;background-color: white !important;">  </td>
    <td style="text-align:left;background-color: white !important;"> [Cooks histogram](#cooks_histogram) </td>
-   <td style="text-align:left;background-color: white !important;"> `plot(model </td>
-   <td style="text-align:left;background-color: white !important;"> which = 4)` </td>
+   <td style="text-align:left;background-color: white !important;"> `plot(model which=4)` </td>
+   <td style="text-align:left;background-color: white !important;">  </td>
   </tr>
   <tr>
    <td style="text-align:left;background-color: white !important;">  </td>

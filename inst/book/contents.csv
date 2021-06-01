@@ -30,17 +30,17 @@ Linear regression,[Linear model](#lm),`stats::lm`,ebike_hardening,The e-bike fra
 ,[Outliers test](#outliers),`car::outlierTest`,,,
 ,[Cooks distance](#cooks),,,,
 ,[Coeficient of determination](#R-squared),`base::summary()$r.squared`,,,
-Anova & Ancova,[Analysis of variance](#aov),`stats::aov`,,,
+Anova,[Analysis of variance](#aov),`stats::aov`,,,
 ,[Pairwise comparison](#tukey),`stats::TukeyHSD`,,,
 ,[Least significant difference](#fisherLSD),`agricolae::LSD.test`,,,
-,[Model formulae](#formula),`stats::formula`,solarcell_output,The solar cell ouput test,Solar energy
+Ancova,[Model formulae](#formula),`stats::formula`,solarcell_output,The solar cell ouput test,Solar energy
 ,[Interaction plot](#interaction.plot),`stats:interaction.plot`,,,
 ,[Simplified timeseries](#simple_timeseries),`plot(model$residuals)`,,,
 ,[Residuals summary](#plot_model),`plot(model)`,,,
 ,[Cooks histogram](#cooks_histogram),`plot(model which=4)`,,,
-,[Anova check](#anova),`stats::anova`,,,
+,[Anova check](#anova_check),`stats::anova`,,,
 ,[Correlation test](#cor.test),`stats::cor.test`,solarcell_fill,The solar cell ouput test,Solar energy
-,[Analysis of covariance](#ancova),`stats::aov`,,,
+,[Analysis of covariance](#ancova_aov),`stats::aov`,,,
 General designs,[Factorial design](#fac.design),`DoE.base::fac.design`,juice_drymatter,The juice production plant,Food
 ,[Main effects plots](#main_effects),,,,
 ,[Interactions plots (custom)](#interaction_plot),`ggplot2::geom_errorbar`,,,

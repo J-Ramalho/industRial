@@ -3,7 +3,7 @@
 
 
 
-## Anova & Ancova
+## Anova
 
 The commercial introduction of the new e-bike model is approaching soon and production is expected to start in a couple of months. The engineering team is getting impacient because the parameters for the frame thermal treatment are not yet defined. The engineering head call for a second meeting to review once more the DoE outputs. The lab supervisor reopens his Rmd report tries to go beyond the linear model discussed before. He created raw data plots with dots on individual data points but now he thinks it is important to have a view on the data distribution and some summary statistics. For that he prepares a box plot:
 
@@ -82,7 +82,7 @@ ggplot(ebike_factor2,
 
 <img src="7_anova_files/figure-html/unnamed-chunk-6-1.png" width="100%" />
 
-Effectively the outputs are much more spread out and the overlaps much bigger. A new anova gives a p value of 0.34 supporting the assumption of no significant difference between the means of the treatment levels.
+Effectively within group variation is larger and groups overlap more. A new anova gives a p value of 0.34 supporting the assumption of no significant difference between the means of the treatment levels.
 
 
 ```r
@@ -100,8 +100,6 @@ Residuals   16 6.55e+09 4.10e+08
 ```
 
 ### Pairwise comparison {#tukey}
-
-The Anova may indicate that the treament means differ but it won't indicate which ones. In this case we may want to compare pairs of means.
 
 
 ```r
@@ -129,9 +127,7 @@ Table: (\#tab:unnamed-chunk-9)tukey test on e-bike frame hardening process
 |220-180 | 119600 | 86545.6  | 152654 | 0.00000 |
 |220-200 | 81600  | 48545.6  | 114654 | 0.00001 |
 
-The test provides us a simple direct calculation of the differences between the treatment means and a confidence interval for those. Most importantly it provides us with the p value to help us confirm the significance of the difference and conclude factor level by factor level which differences are significant.
-
-Additionally we can obtain the related plot with the confidence intervals 
+Back to the main test the lab supervisor wants to see if all levels are significantly different from each other. As discusses the anova indicates that there is a difference in the treament means but it won't indicate which ones and doing individual t.tests has already been discarded. It is possible to get a direct one to one comparison of means with `TukeyHSD()` from `{stats}`. The test also provides a confidence interval for each difference. Most importantly it provides us with the p value to help us confirm the significance of the difference and conclude factor level by factor level which differences are significant. Additionally we can alo obtain the related plot with the confidence intervals 
 
 
 ```r
@@ -140,9 +136,9 @@ plot(ebike_tukey)
 
 <img src="7_anova_files/figure-html/unnamed-chunk-10-1.png" width="100%" />
 
-### Least significant difference {#fisherLSD}
+In the case of the frames thermal treatment all levels bring a specific impact on the lifecycle as we can see from the p values all below 0.05 and from the fact that no confidence interval crosses zero (there are no differences that could have a chance of being zero).
 
-Fisher's Least Significant difference is an alternative to Tuckey's test.
+### Least significant difference {#fisherLSD}
 
 
 ```r
@@ -151,16 +147,13 @@ library(agricolae)
 
 
 ```r
-ebike_anova <- anova(ebike_lm_factor) 
-
-ebike_LSD <- LSD.test(y = ebike_factor$cycles,
-         trt = ebike_factor$temperature,
-         DFerror = ebike_anova$Df[2],  
-         MSerror = ebike_anova$`Mean Sq`[2],
-         alpha = 0.05)
+ebike_LSD <- LSD.test(
+  y = ebike_lm_factor,
+  trt = "temperature"
+)
 ```
 
-The Fisher procedure provides us with additional information. A first outcome is the difference between means (of life cycles) that can be considered significant, indicated in the table below by LSD = 24.49.
+A useful complement to Tukey's test is the calculation of Fisher's Least Significant differences. The Fisher procedure can be done in R with the `LSD.test()` from the `{agricolae}` package. The first important ouput is precisely the *least significant difference* which is the smallest the difference between means (of the the life cycles) that can be considered significant. This is indicated in the table below with the value LSD = 24'492.
 
 
 ```r
@@ -178,14 +171,12 @@ Table: (\#tab:unnamed-chunk-13)Fisher LSD procedure on e-bike frame hardening: s
 |:--|:---------:|:--:|:------:|:------:|:-------:|:-----:|
 |   | 333700000 | 16 | 617750 | 2.9571 | 2.1199  | 24492 |
 
-Furthermore it gives us a confidence interval for each treatment level mean:
+Furthermore it gives us a confidence intervals for each treatment level mean:
 
 
 ```r
 head(ebike_LSD$means) %>% 
-  # as_tibble() %>%
-  rename(cycles = `ebike_factor$cycles`) %>%
-  select(-Min, -Max, -Q25, -Q50, -Q75) %>%
+  select(-Q25, -Q50, -Q75) %>%
   kable(align = "c", 
         caption = "Fisher LSD procedure on e-bike frame hardening: means", 
         booktabs = T)
@@ -195,16 +186,14 @@ head(ebike_LSD$means) %>%
 
 Table: (\#tab:unnamed-chunk-14)Fisher LSD procedure on e-bike frame hardening: means
 
-|    | cycles |  std  | r |  LCL   |  UCL   |
-|:---|:------:|:-----:|:-:|:------:|:------:|
-|160 | 551200 | 20017 | 5 | 533882 | 568518 |
-|180 | 587400 | 16742 | 5 | 570082 | 604718 |
-|200 | 625400 | 20526 | 5 | 608082 | 642718 |
-|220 | 707000 | 15248 | 5 | 689682 | 724318 |
+|    | cycles |  std  | r |  LCL   |  UCL   |  Min   |  Max   |
+|:---|:------:|:-----:|:-:|:------:|:------:|:------:|:------:|
+|160 | 551200 | 20017 | 5 | 533882 | 568518 | 530000 | 575000 |
+|180 | 587400 | 16742 | 5 | 570082 | 604718 | 565000 | 610000 |
+|200 | 625400 | 20526 | 5 | 608082 | 642718 | 600000 | 651000 |
+|220 | 707000 | 15248 | 5 | 689682 | 724318 | 685000 | 725000 |
 
-We can see for example that for temperature 220 °C the etch rate if on average 707.0 with a probability of 95% of being between 689.7 and 724.3 A/min.
-
-Another interesting outcome is the grouping of levels for each factor:
+We can see for example that for temperature 180 °C the lifecyle has an average of 587'400 (has he had calculated before) with a probability of 95% of being between 570'082 and and 604'718 cycles. Another useful outcome is the creation of groups of significance. 
 
 
 ```r
@@ -218,40 +207,42 @@ head(ebike_LSD$groups) %>%
 
 Table: (\#tab:unnamed-chunk-15)Fisher LSD procedure on e-bike frame hardening: groups
 
-|    | ebike_factor$cycles | groups |
-|:---|:-------------------:|:------:|
-|220 |       707000        |   a    |
-|200 |       625400        |   b    |
-|180 |       587400        |   c    |
-|160 |       551200        |   d    |
+|    | cycles | groups |
+|:---|:------:|:------:|
+|220 | 707000 |   a    |
+|200 | 625400 |   b    |
+|180 | 587400 |   c    |
+|160 | 551200 |   d    |
 
-In this case as all level means are statistically different they all show up in separate groups, each indicated by a specific letter.
-
-Finally we can get from this package a plot with the Least significant difference error bars:
+In this case as all level means are statistically different they all show up in separate groups, each indicated by a specific letter. Finally we can use `plot()` which calls the method `plot.group()` from the same package. This allows us to provide as input the desired argument for the error bars.
 
 
 ```r
-plot(ebike_LSD)
+plot(
+  ebike_LSD, 
+  variation = "SE", 
+  main = "e-bike hardening\nMeans comparison"
+)
 ```
 
 <img src="7_anova_files/figure-html/unnamed-chunk-16-1.png" width="100%" />
 
-And below we're exploring a manual execution of this type of plot (in this case with the standard deviations instead).
+Strangly the package plot doesn't have the option to plot error bars with LSD and the lab supervisor decides to make a custom plot:
 
 
 ```r
 ebike_factor %>%
   group_by(temperature) %>%
   summarise(cycles_mean = mean(cycles), 
-            cycles_sd = sd(cycles)) %>%
-  ggplot(aes(x = temperature, y = cycles_mean)) +
+            cycles_lsd = ebike_LSD$statistics$LSD) %>%
+  ggplot(aes(x = temperature, y = cycles_mean, color = temperature)) +
   geom_point(size = 2) +
   geom_line() +
-  geom_errorbar(aes(ymin = cycles_mean - cycles_sd, 
-                    ymax = cycles_mean + cycles_sd),
+  geom_errorbar(aes(ymin = cycles_mean - cycles_lsd, 
+                    ymax = cycles_mean + cycles_lsd),
                 width = .1) +
   scale_y_continuous(n.breaks = 10, labels = label_number(big.mark = "'")) +
-  # scale_color_viridis_d(option = "C", begin = 0.1, end = 0.9) +
+  scale_color_viridis_d(option = "C", begin = 0.1, end = 0.8) +
   annotate(geom = "text", x = Inf, y = -Inf, label = "Error bars are +/- 1xSD", 
     hjust = 1, vjust = -1, colour = "grey30", size = 3, 
     fontface = "italic") +
@@ -263,21 +254,77 @@ ebike_factor %>%
 
 <img src="7_anova_files/figure-html/unnamed-chunk-17-1.png" width="100%" />
 
-As often with statistical tools, there is debate on the best approach to use. We recommend to combine the Tukey test with the Fisher's LSD completementary R functions. The Tukey test giving a first indication of the levels that have an effect and calculating the means differences and the Fisher function to provide much more additional information on each level. To be considered in each situation the slight difference  between the significance level for difference between means and to decide if required to take the most conservative one.
+The plot shows some overlap between the levels of 160 and 180 and again between 180 and 200. When looking a the Tukey test outcome we see that the p value of these differences is close to 0.05. Presenting all these statistical findings to the team they end up agreeing that in order to really improve the resistance they should consider a jump from 160 to 200°C in the thermal treatment.
+
+As often with statistical tools, there is debate on the best approach to use. We recommend to combine the Tukey test with the Fisher's LSD. The Tukey test giving a first indication of the levels that have an effect and calculating the means differences and the Fisher function to provide much more additional information on each level. To be considered in each situation the slight difference  between the significance level for difference between means and to decide if required to take the most conservative one.
 
 To go further in the Anova F-test we recommend this interesting article from @minitab_anovaftest.
 
-Two factors multiple levels
-
-**The solarcell output test**
+## Ancova
 
 <div class="marginnote">
+
+<b class="highlight">Case study: solarcell output test</b>
 
 <img src="img/solar_cell_test_bw.jpg" width="100%" style="display: block; margin: auto;" />
 
 </div>
 
-Load and prepare data for analysis:
+The countdown to leave fossil fuel has started as many companies have adopted firm timelines for 100% renewable energy sourcing. Solar energy is a great candidate but solar cell efficiency is a great challenge. Although it has been progressing steadily since more than four decades yields can still be considered low. A global manufacturing company of solar cells is looking to push the boundaries with a new generation of materials and grab another pie of the global market. 
+
+### Model formulae {#formula}
+
+
+```r
+solarcell_formula <- formula(
+  output ~ temperature * material
+) 
+```
+
+In previous case studies input factors has been put directly in the arguments of the `lm()` function by using the inputs and outputs and relating them with the tilde ~ sign. Here we're looking a bit more into detail into what is happening when we do this. If we pass such expression to the `formula()` function we generate an object of class formula and at that time some manipulations are done to prepare the factors for the linear model calculation. Looking at the formula class and attributes we have:
+
+
+```r
+class(solarcell_formula)
+```
+
+```
+[1] "formula"
+```
+
+```r
+attributes(terms(solarcell_formula))$factors
+```
+
+```
+            temperature material temperature:material
+output                0        0                    0
+temperature           1        0                    1
+material              0        1                    1
+```
+
+We can see that the expression has been extended. While we have only given as input the product of the factors we can see that an interaction term `temperature:material` has been generated. We also see the contrasts matrix associated. 
+
+In the solarcell manufacturing company mentionned before the R&D team is working a new R&D project with the objective of understanding the output of a new solarcell material at different ambient temperatures. Their latest experiment is recorded in an R dataset with the name `solarcell_output`:
+
+
+```r
+solarcell_output %>%
+  head(5) %>%
+  kable(align = "c")
+```
+
+
+
+|  material   | run | T-10 | T20 | T50 |
+|:-----------:|:---:|:----:|:---:|:---:|
+|  thinfilm   |  1  | 130  | 34  | 20  |
+|  thinfilm   |  2  |  74  | 80  | 82  |
+|  thinfilm   |  3  | 155  | 40  | 70  |
+|  thinfilm   |  4  | 180  | 75  | 58  |
+| christaline |  1  | 150  | 136 | 25  |
+
+As often this data comes in a wide format and the first step we're doing is to convert it into a long format and to convert the variables to factors.
 
 
 ```r
@@ -289,17 +336,7 @@ solarcell_factor <- solarcell_output %>%
   ) %>% mutate(across(c(material, temperature), as_factor))
 ```
 
-### Model formulae {#formula}
-
-
-```r
-solarcell_formula <- output ~ temperature + material + temperature:material
-class(solarcell_formula)
-```
-
-```
-[1] "formula"
-```
+The experiment has consisted in measuring the output at three different temperature levels on three different materials. The associated linear model can be obtained with:
 
 
 ```r
@@ -338,7 +375,7 @@ Multiple R-squared:  0.765,	Adjusted R-squared:  0.696
 F-statistic:   11 on 8 and 27 DF,  p-value: 9.43e-07
 ```
 
-Looking at the output we see that R-squared is equal to 0.7652. This means about 77 percent of the variability in the battery life is explained by the plate material in the battery, the temperature, and the material type–temperature interaction. We're going to go more in details now to validate the model and understand the effects and interactions of the different factors.
+We're going to go more in details now to validate the model and understand the effects and interactions of the different factors.
 
 ### Interaction plot {#interaction.plot}
 
@@ -357,7 +394,7 @@ interaction.plot(x.factor = solarcell_factor$temperature,
                  ylab = "output [kWh/yr equivalent]")
 ```
 
-<img src="7_anova_files/figure-html/unnamed-chunk-22-1.png" width="100%" />
+<img src="7_anova_files/figure-html/unnamed-chunk-24-1.png" width="100%" />
 
 Although simple many important learnings can be extracted from this plot. We get the indication of the mean value of battery life for the different data groups at each temperature level for each material. Also we see immediatly that batteries tend to have longer lifes at lower temperature for all material types. We also see that there is certainly an interaction between material and temperature as the lines cross each other.
 
@@ -370,7 +407,7 @@ We do now a quick assessment of the residuals, starting by the timeseries of res
 plot(solarcell_factor_lm$residuals)
 ```
 
-<img src="7_anova_files/figure-html/unnamed-chunk-23-1.png" width="100%" />
+<img src="7_anova_files/figure-html/unnamed-chunk-25-1.png" width="100%" />
 
 No specific pattern is apparent so now we check all the remaining plots grouped into one single output:
 
@@ -382,7 +419,7 @@ par(mfrow = c(2,2))
 plot(solarcell_factor_lm)
 ```
 
-<img src="7_anova_files/figure-html/unnamed-chunk-24-1.png" width="100%" />
+<img src="7_anova_files/figure-html/unnamed-chunk-26-1.png" width="100%" />
 
 Residuals versus fit presents a rather simetrical distribution around zero indicating equality of variances at all levels and the qq plot presents good adherence to the centel line indicating a normal distributed population of residuals, all ok for these. The scale location plot though, shows a center line that is not horizontal which suggest the presence of outliers.
 
@@ -393,7 +430,7 @@ Residuals versus fit presents a rather simetrical distribution around zero indic
 plot(solarcell_factor_lm, which = 4)
 ```
 
-<img src="7_anova_files/figure-html/unnamed-chunk-25-1.png" width="100%" />
+<img src="7_anova_files/figure-html/unnamed-chunk-27-1.png" width="100%" />
 
 
 We can extract the absolute maximum residual with:
@@ -432,7 +469,7 @@ which gives a high Bonferroni p value thus excluding this possibility.
 
 As the R-squared was rather high and there were no issues with residuals we considere the model as acceptable and move ahead with the assessment of the significance of the different effects. For that we apply the anova to the linear model:
 
-### Anova check {#anova}
+### Anova check {#anova_check}
 
 
 ```r
@@ -516,7 +553,7 @@ par(mfrow = c(2,2))
 plot(solarcell_factor_lm_no_int)
 ```
 
-<img src="7_anova_files/figure-html/unnamed-chunk-32-1.png" width="100%" />
+<img src="7_anova_files/figure-html/unnamed-chunk-34-1.png" width="100%" />
 
 We see in the Residuals vs Fitted a clear pattern with residuals moving from positive to negative and then again to positive along the fitted values axis which indicates that there is an interaction at play.
 
@@ -575,7 +612,7 @@ solarcell_fill %>%
   )
 ```
 
-<img src="7_anova_files/figure-html/unnamed-chunk-34-1.png" width="100%" />
+<img src="7_anova_files/figure-html/unnamed-chunk-36-1.png" width="100%" />
 
 ### Correlation test {#cor.test}
 
@@ -625,7 +662,7 @@ solarcell_fill %>%
   )
 ```
 
-<img src="7_anova_files/figure-html/unnamed-chunk-37-1.png" width="100%" />
+<img src="7_anova_files/figure-html/unnamed-chunk-39-1.png" width="100%" />
 
 Visually this is the case, going from one level to the other is not changing the relationship between thickness and strenght - increasing thickness increases stenght. Visually the slopes are similar but the number of points is small. In a real case this verification could be extended with the correlation test for each level or/and a statistical test between slopes.
 
@@ -634,7 +671,7 @@ The way to feed the R function arguments is obtained from https://www.datanovia.
 
 *Three different machines produce a monofilament fiber for a textile company. The process engineer is interested in determining if there is a difference in the breaking strength of the fiber produced by the three machines. However, the strength of a fiber is related to its diameter, with thicker fibers being generally stronger than thinner ones. A random sample of five fiber specimens is selected from each machine.*
 
-### Ancova {#ancova}
+### Ancova {#ancova_aov}
 
 
 ```r

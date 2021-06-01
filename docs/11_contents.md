@@ -202,7 +202,7 @@
    <td style="text-align:left;background-color: white !important;">  </td>
   </tr>
   <tr>
-   <td style="text-align:left;background-color: white !important;"> Anova &amp; Ancova </td>
+   <td style="text-align:left;background-color: white !important;"> Anova </td>
    <td style="text-align:left;background-color: white !important;"> [Analysis of variance](#aov) </td>
    <td style="text-align:left;background-color: white !important;"> `stats::aov` </td>
    <td style="text-align:left;background-color: white !important;">  </td>
@@ -220,7 +220,7 @@
    <td style="text-align:left;background-color: white !important;">  </td>
   </tr>
   <tr>
-   <td style="text-align:left;background-color: white !important;">  </td>
+   <td style="text-align:left;background-color: white !important;"> Ancova </td>
    <td style="text-align:left;background-color: white !important;"> [Model formulae](#formula) </td>
    <td style="text-align:left;background-color: white !important;"> `stats::formula` </td>
    <td style="text-align:left;background-color: white !important;"> solarcell_output </td>
@@ -251,7 +251,7 @@
   </tr>
   <tr>
    <td style="text-align:left;background-color: white !important;">  </td>
-   <td style="text-align:left;background-color: white !important;"> [Anova check](#anova) </td>
+   <td style="text-align:left;background-color: white !important;"> [Anova check](#anova_check) </td>
    <td style="text-align:left;background-color: white !important;"> `stats::anova` </td>
    <td style="text-align:left;background-color: white !important;">  </td>
   </tr>
@@ -263,7 +263,7 @@
   </tr>
   <tr>
    <td style="text-align:left;background-color: white !important;">  </td>
-   <td style="text-align:left;background-color: white !important;"> [Analysis of covariance](#ancova) </td>
+   <td style="text-align:left;background-color: white !important;"> [Analysis of covariance](#ancova_aov) </td>
    <td style="text-align:left;background-color: white !important;"> `stats::aov` </td>
    <td style="text-align:left;background-color: white !important;">  </td>
   </tr>

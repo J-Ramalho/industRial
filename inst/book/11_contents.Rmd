@@ -15,9 +15,9 @@ read_delim(here::here("inst/book/contents.csv"),
     ",", escape_double = FALSE, trim_ws = TRUE) %>%
   select(Subject, Unit, Functions, Datasets) %>%
   kable(align = "l") %>%
-  row_spec(row = 1:66 ,background = "white") %>%
+  row_spec(row = 1:65, background = "white") %>%
   row_spec(
-    row = c(1, 7, 13, 55),
+    row = c(1, 7, 13, 54),
     background = "#e6e6e6", color = "#104e8b", bold = TRUE
     )
 ```

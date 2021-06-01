@@ -22,19 +22,19 @@
    <td style="text-align:left;background-color: white !important;font-weight: bold;color: #104e8b !important;background-color: #e6e6e6 !important;">  </td>
   </tr>
   <tr>
-   <td style="text-align:left;background-color: white !important;"> Pareto </td>
+   <td style="text-align:left;background-color: white !important;"> Pareto analysis </td>
    <td style="text-align:left;background-color: white !important;"> [Pareto chart](#paretochart) </td>
    <td style="text-align:left;background-color: white !important;"> `qicharts2::paretochart` </td>
    <td style="text-align:left;background-color: white !important;"> dial_control </td>
   </tr>
   <tr>
-   <td style="text-align:left;background-color: white !important;"> Ishikawa </td>
-   <td style="text-align:left;background-color: white !important;"> [Fishbone diagram](#fishbone) </td>
+   <td style="text-align:left;background-color: white !important;"> Root cause analysis </td>
+   <td style="text-align:left;background-color: white !important;"> [ishikawa diagram](#ishkawa) </td>
    <td style="text-align:left;background-color: white !important;"> `qcc::cause.and.effect` </td>
    <td style="text-align:left;background-color: white !important;">  </td>
   </tr>
   <tr>
-   <td style="text-align:left;background-color: white !important;"> Correlation </td>
+   <td style="text-align:left;background-color: white !important;"> Correlations </td>
    <td style="text-align:left;background-color: white !important;"> [Matrix](#matrix) </td>
    <td style="text-align:left;background-color: white !important;">  </td>
    <td style="text-align:left;background-color: white !important;"> perfume_experiment </td>
@@ -124,8 +124,8 @@
    <td style="text-align:left;background-color: white !important;">  </td>
   </tr>
   <tr>
-   <td style="text-align:left;background-color: white !important;"> Linear regression </td>
-   <td style="text-align:left;background-color: white !important;"> [Linear model](#lm) </td>
+   <td style="text-align:left;background-color: white !important;"> Statistical modeling </td>
+   <td style="text-align:left;background-color: white !important;"> [Linear models](#lm) </td>
    <td style="text-align:left;background-color: white !important;"> `stats::lm` </td>
    <td style="text-align:left;background-color: white !important;"> ebike_hardening </td>
   </tr>
@@ -202,8 +202,8 @@
    <td style="text-align:left;background-color: white !important;">  </td>
   </tr>
   <tr>
-   <td style="text-align:left;background-color: white !important;"> Anova </td>
-   <td style="text-align:left;background-color: white !important;"> [Analysis of variance](#aov) </td>
+   <td style="text-align:left;background-color: white !important;"> Effects significance </td>
+   <td style="text-align:left;background-color: white !important;"> [Anova](#aov) </td>
    <td style="text-align:left;background-color: white !important;"> `stats::aov` </td>
    <td style="text-align:left;background-color: white !important;">  </td>
   </tr>
@@ -220,7 +220,7 @@
    <td style="text-align:left;background-color: white !important;">  </td>
   </tr>
   <tr>
-   <td style="text-align:left;background-color: white !important;"> Ancova </td>
+   <td style="text-align:left;background-color: white !important;"> Interactions </td>
    <td style="text-align:left;background-color: white !important;"> [Model formulae](#formula) </td>
    <td style="text-align:left;background-color: white !important;"> `stats::formula` </td>
    <td style="text-align:left;background-color: white !important;"> solarcell_output </td>
@@ -233,30 +233,24 @@
   </tr>
   <tr>
    <td style="text-align:left;background-color: white !important;">  </td>
-   <td style="text-align:left;background-color: white !important;"> [Simplified timeseries](#simple_timeseries) </td>
-   <td style="text-align:left;background-color: white !important;"> `plot(model$residuals)` </td>
+   <td style="text-align:left;background-color: white !important;"> [Residual standard error](#RSE) </td>
+   <td style="text-align:left;background-color: white !important;">  </td>
    <td style="text-align:left;background-color: white !important;">  </td>
   </tr>
   <tr>
    <td style="text-align:left;background-color: white !important;">  </td>
-   <td style="text-align:left;background-color: white !important;"> [Residuals summary](#plot_model) </td>
-   <td style="text-align:left;background-color: white !important;"> `plot(model)` </td>
+   <td style="text-align:left;background-color: white !important;"> [Residuals summary](#plot.lm) </td>
+   <td style="text-align:left;background-color: white !important;"> `stats::plot.lm` </td>
    <td style="text-align:left;background-color: white !important;">  </td>
   </tr>
   <tr>
    <td style="text-align:left;background-color: white !important;">  </td>
-   <td style="text-align:left;background-color: white !important;"> [Cooks histogram](#cooks_histogram) </td>
-   <td style="text-align:left;background-color: white !important;"> `plot(model which=4)` </td>
-   <td style="text-align:left;background-color: white !important;">  </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;background-color: white !important;">  </td>
-   <td style="text-align:left;background-color: white !important;"> [Anova check](#anova_check) </td>
+   <td style="text-align:left;background-color: white !important;"> [Anova with interactions](#anova) </td>
    <td style="text-align:left;background-color: white !important;"> `stats::anova` </td>
    <td style="text-align:left;background-color: white !important;">  </td>
   </tr>
   <tr>
-   <td style="text-align:left;background-color: white !important;">  </td>
+   <td style="text-align:left;background-color: white !important;"> Covariance </td>
    <td style="text-align:left;background-color: white !important;"> [Correlation test](#cor.test) </td>
    <td style="text-align:left;background-color: white !important;"> `stats::cor.test` </td>
    <td style="text-align:left;background-color: white !important;"> solarcell_fill </td>

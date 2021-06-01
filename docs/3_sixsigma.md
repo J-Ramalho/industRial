@@ -9,7 +9,7 @@ Quality tools have been grouped under varied names and methodologies being Six S
 
 We start with a case on a dial workshop in the watch making industrial where the pareto chart comes handy. We then move to a dental prosthesis laboratory to see how a simple fishbone diagram can help pinpoint special causes of the measurement variation of an optical device and we finish we two different approaches on how to optimize experiment execution by assess the correlation between the outputs in order to minimize the parameters to measure.
 
-## Pareto
+## Pareto analysis
 
 <div class="marginnote">
 <b class="highlight">Case study: dial polishing workshop</b>
@@ -112,7 +112,7 @@ This example shows how data collecting can be simple and effective. if no one in
 
 To practice and go further in the exploration of pareto charts checkout the tutorials section.
 
-## Ishikawa
+## Root cause analysis
 
 <div class="marginnote">
 <b class="highlight">Case study: dental prosthesis laboratory</b>
@@ -135,9 +135,9 @@ The lab has been having complains and several parts have been returned from the 
 
 After installation and in spite all the precautions it has been reported and now demonstrated with some specific trials that the measurements have a high variation which is preventing putting it in operation. Until now the laboratory team has always had full confidence in the equipment supplier and the Lab Manager has even seen the same equipment operating in another laboratory from the group.
 
-The supplier has been called on site to check the equipment and having seen no reason for the variability proposes to work with the lab team on identifying the potential causes for the high uncertainty in their measurements. They decided to consider a larger scope than just the equipment and take the full measurement method as described in the laboratory operating procedure. They list different reasons related with they're work and group them.
+The supplier has been called on site to check the equipment and having seen no reason for the variability proposes to work with the lab team on identifying the potential causes for the high uncertainty in their measurements. They decided to consider a larger scope than just the equipment and take the full measurement method as described in the laboratory operating procedure. They organize a brainstorm, list different reasons related with they're work and group them.
 
-### Listing root causes
+### Brainstorming
 
 
 ```r
@@ -152,7 +152,7 @@ effect <- "Too high uncertainty"
 
 One of the team members is using R and he has generating all previous reports on the topic with R markdown. He simply adds to the last report a call to the `{qcc}` package and quickly obtains a simple diagram that allows for a quick visualization of these influencing factors.
 
-### Fishbone diagram {#fishbone}
+### Ishikawa digram {#ishikawa}
 
 
 ```r
@@ -178,7 +178,7 @@ cause.and.effect(
 
 The listed factors can now be addressed either one by one or in combined experiments to evaluate their impact on the measurement method. The lab team has decided to assess the method robustness to the brightness and to the dimensional algorithm and will prepare an experiment design with several combinations of these parameters to evaluate them. Using the diagram they can easily keep track of what has been listed, tested and can be eliminated as root cause.
 
-## Correlation
+## Correlations
 
 <div class="marginnote">
 
@@ -330,7 +330,7 @@ perfum_tbl_graph
 4     1     5    0.2
 5     1     6    0.2
 6     1     8    0.8
-# ... with 79 more rows
+# … with 79 more rows
 #
 # Node Data: 22 x 1
   name 
@@ -338,7 +338,7 @@ perfum_tbl_graph
 1 pw   
 2 w    
 3 pm   
-# ... with 19 more rows
+# … with 19 more rows
 ```
 
 In the previous chunk output we see a preview of the tibble graph object with the first few nodes and edges. Now we create a vector with various igraph layouts to allow for easier selection when making the plots:

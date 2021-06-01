@@ -187,6 +187,13 @@ and a structure of the rejection region. The p-value is equal to the signif-
 icance level of the test in which the observed value of the statistic serves
 as the threshold.
 
+### Linear models
+
+**R-squared:** is the proportion of the variance in the dependent variable that is predictable from the independent variable(s). R-squared gives an indication of the quality of the model and can be calculated with the formula $R^2 = 1 - \frac{VAR(res)}{VAR(y)}$. In a linear least squares regression with an intercept term and a single explanator, this is also equal to the squared Pearson correlation coefficient of the dependent variable y and explanatory variable x. Is also called Coefficient of determination.
+
+**Residuals standard error:** an unbiased estimator of the magnitude of a typical residual. Can be calculated with the formula $RSE = \sqrt{\frac{\sum{residuals^2}}{Df}}$ where Df is the number of Degrees of freedom. Sometimes is also called Root Mean Squared Error.
+
+
 ## DFSS
 
 One way of summarising the Six Sigma framework is presented below in a step by step approach with definitions. Each steps consists of an analyis of the product development and production process that progressively refines the final product specifications.

@@ -22,7 +22,7 @@ ebike_lm_factor <- lm(
   )
 ```
 
-## Anova
+## Effects significance
 
 The commercial introduction of the new e-bike model is approaching soon and production is expected to start in a couple of months. The engineering team is getting impacient because the parameters for the frame thermal treatment are not yet defined. The engineering head call for a second meeting to review once more the DoE outputs. The lab supervisor reopens his Rmd report tries to go beyond the linear model discussed before. He created raw data plots with dots on individual data points but now he thinks it is important to have a view on the data distribution and some summary statistics. For that he prepares a box plot:
 
@@ -44,7 +44,7 @@ They have been doing so many experiments that sometimes it gets hard to remember
 
 The anova main principle is that the the total variability in the data, as measured by the total corrected sum of squares, can be partitioned into a sum of squares of the differences between the treatment averages and the grand average plus a sum of squares of the differences of observations within treatments from the treatment average. The first time he read this explanation it seemed complex but he understood better on seeing a simple hand made example on the [kahn academy - anova](https://www.youtube.com/watch?v=EFdlFoHI_0I).
 
-### Aov {#aov}
+### Anova {#aov}
 
 ```{r}
 ebike_aov_factor <- aov(ebike_lm_factor)
@@ -53,8 +53,7 @@ summary(ebike_aov_factor)
 
 In R the anova is built by passing the linear model object to the `anova()` or `aov()` functions. The output of the first is just the anova table, the output of the second function is a complete list with the full lm model inside.
 
-The R anova output gives the sum of squares for the factor and for the residuals. In this case the between-treatment mean square is much larger than the within-treatment or residuals mean square. This suggests that it is unlikely that the treatment means are equal. The p is extremely small confirming this and  we have basis to reject the null hypothesis and conclude that the means are significantly different. 
-
+The R anova output gives the Mean Square for the factor and for the residuals. In this case the between-treatment mean square is much larger than the within-treatment or residuals mean square. This suggests that it is unlikely that the treatment means are equal. The p is extremely small thus we have basis to reject the null hypothesis and conclude that the means are significantly different. 
 In the mean while the lab supervisor has gathered data on a similar experiment done with frams in another material for that seems to be less sensitive the the treatment temperation. He uploads this data and assigns it to a dataset called `ebike_hardning2` and plots another box plot.
 
 ```{r}
@@ -89,7 +88,8 @@ Effectively within group variation is larger and groups overlap more. A new anov
 
 ```{r}
 ebike_lm_factor2 <- lm(cycles ~ temperature, data = ebike_factor2)
-anova(ebike_lm_factor2)
+ebike_aov_factor2 <- aov(ebike_lm_factor2)
+summary(ebike_aov_factor2)
 ```
 
 ### Pairwise comparison {#tukey}
@@ -194,7 +194,7 @@ As often with statistical tools, there is debate on the best approach to use. We
 
 To go further in the Anova F-test we recommend this interesting article from @minitab_anovaftest.
 
-## Ancova
+## Interactions
 
 <div class="marginnote">
 
@@ -219,16 +219,16 @@ solarcell_formula <- formula(
 ) 
 ```
 
-In previous case studies input factors has been put directly in the arguments of the `lm()` function by using the inputs and outputs and relating them with the tilde ~ sign. Here we're looking a bit more into detail into what is happening when we do this. If we pass such expression to the `formula()` function we generate an object of class formula and at that time some manipulations are done to prepare the factors for the linear model calculation. Looking at the formula class and attributes we have:
+In previous case studies input factors has been put directly in the arguments of the `lm()` function by using the inputs and outputs and relating them with the tilde ~ sign. The cases were simple with only one factor but in most DoEs we want to have many factors and decide which interactions to keep or drop. Here we're looking a bit more into detail in how to express this. When we pass an expression to the `formula()` function we generate an object of class formula and at that time some calculations are done in background to prepare the factors for the linear model calculation. Looking at the formula class and attributes we have:
 
 ```{r}
 class(solarcell_formula)
 attributes(terms(solarcell_formula))$factors
 ```
 
-We can see that the expression has been extended. While we have only given as input the product of the factors we can see that an interaction term `temperature:material` has been generated. We also see the contrasts matrix associated. 
+We can see that the expression has been extended. Although we have only given as input the product of the factors we can see that an interaction term `temperature:material` has been generated. We also see the contrasts matrix associated. There is a specific syntax to specify the formula terms using *,+ and other symbols. As always it is good to consult the function documentation with `?formula`.
 
-In the solarcell manufacturing company mentionned before the R&D team is working a new R&D project with the objective of understanding the output of a new solarcell material at different ambient temperatures. Their latest experiment is recorded in an R dataset with the name `solarcell_output`:
+In the solar cell manufacturing company mentioned before the R&D team is working a new research project with the objective of understanding the output in [kWh/yr equivalent] of a new solar cell material at different ambient temperatures. Their latest experiment is recorded in an R dataset with the name `solarcell_output`:
 
 ```{r}
 solarcell_output %>%
@@ -259,123 +259,108 @@ summary(solarcell_factor_lm)
 
 We're going to go more in details now to validate the model and understand the effects and interactions of the different factors.
 
-### Interaction plot {#interaction.plot}
-
-In this experiement instead of just plotting a linear regression we need to go for a more elaborate plot that shows the response as a function of the two factors. Many different approaches are possible in R and here we're starting with a rather simple one - the interaction plot from the stats package:
+### Residuals standard error {#RSE}
 
 ```{r}
-interaction.plot(x.factor = solarcell_factor$temperature, 
-                 trace.factor = solarcell_factor$material,
-                 fun = mean,
-                 response = solarcell_factor$output,
-                 trace.label = "Material",
-                 legend = TRUE,
-                 main = "Temperature-Material interaction plot",
-                 xlab = "temperature [°C]",
-                 ylab = "output [kWh/yr equivalent]")
+pluck(summary(solarcell_factor_lm), "sigma")
 ```
 
-Although simple many important learnings can be extracted from this plot. We get the indication of the mean value of battery life for the different data groups at each temperature level for each material. Also we see immediatly that batteries tend to have longer lifes at lower temperature for all material types. We also see that there is certainly an interaction between material and temperature as the lines cross each other.
-
-We do now a quick assessment of the residuals, starting by the timeseries of residuals:
-
-### Simplified timeseries {#simple_timeseries}
+Besides the R-squared discussed previously in the linear models unit there is another useful indicator of the quality of the fit which is the Residuals Standard Error RSE. It provides the magnitude of a typical residuals. This value is also given directly as output of the model summary and is 26 in this case. Like the R-squared is better when we know how it is calculated and once we're at ease with manipulating the model data either with `{stats}` or `{broom}` it is possible to with a few steps check see how this is done.
 
 ```{r}
-plot(solarcell_factor_lm$residuals)
+sqrt(sum(solarcell_factor_lm$residuals ^ 2) / df.residual(solarcell_factor_lm))
 ```
 
-No specific pattern is apparent so now we check all the remaining plots grouped into one single output:
+The exact value is 25.985 confirming the value extracted from the summary with the `pluck()` function from `{purrr}`.
 
 ### Residuals summary {#plot_model}
 
 ```{r}
-par(mfrow = c(2,2))
-plot(solarcell_factor_lm)
-```
-
-Residuals versus fit presents a rather simetrical distribution around zero indicating equality of variances at all levels and the qq plot presents good adherence to the centel line indicating a normal distributed population of residuals, all ok for these. The scale location plot though, shows a center line that is not horizontal which suggest the presence of outliers.
-
-### Cooks histogram {#cooks_histogram}
-
-```{r}
+par(mfcol = c(2,3))
+plot(solarcell_factor_lm$residuals)
+plot(solarcell_factor_lm, which = 2)
+plot(solarcell_factor_lm, which = c(1, 3, 5))
 plot(solarcell_factor_lm, which = 4)
 ```
 
+As the residuals analysis has been discussed in detail including custom made plots and statistical tests in the linear models unit, the assessment is done here in a summarize manner including a grouped output of all residuals plots: the qq plot presents good adherence to the center line indicating a normal distribution; the residuals versus fit presents a rather symmetrical distribution around zero indicating equality of variances at all levels and; the scale location plot though, shows a center line that is not horizontal which suggests the presence of outliers; in the Residuals versus fit we can effectively sense the Residuals Standard Error of 26.
 
-We can extract the absolute maximum residual with:
-
-```{r}
-solarcell_factor_lm$residuals %>% abs() %>% max()
-```
-
-Inspecting again the residuals plots we see that this corresponds to the point labeled with 2 for which the standardized value is greater than 2 standard deviations. 
-
-We're therefore apply the outlier test from the car package:
+### Interaction plot {#interaction.plot}
 
 ```{r}
-library(car)
+interaction.plot(
+  type = "b",
+  col = viridis(12)[4],
+  x.factor = solarcell_factor$temperature,
+  trace.factor = solarcell_factor$material,
+  fun = mean,
+  response = solarcell_factor$output,
+  trace.label = "Material",
+  legend = TRUE,
+  main = "Temperature-Material interaction plot",
+  xlab = "temperature [°C]",
+  ylab = "output [kWh/yr equivalent]"
+)
 ```
 
-```{r}
-outlierTest(solarcell_factor_lm)
-```
+In order to understand the behavior of the solar cell materials in the different temperature conditions the R&D team is looking for a plot that presents both factors simultaneous. Many different approaches are possible in R and here the team has selected the most basic one, the `interactionplot()` from the `{stats}` package.
 
-which gives a high Bonferroni p value thus excluding this possibility.
+Although simple several findings can already be extracted from this plot. They get the indication of the mean value of the solar cell output for the different materials at each temperature level. Also we see immediately that batteries tend to last longer at lower temperatures and this for all material types. We also see that there is certainly an interaction between material and temperature as the lines cross each other.
 
-As the R-squared was rather high and there were no issues with residuals we considere the model as acceptable and move ahead with the assessment of the significance of the different effects. For that we apply the anova to the linear model:
-
-### Anova check {#anova_check}
+### Anova with interactions {#anova}
 
 ```{r}
 anova(solarcell_factor_lm)
 ```
 
-We see in the output little stars in front of the p value of the different factors. Three stars for temperature corresponding to an extremely low p value indicating that the means of the lifetime at different levels of temperature are significantly different, confirming that temperature has an effect on lifetime. With a lower significance but still clearly impacting lifetime depends on the material. Finally it is confirmed that there is an interaction between both factors has the temperature:material term has a p value of 0.01861 which us lower than the treshold of 0.05.
+Continuing the analysis started in the interaction plot the R&D team checks the anova output. Like in the lm summary output, the  stars in front of the p value of the different factors indicate that the effects are statistically different. Three stars for temperature corresponding to an extremely low p value indicating that the means of the output at the different levels of temperature are different. This confirms that temperature has an effect on output power. The material effect has a lower significance but is also clearly impacting cell power output. Finally it is confirmed that there is an interaction between temperature and material as the temperature:material term has a p value of 0.019 which is lower than the typical threshold of 0.05. Looking into the details interaction comes from the fact that increasing temperature from 10 to 20 decreases output for the thinfilm but is not yet impacting the output for multijunction film. For multijunction it is needed to increase even further the temperature to 50°C to see the decrease in the output. 
 
-The interaction here corresponds to the fact that increasing temperature from 15 to 70 decreases lifetime for material 2 but increases for material 3.
-
-Its interesting to consider what would have been the analysis if the interaction was not put in the model. We can easily assess that by creating a new model in R without the temperature:material term.
+Before closing the first DOE analysis meeting the  R&D team discusses what would have been take-aways  if the interaction had not put in the model. As they use more and more R during their meetings and do the data analysis on the sport they simply create another model without the temperature:material term in the formula:
 
 ```{r}
 solarcell_factor_lm_no_int <- lm(
-  output ~ temperature + material, data = solarcell_factor)
+  output ~ temperature + material, 
+  data = solarcell_factor)
 summary(solarcell_factor_lm_no_int)
 ```
 
-The model still presents a reasonably high R-square of 0.64. We now apply the anova on this new model:
+Residual standard error is up from 26 to 30 which shows a poorer fit but R-square is only down from 76.5% to 64.1% which is still reasonably high. They apply the anova on this new model:
 
 ```{r}
 anova(solarcell_factor_lm_no_int)
 ```
 
-The output naturally confirms the significance of the effects of the factors, however, as soon as a residual analysis is performed for these data, it becomes clear that the non-interaction model is inadequate:
+The output still confirms the significance of the effects of the factors but the residuals analysis raises other concerns:
 
 ```{r}
-par(mfrow = c(2,2))
-plot(solarcell_factor_lm_no_int)
+par(mfcol = c(2,3))
+plot(solarcell_factor_lm_no_int$residuals)
+plot(solarcell_factor_lm_no_int, which = 2)
+plot(solarcell_factor_lm_no_int, which = c(1, 3, 5))
+plot(solarcell_factor_lm_no_int, which = 4)
 ```
 
-We see in the Residuals vs Fitted a clear pattern with residuals moving from positive to negative and then again to positive along the fitted values axis which indicates that there is an interaction at play.
+They see in the Residuals vs Fitted a clear pattern with residuals moving from positive to negative and then again to positive along the fitted values axis which indicates that there is an interaction at play. Another concern comes from the Residuals versus Factor levels where at 10°C some residuals go beyond 2 standard deviations. The model with the interaction is clearly preferred in this case. 
 
-### Covariance
+## Covariance
 
-We assess here the potential utilisation of the analysis of covariance (ancova) in situations where a continuous variable may be influencing the measured value. This technique complements the analysis of variance (anova) allowing for a more accurate assessment of the effects of the categorical variables.
+```{r}
+solarcell_fill %>% 
+  head(5) %>%
+  kable()
+```
 
-Below a description of the approach taken from [@Montgomery2012], pag.655:
+Solarcell experiments continue as the R&D project on new materials progresses. The previous meeting outcome made the R&D team select the multijunction material as the best candidate for the next round of tests. A new experiment has been designed but the team needs to go deeper in the understanding on how to improve the power output. Besides temperature and material there seems to be another variable at play: the fill factor. This is rather technical but all experts agree that this is influencing the behavior of the cell. The way to determine it is complex and depends on the electrical circuit configuration. The table just presented shows the value of fill factor collected for each cell tested together with the measured output.
 
-*Suppose that in an experiment with a response variable y there is another variable, say x, and that y is linearly related to x. Furthermore, suppose that x cannot be controlled by the experimenter but can be observed along with y. The variable x is called a covariate or concomitant variable. The analysis of covariance involves adjusting the observed response variable for the effect of the concomitant variable.* 
+A Data Scientist from the center recommends to use an analysis of covariance (ancova) which can be useful in situations where a continuous variable may be influencing the measured value. This technique complements the analysis of variance (anova) allowing for a more accurate assessment of the effects of the categorical variables. An explanation on the technique and a similar case can be seen on page 655 of @Montgomery2012.
+
+*Suppose that in an experiment with a response variable y there is another variable, say x, and that y is linearly related to x. Furthermore, suppose that x cannot be controlled by the experimenter but can be observed along with y. The variable x is called a covariate. The analysis of covariance involves adjusting the observed response variable for the effect of the covariate.*
 
 *If such an adjustment is not performed, the concomitant variable could inflate the error mean square and make true differences in the response due to treatments harder to detect. Thus, the analysis of covariance is a method of adjusting for the effects of an uncontrollable nuisance variable. As we will see, the procedure is a combination of analysis of variance and regression analysis.*
 
 *As an example of an experiment in which the analysis of covariance may be employed, consider a study performed to determine if there is a difference in the strength of a monofilament fiber produced by three different machines. The data from this experiment are shown in Table 15.10 (below). Figure 15.3 presents a scatter diagram of strength (y) versus the diameter (or thickness) of the sample. Clearly, the strength of the fiber is also affected by its thickness; consequently, a thicker fiber will generally be stronger than a thinner one. The analysis of covariance could be used to remove the effect of thickness (x) on strength (y) when testing for differences in strength between machines.*
 
-```{r}
-solarcell_fill %>% 
-  kable()
-```
-
-Below a plot of strenght by thickness:
+Below a plot of output by fillfactor:
 
 ```{r}
 solarcell_fill %>%
@@ -393,19 +378,14 @@ solarcell_fill %>%
 
 ### Correlation test {#cor.test}
 
-And a short test to assess the strenght of the correlation:
-
 ```{r}
-library(stats)
+cor.test(
+  solarcell_fill$output, solarcell_fill$fillfactor,
+  method = "pearson"
+  )
 ```
 
-[]{#corTest}
-
-```{r}
-cor.test(solarcell_fill$output, solarcell_fill$fillfactor)
-```
-
-Going further and using the approach from [@Broc2016] I'm faceting the scatterplots to assess if the coefficient of the linear regression is similar for all the levels of the machine factor:
+The next step is to confirm the correlation between the continuous input variable and the output and the `cor.test()` from the `{stats}` package is perfectly suited for this. The extremely high value of 93% confirms what was very visible in the scatterplot. Going further and using the approach from [@Broc2016] we're going to facet the scatterplots to assess if the coefficient of the linear regression is similar for all the levels of the fillfactor:
 
 ```{r}
 solarcell_fill %>%
@@ -422,25 +402,21 @@ solarcell_fill %>%
   )
 ```
 
-Visually this is the case, going from one level to the other is not changing the relationship between thickness and strenght - increasing thickness increases stenght. Visually the slopes are similar but the number of points is small. In a real case this verification could be extended with the correlation test for each level or/and a statistical test between slopes.
-
-We're now reproducing in R the ancova case study from the book, still using the aov function.
-The way to feed the R function arguments is obtained from https://www.datanovia.com/en/lessons/ancova-in-r/
-
-*Three different machines produce a monofilament fiber for a textile company. The process engineer is interested in determining if there is a difference in the breaking strength of the fiber produced by the three machines. However, the strength of a fiber is related to its diameter, with thicker fibers being generally stronger than thinner ones. A random sample of five fiber specimens is selected from each machine.*
+Visually this is the case, going from one level to the other is not changing the relationship between output and fillfactor. Not only increasing fill factor increase output the degree to which this takes place is equivalent as seen by the slopes of the plot. Care needs to be taken because the  number of points is very small. If required it is always possible to do individual correlation test and/or do a statistical test between slopes.
 
 ### Ancova {#ancova_aov}
 
 ```{r}
 solarcell_ancova <- aov(
-  output ~ fillfactor  + material, solarcell_fill
+  formula = output ~ fillfactor + material, 
+  data = solarcell_fill
   )
 summary(solarcell_ancova)
 ```
 
-> Note that in the formula the covariate goes first (and there is no interaction)! If you do not do this in order, you will get different results.
+Although the team had been using R often the case of the ancova had not yet came up so it was up to the Data Scientis to do this analysis. In R the ancova can be done with the same function as the anova, the `aov()` function from `{stats}`. There's a specific way to establish the formula which he has obtained from [Datanovia - Ancova](https://www.datanovia.com/en/lessons/ancova-in-r/). Note that the covariate goes first and there is no interaction. If this is not done this way the results are will be different.
 
-* material in this table corresponds to the adjusted material mean square
+In the summary output the material corresponds to the adjusted material mean square
 
 Conclusions from the book in page 662:
 
@@ -450,8 +426,6 @@ Conclusions from the book in page 662:
 
 *In some experiments this may be obvious from the nature of the covariate, whereas in others it may be more doubtful. In our example, there may be a difference in fiber diameter (x ij ) between the three machines. In such cases, Cochran and Cox (1957) suggest that an analysis of variance on the x ij values may be helpful in determining the validity of this assumption. ...there is no reason to believe that machines produce fibers of different diameters.*
 
-(I did not go further here as it goes beyond the scope of the assessment)
-
 Comparison with anova
 
 Below the common approach we've been using in design of experiments.
@@ -460,8 +434,6 @@ Below the common approach we've been using in design of experiments.
 solarcell_aov <- aov(output ~ material, solarcell_fill)
 summary(solarcell_aov)
 ```
-
-The anova table obtained also corresponds correctly to the book example. 
 
 Montgomery final observations:
 
@@ -475,7 +447,7 @@ Potential applications
 
 In the scope of methods validations this approach could potentially be used in robustness validations when there is suspiction that a continuous variable is disturbing the measurement.
 
-Naturally this should not be applied everywhere but only where there would to be logical a physical or chemical reason behind as in the example with thickness and strenght.
+Naturally this should not be applied everywhere but only where there would to be logical a physical or chemical reason behind as in the example with fillfactor and power output.
 
 
 

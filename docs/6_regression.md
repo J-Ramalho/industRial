@@ -1,7 +1,7 @@
 
 
 
-## Linear regression
+## Linear models
 
 <div class="marginnote">
 
@@ -104,7 +104,7 @@ ggplot(ebike_narrow) +
 
 This visualization shows how a linear regression line adjusts to the data and we can see it is not passing exactly at the means of each treatment level. In the next steps we go into the functions underneath that are used to calculate the regression line.
 
-### Linear model {#lm}
+### lm {#lm}
 
 
 ```r
@@ -310,14 +310,14 @@ ebike_aug %>%
 
 
 
-| cycles | temperature | .fitted | .resid | .std.resid | .hat | .sigma | .cooksd | index |
-|:------:|:-----------:|:-------:|:------:|:----------:|:----:|:------:|:-------:|:-----:|
-| 575000 |     160     | 551200  | 23800  |  1.45665   | 0.2  | 17571  | 0.13261 |   1   |
-| 542000 |     160     | 551200  | -9200  |  -0.56307  | 0.2  | 18679  | 0.01982 |   2   |
-| 530000 |     160     | 551200  | -21200 |  -1.29752  | 0.2  | 17846  | 0.10522 |   3   |
-| 539000 |     160     | 551200  | -12200 |  -0.74668  | 0.2  | 18535  | 0.03485 |   4   |
-| 570000 |     160     | 551200  | 18800  |  1.15063   | 0.2  | 18069  | 0.08275 |   5   |
-| 565000 |     180     | 587400  | -22400 |  -1.37096  | 0.2  | 17724  | 0.11747 |   6   |
+| cycles | temperature | .fitted | .resid | .hat | .sigma | .cooksd | .std.resid | index |
+|:------:|:-----------:|:-------:|:------:|:----:|:------:|:-------:|:----------:|:-----:|
+| 575000 |     160     | 551200  | 23800  | 0.2  | 17571  | 0.13261 |  1.45665   |   1   |
+| 542000 |     160     | 551200  | -9200  | 0.2  | 18679  | 0.01982 |  -0.56307  |   2   |
+| 530000 |     160     | 551200  | -21200 | 0.2  | 17846  | 0.10522 |  -1.29752  |   3   |
+| 539000 |     160     | 551200  | -12200 | 0.2  | 18535  | 0.03485 |  -0.74668  |   4   |
+| 570000 |     160     | 551200  | 18800  | 0.2  | 18069  | 0.08275 |  1.15063   |   5   |
+| 565000 |     180     | 587400  | -22400 | 0.2  | 17724  | 0.11747 |  -1.37096  |   6   |
 
 <div class="marginnote">
 
@@ -369,7 +369,7 @@ durbinWatsonTest(ebike_lm_factor)
 
 ```
  lag Autocorrelation D-W Statistic p-value
-   1        -0.53433        2.9609    0.09
+   1        -0.53433        2.9609   0.084
  Alternative hypothesis: rho != 0
 ```
 
@@ -436,23 +436,6 @@ ebike_aug %>%
 
 If the model is correct and the assumptions hold, the residuals should be structureless. In particular they should be unrelated to any other variable including the predicted response. A plot of the residuals against the fitted values should reveal such structures. In this plot we see no variance anomalies such as a higher variance for a certain factor level or other types of skweness.
 
-### Homocedasticity {#homocedasticity}
-
-
-```r
-bartlett.test(cycles ~ temperature, data = ebike_factor)
-```
-
-```
-
-	Bartlett test of homogeneity of variances
-
-data:  cycles by temperature
-Bartlett's K-squared = 0.433, df = 3, p-value = 0.93
-```
-
-A complement to the residuals-fit plot is the equality of variances test. Tests for variance comparison have been introduced in the Direct Comparisons case studies but the `var.test()` cannot be used here. Here we have more than two levels for which the Bartlett test is most suited. The normal distribution of the residuals has already been confirmed. This test is sensitive to the normality assumption, consequently, when the validity of this assumption is doubtful, it should not be used and be replaced by the modified Levene test for example. Applying the test we obtain a p-value is P = 0.93 meaning we cannot reject the null hypothesis. In statistical terms, there is no evidence to counter the claim that all five variances are the same. This is the same conclusion reached by analyzing the plot of residuals versus fitted values.
-
 ### Standard Residuals-Fit plot {#std_residuals_fit}
 
 
@@ -470,6 +453,41 @@ ebike_aug %>%
 <img src="6_regression_files/figure-html/fig-ebikestdresfit-1.png" width="100%" />
 
 This Standardized residuals plot helps detecting outliers in the residuals (any residual > 3 standard deviations is a potential outlier). The plot shows no outliers to consider in this DOE.
+
+### Standard Residuals-Factor plot {#std_residuals_factors}
+
+
+```r
+ebike_aug %>% 
+  ggplot(aes(x = temperature, y = .std.resid)) +
+  geom_point() +
+  geom_smooth(method = stats::loess, se = FALSE, color = "red") +
+  labs(title = "e-bike frame hardening process",
+       subtitle = "Linear model - Standardised Residuals vs Factor levels",
+       y = "Standardised Residuals",
+       x = "Fitted values")
+```
+
+<img src="6_regression_files/figure-html/fig-ebikestdresfactor-1.png" width="100%" />
+
+Besides another support to detect outliers, this additional plot also helps seeing if the variance of the residuals is identical in this case between the factor levels.
+
+### Homocedasticity {#homocedasticity}
+
+
+```r
+bartlett.test(cycles ~ temperature, data = ebike_factor)
+```
+
+```
+
+	Bartlett test of homogeneity of variances
+
+data:  cycles by temperature
+Bartlett's K-squared = 0.433, df = 3, p-value = 0.93
+```
+
+A complement to the residuals-fit/residuals-factors plots is the equality of variances test. Tests for variance comparison have been introduced in the Direct Comparisons case studies but the `var.test()` cannot be used here. Here we have more than two levels for which the Bartlett test is most suited. The normal distribution of the residuals has already been confirmed. This test is sensitive to the normality assumption, consequently, when the validity of this assumption is doubtful, it should not be used and be replaced by the modified Levene test for example. Applying the test we obtain a p-value is P = 0.93 meaning we cannot reject the null hypothesis. In statistical terms, there is no evidence to counter the claim that all five variances are the same. This is the same conclusion reached by analyzing the plot of residuals versus fitted values.
 
 ### Outliers test {#outliers}
 
@@ -516,7 +534,7 @@ summary(ebike_lm_factor)$r.squared
 [1] 0.92606
 ```
 
-A final input in the draft report of the ebike hardnening linear model is the R-squared. When looking into the results the engineering team is suspicious. A model with such a good fit should raise questions. R-squared gives an indication of the quality of the model. In this case 93% of the output is explained by input. Our lab supervisor is also not confortable the residuals analysis has not shown any evidence of something wrong with the model so he decides to quickly calculate it "by hand". He knows that the R-squared, or coefficient of determination is obtained from the ratio between the residuals variance and the output variable variance showing exactly the proportion between the two and he gets its straight away from R using the data already available:
+A final input in the draft report of the ebike hardening linear model is the R-squared. When looking into the results the engineering team is suspicious. In this case 93% of the output is explained by input and a model with such a good fit should raise questions. Our lab supervisor is also not confortable the residuals analysis has not shown any evidence of something wrong with the model so he decides to quickly calculate it "by hand". He knows that the R-squared, or coefficient of determination is obtained from the ratio between the residuals variance and the output variable variance showing exactly the proportion between the two and he gets its straight away from R using the data already available:
 
 
 ```r
@@ -529,4 +547,4 @@ ebike_aug %>%
 [1] 0.92606
 ```
 
-Remembering the original linear regression plot from the begining of the report he accepts this must not be so far away. It was clear that the temperature had a strong impact on the number of cycles and the variability for each level was small in the end. He accepts to leave as it is for now waiting for upcoming analysis of variance to see additional details.
+Remembering the original linear regression plot from the beginning of the report he accepts this must not be so far away. It was clear that the temperature had a strong impact on the number of cycles and the variability for each level was small in the end. He accepts to leave as it is for now waiting for upcoming analysis of variance to see additional details.

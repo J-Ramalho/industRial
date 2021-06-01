@@ -24,11 +24,12 @@ ebike_lm_factor <- lm(
 
 ## Anova & Ancova
 
-We can also compare medians and get a sense of the effect of the treatment levels by looking into the box plot:
+The commercial introduction of the new e-bike model is approaching soon and production is expected to start in a couple of months. The engineering team is getting impacient because the parameters for the frame thermal treatment are not yet defined. The engineering head call for a second meeting to review once more the DoE outputs. The lab supervisor reopens his Rmd report tries to go beyond the linear model discussed before. He created raw data plots with dots on individual data points but now he thinks it is important to have a view on the data distribution and some summary statistics. For that he prepares a box plot:
 
 ```{r}
-ggplot(ebike_factor, 
-       aes(x = temperature, y = cycles, fill = temperature)) +
+ggplot(
+  ebike_factor, 
+  aes(x = temperature, y = cycles, fill = temperature)) +
   geom_boxplot() +
   scale_fill_viridis_d(option = "D", begin = 0.5) +
   scale_y_continuous(n.breaks = 10, labels = label_number(big.mark = "'")) +
@@ -39,25 +40,22 @@ ggplot(ebike_factor,
        y = "Cycles to failure [n]")
 ```
 
-1 factor with severals levels + 1 continuous dependent variable
-Similar to the t-test but extended - this test allows to compare the means between several levels of treatement for a continuous response variable (the t test is only 2 levels at a time, performing all pair wise t-tests would also not be a solution because its a lot of effort and would increase the type I error)
+They have been doing so many experiments that sometimes it gets hard to remember which variables have been tested in which experiment. This plot reminds him that this test consisted simply on 1 input variable with severals levels - the temperature and one continuous dependent variable - the number of cycles to failure. The plots shows clearly that the distributes are quite appart from each other in spite of the slight overlap between the first three groups. The underlying question is: are the different levels of temperature explaining the different results in resistance to fatigue? to confirm that means of those groups are statistically different from each other he knows he can use the analysis of variance. The name is a bit misleading since he want to compare means...but this name is historical and comes from the way the approach has evolved. The anova as it is called is similar to the t-test but is extended. Using all pair wise t-tests would mean more effort and increase the type I error.
 
-ANOVA principle: the total variability in the data, as measured by the total corrected sum of squares, can be partitioned into a sum of squares of the differences between the treatment averages and the grand average plus a sum of squares of the differences of observations within treatments from the treatment average
+The anova main principle is that the the total variability in the data, as measured by the total corrected sum of squares, can be partitioned into a sum of squares of the differences between the treatment averages and the grand average plus a sum of squares of the differences of observations within treatments from the treatment average. The first time he read this explanation it seemed complex but he understood better on seeing a simple hand made example on the [kahn academy - anova](https://www.youtube.com/watch?v=EFdlFoHI_0I).
 
 ### Aov {#aov}
-
-In R the anova is built by passing the linear model to the anova or aov functions. The output of the anova function is just the anova table as shown here for this first example. The output of the aov function is a list.
-
 
 ```{r}
 ebike_aov_factor <- aov(ebike_lm_factor)
 summary(ebike_aov_factor)
 ```
 
-Note that the RF temperature or between-treatment mean square (22,290.18) is many times larger than the within-treatment or error mean square (333.70). This indicates that it is unlikely that the treatment means are equal. 
-Also p < 0.05 thus we can reject the null hypothesis and conclude that the means are significantly different.
+In R the anova is built by passing the linear model object to the `anova()` or `aov()` functions. The output of the first is just the anova table, the output of the second function is a complete list with the full lm model inside.
 
-Anova on plasma etching, modification of the example to achieve a p > 0.05:
+The R anova output gives the sum of squares for the factor and for the residuals. In this case the between-treatment mean square is much larger than the within-treatment or residuals mean square. This suggests that it is unlikely that the treatment means are equal. The p is extremely small confirming this and  we have basis to reject the null hypothesis and conclude that the means are significantly different. 
+
+In the mean while the lab supervisor has gathered data on a similar experiment done with frams in another material for that seems to be less sensitive the the treatment temperation. He uploads this data and assigns it to a dataset called `ebike_hardning2` and plots another box plot.
 
 ```{r}
 ebike_narrow2 <- ebike_hardening2 %>%
@@ -71,9 +69,6 @@ ebike_narrow2 <- ebike_hardening2 %>%
   ungroup()
 ebike_factor2 <- ebike_narrow2
 ebike_factor2$temperature <- as.factor(ebike_factor2$temperature)
-
-ebike_lm_factor2 <- lm(cycles ~ temperature, data = ebike_factor2)
-anova(ebike_lm_factor2)
 ```
 
 ```{r}
@@ -90,7 +85,12 @@ ggplot(ebike_factor2,
        y = "Cycles to failure [n]")
 ```
 
-P > 0.05 - there is no significant difference between the means
+Effectively the outputs are much more spread out and the overlaps much bigger. A new anova gives a p value of 0.34 supporting the assumption of no significant difference between the means of the treatment levels.
+
+```{r}
+ebike_lm_factor2 <- lm(cycles ~ temperature, data = ebike_factor2)
+anova(ebike_lm_factor2)
+```
 
 ### Pairwise comparison {#tukey}
 

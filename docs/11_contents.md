@@ -132,7 +132,7 @@
   <tr>
    <td style="text-align:left;background-color: white !important;">  </td>
    <td style="text-align:left;background-color: white !important;"> [Contrasts treatment](#contr.treatment) </td>
-   <td style="text-align:left;background-color: white !important;">  </td>
+   <td style="text-align:left;background-color: white !important;"> `stats::contrasts` </td>
    <td style="text-align:left;background-color: white !important;">  </td>
   </tr>
   <tr>
@@ -299,12 +299,6 @@
   </tr>
   <tr>
    <td style="text-align:left;background-color: white !important;">  </td>
-   <td style="text-align:left;background-color: white !important;">  </td>
-   <td style="text-align:left;background-color: white !important;"> `stats::contrasts` </td>
-   <td style="text-align:left;background-color: white !important;">  </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;background-color: white !important;">  </td>
    <td style="text-align:left;background-color: white !important;"> [Interaction plots with SE](#plotMeans) </td>
    <td style="text-align:left;background-color: white !important;"> `RcmdrMisc::plotMeans` </td>
    <td style="text-align:left;background-color: white !important;">  </td>
@@ -412,10 +406,10 @@
    <td style="text-align:left;background-color: white !important;">  </td>
   </tr>
   <tr>
-   <td style="text-align:left;">  </td>
-   <td style="text-align:left;"> [Capability chart (custom)](#chart_Cpk) </td>
-   <td style="text-align:left;"> `industRial::chart_Cpk` </td>
-   <td style="text-align:left;">  </td>
+   <td style="text-align:left;background-color: white !important;">  </td>
+   <td style="text-align:left;background-color: white !important;"> [Capability chart (custom)](#chart_Cpk) </td>
+   <td style="text-align:left;background-color: white !important;"> `industRial::chart_Cpk` </td>
+   <td style="text-align:left;background-color: white !important;">  </td>
   </tr>
 </tbody>
 </table>

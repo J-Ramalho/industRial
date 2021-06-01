@@ -18,7 +18,7 @@ Direct comparisons,[Histogram](#histogram),`ggplot2::geom_histogram`,pet_deliver
 ,[F test](#var.test),`stats::var.test`,,,
 ,[Levene test](#levene.test),`car::leveneTest`,,,
 Linear regression,[Linear model](#lm),`stats::lm`,ebike_hardening,The e-bike frame hardening process,Bicycle manufacturing
-,[Contrasts treatment](#contr.treatment),,,,
+,[Contrasts treatment](#contr.treatment),`stats::contrasts`,,,
 ,[Predict](#predict),`stats::predict`,,,
 ,[Model augment](#augment),`broom::augment`,,,
 ,[Timeseries plot](#residuals_timeseries),,,,
@@ -46,7 +46,6 @@ General designs,[Factorial design](#fac.design),`DoE.base::fac.design`,juice_dry
 ,[Interactions plots (custom)](#interaction_plot),`ggplot2::geom_errorbar`,,,
 ,[Anova 3rd level interactions](#anova_three),,,,
 Two level designs,[Coding levels](#coding_levels),`stats::relevel`,pet_doe,The PET clothing improvement DoE,Clothing
-,,`stats::contrasts`,,,
 ,[Interaction plots with SE](#plotMeans),`RcmdrMisc::plotMeans`,,,
 ,[Adjusted R-square](#adj_Rsquare),`broom::glance`,battery_charging,The lithium-ion battery charging time test,Automotive
 ,[Coding inputs](#coding_inputs),,,,

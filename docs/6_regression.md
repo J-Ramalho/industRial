@@ -15,7 +15,7 @@ Demand for electrical bicycles grows steadily and a global manufacturer is looki
 
 A way to go beyond the statistical description of samples and direct comparison between different tests it is to establish a model. Models help us simplify the reality and draw general conclusions. The case studies in this unit introduce linear models and their applications. They also serve as the backbone for statistical inference and forecasting. These are two important techniques because they provide mathematical evidence of such general conclusions in a context where the test quantities are strongly limited as for example in lifecycle testing of expensive mechanical parts.
 
-Mountain bikes frames are submitted to many different efforts, namely bending, compression and vibration. Obviously no one expects a bike frame to break in regular usage and it is hard to commercialy claim resistance to failure as a big thing. Nevertheless on the long term a manufacturer reputation is made on performance features such as the number of cycles of effort that the frame resists. An e-bike manufacturing company is looking to increase the duration of its frames by improving the  <b class="highlight">e-bike frame hardening</b> process.
+Bicycle frames are submitted to many different efforts, namely bending, compression and vibration. Obviously no one expects a bike frame to break in regular usage and it is hard to commercialy claim resistance to failure as a big thing. Nevertheless on the long term a manufacturer reputation is made on performance features such as the number of cycles of effort that the frame resists. An e-bike manufacturing company is looking to increase the duration of its frames by improving the  <b class="highlight">e-bike frame hardening</b> process.
 
 A test has been run with 5 groups of 30 bike frames submitted to 4 different treatment temperature levels and the data collected in the R tibble `ebike_hardening` presented below:
 
@@ -84,6 +84,26 @@ ggplot(data = ebike_narrow) +
 
 Clearly the highest the furnace temperature the higher the number of cycles to failure. This is absolutely expected as higher temperatures, up to a certain level, allow to release mechanical tensions and make the material less prone to fracture. The team knows that other factors are at play such as the treatment duration, the pre-heating temperature and many others related with the welding of the frame parts, but has deliberately decided to look only into the temperature due to time constraints related with a new bike launch.
 
+It is good to complement the raw data plot with a regression line corresponding to this linear model as done in the next chunk with the function `geom_smooth()`:
+
+
+```r
+ggplot(ebike_narrow) +
+  geom_point(aes(x = temperature, y = cycles)) +
+  geom_smooth(aes(x = temperature, y = cycles), method = "lm") +
+  geom_point(aes(x = temperature, y = cycles_mean), color = "red") +
+  scale_y_continuous(n.breaks = 10, labels = label_number(big.mark = "'")) +
+  theme(legend.position = "none") +
+  labs(title = "e-bike frame hardening process",
+       subtitle = "Raw data plot",
+       x = "Furnace Temperature [°C]",
+       y = "Cycles to failure [n]")
+```
+
+<img src="6_regression_files/figure-html/fig-ebikesmooth-1.png" width="100%" />
+
+This visualization shows how a linear regression line adjusts to the data and we can see it is not passing exactly at the means of each treatment level. In the next steps we go into the functions underneath that are used to calculate the regression line.
+
 ### Linear model {#lm}
 
 
@@ -113,36 +133,42 @@ Multiple R-squared:  0.884,	Adjusted R-squared:  0.878
 F-statistic:  138 on 1 and 18 DF,  p-value: 7.26e-10
 ```
 
-This last code chunk in lab supervisor draft report is a linear model built with the variable `temperature` as a numeric vector. The R `summary()` function produces a specific output for linear models and a dedicated help explaining each output value can be accessed with `?summary.lm`. Knowing that R uses specific "methods" to provide the summaries for many functions is useful to find their help pages and a way to list them is `apropos("summary)`.
+This previoous code chunk from the lab supervisor draft report is a linear model built with the variable `temperature` as a numeric vector. The R `summary()` function produces a specific output for linear models and a dedicated help explaining each output value can be accessed with `?summary.lm`. Knowing that R uses specific "methods" to provide the summaries for many functions is useful to find their help pages and a way to list them is `apropos("summary)`. In this case we see a high R-squared suggesting a very good fit and that the temperature is significant by looking at the 3 *significance stars* next to its p-value. 
 
-In this case we see a high R-squared suggesting a very good fit and that the temperature is significant by looking at the 3 *significance stars* next to its p-value. It is good to complement the raw data plot with a regression line corresponding to this linear model as done in the next chunk with the function `geom_smooth()`:
-
-
-```r
-ggplot(ebike_narrow) +
-  geom_point(aes(x = temperature, y = cycles)) +
-  geom_smooth(aes(x = temperature, y = cycles), method = "lm") +
-  geom_point(aes(x = temperature, y = cycles_mean), color = "red") +
-  scale_y_continuous(n.breaks = 10, labels = label_number(big.mark = "'")) +
-  theme(legend.position = "none") +
-  labs(title = "e-bike frame hardening process",
-       subtitle = "Raw data plot",
-       x = "Furnace Temperature [°C]",
-       y = "Cycles to failure [n]")
-```
-
-<img src="6_regression_files/figure-html/fig-ebikesmooth-1.png" width="100%" />
-
-The engineering team has selected to specify and control the temperature variable at specific levels in what is called a fixed effects model, limiting the conclusions to the levels tested. The lab supervisor updates his model by converting the temperature variable to a factor and establishes again the linear model. He explicitly introduces the argument `contrasts` as cont.treatment to make clear that this was his option. In principle this is not needed because this is default setting for the contrasts as seen with `getOption("contrasts")`.
+### Contrasts {#contr.treatment}
 
 
 ```r
 ebike_factor <- ebike_narrow %>%
   mutate(temperature = as_factor(temperature))
+
+contrasts(ebike_factor$temperature) <- contr.treatment
+
+attributes(ebike_factor$temperature)
+```
+
+```
+$levels
+[1] "160" "180" "200" "220"
+
+$class
+[1] "factor"
+
+$contrasts
+    2 3 4
+160 0 0 0
+180 1 0 0
+200 0 1 0
+220 0 0 1
+```
+
+The engineering team has selected to specify and control the temperature variable at specific levels in what is called a fixed effects model, limiting the conclusions to the levels tested. The lab supervisor updates his dataset by converting the temperature variable to a factor and explicitly establishes the factor `contrasts` with the `contrasts()` function. He selects `cont.treatment`. Looking into the attributes of the factor we see the matrix of contrasts. In many cases it is possible to skip this step as contr.treament is default setting for the contrasts. This can be confirmed with `getOption("contrasts")`. He can now establish a new linear model using the modified dataset.
+
+
+```r
 ebike_lm_factor <- lm(
   cycles ~ temperature, 
-  data = ebike_factor,
-  contrasts = list(temperature = "contr.treatment")
+  data = ebike_factor
   )
 summary(ebike_lm_factor)
 ```
@@ -150,18 +176,18 @@ summary(ebike_lm_factor)
 ```
 
 Call:
-lm(formula = cycles ~ temperature, data = ebike_factor, contrasts = list(temperature = "contr.treatment"))
+lm(formula = cycles ~ temperature, data = ebike_factor)
 
 Residuals:
    Min     1Q Median     3Q    Max 
 -25400 -13000   2800  13200  25600 
 
 Coefficients:
-               Estimate Std. Error t value Pr(>|t|)    
-(Intercept)      551200       8170   67.47  < 2e-16 ***
-temperature180    36200      11553    3.13   0.0064 ** 
-temperature200    74200      11553    6.42  8.4e-06 ***
-temperature220   155800      11553   13.49  3.7e-10 ***
+             Estimate Std. Error t value Pr(>|t|)    
+(Intercept)    551200       8170   67.47  < 2e-16 ***
+temperature2    36200      11553    3.13   0.0064 ** 
+temperature3    74200      11553    6.42  8.4e-06 ***
+temperature4   155800      11553   13.49  3.7e-10 ***
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
@@ -170,28 +196,7 @@ Multiple R-squared:  0.926,	Adjusted R-squared:  0.912
 F-statistic: 66.8 on 3 and 16 DF,  p-value: 2.88e-09
 ```
 
-### Contrasts {#contr.treatment}
-
-We saw that from the first model to the second the R-squared has slightly improved and model coefficients are slightly different. In R the model coefficients depend on the variable variable data type. To obtain equivalent results with the different type coding it is necessary to carefully set the model *contrasts*. Lets see the contrasts for the two models established:
-
-
-```r
-ebike_lm$contrasts$temperature
-```
-
-```
-NULL
-```
-
-```r
-ebike_lm_factor$contrasts$temperature
-```
-
-```
-[1] "contr.treatment"
-```
-
-Factor type coding and contrasts definition lead to different linear regression equations with different coefficients. It is important to use common sense and attention before using whatever output the system is giving us. We can see the coefficients and use them to calculate the output with a matrix multiplication  as follows:
+We see that from the first model to the second the R-squared has improved and that the model coefficients are slightly different. In R the model coefficients depend on the variable variable data type and on the contrasts setting. To obtain equivalent results with the different type coding it is necessary to carefully set the model *contrasts*. These differences are due to the calculation of different linear regression equations with different coefficients. It is important to be attemptive before using whatever output the system is giving us. We can see the coefficients and use them to calculate the output with a matrix multiplication  as follows:
 
 
 ```r
@@ -212,7 +217,27 @@ ebike_lm$coefficients %*% c(1, 180)
 [1,] 592480
 ```
 
-this shows that to calculate the output for an input of 180 we have 137'620 + 180 x 2'527 = 592'480. On the other hand, when the temperature is coded as a factor we have the following coefficients and output calculation:
+this shows that to calculate the output for an input of 180 we have 137'620 + 180 x 2'527 = 592'480. Making a zoom on the linear regression plot we see this passes slightly above the mean for the 180°C treatment level:
+
+
+```r
+ggplot(ebike_narrow) +
+  geom_point(aes(x = temperature, y = cycles)) +
+  geom_smooth(aes(x = temperature, y = cycles), method = "lm") +
+  geom_point(aes(x = temperature, y = cycles_mean), color = "red") +
+  scale_y_continuous(n.breaks = 20, labels = label_number(big.mark = "'")) +
+  coord_cartesian(xlim = c(160, 180), ylim = c(520000, 620000)) +
+  geom_hline(yintercept = 592480) +
+  theme(legend.position = "none") +
+  labs(title = "e-bike frame hardening process",
+       subtitle = "Raw data plot",
+       x = "Furnace Temperature [°C]",
+       y = "Cycles to failure [n]")
+```
+
+<img src="6_regression_files/figure-html/fig-ebikesmoothzoom-1.png" width="100%" />
+
+On the other hand, when the temperature is coded as a factor we have the following coefficients and output calculation:
 
 
 ```r
@@ -220,8 +245,8 @@ ebike_lm_factor$coefficients
 ```
 
 ```
-   (Intercept) temperature180 temperature200 temperature220 
-        551200          36200          74200         155800 
+ (Intercept) temperature2 temperature3 temperature4 
+      551200        36200        74200       155800 
 ```
 
 ```r
@@ -233,7 +258,7 @@ ebike_lm_factor$coefficients %*% c(1, 1, 0, 0)
 [1,] 587400
 ```
 
-The output is slightly different corresponding to 551'200 + 1 x 36'200 = 587'400. More on this in the next section.
+The output is slightly different: 551'200 + 1 x 36'200 = 587'400, corresponding exactly to the treatment mean for 180°C. More on this in the next section.
 
 ### Predict {#predict}
 
@@ -250,7 +275,7 @@ predict(ebike_lm, newdata = ebike_new)
 592480 643020 668290 
 ```
 
-We can see that the prediction at the tested levels is slightly different from the measured averages at those levels. This is because the linear regression line is not passing exactly by the averages. Anyway in our case the team has selected a fixed effects model and we can only take conclusions at the levels at which the input was tested. We can check that the predictions correspond exactly to the averages we've calculated for each level:
+As mentionned in our case the team has selected a fixed effects model and in principle they sould only draw conclusions at the levels at which the input was tested. We can check with `predict()` too that the predictions correspond exactly to the averages we've calculated for each level:
 
 
 ```r
@@ -285,14 +310,28 @@ ebike_aug %>%
 
 
 
-| cycles | temperature | .fitted | .resid | .hat | .sigma | .cooksd | .std.resid | index |
-|:------:|:-----------:|:-------:|:------:|:----:|:------:|:-------:|:----------:|:-----:|
-| 575000 |     160     | 551200  | 23800  | 0.2  | 17571  | 0.13261 |  1.45665   |   1   |
-| 542000 |     160     | 551200  | -9200  | 0.2  | 18679  | 0.01982 |  -0.56307  |   2   |
-| 530000 |     160     | 551200  | -21200 | 0.2  | 17846  | 0.10522 |  -1.29752  |   3   |
-| 539000 |     160     | 551200  | -12200 | 0.2  | 18535  | 0.03485 |  -0.74668  |   4   |
-| 570000 |     160     | 551200  | 18800  | 0.2  | 18069  | 0.08275 |  1.15063   |   5   |
-| 565000 |     180     | 587400  | -22400 | 0.2  | 17724  | 0.11747 |  -1.37096  |   6   |
+| cycles | temperature | .fitted | .resid | .std.resid | .hat | .sigma | .cooksd | index |
+|:------:|:-----------:|:-------:|:------:|:----------:|:----:|:------:|:-------:|:-----:|
+| 575000 |     160     | 551200  | 23800  |  1.45665   | 0.2  | 17571  | 0.13261 |   1   |
+| 542000 |     160     | 551200  | -9200  |  -0.56307  | 0.2  | 18679  | 0.01982 |   2   |
+| 530000 |     160     | 551200  | -21200 |  -1.29752  | 0.2  | 17846  | 0.10522 |   3   |
+| 539000 |     160     | 551200  | -12200 |  -0.74668  | 0.2  | 18535  | 0.03485 |   4   |
+| 570000 |     160     | 551200  | 18800  |  1.15063   | 0.2  | 18069  | 0.08275 |   5   |
+| 565000 |     180     | 587400  | -22400 |  -1.37096  | 0.2  | 17724  | 0.11747 |   6   |
+
+<div class="marginnote">
+
+Residuals analysis plots obtained with base R plot() function. In this unit each plot is generated individually with custom functions and a direct approach with based R is used in the next units.
+
+
+```r
+par(mfrow = c(2,2))
+plot(ebike_lm_factor)
+```
+
+<img src="6_regression_files/figure-html/unnamed-chunk-2-1.png" width="100%" />
+
+</div>
 
 A deep structural change has happened in R since the `{tidyverse}`. The original S and R creators had developed a language where matrices, vectors, lists and dataframes had equivalent importance. The output of a function was often a list with a specific *S3* class comprising other vectors and data.frames inside. This allowed to use in a transparent way generic functions such as `summary()` to produce tailor made outputs because a method was working underneath. We've just seen an example of this with the `lm()` summary in the beginning of this case. For the `plot()` function there are more than a hundred different automatic plots as seens with `apropos("plot")`. This is a very important difference as in the `{tidyverse}` we add layers to obtain the required plot. On the data side since `{tidyverse}` has been introduced we've seen an increasing importance of the dataframe, now replaced by the `tibble`. The `agument()` does exactly this, extracts the coefficients, residuals and other data from the model and stores it in a `tibble` format. This has the advantage of making it easier to integrate these functions with the other `{tidyverse}` functions and pipelines while still allowing to keep the methods approach. An interesting reading on this co-existance is available under [tideness-modeling](https://www.tmwr.org/base-r.html#tidiness-modeling)
 
@@ -330,7 +369,7 @@ durbinWatsonTest(ebike_lm_factor)
 
 ```
  lag Autocorrelation D-W Statistic p-value
-   1        -0.53433        2.9609    0.12
+   1        -0.53433        2.9609   0.088
  Alternative hypothesis: rho != 0
 ```
 

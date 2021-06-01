@@ -5,12 +5,13 @@
 
 ## Anova & Ancova
 
-We can also compare medians and get a sense of the effect of the treatment levels by looking into the box plot:
+The commercial introduction of the new e-bike model is approaching soon and production is expected to start in a couple of months. The engineering team is getting impacient because the parameters for the frame thermal treatment are not yet defined. The engineering head call for a second meeting to review once more the DoE outputs. The lab supervisor reopens his Rmd report tries to go beyond the linear model discussed before. He created raw data plots with dots on individual data points but now he thinks it is important to have a view on the data distribution and some summary statistics. For that he prepares a box plot:
 
 
 ```r
-ggplot(ebike_factor, 
-       aes(x = temperature, y = cycles, fill = temperature)) +
+ggplot(
+  ebike_factor, 
+  aes(x = temperature, y = cycles, fill = temperature)) +
   geom_boxplot() +
   scale_fill_viridis_d(option = "D", begin = 0.5) +
   scale_y_continuous(n.breaks = 10, labels = label_number(big.mark = "'")) +
@@ -23,15 +24,11 @@ ggplot(ebike_factor,
 
 <img src="7_anova_files/figure-html/unnamed-chunk-3-1.png" width="100%" />
 
-1 factor with severals levels + 1 continuous dependent variable
-Similar to the t-test but extended - this test allows to compare the means between several levels of treatement for a continuous response variable (the t test is only 2 levels at a time, performing all pair wise t-tests would also not be a solution because its a lot of effort and would increase the type I error)
+They have been doing so many experiments that sometimes it gets hard to remember which variables have been tested in which experiment. This plot reminds him that this test consisted simply on 1 input variable with severals levels - the temperature and one continuous dependent variable - the number of cycles to failure. The plots shows clearly that the distributes are quite appart from each other in spite of the slight overlap between the first three groups. The underlying question is: are the different levels of temperature explaining the different results in resistance to fatigue? to confirm that means of those groups are statistically different from each other he knows he can use the analysis of variance. The name is a bit misleading since he want to compare means...but this name is historical and comes from the way the approach has evolved. The anova as it is called is similar to the t-test but is extended. Using all pair wise t-tests would mean more effort and increase the type I error.
 
-ANOVA principle: the total variability in the data, as measured by the total corrected sum of squares, can be partitioned into a sum of squares of the differences between the treatment averages and the grand average plus a sum of squares of the differences of observations within treatments from the treatment average
+The anova main principle is that the the total variability in the data, as measured by the total corrected sum of squares, can be partitioned into a sum of squares of the differences between the treatment averages and the grand average plus a sum of squares of the differences of observations within treatments from the treatment average. The first time he read this explanation it seemed complex but he understood better on seeing a simple hand made example on the [kahn academy - anova](https://www.youtube.com/watch?v=EFdlFoHI_0I).
 
 ### Aov {#aov}
-
-In R the anova is built by passing the linear model to the anova or aov functions. The output of the anova function is just the anova table as shown here for this first example. The output of the aov function is a list.
-
 
 
 ```r
@@ -47,10 +44,11 @@ Residuals   16 5.34e+09 3.34e+08
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ```
 
-Note that the RF temperature or between-treatment mean square (22,290.18) is many times larger than the within-treatment or error mean square (333.70). This indicates that it is unlikely that the treatment means are equal. 
-Also p < 0.05 thus we can reject the null hypothesis and conclude that the means are significantly different.
+In R the anova is built by passing the linear model object to the `anova()` or `aov()` functions. The output of the first is just the anova table, the output of the second function is a complete list with the full lm model inside.
 
-Anova on plasma etching, modification of the example to achieve a p > 0.05:
+The R anova output gives the sum of squares for the factor and for the residuals. In this case the between-treatment mean square is much larger than the within-treatment or residuals mean square. This suggests that it is unlikely that the treatment means are equal. The p is extremely small confirming this and  we have basis to reject the null hypothesis and conclude that the means are significantly different. 
+
+In the mean while the lab supervisor has gathered data on a similar experiment done with frams in another material for that seems to be less sensitive the the treatment temperation. He uploads this data and assigns it to a dataset called `ebike_hardning2` and plots another box plot.
 
 
 ```r
@@ -65,18 +63,6 @@ ebike_narrow2 <- ebike_hardening2 %>%
   ungroup()
 ebike_factor2 <- ebike_narrow2
 ebike_factor2$temperature <- as.factor(ebike_factor2$temperature)
-
-ebike_lm_factor2 <- lm(cycles ~ temperature, data = ebike_factor2)
-anova(ebike_lm_factor2)
-```
-
-```
-Analysis of Variance Table
-
-Response: cycles
-            Df   Sum Sq  Mean Sq F value Pr(>F)
-temperature  3 1.48e+09 4.92e+08     1.2   0.34
-Residuals   16 6.55e+09 4.10e+08               
 ```
 
 
@@ -96,7 +82,22 @@ ggplot(ebike_factor2,
 
 <img src="7_anova_files/figure-html/unnamed-chunk-6-1.png" width="100%" />
 
-P > 0.05 - there is no significant difference between the means
+Effectively the outputs are much more spread out and the overlaps much bigger. A new anova gives a p value of 0.34 supporting the assumption of no significant difference between the means of the treatment levels.
+
+
+```r
+ebike_lm_factor2 <- lm(cycles ~ temperature, data = ebike_factor2)
+anova(ebike_lm_factor2)
+```
+
+```
+Analysis of Variance Table
+
+Response: cycles
+            Df   Sum Sq  Mean Sq F value Pr(>F)
+temperature  3 1.48e+09 4.92e+08     1.2   0.34
+Residuals   16 6.55e+09 4.10e+08               
+```
 
 ### Pairwise comparison {#tukey}
 
@@ -117,7 +118,7 @@ head(ebike_tukey$temperature) %>%
 
 
 
-Table: (\#tab:unnamed-chunk-8)tukey test on e-bike frame hardening process
+Table: (\#tab:unnamed-chunk-9)tukey test on e-bike frame hardening process
 
 |        |  diff  |   lwr    |  upr   |  p adj  |
 |:-------|:------:|:--------:|:------:|:-------:|
@@ -137,7 +138,7 @@ Additionally we can obtain the related plot with the confidence intervals
 plot(ebike_tukey)
 ```
 
-<img src="7_anova_files/figure-html/unnamed-chunk-9-1.png" width="100%" />
+<img src="7_anova_files/figure-html/unnamed-chunk-10-1.png" width="100%" />
 
 ### Least significant difference {#fisherLSD}
 
@@ -171,7 +172,7 @@ head(ebike_LSD$statistics) %>%
 
 
 
-Table: (\#tab:unnamed-chunk-12)Fisher LSD procedure on e-bike frame hardening: stats
+Table: (\#tab:unnamed-chunk-13)Fisher LSD procedure on e-bike frame hardening: stats
 
 |   |  MSerror  | Df |  Mean  |   CV   | t.value |  LSD  |
 |:--|:---------:|:--:|:------:|:------:|:-------:|:-----:|
@@ -192,7 +193,7 @@ head(ebike_LSD$means) %>%
 
 
 
-Table: (\#tab:unnamed-chunk-13)Fisher LSD procedure on e-bike frame hardening: means
+Table: (\#tab:unnamed-chunk-14)Fisher LSD procedure on e-bike frame hardening: means
 
 |    | cycles |  std  | r |  LCL   |  UCL   |
 |:---|:------:|:-----:|:-:|:------:|:------:|
@@ -215,7 +216,7 @@ head(ebike_LSD$groups) %>%
 
 
 
-Table: (\#tab:unnamed-chunk-14)Fisher LSD procedure on e-bike frame hardening: groups
+Table: (\#tab:unnamed-chunk-15)Fisher LSD procedure on e-bike frame hardening: groups
 
 |    | ebike_factor$cycles | groups |
 |:---|:-------------------:|:------:|
@@ -233,7 +234,7 @@ Finally we can get from this package a plot with the Least significant differenc
 plot(ebike_LSD)
 ```
 
-<img src="7_anova_files/figure-html/unnamed-chunk-15-1.png" width="100%" />
+<img src="7_anova_files/figure-html/unnamed-chunk-16-1.png" width="100%" />
 
 And below we're exploring a manual execution of this type of plot (in this case with the standard deviations instead).
 
@@ -260,7 +261,7 @@ ebike_factor %>%
        y = "Cycles to failure [n]")
 ```
 
-<img src="7_anova_files/figure-html/unnamed-chunk-16-1.png" width="100%" />
+<img src="7_anova_files/figure-html/unnamed-chunk-17-1.png" width="100%" />
 
 As often with statistical tools, there is debate on the best approach to use. We recommend to combine the Tukey test with the Fisher's LSD completementary R functions. The Tukey test giving a first indication of the levels that have an effect and calculating the means differences and the Fisher function to provide much more additional information on each level. To be considered in each situation the slight difference  between the significance level for difference between means and to decide if required to take the most conservative one.
 
@@ -356,7 +357,7 @@ interaction.plot(x.factor = solarcell_factor$temperature,
                  ylab = "output [kWh/yr equivalent]")
 ```
 
-<img src="7_anova_files/figure-html/unnamed-chunk-21-1.png" width="100%" />
+<img src="7_anova_files/figure-html/unnamed-chunk-22-1.png" width="100%" />
 
 Although simple many important learnings can be extracted from this plot. We get the indication of the mean value of battery life for the different data groups at each temperature level for each material. Also we see immediatly that batteries tend to have longer lifes at lower temperature for all material types. We also see that there is certainly an interaction between material and temperature as the lines cross each other.
 
@@ -369,7 +370,7 @@ We do now a quick assessment of the residuals, starting by the timeseries of res
 plot(solarcell_factor_lm$residuals)
 ```
 
-<img src="7_anova_files/figure-html/unnamed-chunk-22-1.png" width="100%" />
+<img src="7_anova_files/figure-html/unnamed-chunk-23-1.png" width="100%" />
 
 No specific pattern is apparent so now we check all the remaining plots grouped into one single output:
 
@@ -381,7 +382,7 @@ par(mfrow = c(2,2))
 plot(solarcell_factor_lm)
 ```
 
-<img src="7_anova_files/figure-html/unnamed-chunk-23-1.png" width="100%" />
+<img src="7_anova_files/figure-html/unnamed-chunk-24-1.png" width="100%" />
 
 Residuals versus fit presents a rather simetrical distribution around zero indicating equality of variances at all levels and the qq plot presents good adherence to the centel line indicating a normal distributed population of residuals, all ok for these. The scale location plot though, shows a center line that is not horizontal which suggest the presence of outliers.
 
@@ -392,7 +393,7 @@ Residuals versus fit presents a rather simetrical distribution around zero indic
 plot(solarcell_factor_lm, which = 4)
 ```
 
-<img src="7_anova_files/figure-html/unnamed-chunk-24-1.png" width="100%" />
+<img src="7_anova_files/figure-html/unnamed-chunk-25-1.png" width="100%" />
 
 
 We can extract the absolute maximum residual with:
@@ -515,7 +516,7 @@ par(mfrow = c(2,2))
 plot(solarcell_factor_lm_no_int)
 ```
 
-<img src="7_anova_files/figure-html/unnamed-chunk-31-1.png" width="100%" />
+<img src="7_anova_files/figure-html/unnamed-chunk-32-1.png" width="100%" />
 
 We see in the Residuals vs Fitted a clear pattern with residuals moving from positive to negative and then again to positive along the fitted values axis which indicates that there is an interaction at play.
 
@@ -574,7 +575,7 @@ solarcell_fill %>%
   )
 ```
 
-<img src="7_anova_files/figure-html/unnamed-chunk-33-1.png" width="100%" />
+<img src="7_anova_files/figure-html/unnamed-chunk-34-1.png" width="100%" />
 
 ### Correlation test {#cor.test}
 
@@ -624,7 +625,7 @@ solarcell_fill %>%
   )
 ```
 
-<img src="7_anova_files/figure-html/unnamed-chunk-36-1.png" width="100%" />
+<img src="7_anova_files/figure-html/unnamed-chunk-37-1.png" width="100%" />
 
 Visually this is the case, going from one level to the other is not changing the relationship between thickness and strenght - increasing thickness increases stenght. Visually the slopes are similar but the number of points is small. In a real case this verification could be extended with the correlation test for each level or/and a statistical test between slopes.
 

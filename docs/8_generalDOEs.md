@@ -207,7 +207,6 @@ drymatter_TGT_particle_size_plot <- juice_drymatter %>%
     x = "Drymatter target",
     y = "Average bias deviation [g]"
   ) +
-  theme_industRial() +
   theme(legend.justification=c(1,0), legend.position=c(1,0))
 
 drymatter_TGT_speed_plot <- juice_drymatter %>%  
@@ -234,7 +233,6 @@ drymatter_TGT_speed_plot <- juice_drymatter %>%
     x = "Dry matter target",
     y = "Average bias deviation [g]"
   ) +
-  theme_industRial() +
   theme(legend.justification=c(1,0), legend.position=c(1,0))
 
 speed_particle_size_plot <- juice_drymatter %>%  
@@ -261,7 +259,6 @@ speed_particle_size_plot <- juice_drymatter %>%
     x = "Speed",
     y = "Average bias deviation [g]"
   ) +
-  theme_industRial() +
   theme(legend.justification=c(1,0), legend.position=c(1,0))
 
 drymatter_TGT_particle_size_plot + drymatter_TGT_speed_plot + speed_particle_size_plot

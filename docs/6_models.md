@@ -341,7 +341,7 @@ A deep structural change has happened in R since the `{tidyverse}`. The original
 ```r
 ebike_aug %>%
   ggplot(aes(x = index, y = .resid)) +
-  geom_point(shape = 21, stroke = 2) +
+  geom_point(shape = 21, size = 2) +
   scale_y_continuous(n.breaks = 10, labels = label_number(big.mark = "'")) +
   labs(
     title = "e-bike frame hardening process",
@@ -369,7 +369,7 @@ durbinWatsonTest(ebike_lm_factor)
 
 ```
  lag Autocorrelation D-W Statistic p-value
-   1        -0.53433        2.9609   0.104
+   1        -0.53433        2.9609   0.106
  Alternative hypothesis: rho != 0
 ```
 
@@ -383,7 +383,7 @@ Although the output shows Autocorrelation of -0.53 we have to consider that the 
 ```r
 ebike_aug %>%
   ggplot(aes(sample = .resid)) +
-  geom_qq(shape = 21, stroke = 2) +
+  geom_qq(shape = 21, size = 2) +
   geom_qq_line() +
   scale_y_continuous(n.breaks = 10, labels = label_number(big.mark = "'")) +
   labs(
@@ -421,7 +421,7 @@ For populations < 50 use the shapiro-wilk normality test, Here p > 0.05 indicate
 ```r
 ebike_aug %>%
   ggplot(aes(x = .fitted, y = .resid)) +
-  geom_point(shape = 21, stroke = 2) +
+  geom_point(shape = 21, size = 2) +
   geom_smooth(method = stats::loess, se = FALSE, color = "red") +
   scale_y_continuous(n.breaks = 10, labels = label_number(big.mark = "'")) +
   labs(
@@ -442,7 +442,7 @@ If the model is correct and the assumptions hold, the residuals should be struct
 ```r
 ebike_aug %>% 
   ggplot(aes(x = .fitted, y = abs(.std.resid))) +
-  geom_point(shape = 21, stroke = 2) +
+  geom_point(shape = 21, size = 2) +
   geom_smooth(method = stats::loess, se = FALSE, color = "red") +
   labs(title = "e-bike frame hardening process",
        subtitle = "Linear model - Standardised Residuals vs Fitted values",
@@ -460,7 +460,7 @@ This Standardized residuals plot helps detecting outliers in the residuals (any 
 ```r
 ebike_aug %>% 
   ggplot(aes(x = as.numeric(temperature), y = .std.resid)) +
-  geom_point(shape = 21, stroke = 2) +
+  geom_point(shape = 21, size = 2) +
   geom_smooth(method = stats::loess, se = FALSE, color = "red") +
   labs(title = "e-bike frame hardening process",
        subtitle = "Linear model - Standardised Residuals vs Factor levels",

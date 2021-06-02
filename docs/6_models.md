@@ -310,14 +310,14 @@ ebike_aug %>%
 
 
 
-| cycles | temperature | .fitted | .resid | .hat | .sigma | .cooksd | .std.resid | index |
-|:------:|:-----------:|:-------:|:------:|:----:|:------:|:-------:|:----------:|:-----:|
-| 575000 |     160     | 551200  | 23800  | 0.2  | 17571  | 0.13261 |  1.45665   |   1   |
-| 542000 |     160     | 551200  | -9200  | 0.2  | 18679  | 0.01982 |  -0.56307  |   2   |
-| 530000 |     160     | 551200  | -21200 | 0.2  | 17846  | 0.10522 |  -1.29752  |   3   |
-| 539000 |     160     | 551200  | -12200 | 0.2  | 18535  | 0.03485 |  -0.74668  |   4   |
-| 570000 |     160     | 551200  | 18800  | 0.2  | 18069  | 0.08275 |  1.15063   |   5   |
-| 565000 |     180     | 587400  | -22400 | 0.2  | 17724  | 0.11747 |  -1.37096  |   6   |
+| cycles | temperature | .fitted | .resid | .std.resid | .hat | .sigma | .cooksd | index |
+|:------:|:-----------:|:-------:|:------:|:----------:|:----:|:------:|:-------:|:-----:|
+| 575000 |     160     | 551200  | 23800  |  1.45665   | 0.2  | 17571  | 0.13261 |   1   |
+| 542000 |     160     | 551200  | -9200  |  -0.56307  | 0.2  | 18679  | 0.01982 |   2   |
+| 530000 |     160     | 551200  | -21200 |  -1.29752  | 0.2  | 17846  | 0.10522 |   3   |
+| 539000 |     160     | 551200  | -12200 |  -0.74668  | 0.2  | 18535  | 0.03485 |   4   |
+| 570000 |     160     | 551200  | 18800  |  1.15063   | 0.2  | 18069  | 0.08275 |   5   |
+| 565000 |     180     | 587400  | -22400 |  -1.37096  | 0.2  | 17724  | 0.11747 |   6   |
 
 <div class="marginnote">
 
@@ -341,13 +341,13 @@ A deep structural change has happened in R since the `{tidyverse}`. The original
 ```r
 ebike_aug %>%
   ggplot(aes(x = index, y = .resid)) +
-  geom_point() +
+  geom_point(shape = 21, stroke = 2) +
   scale_y_continuous(n.breaks = 10, labels = label_number(big.mark = "'")) +
   labs(
     title = "e-bike frame hardening process",
     subtitle = "Linear model - Residuals timeseries",
     y = "Index",
-    x = "Fitted values"
+    x = "Fitted vaues"
   )
 ```
 
@@ -369,7 +369,7 @@ durbinWatsonTest(ebike_lm_factor)
 
 ```
  lag Autocorrelation D-W Statistic p-value
-   1        -0.53433        2.9609    0.09
+   1        -0.53433        2.9609   0.104
  Alternative hypothesis: rho != 0
 ```
 
@@ -383,7 +383,7 @@ Although the output shows Autocorrelation of -0.53 we have to consider that the 
 ```r
 ebike_aug %>%
   ggplot(aes(sample = .resid)) +
-  geom_qq() +
+  geom_qq(shape = 21, stroke = 2) +
   geom_qq_line() +
   scale_y_continuous(n.breaks = 10, labels = label_number(big.mark = "'")) +
   labs(
@@ -421,7 +421,7 @@ For populations < 50 use the shapiro-wilk normality test, Here p > 0.05 indicate
 ```r
 ebike_aug %>%
   ggplot(aes(x = .fitted, y = .resid)) +
-  geom_point() +
+  geom_point(shape = 21, stroke = 2) +
   geom_smooth(method = stats::loess, se = FALSE, color = "red") +
   scale_y_continuous(n.breaks = 10, labels = label_number(big.mark = "'")) +
   labs(
@@ -442,7 +442,7 @@ If the model is correct and the assumptions hold, the residuals should be struct
 ```r
 ebike_aug %>% 
   ggplot(aes(x = .fitted, y = abs(.std.resid))) +
-  geom_point() +
+  geom_point(shape = 21, stroke = 2) +
   geom_smooth(method = stats::loess, se = FALSE, color = "red") +
   labs(title = "e-bike frame hardening process",
        subtitle = "Linear model - Standardised Residuals vs Fitted values",
@@ -459,18 +459,18 @@ This Standardized residuals plot helps detecting outliers in the residuals (any 
 
 ```r
 ebike_aug %>% 
-  ggplot(aes(x = temperature, y = .std.resid)) +
-  geom_point() +
+  ggplot(aes(x = as.numeric(temperature), y = .std.resid)) +
+  geom_point(shape = 21, stroke = 2) +
   geom_smooth(method = stats::loess, se = FALSE, color = "red") +
   labs(title = "e-bike frame hardening process",
        subtitle = "Linear model - Standardised Residuals vs Factor levels",
        y = "Standardised Residuals",
-       x = "Fitted values")
+       x = "Factor levels")
 ```
 
 <img src="6_models_files/figure-html/fig-ebikestdresfactor-1.png" width="100%" />
 
-Besides another support to detect outliers, this additional plot also helps seeing if the variance of the residuals is identical in this case between the factor levels.
+Besides being another support to detect outliers, this additional plot also helps seeing if the variance of the residuals is identical in this case between the factor levels.
 
 ### Homocedasticity {#homocedasticity}
 

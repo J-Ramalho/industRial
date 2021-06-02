@@ -276,7 +276,7 @@ The exact value is 25.985 confirming the value extracted from the summary with t
 ### Residuals summary {#plot_model}
 
 ```{r}
-par(mfcol = c(2,3))
+par(mfrow = c(2,3))
 plot(solarcell_factor_lm$residuals)
 plot(solarcell_factor_lm, which = 2)
 plot(solarcell_factor_lm, which = c(1, 3, 5))
@@ -333,7 +333,7 @@ anova(solarcell_factor_lm_no_int)
 The output still confirms the significance of the effects of the factors but the residuals analysis raises other concerns:
 
 ```{r}
-par(mfcol = c(2,3))
+par(mfrow = c(2,3))
 plot(solarcell_factor_lm_no_int$residuals)
 plot(solarcell_factor_lm_no_int, which = 2)
 plot(solarcell_factor_lm_no_int, which = c(1, 3, 5))
@@ -350,17 +350,10 @@ solarcell_fill %>%
   kable()
 ```
 
-Solarcell experiments continue as the R&D project on new materials progresses. The previous meeting outcome made the R&D team select the multijunction material as the best candidate for the next round of tests. A new experiment has been designed but the team needs to go deeper in the understanding on how to improve the power output. Besides temperature and material there seems to be another variable at play: the fill factor. This is rather technical but all experts agree that this is influencing the behavior of the cell. The way to determine it is complex and depends on the electrical circuit configuration. The table just presented shows the value of fill factor collected for each cell tested together with the measured output.
+Solarcell experiments continue as the R&D project on new materials progresses. Any increase in the output, which is measured in [kWh/yr equivalent will bring a competitive advantage to the company. The previous meeting outcome made the R&D team select the multijunction material as the best candidate for the next round of tests. A new experiment has been designed but the team needs to go deeper in the understanding on how to improve the power output. Besides temperature and material there seems to be another variable at play: the fill factor. This seems to be a complex technical topic but all experts agree that this is influencing the behavior of the cell. The fill factor depends on the electrical circuit configuration and the output seems to be correlated with it. Until now the team has not been able to control the fill factor. The table just presented shows the value of fill factor collected for each cell tested together with the measured output.
 
-A Data Scientist from the center recommends to use an analysis of covariance (ancova) which can be useful in situations where a continuous variable may be influencing the measured value. This technique complements the analysis of variance (anova) allowing for a more accurate assessment of the effects of the categorical variables. An explanation on the technique and a similar case can be seen on page 655 of @Montgomery2012.
+A Data Scientist from the center recommends to use an analysis of covariance (ancova) which can be useful in situations where a continuous variable may be influencing the measured value. He calls this a covariate. In such specific case this approach provides better results than the analysis of variance (anova) allowing for a more accurate assessment of the effects of the categorical variables as it can remove the effect of the fill factor in the output when comaring the different materials. A good explanation and a similar case (without R) can be seen on page 655 of @Montgomery2012.
 
-*Suppose that in an experiment with a response variable y there is another variable, say x, and that y is linearly related to x. Furthermore, suppose that x cannot be controlled by the experimenter but can be observed along with y. The variable x is called a covariate. The analysis of covariance involves adjusting the observed response variable for the effect of the covariate.*
-
-*If such an adjustment is not performed, the concomitant variable could inflate the error mean square and make true differences in the response due to treatments harder to detect. Thus, the analysis of covariance is a method of adjusting for the effects of an uncontrollable nuisance variable. As we will see, the procedure is a combination of analysis of variance and regression analysis.*
-
-*As an example of an experiment in which the analysis of covariance may be employed, consider a study performed to determine if there is a difference in the strength of a monofilament fiber produced by three different machines. The data from this experiment are shown in Table 15.10 (below). Figure 15.3 presents a scatter diagram of strength (y) versus the diameter (or thickness) of the sample. Clearly, the strength of the fiber is also affected by its thickness; consequently, a thicker fiber will generally be stronger than a thinner one. The analysis of covariance could be used to remove the effect of thickness (x) on strength (y) when testing for differences in strength between machines.*
-
-Below a plot of output by fillfactor:
 
 ```{r}
 solarcell_fill %>%
@@ -414,9 +407,9 @@ solarcell_ancova <- aov(
 summary(solarcell_ancova)
 ```
 
-Although the team had been using R often the case of the ancova had not yet came up so it was up to the Data Scientis to do this analysis. In R the ancova can be done with the same function as the anova, the `aov()` function from `{stats}`. There's a specific way to establish the formula which he has obtained from [Datanovia - Ancova](https://www.datanovia.com/en/lessons/ancova-in-r/). Note that the covariate goes first and there is no interaction. If this is not done this way the results are will be different.
+Although the team had been using R often the case of the ancova had not yet came up so it was up to the Data Scientist to do this analysis. In R the ancova can be done with the same function as the anova, the `aov()` function from `{stats}` but there's a specific way to establish the formula which he has obtained from [Datanovia - Ancova](https://www.datanovia.com/en/lessons/ancova-in-r/): the covariate is the first input and there must be interaction between the two inputs, thus the plus sign only. As with contrasts, any little mistake in the syntax may produce very different results so it requires great care and often confirmation of calculation with an existing well know case. In the summary output the material corresponds to the adjusted material mean square
 
-In the summary output the material corresponds to the adjusted material mean square
+*If such an adjustment is not performed, the concomitant variable could inflate the error mean square and make true differences in the response due to treatments harder to detect. Thus, the analysis of covariance is a method of adjusting for the effects of an uncontrollable nuisance variable. As we will see, the procedure is a combination of analysis of variance and regression analysis.*
 
 Conclusions from the book in page 662:
 

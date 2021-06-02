@@ -276,6 +276,8 @@ Below key definitions from @Montgomery2012, complemented with Wikipedia article 
 
 **Replicate:** independent repeat of a run.
 
+**Trials:** total quantity of tests in a DOE corresponding to the multiplication of the runs by the replicates.
+
 **Experiment:** series of runs.
 
 **Factorial design:** in each complete trial or replicate of the experiment all possible combinations of the levels of the factors are investigated.

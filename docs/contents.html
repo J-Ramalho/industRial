@@ -247,7 +247,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#formula"><i class="fa fa-check"></i>Model formulae</a></li>
 <li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#RSE"><i class="fa fa-check"></i>Residuals standard error</a></li>
-<li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#plot_model"><i class="fa fa-check"></i>Residuals summary</a></li>
+<li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#plot.lm"><i class="fa fa-check"></i>Residuals summary</a></li>
 <li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#interaction.plot"><i class="fa fa-check"></i>Interaction plot</a></li>
 <li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#anova"><i class="fa fa-check"></i>Anova with interactions</a></li>
 </ul></li>
@@ -261,6 +261,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#fac.design"><i class="fa fa-check"></i>Factorial design</a></li>
 <li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#main_effects"><i class="fa fa-check"></i>Main effects plots</a></li>
 <li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#interaction_plot"><i class="fa fa-check"></i>Interaction plots (custom)</a></li>
+<li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#formula_expansion"><i class="fa fa-check"></i>Formula expansion</a></li>
 <li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#anova_three"><i class="fa fa-check"></i>Anova with 3rd level interactions</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#two-level-designs"><i class="fa fa-check"></i>Two level designs</a>
@@ -817,7 +818,7 @@ solarcell_output
 <td style="text-align:left;background-color: white !important;">
 </td>
 <td style="text-align:left;background-color: white !important;">
-<a href="#plot.lm">Residuals summary</a>
+<a href="DOE.html#plot.lm">Residuals summary</a>
 </td>
 <td style="text-align:left;background-color: white !important;">
 <code>stats::plot.lm</code>
@@ -904,6 +905,18 @@ juice_drymatter
 <td style="text-align:left;background-color: white !important;">
 </td>
 <td style="text-align:left;background-color: white !important;">
+<a href="DOE.html#formula_expansion">Formula expansion</a>
+</td>
+<td style="text-align:left;background-color: white !important;">
+<code>industRial::formula_expansion</code>
+</td>
+<td style="text-align:left;background-color: white !important;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;background-color: white !important;">
+</td>
+<td style="text-align:left;background-color: white !important;">
 <a href="DOE.html#anova_three">Anova 3rd level interactions</a>
 </td>
 <td style="text-align:left;background-color: white !important;">
@@ -976,7 +989,7 @@ battery_charging
 <td style="text-align:left;background-color: white !important;">
 </td>
 <td style="text-align:left;background-color: white !important;">
-<a href="DOE.html#persp">Perpective plot</a>
+<a href="DOE.html#persp">Perspective plot</a>
 </td>
 <td style="text-align:left;background-color: white !important;">
 <code>graphics::persp</code>
@@ -1004,7 +1017,7 @@ Single replicate designs
 <a href="DOE.html#effects_contribution">Effects contribution table</a>
 </td>
 <td style="text-align:left;background-color: white !important;">
-<code>boom::tidy</code>
+<code>broom::tidy</code>
 </td>
 <td style="text-align:left;background-color: white !important;">
 </td>
@@ -1145,15 +1158,15 @@ tablet_weight
 </td>
 </tr>
 <tr>
-<td style="text-align:left;background-color: white !important;">
+<td style="text-align:left;">
 </td>
-<td style="text-align:left;background-color: white !important;">
+<td style="text-align:left;">
 <a href="SPC.html#chart_Cpk">Capability chart (custom)</a>
 </td>
-<td style="text-align:left;background-color: white !important;">
+<td style="text-align:left;">
 <code>industRial::chart_Cpk</code>
 </td>
-<td style="text-align:left;background-color: white !important;">
+<td style="text-align:left;">
 </td>
 </tr>
 </tbody>

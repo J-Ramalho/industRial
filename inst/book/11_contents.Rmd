@@ -17,7 +17,7 @@ read_delim(here::here("inst/book/contents.csv"),
   kable(align = "l") %>%
   row_spec(row = 1:65, background = "white") %>%
   row_spec(
-    row = c(1, 7, 13, 54),
+    row = c(1, 7, 13, 55),
     background = "#e6e6e6", color = "#104e8b", bold = TRUE
     )
 ```

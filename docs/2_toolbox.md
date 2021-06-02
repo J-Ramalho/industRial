@@ -239,6 +239,7 @@ lsf.str("package:industRial") %>%
 |chart_Cpk           |
 |chart_I             |
 |chart_IMR           |
+|formula_expansion   |
 |off_spec            |
 |process_Cpk         |
 |process_stats       |

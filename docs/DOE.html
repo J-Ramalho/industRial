@@ -247,7 +247,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#formula"><i class="fa fa-check"></i>Model formulae</a></li>
 <li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#RSE"><i class="fa fa-check"></i>Residuals standard error</a></li>
-<li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#plot_model"><i class="fa fa-check"></i>Residuals summary</a></li>
+<li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#plot.lm"><i class="fa fa-check"></i>Residuals summary</a></li>
 <li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#interaction.plot"><i class="fa fa-check"></i>Interaction plot</a></li>
 <li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#anova"><i class="fa fa-check"></i>Anova with interactions</a></li>
 </ul></li>
@@ -261,6 +261,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#fac.design"><i class="fa fa-check"></i>Factorial design</a></li>
 <li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#main_effects"><i class="fa fa-check"></i>Main effects plots</a></li>
 <li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#interaction_plot"><i class="fa fa-check"></i>Interaction plots (custom)</a></li>
+<li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#formula_expansion"><i class="fa fa-check"></i>Formula expansion</a></li>
 <li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#anova_three"><i class="fa fa-check"></i>Anova with 3rd level interactions</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#two-level-designs"><i class="fa fa-check"></i>Two level designs</a>
@@ -349,7 +350,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="direct-comparisons" class="section level2">
 <h2>Direct comparisons</h2>
 <div class="marginnote">
-<p><b class="highlight">Winter Sports clothing manufacture</b></p>
+<p><b class="highlight">Case study: winter sports clothing</b></p>
 <p>All winter sports clothing are virtually made with a mix of natural fibers and synthetic polymers. Upgrading to recyclable polymers while keeping performance requires extensive testing of raw material characteristics such as the tensile strength.</p>
 <p><img src="img/tensile_test_bw.jpg" width="100%" /></p>
 </div>
@@ -870,7 +871,7 @@ F-statistic: 66.8 on 3 and 16 DF,  p-value: 2.88e-09</code></pre>
 <div class="sourceCode" id="cb118"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb118-1"><a href="DOE.html#cb118-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(car)</span>
 <span id="cb118-2"><a href="DOE.html#cb118-2" aria-hidden="true" tabindex="-1"></a><span class="fu">durbinWatsonTest</span>(ebike_lm_factor)</span></code></pre></div>
 <pre><code> lag Autocorrelation D-W Statistic p-value
-   1        -0.53433        2.9609   0.088
+   1        -0.53433        2.9609   0.098
  Alternative hypothesis: rho != 0</code></pre>
 <p>As already stated visual observations can most of the times be complemented with a statistical test. In this case we can apply the durbinWatson test from the <code>{car}</code> package (Car stands for Companion to Applied Regression)</p>
 <p>Although the output shows Autocorrelation of -0.53 we have to consider that the p value is slightly higher than 0.05 thus there is not enough significance to say that there is autocorrelation. The result is not a complete clear cut the lab supervisor remains alert for coming verifications.</p>
@@ -1408,7 +1409,7 @@ F-statistic:   11 on 8 and 27 DF,  p-value: 9.43e-07</code></pre>
 <pre><code>[1] 25.985</code></pre>
 <p>The exact value is 25.985 confirming the value extracted from the summary with the <code>pluck()</code> function from <code>{purrr}</code>.</p>
 </div>
-<div id="plot_model" class="section level3">
+<div id="plot.lm" class="section level3">
 <h3>Residuals summary</h3>
 <div class="sourceCode" id="cb165"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb165-1"><a href="DOE.html#cb165-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">3</span>))</span>
 <span id="cb165-2"><a href="DOE.html#cb165-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(solarcell_factor_lm<span class="sc">$</span>residuals)</span>
@@ -1416,7 +1417,7 @@ F-statistic:   11 on 8 and 27 DF,  p-value: 9.43e-07</code></pre>
 <span id="cb165-4"><a href="DOE.html#cb165-4" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(solarcell_factor_lm, <span class="at">which =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">5</span>))</span>
 <span id="cb165-5"><a href="DOE.html#cb165-5" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(solarcell_factor_lm, <span class="at">which =</span> <span class="dv">4</span>)</span></code></pre></div>
 <p><img src="7_effects_files/figure-html/unnamed-chunk-26-1.png" width="100%" /></p>
-<p>As the residuals analysis has been discussed in detail including custom made plots and statistical tests in the linear models unit, the assessment is done here in a summarize manner including a grouped output of all residuals plots: the qq plot presents good adherence to the center line indicating a normal distribution; the residuals versus fit presents a rather symmetrical distribution around zero indicating equality of variances at all levels and; the scale location plot though, shows a center line that is not horizontal which suggests the presence of outliers; in the Residuals versus fit we can effectively sense the Residuals Standard Error of 26.</p>
+<p>As the residuals analysis has been discussed in detail including custom made plots and statistical tests in the linear models unit, the assessment is done here in a summarized manner with a grouped output of all residuals plots. The qq plot presents good adherence to the center line indicating a normal distribution; the residuals versus fit presents a rather symmetrical distribution around zero indicating equality of variances at all levels and; the scale location plot though, shows a center line that is not horizontal which suggests the presence of outliers; in the Residuals versus fit we can effectively sense the Residuals Standard Error of 26.</p>
 </div>
 <div id="interaction.plot" class="section level3">
 <h3>Interaction plot</h3>
@@ -1611,27 +1612,24 @@ Residuals   12   1854     155
 ---
 Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
 <p>The <code>aov()</code> summary output looks exactly the same for both analysis but the in the first output corresponding to the ancova the material mean square has been adjusted for regression and is smaller. It is also noticeable that the residuals are smaller in the ancova which confirm that the approach has helped reducing the error variability.</p>
-<p>Finaly the most important observation is that the conclusions would have been just the opposite if the Data Scientist had not recommended the ancova. In fact in the anova would have shown that the material influence the output while when removing the influence of the fill factor the ancova ends up showing that there is no influence. This is visible in the p value which is above 0.05 in the ancova and below 0.05 in the anova.</p>
+<p>Finaly the most important observation is that the conclusions would have been just the opposite if the Data Scientist had not recommended the ancova. In fact in the anova would have shown that the material influences the output while when removing the influence of the fill factor the ancova ends up showing that there is no influence. This is visible in the p value which is above 0.05 in the ancova and below 0.05 in the anova.</p>
 <p>As next steps the R&amp;D team decides to tackle this fill factor issue and get it into control. Reducing fill factor variability within each material will certainly reduce the variability in the power output. I would also make upcoming experiments simpler and more easily comparable.</p>
 
 </div>
 </div>
 <div id="general-designs" class="section level2">
 <h2>General designs</h2>
-<p>In a design of experiments we calculate the total number of trials with the expression <span class="math inline">\(n^m\)</span> where n is the number of levels, m the number of factors. A trial represents the number of unique combinations of the factors. To obtain the final number of test runs we have to multiply the number of trials by the number of replicates per trial.</p>
-<p>In a design with 4 factors of 2 levels we have then <span class="math inline">\(2^4 = 16\)</span> runs and <span class="math inline">\(16 \times 5 = 80\)</span> replicates.</p>
-<p>If the design has a combination of factors with different number of levels the number of trials is the multiplication of both such as: <span class="math inline">\(n^m \times n^m\)</span>.</p>
-<p>For example if we added 2 additional factors with 4 levels each to the previous design we would obtain <span class="math inline">\(2^4 \times 4^2 = 256\)</span> which we would still need to multiply by the number of replicates to obtain the number of runs <span class="math inline">\(256 \times 5 = 1280\)</span>.</p>
-<p>In the literature we often see the simbolic notation <span class="math inline">\(a^k\)</span> but we’ve opted for mF-nL (m factors, n levels) in this book for simplification.</p>
-<p>m factors n levels designs</p>
-<p><strong>The juice production plant</strong></p>
-<p>We’re comming back to our Juice Bottling context where a quality team was looking to put in operation a new measurement device for dry matter content in a juices bottling line.</p>
-<p>After a short brainstorming using the Ishikawa tool presented before the team has identified several potential influcing parameters on the equipment bias when compared with the reference equipement: the product itself, the drymatter level on the product (its target), the speed of the filling line and the poweder particle size. In order to evaluate such impact the team has prepared a mid size experiment design with three products, three levels of drymatter, two line speed levels and two particle size levels.</p>
-<p>First we load the DoE.base package:</p>
-<div class="sourceCode" id="cb184"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb184-1"><a href="DOE.html#cb184-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(DoE.base)</span></code></pre></div>
-<p>and then generate the doe with the fac.design function.</p>
+<p>General factorial designs require teams to put together a wealth of knowledge of which some has been already applied in previous case studies or is refered in the bibliography and glossary. This comprises things like root cause analysis, linear models and analysis of variance naturally all coherently articulated in a well though project with clear objectives. The building blocks discussed so far relate to a limited number of input factors and levels and exclusively with a single output variable. Model validation and interactions have been presented as these are needed in all cases and once all these are mastered it becomes possible to consider situations with many variables, many outputs and higher level interactions.
+These arrangements become extremely powerfull and allow to handle complex real life situations such as the design of a new system with dozens of features that relate with each other or the optimization of a manufacturing process where the amount of data generated is very large but the testing time and cost are very high. At this moment considerations of trial quantities optimization enter at play. Typically in a design of experiments the total number of trials is given by <span class="math inline">\(l^k\)</span> where <span class="math inline">\(l\)</span> is the number of levels and <span class="math inline">\(k\)</span> the number of input factors. In our case study a <em>run</em> represents a unique combination of the factors and a <em>replicate</em> an independent repetition of a run. This leads to the notion of <em>trials</em> corresponding to the multiplication of the number of runs by the number of replicates.</p>
+<p>As an example, in a design with 4 factors of 2 levels we have then <span class="math inline">\(2^4 = 16\)</span> runs and if each has 5 replicates there are <span class="math inline">\(16 \times 5 = 80\)</span> trials to be executed. If more factors with a different number of levels are added, the total number of trials is calculated by multiplying both groups: <span class="math inline">\(l_{1}^{k_{1}}\)</span> <span class="math inline">\(\times\)</span> <span class="math inline">\(l_{2}^{k_{2}}\)</span>. Continuing the previous example, if 3 additional factors with 4 levels each were added, all with 5 replicates, the total number of trials would be expressed as follows: <span class="math inline">\(2^{4} \times 4^{3} = 1024 \times 5 = 5120\)</span> trials, which is a very high number in most industrial cases and would require optimization techniques which will be discussed further.</p>
 <div id="fac.design" class="section level3">
 <h3>Factorial design</h3>
+<div class="marginnote">
+<p><b class="highlight">Case study: juice bottling plant</b></p>
+<p>In a juice producing plant a new fast dry matter content measurement device from the supplier DRX has been recently put in operation but the Quality Assurance Head has raised concerns on a bias with the reference method. The quality team established DoE to assess several potential causes such as the dry matter content and juice residue particle size.</p>
+<p><img src="img/juice_bottling_bw2.jpg" width="100%" /></p>
+</div>
+<div class="sourceCode" id="cb184"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb184-1"><a href="DOE.html#cb184-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(DoE.base)</span></code></pre></div>
 <div class="sourceCode" id="cb185"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb185-1"><a href="DOE.html#cb185-1" aria-hidden="true" tabindex="-1"></a>juice_doe <span class="ot">&lt;-</span> <span class="fu">fac.design</span>(</span>
 <span id="cb185-2"><a href="DOE.html#cb185-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">randomize =</span> <span class="cn">FALSE</span>,</span>
 <span id="cb185-3"><a href="DOE.html#cb185-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">factor.names =</span> <span class="fu">list</span>(</span>
@@ -1641,10 +1639,11 @@ Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&
 <span id="cb185-7"><a href="DOE.html#cb185-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">speed =</span> <span class="fu">c</span>(<span class="dv">20</span>, <span class="dv">25</span>),</span>
 <span id="cb185-8"><a href="DOE.html#cb185-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">particle_size =</span> <span class="fu">c</span>(<span class="dv">250</span>, <span class="dv">300</span>))</span>
 <span id="cb185-9"><a href="DOE.html#cb185-9" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
-<p>Note that the DoE generated is more than just a tibble, it belongs to a specific class called design and has many other attributes just like an lm or aov S3 objects.</p>
+<p>Although the Calibration essay discussed in the MSA unit has shown a bias during the acceptance phase the Factory Management has opted to put it in production. The reduction in measurement time is significant and Supply Chain is putting pressure to increase volumes in a context where on-line sales rocket sky high. The Quality Manager understands all this but he’s concern of having some kind of kickback. Although he’s not expecting any kind of consumer complain, dry matter levels are somehow loosely related with some sort claims and regulatory limits.</p>
+<p>To dig deeper and understand how to minimize this bias he has asked one of his team members to come up with an experiment design. He would like something that combines all factors mentionned by the team as potential root causes for the bias. After a short brainstorming between the production and quality teams several potential causes for bias were: drymatter level, the speed of filling and the powder particle size. This lead to a mid size experiment design with three products, three levels of drymatter, two line speed levels and two particle size levels.</p>
+<p>When the number of factors and levels is limited it is possible to reccur to existing experiment designs and pre-filled <em>Yates tables</em>. In this case the quality analyst had been trying with R and found a package called <code>{DoE.base}</code> which generates such designs automatically with the function <code>fac.desig</code>. The output generated by this function is more than just a tibble, it belongs to a specific class called <code>design</code>and has other attributes just like an lm or aov S3 objects. The care given by the package authors becomes visible when using an R generic function such as <code>summary()</code> with such object and get as return a tailor made output, in this case showing the levels of the different factors of our design:</p>
 <div class="sourceCode" id="cb186"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb186-1"><a href="DOE.html#cb186-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(juice_doe)</span></code></pre></div>
 <pre><code>[1] &quot;design&quot;     &quot;data.frame&quot;</code></pre>
-<p>The power and care given by the package authors become visible when we use an R generic function such as summary() with this object and we see it returns a tailor made output, in this case showing the levels of the different factors of our design:</p>
 <div class="sourceCode" id="cb188"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb188-1"><a href="DOE.html#cb188-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(juice_doe)</span></code></pre></div>
 <pre><code>Call:
 fac.design(randomize = FALSE, factor.names = list(product = c(&quot;beetroot&quot;, 
@@ -1659,10 +1658,10 @@ Factor settings (scale ends):
 1 beetroot               10    1    20           250
 2    apple               15    2    25           300
 3   carrot               20    3                    </code></pre>
-<p>Using this the team has simple copied the experiment plan to an spreadsheet to collect the data:</p>
+<p>In the summary() output we can see the plan factors with 3 products, 3 levels of dry matter target, 2 levels for speed and 2 levels for particle size. Using this the team has simple copied the experiment plan to an spreadsheet to collect the data:</p>
 <pre><code>juice_doe %&gt;% 
   write_clip() </code></pre>
-<p>and after a few day the file completed and ready for analysis looked like:</p>
+<p>and after a few days the file completed with the test results cames back ready for analysis</p>
 <div class="sourceCode" id="cb191"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb191-1"><a href="DOE.html#cb191-1" aria-hidden="true" tabindex="-1"></a>juice_drymatter <span class="sc">%&gt;%</span></span>
 <span id="cb191-2"><a href="DOE.html#cb191-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>() <span class="sc">%&gt;%</span></span>
 <span id="cb191-3"><a href="DOE.html#cb191-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable</span>()</span></code></pre></div>
@@ -1735,13 +1734,20 @@ Factor settings (scale ends):
 </tr>
 </tbody>
 </table>
+<p>and the only thing quality analyst had to add was an extra column to calculate the bias:</p>
 <div class="sourceCode" id="cb192"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb192-1"><a href="DOE.html#cb192-1" aria-hidden="true" tabindex="-1"></a>juice_drymatter <span class="ot">&lt;-</span> juice_drymatter <span class="sc">%&gt;%</span></span>
 <span id="cb192-2"><a href="DOE.html#cb192-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">bias =</span> drymatter_DRX <span class="sc">-</span> drymatter_REF)</span></code></pre></div>
 </div>
 <div id="main_effects" class="section level3">
 <h3>Main effects plots</h3>
-<p>As the number of factors and levels of a design increase, more thinking is required to obtain good visualisation of the data.</p>
-<p>Main effects plots consist usually of a scatterplot representing the experiment output as a function of one of the inputs. In a design like this with three different inputs three plots are required:</p>
+<div class="marginnote">
+<div class="figure"><span id="fig:unnamed-chunk-7"></span>
+<img src="8_generalDOEs_files/figure-html/unnamed-chunk-7-1.png" alt="Main" width="100%" />
+<p class="caption">
+Figure 1: Main
+</p>
+</div>
+</div>
 <div class="sourceCode" id="cb193"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb193-1"><a href="DOE.html#cb193-1" aria-hidden="true" tabindex="-1"></a>drymatter_TGT_plot <span class="ot">&lt;-</span> juice_drymatter <span class="sc">%&gt;%</span></span>
 <span id="cb193-2"><a href="DOE.html#cb193-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(drymatter_TGT) <span class="sc">%&gt;%</span></span>
 <span id="cb193-3"><a href="DOE.html#cb193-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">bias_m_drymatter =</span> <span class="fu">mean</span>(bias)) <span class="sc">%&gt;%</span></span>
@@ -1754,143 +1760,149 @@ Factor settings (scale ends):
 <span id="cb193-10"><a href="DOE.html#cb193-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
 <span id="cb193-11"><a href="DOE.html#cb193-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">&quot;Juice bottling problem&quot;</span>,</span>
 <span id="cb193-12"><a href="DOE.html#cb193-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="st">&quot;Main effects plots&quot;</span>,</span>
-<span id="cb193-13"><a href="DOE.html#cb193-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">&quot;drymatter_TGT [%]&quot;</span>,</span>
+<span id="cb193-13"><a href="DOE.html#cb193-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">&quot;Drymatter TGT [%]&quot;</span>,</span>
 <span id="cb193-14"><a href="DOE.html#cb193-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">&quot;Average bias [g]&quot;</span></span>
-<span id="cb193-15"><a href="DOE.html#cb193-15" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb193-16"><a href="DOE.html#cb193-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb193-17"><a href="DOE.html#cb193-17" aria-hidden="true" tabindex="-1"></a>particle_size_plot <span class="ot">&lt;-</span> juice_drymatter <span class="sc">%&gt;%</span>  </span>
-<span id="cb193-18"><a href="DOE.html#cb193-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(particle_size) <span class="sc">%&gt;%</span></span>
-<span id="cb193-19"><a href="DOE.html#cb193-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">particle_size_bias_mean =</span> <span class="fu">mean</span>(bias)) <span class="sc">%&gt;%</span></span>
-<span id="cb193-20"><a href="DOE.html#cb193-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> particle_size, <span class="at">y =</span> particle_size_bias_mean)) <span class="sc">+</span></span>
-<span id="cb193-21"><a href="DOE.html#cb193-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb193-22"><a href="DOE.html#cb193-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
-<span id="cb193-23"><a href="DOE.html#cb193-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_cartesian</span>(</span>
-<span id="cb193-24"><a href="DOE.html#cb193-24" aria-hidden="true" tabindex="-1"></a>    <span class="at">xlim =</span> <span class="fu">c</span>(<span class="dv">240</span>,<span class="dv">310</span>), </span>
-<span id="cb193-25"><a href="DOE.html#cb193-25" aria-hidden="true" tabindex="-1"></a>    <span class="at">ylim =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">1</span>,<span class="dv">0</span>), <span class="at">expand =</span> <span class="cn">TRUE</span>) <span class="sc">+</span></span>
-<span id="cb193-26"><a href="DOE.html#cb193-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
-<span id="cb193-27"><a href="DOE.html#cb193-27" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">&quot;particle_size&quot;</span>,</span>
-<span id="cb193-28"><a href="DOE.html#cb193-28" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">&quot;Average bias [g]&quot;</span></span>
-<span id="cb193-29"><a href="DOE.html#cb193-29" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb193-30"><a href="DOE.html#cb193-30" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb193-31"><a href="DOE.html#cb193-31" aria-hidden="true" tabindex="-1"></a>speed_plot <span class="ot">&lt;-</span> juice_drymatter <span class="sc">%&gt;%</span>  </span>
-<span id="cb193-32"><a href="DOE.html#cb193-32" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(speed) <span class="sc">%&gt;%</span></span>
-<span id="cb193-33"><a href="DOE.html#cb193-33" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">speed_bias_mean =</span> <span class="fu">mean</span>(bias)) <span class="sc">%&gt;%</span></span>
-<span id="cb193-34"><a href="DOE.html#cb193-34" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> speed, <span class="at">y =</span> speed_bias_mean)) <span class="sc">+</span></span>
-<span id="cb193-35"><a href="DOE.html#cb193-35" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb193-36"><a href="DOE.html#cb193-36" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
-<span id="cb193-37"><a href="DOE.html#cb193-37" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_cartesian</span>(</span>
-<span id="cb193-38"><a href="DOE.html#cb193-38" aria-hidden="true" tabindex="-1"></a>    <span class="at">xlim =</span> <span class="fu">c</span>(<span class="dv">19</span>, <span class="dv">26</span>),</span>
-<span id="cb193-39"><a href="DOE.html#cb193-39" aria-hidden="true" tabindex="-1"></a>    <span class="at">ylim =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">1</span>,<span class="dv">0</span>), <span class="at">expand =</span> <span class="cn">TRUE</span>) <span class="sc">+</span></span>
-<span id="cb193-40"><a href="DOE.html#cb193-40" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
-<span id="cb193-41"><a href="DOE.html#cb193-41" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">&quot;Speed&quot;</span>,</span>
-<span id="cb193-42"><a href="DOE.html#cb193-42" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">&quot;Average bias [g]&quot;</span></span>
-<span id="cb193-43"><a href="DOE.html#cb193-43" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb193-44"><a href="DOE.html#cb193-44" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb193-45"><a href="DOE.html#cb193-45" aria-hidden="true" tabindex="-1"></a>drymatter_TGT_plot <span class="sc">+</span> particle_size_plot <span class="sc">+</span> speed_plot</span></code></pre></div>
-<p><img src="8_generalDOEs_files/figure-html/unnamed-chunk-8-1.png" width="100%" /></p>
-<p>This kind of plots gives already important insights in to the experiement outcome, even before any deeper analysis with a linear model and anova. In our case:</p>
+<span id="cb193-15"><a href="DOE.html#cb193-15" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
+<p>As the number of factors and levels of a design increase, more thinking is required to obtain good visualisation of the data. Main effects plots consist usually of a scatterplot representing the experiment output as a function of one of the inputs. This first plot consists of the mean bias as a function of the dry matter for each of the 3 levels tested. As the DOE has 3 factors, three plots like this are required in total. The Quality Analyst builds the remaining two plots and then groups them all together in a single output with the package <code>{patchwork}</code>. This is made by simply putting <code>+</code> between the plots.</p>
+<div class="sourceCode" id="cb194"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb194-1"><a href="DOE.html#cb194-1" aria-hidden="true" tabindex="-1"></a>particle_size_plot <span class="ot">&lt;-</span> juice_drymatter <span class="sc">%&gt;%</span>  </span>
+<span id="cb194-2"><a href="DOE.html#cb194-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(particle_size) <span class="sc">%&gt;%</span></span>
+<span id="cb194-3"><a href="DOE.html#cb194-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">particle_size_bias_mean =</span> <span class="fu">mean</span>(bias)) <span class="sc">%&gt;%</span></span>
+<span id="cb194-4"><a href="DOE.html#cb194-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> particle_size, <span class="at">y =</span> particle_size_bias_mean)) <span class="sc">+</span></span>
+<span id="cb194-5"><a href="DOE.html#cb194-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb194-6"><a href="DOE.html#cb194-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
+<span id="cb194-7"><a href="DOE.html#cb194-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_cartesian</span>(</span>
+<span id="cb194-8"><a href="DOE.html#cb194-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">xlim =</span> <span class="fu">c</span>(<span class="dv">240</span>,<span class="dv">310</span>), </span>
+<span id="cb194-9"><a href="DOE.html#cb194-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">ylim =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">1</span>,<span class="dv">0</span>), <span class="at">expand =</span> <span class="cn">TRUE</span>) <span class="sc">+</span></span>
+<span id="cb194-10"><a href="DOE.html#cb194-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb194-11"><a href="DOE.html#cb194-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">&quot;Particle Size&quot;</span>,</span>
+<span id="cb194-12"><a href="DOE.html#cb194-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">&quot;Average bias [g]&quot;</span></span>
+<span id="cb194-13"><a href="DOE.html#cb194-13" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb194-14"><a href="DOE.html#cb194-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb194-15"><a href="DOE.html#cb194-15" aria-hidden="true" tabindex="-1"></a>speed_plot <span class="ot">&lt;-</span> juice_drymatter <span class="sc">%&gt;%</span>  </span>
+<span id="cb194-16"><a href="DOE.html#cb194-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(speed) <span class="sc">%&gt;%</span></span>
+<span id="cb194-17"><a href="DOE.html#cb194-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">speed_bias_mean =</span> <span class="fu">mean</span>(bias)) <span class="sc">%&gt;%</span></span>
+<span id="cb194-18"><a href="DOE.html#cb194-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> speed, <span class="at">y =</span> speed_bias_mean)) <span class="sc">+</span></span>
+<span id="cb194-19"><a href="DOE.html#cb194-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb194-20"><a href="DOE.html#cb194-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
+<span id="cb194-21"><a href="DOE.html#cb194-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_cartesian</span>(</span>
+<span id="cb194-22"><a href="DOE.html#cb194-22" aria-hidden="true" tabindex="-1"></a>    <span class="at">xlim =</span> <span class="fu">c</span>(<span class="dv">19</span>, <span class="dv">26</span>),</span>
+<span id="cb194-23"><a href="DOE.html#cb194-23" aria-hidden="true" tabindex="-1"></a>    <span class="at">ylim =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">1</span>,<span class="dv">0</span>), <span class="at">expand =</span> <span class="cn">TRUE</span>) <span class="sc">+</span></span>
+<span id="cb194-24"><a href="DOE.html#cb194-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb194-25"><a href="DOE.html#cb194-25" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">&quot;Speed&quot;</span>,</span>
+<span id="cb194-26"><a href="DOE.html#cb194-26" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">&quot;Average bias [g]&quot;</span></span>
+<span id="cb194-27"><a href="DOE.html#cb194-27" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb194-28"><a href="DOE.html#cb194-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb194-29"><a href="DOE.html#cb194-29" aria-hidden="true" tabindex="-1"></a>drymatter_TGT_plot <span class="sc">+</span> particle_size_plot <span class="sc">+</span> speed_plot</span></code></pre></div>
+<p><img src="8_generalDOEs_files/figure-html/unnamed-chunk-9-1.png" width="100%" /></p>
+<p>Main effects plots give important insights in to the experiement outcomes and this even before any statistical analysis with a linear model and anova. From these three plots the Quality Analyst already takes the following observations for her report:</p>
 <ul>
-<li>higher particle_size and higher speed result in higher bias weight deviation</li>
-<li>beyond 10.5% drymatter_TGT level the bias weight is always higher than the target</li>
+<li>bias increases in negative direction as dry matter content increases</li>
+<li>bias increases in positive direction as particle size increases</li>
+<li>bias is not influence by line speed</li>
 </ul>
 </div>
 <div id="interaction_plot" class="section level3">
 <h3>Interaction plots (custom)</h3>
-<p>In designs like these with 3 factors we have 3 possible interactions (A-B, A-C, B-C) corresponding the the possible combination between them. This results in three interaction plots that we’re presenting below. The approach here goes beyond the interaction.plot function from the <code>{stats}</code> package presented previously in the two factors multiple levels case. We are developping here the plots with {ggplot2} which provides much more control on the plot attibutes but on the other hand requires that additional code is added to calculate the means by group.</p>
-<div class="sourceCode" id="cb194"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb194-1"><a href="DOE.html#cb194-1" aria-hidden="true" tabindex="-1"></a>drymatter_TGT_particle_size_plot <span class="ot">&lt;-</span> juice_drymatter <span class="sc">%&gt;%</span>  </span>
-<span id="cb194-2"><a href="DOE.html#cb194-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">particle_size =</span> <span class="fu">as_factor</span>(particle_size)) <span class="sc">%&gt;%</span></span>
-<span id="cb194-3"><a href="DOE.html#cb194-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(drymatter_TGT, particle_size) <span class="sc">%&gt;%</span></span>
-<span id="cb194-4"><a href="DOE.html#cb194-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">drymatter_bias_mean =</span> <span class="fu">mean</span>(bias), <span class="at">drymatter_bias_sd =</span> <span class="fu">sd</span>(bias)) <span class="sc">%&gt;%</span></span>
-<span id="cb194-5"><a href="DOE.html#cb194-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> drymatter_TGT, <span class="at">y =</span> drymatter_bias_mean, <span class="at">color =</span> particle_size, <span class="at">linetype =</span> particle_size)) <span class="sc">+</span></span>
-<span id="cb194-6"><a href="DOE.html#cb194-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">group =</span> particle_size), <span class="at">size =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
-<span id="cb194-7"><a href="DOE.html#cb194-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">group =</span> particle_size, <span class="at">linetype =</span> particle_size)) <span class="sc">+</span></span>
-<span id="cb194-8"><a href="DOE.html#cb194-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_linetype</span>(<span class="at">name =</span> <span class="st">&quot;Particle Size&quot;</span>) <span class="sc">+</span></span>
-<span id="cb194-9"><a href="DOE.html#cb194-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_errorbar</span>(<span class="fu">aes</span>(</span>
-<span id="cb194-10"><a href="DOE.html#cb194-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">ymin =</span> drymatter_bias_mean <span class="sc">-</span> <span class="dv">2</span> <span class="sc">*</span> drymatter_bias_sd,</span>
-<span id="cb194-11"><a href="DOE.html#cb194-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">ymax =</span> drymatter_bias_mean <span class="sc">+</span> <span class="dv">2</span> <span class="sc">*</span> drymatter_bias_sd,</span>
-<span id="cb194-12"><a href="DOE.html#cb194-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">width =</span> .<span class="dv">5</span></span>
-<span id="cb194-13"><a href="DOE.html#cb194-13" aria-hidden="true" tabindex="-1"></a>  )) <span class="sc">+</span></span>
-<span id="cb194-14"><a href="DOE.html#cb194-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_linetype</span>(<span class="at">guide=</span><span class="cn">FALSE</span>) <span class="sc">+</span></span>
-<span id="cb194-15"><a href="DOE.html#cb194-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_viridis_d</span>(<span class="at">option =</span> <span class="st">&quot;C&quot;</span>, <span class="at">begin =</span> <span class="fl">0.3</span>, <span class="at">end =</span> <span class="fl">0.7</span>, <span class="at">name =</span> <span class="st">&quot;Particle size&quot;</span>) <span class="sc">+</span></span>
-<span id="cb194-16"><a href="DOE.html#cb194-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_cartesian</span>(</span>
-<span id="cb194-17"><a href="DOE.html#cb194-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">xlim =</span> <span class="fu">c</span>(<span class="dv">9</span>,<span class="dv">21</span>),</span>
-<span id="cb194-18"><a href="DOE.html#cb194-18" aria-hidden="true" tabindex="-1"></a>    <span class="at">ylim =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">1</span>,<span class="dv">0</span>), <span class="at">expand =</span> <span class="cn">TRUE</span>) <span class="sc">+</span></span>
-<span id="cb194-19"><a href="DOE.html#cb194-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">annotate</span>(<span class="at">geom =</span> <span class="st">&quot;text&quot;</span>, <span class="at">x =</span> <span class="cn">Inf</span>, <span class="at">y =</span> <span class="dv">0</span>, <span class="at">label =</span> <span class="st">&quot;Error bars are +/- 2xSD&quot;</span>, </span>
-<span id="cb194-20"><a href="DOE.html#cb194-20" aria-hidden="true" tabindex="-1"></a>    <span class="at">hjust =</span> <span class="dv">1</span>, <span class="at">vjust =</span> <span class="sc">-</span><span class="dv">1</span>, <span class="at">colour =</span> <span class="st">&quot;grey30&quot;</span>, <span class="at">size =</span> <span class="dv">3</span>, </span>
-<span id="cb194-21"><a href="DOE.html#cb194-21" aria-hidden="true" tabindex="-1"></a>    <span class="at">fontface =</span> <span class="st">&quot;italic&quot;</span>) <span class="sc">+</span></span>
-<span id="cb194-22"><a href="DOE.html#cb194-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
-<span id="cb194-23"><a href="DOE.html#cb194-23" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">&quot;Juice bottling problem&quot;</span>,</span>
-<span id="cb194-24"><a href="DOE.html#cb194-24" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="st">&quot;Interaction plots&quot;</span>,</span>
-<span id="cb194-25"><a href="DOE.html#cb194-25" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">&quot;Drymatter target&quot;</span>,</span>
-<span id="cb194-26"><a href="DOE.html#cb194-26" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">&quot;Average bias deviation [g]&quot;</span></span>
-<span id="cb194-27"><a href="DOE.html#cb194-27" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb194-28"><a href="DOE.html#cb194-28" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.justification=</span><span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">0</span>), <span class="at">legend.position=</span><span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">0</span>))</span>
-<span id="cb194-29"><a href="DOE.html#cb194-29" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb194-30"><a href="DOE.html#cb194-30" aria-hidden="true" tabindex="-1"></a>drymatter_TGT_speed_plot <span class="ot">&lt;-</span> juice_drymatter <span class="sc">%&gt;%</span>  </span>
-<span id="cb194-31"><a href="DOE.html#cb194-31" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">speed =</span> <span class="fu">as_factor</span>(speed)) <span class="sc">%&gt;%</span></span>
-<span id="cb194-32"><a href="DOE.html#cb194-32" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(drymatter_TGT, speed) <span class="sc">%&gt;%</span></span>
-<span id="cb194-33"><a href="DOE.html#cb194-33" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">drymatter_bias_mean =</span> <span class="fu">mean</span>(bias), <span class="at">drymatter_bias_sd =</span> <span class="fu">sd</span>(bias)) <span class="sc">%&gt;%</span></span>
-<span id="cb194-34"><a href="DOE.html#cb194-34" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> drymatter_TGT, <span class="at">y =</span> drymatter_bias_mean, <span class="at">color =</span> speed)) <span class="sc">+</span></span>
-<span id="cb194-35"><a href="DOE.html#cb194-35" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">group =</span> speed), <span class="at">size =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
-<span id="cb194-36"><a href="DOE.html#cb194-36" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">group =</span> speed, <span class="at">linetype =</span> speed)) <span class="sc">+</span></span>
-<span id="cb194-37"><a href="DOE.html#cb194-37" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_linetype</span>(<span class="at">guide=</span><span class="cn">FALSE</span>) <span class="sc">+</span></span>
-<span id="cb194-38"><a href="DOE.html#cb194-38" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_viridis_d</span>(<span class="at">option =</span> <span class="st">&quot;C&quot;</span>, <span class="at">begin =</span> <span class="fl">0.3</span>, <span class="at">end =</span> <span class="fl">0.7</span>, <span class="at">name =</span> <span class="st">&quot;Speed&quot;</span>) <span class="sc">+</span></span>
-<span id="cb194-39"><a href="DOE.html#cb194-39" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_errorbar</span>(<span class="fu">aes</span>(</span>
-<span id="cb194-40"><a href="DOE.html#cb194-40" aria-hidden="true" tabindex="-1"></a>    <span class="at">ymin =</span> drymatter_bias_mean <span class="sc">-</span> <span class="dv">2</span> <span class="sc">*</span> drymatter_bias_sd,</span>
-<span id="cb194-41"><a href="DOE.html#cb194-41" aria-hidden="true" tabindex="-1"></a>    <span class="at">ymax =</span> drymatter_bias_mean <span class="sc">+</span> <span class="dv">2</span> <span class="sc">*</span> drymatter_bias_sd,</span>
-<span id="cb194-42"><a href="DOE.html#cb194-42" aria-hidden="true" tabindex="-1"></a>    <span class="at">width =</span> .<span class="dv">5</span></span>
-<span id="cb194-43"><a href="DOE.html#cb194-43" aria-hidden="true" tabindex="-1"></a>  )) <span class="sc">+</span></span>
-<span id="cb194-44"><a href="DOE.html#cb194-44" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_cartesian</span>(</span>
-<span id="cb194-45"><a href="DOE.html#cb194-45" aria-hidden="true" tabindex="-1"></a>    <span class="at">xlim =</span> <span class="fu">c</span>(<span class="dv">9</span>, <span class="dv">21</span>),</span>
-<span id="cb194-46"><a href="DOE.html#cb194-46" aria-hidden="true" tabindex="-1"></a>    <span class="at">ylim =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">1</span>,<span class="dv">0</span>), <span class="at">expand =</span> <span class="cn">TRUE</span>) <span class="sc">+</span></span>
-<span id="cb194-47"><a href="DOE.html#cb194-47" aria-hidden="true" tabindex="-1"></a>  <span class="fu">annotate</span>(<span class="at">geom =</span> <span class="st">&quot;text&quot;</span>, <span class="at">x =</span> <span class="cn">Inf</span>, <span class="at">y =</span> <span class="dv">0</span>, <span class="at">label =</span> <span class="st">&quot;Error bars are +/- 2xSD&quot;</span>, </span>
-<span id="cb194-48"><a href="DOE.html#cb194-48" aria-hidden="true" tabindex="-1"></a>    <span class="at">hjust =</span> <span class="dv">1</span>, <span class="at">vjust =</span> <span class="sc">-</span><span class="dv">1</span>, <span class="at">colour =</span> <span class="st">&quot;grey30&quot;</span>, <span class="at">size =</span> <span class="dv">3</span>, </span>
-<span id="cb194-49"><a href="DOE.html#cb194-49" aria-hidden="true" tabindex="-1"></a>    <span class="at">fontface =</span> <span class="st">&quot;italic&quot;</span>) <span class="sc">+</span></span>
-<span id="cb194-50"><a href="DOE.html#cb194-50" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
-<span id="cb194-51"><a href="DOE.html#cb194-51" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">&quot;Dry matter target&quot;</span>,</span>
-<span id="cb194-52"><a href="DOE.html#cb194-52" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">&quot;Average bias deviation [g]&quot;</span></span>
-<span id="cb194-53"><a href="DOE.html#cb194-53" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb194-54"><a href="DOE.html#cb194-54" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.justification=</span><span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">0</span>), <span class="at">legend.position=</span><span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">0</span>))</span>
-<span id="cb194-55"><a href="DOE.html#cb194-55" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb194-56"><a href="DOE.html#cb194-56" aria-hidden="true" tabindex="-1"></a>speed_particle_size_plot <span class="ot">&lt;-</span> juice_drymatter <span class="sc">%&gt;%</span>  </span>
-<span id="cb194-57"><a href="DOE.html#cb194-57" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">particle_size =</span> <span class="fu">as_factor</span>(particle_size)) <span class="sc">%&gt;%</span></span>
-<span id="cb194-58"><a href="DOE.html#cb194-58" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(speed, particle_size) <span class="sc">%&gt;%</span></span>
-<span id="cb194-59"><a href="DOE.html#cb194-59" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">drymatter_bias_mean =</span> <span class="fu">mean</span>(bias), <span class="at">drymatter_bias_sd =</span> <span class="fu">sd</span>(bias)) <span class="sc">%&gt;%</span></span>
-<span id="cb194-60"><a href="DOE.html#cb194-60" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> speed, <span class="at">y =</span> drymatter_bias_mean, <span class="at">color =</span> particle_size)) <span class="sc">+</span></span>
-<span id="cb194-61"><a href="DOE.html#cb194-61" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">group =</span> particle_size), <span class="at">size =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
-<span id="cb194-62"><a href="DOE.html#cb194-62" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">group =</span> particle_size, <span class="at">linetype =</span> particle_size)) <span class="sc">+</span></span>
-<span id="cb194-63"><a href="DOE.html#cb194-63" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_linetype</span>(<span class="at">guide=</span><span class="cn">FALSE</span>) <span class="sc">+</span></span>
-<span id="cb194-64"><a href="DOE.html#cb194-64" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_viridis_d</span>(<span class="at">option =</span> <span class="st">&quot;C&quot;</span>, <span class="at">begin =</span> <span class="fl">0.3</span>, <span class="at">end =</span> <span class="fl">0.7</span>, <span class="at">name =</span> <span class="st">&quot;Particle size&quot;</span>) <span class="sc">+</span></span>
-<span id="cb194-65"><a href="DOE.html#cb194-65" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_errorbar</span>(<span class="fu">aes</span>(</span>
-<span id="cb194-66"><a href="DOE.html#cb194-66" aria-hidden="true" tabindex="-1"></a>    <span class="at">ymin =</span> drymatter_bias_mean <span class="sc">-</span> <span class="dv">2</span> <span class="sc">*</span> drymatter_bias_sd,</span>
-<span id="cb194-67"><a href="DOE.html#cb194-67" aria-hidden="true" tabindex="-1"></a>    <span class="at">ymax =</span> drymatter_bias_mean <span class="sc">+</span> <span class="dv">2</span> <span class="sc">*</span> drymatter_bias_sd,</span>
-<span id="cb194-68"><a href="DOE.html#cb194-68" aria-hidden="true" tabindex="-1"></a>    <span class="at">width =</span> .<span class="dv">5</span></span>
-<span id="cb194-69"><a href="DOE.html#cb194-69" aria-hidden="true" tabindex="-1"></a>  )) <span class="sc">+</span></span>
-<span id="cb194-70"><a href="DOE.html#cb194-70" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_cartesian</span>(</span>
-<span id="cb194-71"><a href="DOE.html#cb194-71" aria-hidden="true" tabindex="-1"></a>    <span class="at">xlim =</span> <span class="fu">c</span>(<span class="dv">19</span>, <span class="dv">26</span>),</span>
-<span id="cb194-72"><a href="DOE.html#cb194-72" aria-hidden="true" tabindex="-1"></a>    <span class="at">ylim =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">1</span>,<span class="dv">0</span>), <span class="at">expand =</span> <span class="cn">TRUE</span>) <span class="sc">+</span></span>
-<span id="cb194-73"><a href="DOE.html#cb194-73" aria-hidden="true" tabindex="-1"></a>  <span class="fu">annotate</span>(<span class="at">geom =</span> <span class="st">&quot;text&quot;</span>, <span class="at">x =</span> <span class="cn">Inf</span>, <span class="at">y =</span> <span class="dv">0</span>, <span class="at">label =</span> <span class="st">&quot;Error bars are +/- 2xSD&quot;</span>, </span>
-<span id="cb194-74"><a href="DOE.html#cb194-74" aria-hidden="true" tabindex="-1"></a>    <span class="at">hjust =</span> <span class="dv">1</span>, <span class="at">vjust =</span> <span class="sc">-</span><span class="dv">1</span>, <span class="at">colour =</span> <span class="st">&quot;grey30&quot;</span>, <span class="at">size =</span> <span class="dv">3</span>, </span>
-<span id="cb194-75"><a href="DOE.html#cb194-75" aria-hidden="true" tabindex="-1"></a>    <span class="at">fontface =</span> <span class="st">&quot;italic&quot;</span>) <span class="sc">+</span></span>
-<span id="cb194-76"><a href="DOE.html#cb194-76" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
-<span id="cb194-77"><a href="DOE.html#cb194-77" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">&quot;Speed&quot;</span>,</span>
-<span id="cb194-78"><a href="DOE.html#cb194-78" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">&quot;Average bias deviation [g]&quot;</span></span>
-<span id="cb194-79"><a href="DOE.html#cb194-79" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb194-80"><a href="DOE.html#cb194-80" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.justification=</span><span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">0</span>), <span class="at">legend.position=</span><span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">0</span>))</span>
-<span id="cb194-81"><a href="DOE.html#cb194-81" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb194-82"><a href="DOE.html#cb194-82" aria-hidden="true" tabindex="-1"></a>drymatter_TGT_particle_size_plot <span class="sc">+</span> drymatter_TGT_speed_plot <span class="sc">+</span> speed_particle_size_plot</span></code></pre></div>
-<p><img src="8_generalDOEs_files/figure-html/unnamed-chunk-9-1.png" width="100%" /></p>
-<p>The plots indicate no interaction between the different factors as all lines do not intercept and are mostly parallel.</p>
-<p>In most cases the anova would be performed first and only the plot for the significant interactions would be plotted, if any.</p>
+<div class="sourceCode" id="cb195"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb195-1"><a href="DOE.html#cb195-1" aria-hidden="true" tabindex="-1"></a>drymatter_TGT_particle_size_plot <span class="ot">&lt;-</span> juice_drymatter <span class="sc">%&gt;%</span>  </span>
+<span id="cb195-2"><a href="DOE.html#cb195-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">particle_size =</span> <span class="fu">as_factor</span>(particle_size)) <span class="sc">%&gt;%</span></span>
+<span id="cb195-3"><a href="DOE.html#cb195-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(drymatter_TGT, particle_size) <span class="sc">%&gt;%</span></span>
+<span id="cb195-4"><a href="DOE.html#cb195-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">drymatter_bias_mean =</span> <span class="fu">mean</span>(bias), <span class="at">drymatter_bias_sd =</span> <span class="fu">sd</span>(bias)) <span class="sc">%&gt;%</span></span>
+<span id="cb195-5"><a href="DOE.html#cb195-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> drymatter_TGT, <span class="at">y =</span> drymatter_bias_mean, <span class="at">color =</span> particle_size, <span class="at">linetype =</span> particle_size)) <span class="sc">+</span></span>
+<span id="cb195-6"><a href="DOE.html#cb195-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">group =</span> particle_size), <span class="at">size =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="cb195-7"><a href="DOE.html#cb195-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">group =</span> particle_size, <span class="at">linetype =</span> particle_size)) <span class="sc">+</span></span>
+<span id="cb195-8"><a href="DOE.html#cb195-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_linetype</span>(<span class="at">guide=</span><span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb195-9"><a href="DOE.html#cb195-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_errorbar</span>(<span class="fu">aes</span>(</span>
+<span id="cb195-10"><a href="DOE.html#cb195-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">ymin =</span> drymatter_bias_mean <span class="sc">-</span> <span class="dv">2</span> <span class="sc">*</span> drymatter_bias_sd,</span>
+<span id="cb195-11"><a href="DOE.html#cb195-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">ymax =</span> drymatter_bias_mean <span class="sc">+</span> <span class="dv">2</span> <span class="sc">*</span> drymatter_bias_sd,</span>
+<span id="cb195-12"><a href="DOE.html#cb195-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">width =</span> .<span class="dv">5</span></span>
+<span id="cb195-13"><a href="DOE.html#cb195-13" aria-hidden="true" tabindex="-1"></a>  )) <span class="sc">+</span></span>
+<span id="cb195-14"><a href="DOE.html#cb195-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_viridis_d</span>(<span class="at">option =</span> <span class="st">&quot;C&quot;</span>, <span class="at">begin =</span> <span class="fl">0.3</span>, <span class="at">end =</span> <span class="fl">0.7</span>, <span class="at">name =</span> <span class="st">&quot;Particle size&quot;</span>) <span class="sc">+</span></span>
+<span id="cb195-15"><a href="DOE.html#cb195-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_cartesian</span>(</span>
+<span id="cb195-16"><a href="DOE.html#cb195-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">xlim =</span> <span class="fu">c</span>(<span class="dv">9</span>,<span class="dv">21</span>),</span>
+<span id="cb195-17"><a href="DOE.html#cb195-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">ylim =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">1</span>,<span class="dv">0</span>), <span class="at">expand =</span> <span class="cn">TRUE</span>) <span class="sc">+</span></span>
+<span id="cb195-18"><a href="DOE.html#cb195-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">annotate</span>(<span class="at">geom =</span> <span class="st">&quot;text&quot;</span>, <span class="at">x =</span> <span class="cn">Inf</span>, <span class="at">y =</span> <span class="dv">0</span>, <span class="at">label =</span> <span class="st">&quot;Error bars are +/- 2xSD&quot;</span>, </span>
+<span id="cb195-19"><a href="DOE.html#cb195-19" aria-hidden="true" tabindex="-1"></a>    <span class="at">hjust =</span> <span class="dv">1</span>, <span class="at">vjust =</span> <span class="sc">-</span><span class="dv">1</span>, <span class="at">colour =</span> <span class="st">&quot;grey30&quot;</span>, <span class="at">size =</span> <span class="dv">3</span>, </span>
+<span id="cb195-20"><a href="DOE.html#cb195-20" aria-hidden="true" tabindex="-1"></a>    <span class="at">fontface =</span> <span class="st">&quot;italic&quot;</span>) <span class="sc">+</span></span>
+<span id="cb195-21"><a href="DOE.html#cb195-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb195-22"><a href="DOE.html#cb195-22" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">&quot;Juice bottling problem&quot;</span>,</span>
+<span id="cb195-23"><a href="DOE.html#cb195-23" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="st">&quot;Interaction plots&quot;</span>,</span>
+<span id="cb195-24"><a href="DOE.html#cb195-24" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">&quot;Drymatter target&quot;</span>,</span>
+<span id="cb195-25"><a href="DOE.html#cb195-25" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">&quot;Average bias deviation [g]&quot;</span></span>
+<span id="cb195-26"><a href="DOE.html#cb195-26" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb195-27"><a href="DOE.html#cb195-27" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.justification=</span><span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">0</span>), <span class="at">legend.position=</span><span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">0</span>))</span></code></pre></div>
+<p>Now to look deeper and she’s preparing interaction plots. She wants to understand if factors combine in unexpected ways at certain levels. In designs like these with 3 factors we have 3 possible interactions (A-B, A-C, B-C) corresponding the the possible combination between them. It is important to keep in mind that at least two replicates by run are needed to be able determine the sum of squares due to error, this if all possible interactions are to be included in the model. As the plan is a full factorial plan and there are more than 2 replicates, all factor combinations are resolved and can be assessed for their significance. The interaction plots show precisely such combinations, two at a time against the output. The first one Dry matter target - Particle Size being ready she moves to the next two: Dry matter target - Speed and Speed - Particle Size.</p>
+<div class="sourceCode" id="cb196"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb196-1"><a href="DOE.html#cb196-1" aria-hidden="true" tabindex="-1"></a>drymatter_TGT_speed_plot <span class="ot">&lt;-</span> juice_drymatter <span class="sc">%&gt;%</span>  </span>
+<span id="cb196-2"><a href="DOE.html#cb196-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">speed =</span> <span class="fu">as_factor</span>(speed)) <span class="sc">%&gt;%</span></span>
+<span id="cb196-3"><a href="DOE.html#cb196-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(drymatter_TGT, speed) <span class="sc">%&gt;%</span></span>
+<span id="cb196-4"><a href="DOE.html#cb196-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">drymatter_bias_mean =</span> <span class="fu">mean</span>(bias), <span class="at">drymatter_bias_sd =</span> <span class="fu">sd</span>(bias)) <span class="sc">%&gt;%</span></span>
+<span id="cb196-5"><a href="DOE.html#cb196-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> drymatter_TGT, <span class="at">y =</span> drymatter_bias_mean, <span class="at">color =</span> speed)) <span class="sc">+</span></span>
+<span id="cb196-6"><a href="DOE.html#cb196-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">group =</span> speed), <span class="at">size =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="cb196-7"><a href="DOE.html#cb196-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">group =</span> speed, <span class="at">linetype =</span> speed)) <span class="sc">+</span></span>
+<span id="cb196-8"><a href="DOE.html#cb196-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_linetype</span>( <span class="at">guide=</span><span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb196-9"><a href="DOE.html#cb196-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_viridis_d</span>(<span class="at">option =</span> <span class="st">&quot;C&quot;</span>, <span class="at">begin =</span> <span class="fl">0.3</span>, <span class="at">end =</span> <span class="fl">0.7</span>, <span class="at">name =</span> <span class="st">&quot;Speed&quot;</span>) <span class="sc">+</span></span>
+<span id="cb196-10"><a href="DOE.html#cb196-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_errorbar</span>(<span class="fu">aes</span>(</span>
+<span id="cb196-11"><a href="DOE.html#cb196-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">ymin =</span> drymatter_bias_mean <span class="sc">-</span> <span class="dv">2</span> <span class="sc">*</span> drymatter_bias_sd,</span>
+<span id="cb196-12"><a href="DOE.html#cb196-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">ymax =</span> drymatter_bias_mean <span class="sc">+</span> <span class="dv">2</span> <span class="sc">*</span> drymatter_bias_sd,</span>
+<span id="cb196-13"><a href="DOE.html#cb196-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">width =</span> .<span class="dv">5</span></span>
+<span id="cb196-14"><a href="DOE.html#cb196-14" aria-hidden="true" tabindex="-1"></a>  )) <span class="sc">+</span></span>
+<span id="cb196-15"><a href="DOE.html#cb196-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_cartesian</span>(</span>
+<span id="cb196-16"><a href="DOE.html#cb196-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">xlim =</span> <span class="fu">c</span>(<span class="dv">9</span>, <span class="dv">21</span>),</span>
+<span id="cb196-17"><a href="DOE.html#cb196-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">ylim =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">1</span>,<span class="dv">0</span>), <span class="at">expand =</span> <span class="cn">TRUE</span>) <span class="sc">+</span></span>
+<span id="cb196-18"><a href="DOE.html#cb196-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">annotate</span>(<span class="at">geom =</span> <span class="st">&quot;text&quot;</span>, <span class="at">x =</span> <span class="cn">Inf</span>, <span class="at">y =</span> <span class="dv">0</span>, <span class="at">label =</span> <span class="st">&quot;Error bars are +/- 2xSD&quot;</span>, </span>
+<span id="cb196-19"><a href="DOE.html#cb196-19" aria-hidden="true" tabindex="-1"></a>    <span class="at">hjust =</span> <span class="dv">1</span>, <span class="at">vjust =</span> <span class="sc">-</span><span class="dv">1</span>, <span class="at">colour =</span> <span class="st">&quot;grey30&quot;</span>, <span class="at">size =</span> <span class="dv">3</span>, </span>
+<span id="cb196-20"><a href="DOE.html#cb196-20" aria-hidden="true" tabindex="-1"></a>    <span class="at">fontface =</span> <span class="st">&quot;italic&quot;</span>) <span class="sc">+</span></span>
+<span id="cb196-21"><a href="DOE.html#cb196-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb196-22"><a href="DOE.html#cb196-22" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">&quot;Dry matter target&quot;</span>,</span>
+<span id="cb196-23"><a href="DOE.html#cb196-23" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">&quot;Average bias deviation [g]&quot;</span></span>
+<span id="cb196-24"><a href="DOE.html#cb196-24" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb196-25"><a href="DOE.html#cb196-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.justification=</span><span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">0</span>), <span class="at">legend.position=</span><span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">0</span>))</span>
+<span id="cb196-26"><a href="DOE.html#cb196-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb196-27"><a href="DOE.html#cb196-27" aria-hidden="true" tabindex="-1"></a>speed_particle_size_plot <span class="ot">&lt;-</span> juice_drymatter <span class="sc">%&gt;%</span>  </span>
+<span id="cb196-28"><a href="DOE.html#cb196-28" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">particle_size =</span> <span class="fu">as_factor</span>(particle_size)) <span class="sc">%&gt;%</span></span>
+<span id="cb196-29"><a href="DOE.html#cb196-29" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(speed, particle_size) <span class="sc">%&gt;%</span></span>
+<span id="cb196-30"><a href="DOE.html#cb196-30" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">drymatter_bias_mean =</span> <span class="fu">mean</span>(bias), <span class="at">drymatter_bias_sd =</span> <span class="fu">sd</span>(bias)) <span class="sc">%&gt;%</span></span>
+<span id="cb196-31"><a href="DOE.html#cb196-31" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> speed, <span class="at">y =</span> drymatter_bias_mean, <span class="at">color =</span> particle_size)) <span class="sc">+</span></span>
+<span id="cb196-32"><a href="DOE.html#cb196-32" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">group =</span> particle_size), <span class="at">size =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="cb196-33"><a href="DOE.html#cb196-33" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">group =</span> particle_size, <span class="at">linetype =</span> particle_size)) <span class="sc">+</span></span>
+<span id="cb196-34"><a href="DOE.html#cb196-34" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_linetype</span>(<span class="at">guide=</span><span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb196-35"><a href="DOE.html#cb196-35" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_viridis_d</span>(<span class="at">option =</span> <span class="st">&quot;C&quot;</span>, <span class="at">begin =</span> <span class="fl">0.3</span>, <span class="at">end =</span> <span class="fl">0.7</span>, <span class="at">name =</span> <span class="st">&quot;Particle size&quot;</span>) <span class="sc">+</span></span>
+<span id="cb196-36"><a href="DOE.html#cb196-36" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_errorbar</span>(<span class="fu">aes</span>(</span>
+<span id="cb196-37"><a href="DOE.html#cb196-37" aria-hidden="true" tabindex="-1"></a>    <span class="at">ymin =</span> drymatter_bias_mean <span class="sc">-</span> <span class="dv">2</span> <span class="sc">*</span> drymatter_bias_sd,</span>
+<span id="cb196-38"><a href="DOE.html#cb196-38" aria-hidden="true" tabindex="-1"></a>    <span class="at">ymax =</span> drymatter_bias_mean <span class="sc">+</span> <span class="dv">2</span> <span class="sc">*</span> drymatter_bias_sd,</span>
+<span id="cb196-39"><a href="DOE.html#cb196-39" aria-hidden="true" tabindex="-1"></a>    <span class="at">width =</span> .<span class="dv">5</span></span>
+<span id="cb196-40"><a href="DOE.html#cb196-40" aria-hidden="true" tabindex="-1"></a>  )) <span class="sc">+</span></span>
+<span id="cb196-41"><a href="DOE.html#cb196-41" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_cartesian</span>(</span>
+<span id="cb196-42"><a href="DOE.html#cb196-42" aria-hidden="true" tabindex="-1"></a>    <span class="at">xlim =</span> <span class="fu">c</span>(<span class="dv">19</span>, <span class="dv">26</span>),</span>
+<span id="cb196-43"><a href="DOE.html#cb196-43" aria-hidden="true" tabindex="-1"></a>    <span class="at">ylim =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">1</span>,<span class="dv">0</span>), <span class="at">expand =</span> <span class="cn">TRUE</span>) <span class="sc">+</span></span>
+<span id="cb196-44"><a href="DOE.html#cb196-44" aria-hidden="true" tabindex="-1"></a>  <span class="fu">annotate</span>(<span class="at">geom =</span> <span class="st">&quot;text&quot;</span>, <span class="at">x =</span> <span class="cn">Inf</span>, <span class="at">y =</span> <span class="dv">0</span>, <span class="at">label =</span> <span class="st">&quot;Error bars are +/- 2xSD&quot;</span>, </span>
+<span id="cb196-45"><a href="DOE.html#cb196-45" aria-hidden="true" tabindex="-1"></a>    <span class="at">hjust =</span> <span class="dv">1</span>, <span class="at">vjust =</span> <span class="sc">-</span><span class="dv">1</span>, <span class="at">colour =</span> <span class="st">&quot;grey30&quot;</span>, <span class="at">size =</span> <span class="dv">3</span>, </span>
+<span id="cb196-46"><a href="DOE.html#cb196-46" aria-hidden="true" tabindex="-1"></a>    <span class="at">fontface =</span> <span class="st">&quot;italic&quot;</span>) <span class="sc">+</span></span>
+<span id="cb196-47"><a href="DOE.html#cb196-47" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb196-48"><a href="DOE.html#cb196-48" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">&quot;Speed&quot;</span>,</span>
+<span id="cb196-49"><a href="DOE.html#cb196-49" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">&quot;Average bias deviation [g]&quot;</span></span>
+<span id="cb196-50"><a href="DOE.html#cb196-50" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb196-51"><a href="DOE.html#cb196-51" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.justification=</span><span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">0</span>), <span class="at">legend.position=</span><span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">0</span>))</span>
+<span id="cb196-52"><a href="DOE.html#cb196-52" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb196-53"><a href="DOE.html#cb196-53" aria-hidden="true" tabindex="-1"></a>drymatter_TGT_particle_size_plot <span class="sc">+</span> drymatter_TGT_speed_plot <span class="sc">+</span> speed_particle_size_plot</span></code></pre></div>
+<p><img src="8_generalDOEs_files/figure-html/unnamed-chunk-11-1.png" width="100%" /></p>
+<p>The approach here goes much beyond the interaction.plot function from the <code>{stats}</code> package introduced before and the code to obtain this plots is significantly longer. She has chosen to develop here the plots with <code>{ggplot2}</code> because she wanted to have direct access to all the minor details in the contruction of the plot such as the colors by line, a custom error bars calculation, very specific locations for the legends. She ends up concluding that there is no interaction between any of the different factors as all lines do not intercept, are mostly parallel and error bars cover each other.</p>
+</div>
+<div id="formula_expansion" class="section level3">
+<h3>Formula expansion</h3>
+<div class="sourceCode" id="cb197"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb197-1"><a href="DOE.html#cb197-1" aria-hidden="true" tabindex="-1"></a>f1 <span class="ot">&lt;-</span> Y <span class="sc">~</span> A <span class="sc">*</span> B <span class="sc">*</span> C</span>
+<span id="cb197-2"><a href="DOE.html#cb197-2" aria-hidden="true" tabindex="-1"></a>f2 <span class="ot">&lt;-</span> Y <span class="sc">~</span> A <span class="sc">*</span> B <span class="sc">+</span> C</span></code></pre></div>
+<div class="sourceCode" id="cb198"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb198-1"><a href="DOE.html#cb198-1" aria-hidden="true" tabindex="-1"></a><span class="fu">formula_expansion</span>(f1)</span></code></pre></div>
+<pre><code>[1] &quot;A&quot;     &quot;B&quot;     &quot;C&quot;     &quot;A:B&quot;   &quot;A:C&quot;   &quot;B:C&quot;   &quot;A:B:C&quot;</code></pre>
+<div class="sourceCode" id="cb200"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb200-1"><a href="DOE.html#cb200-1" aria-hidden="true" tabindex="-1"></a><span class="fu">formula_expansion</span>(f2)</span></code></pre></div>
+<pre><code>[1] &quot;A&quot;   &quot;B&quot;   &quot;C&quot;   &quot;A:B&quot;</code></pre>
+<p>The short code chunk before shows two formula expansion examples, the first one corresponding to our Juice DOE: in a design with factors coded A, B and C the sources of variation for the Anova table for three-factor fixed effects model are: A, B, C, AB, AC, BC, ABC. The second case corresponds to a situation where interactions with C would be discarded. This understanding is very important as more and more factors are added to models and the number of trials grows to unrealistic quantities. In such situations a preliminary work of selection of interactions allows to prepare a fractionned design. For now the doe is still contained at 108 trials so she can move ahead assessing the effect significance of the different factors using the anova.</p>
 </div>
 <div id="anova_three" class="section level3">
 <h3>Anova with 3rd level interactions</h3>
-<p>The sources of variation for the Anova table for three-factor fixed effects model are: A, B, C, AB, AC, BC, ABC. To be noted that like in the two-factors we must have at least two parts (n&gt;2) to determine the sum of squares due to error if all possible interactions are to be included in the model.</p>
-<p>We are now fully prepared for an assessment of the effect of the different factors with the anova. To reduce the amount of coding we’re inputing the model directly in the aov function:</p>
-<div class="sourceCode" id="cb195"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb195-1"><a href="DOE.html#cb195-1" aria-hidden="true" tabindex="-1"></a>juice_drymatter_aov <span class="ot">&lt;-</span> <span class="fu">aov</span>(</span>
-<span id="cb195-2"><a href="DOE.html#cb195-2" aria-hidden="true" tabindex="-1"></a>  bias <span class="sc">~</span> drymatter_TGT <span class="sc">*</span> speed <span class="sc">*</span> particle_size,</span>
-<span id="cb195-3"><a href="DOE.html#cb195-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> juice_drymatter)</span>
-<span id="cb195-4"><a href="DOE.html#cb195-4" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(juice_drymatter_aov)</span></code></pre></div>
+<div class="sourceCode" id="cb202"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb202-1"><a href="DOE.html#cb202-1" aria-hidden="true" tabindex="-1"></a>juice_drymatter_aov <span class="ot">&lt;-</span> <span class="fu">aov</span>(</span>
+<span id="cb202-2"><a href="DOE.html#cb202-2" aria-hidden="true" tabindex="-1"></a>  bias <span class="sc">~</span> drymatter_TGT <span class="sc">*</span> speed <span class="sc">*</span> particle_size,</span>
+<span id="cb202-3"><a href="DOE.html#cb202-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> juice_drymatter)</span>
+<span id="cb202-4"><a href="DOE.html#cb202-4" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(juice_drymatter_aov)</span></code></pre></div>
 <pre><code>                                   Df Sum Sq Mean Sq F value Pr(&gt;F)    
 drymatter_TGT                       1  1.315   1.315  486.06 &lt;2e-16 ***
 speed                               1  0.000   0.000    0.00   0.99    
@@ -1902,9 +1914,7 @@ drymatter_TGT:speed:particle_size   1  0.004   0.004    1.44   0.23
 Residuals                         100  0.271   0.003                   
 ---
 Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
-<p>The observations of the plots are confirmed and completed with statistical input: we see that the percentage of drymatter_TGT and the particle_size significantly affect the bias volume (p &lt; 0.05). The drymatter_TGT-particle_size interactions are non significative.</p>
-<p>As expected the anova confirms strong influence of the dissolution level on the bias.</p>
-<p>From the analysis all interactions could be removed from the model in order to establish a predictive model.</p>
+<p>Here she simplified things by inputing the formula directly in the aov function without passing by the <code>formula()</code> or <code>lm()</code> functions. The previous observations done on the plots are fully confirmed and now supported with statistical evidence: <code>drymatter target</code> and <code>particle_size</code> significantly affect the bias (p &lt; 0.05); <code>speed</code> has no effect; none of the interactions is significative. This first round of assessment was very clear and successful and she can make bold proposals to the Quality Manager now to look deeper into the links between drymatter target and particle size in that bias. Certainly passing by a discussion again with the product team and a final DOE with more levels to identify or select an optimal operating zone for the measurement method.</p>
 
 </div>
 </div>
@@ -1940,50 +1950,50 @@ Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&
 <p><strong>The PET clothing improvement plan</strong></p>
 <p>In this case study factors have only 2 levels.</p>
 <p>Below we start by preparing our dataset:</p>
-<div class="sourceCode" id="cb197"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb197-1"><a href="DOE.html#cb197-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(DoE.base)</span></code></pre></div>
-<div class="sourceCode" id="cb198"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb198-1"><a href="DOE.html#cb198-1" aria-hidden="true" tabindex="-1"></a>pet_doe <span class="ot">&lt;-</span> <span class="fu">fac.design</span>(</span>
-<span id="cb198-2"><a href="DOE.html#cb198-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">randomize =</span> <span class="cn">FALSE</span>,</span>
-<span id="cb198-3"><a href="DOE.html#cb198-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">factor.names=</span><span class="fu">list</span>(<span class="at">A=</span><span class="fu">c</span>(<span class="st">&quot;-&quot;</span>,<span class="st">&quot;+&quot;</span>), </span>
-<span id="cb198-4"><a href="DOE.html#cb198-4" aria-hidden="true" tabindex="-1"></a>                    <span class="at">B=</span><span class="fu">c</span>(<span class="st">&quot;-&quot;</span>,<span class="st">&quot;+&quot;</span>),</span>
-<span id="cb198-5"><a href="DOE.html#cb198-5" aria-hidden="true" tabindex="-1"></a>                    <span class="at">replicate =</span> <span class="fu">c</span>(<span class="st">&quot;I&quot;</span>, <span class="st">&quot;II&quot;</span>, <span class="st">&quot;III&quot;</span>))</span>
-<span id="cb198-6"><a href="DOE.html#cb198-6" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
-<div class="sourceCode" id="cb199"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb199-1"><a href="DOE.html#cb199-1" aria-hidden="true" tabindex="-1"></a>tensile_strength <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">64.4</span>,<span class="fl">82.8</span>,<span class="fl">41.4</span>,<span class="fl">71.3</span>,<span class="fl">57.5</span>,<span class="fl">73.6</span>,<span class="fl">43.7</span>,<span class="fl">69.0</span>,<span class="fl">62.1</span>,<span class="fl">73.6</span>,<span class="fl">52.9</span>,<span class="fl">66.7</span>)</span>
-<span id="cb199-2"><a href="DOE.html#cb199-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb199-3"><a href="DOE.html#cb199-3" aria-hidden="true" tabindex="-1"></a>pet_doe <span class="ot">&lt;-</span> <span class="fu">bind_cols</span>(</span>
-<span id="cb199-4"><a href="DOE.html#cb199-4" aria-hidden="true" tabindex="-1"></a>  pet_doe,</span>
-<span id="cb199-5"><a href="DOE.html#cb199-5" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;tensile_strength&quot;</span> <span class="ot">=</span> tensile_strength,</span>
-<span id="cb199-6"><a href="DOE.html#cb199-6" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb204"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb204-1"><a href="DOE.html#cb204-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(DoE.base)</span></code></pre></div>
+<div class="sourceCode" id="cb205"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb205-1"><a href="DOE.html#cb205-1" aria-hidden="true" tabindex="-1"></a>pet_doe <span class="ot">&lt;-</span> <span class="fu">fac.design</span>(</span>
+<span id="cb205-2"><a href="DOE.html#cb205-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">randomize =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb205-3"><a href="DOE.html#cb205-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">factor.names=</span><span class="fu">list</span>(<span class="at">A=</span><span class="fu">c</span>(<span class="st">&quot;-&quot;</span>,<span class="st">&quot;+&quot;</span>), </span>
+<span id="cb205-4"><a href="DOE.html#cb205-4" aria-hidden="true" tabindex="-1"></a>                    <span class="at">B=</span><span class="fu">c</span>(<span class="st">&quot;-&quot;</span>,<span class="st">&quot;+&quot;</span>),</span>
+<span id="cb205-5"><a href="DOE.html#cb205-5" aria-hidden="true" tabindex="-1"></a>                    <span class="at">replicate =</span> <span class="fu">c</span>(<span class="st">&quot;I&quot;</span>, <span class="st">&quot;II&quot;</span>, <span class="st">&quot;III&quot;</span>))</span>
+<span id="cb205-6"><a href="DOE.html#cb205-6" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
+<div class="sourceCode" id="cb206"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb206-1"><a href="DOE.html#cb206-1" aria-hidden="true" tabindex="-1"></a>tensile_strength <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">64.4</span>,<span class="fl">82.8</span>,<span class="fl">41.4</span>,<span class="fl">71.3</span>,<span class="fl">57.5</span>,<span class="fl">73.6</span>,<span class="fl">43.7</span>,<span class="fl">69.0</span>,<span class="fl">62.1</span>,<span class="fl">73.6</span>,<span class="fl">52.9</span>,<span class="fl">66.7</span>)</span>
+<span id="cb206-2"><a href="DOE.html#cb206-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb206-3"><a href="DOE.html#cb206-3" aria-hidden="true" tabindex="-1"></a>pet_doe <span class="ot">&lt;-</span> <span class="fu">bind_cols</span>(</span>
+<span id="cb206-4"><a href="DOE.html#cb206-4" aria-hidden="true" tabindex="-1"></a>  pet_doe,</span>
+<span id="cb206-5"><a href="DOE.html#cb206-5" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;tensile_strength&quot;</span> <span class="ot">=</span> tensile_strength,</span>
+<span id="cb206-6"><a href="DOE.html#cb206-6" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
 <div id="coding_levels" class="section level3">
 <h3>Coding levels</h3>
 <p>Factors as +/-</p>
 <p>In this first model we’re using a design where the inputs levels have been defined as plus and minus, sometimes also called high and low. The actual naming is not important, what is critical is to ensure that those input parameters are coded as factors.</p>
-<div class="sourceCode" id="cb200"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb200-1"><a href="DOE.html#cb200-1" aria-hidden="true" tabindex="-1"></a>pet_fct <span class="ot">&lt;-</span> pet_doe <span class="sc">%&gt;%</span></span>
-<span id="cb200-2"><a href="DOE.html#cb200-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="fu">across</span>(<span class="fu">c</span>(A,B), as_factor))</span></code></pre></div>
+<div class="sourceCode" id="cb207"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb207-1"><a href="DOE.html#cb207-1" aria-hidden="true" tabindex="-1"></a>pet_fct <span class="ot">&lt;-</span> pet_doe <span class="sc">%&gt;%</span></span>
+<span id="cb207-2"><a href="DOE.html#cb207-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="fu">across</span>(<span class="fu">c</span>(A,B), as_factor))</span></code></pre></div>
 <p>Another detail is to put the higher level as the reference otherwise we will get inverted signs in the lm output:</p>
-<div class="sourceCode" id="cb201"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb201-1"><a href="DOE.html#cb201-1" aria-hidden="true" tabindex="-1"></a>pet_fct<span class="sc">$</span>A <span class="ot">&lt;-</span> <span class="fu">relevel</span>(pet_fct<span class="sc">$</span>A, <span class="at">ref=</span><span class="st">&quot;+&quot;</span>)</span>
-<span id="cb201-2"><a href="DOE.html#cb201-2" aria-hidden="true" tabindex="-1"></a>pet_fct<span class="sc">$</span>B <span class="ot">&lt;-</span> <span class="fu">relevel</span>(pet_fct<span class="sc">$</span>B, <span class="at">ref=</span><span class="st">&quot;+&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb208"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb208-1"><a href="DOE.html#cb208-1" aria-hidden="true" tabindex="-1"></a>pet_fct<span class="sc">$</span>A <span class="ot">&lt;-</span> <span class="fu">relevel</span>(pet_fct<span class="sc">$</span>A, <span class="at">ref=</span><span class="st">&quot;+&quot;</span>)</span>
+<span id="cb208-2"><a href="DOE.html#cb208-2" aria-hidden="true" tabindex="-1"></a>pet_fct<span class="sc">$</span>B <span class="ot">&lt;-</span> <span class="fu">relevel</span>(pet_fct<span class="sc">$</span>B, <span class="at">ref=</span><span class="st">&quot;+&quot;</span>)</span></code></pre></div>
 <p>and one final step is need which is the setup of the contrasts. As our design is ortogonal and we want the contrasts to add up to zero we have to indicate that on the factor so that the coefficients of the linear model are correctly calculated. The current definition of the contrasts is:</p>
-<div class="sourceCode" id="cb202"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb202-1"><a href="DOE.html#cb202-1" aria-hidden="true" tabindex="-1"></a><span class="fu">contrasts</span>(pet_fct<span class="sc">$</span>A)</span></code></pre></div>
+<div class="sourceCode" id="cb209"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb209-1"><a href="DOE.html#cb209-1" aria-hidden="true" tabindex="-1"></a><span class="fu">contrasts</span>(pet_fct<span class="sc">$</span>A)</span></code></pre></div>
 <pre><code>  -
 + 0
 - 1</code></pre>
 <p>So we change this with:</p>
-<div class="sourceCode" id="cb204"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb204-1"><a href="DOE.html#cb204-1" aria-hidden="true" tabindex="-1"></a><span class="fu">contrasts</span>(pet_fct<span class="sc">$</span>A) <span class="ot">&lt;-</span> <span class="st">&quot;contr.sum&quot;</span></span>
-<span id="cb204-2"><a href="DOE.html#cb204-2" aria-hidden="true" tabindex="-1"></a><span class="fu">contrasts</span>(pet_fct<span class="sc">$</span>B) <span class="ot">&lt;-</span> <span class="st">&quot;contr.sum&quot;</span></span>
-<span id="cb204-3"><a href="DOE.html#cb204-3" aria-hidden="true" tabindex="-1"></a><span class="fu">contrasts</span>(pet_fct<span class="sc">$</span>A)</span></code></pre></div>
+<div class="sourceCode" id="cb211"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb211-1"><a href="DOE.html#cb211-1" aria-hidden="true" tabindex="-1"></a><span class="fu">contrasts</span>(pet_fct<span class="sc">$</span>A) <span class="ot">&lt;-</span> <span class="st">&quot;contr.sum&quot;</span></span>
+<span id="cb211-2"><a href="DOE.html#cb211-2" aria-hidden="true" tabindex="-1"></a><span class="fu">contrasts</span>(pet_fct<span class="sc">$</span>B) <span class="ot">&lt;-</span> <span class="st">&quot;contr.sum&quot;</span></span>
+<span id="cb211-3"><a href="DOE.html#cb211-3" aria-hidden="true" tabindex="-1"></a><span class="fu">contrasts</span>(pet_fct<span class="sc">$</span>A)</span></code></pre></div>
 <pre><code>  [,1]
 +    1
 -   -1</code></pre>
-<div class="sourceCode" id="cb206"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb206-1"><a href="DOE.html#cb206-1" aria-hidden="true" tabindex="-1"></a><span class="fu">contrasts</span>(pet_fct<span class="sc">$</span>A)</span></code></pre></div>
+<div class="sourceCode" id="cb213"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb213-1"><a href="DOE.html#cb213-1" aria-hidden="true" tabindex="-1"></a><span class="fu">contrasts</span>(pet_fct<span class="sc">$</span>A)</span></code></pre></div>
 <pre><code>  [,1]
 +    1
 -   -1</code></pre>
 <p>Now we can run our linear model:</p>
-<div class="sourceCode" id="cb208"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb208-1"><a href="DOE.html#cb208-1" aria-hidden="true" tabindex="-1"></a>pet_ctr_lm <span class="ot">&lt;-</span> <span class="fu">lm</span>(</span>
-<span id="cb208-2"><a href="DOE.html#cb208-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">formula =</span> tensile_strength <span class="sc">~</span> A <span class="sc">*</span> B, </span>
-<span id="cb208-3"><a href="DOE.html#cb208-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> pet_fct</span>
-<span id="cb208-4"><a href="DOE.html#cb208-4" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb208-5"><a href="DOE.html#cb208-5" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(pet_ctr_lm)</span></code></pre></div>
+<div class="sourceCode" id="cb215"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb215-1"><a href="DOE.html#cb215-1" aria-hidden="true" tabindex="-1"></a>pet_ctr_lm <span class="ot">&lt;-</span> <span class="fu">lm</span>(</span>
+<span id="cb215-2"><a href="DOE.html#cb215-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">formula =</span> tensile_strength <span class="sc">~</span> A <span class="sc">*</span> B, </span>
+<span id="cb215-3"><a href="DOE.html#cb215-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> pet_fct</span>
+<span id="cb215-4"><a href="DOE.html#cb215-4" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb215-5"><a href="DOE.html#cb215-5" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(pet_ctr_lm)</span></code></pre></div>
 <pre><code>
 Call:
 lm.default(formula = tensile_strength ~ A * B, data = pet_fct)
@@ -2007,24 +2017,24 @@ F-statistic: 24.8 on 3 and 8 DF,  p-value: 0.000209</code></pre>
 <p>We can observe in the output that the p value of the effects is the same in the lm and in the the aov functions. This confirms that the contrasts have been correctly specified with contr.sum</p>
 <p>Note that we’ve had to adjust the contrasts in the lm function with contr.sum which applies to cases where the sum of the contrasts is zero (the R default is contr.treatment which applies to cases where the levels are coded as 0 and 1).</p>
 <p>and now going to apply a prediction:</p>
-<div class="sourceCode" id="cb210"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb210-1"><a href="DOE.html#cb210-1" aria-hidden="true" tabindex="-1"></a><span class="fu">predict</span>(pet_ctr_lm, <span class="at">newdata =</span> <span class="fu">list</span>(<span class="at">A =</span> <span class="st">&quot;+&quot;</span>, <span class="at">B =</span> <span class="st">&quot;+&quot;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb217"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb217-1"><a href="DOE.html#cb217-1" aria-hidden="true" tabindex="-1"></a><span class="fu">predict</span>(pet_ctr_lm, <span class="at">newdata =</span> <span class="fu">list</span>(<span class="at">A =</span> <span class="st">&quot;+&quot;</span>, <span class="at">B =</span> <span class="st">&quot;+&quot;</span>))</span></code></pre></div>
 <pre><code> 1 
 69 </code></pre>
 <p>Factors as +/- 1</p>
 <p>In this example we convert the levels to factors still using the +/-1 notation. This will also be helpfull to apply what are called the Yates tables.</p>
-<div class="sourceCode" id="cb212"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb212-1"><a href="DOE.html#cb212-1" aria-hidden="true" tabindex="-1"></a>coded <span class="ot">&lt;-</span> <span class="cf">function</span>(x) { <span class="fu">ifelse</span>(x <span class="sc">==</span> x[<span class="dv">1</span>], <span class="sc">-</span><span class="dv">1</span>, <span class="dv">1</span>) }</span></code></pre></div>
+<div class="sourceCode" id="cb219"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb219-1"><a href="DOE.html#cb219-1" aria-hidden="true" tabindex="-1"></a>coded <span class="ot">&lt;-</span> <span class="cf">function</span>(x) { <span class="fu">ifelse</span>(x <span class="sc">==</span> x[<span class="dv">1</span>], <span class="sc">-</span><span class="dv">1</span>, <span class="dv">1</span>) }</span></code></pre></div>
 <p>We again convert them to factors and put the upper level as the reference. Regarding the contrasts we show a simpler and more direct approach now by defining them directly in the lm() function.</p>
-<div class="sourceCode" id="cb213"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb213-1"><a href="DOE.html#cb213-1" aria-hidden="true" tabindex="-1"></a>pet_fct <span class="ot">&lt;-</span> pet_fct <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">cA =</span> <span class="fu">coded</span>(A), <span class="at">cB =</span> <span class="fu">coded</span>(B))</span>
-<span id="cb213-2"><a href="DOE.html#cb213-2" aria-hidden="true" tabindex="-1"></a>pet_fct2 <span class="ot">&lt;-</span> pet_fct <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="fu">across</span>(<span class="fu">c</span>(cA, cB), as_factor))</span>
-<span id="cb213-3"><a href="DOE.html#cb213-3" aria-hidden="true" tabindex="-1"></a>pet_fct2<span class="sc">$</span>cA <span class="ot">&lt;-</span> <span class="fu">relevel</span>(pet_fct2<span class="sc">$</span>cA, <span class="at">ref =</span> <span class="st">&quot;1&quot;</span>)</span>
-<span id="cb213-4"><a href="DOE.html#cb213-4" aria-hidden="true" tabindex="-1"></a>pet_fct2<span class="sc">$</span>cB <span class="ot">&lt;-</span> <span class="fu">relevel</span>(pet_fct2<span class="sc">$</span>cB, <span class="at">ref =</span> <span class="st">&quot;1&quot;</span>)</span>
-<span id="cb213-5"><a href="DOE.html#cb213-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb213-6"><a href="DOE.html#cb213-6" aria-hidden="true" tabindex="-1"></a>pet_ctr2_lm <span class="ot">&lt;-</span> <span class="fu">lm</span>(</span>
-<span id="cb213-7"><a href="DOE.html#cb213-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">formula =</span> tensile_strength <span class="sc">~</span> cA <span class="sc">*</span> cB, </span>
-<span id="cb213-8"><a href="DOE.html#cb213-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> pet_fct2,</span>
-<span id="cb213-9"><a href="DOE.html#cb213-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">contrasts =</span> <span class="fu">list</span>(<span class="at">cA =</span> <span class="st">&quot;contr.sum&quot;</span>, <span class="at">cB =</span> <span class="st">&quot;contr.sum&quot;</span>)</span>
-<span id="cb213-10"><a href="DOE.html#cb213-10" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb213-11"><a href="DOE.html#cb213-11" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(pet_ctr2_lm)</span></code></pre></div>
+<div class="sourceCode" id="cb220"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb220-1"><a href="DOE.html#cb220-1" aria-hidden="true" tabindex="-1"></a>pet_fct <span class="ot">&lt;-</span> pet_fct <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">cA =</span> <span class="fu">coded</span>(A), <span class="at">cB =</span> <span class="fu">coded</span>(B))</span>
+<span id="cb220-2"><a href="DOE.html#cb220-2" aria-hidden="true" tabindex="-1"></a>pet_fct2 <span class="ot">&lt;-</span> pet_fct <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="fu">across</span>(<span class="fu">c</span>(cA, cB), as_factor))</span>
+<span id="cb220-3"><a href="DOE.html#cb220-3" aria-hidden="true" tabindex="-1"></a>pet_fct2<span class="sc">$</span>cA <span class="ot">&lt;-</span> <span class="fu">relevel</span>(pet_fct2<span class="sc">$</span>cA, <span class="at">ref =</span> <span class="st">&quot;1&quot;</span>)</span>
+<span id="cb220-4"><a href="DOE.html#cb220-4" aria-hidden="true" tabindex="-1"></a>pet_fct2<span class="sc">$</span>cB <span class="ot">&lt;-</span> <span class="fu">relevel</span>(pet_fct2<span class="sc">$</span>cB, <span class="at">ref =</span> <span class="st">&quot;1&quot;</span>)</span>
+<span id="cb220-5"><a href="DOE.html#cb220-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb220-6"><a href="DOE.html#cb220-6" aria-hidden="true" tabindex="-1"></a>pet_ctr2_lm <span class="ot">&lt;-</span> <span class="fu">lm</span>(</span>
+<span id="cb220-7"><a href="DOE.html#cb220-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">formula =</span> tensile_strength <span class="sc">~</span> cA <span class="sc">*</span> cB, </span>
+<span id="cb220-8"><a href="DOE.html#cb220-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> pet_fct2,</span>
+<span id="cb220-9"><a href="DOE.html#cb220-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">contrasts =</span> <span class="fu">list</span>(<span class="at">cA =</span> <span class="st">&quot;contr.sum&quot;</span>, <span class="at">cB =</span> <span class="st">&quot;contr.sum&quot;</span>)</span>
+<span id="cb220-10"><a href="DOE.html#cb220-10" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb220-11"><a href="DOE.html#cb220-11" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(pet_ctr2_lm)</span></code></pre></div>
 <pre><code>
 Call:
 lm.default(formula = tensile_strength ~ cA * cB, data = pet_fct2, 
@@ -2050,17 +2060,17 @@ F-statistic: 24.8 on 3 and 8 DF,  p-value: 0.000209</code></pre>
 <p>As A or B changes from its low level to its high level, the coded variable changes by 1 − (−1) = +2, so the change in the response is twice the regression coefficient.</p>
 <p>So the effects and interaction(s) from their minumum to their maximum correspond to twice the values in the “Estimate” column. These regression coefficients are often called effects and interactions, even though they differ from the definitions used in the designs themeselves.</p>
 <p>Checking now with coded factors:</p>
-<div class="sourceCode" id="cb215"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb215-1"><a href="DOE.html#cb215-1" aria-hidden="true" tabindex="-1"></a><span class="fu">predict</span>(pet_ctr2_lm, <span class="at">newdata =</span> <span class="fu">list</span>(<span class="at">cA =</span> <span class="st">&quot;1&quot;</span>, <span class="at">cB =</span> <span class="st">&quot;1&quot;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb222"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb222-1"><a href="DOE.html#cb222-1" aria-hidden="true" tabindex="-1"></a><span class="fu">predict</span>(pet_ctr2_lm, <span class="at">newdata =</span> <span class="fu">list</span>(<span class="at">cA =</span> <span class="st">&quot;1&quot;</span>, <span class="at">cB =</span> <span class="st">&quot;1&quot;</span>))</span></code></pre></div>
 <pre><code> 1 
 69 </code></pre>
 <p>Factors as +/- 1 numeric</p>
 <p>In this example we’re going to code the levels with +1/-1 but we’re going use the numeric coding:</p>
-<div class="sourceCode" id="cb217"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb217-1"><a href="DOE.html#cb217-1" aria-hidden="true" tabindex="-1"></a>pet_num <span class="ot">&lt;-</span> pet_fct <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">cA =</span> <span class="fu">coded</span>(A), <span class="at">cB =</span> <span class="fu">coded</span>(B))</span>
-<span id="cb217-2"><a href="DOE.html#cb217-2" aria-hidden="true" tabindex="-1"></a>pet_num_lm <span class="ot">&lt;-</span> <span class="fu">lm</span>(</span>
-<span id="cb217-3"><a href="DOE.html#cb217-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">formula =</span> tensile_strength <span class="sc">~</span> cA <span class="sc">*</span> cB, </span>
-<span id="cb217-4"><a href="DOE.html#cb217-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> pet_num</span>
-<span id="cb217-5"><a href="DOE.html#cb217-5" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb217-6"><a href="DOE.html#cb217-6" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(pet_num_lm)</span></code></pre></div>
+<div class="sourceCode" id="cb224"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb224-1"><a href="DOE.html#cb224-1" aria-hidden="true" tabindex="-1"></a>pet_num <span class="ot">&lt;-</span> pet_fct <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">cA =</span> <span class="fu">coded</span>(A), <span class="at">cB =</span> <span class="fu">coded</span>(B))</span>
+<span id="cb224-2"><a href="DOE.html#cb224-2" aria-hidden="true" tabindex="-1"></a>pet_num_lm <span class="ot">&lt;-</span> <span class="fu">lm</span>(</span>
+<span id="cb224-3"><a href="DOE.html#cb224-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">formula =</span> tensile_strength <span class="sc">~</span> cA <span class="sc">*</span> cB, </span>
+<span id="cb224-4"><a href="DOE.html#cb224-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> pet_num</span>
+<span id="cb224-5"><a href="DOE.html#cb224-5" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb224-6"><a href="DOE.html#cb224-6" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(pet_num_lm)</span></code></pre></div>
 <pre><code>
 Call:
 lm.default(formula = tensile_strength ~ cA * cB, data = pet_num)
@@ -2082,64 +2092,64 @@ Residual standard error: 4.55 on 8 degrees of freedom
 Multiple R-squared:  0.903,	Adjusted R-squared:  0.867 
 F-statistic: 24.8 on 3 and 8 DF,  p-value: 0.000209</code></pre>
 <p>In this case we did not define any contrasts. Looking into the lm We can see we’ve obtained exactly the same outputs.</p>
-<div class="sourceCode" id="cb219"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb219-1"><a href="DOE.html#cb219-1" aria-hidden="true" tabindex="-1"></a><span class="fu">predict</span>(pet_num_lm, <span class="at">newdata =</span> <span class="fu">list</span>(<span class="at">cA =</span> <span class="dv">1</span>, <span class="at">cB =</span> <span class="dv">1</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb226"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb226-1"><a href="DOE.html#cb226-1" aria-hidden="true" tabindex="-1"></a><span class="fu">predict</span>(pet_num_lm, <span class="at">newdata =</span> <span class="fu">list</span>(<span class="at">cA =</span> <span class="dv">1</span>, <span class="at">cB =</span> <span class="dv">1</span>))</span></code></pre></div>
 <pre><code> 1 
 69 </code></pre>
 <p>As the inputs are coded as numeric this behaves just like the first simple linear model we’ve seen in the Case Study on One Factor with Multiple levels. In particular when we feed the predictions function with numeric values.</p>
 <p>This is very intuitive as it corresponds to the original units of the experiments (also called natural or engineering units). On the other hand coding the design variables provides another advange: generally, the engineering units are not directly comparable while coded variables are very effective for determining the relative size of factor effects.</p>
 <p>We can see that these three ways of coding the variable levels lead to equivalent results both in lm and prediction. Our preference goes to use numeric values as it is more intuitive and allows for easier prediction between the fixed levels.</p>
 <p>And now in order to better understand the coding of factors in this unit, we’re going to establish a simple regression plot of our data:</p>
-<div class="sourceCode" id="cb221"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb221-1"><a href="DOE.html#cb221-1" aria-hidden="true" tabindex="-1"></a>pet_num <span class="sc">%&gt;%</span> </span>
-<span id="cb221-2"><a href="DOE.html#cb221-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unclass</span>() <span class="sc">%&gt;%</span> </span>
-<span id="cb221-3"><a href="DOE.html#cb221-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as_tibble</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb221-4"><a href="DOE.html#cb221-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">cA =</span> <span class="fu">coded</span>(A), <span class="at">cB =</span> <span class="fu">coded</span>(B)) <span class="sc">%&gt;%</span></span>
-<span id="cb221-5"><a href="DOE.html#cb221-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(</span>
-<span id="cb221-6"><a href="DOE.html#cb221-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">cols =</span> <span class="fu">c</span>(<span class="st">&quot;cA&quot;</span>, <span class="st">&quot;cB&quot;</span>),</span>
-<span id="cb221-7"><a href="DOE.html#cb221-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">names_to =</span> <span class="st">&quot;variable&quot;</span>,</span>
-<span id="cb221-8"><a href="DOE.html#cb221-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">values_to =</span> <span class="st">&quot;level&quot;</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb221-9"><a href="DOE.html#cb221-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
-<span id="cb221-10"><a href="DOE.html#cb221-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">x =</span> level, <span class="at">y =</span> tensile_strength)) <span class="sc">+</span></span>
-<span id="cb221-11"><a href="DOE.html#cb221-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="fu">aes</span>(<span class="at">x =</span> level, <span class="at">y =</span> tensile_strength), </span>
-<span id="cb221-12"><a href="DOE.html#cb221-12" aria-hidden="true" tabindex="-1"></a>              <span class="at">method =</span> <span class="st">&quot;lm&quot;</span>, <span class="at">se =</span> <span class="cn">FALSE</span>, <span class="at">fullrange =</span> <span class="cn">TRUE</span>) <span class="sc">+</span></span>
-<span id="cb221-13"><a href="DOE.html#cb221-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="fu">vars</span>(variable))</span></code></pre></div>
+<div class="sourceCode" id="cb228"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb228-1"><a href="DOE.html#cb228-1" aria-hidden="true" tabindex="-1"></a>pet_num <span class="sc">%&gt;%</span> </span>
+<span id="cb228-2"><a href="DOE.html#cb228-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unclass</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb228-3"><a href="DOE.html#cb228-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as_tibble</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb228-4"><a href="DOE.html#cb228-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">cA =</span> <span class="fu">coded</span>(A), <span class="at">cB =</span> <span class="fu">coded</span>(B)) <span class="sc">%&gt;%</span></span>
+<span id="cb228-5"><a href="DOE.html#cb228-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(</span>
+<span id="cb228-6"><a href="DOE.html#cb228-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">cols =</span> <span class="fu">c</span>(<span class="st">&quot;cA&quot;</span>, <span class="st">&quot;cB&quot;</span>),</span>
+<span id="cb228-7"><a href="DOE.html#cb228-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">names_to =</span> <span class="st">&quot;variable&quot;</span>,</span>
+<span id="cb228-8"><a href="DOE.html#cb228-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">values_to =</span> <span class="st">&quot;level&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb228-9"><a href="DOE.html#cb228-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb228-10"><a href="DOE.html#cb228-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">x =</span> level, <span class="at">y =</span> tensile_strength)) <span class="sc">+</span></span>
+<span id="cb228-11"><a href="DOE.html#cb228-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="fu">aes</span>(<span class="at">x =</span> level, <span class="at">y =</span> tensile_strength), </span>
+<span id="cb228-12"><a href="DOE.html#cb228-12" aria-hidden="true" tabindex="-1"></a>              <span class="at">method =</span> <span class="st">&quot;lm&quot;</span>, <span class="at">se =</span> <span class="cn">FALSE</span>, <span class="at">fullrange =</span> <span class="cn">TRUE</span>) <span class="sc">+</span></span>
+<span id="cb228-13"><a href="DOE.html#cb228-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="fu">vars</span>(variable))</span></code></pre></div>
 <p><img src="9_twolevelDOEs_files/figure-html/unnamed-chunk-16-1.png" width="100%" /></p>
 <p>Note that we had to extract the data from the S3 doe object, which we’ve done with using unclass() and then as_tibble()</p>
 <p>The intercept passes at 27.5 as seen on the lm summary. We’re going now to put the B factor at its maximum and replot:</p>
-<div class="sourceCode" id="cb222"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb222-1"><a href="DOE.html#cb222-1" aria-hidden="true" tabindex="-1"></a>pet_num <span class="sc">%&gt;%</span> </span>
-<span id="cb222-2"><a href="DOE.html#cb222-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unclass</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb222-3"><a href="DOE.html#cb222-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as_tibble</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb222-4"><a href="DOE.html#cb222-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">cA =</span> <span class="fu">coded</span>(A), <span class="at">cB =</span> <span class="fu">coded</span>(B)) <span class="sc">%&gt;%</span></span>
-<span id="cb222-5"><a href="DOE.html#cb222-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(cB <span class="sc">==</span> <span class="dv">1</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb222-6"><a href="DOE.html#cb222-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(</span>
-<span id="cb222-7"><a href="DOE.html#cb222-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">cols =</span> <span class="fu">c</span>(<span class="st">&quot;cA&quot;</span>, <span class="st">&quot;cB&quot;</span>),</span>
-<span id="cb222-8"><a href="DOE.html#cb222-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">names_to =</span> <span class="st">&quot;variable&quot;</span>,</span>
-<span id="cb222-9"><a href="DOE.html#cb222-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">values_to =</span> <span class="st">&quot;level&quot;</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb222-10"><a href="DOE.html#cb222-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
-<span id="cb222-11"><a href="DOE.html#cb222-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">x =</span> level, <span class="at">y =</span> tensile_strength)) <span class="sc">+</span></span>
-<span id="cb222-12"><a href="DOE.html#cb222-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="fu">aes</span>(<span class="at">x =</span> level, <span class="at">y =</span> tensile_strength), </span>
-<span id="cb222-13"><a href="DOE.html#cb222-13" aria-hidden="true" tabindex="-1"></a>              <span class="at">method =</span> <span class="st">&quot;lm&quot;</span>, <span class="at">se =</span> <span class="cn">FALSE</span>, <span class="at">fullrange =</span> <span class="cn">TRUE</span>) <span class="sc">+</span></span>
-<span id="cb222-14"><a href="DOE.html#cb222-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_cartesian</span>(<span class="at">xlim =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">2</span>, <span class="dv">2</span>)) <span class="sc">+</span></span>
-<span id="cb222-15"><a href="DOE.html#cb222-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">n.breaks =</span> <span class="dv">10</span>) <span class="sc">+</span></span>
-<span id="cb222-16"><a href="DOE.html#cb222-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="fu">vars</span>(variable))</span></code></pre></div>
+<div class="sourceCode" id="cb229"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb229-1"><a href="DOE.html#cb229-1" aria-hidden="true" tabindex="-1"></a>pet_num <span class="sc">%&gt;%</span> </span>
+<span id="cb229-2"><a href="DOE.html#cb229-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unclass</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb229-3"><a href="DOE.html#cb229-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as_tibble</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb229-4"><a href="DOE.html#cb229-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">cA =</span> <span class="fu">coded</span>(A), <span class="at">cB =</span> <span class="fu">coded</span>(B)) <span class="sc">%&gt;%</span></span>
+<span id="cb229-5"><a href="DOE.html#cb229-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(cB <span class="sc">==</span> <span class="dv">1</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb229-6"><a href="DOE.html#cb229-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(</span>
+<span id="cb229-7"><a href="DOE.html#cb229-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">cols =</span> <span class="fu">c</span>(<span class="st">&quot;cA&quot;</span>, <span class="st">&quot;cB&quot;</span>),</span>
+<span id="cb229-8"><a href="DOE.html#cb229-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">names_to =</span> <span class="st">&quot;variable&quot;</span>,</span>
+<span id="cb229-9"><a href="DOE.html#cb229-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">values_to =</span> <span class="st">&quot;level&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb229-10"><a href="DOE.html#cb229-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb229-11"><a href="DOE.html#cb229-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">x =</span> level, <span class="at">y =</span> tensile_strength)) <span class="sc">+</span></span>
+<span id="cb229-12"><a href="DOE.html#cb229-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="fu">aes</span>(<span class="at">x =</span> level, <span class="at">y =</span> tensile_strength), </span>
+<span id="cb229-13"><a href="DOE.html#cb229-13" aria-hidden="true" tabindex="-1"></a>              <span class="at">method =</span> <span class="st">&quot;lm&quot;</span>, <span class="at">se =</span> <span class="cn">FALSE</span>, <span class="at">fullrange =</span> <span class="cn">TRUE</span>) <span class="sc">+</span></span>
+<span id="cb229-14"><a href="DOE.html#cb229-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_cartesian</span>(<span class="at">xlim =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">2</span>, <span class="dv">2</span>)) <span class="sc">+</span></span>
+<span id="cb229-15"><a href="DOE.html#cb229-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">n.breaks =</span> <span class="dv">10</span>) <span class="sc">+</span></span>
+<span id="cb229-16"><a href="DOE.html#cb229-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="fu">vars</span>(variable))</span></code></pre></div>
 <p><img src="9_twolevelDOEs_files/figure-html/unnamed-chunk-17-1.png" width="100%" /></p>
 <p>As seen on the plot the output of our prediction is 69 corresponding the high level of A when B is at 1. To be precise we need to multiply all the coefficients by the levels of the factors as : 63.250 + 9.583x(+1) - 5.750x(+1) + 1.917</p>
 </div>
 <div id="plotMeans" class="section level3">
 <h3>Interaction plots with SE</h3>
 <p>Here we’re making a step further in the representation of interaction plots, we’re adding error bars to the means. There are many ways to do this and we’re providing a simple approach with the function plotMeans from the package RcmdrMisc.</p>
-<div class="sourceCode" id="cb223"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb223-1"><a href="DOE.html#cb223-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(RcmdrMisc)</span></code></pre></div>
+<div class="sourceCode" id="cb230"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb230-1"><a href="DOE.html#cb230-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(RcmdrMisc)</span></code></pre></div>
 <p>We select standard error as argument for the error.bars argument.</p>
-<div class="sourceCode" id="cb224"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb224-1"><a href="DOE.html#cb224-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">1</span>), <span class="at">bty =</span> <span class="st">&quot;l&quot;</span>)</span>
-<span id="cb224-2"><a href="DOE.html#cb224-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plotMeans</span>(<span class="at">response =</span> pet_fct<span class="sc">$</span>tensile_strength,</span>
-<span id="cb224-3"><a href="DOE.html#cb224-3" aria-hidden="true" tabindex="-1"></a>          <span class="at">factor2 =</span> pet_fct<span class="sc">$</span>A,</span>
-<span id="cb224-4"><a href="DOE.html#cb224-4" aria-hidden="true" tabindex="-1"></a>          <span class="at">factor1 =</span> pet_fct<span class="sc">$</span>B,</span>
-<span id="cb224-5"><a href="DOE.html#cb224-5" aria-hidden="true" tabindex="-1"></a>          <span class="at">error.bars =</span> <span class="st">&quot;se&quot;</span>,</span>
-<span id="cb224-6"><a href="DOE.html#cb224-6" aria-hidden="true" tabindex="-1"></a>          <span class="at">xlab =</span> <span class="st">&quot;A - Reactant&quot;</span>,</span>
-<span id="cb224-7"><a href="DOE.html#cb224-7" aria-hidden="true" tabindex="-1"></a>          <span class="at">legend.lab =</span> <span class="st">&quot;B - Catalist</span><span class="sc">\n</span><span class="st">(error bars +/-se)&quot;</span>,</span>
-<span id="cb224-8"><a href="DOE.html#cb224-8" aria-hidden="true" tabindex="-1"></a>          <span class="at">ylab =</span> <span class="st">&quot;Tensile Strenght&quot;</span>,</span>
-<span id="cb224-9"><a href="DOE.html#cb224-9" aria-hidden="true" tabindex="-1"></a>          <span class="at">col =</span> viridis<span class="sc">::</span><span class="fu">viridis</span>(<span class="dv">12</span>)[<span class="dv">4</span>],</span>
-<span id="cb224-10"><a href="DOE.html#cb224-10" aria-hidden="true" tabindex="-1"></a>          <span class="at">legend.pos =</span> <span class="st">&quot;bottomright&quot;</span>,</span>
-<span id="cb224-11"><a href="DOE.html#cb224-11" aria-hidden="true" tabindex="-1"></a>          <span class="at">main =</span> <span class="st">&quot;The PET clothing improvement plan&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb231"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb231-1"><a href="DOE.html#cb231-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">1</span>), <span class="at">bty =</span> <span class="st">&quot;l&quot;</span>)</span>
+<span id="cb231-2"><a href="DOE.html#cb231-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plotMeans</span>(<span class="at">response =</span> pet_fct<span class="sc">$</span>tensile_strength,</span>
+<span id="cb231-3"><a href="DOE.html#cb231-3" aria-hidden="true" tabindex="-1"></a>          <span class="at">factor2 =</span> pet_fct<span class="sc">$</span>A,</span>
+<span id="cb231-4"><a href="DOE.html#cb231-4" aria-hidden="true" tabindex="-1"></a>          <span class="at">factor1 =</span> pet_fct<span class="sc">$</span>B,</span>
+<span id="cb231-5"><a href="DOE.html#cb231-5" aria-hidden="true" tabindex="-1"></a>          <span class="at">error.bars =</span> <span class="st">&quot;se&quot;</span>,</span>
+<span id="cb231-6"><a href="DOE.html#cb231-6" aria-hidden="true" tabindex="-1"></a>          <span class="at">xlab =</span> <span class="st">&quot;A - Reactant&quot;</span>,</span>
+<span id="cb231-7"><a href="DOE.html#cb231-7" aria-hidden="true" tabindex="-1"></a>          <span class="at">legend.lab =</span> <span class="st">&quot;B - Catalist</span><span class="sc">\n</span><span class="st">(error bars +/-se)&quot;</span>,</span>
+<span id="cb231-8"><a href="DOE.html#cb231-8" aria-hidden="true" tabindex="-1"></a>          <span class="at">ylab =</span> <span class="st">&quot;Tensile Strenght&quot;</span>,</span>
+<span id="cb231-9"><a href="DOE.html#cb231-9" aria-hidden="true" tabindex="-1"></a>          <span class="at">col =</span> viridis<span class="sc">::</span><span class="fu">viridis</span>(<span class="dv">12</span>)[<span class="dv">4</span>],</span>
+<span id="cb231-10"><a href="DOE.html#cb231-10" aria-hidden="true" tabindex="-1"></a>          <span class="at">legend.pos =</span> <span class="st">&quot;bottomright&quot;</span>,</span>
+<span id="cb231-11"><a href="DOE.html#cb231-11" aria-hidden="true" tabindex="-1"></a>          <span class="at">main =</span> <span class="st">&quot;The PET clothing improvement plan&quot;</span>)</span></code></pre></div>
 <p><img src="9_twolevelDOEs_files/figure-html/unnamed-chunk-19-1.png" width="100%" /></p>
 <p>3 factors 2 levels</p>
 <p><strong>The lithium-ion battery charging time test</strong></p>
@@ -2147,9 +2157,9 @@ F-statistic: 24.8 on 3 and 8 DF,  p-value: 0.000209</code></pre>
 B - previous cycles (within warranty)
 C - voltage
 response - charging time [h]</p>
-<div class="sourceCode" id="cb225"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb225-1"><a href="DOE.html#cb225-1" aria-hidden="true" tabindex="-1"></a>battery_charging <span class="sc">%&gt;%</span></span>
-<span id="cb225-2"><a href="DOE.html#cb225-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb225-3"><a href="DOE.html#cb225-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb232"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb232-1"><a href="DOE.html#cb232-1" aria-hidden="true" tabindex="-1"></a>battery_charging <span class="sc">%&gt;%</span></span>
+<span id="cb232-2"><a href="DOE.html#cb232-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb232-3"><a href="DOE.html#cb232-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable</span>()</span></code></pre></div>
 <table>
 <thead>
 <tr class="header">
@@ -2212,11 +2222,11 @@ response - charging time [h]</p>
 </tr>
 </tbody>
 </table>
-<div class="sourceCode" id="cb226"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb226-1"><a href="DOE.html#cb226-1" aria-hidden="true" tabindex="-1"></a>battery_lm <span class="ot">&lt;-</span> <span class="fu">lm</span>(</span>
-<span id="cb226-2"><a href="DOE.html#cb226-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">formula =</span> charging_time <span class="sc">~</span> A <span class="sc">*</span> B <span class="sc">*</span> C, </span>
-<span id="cb226-3"><a href="DOE.html#cb226-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> battery_charging</span>
-<span id="cb226-4"><a href="DOE.html#cb226-4" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb226-5"><a href="DOE.html#cb226-5" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(battery_lm)</span></code></pre></div>
+<div class="sourceCode" id="cb233"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb233-1"><a href="DOE.html#cb233-1" aria-hidden="true" tabindex="-1"></a>battery_lm <span class="ot">&lt;-</span> <span class="fu">lm</span>(</span>
+<span id="cb233-2"><a href="DOE.html#cb233-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">formula =</span> charging_time <span class="sc">~</span> A <span class="sc">*</span> B <span class="sc">*</span> C, </span>
+<span id="cb233-3"><a href="DOE.html#cb233-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> battery_charging</span>
+<span id="cb233-4"><a href="DOE.html#cb233-4" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb233-5"><a href="DOE.html#cb233-5" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(battery_lm)</span></code></pre></div>
 <pre><code>
 Call:
 lm.default(formula = charging_time ~ A * B * C, data = battery_charging)
@@ -2241,8 +2251,8 @@ Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&
 Residual standard error: 1.5 on 24 degrees of freedom
 Multiple R-squared:  0.522,	Adjusted R-squared:  0.383 
 F-statistic: 3.75 on 7 and 24 DF,  p-value: 0.00696</code></pre>
-<div class="sourceCode" id="cb228"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb228-1"><a href="DOE.html#cb228-1" aria-hidden="true" tabindex="-1"></a>battery_aov <span class="ot">&lt;-</span> <span class="fu">aov</span>(battery_lm)</span>
-<span id="cb228-2"><a href="DOE.html#cb228-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(battery_aov)</span></code></pre></div>
+<div class="sourceCode" id="cb235"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb235-1"><a href="DOE.html#cb235-1" aria-hidden="true" tabindex="-1"></a>battery_aov <span class="ot">&lt;-</span> <span class="fu">aov</span>(battery_lm)</span>
+<span id="cb235-2"><a href="DOE.html#cb235-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(battery_aov)</span></code></pre></div>
 <pre><code>            Df Sum Sq Mean Sq F value  Pr(&gt;F)    
 A            1    3.2     3.2    1.41 0.24737    
 B            1    0.1     0.1    0.07 0.79872    
@@ -2259,11 +2269,11 @@ Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&
 <div id="adj_Rsquare" class="section level3">
 <h3>Adjusted R-squared</h3>
 <p>The ordinary R^2 is 0.9661 and it measures the proportion of total variability explained by the model. A potential problem with this statistic is that it always increases as factors are added to the model, even if these factors are not significant. The adjusted R^2 is obtained by dividing the Sums of Squares by the degrees of freedom, and is adjusted for the size of the model, that is the number of factors.</p>
-<div class="sourceCode" id="cb230"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb230-1"><a href="DOE.html#cb230-1" aria-hidden="true" tabindex="-1"></a>battery_reduced_lm <span class="ot">&lt;-</span> <span class="fu">lm</span>(</span>
-<span id="cb230-2"><a href="DOE.html#cb230-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">formula =</span> charging_time <span class="sc">~</span> A <span class="sc">+</span> C <span class="sc">+</span> A<span class="sc">:</span>C, </span>
-<span id="cb230-3"><a href="DOE.html#cb230-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> battery_charging</span>
-<span id="cb230-4"><a href="DOE.html#cb230-4" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb230-5"><a href="DOE.html#cb230-5" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(battery_reduced_lm)</span></code></pre></div>
+<div class="sourceCode" id="cb237"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb237-1"><a href="DOE.html#cb237-1" aria-hidden="true" tabindex="-1"></a>battery_reduced_lm <span class="ot">&lt;-</span> <span class="fu">lm</span>(</span>
+<span id="cb237-2"><a href="DOE.html#cb237-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">formula =</span> charging_time <span class="sc">~</span> A <span class="sc">+</span> C <span class="sc">+</span> A<span class="sc">:</span>C, </span>
+<span id="cb237-3"><a href="DOE.html#cb237-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> battery_charging</span>
+<span id="cb237-4"><a href="DOE.html#cb237-4" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb237-5"><a href="DOE.html#cb237-5" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(battery_reduced_lm)</span></code></pre></div>
 <pre><code>
 Call:
 lm.default(formula = charging_time ~ A + C + A:C, data = battery_charging)
@@ -2285,9 +2295,9 @@ Residual standard error: 1.4 on 28 degrees of freedom
 Multiple R-squared:  0.519,	Adjusted R-squared:  0.467 
 F-statistic: 10.1 on 3 and 28 DF,  p-value: 0.000116</code></pre>
 <p>Besides the base summary() function, R squared and adjusted R squared can also be easily retrieved with the glance function from the {broom} package. We’re extracting them here for the complete and for reduced model:</p>
-<div class="sourceCode" id="cb232"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb232-1"><a href="DOE.html#cb232-1" aria-hidden="true" tabindex="-1"></a><span class="fu">glance</span>(battery_lm)[<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>] <span class="sc">%&gt;%</span></span>
-<span id="cb232-2"><a href="DOE.html#cb232-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">bind_rows</span>(<span class="fu">glance</span>(battery_reduced_lm)[<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>], </span>
-<span id="cb232-3"><a href="DOE.html#cb232-3" aria-hidden="true" tabindex="-1"></a>            <span class="at">.id =</span> <span class="st">&quot;model&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb239"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb239-1"><a href="DOE.html#cb239-1" aria-hidden="true" tabindex="-1"></a><span class="fu">glance</span>(battery_lm)[<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>] <span class="sc">%&gt;%</span></span>
+<span id="cb239-2"><a href="DOE.html#cb239-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">bind_rows</span>(<span class="fu">glance</span>(battery_reduced_lm)[<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>], </span>
+<span id="cb239-3"><a href="DOE.html#cb239-3" aria-hidden="true" tabindex="-1"></a>            <span class="at">.id =</span> <span class="st">&quot;model&quot;</span>)</span></code></pre></div>
 <pre><code># A tibble: 2 x 3
   model r.squared adj.r.squared
   &lt;chr&gt;     &lt;dbl&gt;         &lt;dbl&gt;
@@ -2299,75 +2309,75 @@ F-statistic: 10.1 on 3 and 28 DF,  p-value: 0.000116</code></pre>
 <h3>Coding inputs</h3>
 <p>Now that we have model often we will want to predict the response at a certainly specific level between the coded factor levels of <span class="math inline">\(\pm\)</span> 1.</p>
 <p>To do that we need to convert that specific the natural value into a coded value. Lets calculate the coded value for the factor A (gap) of which the natural value is nA = 0.9, between the natural levels of nA = 0.8 and nA = 1.2. We choose to do this for a fixed level of C of 1, corresponding to its maximum of 325W.</p>
-<div class="sourceCode" id="cb234"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb234-1"><a href="DOE.html#cb234-1" aria-hidden="true" tabindex="-1"></a>natural2coded <span class="ot">&lt;-</span> <span class="cf">function</span>(xA, lA, hA) {(xA <span class="sc">-</span> (lA <span class="sc">+</span> hA) <span class="sc">/</span> <span class="dv">2</span>) <span class="sc">/</span> ((hA <span class="sc">-</span>  lA) <span class="sc">/</span> <span class="dv">2</span>)}</span></code></pre></div>
-<div class="sourceCode" id="cb235"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb235-1"><a href="DOE.html#cb235-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Converting natural value xA into coded value cA:</span></span>
-<span id="cb235-2"><a href="DOE.html#cb235-2" aria-hidden="true" tabindex="-1"></a>lA <span class="ot">&lt;-</span> <span class="fl">0.8</span></span>
-<span id="cb235-3"><a href="DOE.html#cb235-3" aria-hidden="true" tabindex="-1"></a>hA <span class="ot">&lt;-</span> <span class="fl">1.2</span></span>
-<span id="cb235-4"><a href="DOE.html#cb235-4" aria-hidden="true" tabindex="-1"></a>xA <span class="ot">&lt;-</span> <span class="fl">0.9</span></span>
-<span id="cb235-5"><a href="DOE.html#cb235-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb235-6"><a href="DOE.html#cb235-6" aria-hidden="true" tabindex="-1"></a>cA <span class="ot">&lt;-</span> <span class="fu">natural2coded</span>(xA, lA, hA)</span>
-<span id="cb235-7"><a href="DOE.html#cb235-7" aria-hidden="true" tabindex="-1"></a>cA</span></code></pre></div>
+<div class="sourceCode" id="cb241"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb241-1"><a href="DOE.html#cb241-1" aria-hidden="true" tabindex="-1"></a>natural2coded <span class="ot">&lt;-</span> <span class="cf">function</span>(xA, lA, hA) {(xA <span class="sc">-</span> (lA <span class="sc">+</span> hA) <span class="sc">/</span> <span class="dv">2</span>) <span class="sc">/</span> ((hA <span class="sc">-</span>  lA) <span class="sc">/</span> <span class="dv">2</span>)}</span></code></pre></div>
+<div class="sourceCode" id="cb242"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb242-1"><a href="DOE.html#cb242-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Converting natural value xA into coded value cA:</span></span>
+<span id="cb242-2"><a href="DOE.html#cb242-2" aria-hidden="true" tabindex="-1"></a>lA <span class="ot">&lt;-</span> <span class="fl">0.8</span></span>
+<span id="cb242-3"><a href="DOE.html#cb242-3" aria-hidden="true" tabindex="-1"></a>hA <span class="ot">&lt;-</span> <span class="fl">1.2</span></span>
+<span id="cb242-4"><a href="DOE.html#cb242-4" aria-hidden="true" tabindex="-1"></a>xA <span class="ot">&lt;-</span> <span class="fl">0.9</span></span>
+<span id="cb242-5"><a href="DOE.html#cb242-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb242-6"><a href="DOE.html#cb242-6" aria-hidden="true" tabindex="-1"></a>cA <span class="ot">&lt;-</span> <span class="fu">natural2coded</span>(xA, lA, hA)</span>
+<span id="cb242-7"><a href="DOE.html#cb242-7" aria-hidden="true" tabindex="-1"></a>cA</span></code></pre></div>
 <pre><code>[1] -0.5</code></pre>
 <p>To be noted that the opposite conversion looks like:</p>
-<div class="sourceCode" id="cb237"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb237-1"><a href="DOE.html#cb237-1" aria-hidden="true" tabindex="-1"></a>coded2natural <span class="ot">&lt;-</span> <span class="cf">function</span>(cA, lA, hA) {cA <span class="sc">*</span> ((hA <span class="sc">-</span> lA) <span class="sc">/</span> <span class="dv">2</span>) <span class="sc">+</span> ((lA <span class="sc">+</span> hA)<span class="sc">/</span><span class="dv">2</span>)} </span></code></pre></div>
-<div class="sourceCode" id="cb238"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb238-1"><a href="DOE.html#cb238-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Converting back the coded value cA into its natural value xA</span></span>
-<span id="cb238-2"><a href="DOE.html#cb238-2" aria-hidden="true" tabindex="-1"></a>lA <span class="ot">&lt;-</span> <span class="fl">0.8</span></span>
-<span id="cb238-3"><a href="DOE.html#cb238-3" aria-hidden="true" tabindex="-1"></a>hA <span class="ot">&lt;-</span> <span class="fl">1.2</span></span>
-<span id="cb238-4"><a href="DOE.html#cb238-4" aria-hidden="true" tabindex="-1"></a>cA <span class="ot">&lt;-</span> <span class="sc">-</span><span class="fl">0.5</span></span>
-<span id="cb238-5"><a href="DOE.html#cb238-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb238-6"><a href="DOE.html#cb238-6" aria-hidden="true" tabindex="-1"></a>nA <span class="ot">&lt;-</span> <span class="fu">coded2natural</span>(cA, lA, hA)</span>
-<span id="cb238-7"><a href="DOE.html#cb238-7" aria-hidden="true" tabindex="-1"></a>nA</span></code></pre></div>
+<div class="sourceCode" id="cb244"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb244-1"><a href="DOE.html#cb244-1" aria-hidden="true" tabindex="-1"></a>coded2natural <span class="ot">&lt;-</span> <span class="cf">function</span>(cA, lA, hA) {cA <span class="sc">*</span> ((hA <span class="sc">-</span> lA) <span class="sc">/</span> <span class="dv">2</span>) <span class="sc">+</span> ((lA <span class="sc">+</span> hA)<span class="sc">/</span><span class="dv">2</span>)} </span></code></pre></div>
+<div class="sourceCode" id="cb245"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb245-1"><a href="DOE.html#cb245-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Converting back the coded value cA into its natural value xA</span></span>
+<span id="cb245-2"><a href="DOE.html#cb245-2" aria-hidden="true" tabindex="-1"></a>lA <span class="ot">&lt;-</span> <span class="fl">0.8</span></span>
+<span id="cb245-3"><a href="DOE.html#cb245-3" aria-hidden="true" tabindex="-1"></a>hA <span class="ot">&lt;-</span> <span class="fl">1.2</span></span>
+<span id="cb245-4"><a href="DOE.html#cb245-4" aria-hidden="true" tabindex="-1"></a>cA <span class="ot">&lt;-</span> <span class="sc">-</span><span class="fl">0.5</span></span>
+<span id="cb245-5"><a href="DOE.html#cb245-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb245-6"><a href="DOE.html#cb245-6" aria-hidden="true" tabindex="-1"></a>nA <span class="ot">&lt;-</span> <span class="fu">coded2natural</span>(cA, lA, hA)</span>
+<span id="cb245-7"><a href="DOE.html#cb245-7" aria-hidden="true" tabindex="-1"></a>nA</span></code></pre></div>
 <pre><code>[1] 0.9</code></pre>
 </div>
 <div id="coded_prediction" class="section level3">
 <h3>Coded prediction</h3>
 <p>And now we can feed our linear model and make predictions:</p>
-<div class="sourceCode" id="cb240"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb240-1"><a href="DOE.html#cb240-1" aria-hidden="true" tabindex="-1"></a>battery_new <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">A =</span> cA, <span class="at">C =</span> <span class="dv">1</span>)</span>
-<span id="cb240-2"><a href="DOE.html#cb240-2" aria-hidden="true" tabindex="-1"></a>pA <span class="ot">&lt;-</span> <span class="fu">predict</span>(battery_reduced_lm, battery_new)</span>
-<span id="cb240-3"><a href="DOE.html#cb240-3" aria-hidden="true" tabindex="-1"></a>pA</span></code></pre></div>
+<div class="sourceCode" id="cb247"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb247-1"><a href="DOE.html#cb247-1" aria-hidden="true" tabindex="-1"></a>battery_new <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">A =</span> cA, <span class="at">C =</span> <span class="dv">1</span>)</span>
+<span id="cb247-2"><a href="DOE.html#cb247-2" aria-hidden="true" tabindex="-1"></a>pA <span class="ot">&lt;-</span> <span class="fu">predict</span>(battery_reduced_lm, battery_new)</span>
+<span id="cb247-3"><a href="DOE.html#cb247-3" aria-hidden="true" tabindex="-1"></a>pA</span></code></pre></div>
 <pre><code>     1 
 8.6991 </code></pre>
 <p>We can visualize this outcome as follows:</p>
-<div class="sourceCode" id="cb242"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb242-1"><a href="DOE.html#cb242-1" aria-hidden="true" tabindex="-1"></a>battery_charging <span class="sc">%&gt;%</span></span>
-<span id="cb242-2"><a href="DOE.html#cb242-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(C <span class="sc">==</span> <span class="dv">1</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb242-3"><a href="DOE.html#cb242-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
-<span id="cb242-4"><a href="DOE.html#cb242-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">x =</span> A, <span class="at">y =</span> charging_time, <span class="at">color =</span> <span class="fu">as_factor</span>(C))) <span class="sc">+</span></span>
-<span id="cb242-5"><a href="DOE.html#cb242-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="fu">aes</span>(<span class="at">x =</span> A, <span class="at">y =</span> charging_time), <span class="at">method =</span> <span class="st">&quot;lm&quot;</span>) <span class="sc">+</span></span>
-<span id="cb242-6"><a href="DOE.html#cb242-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">x =</span> cA, <span class="at">y =</span> pA)) <span class="sc">+</span></span>
-<span id="cb242-7"><a href="DOE.html#cb242-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">n.breaks =</span> <span class="dv">10</span>) <span class="sc">+</span> </span>
-<span id="cb242-8"><a href="DOE.html#cb242-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_discrete</span>(<span class="at">guide =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
-<span id="cb242-9"><a href="DOE.html#cb242-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">plot.title =</span> ggtext<span class="sc">::</span><span class="fu">element_markdown</span>()) <span class="sc">+</span></span>
-<span id="cb242-10"><a href="DOE.html#cb242-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
-<span id="cb242-11"><a href="DOE.html#cb242-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">&quot;3^k factorial design&quot;</span>,</span>
-<span id="cb242-12"><a href="DOE.html#cb242-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="st">&quot;Prediction with reduced model&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb249"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb249-1"><a href="DOE.html#cb249-1" aria-hidden="true" tabindex="-1"></a>battery_charging <span class="sc">%&gt;%</span></span>
+<span id="cb249-2"><a href="DOE.html#cb249-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(C <span class="sc">==</span> <span class="dv">1</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb249-3"><a href="DOE.html#cb249-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb249-4"><a href="DOE.html#cb249-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">x =</span> A, <span class="at">y =</span> charging_time, <span class="at">color =</span> <span class="fu">as_factor</span>(C))) <span class="sc">+</span></span>
+<span id="cb249-5"><a href="DOE.html#cb249-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="fu">aes</span>(<span class="at">x =</span> A, <span class="at">y =</span> charging_time), <span class="at">method =</span> <span class="st">&quot;lm&quot;</span>) <span class="sc">+</span></span>
+<span id="cb249-6"><a href="DOE.html#cb249-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">x =</span> cA, <span class="at">y =</span> pA)) <span class="sc">+</span></span>
+<span id="cb249-7"><a href="DOE.html#cb249-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">n.breaks =</span> <span class="dv">10</span>) <span class="sc">+</span> </span>
+<span id="cb249-8"><a href="DOE.html#cb249-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_discrete</span>(<span class="at">guide =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb249-9"><a href="DOE.html#cb249-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">plot.title =</span> ggtext<span class="sc">::</span><span class="fu">element_markdown</span>()) <span class="sc">+</span></span>
+<span id="cb249-10"><a href="DOE.html#cb249-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb249-11"><a href="DOE.html#cb249-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">&quot;3^k factorial design&quot;</span>,</span>
+<span id="cb249-12"><a href="DOE.html#cb249-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="st">&quot;Prediction with reduced model&quot;</span>)</span></code></pre></div>
 <p><img src="9_twolevelDOEs_files/figure-html/unnamed-chunk-30-1.png" width="100%" /></p>
 <p>We are introducing here response surface plots which is yet another way to visualize the experiment outputs as a function of the inputs. We’re doing this with the persp() function from the {rsm} package which provides an extremely fast rendering, easy parametrization and a readable output. To be noted that this function is an extension of the base R persp() consisting from the R point of view in an S3 method for the lm class. This allows to simply provide directly the lm object to the function to obtain the response surface.</p>
 </div>
 <div id="persp" class="section level3">
 <h3>Perspective plot</h3>
-<div class="sourceCode" id="cb243"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb243-1"><a href="DOE.html#cb243-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rsm)</span></code></pre></div>
-<div class="sourceCode" id="cb244"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb244-1"><a href="DOE.html#cb244-1" aria-hidden="true" tabindex="-1"></a><span class="fu">persp</span>(</span>
-<span id="cb244-2"><a href="DOE.html#cb244-2" aria-hidden="true" tabindex="-1"></a>  battery_reduced_lm, </span>
-<span id="cb244-3"><a href="DOE.html#cb244-3" aria-hidden="true" tabindex="-1"></a>  A <span class="sc">~</span> C, </span>
-<span id="cb244-4"><a href="DOE.html#cb244-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">bounds =</span> <span class="fu">list</span>(<span class="at">A =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">1</span>,<span class="dv">1</span>), <span class="at">C =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">1</span>,<span class="dv">1</span>)),</span>
-<span id="cb244-5"><a href="DOE.html#cb244-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">col =</span> <span class="fu">viridis</span>(<span class="dv">12</span>)[<span class="dv">8</span>],</span>
-<span id="cb244-6"><a href="DOE.html#cb244-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">theta =</span> <span class="sc">-</span><span class="dv">40</span>, <span class="at">phi =</span> <span class="dv">20</span>, <span class="at">r =</span> <span class="dv">5</span>,</span>
-<span id="cb244-7"><a href="DOE.html#cb244-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">zlab =</span> <span class="st">&quot;Charging Time&quot;</span>,</span>
-<span id="cb244-8"><a href="DOE.html#cb244-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">main =</span> <span class="st">&quot;Lithium-ion battery</span><span class="sc">\n</span><span class="st">charging time test&quot;</span></span>
-<span id="cb244-9"><a href="DOE.html#cb244-9" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb250"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb250-1"><a href="DOE.html#cb250-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rsm)</span></code></pre></div>
+<div class="sourceCode" id="cb251"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb251-1"><a href="DOE.html#cb251-1" aria-hidden="true" tabindex="-1"></a><span class="fu">persp</span>(</span>
+<span id="cb251-2"><a href="DOE.html#cb251-2" aria-hidden="true" tabindex="-1"></a>  battery_reduced_lm, </span>
+<span id="cb251-3"><a href="DOE.html#cb251-3" aria-hidden="true" tabindex="-1"></a>  A <span class="sc">~</span> C, </span>
+<span id="cb251-4"><a href="DOE.html#cb251-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">bounds =</span> <span class="fu">list</span>(<span class="at">A =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">1</span>,<span class="dv">1</span>), <span class="at">C =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">1</span>,<span class="dv">1</span>)),</span>
+<span id="cb251-5"><a href="DOE.html#cb251-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">col =</span> <span class="fu">viridis</span>(<span class="dv">12</span>)[<span class="dv">8</span>],</span>
+<span id="cb251-6"><a href="DOE.html#cb251-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">theta =</span> <span class="sc">-</span><span class="dv">40</span>, <span class="at">phi =</span> <span class="dv">20</span>, <span class="at">r =</span> <span class="dv">5</span>,</span>
+<span id="cb251-7"><a href="DOE.html#cb251-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">zlab =</span> <span class="st">&quot;Charging Time&quot;</span>,</span>
+<span id="cb251-8"><a href="DOE.html#cb251-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">main =</span> <span class="st">&quot;Lithium-ion battery</span><span class="sc">\n</span><span class="st">charging time test&quot;</span></span>
+<span id="cb251-9"><a href="DOE.html#cb251-9" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
 <p><img src="9_twolevelDOEs_files/figure-html/unnamed-chunk-32-1.png" width="100%" /></p>
 <p>Due to the interaction between factors A and C the surface is slightly bent. This is exactly what we observe in the interactions plots of which the one below corresponds to slicing the surface at the min and the max of Power:</p>
-<div class="sourceCode" id="cb245"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb245-1"><a href="DOE.html#cb245-1" aria-hidden="true" tabindex="-1"></a><span class="fu">interaction.plot</span>(<span class="at">x.factor =</span> battery_charging<span class="sc">$</span>C, </span>
-<span id="cb245-2"><a href="DOE.html#cb245-2" aria-hidden="true" tabindex="-1"></a>                 <span class="at">trace.factor =</span> battery_charging<span class="sc">$</span>A,</span>
-<span id="cb245-3"><a href="DOE.html#cb245-3" aria-hidden="true" tabindex="-1"></a>                 <span class="at">fun =</span> mean,</span>
-<span id="cb245-4"><a href="DOE.html#cb245-4" aria-hidden="true" tabindex="-1"></a>                 <span class="at">response =</span> battery_charging<span class="sc">$</span>charging_time,</span>
-<span id="cb245-5"><a href="DOE.html#cb245-5" aria-hidden="true" tabindex="-1"></a>                 <span class="at">legend =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb245-6"><a href="DOE.html#cb245-6" aria-hidden="true" tabindex="-1"></a>                 <span class="at">xlab =</span> <span class="st">&quot;C&quot;</span>,</span>
-<span id="cb245-7"><a href="DOE.html#cb245-7" aria-hidden="true" tabindex="-1"></a>                 <span class="at">trace.label =</span> <span class="st">&quot;A&quot;</span>,</span>
-<span id="cb245-8"><a href="DOE.html#cb245-8" aria-hidden="true" tabindex="-1"></a>                 <span class="at">lwd =</span> <span class="dv">2</span>,</span>
-<span id="cb245-9"><a href="DOE.html#cb245-9" aria-hidden="true" tabindex="-1"></a>                 <span class="at">col =</span> <span class="fu">c</span>(<span class="fu">viridis</span>(<span class="dv">12</span>)[<span class="dv">10</span>], <span class="at">col =</span> <span class="fu">viridis</span>(<span class="dv">12</span>)[<span class="dv">6</span>]),</span>
-<span id="cb245-10"><a href="DOE.html#cb245-10" aria-hidden="true" tabindex="-1"></a>                 <span class="at">ylab =</span> <span class="st">&quot;Charging Time&quot;</span>,</span>
-<span id="cb245-11"><a href="DOE.html#cb245-11" aria-hidden="true" tabindex="-1"></a>                 <span class="at">main =</span> <span class="st">&quot;Lithium-ion battery</span><span class="sc">\n</span><span class="st">charging time test&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb252"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb252-1"><a href="DOE.html#cb252-1" aria-hidden="true" tabindex="-1"></a><span class="fu">interaction.plot</span>(<span class="at">x.factor =</span> battery_charging<span class="sc">$</span>C, </span>
+<span id="cb252-2"><a href="DOE.html#cb252-2" aria-hidden="true" tabindex="-1"></a>                 <span class="at">trace.factor =</span> battery_charging<span class="sc">$</span>A,</span>
+<span id="cb252-3"><a href="DOE.html#cb252-3" aria-hidden="true" tabindex="-1"></a>                 <span class="at">fun =</span> mean,</span>
+<span id="cb252-4"><a href="DOE.html#cb252-4" aria-hidden="true" tabindex="-1"></a>                 <span class="at">response =</span> battery_charging<span class="sc">$</span>charging_time,</span>
+<span id="cb252-5"><a href="DOE.html#cb252-5" aria-hidden="true" tabindex="-1"></a>                 <span class="at">legend =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb252-6"><a href="DOE.html#cb252-6" aria-hidden="true" tabindex="-1"></a>                 <span class="at">xlab =</span> <span class="st">&quot;C&quot;</span>,</span>
+<span id="cb252-7"><a href="DOE.html#cb252-7" aria-hidden="true" tabindex="-1"></a>                 <span class="at">trace.label =</span> <span class="st">&quot;A&quot;</span>,</span>
+<span id="cb252-8"><a href="DOE.html#cb252-8" aria-hidden="true" tabindex="-1"></a>                 <span class="at">lwd =</span> <span class="dv">2</span>,</span>
+<span id="cb252-9"><a href="DOE.html#cb252-9" aria-hidden="true" tabindex="-1"></a>                 <span class="at">col =</span> <span class="fu">c</span>(<span class="fu">viridis</span>(<span class="dv">12</span>)[<span class="dv">10</span>], <span class="at">col =</span> <span class="fu">viridis</span>(<span class="dv">12</span>)[<span class="dv">6</span>]),</span>
+<span id="cb252-10"><a href="DOE.html#cb252-10" aria-hidden="true" tabindex="-1"></a>                 <span class="at">ylab =</span> <span class="st">&quot;Charging Time&quot;</span>,</span>
+<span id="cb252-11"><a href="DOE.html#cb252-11" aria-hidden="true" tabindex="-1"></a>                 <span class="at">main =</span> <span class="st">&quot;Lithium-ion battery</span><span class="sc">\n</span><span class="st">charging time test&quot;</span>)</span></code></pre></div>
 <p><img src="9_twolevelDOEs_files/figure-html/unnamed-chunk-33-1.png" width="100%" /></p>
 <p>Just like in the surface plot we can see here in the interaction plot that the response of yield on gap is different depending on the level of power. When power is high it decreases and when power is low it increases. As a reminder this is what is called an interaction between these two factors.</p>
 </div>
@@ -2382,9 +2392,9 @@ F-statistic: 10.1 on 3 and 28 DF,  p-value: 0.000116</code></pre>
 <div class="marginnote">
 <p><img src="img/electrical_car_bw.png" width="100%" /></p>
 </div>
-<div class="sourceCode" id="cb246"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb246-1"><a href="DOE.html#cb246-1" aria-hidden="true" tabindex="-1"></a>battery_charging <span class="sc">%&gt;%</span></span>
-<span id="cb246-2"><a href="DOE.html#cb246-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>((Replicate <span class="sc">==</span> <span class="dv">1</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb246-3"><a href="DOE.html#cb246-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb253"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb253-1"><a href="DOE.html#cb253-1" aria-hidden="true" tabindex="-1"></a>battery_charging <span class="sc">%&gt;%</span></span>
+<span id="cb253-2"><a href="DOE.html#cb253-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>((Replicate <span class="sc">==</span> <span class="dv">1</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb253-3"><a href="DOE.html#cb253-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>()</span></code></pre></div>
 <pre><code># A tibble: 6 x 6
       A     B     C     D Replicate charging_time
   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt;         &lt;dbl&gt;
@@ -2394,10 +2404,10 @@ F-statistic: 10.1 on 3 and 28 DF,  p-value: 0.000116</code></pre>
 4     1     1    -1    -1         1          6.42
 5    -1    -1     1    -1         1         10.4 
 6     1    -1     1    -1         1          7.49</code></pre>
-<div class="sourceCode" id="cb248"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb248-1"><a href="DOE.html#cb248-1" aria-hidden="true" tabindex="-1"></a>battery_lm3 <span class="ot">&lt;-</span> <span class="fu">lm</span>(</span>
-<span id="cb248-2"><a href="DOE.html#cb248-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">formula =</span> charging_time <span class="sc">~</span> A <span class="sc">*</span> B <span class="sc">*</span> C <span class="sc">*</span> D, </span>
-<span id="cb248-3"><a href="DOE.html#cb248-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> battery_charging <span class="sc">%&gt;%</span> <span class="fu">filter</span>(Replicate <span class="sc">==</span> <span class="dv">1</span>))</span>
-<span id="cb248-4"><a href="DOE.html#cb248-4" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(battery_lm3)</span></code></pre></div>
+<div class="sourceCode" id="cb255"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb255-1"><a href="DOE.html#cb255-1" aria-hidden="true" tabindex="-1"></a>battery_lm3 <span class="ot">&lt;-</span> <span class="fu">lm</span>(</span>
+<span id="cb255-2"><a href="DOE.html#cb255-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">formula =</span> charging_time <span class="sc">~</span> A <span class="sc">*</span> B <span class="sc">*</span> C <span class="sc">*</span> D, </span>
+<span id="cb255-3"><a href="DOE.html#cb255-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> battery_charging <span class="sc">%&gt;%</span> <span class="fu">filter</span>(Replicate <span class="sc">==</span> <span class="dv">1</span>))</span>
+<span id="cb255-4"><a href="DOE.html#cb255-4" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(battery_lm3)</span></code></pre></div>
 <pre><code>
 Call:
 lm.default(formula = charging_time ~ A * B * C * D, data = battery_charging %&gt;% 
@@ -2432,37 +2442,37 @@ F-statistic:  NaN on 15 and 0 DF,  p-value: NA</code></pre>
 <p>Here we are going to prepare this plot with the function qqPlot() from the {car} package:</p>
 <div id="qqPlot" class="section level3">
 <h3>Effects normal plot</h3>
-<div class="sourceCode" id="cb250"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb250-1"><a href="DOE.html#cb250-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(car)</span></code></pre></div>
-<div class="sourceCode" id="cb251"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb251-1"><a href="DOE.html#cb251-1" aria-hidden="true" tabindex="-1"></a>battery_eff3 <span class="ot">&lt;-</span> battery_lm3<span class="sc">$</span>coefficients[<span class="dv">2</span><span class="sc">:</span><span class="dv">16</span>]</span>
-<span id="cb251-2"><a href="DOE.html#cb251-2" aria-hidden="true" tabindex="-1"></a>battery_eff_names2 <span class="ot">&lt;-</span> <span class="fu">names</span>((battery_lm3<span class="sc">$</span>coefficients)[<span class="dv">2</span><span class="sc">:</span><span class="dv">16</span>])</span>
-<span id="cb251-3"><a href="DOE.html#cb251-3" aria-hidden="true" tabindex="-1"></a>main_effects_plot <span class="ot">&lt;-</span> <span class="fu">qqPlot</span>(</span>
-<span id="cb251-4"><a href="DOE.html#cb251-4" aria-hidden="true" tabindex="-1"></a>  battery_eff3, <span class="at">envelope =</span> <span class="fl">0.70</span>, </span>
-<span id="cb251-5"><a href="DOE.html#cb251-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">id =</span> <span class="fu">list</span>(</span>
-<span id="cb251-6"><a href="DOE.html#cb251-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">method =</span> <span class="st">&quot;y&quot;</span>, <span class="at">n =</span> <span class="dv">5</span>, <span class="at">cex =</span> <span class="dv">1</span>, <span class="at">col =</span> <span class="fu">carPalette</span>()[<span class="dv">1</span>], <span class="at">location =</span> <span class="st">&quot;lr&quot;</span>), </span>
-<span id="cb251-7"><a href="DOE.html#cb251-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">grid =</span> <span class="cn">FALSE</span>,</span>
-<span id="cb251-8"><a href="DOE.html#cb251-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">col =</span> <span class="st">&quot;black&quot;</span>,</span>
-<span id="cb251-9"><a href="DOE.html#cb251-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">col.lines =</span> <span class="st">&quot;black&quot;</span>,</span>
-<span id="cb251-10"><a href="DOE.html#cb251-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">main =</span> <span class="st">&quot;Chemical vessel - Normal plot of effects 2&quot;</span></span>
-<span id="cb251-11"><a href="DOE.html#cb251-11" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
+<div class="sourceCode" id="cb257"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb257-1"><a href="DOE.html#cb257-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(car)</span></code></pre></div>
+<div class="sourceCode" id="cb258"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb258-1"><a href="DOE.html#cb258-1" aria-hidden="true" tabindex="-1"></a>battery_eff3 <span class="ot">&lt;-</span> battery_lm3<span class="sc">$</span>coefficients[<span class="dv">2</span><span class="sc">:</span><span class="dv">16</span>]</span>
+<span id="cb258-2"><a href="DOE.html#cb258-2" aria-hidden="true" tabindex="-1"></a>battery_eff_names2 <span class="ot">&lt;-</span> <span class="fu">names</span>((battery_lm3<span class="sc">$</span>coefficients)[<span class="dv">2</span><span class="sc">:</span><span class="dv">16</span>])</span>
+<span id="cb258-3"><a href="DOE.html#cb258-3" aria-hidden="true" tabindex="-1"></a>main_effects_plot <span class="ot">&lt;-</span> <span class="fu">qqPlot</span>(</span>
+<span id="cb258-4"><a href="DOE.html#cb258-4" aria-hidden="true" tabindex="-1"></a>  battery_eff3, <span class="at">envelope =</span> <span class="fl">0.70</span>, </span>
+<span id="cb258-5"><a href="DOE.html#cb258-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">id =</span> <span class="fu">list</span>(</span>
+<span id="cb258-6"><a href="DOE.html#cb258-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">method =</span> <span class="st">&quot;y&quot;</span>, <span class="at">n =</span> <span class="dv">5</span>, <span class="at">cex =</span> <span class="dv">1</span>, <span class="at">col =</span> <span class="fu">carPalette</span>()[<span class="dv">1</span>], <span class="at">location =</span> <span class="st">&quot;lr&quot;</span>), </span>
+<span id="cb258-7"><a href="DOE.html#cb258-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">grid =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb258-8"><a href="DOE.html#cb258-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">col =</span> <span class="st">&quot;black&quot;</span>,</span>
+<span id="cb258-9"><a href="DOE.html#cb258-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">col.lines =</span> <span class="st">&quot;black&quot;</span>,</span>
+<span id="cb258-10"><a href="DOE.html#cb258-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">main =</span> <span class="st">&quot;Chemical vessel - Normal plot of effects 2&quot;</span></span>
+<span id="cb258-11"><a href="DOE.html#cb258-11" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
 <p><img src="9_twolevelDOEs_files/figure-html/unnamed-chunk-38-1.png" width="100%" /></p>
 <p>In plot we can see that the effects that have the highest influence on the output are the effects A, C and D and their interactions. We can still confirm these observations with a calculation of the percentage contribution of each effect as follows:</p>
 </div>
 <div id="effects_contribution" class="section level3">
 <h3>Effects contribution table</h3>
-<div class="sourceCode" id="cb252"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb252-1"><a href="DOE.html#cb252-1" aria-hidden="true" tabindex="-1"></a>battery_lm_tidy3 <span class="ot">&lt;-</span> battery_lm3 <span class="sc">%&gt;%</span></span>
-<span id="cb252-2"><a href="DOE.html#cb252-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tidy</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb252-3"><a href="DOE.html#cb252-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(term <span class="sc">!=</span> <span class="st">&quot;(Intercept)&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb252-4"><a href="DOE.html#cb252-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
-<span id="cb252-5"><a href="DOE.html#cb252-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">effect_estimate =</span> <span class="sc">-</span><span class="dv">2</span> <span class="sc">*</span> estimate,</span>
-<span id="cb252-6"><a href="DOE.html#cb252-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">effect_estimate_sum =</span> <span class="fu">sum</span>(effect_estimate), </span>
-<span id="cb252-7"><a href="DOE.html#cb252-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">effect_contribution_perc =</span> <span class="fu">abs</span>((effect_estimate<span class="sc">/</span>effect_estimate_sum)<span class="sc">*</span><span class="dv">100</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb252-8"><a href="DOE.html#cb252-8" aria-hidden="true" tabindex="-1"></a>      <span class="fu">round</span>(<span class="dv">2</span>)</span>
-<span id="cb252-9"><a href="DOE.html#cb252-9" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb252-10"><a href="DOE.html#cb252-10" aria-hidden="true" tabindex="-1"></a>battery_lm_tidy3 <span class="sc">%&gt;%</span></span>
-<span id="cb252-11"><a href="DOE.html#cb252-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(term, effect_estimate, effect_contribution_perc) <span class="sc">%&gt;%</span></span>
-<span id="cb252-12"><a href="DOE.html#cb252-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(effect_contribution_perc)) <span class="sc">%&gt;%</span></span>
-<span id="cb252-13"><a href="DOE.html#cb252-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>(<span class="dv">8</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb252-14"><a href="DOE.html#cb252-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb259"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb259-1"><a href="DOE.html#cb259-1" aria-hidden="true" tabindex="-1"></a>battery_lm_tidy3 <span class="ot">&lt;-</span> battery_lm3 <span class="sc">%&gt;%</span></span>
+<span id="cb259-2"><a href="DOE.html#cb259-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tidy</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb259-3"><a href="DOE.html#cb259-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(term <span class="sc">!=</span> <span class="st">&quot;(Intercept)&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb259-4"><a href="DOE.html#cb259-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb259-5"><a href="DOE.html#cb259-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">effect_estimate =</span> <span class="sc">-</span><span class="dv">2</span> <span class="sc">*</span> estimate,</span>
+<span id="cb259-6"><a href="DOE.html#cb259-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">effect_estimate_sum =</span> <span class="fu">sum</span>(effect_estimate), </span>
+<span id="cb259-7"><a href="DOE.html#cb259-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">effect_contribution_perc =</span> <span class="fu">abs</span>((effect_estimate<span class="sc">/</span>effect_estimate_sum)<span class="sc">*</span><span class="dv">100</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb259-8"><a href="DOE.html#cb259-8" aria-hidden="true" tabindex="-1"></a>      <span class="fu">round</span>(<span class="dv">2</span>)</span>
+<span id="cb259-9"><a href="DOE.html#cb259-9" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb259-10"><a href="DOE.html#cb259-10" aria-hidden="true" tabindex="-1"></a>battery_lm_tidy3 <span class="sc">%&gt;%</span></span>
+<span id="cb259-11"><a href="DOE.html#cb259-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(term, effect_estimate, effect_contribution_perc) <span class="sc">%&gt;%</span></span>
+<span id="cb259-12"><a href="DOE.html#cb259-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(effect_contribution_perc)) <span class="sc">%&gt;%</span></span>
+<span id="cb259-13"><a href="DOE.html#cb259-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>(<span class="dv">8</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb259-14"><a href="DOE.html#cb259-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable</span>()</span></code></pre></div>
 <table>
 <thead>
 <tr class="header">
@@ -2516,10 +2526,10 @@ F-statistic:  NaN on 15 and 0 DF,  p-value: NA</code></pre>
 </table>
 <p>Reduced model</p>
 <p>Following the previous analysis we are removing the factor B from the model and keeping only the 2nd order interactions assuming the system also respects the sparcity of effects principle.</p>
-<div class="sourceCode" id="cb253"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb253-1"><a href="DOE.html#cb253-1" aria-hidden="true" tabindex="-1"></a>battery_red_lm3 <span class="ot">&lt;-</span> <span class="fu">lm</span>(</span>
-<span id="cb253-2"><a href="DOE.html#cb253-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">formula =</span> charging_time <span class="sc">~</span> A <span class="sc">+</span> C <span class="sc">+</span> A<span class="sc">:</span>C, </span>
-<span id="cb253-3"><a href="DOE.html#cb253-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> battery_charging)</span>
-<span id="cb253-4"><a href="DOE.html#cb253-4" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(battery_red_lm3)</span></code></pre></div>
+<div class="sourceCode" id="cb260"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb260-1"><a href="DOE.html#cb260-1" aria-hidden="true" tabindex="-1"></a>battery_red_lm3 <span class="ot">&lt;-</span> <span class="fu">lm</span>(</span>
+<span id="cb260-2"><a href="DOE.html#cb260-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">formula =</span> charging_time <span class="sc">~</span> A <span class="sc">+</span> C <span class="sc">+</span> A<span class="sc">:</span>C, </span>
+<span id="cb260-3"><a href="DOE.html#cb260-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> battery_charging)</span>
+<span id="cb260-4"><a href="DOE.html#cb260-4" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(battery_red_lm3)</span></code></pre></div>
 <pre><code>
 Call:
 lm.default(formula = charging_time ~ A + C + A:C, data = battery_charging)
@@ -2543,8 +2553,8 @@ F-statistic: 10.1 on 3 and 28 DF,  p-value: 0.000116</code></pre>
 <p>We can now see that we’ve regained degrees of freedom and obtained a sort of hidden replication allowing to calculate statistics and error terms on the model.</p>
 <p>Residuals analysis</p>
 <p>Checking the residuals we see the significant effect of the remaining interactions. The residuals are not completely normal but the in the standardized residuals the deviations are contained within 1.2 sd.</p>
-<div class="sourceCode" id="cb255"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb255-1"><a href="DOE.html#cb255-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">2</span>))</span>
-<span id="cb255-2"><a href="DOE.html#cb255-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(battery_red_lm3)</span></code></pre></div>
+<div class="sourceCode" id="cb262"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb262-1"><a href="DOE.html#cb262-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">2</span>))</span>
+<span id="cb262-2"><a href="DOE.html#cb262-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(battery_red_lm3)</span></code></pre></div>
 <p><img src="9_twolevelDOEs_files/figure-html/unnamed-chunk-41-1.png" width="100%" /></p>
 <p>We can now establish the main effects and interaction plots and conclude on the optimal settings to maximize the output: A and D should be on the max and C on the min.</p>
 

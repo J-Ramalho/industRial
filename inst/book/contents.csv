@@ -43,15 +43,16 @@ Covariance,[Correlation test](#cor.test),`stats::cor.test`,solarcell_fill,The so
 General designs,[Factorial design](#fac.design),`DoE.base::fac.design`,juice_drymatter,The juice production plant,Food
 ,[Main effects plots](#main_effects),,,,
 ,[Interactions plots (custom)](#interaction_plot),`ggplot2::geom_errorbar`,,,
+,[Formula expansion](#formula_expansion),`industRial::formula_expansion`,,
 ,[Anova 3rd level interactions](#anova_three),,,,
 Two level designs,[Coding levels](#coding_levels),`stats::relevel`,pet_doe,The PET clothing improvement DoE,Clothing
 ,[Interaction plots with SE](#plotMeans),`RcmdrMisc::plotMeans`,,,
 ,[Adjusted R-square](#adj_Rsquare),`broom::glance`,battery_charging,The lithium-ion battery charging time test,Automotive
 ,[Coding inputs](#coding_inputs),,,,
 ,[Coding prediction](#coded_prediction),,,,
-,[Perpective plot](#persp),`graphics::persp`,,,
+,[Perspective plot](#persp),`graphics::persp`,,,
 Single replicate designs,[Effects normal plot](#qqPlot),`car::qqPlot`,,,
-,[Effects contribution table](#effects_contribution),`boom::tidy`,,,
+,[Effects contribution table](#effects_contribution),`broom::tidy`,,,
 SPC,,,,,
 Xbar-R charts,[Mean chart](#xbar_chart),`qcc::qcc`,syringe_diameter,The syringe injection molding process,Medical devices
 ,[Range chart](#Rchart),`qcc::qcc`,,,

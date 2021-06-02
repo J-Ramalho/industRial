@@ -281,6 +281,12 @@
   </tr>
   <tr>
    <td style="text-align:left;background-color: white !important;">  </td>
+   <td style="text-align:left;background-color: white !important;"> [Formula expansion](#formula_expansion) </td>
+   <td style="text-align:left;background-color: white !important;"> `industRial::formula_expansion` </td>
+   <td style="text-align:left;background-color: white !important;">  </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;background-color: white !important;">  </td>
    <td style="text-align:left;background-color: white !important;"> [Anova 3rd level interactions](#anova_three) </td>
    <td style="text-align:left;background-color: white !important;">  </td>
    <td style="text-align:left;background-color: white !important;">  </td>
@@ -317,7 +323,7 @@
   </tr>
   <tr>
    <td style="text-align:left;background-color: white !important;">  </td>
-   <td style="text-align:left;background-color: white !important;"> [Perpective plot](#persp) </td>
+   <td style="text-align:left;background-color: white !important;"> [Perspective plot](#persp) </td>
    <td style="text-align:left;background-color: white !important;"> `graphics::persp` </td>
    <td style="text-align:left;background-color: white !important;">  </td>
   </tr>
@@ -330,7 +336,7 @@
   <tr>
    <td style="text-align:left;background-color: white !important;">  </td>
    <td style="text-align:left;background-color: white !important;"> [Effects contribution table](#effects_contribution) </td>
-   <td style="text-align:left;background-color: white !important;"> `boom::tidy` </td>
+   <td style="text-align:left;background-color: white !important;"> `broom::tidy` </td>
    <td style="text-align:left;background-color: white !important;">  </td>
   </tr>
   <tr>
@@ -400,10 +406,10 @@
    <td style="text-align:left;background-color: white !important;">  </td>
   </tr>
   <tr>
-   <td style="text-align:left;background-color: white !important;">  </td>
-   <td style="text-align:left;background-color: white !important;"> [Capability chart (custom)](#chart_Cpk) </td>
-   <td style="text-align:left;background-color: white !important;"> `industRial::chart_Cpk` </td>
-   <td style="text-align:left;background-color: white !important;">  </td>
+   <td style="text-align:left;">  </td>
+   <td style="text-align:left;"> [Capability chart (custom)](#chart_Cpk) </td>
+   <td style="text-align:left;"> `industRial::chart_Cpk` </td>
+   <td style="text-align:left;">  </td>
   </tr>
 </tbody>
 </table>

@@ -3,34 +3,28 @@
 
 ## General designs
 
-In a design of experiments we calculate the total number of trials with the expression $n^m$ where n is the number of levels, m the number of factors. A trial represents the number of unique combinations of the factors. To obtain the final number of test runs we have to multiply the number of trials by the number of replicates per trial.
+General factorial designs require teams to put together a wealth of knowledge of which some has been already applied in previous case studies or is refered in the bibliography and glossary. This comprises things like root cause analysis, linear models and analysis of variance naturally all coherently articulated in a well though project with clear objectives. The building blocks discussed so far relate to a limited number of input factors and levels and exclusively with a single output variable. Model validation and interactions have been presented as these are needed in all cases and once all these are mastered it becomes possible to consider situations with many variables, many outputs and higher level interactions. 
+These arrangements become extremely powerfull and allow to handle complex real life situations such as the design of a new system with dozens of features that relate with each other or the optimization of a manufacturing process where the amount of data generated is very large but the testing time and cost are very high. At this moment considerations of trial quantities optimization enter at play. Typically in a design of experiments the total number of trials is given by $l^k$ where $l$ is the number of levels and $k$ the number of input factors. In our case study a *run* represents a unique combination of the factors and a *replicate* an independent repetition of a run. This leads to the notion of *trials* corresponding to the multiplication of the number of runs by the number of replicates. 
 
-In a design with 4 factors of 2 levels we have then $2^4 = 16$ runs and $16 \times 5 = 80$ replicates. 
+As an example, in a design with 4 factors of 2 levels we have then $2^4 = 16$ runs and if each has 5 replicates there are $16 \times 5 = 80$ trials to be executed. If more factors with a different number of levels are added, the total number of trials is calculated by multiplying both groups: $l_{1}^{k_{1}}$  $\times$ $l_{2}^{k_{2}}$. Continuing the previous example, if 3 additional factors with 4 levels each were added, all with 5 replicates, the total number of trials would be expressed as follows: $2^{4} \times 4^{3} = 1024 \times 5 = 5120$ trials, which is a very high number in most industrial cases and would require optimization techniques which will be discussed further.
 
-If the design has a combination of factors with different number of levels the number of trials is the multiplication of both such as: $n^m \times n^m$. 
 
-For example if we added 2 additional factors with 4 levels each to the previous design we would obtain $2^4 \times 4^2 = 256$ which we would still need to multiply by the number of replicates to obtain the number of runs $256 \times 5 = 1280$.
+### Factorial design {#fac.design}
 
-In the literature we often see the simbolic notation $a^k$ but we've opted for mF-nL (m factors, n levels) in this book for simplification.
+<div class="marginnote">
 
-m factors n levels designs
+<b class="highlight">Case study: juice bottling plant</b>
 
-**The juice production plant**
+In a juice producing plant a new fast dry matter content measurement device from the supplier DRX has been recently put in operation but the Quality Assurance Head has raised concerns on a bias with the reference method. The quality team established DoE to assess several potential causes such as the dry matter content and juice residue particle size.
 
-We're comming back to our Juice Bottling context where a quality team was looking to put in operation a new measurement device for dry matter content in a juices bottling line.
+<img src="img/juice_bottling_bw2.jpg" width="100%" />
 
-After a short brainstorming using the Ishikawa tool presented before the team has identified several potential influcing parameters on the equipment bias when compared with the reference equipement: the product itself, the drymatter level on the product (its target), the speed of the filling line and the poweder particle size. In order to evaluate such impact the team has prepared a mid size experiment design with three products, three levels of drymatter, two line speed levels and two particle size levels.
-
-First we load the DoE.base package:
+</div>
 
 
 ```r
 library(DoE.base)
 ```
-
-and then generate the doe with the fac.design function.
-
-### Factorial design {#fac.design}
 
 
 ```r
@@ -45,7 +39,11 @@ juice_doe <- fac.design(
 )
 ```
 
-Note that the DoE generated is more than just a tibble, it belongs to a specific class called design and has many other attributes just like an lm or aov S3 objects.
+Although the Calibration essay discussed in the MSA unit has shown a bias during the acceptance phase the Factory Management has opted to put it in production. The reduction in measurement time is significant and Supply Chain is putting pressure to increase volumes in a context where on-line sales rocket sky high. The Quality Manager understands all this but he's concern of having some kind of kickback. Although he's not expecting any kind of consumer complain, dry matter levels are somehow loosely related with some sort claims and regulatory limits.
+
+To dig deeper and understand how to minimize this bias he has asked one of his team members to come up with an experiment design. He would like something that combines all factors mentionned by the team as potential root causes for the bias. After a short brainstorming between the production and quality teams several potential causes for bias were: drymatter level, the speed of filling and the powder particle size. This lead to  a mid size experiment design with three products, three levels of drymatter, two line speed levels and two particle size levels.
+
+When the number of factors and levels is limited it is possible to reccur to existing experiment designs and pre-filled *Yates tables*. In this case the quality analyst had been trying with R and found a package called `{DoE.base}` which generates such designs automatically with the function `fac.desig`. The output generated by this function is more than just a tibble, it belongs to a specific class called `design`and has other attributes just like an lm or aov S3 objects. The care given by the package authors becomes visible when using an R generic function such as `summary()` with such object and get as return a tailor made output, in this case showing the levels of the different factors of our design: 
 
 
 ```r
@@ -55,9 +53,6 @@ class(juice_doe)
 ```
 [1] "design"     "data.frame"
 ```
-
-The power and care given by the package authors become visible when we use an R generic function such as summary() with this object and we see it returns a tailor made output, in this case showing the levels of the different factors of our design: 
-
 
 ```r
 summary(juice_doe)
@@ -79,14 +74,14 @@ Factor settings (scale ends):
 3   carrot               20    3                    
 ```
 
-Using this the team has simple copied the experiment plan to an spreadsheet to collect the data:
+In the summary() output we can see the plan factors with 3 products, 3 levels of dry matter target, 2 levels for speed and 2 levels for particle size. Using this the team has simple copied the experiment plan to an spreadsheet to collect the data:
 
 ```{}
 juice_doe %>% 
   write_clip() 
 ```
 
-and after a few day the file completed and ready for analysis looked like:
+and after a few days the file completed with the test results cames back ready for analysis
 
 
 ```r
@@ -106,6 +101,8 @@ juice_drymatter %>%
 |beetroot |            10|    20|           250|    2|          9.75|         10.03|
 |beetroot |            10|    20|           250|    3|          9.77|         10.03|
 
+and the only thing quality analyst had to add was an extra column to calculate the bias:
+
 
 ```r
 juice_drymatter <- juice_drymatter %>%
@@ -114,9 +111,14 @@ juice_drymatter <- juice_drymatter %>%
 
 ### Main effects plots {#main_effects}
 
-As the number of factors and levels of a design increase, more thinking is required to obtain good visualisation of the data. 
+<div class="marginnote">
 
-Main effects plots consist usually of a scatterplot representing the experiment output as a function of one of the inputs. In a design like this with three different inputs three plots are required:
+<div class="figure">
+<img src="8_generalDOEs_files/figure-html/unnamed-chunk-7-1.png" alt="Main" width="100%" />
+<p class="caption">(\#fig:unnamed-chunk-7)Main</p>
+</div>
+
+</div>
 
 
 ```r
@@ -132,10 +134,15 @@ drymatter_TGT_plot <- juice_drymatter %>%
   labs(
     title = "Juice bottling problem",
     subtitle = "Main effects plots",
-    x = "drymatter_TGT [%]",
+    x = "Drymatter TGT [%]",
     y = "Average bias [g]"
   )
+```
 
+As the number of factors and levels of a design increase, more thinking is required to obtain good visualisation of the data. Main effects plots consist usually of a scatterplot representing the experiment output as a function of one of the inputs. This first plot consists of the mean bias as a function of the dry matter for each of the 3 levels tested. As the DOE has 3 factors, three plots like this are required in total. The Quality Analyst builds the remaining two plots and then groups them all together in a single output with the package `{patchwork}`. This is made by simply putting `+` between the plots.
+
+
+```r
 particle_size_plot <- juice_drymatter %>%  
   group_by(particle_size) %>%
   summarise(particle_size_bias_mean = mean(bias)) %>%
@@ -146,7 +153,7 @@ particle_size_plot <- juice_drymatter %>%
     xlim = c(240,310), 
     ylim = c(-1,0), expand = TRUE) +
   labs(
-    x = "particle_size",
+    x = "Particle Size",
     y = "Average bias [g]"
   )
 
@@ -167,16 +174,15 @@ speed_plot <- juice_drymatter %>%
 drymatter_TGT_plot + particle_size_plot + speed_plot
 ```
 
-<img src="8_generalDOEs_files/figure-html/unnamed-chunk-8-1.png" width="100%" />
+<img src="8_generalDOEs_files/figure-html/unnamed-chunk-9-1.png" width="100%" />
 
-This kind of plots gives already important insights in to the experiement outcome, even before any deeper analysis with a linear model and anova. In our case:
+Main effects plots give important insights in to the experiement outcomes and this even before any statistical analysis with a linear model and anova. From these three plots the Quality Analyst already takes the following observations for her report:
 
-* higher particle_size and higher speed result in higher bias weight deviation
-* beyond 10.5% drymatter_TGT level the bias weight is always higher than the target
+* bias increases in negative direction as dry matter content increases
+* bias increases in positive direction as particle size increases
+* bias is not influence by line speed
 
 ### Interaction plots (custom) {#interaction_plot}
-
-In designs like these with 3 factors we have 3 possible interactions (A-B, A-C, B-C) corresponding the the possible combination between them. This results in three interaction plots that we're presenting below. The approach here goes beyond the interaction.plot function from the `{stats}` package presented previously in the two factors multiple levels case. We are developping here the plots with {ggplot2} which provides much more control on the plot attibutes but on the other hand requires that additional code is added to calculate the means by group.
 
 
 ```r
@@ -187,13 +193,12 @@ drymatter_TGT_particle_size_plot <- juice_drymatter %>%
   ggplot(aes(x = drymatter_TGT, y = drymatter_bias_mean, color = particle_size, linetype = particle_size)) +
   geom_point(aes(group = particle_size), size = 2) +
   geom_line(aes(group = particle_size, linetype = particle_size)) +
-  scale_linetype(name = "Particle Size") +
+  scale_linetype(guide=FALSE) +
   geom_errorbar(aes(
     ymin = drymatter_bias_mean - 2 * drymatter_bias_sd,
     ymax = drymatter_bias_mean + 2 * drymatter_bias_sd,
     width = .5
   )) +
-  scale_linetype(guide=FALSE) +
   scale_color_viridis_d(option = "C", begin = 0.3, end = 0.7, name = "Particle size") +
   coord_cartesian(
     xlim = c(9,21),
@@ -208,7 +213,12 @@ drymatter_TGT_particle_size_plot <- juice_drymatter %>%
     y = "Average bias deviation [g]"
   ) +
   theme(legend.justification=c(1,0), legend.position=c(1,0))
+```
 
+Now to look deeper and she's preparing interaction plots. She wants to understand if factors combine in unexpected ways at certain levels. In designs like these with 3 factors we have 3 possible interactions (A-B, A-C, B-C) corresponding the the possible combination between them. It is important to keep in mind that at least two replicates by run are needed to be able determine the sum of squares due to error, this if all possible interactions are to be included in the model. As the plan is a full factorial plan and there are more than 2 replicates, all factor combinations are resolved and can be assessed for their significance. The interaction plots show precisely such combinations, two at a time against the output. The first one Dry matter target - Particle Size being ready she moves to the next two: Dry matter target - Speed and Speed - Particle Size.
+
+
+```r
 drymatter_TGT_speed_plot <- juice_drymatter %>%  
   mutate(speed = as_factor(speed)) %>%
   group_by(drymatter_TGT, speed) %>%
@@ -216,7 +226,7 @@ drymatter_TGT_speed_plot <- juice_drymatter %>%
   ggplot(aes(x = drymatter_TGT, y = drymatter_bias_mean, color = speed)) +
   geom_point(aes(group = speed), size = 2) +
   geom_line(aes(group = speed, linetype = speed)) +
-  scale_linetype(guide=FALSE) +
+  scale_linetype( guide=FALSE) +
   scale_color_viridis_d(option = "C", begin = 0.3, end = 0.7, name = "Speed") +
   geom_errorbar(aes(
     ymin = drymatter_bias_mean - 2 * drymatter_bias_sd,
@@ -264,17 +274,38 @@ speed_particle_size_plot <- juice_drymatter %>%
 drymatter_TGT_particle_size_plot + drymatter_TGT_speed_plot + speed_particle_size_plot
 ```
 
-<img src="8_generalDOEs_files/figure-html/unnamed-chunk-9-1.png" width="100%" />
+<img src="8_generalDOEs_files/figure-html/unnamed-chunk-11-1.png" width="100%" />
 
-The plots indicate no interaction between the different factors as all lines do not intercept and are mostly parallel.
+The approach here goes much beyond the interaction.plot function from the `{stats}` package introduced before and the code to obtain this plots is significantly longer. She has chosen to develop here the plots with `{ggplot2}` because she wanted to have direct access to all the minor details in the contruction of the plot such as the colors by line, a custom error bars calculation, very specific locations for the legends. She ends up concluding that there is no interaction between any of the different factors as all lines do not intercept, are mostly parallel and error bars cover each other.
 
-In most cases the anova would be performed first and only the plot for the significant interactions would be plotted, if any.
+### Formula expansion {#formula_expansion}
+
+
+```r
+f1 <- Y ~ A * B * C
+f2 <- Y ~ A * B + C
+```
+
+
+```r
+formula_expansion(f1)
+```
+
+```
+[1] "A"     "B"     "C"     "A:B"   "A:C"   "B:C"   "A:B:C"
+```
+
+```r
+formula_expansion(f2)
+```
+
+```
+[1] "A"   "B"   "C"   "A:B"
+```
+
+The short code chunk before shows two formula expansion examples, the first one corresponding to our Juice DOE: in a design with factors coded A, B and C the sources of variation for the Anova table for three-factor fixed effects model are: A, B, C, AB, AC, BC, ABC. The second case corresponds to a situation where interactions with C would be discarded. This understanding is very important as more and more factors are added to models and the number of trials grows to unrealistic quantities. In such situations a preliminary work of selection of interactions allows to prepare a fractionned design. For now the doe is still contained at 108 trials so she can move ahead assessing the effect significance of the different factors using the anova.
 
 ### Anova with 3rd level interactions {#anova_three}
-
-The sources of variation for the Anova table for three-factor fixed effects model are: A, B, C, AB, AC, BC, ABC. To be noted that like in the two-factors we must have at least two parts (n>2) to determine the sum of squares due to error if all possible interactions are to be included in the model.
-
-We are now fully prepared for an assessment of the effect of the different factors with the anova. To reduce the amount of coding we're inputing the model directly in the aov function:
 
 
 ```r
@@ -298,8 +329,4 @@ Residuals                         100  0.271   0.003
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ```
 
-The observations of the plots are confirmed and completed with statistical input: we see that the percentage of drymatter_TGT and the particle_size significantly affect the bias volume (p < 0.05). The drymatter_TGT-particle_size interactions are non significative.
-
-As expected the anova confirms strong influence of the dissolution level on the bias.
-
-From the analysis all interactions could be removed from the model in order to establish a predictive model.
+Here she simplified things by inputing the formula directly in the aov function without passing by the `formula()` or `lm()` functions. The previous observations done on the plots are fully confirmed and now supported with statistical evidence: `drymatter target` and `particle_size` significantly affect the bias (p < 0.05); `speed` has no effect; none of the interactions is significative. This first round of assessment was very clear and successful and she can make bold proposals to the Quality Manager now to look deeper into the links between drymatter target and particle size in that bias. Certainly passing by a discussion again with the product team and a final DOE with more levels to identify or select an optimal operating zone for the measurement method.

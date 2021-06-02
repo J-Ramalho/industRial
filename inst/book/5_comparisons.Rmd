@@ -15,7 +15,7 @@ There are many well tested approaches, the domain is very large and our textbook
 
 <div class="marginnote">
 
-<b class="highlight">Winter Sports clothing manufacture</b>
+<b class="highlight">Case study: winter sports clothing</b>
 
 All winter sports clothing are virtually made with a mix of natural fibers and synthetic polymers. Upgrading to recyclable polymers while keeping performance requires extensive testing of raw material characteristics such as the tensile strength.
 

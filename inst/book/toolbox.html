@@ -1,0 +1,1020 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Toolbox | industRial data science</title>
+  <meta name="description" content="Toolbox | industRial data science" />
+  <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Toolbox | industRial data science" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:image" content="/img/cover3.png" />
+  
+  <meta name="github-repo" content="J-Ramalho/industRialds" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Toolbox | industRial data science" />
+  
+  
+  <meta name="twitter:image" content="/img/cover3.png" />
+
+<meta name="author" content="João Ramalho" />
+
+
+<meta name="date" content="2021-06-03" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="index.html"/>
+<link rel="next" href="tutorials.html"/>
+<script src="libs/header-attrs-2.8/header-attrs.js"></script>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-122820355-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-122820355-1');
+</script>
+
+
+<script type="text/javascript">
+mattcrump=1;
+</script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
+<link rel="stylesheet" href="css/industRialds.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">industRial data science</a></li>
+
+<li class="divider"></li>
+<li class="part"><span><b>I INTRODUCTION</b></span></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Welcome</a></li>
+<li class="chapter" data-level="" data-path="toolbox.html"><a href="toolbox.html"><i class="fa fa-check"></i>Toolbox</a>
+<ul>
+<li class="chapter" data-level="" data-path="toolbox.html"><a href="toolbox.html#r-and-rstudio"><i class="fa fa-check"></i>R and RStudio</a></li>
+<li class="chapter" data-level="" data-path="toolbox.html"><a href="toolbox.html#packages"><i class="fa fa-check"></i>Packages</a>
+<ul>
+<li class="chapter" data-level="" data-path="toolbox.html"><a href="toolbox.html#installation"><i class="fa fa-check"></i>Installation</a></li>
+<li class="chapter" data-level="" data-path="toolbox.html"><a href="toolbox.html#highlights"><i class="fa fa-check"></i>Highlights</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="toolbox.html"><a href="toolbox.html#datasets"><i class="fa fa-check"></i>Datasets</a></li>
+<li class="chapter" data-level="" data-path="toolbox.html"><a href="toolbox.html#functions"><i class="fa fa-check"></i>Functions</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="tutorials.html"><a href="tutorials.html"><i class="fa fa-check"></i>Tutorials</a>
+<ul>
+<li class="chapter" data-level="" data-path="tutorials.html"><a href="tutorials.html#on-the-web"><i class="fa fa-check"></i>On the web</a></li>
+<li class="chapter" data-level="" data-path="tutorials.html"><a href="tutorials.html#locally"><i class="fa fa-check"></i>Locally</a></li>
+</ul></li>
+<li class="part"><span><b>II CASE STUDIES</b></span></li>
+<li class="chapter" data-level="" data-path="design-for-six-sigma.html"><a href="design-for-six-sigma.html"><i class="fa fa-check"></i>Design for Six Sigma</a>
+<ul>
+<li class="chapter" data-level="" data-path="design-for-six-sigma.html"><a href="design-for-six-sigma.html#pareto-analysis"><i class="fa fa-check"></i>Pareto analysis</a>
+<ul>
+<li class="chapter" data-level="" data-path="design-for-six-sigma.html"><a href="design-for-six-sigma.html#collecting-defects"><i class="fa fa-check"></i>Collecting defects</a></li>
+<li class="chapter" data-level="" data-path="design-for-six-sigma.html"><a href="design-for-six-sigma.html#paretochart"><i class="fa fa-check"></i>Pareto chart</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="design-for-six-sigma.html"><a href="design-for-six-sigma.html#root-cause-analysis"><i class="fa fa-check"></i>Root cause analysis</a>
+<ul>
+<li class="chapter" data-level="" data-path="design-for-six-sigma.html"><a href="design-for-six-sigma.html#brainstorming"><i class="fa fa-check"></i>Brainstorming</a></li>
+<li class="chapter" data-level="" data-path="design-for-six-sigma.html"><a href="design-for-six-sigma.html#ishikawa"><i class="fa fa-check"></i>Ishikawa digram</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="design-for-six-sigma.html"><a href="design-for-six-sigma.html#correlations"><i class="fa fa-check"></i>Correlations</a>
+<ul>
+<li class="chapter" data-level="" data-path="design-for-six-sigma.html"><a href="design-for-six-sigma.html#matrix"><i class="fa fa-check"></i>Matrix</a></li>
+<li class="chapter" data-level="" data-path="design-for-six-sigma.html"><a href="design-for-six-sigma.html#tileplot"><i class="fa fa-check"></i>Tileplot</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="design-for-six-sigma.html"><a href="design-for-six-sigma.html#clustering"><i class="fa fa-check"></i>Clustering</a>
+<ul>
+<li class="chapter" data-level="" data-path="design-for-six-sigma.html"><a href="design-for-six-sigma.html#clustering-algorithms"><i class="fa fa-check"></i>Clustering algorithms</a></li>
+<li class="chapter" data-level="" data-path="design-for-six-sigma.html"><a href="design-for-six-sigma.html#network_plot"><i class="fa fa-check"></i>Network plot</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="MSA.html"><a href="MSA.html"><i class="fa fa-check"></i>Measurement System Analysis</a>
+<ul>
+<li class="chapter" data-level="" data-path="MSA.html"><a href="MSA.html#calibration"><i class="fa fa-check"></i>Calibration</a>
+<ul>
+<li class="chapter" data-level="" data-path="MSA.html"><a href="MSA.html#bias_plot"><i class="fa fa-check"></i>Bias plot</a></li>
+<li class="chapter" data-level="" data-path="MSA.html"><a href="MSA.html#bias_report"><i class="fa fa-check"></i>Bias report</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="MSA.html"><a href="MSA.html#precision"><i class="fa fa-check"></i>Precision</a>
+<ul>
+<li class="chapter" data-level="" data-path="MSA.html"><a href="MSA.html#gageRnR"><i class="fa fa-check"></i>Gage r&amp;R</a></li>
+<li class="chapter" data-level="" data-path="MSA.html"><a href="MSA.html#gage_acceptance"><i class="fa fa-check"></i>Gage acceptance</a></li>
+<li class="chapter" data-level="" data-path="MSA.html"><a href="MSA.html#gage-plots"><i class="fa fa-check"></i>Gage plots</a></li>
+<li class="chapter" data-level="" data-path="MSA.html"><a href="MSA.html#negative-variance"><i class="fa fa-check"></i>Negative variance</a></li>
+<li class="chapter" data-level="" data-path="MSA.html"><a href="MSA.html#custom-functions"><i class="fa fa-check"></i>Custom functions</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="MSA.html"><a href="MSA.html#uncertainty"><i class="fa fa-check"></i>Uncertainty</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html"><i class="fa fa-check"></i>Design of Experiments</a>
+<ul>
+<li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#direct-comparisons"><i class="fa fa-check"></i>Direct comparisons</a>
+<ul>
+<li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#histogram"><i class="fa fa-check"></i>Histogram</a></li>
+<li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#t.test"><i class="fa fa-check"></i>t-test one sample</a></li>
+<li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#geom_qq"><i class="fa fa-check"></i>Normality plot</a></li>
+<li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#var.test"><i class="fa fa-check"></i>F-test</a></li>
+<li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#levene.test"><i class="fa fa-check"></i>Levene test</a></li>
+<li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#t-test-two-samples"><i class="fa fa-check"></i>t-test two samples</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#statistical-modeling"><i class="fa fa-check"></i>Statistical modeling</a>
+<ul>
+<li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#lm"><i class="fa fa-check"></i>Linear models</a></li>
+<li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#contr.treatment"><i class="fa fa-check"></i>Contrasts</a></li>
+<li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#predict"><i class="fa fa-check"></i>Predict</a></li>
+<li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#augment"><i class="fa fa-check"></i>Model augment</a></li>
+<li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#residuals_timeseries"><i class="fa fa-check"></i>Timeseries plot</a></li>
+<li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#autocorrelation"><i class="fa fa-check"></i>Autocorrelation test</a></li>
+<li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#normality-plot"><i class="fa fa-check"></i>Normality plot</a></li>
+<li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#shapiroTest"><i class="fa fa-check"></i>Normality test</a></li>
+<li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#residuals_fit"><i class="fa fa-check"></i>Residuals-Fit plot</a></li>
+<li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#std_residuals_fit"><i class="fa fa-check"></i>Standard Residuals-Fit plot</a></li>
+<li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#std_residuals_factors"><i class="fa fa-check"></i>Standard Residuals-Factor plot</a></li>
+<li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#homocedasticity"><i class="fa fa-check"></i>Homocedasticity</a></li>
+<li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#outliers"><i class="fa fa-check"></i>Outliers test</a></li>
+<li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#cooks"><i class="fa fa-check"></i>Cooks distance</a></li>
+<li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#R-squared"><i class="fa fa-check"></i>R-squared</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#effects-significance"><i class="fa fa-check"></i>Effects significance</a>
+<ul>
+<li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#aov"><i class="fa fa-check"></i>Anova</a></li>
+<li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#tukey"><i class="fa fa-check"></i>Pairwise comparison</a></li>
+<li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#fisherLSD"><i class="fa fa-check"></i>Least significant difference</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#interactions"><i class="fa fa-check"></i>Interactions</a>
+<ul>
+<li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#formula"><i class="fa fa-check"></i>Model formulae</a></li>
+<li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#RSE"><i class="fa fa-check"></i>Residuals standard error</a></li>
+<li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#plot.lm"><i class="fa fa-check"></i>Residuals summary</a></li>
+<li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#interaction.plot"><i class="fa fa-check"></i>Interaction plot</a></li>
+<li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#anova"><i class="fa fa-check"></i>Anova with interactions</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#covariance"><i class="fa fa-check"></i>Covariance</a>
+<ul>
+<li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#cor.test"><i class="fa fa-check"></i>Correlation test</a></li>
+<li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#ancova_aov"><i class="fa fa-check"></i>Ancova</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#general-designs"><i class="fa fa-check"></i>General designs</a>
+<ul>
+<li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#fac.design"><i class="fa fa-check"></i>Factorial design</a></li>
+<li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#main_effects"><i class="fa fa-check"></i>Main effects plots</a></li>
+<li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#interaction_plot"><i class="fa fa-check"></i>Interaction plots (custom)</a></li>
+<li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#formula_expansion"><i class="fa fa-check"></i>Formula expansion</a></li>
+<li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#anova_three"><i class="fa fa-check"></i>Anova with 3rd level interactions</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#two-level-designs"><i class="fa fa-check"></i>Two level designs</a>
+<ul>
+<li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#coding_levels"><i class="fa fa-check"></i>Coding levels</a></li>
+<li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#plotMeans"><i class="fa fa-check"></i>Interaction plots with SE</a></li>
+<li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#adj_Rsquare"><i class="fa fa-check"></i>Adjusted R-squared</a></li>
+<li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#coding_inputs"><i class="fa fa-check"></i>Coding inputs</a></li>
+<li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#coded_prediction"><i class="fa fa-check"></i>Coded prediction</a></li>
+<li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#persp"><i class="fa fa-check"></i>Perspective plot</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#single-replicate-designs"><i class="fa fa-check"></i>Single replicate designs</a>
+<ul>
+<li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#qqPlot"><i class="fa fa-check"></i>Effects normal plot</a></li>
+<li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#effects_contribution"><i class="fa fa-check"></i>Effects contribution table</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="SPC.html"><a href="SPC.html"><i class="fa fa-check"></i>Statistical Process Control</a>
+<ul>
+<li class="chapter" data-level="" data-path="SPC.html"><a href="SPC.html#xbar-r-charts"><i class="fa fa-check"></i>xbar-R charts</a>
+<ul>
+<li class="chapter" data-level="" data-path="SPC.html"><a href="SPC.html#xbar_chart"><i class="fa fa-check"></i>Mean chart</a></li>
+<li class="chapter" data-level="" data-path="SPC.html"><a href="SPC.html#Rchart"><i class="fa fa-check"></i>Range chart</a></li>
+<li class="chapter" data-level="" data-path="SPC.html"><a href="SPC.html#limits.xbar"><i class="fa fa-check"></i>Control limits</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="SPC.html"><a href="SPC.html#cpk-charts"><i class="fa fa-check"></i>Cpk charts</a>
+<ul>
+<li class="chapter" data-level="" data-path="SPC.html"><a href="SPC.html#off_spec"><i class="fa fa-check"></i>Off specification</a></li>
+<li class="chapter" data-level="" data-path="SPC.html"><a href="SPC.html#process_Cpk"><i class="fa fa-check"></i>Process Capability</a></li>
+<li class="chapter" data-level="" data-path="SPC.html"><a href="SPC.html#sigma_table"><i class="fa fa-check"></i>Sigma conversion table</a></li>
+<li class="chapter" data-level="" data-path="SPC.html"><a href="SPC.html#process.capability"><i class="fa fa-check"></i>Capability chart</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="SPC.html"><a href="SPC.html#i-mr-charts"><i class="fa fa-check"></i>I-MR charts</a>
+<ul>
+<li class="chapter" data-level="" data-path="SPC.html"><a href="SPC.html#process_stats"><i class="fa fa-check"></i>Process statistics</a></li>
+<li class="chapter" data-level="" data-path="SPC.html"><a href="SPC.html#chart_I"><i class="fa fa-check"></i>Individual chart</a></li>
+<li class="chapter" data-level="" data-path="SPC.html"><a href="SPC.html#chart_IMR"><i class="fa fa-check"></i>Moving range chart</a></li>
+<li class="chapter" data-level="" data-path="SPC.html"><a href="SPC.html#chart_Cpk"><i class="fa fa-check"></i>Capability chart (custom)</a></li>
+</ul></li>
+</ul></li>
+<li class="part"><span><b>III APPENDIX</b></span></li>
+<li class="chapter" data-level="" data-path="contents.html"><a href="contents.html"><i class="fa fa-check"></i>Index</a></li>
+<li class="chapter" data-level="" data-path="glossary.html"><a href="glossary.html"><i class="fa fa-check"></i>Glossary</a>
+<ul>
+<li class="chapter" data-level="" data-path="glossary.html"><a href="glossary.html#statistics"><i class="fa fa-check"></i>Statistics</a>
+<ul>
+<li class="chapter" data-level="" data-path="glossary.html"><a href="glossary.html#notation-conventions"><i class="fa fa-check"></i>Notation conventions</a></li>
+<li class="chapter" data-level="" data-path="glossary.html"><a href="glossary.html#descriptive-statistics"><i class="fa fa-check"></i>Descriptive statistics</a></li>
+<li class="chapter" data-level="" data-path="glossary.html"><a href="glossary.html#probability"><i class="fa fa-check"></i>Probability</a></li>
+<li class="chapter" data-level="" data-path="glossary.html"><a href="glossary.html#statistical-inference"><i class="fa fa-check"></i>Statistical Inference</a></li>
+<li class="chapter" data-level="" data-path="glossary.html"><a href="glossary.html#linear-models"><i class="fa fa-check"></i>Linear models</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="glossary.html"><a href="glossary.html#dfss"><i class="fa fa-check"></i>DFSS</a>
+<ul>
+<li class="chapter" data-level="" data-path="glossary.html"><a href="glossary.html#voice-of-customer"><i class="fa fa-check"></i>Voice of Customer</a></li>
+<li class="chapter" data-level="" data-path="glossary.html"><a href="glossary.html#voice-of-process"><i class="fa fa-check"></i>Voice of Process</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="glossary.html"><a href="glossary.html#msa"><i class="fa fa-check"></i>MSA</a></li>
+<li class="chapter" data-level="" data-path="glossary.html"><a href="glossary.html#doe"><i class="fa fa-check"></i>DOE</a></li>
+<li class="chapter" data-level="" data-path="glossary.html"><a href="glossary.html#spc"><i class="fa fa-check"></i>SPC</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+<li class="chapter" data-level="" data-path="imprint.html"><a href="imprint.html"><i class="fa fa-check"></i>Imprint</a></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">indust<b style='color:#38598CFF'>R</b>ial data science</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="toolbox" class="section level1">
+<h1>Toolbox</h1>
+<div id="r-and-rstudio" class="section level2">
+<h2>R and RStudio</h2>
+<p>Many tools exist to do Data Analysis and Statistics with different degrees of power and difficulty such as:</p>
+<ul>
+<li>Spreadsheets: Excel, Libreoffice, Numbers</li>
+<li>Proprietary software: Minitab, Mathlab</li>
+<li>Programming languages: Visual Basic, R, Python, Julia</li>
+<li>Databases: sqlite, postgre, mysql, mongodb</li>
+</ul>
+<p>Choosing the right set of tools for Data Science is often not a very scientific task. Mostly is a matter of what is available and what our colleagues, customers or suppliers use. As with everything it is important to remain open to evaluate new tools and approaches and even to be able to combine them.</p>
+<p>In this book we’ve chosen to provide all examples in R which is a free software environment for statistical computing and graphics. Besides taste and personal preference R brings a significant number of specific advantages in the field of Industrial Data Science:</p>
+<p>R allows for reproducible research</p>
+<p>This because the algorithms and functions defined to make the calculations can be inspected and all results can be fully reproduced and audited. This is known as reproducible research and is a critical aspect in all areas where a proof is needed such as in equipment validation and product quality reporting.</p>
+<p>R functions and tools can be audited and improved</p>
+<p>Being an open source language, all R libraries and packages added to the basic environment can be audited, adapted and improved. This is very important because when we enter into details every industry has a slight different way of doing things, different naming conventions, different coeficients and so on.</p>
+<p>R is extensible</p>
+<p>R is compatible with most other software on the market and is an excellent “glue” tool allowing for example for data loading from excel files, producing reports in pdf and even building complete dashboards in the form of web pages.</p>
+<p>Large documentation is available on installing and learning R, starting with the official sites <a href="https://www.r-project.org/">R-project</a> and <a href="https://www.rstudio.com/">RStudio</a>.</p>
+</div>
+<div id="packages" class="section level2">
+<h2>Packages</h2>
+<p>All industry specific tools applied throughout this book are available in the form of packages of the programming language R. As with all open source code, they’re all available for download with freedom to modification and at no cost.</p>
+<p>The amount of packages available is extremely large and growing very fast. When selecting new packages it is recommended to check the latest package update. Packages that have had no improvements since more than a couple of years should be questioned. The field evolves rapidly and compatibility and other issues can become painful. Two ways of obtaining statistics on package history are <a href="https://www.r-pkg.org/">metacran</a> and <a href="https://packagemanager.rstudio.com/">RStudio package manager</a>.</p>
+<p>Additionally an original package named <code>{industRial}</code> has been developed as a companion package for this book.</p>
+<div id="installation" class="section level3">
+<h3>Installation</h3>
+<p>The companion package to this book can downloaded from github with the following command:</p>
+<pre><code>devtools::install_github(&quot;J-Ramalho/industRial&quot;)</code></pre>
+<p>The list below identifies which are the remaining packages required to run all the coded of the book examples. Note that it is not required to download them all at once.</p>
+<p>The column <em>Download</em> precises if a package is downloaded automatically when the <code>{industRial}</code> package is downloaded (imports) or if it needs be downloaded manually by the reader (suggests). In technical terms this differentiation corresponds to the DESCRIPTION file and allows for a progressive installation of the required software.</p>
+<table>
+<colgroup>
+<col width="9%" />
+<col width="12%" />
+<col width="18%" />
+<col width="8%" />
+<col width="50%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="left">Download</th>
+<th align="left">Package</th>
+<th align="left">Domain</th>
+<th align="left">Version</th>
+<th align="left">Depends</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">imports</td>
+<td align="left">viridis</td>
+<td align="left">colors</td>
+<td align="left">0.6.1</td>
+<td align="left">R (&gt;= 2.10), viridisLite (&gt;= 0.4.0)</td>
+</tr>
+<tr class="even">
+<td align="left">imports</td>
+<td align="left">readr</td>
+<td align="left">data loading</td>
+<td align="left">1.4.0</td>
+<td align="left">R (&gt;= 3.1)</td>
+</tr>
+<tr class="odd">
+<td align="left">imports</td>
+<td align="left">dplyr</td>
+<td align="left">data wrangling</td>
+<td align="left">1.0.6</td>
+<td align="left">R (&gt;= 3.3.0)</td>
+</tr>
+<tr class="even">
+<td align="left">imports</td>
+<td align="left">forcats</td>
+<td align="left">data wrangling</td>
+<td align="left">0.5.1</td>
+<td align="left">R (&gt;= 3.2)</td>
+</tr>
+<tr class="odd">
+<td align="left">imports</td>
+<td align="left">janitor</td>
+<td align="left">data wrangling</td>
+<td align="left">2.1.0</td>
+<td align="left">R (&gt;= 3.1.2)</td>
+</tr>
+<tr class="even">
+<td align="left">imports</td>
+<td align="left">magrittr</td>
+<td align="left">data wrangling</td>
+<td align="left">2.0.1</td>
+<td align="left">NA</td>
+</tr>
+<tr class="odd">
+<td align="left">imports</td>
+<td align="left">tibble</td>
+<td align="left">data wrangling</td>
+<td align="left">3.1.2</td>
+<td align="left">R (&gt;= 3.1.0)</td>
+</tr>
+<tr class="even">
+<td align="left">imports</td>
+<td align="left">tidyr</td>
+<td align="left">data wrangling</td>
+<td align="left">1.1.3</td>
+<td align="left">R (&gt;= 3.1)</td>
+</tr>
+<tr class="odd">
+<td align="left">imports</td>
+<td align="left">purrr</td>
+<td align="left">data wrangling</td>
+<td align="left">0.3.4</td>
+<td align="left">R (&gt;= 3.2)</td>
+</tr>
+<tr class="even">
+<td align="left">imports</td>
+<td align="left">glue</td>
+<td align="left">data wrangling</td>
+<td align="left">1.4.2</td>
+<td align="left">R (&gt;= 3.2)</td>
+</tr>
+<tr class="odd">
+<td align="left">imports</td>
+<td align="left">stringr</td>
+<td align="left">data wrangling</td>
+<td align="left">1.4.0</td>
+<td align="left">R (&gt;= 3.1)</td>
+</tr>
+<tr class="even">
+<td align="left">imports</td>
+<td align="left">patchwork</td>
+<td align="left">plotting</td>
+<td align="left">1.1.1</td>
+<td align="left">NA</td>
+</tr>
+<tr class="odd">
+<td align="left">imports</td>
+<td align="left">ggplot2</td>
+<td align="left">plotting</td>
+<td align="left">3.3.3</td>
+<td align="left">R (&gt;= 3.2)</td>
+</tr>
+<tr class="even">
+<td align="left">imports</td>
+<td align="left">scales</td>
+<td align="left">plotting</td>
+<td align="left">1.1.1</td>
+<td align="left">R (&gt;= 3.2)</td>
+</tr>
+<tr class="odd">
+<td align="left">imports</td>
+<td align="left">ggtext</td>
+<td align="left">plotting</td>
+<td align="left">0.1.1</td>
+<td align="left">R (&gt;= 3.5)</td>
+</tr>
+<tr class="even">
+<td align="left">imports</td>
+<td align="left">broom</td>
+<td align="left">statistics</td>
+<td align="left">0.7.6</td>
+<td align="left">R (&gt;= 3.1)</td>
+</tr>
+<tr class="odd">
+<td align="left">imports</td>
+<td align="left">stats</td>
+<td align="left">statistics</td>
+<td align="left">4.0.5</td>
+<td align="left">NA</td>
+</tr>
+<tr class="even">
+<td align="left">imports</td>
+<td align="left">skimr</td>
+<td align="left">statistics</td>
+<td align="left">2.1.3</td>
+<td align="left">R (&gt;= 3.1.2)</td>
+</tr>
+<tr class="odd">
+<td align="left">suggests</td>
+<td align="left">qicharts2</td>
+<td align="left">industrial stats</td>
+<td align="left">0.7.1</td>
+<td align="left">R (&gt;= 3.0.0)</td>
+</tr>
+<tr class="even">
+<td align="left">suggests</td>
+<td align="left">qcc</td>
+<td align="left">industrial stats</td>
+<td align="left">2.7</td>
+<td align="left">R (&gt;= 3.0)</td>
+</tr>
+<tr class="odd">
+<td align="left">suggests</td>
+<td align="left">SixSigma</td>
+<td align="left">industrial stats</td>
+<td align="left">0.9-52</td>
+<td align="left">R (&gt;= 2.14.0)</td>
+</tr>
+<tr class="even">
+<td align="left">suggests</td>
+<td align="left">DoE.base</td>
+<td align="left">industrial stats</td>
+<td align="left">1.1-6</td>
+<td align="left">R (&gt;= 2.10), grid, conf.design</td>
+</tr>
+<tr class="odd">
+<td align="left">suggests</td>
+<td align="left">rsm</td>
+<td align="left">industrial stats</td>
+<td align="left">2.10.2</td>
+<td align="left">NA</td>
+</tr>
+<tr class="even">
+<td align="left">suggests</td>
+<td align="left">agricolae</td>
+<td align="left">industrial stats</td>
+<td align="left">1.3-3</td>
+<td align="left">R (&gt;= 2.10)</td>
+</tr>
+<tr class="odd">
+<td align="left">suggests</td>
+<td align="left">ggraph</td>
+<td align="left">networks</td>
+<td align="left">2.0.5</td>
+<td align="left">R (&gt;= 2.10), ggplot2 (&gt;= 3.0.0)</td>
+</tr>
+<tr class="even">
+<td align="left">suggests</td>
+<td align="left">tidygraph</td>
+<td align="left">networks</td>
+<td align="left">1.2.0</td>
+<td align="left">NA</td>
+</tr>
+<tr class="odd">
+<td align="left">suggests</td>
+<td align="left">igraph</td>
+<td align="left">networks</td>
+<td align="left">1.2.6</td>
+<td align="left">methods</td>
+</tr>
+<tr class="even">
+<td align="left">suggests</td>
+<td align="left">ggforce</td>
+<td align="left">networks</td>
+<td align="left">0.3.3</td>
+<td align="left">ggplot2 (&gt;= 3.0.0), R (&gt;= 3.3.0)</td>
+</tr>
+<tr class="odd">
+<td align="left">suggests</td>
+<td align="left">bookdown</td>
+<td align="left">publishing</td>
+<td align="left">0.22</td>
+<td align="left">NA</td>
+</tr>
+<tr class="even">
+<td align="left">suggests</td>
+<td align="left">knitr</td>
+<td align="left">publishing</td>
+<td align="left">1.33</td>
+<td align="left">R (&gt;= 3.2.3)</td>
+</tr>
+<tr class="odd">
+<td align="left">suggests</td>
+<td align="left">kableextra</td>
+<td align="left">publishing</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+</tr>
+<tr class="even">
+<td align="left">suggests</td>
+<td align="left">gt</td>
+<td align="left">publishing</td>
+<td align="left">0.3.0</td>
+<td align="left">R (&gt;= 3.2.0)</td>
+</tr>
+<tr class="odd">
+<td align="left">suggests</td>
+<td align="left">car</td>
+<td align="left">statistics</td>
+<td align="left">3.0-10</td>
+<td align="left">R (&gt;= 3.5.0), carData (&gt;= 3.0-0)</td>
+</tr>
+<tr class="even">
+<td align="left">suggests</td>
+<td align="left">RcmdrMisc</td>
+<td align="left">statistics</td>
+<td align="left">2.7-1</td>
+<td align="left">R (&gt;= 3.5.0), utils, car (&gt;= 3.0-0), sandwich</td>
+</tr>
+</tbody>
+</table>
+<p>In the book text we don’t see the loading instructions for the installed packages over and over again everytime an example is given to avoid repetition (e.g. running <code>library(dplyr)</code> before each code chunk). Be sure to load at minimum the packages below before trying any example:</p>
+<pre><code>ds_pkgs &lt;- c(&quot;tidyverse&quot;, &quot;scales&quot;, &quot;janitor&quot;, &quot;knitr&quot;, &quot;stats&quot;, &quot;industRial&quot;,
+  &quot;viridis&quot;, &quot;broom&quot;, &quot;patchwork&quot;)
+purrr::map(ds_pkgs, library, character.only = TRUE)</code></pre>
+<p>Beware of the common issue of <em>function masking</em>. This happens more often in R when compared to python. As we tend to load all the sets of functions from each package we end up with conflicting function names. In the scope of this text it is mostly the function filter() from <code>{dplyr}</code> which conflicts with the function with the same name from <code>{stats}</code>. We tackle this with the simple technique of adding <code>filter &lt;- dplyr::filter</code> in the beginning of our script to precise which function we want to give priority and we pre-append the package name to all calls of the other function such as <code>stats::filter</code>. For more sophisticated ways to handle this issue we suggest the package <code>{import}</code>.</p>
+</div>
+<div id="highlights" class="section level3">
+<h3>Highlights</h3>
+<p>We’re highlighting now some specific packages that are used in the book and that bring powerful features in analysis of data from R&amp;D and Operations. Wherever they are required in the book we loaded them explicitly in the text to help tracking where the specific functions come from.</p>
+<div id="six-sigma" class="section level4">
+<h4>six sigma</h4>
+<p><code>{SixSigma}</code> is a complete and robust R package. It provides many well tested functions in the area of quality and process improvement. We’re presenting a full example with the gage r&amp;R function in our MSA Case Study. As many other industrial packages, the <code>{SixSigma}</code> package is from before the <code>{tidyverse}</code> era and its plots have been not been developed with <code>{ggplot2}</code>. This makes integration in newer approaches harder. The data output is still nevertheless fully exploitable and very useful. The package is part of an excellent book with the same name published by <span class="citation"><a href="#ref-Cano2012" role="doc-biblioref">Emilio L. Cano</a> (<a href="#ref-Cano2012" role="doc-biblioref">2012</a>)</span>.</p>
+</div>
+<div id="qcc" class="section level4">
+<h4>qcc</h4>
+<p>The Quality Control Charts package, <code>{qcc}</code> is another very complete and solid package. It offers a very large range of statistical process control charts and capability analysis. Several examples of the control charts are available in its vignette: <a href="https://luca-scr.github.io/qcc/articles/qcc.html">qcc vignette</a> that we develop further in our SPC Case Studies.</p>
+</div>
+<div id="qicharts2" class="section level4">
+<h4>qicharts2</h4>
+<p>We recommend <code>{qichart2}</code> specifically for the good pareto plots. The package also provides statistical process control charts which are based on <code>{ggplot2}</code> and can serve as an easier alternative to the <code>{qcc}</code> package. As many niche packages we need to be aware that the number of contributors is small meaning that it cannot be as thoroughly tested as community packages.</p>
+</div>
+<div id="doe.base" class="section level4">
+<h4>DoE.base</h4>
+<p>This package is one of the most complete and vast packages in Design of Experiments. <code>{DoE.base}</code> is a first of a large suite of packages on the topic, it has vast functionality and is very well documented. We do some exploration of the automatic generation of designs in the DOE case studies. Full documentation available under: <a href="http://prof.beuth-hochschule.de/groemping/software/doe/?L=1&amp;print=1">DoE.base</a></p>
+</div>
+<div id="agricolae" class="section level4">
+<h4>agricolae</h4>
+<p>Agricolae is a long tested package in the domain of design of experiments. It has been developed for the domain of Agricultural Research but can be used elsewhere. We make a small use, specifically to obtain the function fisher LSD but believe the package has a wealth of functions and methodologies to be explored.</p>
+</div>
+<div id="rsm" class="section level4">
+<h4>rsm</h4>
+<p>The Response Surface Methods <code>{rsm}</code> is the best option in our view to produce 3D plots from linear models. It has specific features to use directly the models removing all the work to produce the data and feed generic 3D plotting functions. The package is larger than this and contains many support functions in the domain of design of experiments.</p>
+</div>
+<div id="car" class="section level4">
+<h4>car</h4>
+<p>The <code>{car}</code> package which stands for Companion for Applied Regression is also used in many occasions as it contains many useful functions to assess the performance of linear models and anova. This package is combined with a complete book by <span class="citation"><a href="#ref-Fox2019" role="doc-biblioref">Fox and Weisberg</a> (<a href="#ref-Fox2019" role="doc-biblioref">2019</a>)</span>.</p>
+</div>
+<div id="rcmdrmisc" class="section level4">
+<h4>RcmdrMisc</h4>
+<p>This package by the same author of the <code>{car}</code> provides additional miscellaneous functions for statistical analysis. Although it is part of a point and click interface for R we value it for its functions and plots in the domain of linear regression.</p>
+</div>
+<div id="broom" class="section level4">
+<h4>broom</h4>
+<p>The mission of <code>{broom}</code> is to <em>Convert statistical objects into tidy tibbles</em>. This is quite usefull when we want to reuse the output of the statistical analysis such as the R-squared in data pipelines with <code>{tidyverse}</code> packages. It becomes specially handy to obtain printing quality outputs in <code>{Rmarkdown}</code> documents with tables rendered with <code>{kable}</code> and in <code>{shiny}</code> apps. Several examples are present throughtout our book and mostly in the tutorials.</p>
+</div>
+<div id="skimr" class="section level4">
+<h4>skimr</h4>
+<p>This package comes from <a href="https://ropensci.org/">ropensci</a> a strong and open community supported by large global organizations such as the NASA. <code>{skimr}</code> is an interesting and powerful alternative to the base <code>summary()</code> function. Two main features make it a strong candidate for regular utilization: the first is its tight integrated with <code>{tidyverse}</code> and <code>{knitr}</code> making it possible to integrate it in pipelines, filtering and so on and in Rmarkdown chunks with specific printing arguments; the second is its extensive customization capabilities allowing to add and remove indicators, data types and presentation formats and agregration levels.</p>
+</div>
+<div id="stats" class="section level4">
+<h4>stats</h4>
+<p>Many functions from the packages discussed before are built on the large and extremely well tested <code>{stats}</code> package. This package is installed directly with R and consolidates software code that has been improving and tested for decades. As an example the source code of the <a href="https://svn.r-project.org/R/trunk/src/library/stats/R/lm.R">lm</a> function has close to 1000 lines. The complete package has more than 400 functions that can be listed with <code>library(help = "stats")</code> or <code>ls("package:stats")</code></p>
+</div>
+</div>
+</div>
+<div id="datasets" class="section level2">
+<h2>Datasets</h2>
+<p>All datasets presented throughout the book are fully anonymized. Once the package is correctly installed it can be loaded in the R session as usual with the library() function.</p>
+<pre><code>devtools::install_github(&quot;J-Ramalho/industRial&quot;)
+library(industRial)</code></pre>
+<p>The primary goal of <code>{industRial}</code> is to make easily available all the data sets from all case studies. We can easily look for a data set by typing <code>industRial::</code> and tab. The complete list can also be obtained with the snippet below:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="toolbox.html#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="at">package =</span> <span class="st">&quot;industRial&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb4-2"><a href="toolbox.html#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pluck</span>(<span class="st">&quot;results&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb4-3"><a href="toolbox.html#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as_tibble</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb4-4"><a href="toolbox.html#cb4-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(Item, Title) <span class="sc">%&gt;%</span></span>
+<span id="cb4-5"><a href="toolbox.html#cb4-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable</span>()</span></code></pre></div>
+<table>
+<colgroup>
+<col width="17%" />
+<col width="82%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="left">Item</th>
+<th align="left">Title</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">battery_charging</td>
+<td align="left">Charging time of a lithium-ion battery.</td>
+</tr>
+<tr class="even">
+<td align="left">dial_control</td>
+<td align="left">Collection of visual defects on watch dial production.</td>
+</tr>
+<tr class="odd">
+<td align="left">ebike_hardening</td>
+<td align="left">Cycles to failure of ebikes frames after temperature treatment.</td>
+</tr>
+<tr class="even">
+<td align="left">ebike_hardening2</td>
+<td align="left">Cycles to failure of ebikes frames after temperature treatment.</td>
+</tr>
+<tr class="odd">
+<td align="left">juice_drymatter</td>
+<td align="left">Dry matter content of different juices obtained with two different measurement devices.</td>
+</tr>
+<tr class="even">
+<td align="left">perfume_experiment</td>
+<td align="left">Correlation matrix of the input variables of an experiment design in perfume formulation.</td>
+</tr>
+<tr class="odd">
+<td align="left">pet_delivery</td>
+<td align="left">Tensile strength values on PET raw material for the clothing industry.</td>
+</tr>
+<tr class="even">
+<td align="left">pet_doe</td>
+<td align="left">A factorial design for the improvement of PET film tensile strength.</td>
+</tr>
+<tr class="odd">
+<td align="left">solarcell_fill</td>
+<td align="left">Yearly outputs and fills factor of solarcells of different types.</td>
+</tr>
+<tr class="even">
+<td align="left">solarcell_output</td>
+<td align="left">Yearly outputs of solarcells of different types.</td>
+</tr>
+<tr class="odd">
+<td align="left">syringe_diameter</td>
+<td align="left">Production measurements of the inner diameter of syringes barrels.</td>
+</tr>
+<tr class="even">
+<td align="left">tablet_thickness</td>
+<td align="left">Thickness measurements of pharmaceutical tablets</td>
+</tr>
+<tr class="odd">
+<td align="left">tablet_weight</td>
+<td align="left">Weight measurements of pharmaceutical tablets</td>
+</tr>
+</tbody>
+</table>
+<p>Once the package is loaded the data objects become immediately available in memory and can directly be used in the examples presented or for further exploration. Lets confirm this invoking the first data set:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="toolbox.html#cb5-1" aria-hidden="true" tabindex="-1"></a>dial_control <span class="sc">%&gt;%</span></span>
+<span id="cb5-2"><a href="toolbox.html#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb5-3"><a href="toolbox.html#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable</span>()</span></code></pre></div>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Operator</th>
+<th align="left">Date</th>
+<th align="left">Defect</th>
+<th align="left">Location</th>
+<th align="left">id</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Jane</td>
+<td align="left">2018.01.31</td>
+<td align="left">Indent</td>
+<td align="left">3h</td>
+<td align="left">D2354</td>
+</tr>
+<tr class="even">
+<td align="left">Jane</td>
+<td align="left">2018.02.02</td>
+<td align="left">Indent</td>
+<td align="left">3h</td>
+<td align="left">D2355</td>
+</tr>
+<tr class="odd">
+<td align="left">Jane</td>
+<td align="left">2018.02.02</td>
+<td align="left">Indent</td>
+<td align="left">4h</td>
+<td align="left">D2356</td>
+</tr>
+<tr class="even">
+<td align="left">Peter</td>
+<td align="left">2018.02.02</td>
+<td align="left">Indent</td>
+<td align="left">10h</td>
+<td align="left">D2357</td>
+</tr>
+<tr class="odd">
+<td align="left">Jane</td>
+<td align="left">2018.02.03</td>
+<td align="left">Scratch</td>
+<td align="left">3h</td>
+<td align="left">D2358</td>
+</tr>
+<tr class="even">
+<td align="left">Jane</td>
+<td align="left">2018.02.03</td>
+<td align="left">Indent</td>
+<td align="left">3h</td>
+<td align="left">D2359</td>
+</tr>
+</tbody>
+</table>
+<p>The dateset can be used and manipulated like any other dataset created in the session or loaded otherwise. For example it can be filtered and assigned to a new variable name:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="toolbox.html#cb6-1" aria-hidden="true" tabindex="-1"></a>dial_peter <span class="ot">&lt;-</span> dial_control <span class="sc">%&gt;%</span></span>
+<span id="cb6-2"><a href="toolbox.html#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Operator <span class="sc">==</span> <span class="st">&quot;Peter&quot;</span>) </span>
+<span id="cb6-3"><a href="toolbox.html#cb6-3" aria-hidden="true" tabindex="-1"></a>dial_peter <span class="sc">%&gt;%</span></span>
+<span id="cb6-4"><a href="toolbox.html#cb6-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>(<span class="dv">2</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb6-5"><a href="toolbox.html#cb6-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable</span>()</span></code></pre></div>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Operator</th>
+<th align="left">Date</th>
+<th align="left">Defect</th>
+<th align="left">Location</th>
+<th align="left">id</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Peter</td>
+<td align="left">2018.02.02</td>
+<td align="left">Indent</td>
+<td align="left">10h</td>
+<td align="left">D2357</td>
+</tr>
+<tr class="even">
+<td align="left">Peter</td>
+<td align="left">2018.02.03</td>
+<td align="left">Scratch</td>
+<td align="left">4h</td>
+<td align="left">D2360</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="functions" class="section level2">
+<h2>Functions</h2>
+<p>Besides the data sets the <code>{industRial}</code> package also contains toy functions to plot Statistical Process Control (SPC) charts. The objective here is to showcase how to build such functions and their scope of application is limited to the book case studies. For complete and robust SPC functions we recommend using the <code>{QCC}</code> package also described below.</p>
+<p>Additionally the package contains theme functions to print and customize the aesthetics of spc charts and other charts. These themes are built on top of the <code>{ggplot2}</code> by H.Wickham and <code>{cowplot}</code> package by Claus O.Wilke. The main objective is to give the reader a starting point for customization of charts in this domain.</p>
+<p>A functions can conveniently be accessed on the console with <code>industRial::</code> and then tab. The complete list of themes and functions can be seen with:</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="toolbox.html#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">lsf.str</span>(<span class="st">&quot;package:industRial&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb7-2"><a href="toolbox.html#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unclass</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb7-3"><a href="toolbox.html#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as_tibble</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb7-4"><a href="toolbox.html#cb7-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable</span>()</span></code></pre></div>
+<table>
+<thead>
+<tr class="header">
+<th align="left">value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">chart_Cpk</td>
+</tr>
+<tr class="even">
+<td align="left">chart_I</td>
+</tr>
+<tr class="odd">
+<td align="left">chart_IMR</td>
+</tr>
+<tr class="even">
+<td align="left">expand_formula</td>
+</tr>
+<tr class="odd">
+<td align="left">off_spec</td>
+</tr>
+<tr class="even">
+<td align="left">process_Cpk</td>
+</tr>
+<tr class="odd">
+<td align="left">process_stats</td>
+</tr>
+<tr class="even">
+<td align="left">process_stats_table</td>
+</tr>
+<tr class="odd">
+<td align="left">ss.rr.plots</td>
+</tr>
+<tr class="even">
+<td align="left">theme_industRial</td>
+</tr>
+<tr class="odd">
+<td align="left">theme_qcc</td>
+</tr>
+</tbody>
+</table>
+<p>For each function a help page is available and can be obtained the same way as any other R data sets, themes and functions with <code>?&lt;object&gt;</code> (e.g. ?chart_xbar)</p>
+<p>To go even deeper and get access to all the code, the original book Rmd files are also bundled in the package and can be seen in the book folder. A way to get the exact folder path is:</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="toolbox.html#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">paste0</span>(<span class="fu">.libPaths</span>()[<span class="dv">1</span>], <span class="st">&quot;/industRial/book&quot;</span>)</span></code></pre></div>
+<pre><code>[1] &quot;/home/joao/R/x86_64-pc-linux-gnu-library/4.0/industRial/book&quot;</code></pre>
+</div>
+</div>
+<h3>References</h3>
+<div id="refs" class="references csl-bib-body hanging-indent">
+<div id="ref-Cano2012" class="csl-entry">
+Emilio L. Cano, Andrés Redchuk, Javier M. Moguerza. 2012. <em>Six Sigma with r</em>. 1th ed. Vol. 36. Use r! Springer New York Heidelberg Dordrecht London: Springer.
+</div>
+<div id="ref-Fox2019" class="csl-entry">
+Fox, John, and Sanford Weisberg. 2019. <em>An r Companion to Applied Regression</em>. 3rd edition. Thousand Oaks CA: SAGE publishing.
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="index.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="tutorials.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": false,
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "section"
+},
+"search": false,
+"info": false,
+"toolbar": {
+"position": "fixed"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

@@ -6,12 +6,12 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Design for Six Sigma | industRial data science</title>
   <meta name="description" content="Design for Six Sigma | industRial data science" />
-  <meta name="generator" content="bookdown 0.20 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Design for Six Sigma | industRial data science" />
   <meta property="og:type" content="book" />
   
-  <meta property="og:image" content="img/cover3.png" />
+  <meta property="og:image" content="/img/cover3.png" />
   
   <meta name="github-repo" content="J-Ramalho/industRialds" />
 
@@ -19,12 +19,12 @@
   <meta name="twitter:title" content="Design for Six Sigma | industRial data science" />
   
   
-  <meta name="twitter:image" content="img/cover3.png" />
+  <meta name="twitter:image" content="/img/cover3.png" />
 
 <meta name="author" content="João Ramalho" />
 
 
-<meta name="date" content="2021-06-02" />
+<meta name="date" content="2021-06-03" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -33,7 +33,7 @@
   
 <link rel="prev" href="tutorials.html"/>
 <link rel="next" href="MSA.html"/>
-<script src="libs/header-attrs-2.7/header-attrs.js"></script>
+<script src="libs/header-attrs-2.8/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -51,6 +51,8 @@
 
 
 
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
 <script src="libs/kePrint-0.0.1/kePrint.js"></script>
 <link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
 <!-- Global site tag (gtag.js) - Google Analytics -->
@@ -73,6 +75,7 @@ mattcrump=1;
 pre > code.sourceCode { white-space: pre; position: relative; }
 pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
 pre.sourceCode { margin: 0; }
 @media screen {
@@ -131,6 +134,29 @@ code span.st { color: #4070a0; } /* String */
 code span.va { color: #19177c; } /* Variable */
 code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
 </style>
 
 <link rel="stylesheet" href="css/industRialds.css" type="text/css" />
@@ -344,7 +370,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="design-for-six-sigma" class="section level1">
 <h1>Design for Six Sigma</h1>
-<p>Quality tools have been grouped under varied names and methodologies being Six Sigma one of the most well known and comprehensives ones. The domain is vast as seen in the many tools collected and described in the Six Sigma book by <span class="citation"><a href="references.html#ref-Munro2015" role="doc-biblioref">Roderik A.Munro and J.Zrymiak</a> (<a href="references.html#ref-Munro2015" role="doc-biblioref">2015</a>)</span>. For this section we’ve selected a few cases that strongly support Measurement System Analysis, Design of Experiments and Statistical Process Control. Beside supporting the remaining sections, they also pretend to showcase how R can be used also for other purposes than data wrangling and visualization in the domain of industrial data science, typically to obtain easily reproducible diagrams.</p>
+<p>Quality tools have been grouped under varied names and methodologies being Six Sigma one of the most well known and comprehensives ones. The domain is vast as seen in the many tools collected and described in the Six Sigma book by <span class="citation"><a href="#ref-Munro2015" role="doc-biblioref">Roderik A.Munro and J.Zrymiak</a> (<a href="#ref-Munro2015" role="doc-biblioref">2015</a>)</span>. For this section we’ve selected a few cases that strongly support Measurement System Analysis, Design of Experiments and Statistical Process Control. Beside supporting the remaining sections, they also pretend to showcase how R can be used also for other purposes than data wrangling and visualization in the domain of industrial data science, typically to obtain easily reproducible diagrams.</p>
 <p>We start with a case on a dial workshop in the watch making industrial where the pareto chart comes handy. We then move to a dental prosthesis laboratory to see how a simple fishbone diagram can help pinpoint special causes of the measurement variation of an optical device and we finish we two different approaches on how to optimize experiment execution by assess the correlation between the outputs in order to minimize the parameters to measure.</p>
 <div id="pareto-analysis" class="section level2">
 <h2>Pareto analysis</h2>
@@ -468,7 +494,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <p>Usually called Fishbone or Ishikawa diagrams this simple tool has proven to be extremely practical and helpful in structuring team discussions.</p>
 <p>With it we can easily identify and list the expected influencing factors in various contexts such as the preparation of an experiment design. Selection and grouping input parameters can be useful in defining for example the right mix of ingredients in a new product, in selecting manufacturing parameters in an industrial production line or in the definition of a draft operating procedure for a measurement device. In each of these situations it helps seeing the big picture and not fall into the trap of relying only in the data and findings obtained by statistical analysis.</p>
-<p>In this case study we’re exploring the creation of Ishikawa diagrams with the <code>{qcc}</code> package. <span class="citation"><a href="references.html#ref-Cano2012" role="doc-biblioref">Emilio L. Cano</a> (<a href="references.html#ref-Cano2012" role="doc-biblioref">2012</a>)</span> recommends the utilization of R even for such simple diagrams with clear arguments on reproducibility and ease of update. If R and programming is already part of the working culture and there’s someone in the team this makes perfect sense.</p>
+<p>In this case study we’re exploring the creation of Ishikawa diagrams with the <code>{qcc}</code> package. <span class="citation"><a href="#ref-Cano2012" role="doc-biblioref">Emilio L. Cano</a> (<a href="#ref-Cano2012" role="doc-biblioref">2012</a>)</span> recommends the utilization of R even for such simple diagrams with clear arguments on reproducibility and ease of update. If R and programming is already part of the working culture and there’s someone in the team this makes perfect sense.</p>
 <p>The lab manager of a <b class="highlight">dental prosthesis laboratory</b> has acquired a optical device for the precise measurement of the dental impressions that serve as models for the production of the crowns and bridges.</p>
 <p>The lab has been having complains and several parts have been returned from the dentists and had to be partially or totally reworked. Besides the potential troubles to patients and the already incurred financial losses there is a reputation loss of which the lab manager is very concerned with. Regardless of all this the acquisition decision has taken more than a year.</p>
 <p>After installation and in spite all the precautions it has been reported and now demonstrated with some specific trials that the measurements have a high variation which is preventing putting it in operation. Until now the laboratory team has always had full confidence in the equipment supplier and the Lab Manager has even seen the same equipment operating in another laboratory from the group.</p>
@@ -661,7 +687,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 4     1     5    0.2
 5     1     6    0.2
 6     1     8    0.8
-# ... with 79 more rows
+# … with 79 more rows
 #
 # Node Data: 22 x 1
   name 
@@ -669,7 +695,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 1 pw   
 2 w    
 3 pm   
-# ... with 19 more rows</code></pre>
+# … with 19 more rows</code></pre>
 <p>In the previous chunk output we see a preview of the tibble graph object with the first few nodes and edges. Now we create a vector with various igraph layouts to allow for easier selection when making the plots:</p>
 <div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="design-for-six-sigma.html#cb31-1" aria-hidden="true" tabindex="-1"></a>igraph_layouts <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&#39;star&#39;</span>, <span class="st">&#39;circle&#39;</span>, <span class="st">&#39;gem&#39;</span>, <span class="st">&#39;dh&#39;</span>, <span class="st">&#39;graphopt&#39;</span>, <span class="st">&#39;grid&#39;</span>, <span class="st">&#39;mds&#39;</span>, </span>
 <span id="cb31-2"><a href="design-for-six-sigma.html#cb31-2" aria-hidden="true" tabindex="-1"></a>                    <span class="st">&#39;randomly&#39;</span>, <span class="st">&#39;fr&#39;</span>, <span class="st">&#39;kk&#39;</span>, <span class="st">&#39;drl&#39;</span>, <span class="st">&#39;lgl&#39;</span>)</span></code></pre></div>
@@ -746,6 +772,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>We can see that the algorithm is grouping elements that have a strong correlation. Most stronger correlations are mostly presented within elements of each cluster. This is expected as certain perfume sensorial attributes are strongly correlated and the same for certain Line Parameters.e The code presented can now easily be reused once the DOE is executed to compare with the real correlations measured. Once knowledge is built and confirmed on which outputs are strongly correlated a selection of the key parameters can be done. This strongly simplifies the experiments by reducing the number of outputs to measure and reduces the cost and lead time of new formulations.</p>
 
 </div>
+</div>
+</div>
+<h3>References</h3>
+<div id="refs" class="references csl-bib-body hanging-indent">
+<div id="ref-Cano2012" class="csl-entry">
+Emilio L. Cano, Andrés Redchuk, Javier M. Moguerza. 2012. <em>Six Sigma with r</em>. 1th ed. Vol. 36. Use r! Springer New York Heidelberg Dordrecht London: Springer.
+</div>
+<div id="ref-Munro2015" class="csl-entry">
+Roderik A.Munro, Govindarajan Ramu, and Daniel J.Zrymiak. 2015. <em>The Certified Six Sigma Green Belt Handbook</em>. 2nd ed. Milwaukee, Winsconsin: ASQ Quality Press.
 </div>
 </div>
             </section>

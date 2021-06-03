@@ -3,10 +3,11 @@
 
 ## General designs
 
-General factorial designs require teams to put together a wealth of knowledge of which some has been already applied in previous case studies or is refered in the bibliography and glossary. This comprises things like root cause analysis, linear models and analysis of variance naturally all coherently articulated in a well though project with clear objectives. The building blocks discussed so far relate to a limited number of input factors and levels and exclusively with a single output variable. Model validation and interactions have been presented as these are needed in all cases and once all these are mastered it becomes possible to consider situations with many variables, many outputs and higher level interactions. 
-These arrangements become extremely powerfull and allow to handle complex real life situations such as the design of a new system with dozens of features that relate with each other or the optimization of a manufacturing process where the amount of data generated is very large but the testing time and cost are very high. At this moment considerations of trial quantities optimization enter at play. Typically in a design of experiments the total number of trials is given by $l^k$ where $l$ is the number of levels and $k$ the number of input factors. In our case study a *run* represents a unique combination of the factors and a *replicate* an independent repetition of a run. This leads to the notion of *trials* corresponding to the multiplication of the number of runs by the number of replicates. 
+General factorial designs require teams to put together a wealth of knowledge of which some has been already applied in previous case studies or is refered in the bibliography and glossary. This comprises things like root cause analysis, linear models and analysis of variance naturally all coherently articulated in a well though project with clear objectives. The building blocks discussed so far relate to a limited number of input factors and levels and exclusively with a single output variable. Model validation and interactions have been presented as these are needed in all cases and once all these are mastered it becomes possible to consider situations with many variables, many outputs and higher level interactions. These arrangements become extremely powerful and allow to handle complex real life situations such as the design of a new system with dozens of features that relate with each other or the optimization of a manufacturing process where the amount of data generated is very large but the testing time and cost are very high. At this moment considerations of trial quantities optimization enter at play.
 
-As an example, in a design with 4 factors of 2 levels we have then $2^4 = 16$ runs and if each has 5 replicates there are $16 \times 5 = 80$ trials to be executed. If more factors with a different number of levels are added, the total number of trials is calculated by multiplying both groups: $l_{1}^{k_{1}}$  $\times$ $l_{2}^{k_{2}}$. Continuing the previous example, if 3 additional factors with 4 levels each were added, all with 5 replicates, the total number of trials would be expressed as follows: $2^{4} \times 4^{3} = 1024 \times 5 = 5120$ trials, which is a very high number in most industrial cases and would require optimization techniques which will be discussed further.
+In our case studies a *run* represents a unique combination of the factors and a *replicate* an independent repetition of a run. This leads to the notion of *trials* corresponding to the multiplication of the number of runs by the number of replicates. For small designs it is possible to calculate the number of trials by simply multiplying the number of levels of each factor. With 1 factor with 3 levels and 2 factors with 4 levels we have $3 \times 4 \times 4 = 48$ which corresponds to the number of distinct combinations. For a higher number of factors and levels where this is not practical the total number of trials is given by $l^k$ where $l$ is the number of levels and $k$ the number of input factors. 
+
+In this case for a design with 4 factors of 2 levels we have then $2^4 = 16$ runs and if each has 5 replicates there are $16 \times 5 = 80$ trials to be executed. If more factors with a different number of levels are added, the total number of trials is calculated by multiplying both groups: $l_{1}^{k_{1}}$  $\times$ $l_{2}^{k_{2}}$. Continuing the previous example, if 3 additional factors with 4 levels each were added, all with 5 replicates, the total number of trials would be expressed as follows: $2^{4} \times 4^{3} = 1024 \times 5 = 5120$ trials, which is a very high number in most industrial cases and would require optimization techniques which will be discussed further.
 
 
 ### Factorial design {#fac.design}
@@ -288,7 +289,7 @@ f2 <- Y ~ A * B + C
 
 
 ```r
-formula_expansion(f1)
+expand_formula(f1)
 ```
 
 ```
@@ -296,14 +297,14 @@ formula_expansion(f1)
 ```
 
 ```r
-formula_expansion(f2)
+expand_formula(f2)
 ```
 
 ```
 [1] "A"   "B"   "C"   "A:B"
 ```
 
-The short code chunk before shows two formula expansion examples, the first one corresponding to our Juice DOE: in a design with factors coded A, B and C the sources of variation for the Anova table for three-factor fixed effects model are: A, B, C, AB, AC, BC, ABC. The second case corresponds to a situation where interactions with C would be discarded. This understanding is very important as more and more factors are added to models and the number of trials grows to unrealistic quantities. In such situations a preliminary work of selection of interactions allows to prepare a fractionned design. For now the doe is still contained at 108 trials so she can move ahead assessing the effect significance of the different factors using the anova.
+The short code chunk before shows two formula expansion examples, the first one corresponding to our Juice DOE: in a design with factors coded A, B and C the sources of variation for the Anova table for three-factor fixed effects model are: A, B, C, AB, AC, BC, ABC. The second case corresponds to a situation where interactions with C would be discarded. Understanding these syntax details is very important because as more and more factors are added to models, the number of trials grows to unrealistic quantities. In such situations a preliminary work consisting in the selection of specific interactions enables the creation a fractional design. For now the juice doe is still small with 108 trials so she can move ahead assessing the effect significance of the different factors using the anova.
 
 ### Anova with 3rd level interactions {#anova_three}
 

@@ -3,37 +3,42 @@
 
 ## Two level designs
 
+<<<<<<< HEAD
 We may be armed with powerful tools to design and analyze experiments and even have strong knowledge in the topic we're studying but real life is full of constraints and a DOE is always the reflection of them. The calculation of the number of trials presented in the previous case shows a very quick explosion of the volume of work and material consumption. Another aspect is that as knowledge progresses and findings are accumulated on a topic certain variables which present little influence in the outputs start to be discarded. Data and models constructed in several preliminary DOEs can be consolidated under certain conditions. So the design of a new DOE should take into account the design of the previous DOE and this regarding not only the variables but even the levels themselves. With this in mind it is possible and common to start with very large screening experiments with for instance 10 inputs and 10 outputs and end up with a narrow optimization experiment with 2 factors with 4 levels to select a fine  operating window.
 
 In these practical considerations, a way to make screening experiments realistic is to limit the number of levels of the factors, the minimum being 2 to have a complete factorial design .$2^{k}$  It provides the smallest number of runs with which k factors can be studied in a complete factorial design. Consequently, these designs are widely used in factor screening experiments.
+=======
+We may be armed with powerful tools to design and analyze experiments and even have strong knowledge in the topic we're studying but real life in a laboratory or in a factory has many constraints and a DOE is always the reflection of them. The calculation of the number of trials presented in the previous case shows a very quick explosion of the volume of work and material consumption. Another aspect is that as knowledge progresses and findings are accumulated certain variables which present little influence in the outputs start to be discarded. This is a consequence of the sparcity of effects principle. Data and models constructed in several preliminary DOEs can be consolidated under certain conditions. So the design of a new DOE should take into account the design of the previous one and this regarding not only the variables but even the levels themselves. With all these practical considerations in mind it is possible and common to start with very large screening experiments with for instance 10 inputs and 10 outputs and end up with a narrow optimization experiment with 2 factors with 4 levels to select a fine  operating window.
 
-The validity of the analysis depends on the following assumptions:
+A way to make screening experiments realistic is to limit the number of levels of the factors, the minimum being 2 to have a complete factorial design. Following the notation also presented in the previous case study these designs are called $2^{k}$ designs. Application of linear models and interpretation of anova is subject to the same assumptions as general cases discussed, these being the factors are fixed, the designs are completely randomized, the normality assumptions are satisfied. In particular as there are only 2 levels it is assumed that the response is approximately linear between the factor levels.
 
-* the factors are fixed
-* the designs are completely randomized
-* the usual normality assumptions are satisfied
-* the response is approximately linear over the range of the factor levels chosen
+In the next Case Studies we continue follow the same general steps:
+>>>>>>> 988356a8e29d3ca28b4be46045735c81840d8027
 
-Analysis Procedure for a 2 k Design
+* Identify factors
+* Estimate factor effects
+* Form initial full model
+* Check model including residuals
+* Assess significance of effects including factor interactions
+* Interpret results
+* Refine model by removing the non significant effects
+* Re-check model
+* Draw final conclusions
 
-1. Estimate factor effects
-2. Form initial model (full model)
-  a. If the design is replicated, fit the full model
-  b. If there is no replication, form the model using a normal probability plot of the effects
-3. Perform statistical testing (Anova)
-4. Refine model (remove non significant effects)
-5. Analyze residuals
-6. Interpret results
+In this first Case Study dedicated to $2^k$ designs we're going to start by explore the contrasts settings in the linear model functions as the coding of factors becomes a key tool in the linear model construction in R and in the way to use the forecasting tools.
 
-DEF - Sparsity of effects principle: most systems are dominated by some of the main effects and low-order interactions, and most high-order interactions are negligible.
+<div class="marginnote">
 
-In this first Case Study dedicated to $2^k$ designs we're going to explore the contrasts settings in the linear model functions.
+<b class="highlight">Case study: PET clothing improvement plan</b>
 
-**The PET clothing improvement plan**
+</div>
 
-In this case study factors have only 2 levels. 
+### Factorial design 2 levels
 
-Below we start by preparing our dataset:
+A materials engineer working in the <b class="highlight">winter sports clothing industry</b> has been working in the development of a recyclable PET. Previous tests have shown promising results on tensile strength, one of the main characteristics required from the raw material. The trade offs between performance, costs and recyclability are not obvious to obtain due to lack of experience and specific know-how. Several one at a time comparisions between supplier deliveries have been done but now she wanted to go further and has established together with the raw material supplier factorial design with two factors presented in the output of the next R chunk. Most of the time process recipes at suppliers are kept confidentiel so she only had access to a generic description of the factor levels:
+
+A: bi-axial orientation in production (yes/no)   
+B: nucleating agent level (high/low)
 
 
 ```r
@@ -58,7 +63,22 @@ pet_doe <- bind_cols(
   pet_doe,
   "tensile_strength" = tensile_strength,
 )
+
+pet_doe %>%
+  head() %>%
+  kable()
 ```
+
+
+
+|A  |B  |replicate | tensile_strength|
+|:--|:--|:---------|----------------:|
+|-  |-  |I         |             64.4|
+|+  |-  |I         |             82.8|
+|-  |+  |I         |             41.4|
+|+  |+  |I         |             71.3|
+|-  |-  |II        |             57.5|
+|+  |-  |II        |             73.6|
 
 ### Coding levels {#coding_levels}
 
@@ -356,12 +376,12 @@ We select standard error as argument for the error.bars argument.
 ```r
 par(mfrow = c(1,1), bty = "l")
 plotMeans(response = pet_fct$tensile_strength,
-          factor2 = pet_fct$A,
-          factor1 = pet_fct$B,
+          factor1 = pet_fct$A,
+          xlab = "A: bi-axial orientation in production (yes/no)",
+          factor2 = pet_fct$B,
+          legend.lab = "B: nucleating agent (high/low)",
+          ylab = "Tensile Strenght [Mpa]",
           error.bars = "se",
-          xlab = "A - Reactant",
-          legend.lab = "B - Catalist\n(error bars +/-se)",
-          ylab = "Tensile Strenght",
           col = viridis::viridis(12)[4],
           legend.pos = "bottomright",
           main = "The PET clothing improvement plan")
@@ -369,9 +389,14 @@ plotMeans(response = pet_fct$tensile_strength,
 
 <img src="9_twolevelDOEs_files/figure-html/unnamed-chunk-19-1.png" width="100%" />
 
-3 factors 2 levels
+A: bi-axial orientation in production (yes/no)   
+B: nucleating agent level (high/low)
 
-**The lithium-ion battery charging time test**
+<div class="marginnote>
+
+<b class="highlight">Case study: lithium-ion battery charging time</b>
+
+</div>
 
 A - temperature 
 B - previous cycles (within warranty)

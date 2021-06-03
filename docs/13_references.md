@@ -27,9 +27,15 @@ devtools::session_info()[[1]]
 ##  system   x86_64, linux-gnu           
 ##  ui       X11                         
 ##  language (EN)                        
+<<<<<<< HEAD
 ##  collate  en_US.UTF-8                 
 ##  ctype    en_US.UTF-8                 
 ##  tz       Europe/Zurich               
+=======
+##  collate  French_Switzerland.1252     
+##  ctype    French_Switzerland.1252     
+##  tz       Europe/Berlin               
+>>>>>>> 988356a8e29d3ca28b4be46045735c81840d8027
 ##  date     2021-06-03
 ```
 

@@ -292,6 +292,7 @@ div.csl-indent {
 </ul></li>
 <li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#two-level-designs"><i class="fa fa-check"></i>Two level designs</a>
 <ul>
+<li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#factorial-design-2-levels"><i class="fa fa-check"></i>Factorial design 2 levels</a></li>
 <li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#coding_levels"><i class="fa fa-check"></i>Coding levels</a></li>
 <li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#plotMeans"><i class="fa fa-check"></i>Interaction plots with SE</a></li>
 <li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#adj_Rsquare"><i class="fa fa-check"></i>Adjusted R-squared</a></li>
@@ -1645,9 +1646,15 @@ Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&
 </div>
 <div id="general-designs" class="section level2">
 <h2>General designs</h2>
+<<<<<<< HEAD
 <p>General factorial designs require teams to put together a wealth of knowledge of which some has been already applied in previous case studies or is refered in the bibliography and glossary. This comprises things like root cause analysis, linear models and analysis of variance naturally all coherently articulated in a well though project with clear objectives. The building blocks discussed so far relate to a limited number of input factors and levels and exclusively with a single output variable. Model validation and interactions have been presented as these are needed in all cases and once all these are mastered it becomes possible to consider situations with many variables, many outputs and higher level interactions. These arrangements become extremely powerful and allow to handle complex real life situations such as the design of a new system with dozens of features that relate with each other or the optimization of a manufacturing process where the amount of data generated is very large but the testing time and cost are very high. At this moment considerations of trial quantities optimization enter at play.</p>
 <p>In our case studies a <em>run</em> represents a unique combination of the factors and a <em>replicate</em> an independent repetition of a run. This leads to the notion of <em>trials</em> corresponding to the multiplication of the number of runs by the number of replicates. For small designs it is possible to calculate the number of trials by simply multiplying the number of levels of each factor. With 1 factor with 3 levels and 2 factors with 4 levels we have <span class="math inline">\(3 \times 4 \times 4 = 48\)</span> which corresponds to the number of distinct combinations. For a higher number of factors and levels where this is not practical the total number of trials is given by <span class="math inline">\(l^k\)</span> where <span class="math inline">\(l\)</span> is the number of levels and <span class="math inline">\(k\)</span> the number of input factors.</p>
 <p>In this case for a design with 4 factors of 2 levels we have then <span class="math inline">\(2^4 = 16\)</span> runs and if each has 5 replicates there are <span class="math inline">\(16 \times 5 = 80\)</span> trials to be executed. If more factors with a different number of levels are added, the total number of trials is calculated by multiplying both groups: <span class="math inline">\(l_{1}^{k_{1}}\)</span> <span class="math inline">\(\times\)</span> <span class="math inline">\(l_{2}^{k_{2}}\)</span>. Continuing the previous example, if 3 additional factors with 4 levels each were added, all with 5 replicates, the total number of trials would be expressed as follows: <span class="math inline">\(2^{4} \times 4^{3} = 1024 \times 5 = 5120\)</span> trials, which is a very high number in most industrial cases and would require optimization techniques which will be discussed further.</p>
+=======
+<p>General factorial designs require teams to put together a wealth of knowledge of which some has been already applied in previous case studies or is refered in the bibliography and glossary. This comprises things like root cause analysis, linear models and analysis of variance naturally all coherently articulated in a well though project with clear objectives. The building blocks discussed so far relate to a limited number of input factors and levels and exclusively with a single output variable. Model validation and interactions have been presented as these are needed in all cases and once all these are mastered it becomes possible to consider situations with many variables, many outputs and higher level interactions.
+These arrangements become extremely powerfull and allow to handle complex real life situations such as the design of a new system with dozens of features that relate with each other or the optimization of a manufacturing process where the amount of data generated is very large but the testing time and cost are very high. At this moment considerations of trial quantities optimization enter at play. Typically in a design of experiments the total number of trials is given by <span class="math inline">\(l^k\)</span> where <span class="math inline">\(l\)</span> is the number of levels and <span class="math inline">\(k\)</span> the number of input factors. In our case study a <em>run</em> represents a unique combination of the factors and a <em>replicate</em> an independent repetition of a run. This leads to the notion of <em>trials</em> corresponding to the multiplication of the number of runs by the number of replicates.</p>
+<p>As an example, in a design with 4 factors of 2 levels we have then <span class="math inline">\(2^4 = 2 \times 2 \times 2 \times 2 = 16\)</span> runs and if each has 5 replicates there are <span class="math inline">\(16 \times 5 = 80\)</span> trials to be executed. If more factors with a different number of levels are added, the total number of trials is calculated by multiplying both groups: <span class="math inline">\(l_{1}^{k_{1}}\)</span> <span class="math inline">\(\times\)</span> <span class="math inline">\(l_{2}^{k_{2}}\)</span>. Continuing the previous example, if 3 additional factors with 4 levels each were added, all with 5 replicates, the total number of trials would be expressed as follows: <span class="math inline">\(2^{4} \times 4^{3} = 2 \times 2 \times 2 \times 2 \times 4 \times 4 \times 4 = 1024 \times 5 = 5120\)</span> trials, which is a very high number in most industrial cases and would require optimization techniques which will be discussed further.</p>
+>>>>>>> 988356a8e29d3ca28b4be46045735c81840d8027
 <div id="fac.design" class="section level3">
 <h3>Factorial design</h3>
 <div class="marginnote">
@@ -1946,35 +1953,35 @@ Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&
 </div>
 <div id="two-level-designs" class="section level2">
 <h2>Two level designs</h2>
+<<<<<<< HEAD
 <p>We may be armed with powerful tools to design and analyze experiments and even have strong knowledge in the topic we’re studying but real life is full of constraints and a DOE is always the reflection of them. The calculation of the number of trials presented in the previous case shows a very quick explosion of the volume of work and material consumption. Another aspect is that as knowledge progresses and findings are accumulated on a topic certain variables which present little influence in the outputs start to be discarded. Data and models constructed in several preliminary DOEs can be consolidated under certain conditions. So the design of a new DOE should take into account the design of the previous DOE and this regarding not only the variables but even the levels themselves. With this in mind it is possible and common to start with very large screening experiments with for instance 10 inputs and 10 outputs and end up with a narrow optimization experiment with 2 factors with 4 levels to select a fine operating window.</p>
 <p>In these practical considerations, a way to make screening experiments realistic is to limit the number of levels of the factors, the minimum being 2 to have a complete factorial design .<span class="math inline">\(2^{k}\)</span> It provides the smallest number of runs with which k factors can be studied in a complete factorial design. Consequently, these designs are widely used in factor screening experiments.</p>
 <p>The validity of the analysis depends on the following assumptions:</p>
+=======
+<p>We may be armed with powerful tools to design and analyze experiments and even have strong knowledge in the topic we’re studying but real life in a laboratory or in a factory has many constraints and a DOE is always the reflection of them. The calculation of the number of trials presented in the previous case shows a very quick explosion of the volume of work and material consumption. Another aspect is that as knowledge progresses and findings are accumulated certain variables which present little influence in the outputs start to be discarded. This is a consequence of the sparcity of effects principle. Data and models constructed in several preliminary DOEs can be consolidated under certain conditions. So the design of a new DOE should take into account the design of the previous one and this regarding not only the variables but even the levels themselves. With all these practical considerations in mind it is possible and common to start with very large screening experiments with for instance 10 inputs and 10 outputs and end up with a narrow optimization experiment with 2 factors with 4 levels to select a fine operating window.</p>
+<p>A way to make screening experiments realistic is to limit the number of levels of the factors, the minimum being 2 to have a complete factorial design. Following the notation also presented in the previous case study these designs are called <span class="math inline">\(2^{k}\)</span> designs. Application of linear models and interpretation of anova is subject to the same assumptions as general cases discussed, these being the factors are fixed, the designs are completely randomized, the normality assumptions are satisfied. In particular as there are only 2 levels it is assumed that the response is approximately linear between the factor levels.</p>
+<p>In the next Case Studies we continue follow the same general steps:</p>
+>>>>>>> 988356a8e29d3ca28b4be46045735c81840d8027
 <ul>
-<li>the factors are fixed</li>
-<li>the designs are completely randomized</li>
-<li>the usual normality assumptions are satisfied</li>
-<li>the response is approximately linear over the range of the factor levels chosen</li>
-</ul>
-<p>Analysis Procedure for a 2 k Design</p>
-<ol style="list-style-type: decimal">
+<li>Identify factors</li>
 <li>Estimate factor effects</li>
-<li>Form initial model (full model)</li>
-</ol>
-<ol style="list-style-type: lower-alpha">
-<li>If the design is replicated, fit the full model</li>
-<li>If there is no replication, form the model using a normal probability plot of the effects</li>
-</ol>
-<ol start="3" style="list-style-type: decimal">
-<li>Perform statistical testing (Anova)</li>
-<li>Refine model (remove non significant effects)</li>
-<li>Analyze residuals</li>
+<li>Form initial full model</li>
+<li>Check model including residuals</li>
+<li>Assess significance of effects including factor interactions</li>
 <li>Interpret results</li>
-</ol>
-<p>DEF - Sparsity of effects principle: most systems are dominated by some of the main effects and low-order interactions, and most high-order interactions are negligible.</p>
-<p>In this first Case Study dedicated to <span class="math inline">\(2^k\)</span> designs we’re going to explore the contrasts settings in the linear model functions.</p>
-<p><strong>The PET clothing improvement plan</strong></p>
-<p>In this case study factors have only 2 levels.</p>
-<p>Below we start by preparing our dataset:</p>
+<li>Refine model by removing the non significant effects</li>
+<li>Re-check model</li>
+<li>Draw final conclusions</li>
+</ul>
+<p>In this first Case Study dedicated to <span class="math inline">\(2^k\)</span> designs we’re going to start by explore the contrasts settings in the linear model functions as the coding of factors becomes a key tool in the linear model construction in R and in the way to use the forecasting tools.</p>
+<div class="marginnote">
+<p><b class="highlight">Case study: PET clothing improvement plan</b></p>
+</div>
+<div id="factorial-design-2-levels" class="section level3">
+<h3>Factorial design 2 levels</h3>
+<p>A materials engineer working in the <b class="highlight">winter sports clothing industry</b> has been working in the development of a recyclable PET. Previous tests have shown promising results on tensile strength, one of the main characteristics required from the raw material. The trade offs between performance, costs and recyclability are not obvious to obtain due to lack of experience and specific know-how. Several one at a time comparisions between supplier deliveries have been done but now she wanted to go further and has established together with the raw material supplier factorial design with two factors presented in the output of the next R chunk. Most of the time process recipes at suppliers are kept confidentiel so she only had access to a generic description of the factor levels:</p>
+<p>A: bi-axial orientation in production (yes/no)<br />
+B: nucleating agent level (high/low)</p>
 <div class="sourceCode" id="cb204"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb204-1"><a href="DOE.html#cb204-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(DoE.base)</span></code></pre></div>
 <div class="sourceCode" id="cb205"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb205-1"><a href="DOE.html#cb205-1" aria-hidden="true" tabindex="-1"></a>pet_doe <span class="ot">&lt;-</span> <span class="fu">fac.design</span>(</span>
 <span id="cb205-2"><a href="DOE.html#cb205-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">randomize =</span> <span class="cn">FALSE</span>,</span>
@@ -1987,7 +1994,60 @@ Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&
 <span id="cb206-3"><a href="DOE.html#cb206-3" aria-hidden="true" tabindex="-1"></a>pet_doe <span class="ot">&lt;-</span> <span class="fu">bind_cols</span>(</span>
 <span id="cb206-4"><a href="DOE.html#cb206-4" aria-hidden="true" tabindex="-1"></a>  pet_doe,</span>
 <span id="cb206-5"><a href="DOE.html#cb206-5" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;tensile_strength&quot;</span> <span class="ot">=</span> tensile_strength,</span>
-<span id="cb206-6"><a href="DOE.html#cb206-6" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<span id="cb206-6"><a href="DOE.html#cb206-6" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb206-7"><a href="DOE.html#cb206-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb206-8"><a href="DOE.html#cb206-8" aria-hidden="true" tabindex="-1"></a>pet_doe <span class="sc">%&gt;%</span></span>
+<span id="cb206-9"><a href="DOE.html#cb206-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb206-10"><a href="DOE.html#cb206-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable</span>()</span></code></pre></div>
+<table>
+<thead>
+<tr class="header">
+<th align="left">A</th>
+<th align="left">B</th>
+<th align="left">replicate</th>
+<th align="right">tensile_strength</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">-</td>
+<td align="left">-</td>
+<td align="left">I</td>
+<td align="right">64.4</td>
+</tr>
+<tr class="even">
+<td align="left">+</td>
+<td align="left">-</td>
+<td align="left">I</td>
+<td align="right">82.8</td>
+</tr>
+<tr class="odd">
+<td align="left">-</td>
+<td align="left">+</td>
+<td align="left">I</td>
+<td align="right">41.4</td>
+</tr>
+<tr class="even">
+<td align="left">+</td>
+<td align="left">+</td>
+<td align="left">I</td>
+<td align="right">71.3</td>
+</tr>
+<tr class="odd">
+<td align="left">-</td>
+<td align="left">-</td>
+<td align="left">II</td>
+<td align="right">57.5</td>
+</tr>
+<tr class="even">
+<td align="left">+</td>
+<td align="left">-</td>
+<td align="left">II</td>
+<td align="right">73.6</td>
+</tr>
+</tbody>
+</table>
+</div>
 <div id="coding_levels" class="section level3">
 <h3>Coding levels</h3>
 <p>Factors as +/-</p>
@@ -2166,18 +2226,23 @@ F-statistic: 24.8 on 3 and 8 DF,  p-value: 0.000209</code></pre>
 <p>We select standard error as argument for the error.bars argument.</p>
 <div class="sourceCode" id="cb231"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb231-1"><a href="DOE.html#cb231-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">1</span>), <span class="at">bty =</span> <span class="st">&quot;l&quot;</span>)</span>
 <span id="cb231-2"><a href="DOE.html#cb231-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plotMeans</span>(<span class="at">response =</span> pet_fct<span class="sc">$</span>tensile_strength,</span>
-<span id="cb231-3"><a href="DOE.html#cb231-3" aria-hidden="true" tabindex="-1"></a>          <span class="at">factor2 =</span> pet_fct<span class="sc">$</span>A,</span>
-<span id="cb231-4"><a href="DOE.html#cb231-4" aria-hidden="true" tabindex="-1"></a>          <span class="at">factor1 =</span> pet_fct<span class="sc">$</span>B,</span>
-<span id="cb231-5"><a href="DOE.html#cb231-5" aria-hidden="true" tabindex="-1"></a>          <span class="at">error.bars =</span> <span class="st">&quot;se&quot;</span>,</span>
-<span id="cb231-6"><a href="DOE.html#cb231-6" aria-hidden="true" tabindex="-1"></a>          <span class="at">xlab =</span> <span class="st">&quot;A - Reactant&quot;</span>,</span>
-<span id="cb231-7"><a href="DOE.html#cb231-7" aria-hidden="true" tabindex="-1"></a>          <span class="at">legend.lab =</span> <span class="st">&quot;B - Catalist</span><span class="sc">\n</span><span class="st">(error bars +/-se)&quot;</span>,</span>
-<span id="cb231-8"><a href="DOE.html#cb231-8" aria-hidden="true" tabindex="-1"></a>          <span class="at">ylab =</span> <span class="st">&quot;Tensile Strenght&quot;</span>,</span>
+<span id="cb231-3"><a href="DOE.html#cb231-3" aria-hidden="true" tabindex="-1"></a>          <span class="at">factor1 =</span> pet_fct<span class="sc">$</span>A,</span>
+<span id="cb231-4"><a href="DOE.html#cb231-4" aria-hidden="true" tabindex="-1"></a>          <span class="at">xlab =</span> <span class="st">&quot;A: bi-axial orientation in production (yes/no)&quot;</span>,</span>
+<span id="cb231-5"><a href="DOE.html#cb231-5" aria-hidden="true" tabindex="-1"></a>          <span class="at">factor2 =</span> pet_fct<span class="sc">$</span>B,</span>
+<span id="cb231-6"><a href="DOE.html#cb231-6" aria-hidden="true" tabindex="-1"></a>          <span class="at">legend.lab =</span> <span class="st">&quot;B: nucleating agent (high/low)&quot;</span>,</span>
+<span id="cb231-7"><a href="DOE.html#cb231-7" aria-hidden="true" tabindex="-1"></a>          <span class="at">ylab =</span> <span class="st">&quot;Tensile Strenght [Mpa]&quot;</span>,</span>
+<span id="cb231-8"><a href="DOE.html#cb231-8" aria-hidden="true" tabindex="-1"></a>          <span class="at">error.bars =</span> <span class="st">&quot;se&quot;</span>,</span>
 <span id="cb231-9"><a href="DOE.html#cb231-9" aria-hidden="true" tabindex="-1"></a>          <span class="at">col =</span> viridis<span class="sc">::</span><span class="fu">viridis</span>(<span class="dv">12</span>)[<span class="dv">4</span>],</span>
 <span id="cb231-10"><a href="DOE.html#cb231-10" aria-hidden="true" tabindex="-1"></a>          <span class="at">legend.pos =</span> <span class="st">&quot;bottomright&quot;</span>,</span>
 <span id="cb231-11"><a href="DOE.html#cb231-11" aria-hidden="true" tabindex="-1"></a>          <span class="at">main =</span> <span class="st">&quot;The PET clothing improvement plan&quot;</span>)</span></code></pre></div>
 <p><img src="9_twolevelDOEs_files/figure-html/unnamed-chunk-19-1.png" width="100%" /></p>
-<p>3 factors 2 levels</p>
-<p><strong>The lithium-ion battery charging time test</strong></p>
+<p>A: bi-axial orientation in production (yes/no)<br />
+B: nucleating agent level (high/low)</p>
+<div class="marginnote>
+
+<b class="highlight">Case study: lithium-ion battery charging time</b>
+
+</div>
 <p>A - temperature
 B - previous cycles (within warranty)
 C - voltage

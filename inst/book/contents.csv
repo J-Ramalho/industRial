@@ -29,7 +29,7 @@ Statistical modeling,[Linear models](#lm),`stats::lm`,ebike_hardening,The e-bike
 ,[Standard Residuals-Fit plot](#std_residuals_fit),,,,
 ,[Outliers test](#outliers),`car::outlierTest`,,,
 ,[Cooks distance](#cooks),,,,
-,[Coeficient of determination](#R-squared),`base::summary()$r.squared`,,,
+,[R-squared](#R-squared),`base::summary()$r.squared`,,,
 Effects significance,[Anova](#aov),`stats::aov`,,,
 ,[Pairwise comparison](#tukey),`stats::TukeyHSD`,,,
 ,[Least significant difference](#fisherLSD),`agricolae::LSD.test`,,,
@@ -47,7 +47,7 @@ General designs,[Factorial design](#fac.design),`DoE.base::fac.design`,juice_dry
 ,[Anova 3rd level interactions](#anova_three),,,,
 Two level designs,[Coding levels](#coding_levels),`stats::relevel`,pet_doe,The PET clothing improvement DoE,Clothing
 ,[Interaction plots with SE](#plotMeans),`RcmdrMisc::plotMeans`,,,
-,[Adjusted R-square](#adj_Rsquare),`broom::glance`,battery_charging,The lithium-ion battery charging time test,Automotive
+,[Adjusted R-squared](#adj_Rsquare),`broom::glance`,battery_charging,The lithium-ion battery charging time test,Automotive
 ,[Coding inputs](#coding_inputs),,,,
 ,[Coding prediction](#coded_prediction),,,,
 ,[Perspective plot](#persp),`graphics::persp`,,,

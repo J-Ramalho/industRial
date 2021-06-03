@@ -197,7 +197,7 @@
   </tr>
   <tr>
    <td style="text-align:left;background-color: white !important;">  </td>
-   <td style="text-align:left;background-color: white !important;"> [Coeficient of determination](#R-squared) </td>
+   <td style="text-align:left;background-color: white !important;"> [R-squared](#R-squared) </td>
    <td style="text-align:left;background-color: white !important;"> `base::summary()$r.squared` </td>
    <td style="text-align:left;background-color: white !important;">  </td>
   </tr>
@@ -305,7 +305,7 @@
   </tr>
   <tr>
    <td style="text-align:left;background-color: white !important;">  </td>
-   <td style="text-align:left;background-color: white !important;"> [Adjusted R-square](#adj_Rsquare) </td>
+   <td style="text-align:left;background-color: white !important;"> [Adjusted R-squared](#adj_Rsquare) </td>
    <td style="text-align:left;background-color: white !important;"> `broom::glance` </td>
    <td style="text-align:left;background-color: white !important;"> battery_charging </td>
   </tr>

@@ -24,7 +24,7 @@
 <meta name="author" content="João Ramalho" />
 
 
-<meta name="date" content="2021-06-02" />
+<meta name="date" content="2021-06-03" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -266,6 +266,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#two-level-designs"><i class="fa fa-check"></i>Two level designs</a>
 <ul>
+<li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#factorial-design-2-levels"><i class="fa fa-check"></i>Factorial design 2 levels</a></li>
 <li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#coding_levels"><i class="fa fa-check"></i>Coding levels</a></li>
 <li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#plotMeans"><i class="fa fa-check"></i>Interaction plots with SE</a></li>
 <li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#adj_Rsquare"><i class="fa fa-check"></i>Adjusted R-squared</a></li>
@@ -871,7 +872,7 @@ F-statistic: 66.8 on 3 and 16 DF,  p-value: 2.88e-09</code></pre>
 <div class="sourceCode" id="cb118"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb118-1"><a href="DOE.html#cb118-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(car)</span>
 <span id="cb118-2"><a href="DOE.html#cb118-2" aria-hidden="true" tabindex="-1"></a><span class="fu">durbinWatsonTest</span>(ebike_lm_factor)</span></code></pre></div>
 <pre><code> lag Autocorrelation D-W Statistic p-value
-   1        -0.53433        2.9609   0.098
+   1        -0.53433        2.9609   0.082
  Alternative hypothesis: rho != 0</code></pre>
 <p>As already stated visual observations can most of the times be complemented with a statistical test. In this case we can apply the durbinWatson test from the <code>{car}</code> package (Car stands for Companion to Applied Regression)</p>
 <p>Although the output shows Autocorrelation of -0.53 we have to consider that the p value is slightly higher than 0.05 thus there is not enough significance to say that there is autocorrelation. The result is not a complete clear cut the lab supervisor remains alert for coming verifications.</p>
@@ -1895,7 +1896,7 @@ Figure 1: Main
 <pre><code>[1] &quot;A&quot;     &quot;B&quot;     &quot;C&quot;     &quot;A:B&quot;   &quot;A:C&quot;   &quot;B:C&quot;   &quot;A:B:C&quot;</code></pre>
 <div class="sourceCode" id="cb200"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb200-1"><a href="DOE.html#cb200-1" aria-hidden="true" tabindex="-1"></a><span class="fu">formula_expansion</span>(f2)</span></code></pre></div>
 <pre><code>[1] &quot;A&quot;   &quot;B&quot;   &quot;C&quot;   &quot;A:B&quot;</code></pre>
-<p>The short code chunk before shows two formula expansion examples, the first one corresponding to our Juice DOE: in a design with factors coded A, B and C the sources of variation for the Anova table for three-factor fixed effects model are: A, B, C, AB, AC, BC, ABC. The second case corresponds to a situation where interactions with C would be discarded. This understanding is very important as more and more factors are added to models and the number of trials grows to unrealistic quantities. In such situations a preliminary work of selection of interactions allows to prepare a fractionned design. For now the doe is still contained at 108 trials so she can move ahead assessing the effect significance of the different factors using the anova.</p>
+<p>The short code chunk before shows two formula expansion examples, the first one corresponding to our Juice DOE: in a design with factors coded A, B and C the sources of variation for the Anova table for three-factor fixed effects model are: A, B, C, AB, AC, BC, ABC. The second case corresponds to a situation where interactions with C would be discarded. Understanding these syntax details is very important because as more and more factors are added to models, the number of trials grows to unrealistic quantities. In such situations a preliminary work consisting in the selection of specific interactions enables the creation a fractional design. For now the juice doe is still small with 108 trials so she can move ahead assessing the effect significance of the different factors using the anova.</p>
 </div>
 <div id="anova_three" class="section level3">
 <h3>Anova with 3rd level interactions</h3>
@@ -1920,36 +1921,26 @@ Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&
 </div>
 <div id="two-level-designs" class="section level2">
 <h2>Two level designs</h2>
-<p>Coding factors</p>
-<p>2 factors 2 levels</p>
-<p>The <span class="math inline">\(2^{k}\)</span> designs are particularly useful in the early stages of experimental work when many factors are likely to be investigated. It provides the smallest number of runs with which k factors can be studied in a complete factorial design. Consequently, these designs are widely used in factor screening experiments.</p>
-<p>The validity of the analysis depends on the following assumptions:</p>
+<p>We may be armed with powerful tools to design and analyze experiments and even have strong knowledge in the topic we’re studying but real life in a laboratory or in a factory has many constraints and a DOE is always the reflection of them. The calculation of the number of trials presented in the previous case shows a very quick explosion of the volume of work and material consumption. Another aspect is that as knowledge progresses and findings are accumulated certain variables which present little influence in the outputs start to be discarded. This is a consequence of the sparcity of effects principle. Data and models constructed in several preliminary DOEs can be consolidated under certain conditions. So the design of a new DOE should take into account the design of the previous one and this regarding not only the variables but even the levels themselves. With all these practical considerations in mind it is possible and common to start with very large screening experiments with for instance 10 inputs and 10 outputs and end up with a narrow optimization experiment with 2 factors with 4 levels to select a fine operating window.</p>
+<p>A way to make screening experiments realistic is to limit the number of levels of the factors, the minimum being 2 to have a complete factorial design. Following the notation also presented in the previous case study these designs are called <span class="math inline">\(2^{k}\)</span> designs. Application of linear models and interpretation of anova is subject to the same assumptions as general cases discussed, these being the factors are fixed, the designs are completely randomized, the normality assumptions are satisfied. In particular as there are only 2 levels it is assumed that the response is approximately linear between the factor levels.</p>
+<p>The approach presented in the next Case Studies continuous to follow the same general steps used so far:</p>
 <ul>
-<li>the factors are fixed</li>
-<li>the designs are completely randomized</li>
-<li>the usual normality assumptions are satisfied</li>
-<li>the response is approximately linear over the range of the factor levels chosen</li>
-</ul>
-<p>Analysis Procedure for a 2 k Design</p>
-<ol style="list-style-type: decimal">
+<li>Identify factors</li>
 <li>Estimate factor effects</li>
-<li>Form initial model (full model)</li>
-</ol>
-<ol style="list-style-type: lower-alpha">
-<li>If the design is replicated, fit the full model</li>
-<li>If there is no replication, form the model using a normal probability plot of the effects</li>
-</ol>
-<ol start="3" style="list-style-type: decimal">
-<li>Perform statistical testing (Anova)</li>
-<li>Refine model (remove non significant effects)</li>
-<li>Analyze residuals</li>
+<li>Form initial full model</li>
+<li>Check model including residuals</li>
+<li>Assess significance of effects including factor interactions</li>
 <li>Interpret results</li>
-</ol>
-<p>DEF - Sparsity of effects principle: most systems are dominated by some of the main effects and low-order interactions, and most high-order interactions are negligible.</p>
-<p>In this first Case Study dedicated to <span class="math inline">\(2^k\)</span> designs we’re going to explore the contrasts settings in the linear model functions.</p>
-<p><strong>The PET clothing improvement plan</strong></p>
-<p>In this case study factors have only 2 levels.</p>
-<p>Below we start by preparing our dataset:</p>
+<li>Refine model by removing the non significant effects</li>
+<li>Re-check model</li>
+<li>Draw final conclusions</li>
+</ul>
+<p>In this first Case Study dedicated to <span class="math inline">\(2^k\)</span> designs we’re going to start by explore the contrasts settings in the linear model functions as the coding of factors becomes a key tool in the linear model construction in R and in the way to use the forecasting tools.</p>
+<div class="marginnote">
+<p><b class="highlight">Case study: PET clothing improvement plan</b></p>
+</div>
+<div id="factorial-design-2-levels" class="section level3">
+<h3>Factorial design 2 levels</h3>
 <div class="sourceCode" id="cb204"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb204-1"><a href="DOE.html#cb204-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(DoE.base)</span></code></pre></div>
 <div class="sourceCode" id="cb205"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb205-1"><a href="DOE.html#cb205-1" aria-hidden="true" tabindex="-1"></a>pet_doe <span class="ot">&lt;-</span> <span class="fu">fac.design</span>(</span>
 <span id="cb205-2"><a href="DOE.html#cb205-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">randomize =</span> <span class="cn">FALSE</span>,</span>
@@ -1963,6 +1954,10 @@ Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&
 <span id="cb206-4"><a href="DOE.html#cb206-4" aria-hidden="true" tabindex="-1"></a>  pet_doe,</span>
 <span id="cb206-5"><a href="DOE.html#cb206-5" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;tensile_strength&quot;</span> <span class="ot">=</span> tensile_strength,</span>
 <span id="cb206-6"><a href="DOE.html#cb206-6" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<p>A materials engineer working in the <b class="highlight">winter sports clothing industry</b> has been working in the development of a recyclable PET. Previous tests have shown promising results on tensile strength, one of the main characteristics required from the raw material. The trade offs between performance, costs and recyclability are not obvious to obtain due to lack of experience and specific know-how. Several one at a time comparisions between supplier deliveries have been done but now she wanted to go further and has established together with the raw material supplier factorial design with two factors presented in the output of the previous R chunk. Most of the time process recipes at suppliers are kept confidentiel so she only had access to a generic description of the factor levels:</p>
+<p>A: bi-axial orientation in production (yes/no)<br />
+B: nucleating agent level (high/low)</p>
+</div>
 <div id="coding_levels" class="section level3">
 <h3>Coding levels</h3>
 <p>Factors as +/-</p>
@@ -2141,18 +2136,23 @@ F-statistic: 24.8 on 3 and 8 DF,  p-value: 0.000209</code></pre>
 <p>We select standard error as argument for the error.bars argument.</p>
 <div class="sourceCode" id="cb231"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb231-1"><a href="DOE.html#cb231-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">1</span>), <span class="at">bty =</span> <span class="st">&quot;l&quot;</span>)</span>
 <span id="cb231-2"><a href="DOE.html#cb231-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plotMeans</span>(<span class="at">response =</span> pet_fct<span class="sc">$</span>tensile_strength,</span>
-<span id="cb231-3"><a href="DOE.html#cb231-3" aria-hidden="true" tabindex="-1"></a>          <span class="at">factor2 =</span> pet_fct<span class="sc">$</span>A,</span>
-<span id="cb231-4"><a href="DOE.html#cb231-4" aria-hidden="true" tabindex="-1"></a>          <span class="at">factor1 =</span> pet_fct<span class="sc">$</span>B,</span>
-<span id="cb231-5"><a href="DOE.html#cb231-5" aria-hidden="true" tabindex="-1"></a>          <span class="at">error.bars =</span> <span class="st">&quot;se&quot;</span>,</span>
-<span id="cb231-6"><a href="DOE.html#cb231-6" aria-hidden="true" tabindex="-1"></a>          <span class="at">xlab =</span> <span class="st">&quot;A - Reactant&quot;</span>,</span>
-<span id="cb231-7"><a href="DOE.html#cb231-7" aria-hidden="true" tabindex="-1"></a>          <span class="at">legend.lab =</span> <span class="st">&quot;B - Catalist</span><span class="sc">\n</span><span class="st">(error bars +/-se)&quot;</span>,</span>
-<span id="cb231-8"><a href="DOE.html#cb231-8" aria-hidden="true" tabindex="-1"></a>          <span class="at">ylab =</span> <span class="st">&quot;Tensile Strenght&quot;</span>,</span>
+<span id="cb231-3"><a href="DOE.html#cb231-3" aria-hidden="true" tabindex="-1"></a>          <span class="at">factor1 =</span> pet_fct<span class="sc">$</span>A,</span>
+<span id="cb231-4"><a href="DOE.html#cb231-4" aria-hidden="true" tabindex="-1"></a>          <span class="at">xlab =</span> <span class="st">&quot;A: bi-axial orientation in production (yes/no)&quot;</span>,</span>
+<span id="cb231-5"><a href="DOE.html#cb231-5" aria-hidden="true" tabindex="-1"></a>          <span class="at">factor2 =</span> pet_fct<span class="sc">$</span>B,</span>
+<span id="cb231-6"><a href="DOE.html#cb231-6" aria-hidden="true" tabindex="-1"></a>          <span class="at">legend.lab =</span> <span class="st">&quot;B: nucleating agent (high/low)&quot;</span>,</span>
+<span id="cb231-7"><a href="DOE.html#cb231-7" aria-hidden="true" tabindex="-1"></a>          <span class="at">ylab =</span> <span class="st">&quot;Tensile Strenght [Mpa]&quot;</span>,</span>
+<span id="cb231-8"><a href="DOE.html#cb231-8" aria-hidden="true" tabindex="-1"></a>          <span class="at">error.bars =</span> <span class="st">&quot;se&quot;</span>,</span>
 <span id="cb231-9"><a href="DOE.html#cb231-9" aria-hidden="true" tabindex="-1"></a>          <span class="at">col =</span> viridis<span class="sc">::</span><span class="fu">viridis</span>(<span class="dv">12</span>)[<span class="dv">4</span>],</span>
 <span id="cb231-10"><a href="DOE.html#cb231-10" aria-hidden="true" tabindex="-1"></a>          <span class="at">legend.pos =</span> <span class="st">&quot;bottomright&quot;</span>,</span>
 <span id="cb231-11"><a href="DOE.html#cb231-11" aria-hidden="true" tabindex="-1"></a>          <span class="at">main =</span> <span class="st">&quot;The PET clothing improvement plan&quot;</span>)</span></code></pre></div>
 <p><img src="9_twolevelDOEs_files/figure-html/unnamed-chunk-19-1.png" width="100%" /></p>
-<p>3 factors 2 levels</p>
-<p><strong>The lithium-ion battery charging time test</strong></p>
+<p>A: bi-axial orientation in production (yes/no)<br />
+B: nucleating agent level (high/low)</p>
+<div class="marginnote>
+
+<b class="highlight">Case study: lithium-ion battery charging time</b>
+
+</div>
 <p>A - temperature
 B - previous cycles (within warranty)
 C - voltage

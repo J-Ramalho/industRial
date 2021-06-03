@@ -303,7 +303,7 @@ formula_expansion(f2)
 [1] "A"   "B"   "C"   "A:B"
 ```
 
-The short code chunk before shows two formula expansion examples, the first one corresponding to our Juice DOE: in a design with factors coded A, B and C the sources of variation for the Anova table for three-factor fixed effects model are: A, B, C, AB, AC, BC, ABC. The second case corresponds to a situation where interactions with C would be discarded. This understanding is very important as more and more factors are added to models and the number of trials grows to unrealistic quantities. In such situations a preliminary work of selection of interactions allows to prepare a fractionned design. For now the doe is still contained at 108 trials so she can move ahead assessing the effect significance of the different factors using the anova.
+The short code chunk before shows two formula expansion examples, the first one corresponding to our Juice DOE: in a design with factors coded A, B and C the sources of variation for the Anova table for three-factor fixed effects model are: A, B, C, AB, AC, BC, ABC. The second case corresponds to a situation where interactions with C would be discarded. Understanding these syntax details is very important because as more and more factors are added to models, the number of trials grows to unrealistic quantities. In such situations a preliminary work consisting in the selection of specific interactions enables the creation a fractional design. For now the juice doe is still small with 108 trials so she can move ahead assessing the effect significance of the different factors using the anova.
 
 ### Anova with 3rd level interactions {#anova_three}
 

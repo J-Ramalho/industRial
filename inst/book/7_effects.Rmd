@@ -226,7 +226,7 @@ class(solarcell_formula)
 attributes(terms(solarcell_formula))$factors
 ```
 
-We can see that the expression has been extended. Although we have only given as input the product of the factors we can see that an interaction term `temperature:material` has been generated. We also see the contrasts matrix associated. There is a specific syntax to specify the formula terms using *,+ and other symbols. As always it is good to consult the function documentation with `?formula`.
+We can see that the expression has been extended. Although we have only given as input the product of the factors we can see that an interaction term `temperature:material` has been generated. We also see the contrasts matrix associated. There is a specific syntax to specify the formula terms using `*`,`+` and other symbols. As always it is good to consult the function documentation with `?formula`.
 
 In the solar cell manufacturing company mentioned before the R&D team is working a new research project with the objective of understanding the output in [kWh/yr equivalent] of a new solar cell material at different ambient temperatures. Their latest experiment is recorded in an R dataset with the name `solarcell_output`:
 

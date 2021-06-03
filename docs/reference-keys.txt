@@ -1,9 +1,0 @@
-tab:tbl-dial
-tab:tbl-perfume
-tab:code-juicesummary
-tab:tbl-tabletthickness
-tab:fig-ebikenarrow
-tab:unnamed-chunk-9
-tab:unnamed-chunk-13
-tab:unnamed-chunk-14
-tab:unnamed-chunk-15

@@ -872,7 +872,7 @@ F-statistic: 66.8 on 3 and 16 DF,  p-value: 2.88e-09</code></pre>
 <div class="sourceCode" id="cb118"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb118-1"><a href="DOE.html#cb118-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(car)</span>
 <span id="cb118-2"><a href="DOE.html#cb118-2" aria-hidden="true" tabindex="-1"></a><span class="fu">durbinWatsonTest</span>(ebike_lm_factor)</span></code></pre></div>
 <pre><code> lag Autocorrelation D-W Statistic p-value
-   1        -0.53433        2.9609   0.082
+   1        -0.53433        2.9609   0.098
  Alternative hypothesis: rho != 0</code></pre>
 <p>As already stated visual observations can most of the times be complemented with a statistical test. In this case we can apply the durbinWatson test from the <code>{car}</code> package (Car stands for Companion to Applied Regression)</p>
 <p>Although the output shows Autocorrelation of -0.53 we have to consider that the p value is slightly higher than 0.05 thus there is not enough significance to say that there is autocorrelation. The result is not a complete clear cut the lab supervisor remains alert for coming verifications.</p>
@@ -1622,7 +1622,7 @@ Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&
 <h2>General designs</h2>
 <p>General factorial designs require teams to put together a wealth of knowledge of which some has been already applied in previous case studies or is refered in the bibliography and glossary. This comprises things like root cause analysis, linear models and analysis of variance naturally all coherently articulated in a well though project with clear objectives. The building blocks discussed so far relate to a limited number of input factors and levels and exclusively with a single output variable. Model validation and interactions have been presented as these are needed in all cases and once all these are mastered it becomes possible to consider situations with many variables, many outputs and higher level interactions.
 These arrangements become extremely powerfull and allow to handle complex real life situations such as the design of a new system with dozens of features that relate with each other or the optimization of a manufacturing process where the amount of data generated is very large but the testing time and cost are very high. At this moment considerations of trial quantities optimization enter at play. Typically in a design of experiments the total number of trials is given by <span class="math inline">\(l^k\)</span> where <span class="math inline">\(l\)</span> is the number of levels and <span class="math inline">\(k\)</span> the number of input factors. In our case study a <em>run</em> represents a unique combination of the factors and a <em>replicate</em> an independent repetition of a run. This leads to the notion of <em>trials</em> corresponding to the multiplication of the number of runs by the number of replicates.</p>
-<p>As an example, in a design with 4 factors of 2 levels we have then <span class="math inline">\(2^4 = 16\)</span> runs and if each has 5 replicates there are <span class="math inline">\(16 \times 5 = 80\)</span> trials to be executed. If more factors with a different number of levels are added, the total number of trials is calculated by multiplying both groups: <span class="math inline">\(l_{1}^{k_{1}}\)</span> <span class="math inline">\(\times\)</span> <span class="math inline">\(l_{2}^{k_{2}}\)</span>. Continuing the previous example, if 3 additional factors with 4 levels each were added, all with 5 replicates, the total number of trials would be expressed as follows: <span class="math inline">\(2^{4} \times 4^{3} = 1024 \times 5 = 5120\)</span> trials, which is a very high number in most industrial cases and would require optimization techniques which will be discussed further.</p>
+<p>As an example, in a design with 4 factors of 2 levels we have then <span class="math inline">\(2^4 = 2 \times 2 \times 2 \times 2 = 16\)</span> runs and if each has 5 replicates there are <span class="math inline">\(16 \times 5 = 80\)</span> trials to be executed. If more factors with a different number of levels are added, the total number of trials is calculated by multiplying both groups: <span class="math inline">\(l_{1}^{k_{1}}\)</span> <span class="math inline">\(\times\)</span> <span class="math inline">\(l_{2}^{k_{2}}\)</span>. Continuing the previous example, if 3 additional factors with 4 levels each were added, all with 5 replicates, the total number of trials would be expressed as follows: <span class="math inline">\(2^{4} \times 4^{3} = 2 \times 2 \times 2 \times 2 \times 4 \times 4 \times 4 = 1024 \times 5 = 5120\)</span> trials, which is a very high number in most industrial cases and would require optimization techniques which will be discussed further.</p>
 <div id="fac.design" class="section level3">
 <h3>Factorial design</h3>
 <div class="marginnote">
@@ -1923,7 +1923,7 @@ Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&
 <h2>Two level designs</h2>
 <p>We may be armed with powerful tools to design and analyze experiments and even have strong knowledge in the topic we’re studying but real life in a laboratory or in a factory has many constraints and a DOE is always the reflection of them. The calculation of the number of trials presented in the previous case shows a very quick explosion of the volume of work and material consumption. Another aspect is that as knowledge progresses and findings are accumulated certain variables which present little influence in the outputs start to be discarded. This is a consequence of the sparcity of effects principle. Data and models constructed in several preliminary DOEs can be consolidated under certain conditions. So the design of a new DOE should take into account the design of the previous one and this regarding not only the variables but even the levels themselves. With all these practical considerations in mind it is possible and common to start with very large screening experiments with for instance 10 inputs and 10 outputs and end up with a narrow optimization experiment with 2 factors with 4 levels to select a fine operating window.</p>
 <p>A way to make screening experiments realistic is to limit the number of levels of the factors, the minimum being 2 to have a complete factorial design. Following the notation also presented in the previous case study these designs are called <span class="math inline">\(2^{k}\)</span> designs. Application of linear models and interpretation of anova is subject to the same assumptions as general cases discussed, these being the factors are fixed, the designs are completely randomized, the normality assumptions are satisfied. In particular as there are only 2 levels it is assumed that the response is approximately linear between the factor levels.</p>
-<p>The approach presented in the next Case Studies continuous to follow the same general steps used so far:</p>
+<p>In the next Case Studies we continue follow the same general steps:</p>
 <ul>
 <li>Identify factors</li>
 <li>Estimate factor effects</li>
@@ -1941,6 +1941,9 @@ Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&
 </div>
 <div id="factorial-design-2-levels" class="section level3">
 <h3>Factorial design 2 levels</h3>
+<p>A materials engineer working in the <b class="highlight">winter sports clothing industry</b> has been working in the development of a recyclable PET. Previous tests have shown promising results on tensile strength, one of the main characteristics required from the raw material. The trade offs between performance, costs and recyclability are not obvious to obtain due to lack of experience and specific know-how. Several one at a time comparisions between supplier deliveries have been done but now she wanted to go further and has established together with the raw material supplier factorial design with two factors presented in the output of the next R chunk. Most of the time process recipes at suppliers are kept confidentiel so she only had access to a generic description of the factor levels:</p>
+<p>A: bi-axial orientation in production (yes/no)<br />
+B: nucleating agent level (high/low)</p>
 <div class="sourceCode" id="cb204"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb204-1"><a href="DOE.html#cb204-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(DoE.base)</span></code></pre></div>
 <div class="sourceCode" id="cb205"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb205-1"><a href="DOE.html#cb205-1" aria-hidden="true" tabindex="-1"></a>pet_doe <span class="ot">&lt;-</span> <span class="fu">fac.design</span>(</span>
 <span id="cb205-2"><a href="DOE.html#cb205-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">randomize =</span> <span class="cn">FALSE</span>,</span>
@@ -1953,10 +1956,59 @@ Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&
 <span id="cb206-3"><a href="DOE.html#cb206-3" aria-hidden="true" tabindex="-1"></a>pet_doe <span class="ot">&lt;-</span> <span class="fu">bind_cols</span>(</span>
 <span id="cb206-4"><a href="DOE.html#cb206-4" aria-hidden="true" tabindex="-1"></a>  pet_doe,</span>
 <span id="cb206-5"><a href="DOE.html#cb206-5" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;tensile_strength&quot;</span> <span class="ot">=</span> tensile_strength,</span>
-<span id="cb206-6"><a href="DOE.html#cb206-6" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
-<p>A materials engineer working in the <b class="highlight">winter sports clothing industry</b> has been working in the development of a recyclable PET. Previous tests have shown promising results on tensile strength, one of the main characteristics required from the raw material. The trade offs between performance, costs and recyclability are not obvious to obtain due to lack of experience and specific know-how. Several one at a time comparisions between supplier deliveries have been done but now she wanted to go further and has established together with the raw material supplier factorial design with two factors presented in the output of the previous R chunk. Most of the time process recipes at suppliers are kept confidentiel so she only had access to a generic description of the factor levels:</p>
-<p>A: bi-axial orientation in production (yes/no)<br />
-B: nucleating agent level (high/low)</p>
+<span id="cb206-6"><a href="DOE.html#cb206-6" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb206-7"><a href="DOE.html#cb206-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb206-8"><a href="DOE.html#cb206-8" aria-hidden="true" tabindex="-1"></a>pet_doe <span class="sc">%&gt;%</span></span>
+<span id="cb206-9"><a href="DOE.html#cb206-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb206-10"><a href="DOE.html#cb206-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable</span>()</span></code></pre></div>
+<table>
+<thead>
+<tr class="header">
+<th align="left">A</th>
+<th align="left">B</th>
+<th align="left">replicate</th>
+<th align="right">tensile_strength</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">-</td>
+<td align="left">-</td>
+<td align="left">I</td>
+<td align="right">64.4</td>
+</tr>
+<tr class="even">
+<td align="left">+</td>
+<td align="left">-</td>
+<td align="left">I</td>
+<td align="right">82.8</td>
+</tr>
+<tr class="odd">
+<td align="left">-</td>
+<td align="left">+</td>
+<td align="left">I</td>
+<td align="right">41.4</td>
+</tr>
+<tr class="even">
+<td align="left">+</td>
+<td align="left">+</td>
+<td align="left">I</td>
+<td align="right">71.3</td>
+</tr>
+<tr class="odd">
+<td align="left">-</td>
+<td align="left">-</td>
+<td align="left">II</td>
+<td align="right">57.5</td>
+</tr>
+<tr class="even">
+<td align="left">+</td>
+<td align="left">-</td>
+<td align="left">II</td>
+<td align="right">73.6</td>
+</tr>
+</tbody>
+</table>
 </div>
 <div id="coding_levels" class="section level3">
 <h3>Coding levels</h3>

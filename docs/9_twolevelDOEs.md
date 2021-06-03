@@ -7,7 +7,7 @@ We may be armed with powerful tools to design and analyze experiments and even h
 
 A way to make screening experiments realistic is to limit the number of levels of the factors, the minimum being 2 to have a complete factorial design. Following the notation also presented in the previous case study these designs are called $2^{k}$ designs. Application of linear models and interpretation of anova is subject to the same assumptions as general cases discussed, these being the factors are fixed, the designs are completely randomized, the normality assumptions are satisfied. In particular as there are only 2 levels it is assumed that the response is approximately linear between the factor levels.
 
-The approach presented in the next Case Studies continuous to follow the same general steps used so far:
+In the next Case Studies we continue follow the same general steps:
 
 * Identify factors
 * Estimate factor effects
@@ -28,6 +28,11 @@ In this first Case Study dedicated to $2^k$ designs we're going to start by expl
 </div>
 
 ### Factorial design 2 levels
+
+A materials engineer working in the <b class="highlight">winter sports clothing industry</b> has been working in the development of a recyclable PET. Previous tests have shown promising results on tensile strength, one of the main characteristics required from the raw material. The trade offs between performance, costs and recyclability are not obvious to obtain due to lack of experience and specific know-how. Several one at a time comparisions between supplier deliveries have been done but now she wanted to go further and has established together with the raw material supplier factorial design with two factors presented in the output of the next R chunk. Most of the time process recipes at suppliers are kept confidentiel so she only had access to a generic description of the factor levels:
+
+A: bi-axial orientation in production (yes/no)   
+B: nucleating agent level (high/low)
 
 
 ```r
@@ -52,12 +57,22 @@ pet_doe <- bind_cols(
   pet_doe,
   "tensile_strength" = tensile_strength,
 )
+
+pet_doe %>%
+  head() %>%
+  kable()
 ```
 
-A materials engineer working in the <b class="highlight">winter sports clothing industry</b> has been working in the development of a recyclable PET. Previous tests have shown promising results on tensile strength, one of the main characteristics required from the raw material. The trade offs between performance, costs and recyclability are not obvious to obtain due to lack of experience and specific know-how. Several one at a time comparisions between supplier deliveries have been done but now she wanted to go further and has established together with the raw material supplier factorial design with two factors presented in the output of the previous R chunk. Most of the time process recipes at suppliers are kept confidentiel so she only had access to a generic description of the factor levels:
 
-A: bi-axial orientation in production (yes/no)   
-B: nucleating agent level (high/low)
+
+|A  |B  |replicate | tensile_strength|
+|:--|:--|:---------|----------------:|
+|-  |-  |I         |             64.4|
+|+  |-  |I         |             82.8|
+|-  |+  |I         |             41.4|
+|+  |+  |I         |             71.3|
+|-  |-  |II        |             57.5|
+|+  |-  |II        |             73.6|
 
 ### Coding levels {#coding_levels}
 

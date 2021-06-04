@@ -3,11 +3,11 @@
 
 ## General designs
 
-General factorial designs require teams to put together a wealth of knowledge of which some has been already applied in previous case studies or is refered in the bibliography and glossary. This comprises things like root cause analysis, linear models and analysis of variance naturally all coherently articulated in a well though project with clear objectives. The building blocks discussed so far relate to a limited number of input factors and levels and exclusively with a single output variable. Model validation and interactions have been presented as these are needed in all cases and once all these are mastered it becomes possible to consider situations with many variables, many outputs and higher level interactions. 
-These arrangements become extremely powerfull and allow to handle complex real life situations such as the design of a new system with dozens of features that relate with each other or the optimization of a manufacturing process where the amount of data generated is very large but the testing time and cost are very high. At this moment considerations of trial quantities optimization enter at play. Typically in a design of experiments the total number of trials is given by $l^k$ where $l$ is the number of levels and $k$ the number of input factors. In our case study a *run* represents a unique combination of the factors and a *replicate* an independent repetition of a run. This leads to the notion of *trials* corresponding to the multiplication of the number of runs by the number of replicates. 
+General factorial designs require teams to put together a wealth of knowledge of which some has been already applied in previous case studies or is referred in the bibliography and glossary. This comprises things like root cause analysis, linear models and analysis of variance all coherently articulated in a well though project with clear objectives. The building blocks discussed so far relate to a limited number of input factors and levels and exclusively a single output variable. Model validation and interactions are needed tools in all cases and once these are all mastered it becomes possible to consider situations with many variables, many outputs and higher level interactions. These arrangements become extremely powerful and allow to handle complex real life situations such as the design of a new system with dozens of features that relate with each other or the optimization of a manufacturing process where the amount of data generated is very large but the testing time and cost are very high. At this moment considerations of trial quantities optimization enter at play.
 
-As an example, in a design with 4 factors of 2 levels we have then $2^4 = 2 \times 2 \times 2 \times 2 = 16$ runs and if each has 5 replicates there are $16 \times 5 = 80$ trials to be executed. If more factors with a different number of levels are added, the total number of trials is calculated by multiplying both groups: $l_{1}^{k_{1}}$  $\times$ $l_{2}^{k_{2}}$. Continuing the previous example, if 3 additional factors with 4 levels each were added, all with 5 replicates, the total number of trials would be expressed as follows: $2^{4} \times 4^{3} = 2 \times 2 \times 2 \times 2 \times 4 \times 4 \times 4 = 1024 \times 5 = 5120$ trials, which is a very high number in most industrial cases and would require optimization techniques which will be discussed further.
+In our case studies a *run* represents a unique combination of the factors and a *replicate* an independent repetition of a run. This leads to the notion of *trials* corresponding to the multiplication of the number of runs by the number of replicates. For small designs it is possible to calculate the number of trials by simply multiplying the number of levels of each factor. If we have for instance 1 factor with 3 levels and 2 factors with 4 levels then we have $3 \times 4 \times 4 = 48$ runs which corresponds to the number of distinct combinations. Then we have to multiply by the number of replicates per run to get the number of trials, e.g $48 \times 3 = 144$ trials.
 
+For a very high number of factors and levels where this way of calculating may not be practical the total number of trials is given by $l^k$ where $l$ is the number of levels and $k$ the number of input factors. With this approach a design with 4 factors of 2 levels gives $2^4 = 2 \times 2 \times 2 \times 2 = 16$ runs and if each has 5 replicates there are $16 \times 5 = 80$ trials to be executed. If more factors with a different number of levels are added, the total number of trials is calculated by multiplying both groups: $l_{1}^{k_{1}}$  $\times$ $l_{2}^{k_{2}}$. Continuing the previous example, if 3 additional factors with 4 levels each were added, all with 5 replicates, the total number of trials would be expressed as follows: $2^{4} \times 4^{3} \times 5 = 5120$ trials, which is a very high number in most industrial cases and would require optimization techniques which will be discussed in later units.
 
 ### Factorial design {#fac.design}
 
@@ -288,7 +288,7 @@ f2 <- Y ~ A * B + C
 
 
 ```r
-formula_expansion(f1)
+expand_formula(f1)
 ```
 
 ```
@@ -296,7 +296,7 @@ formula_expansion(f1)
 ```
 
 ```r
-formula_expansion(f2)
+expand_formula(f2)
 ```
 
 ```

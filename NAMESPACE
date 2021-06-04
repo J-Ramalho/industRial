@@ -3,7 +3,7 @@
 export(chart_Cpk)
 export(chart_I)
 export(chart_IMR)
-export(formula_expansion)
+export(expand_formula)
 export(off_spec)
 export(process_Cpk)
 export(process_stats)

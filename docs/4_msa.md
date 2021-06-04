@@ -76,8 +76,8 @@ skim(juice_drymatter$bias) %>%
 
 **Variable type: numeric**
 
-|skim_variable | n_missing| complete_rate| mean|   sd|    p0|  p25|   p50|   p75|  p100|hist                                     |
-|:-------------|---------:|-------------:|----:|----:|-----:|----:|-----:|-----:|-----:|:----------------------------------------|
+|skim_variable | n_missing| complete_rate| mean|   sd|    p0|  p25|   p50|   p75|  p100|hist  |
+|:-------------|---------:|-------------:|----:|----:|-----:|----:|-----:|-----:|-----:|:-----|
 |data          |         0|             1| -0.3| 0.14| -0.63| -0.4| -0.29| -0.19| -0.07|▂▅▆▇▇ |
 
 Such results are not encouraging because a non regular bias along the range may require specific correction for different product which may be not practical and prone to error. Often this requires to dig into detail to understand the causes of the bias and determine if they are related with the physical phenomena and if there are clear controllable causes. Ultimately this could result is narrowing the measurement range and validating a specific device and method for a specific product specification target. For the Quality Assurance Manager it is too early to draw conclusions and he establishes a more detailed plot with `{ggplot2}` to better visualize the data.

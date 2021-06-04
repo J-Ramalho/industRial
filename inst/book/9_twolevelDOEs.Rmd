@@ -78,122 +78,96 @@ pet_doe %>%
   kable()
 ```
 
+Now she's ready to move ahead by coding properly the factors and input them in the linear model. She's not so used to DOEs with coded factors so she tries three different approaches: a first one with the factors labeled plus/minus, a second one with the factors labeled +1/-1 and a third one with the factors as +1/-1 but numeric. She ends up choosing this last option which seems more natural for forecasting.
+
 ### Coding levels {#coding_levels}
 
-Factors as +/-
-
-In this first model we're using a design where the inputs levels have been defined as plus and minus, sometimes also called high and low. The actual naming is not important, what is critical is to ensure that those input parameters are coded as factors. 
+#### Factors as +/-
 
 ```{r}
-pet_fct <- pet_doe %>%
-  mutate(across(c(A,B), as_factor))
+pet_plusminus <- pet_doe
+pet_plusminus$A <- relevel(pet_plusminus$A, ref = "+")
+pet_plusminus$B <- relevel(pet_plusminus$B, ref = "+")
 ```
 
-Another detail is to put the higher level as the reference otherwise we will get inverted signs in the lm output:
+For the first model the materials engineer made a copy of the original dataset and left the input variables as they were generated which is as factors and with the labels "plus" and "minus". After some playing with data she found necessary to put the "plus" as the reference otherwise she gets inverted signs in the lm output. 
+
+Another detail she needed to take care was the setup of the contrasts. As the design is ortogonal and she wanted the contrasts to add up to zero she had to precise by assigning `contr.sum` to the factor. First she checked the original definition of the contrasts:
 
 ```{r}
-pet_fct$A <- relevel(pet_fct$A, ref="+")
-pet_fct$B <- relevel(pet_fct$B, ref="+")
+contrasts(pet_plusminus$A)
 ```
 
-
-and one final step is need which is the setup of the contrasts. As our design is ortogonal and we want the contrasts to add up to zero we have to indicate that on the factor so that the coefficients of the linear model are correctly calculated. The current definition of the contrasts is:
+The original/default setting is `contr.treatm` as seen in the corresponding unit and she changed this with:
 
 ```{r}
-contrasts(pet_fct$A)
+contrasts(pet_plusminus$A) <- "contr.sum"
+contrasts(pet_plusminus$B) <- "contr.sum"
+contrasts(pet_plusminus$A)
+contrasts(pet_plusminus$B)
 ```
 
-So we change this with:
+Having confirmed that the sum of the contrast is zero she establishes the linear model and makes a prediction to check the output:
 
 ```{r}
-contrasts(pet_fct$A) <- "contr.sum"
-contrasts(pet_fct$B) <- "contr.sum"
-contrasts(pet_fct$A)
-contrasts(pet_fct$A)
-```
-
-Now we can run our linear model:
-
-```{r}
-pet_ctr_lm <- lm(
+pet_plusminus_lm <- lm(
   formula = tensile_strength ~ A * B, 
-  data = pet_fct
+  data = pet_plusminus
   )
-summary(pet_ctr_lm)
+summary(pet_plusminus_lm)
+predict(pet_plusminus_lm, newdata = list(A = "+", B = "+"))
 ```
 
-We can observe in the output that the p value of the effects is the same in the lm and in the the aov functions. This confirms that the contrasts have been correctly specified with contr.sum
-
-Note that we've had to adjust the contrasts in the lm function with contr.sum which applies to cases where the sum of the contrasts is zero (the R default is contr.treatment which applies to cases where the levels are coded as 0 and 1).
-
-and now going to apply a prediction:
-
-```{r}
-predict(pet_ctr_lm, newdata = list(A = "+", B = "+"))
-```
-
-Factors as +/- 1
-
-In this example we convert the levels to factors still using the +/-1 notation. This will also be helpfull to apply what are called the Yates tables.
+#### Factors as +/- 1
 
 ```{r}
 coded <- function(x) { ifelse(x == x[1], -1, 1) }
+
+pet_doe <- pet_doe %>% mutate(cA = coded(A), cB = coded(B))
+pet_plusminus1 <- pet_doe %>% mutate(across(c(cA, cB), as_factor))
+pet_plusminus1$cA <- relevel(pet_plusminus1$cA, ref = "1")
+pet_plusminus1$cB <- relevel(pet_plusminus1$cB, ref = "1")
+
+pet_plusminus1 %>%
+  head(3) %>%
+  kable(align = "c")
 ```
 
-We again convert them to factors and put the upper level as the reference. Regarding the contrasts we show a simpler and more direct approach now by defining them directly in the lm() function.
+The second approach she tries is to convert the levels to +1/-1 still leaving them coded as factors. This notation is easier for her as it corresponds to a common way she sees in the Yates tables. Again she had to relevel the factors to get the max as reference in order to get the same coefficients on the linear model. Regarding the contrasts she goes for the simpler and more direct approach now by defining them directly in the lm() function.
 
 ```{r}
-pet_fct <- pet_fct %>% mutate(cA = coded(A), cB = coded(B))
-pet_fct2 <- pet_fct %>% mutate(across(c(cA, cB), as_factor))
-pet_fct2$cA <- relevel(pet_fct2$cA, ref = "1")
-pet_fct2$cB <- relevel(pet_fct2$cB, ref = "1")
-
-pet_ctr2_lm <- lm(
+pet_plusminus1_lm <- lm(
   formula = tensile_strength ~ cA * cB, 
-  data = pet_fct2,
+  data = pet_plusminus1,
   contrasts = list(cA = "contr.sum", cB = "contr.sum")
   )
-summary(pet_ctr2_lm)
+summary(pet_plusminus1_lm)
+predict(pet_plusminus1_lm, newdata = list(cA = "1", cB = "1"))
 ```
 
-Note that a coefficient in a regression equation is the change in the response when the corresponding variable changes by +1. Special attention to the + and - needs to be taken with the R output.
-
-As A or B changes from its low level to its high level, the coded variable changes by 1 − (−1) = +2, so the change in the response is twice the regression coefficient.
+Note that a coefficient in a regression equation is the change in the response when the corresponding variable changes by +1. Special attention to the + and - needs to be taken with the R output. As A or B changes from its high level to its low level, the coded variable changes by 1 − (−1) = +2, so the change in the response from the min to the max is twice the regression coefficient.
 
 So the effects and interaction(s) from their minumum to their maximum correspond to  twice the values in the “Estimate” column. These regression coefficients are often called effects and interactions, even though they differ from the definitions used in the designs themeselves.
 
-Checking now with coded factors:
+#### Factors as +/- 1 numeric
 
 ```{r}
-predict(pet_ctr2_lm, newdata = list(cA = "1", cB = "1"))
-```
-
-Factors as +/- 1 numeric
-
-In this example we're going to code the levels with +1/-1 but we're going use the numeric coding:
-
-```{r}
-pet_num <- pet_fct %>% mutate(cA = coded(A), cB = coded(B))
+pet_num <- pet_doe %>% mutate(cA = coded(A), cB = coded(B))
 pet_num_lm <- lm(
   formula = tensile_strength ~ cA * cB, 
   data = pet_num
   )
 summary(pet_num_lm)
-```
-
-In this case we did not define any contrasts. Looking into the lm We can see we've obtained exactly the same outputs.
-
-```{r}
 predict(pet_num_lm, newdata = list(cA = 1, cB = 1))
 ```
 
-As the inputs are coded as numeric this behaves just like the first simple linear model we've seen in the Case Study on One Factor with Multiple levels. In particular when we feed the predictions function with numeric values.
+Finaly the materials engineer coded the levels with +1/-1 but left the variables with type numeric. In this case she did not define any contrasts. Looking into the lm and prediction she confirms having obtained exactly the same outputs.
 
-This is very intuitive as it corresponds to the original units of the experiments (also called natural or engineering units). On the other hand coding the design variables provides another advange: generally, the engineering units are not directly comparable while coded variables are very effective for determining the relative size of factor effects.
+As the inputs are coded as numeric this behaves just like the predictions with the first linear model studied in our book. Note that we feed the predictions function with numeric values. This is very intuitive as it corresponds to the original units of the experiments (also called natural or engineering units). On the other hand coding the design variables provides another advange: generally, the engineering units are not directly comparable while coded variables are very effective for determining the relative size of factor effects.
 
-We can see that these three ways of coding the variable levels lead to equivalent results both in lm and prediction. Our preference goes to use numeric values as it is more intuitive and allows for easier prediction between the fixed levels. 
+Coding the design factors has the benefit of enabling a direct comparison of the effect sizes and we can see that these three ways of coding the variable levels lead to equivalent results both in lm and prediction. Her preference goes to using numeric values as it is more intuitive and allows for easier prediction between the fixed levels. 
 
-And now in order to better understand the coding of factors in this unit, we're going to establish a simple regression plot of our data:
+In order to better visualize the coding of factors she established a simple regression plot of the data. Note that she had to extract the data from the S3 doe object, which we've done with using unclass() and then as_tibble()
 
 ```{r}
 pet_num %>% 
@@ -208,12 +182,17 @@ pet_num %>%
   geom_point(aes(x = level, y = tensile_strength)) +
   geom_smooth(aes(x = level, y = tensile_strength), 
               method = "lm", se = FALSE, fullrange = TRUE) +
-  facet_wrap(vars(variable))
+  coord_cartesian(xlim = c(-1.5, 1.5), ylim = c(30, 90)) +
+  scale_y_continuous(n.breaks = 10) +
+  facet_wrap(vars(variable)) +
+  labs(
+    title = "PET tensile strenght improvement DOE",
+    y = "Tensile strenght [MPa]",
+    x = "Coded levels"
+  )
 ```
 
-Note that we had to extract the data from the S3 doe object, which we've done with using unclass() and then as_tibble()
-
-The intercept passes at 27.5 as seen on the lm summary. We're going now to put the B factor at its maximum and replot:
+From the `lm()` summary she remembers that the intercept passes at 27.5 and she replorts now to putting the B factor at its maximum:
 
 ```{r}
 pet_num %>% 
@@ -229,29 +208,30 @@ pet_num %>%
   geom_point(aes(x = level, y = tensile_strength)) +
   geom_smooth(aes(x = level, y = tensile_strength), 
               method = "lm", se = FALSE, fullrange = TRUE) +
-  coord_cartesian(xlim = c(-2, 2)) +
+  coord_cartesian(xlim = c(-1.5, 1.5), ylim = c(30, 90)) +
   scale_y_continuous(n.breaks = 10) +
-  facet_wrap(vars(variable))
+  facet_wrap(vars(variable)) +
+  labs(
+    title = "PET tensile strenght improvement DOE",
+    y = "Tensile strenght [MPa]",
+    x = "Coded levels"
+  )
 ```
 
-As seen on the plot the output of our prediction is 69 corresponding the high level of A when B is at 1. To be precise we need to multiply all the coefficients by the levels of the factors as : 63.250 + 9.583x(+1) - 5.750x(+1) + 1.917
+The plot confirms that the output of the prediction is 69 corresponding to the max level of A when B is also at the max. Mathematically she confirms this result by multiplying all the linear regression coefficients by the levels of the factors as : $63.250 + 9.583 \times (+1) - 5.750 \times (+1) + 1.917 = 69$
 
 ### Interaction plots with SE {#plotMeans}
-
-Here we're making a step further in the representation of interaction plots, we're adding error bars to the means. There are many ways to do this and we're providing a simple approach with the function plotMeans from the package RcmdrMisc.
 
 ```{r}
 library(RcmdrMisc)
 ```
 
-We select standard error as argument for the error.bars argument.
-
 ```{r}
 par(mfrow = c(1,1), bty = "l")
-plotMeans(response = pet_fct$tensile_strength,
-          factor1 = pet_fct$A,
+plotMeans(response = pet_doe$tensile_strength,
+          factor1 = pet_doe$A,
           xlab = "A: bi-axial orientation in production (yes/no)",
-          factor2 = pet_fct$B,
+          factor2 = pet_doe$B,
           legend.lab = "B: nucleating agent (high/low)",
           ylab = "Tensile Strenght [Mpa]",
           error.bars = "se",
@@ -260,25 +240,24 @@ plotMeans(response = pet_fct$tensile_strength,
           main = "The PET clothing improvement plan")
 ```
 
-A: bi-axial orientation in production (yes/no)   
-B: nucleating agent level (high/low)
+Now she want to get quickly an interaction plot but including error bars. Unfortunately the base R `interaction.plot()` doesn't provide it and the `ggplot2()` made it to long. With a quick check on Stackoverflow she discovered this simple approach with the function `plotMeans()` from the package {RcmdrMisc} and she gets the plot dine with standard error as argument for the `error.bars` argument.
+
+As expected she confirms that both treatments provide an visible effect on Tensile strenght and that there is no interaction between them.
+
+### Adjusted R-squared {#adj_Rsquare}
 
 <div class="marginnote>
 
 <b class="highlight">Case study: lithium-ion battery charging time</b>
 
-</div>
+The global transition to full electrical car is well underway. The challenge of authonomy has been brought to acceptable levels with the deployment of charging stations but engineering teams still face complex problems such as the charging time. At a pioneering manufacturer another DOE is underway to get it optimized.
 
-A - temperature 
-B - previous cycles (within warranty)
-C - voltage
-response - charging time [h]
-
-```{r}
-battery_charging %>%
-  head() %>%
-  kable()
+```{r echo=FALSE}
+knitr::include_graphics("img/electrical_car_bw.png")
+# image is from nissan leaf electrical car platform
 ```
+
+</div>
 
 ```{r}
 battery_lm <- lm(
@@ -288,6 +267,17 @@ battery_lm <- lm(
 summary(battery_lm)
 ```
 
+The R-squared was introduced in the linear models unit as a way to assess the quality of the model fit. A potential problem with this statistic is that it always increases as factors are added to the model, even if these factors are not significant. This can be overcome by using the adjusted R-squared which is obtained by dividing the Sums of Squares by the degrees of freedom, and is adjusted for the size of the model, that is the number of factors. Both indicators are part of the `summary()` output of the `lm()` function as we could just see in the previous chunk.
+
+A consulting company specialized in data science is supporting a global manufacturer of electrical car batteries to further optimize a <b class="highlight">lithium-ion battery charging time</b>.
+
+A - temperature (-1 = -10, +1 = 40)
+B - previous cycles (within warranty) (-1 = 10'000, +1 = 0)
+C - voltage (-1 = )
+D - 
+
+response - charging time [h]
+
 ```{r}
 battery_aov <- aov(battery_lm)
 summary(battery_aov)
@@ -295,9 +285,6 @@ summary(battery_aov)
 
 The main effects of Gap and Power are highly significant (both have very small P-values). The AC interaction is also highly significant; thus, there is a strong interaction between Gap and Power.
 
-### Adjusted R-squared {#adj_Rsquare}
-
-The ordinary R^2 is 0.9661 and it measures the proportion of total variability explained by the model. A potential problem with this statistic is that it always increases as factors are added to the model, even if these factors are not significant. The adjusted R^2 is obtained by dividing the Sums of Squares by the degrees of freedom, and is adjusted for the size of the model, that is the number of factors.
 
 ```{r}
 battery_reduced_lm <- lm(
@@ -369,18 +356,21 @@ We can visualize this outcome as follows:
 battery_charging %>%
   filter(C == 1) %>%
   ggplot() +
-  geom_point(aes(x = A, y = charging_time, color = as_factor(C))) +
-  geom_smooth(aes(x = A, y = charging_time), method = "lm") +
+  # geom_point(aes(x = A, y = charging_time, color = as_factor(C))) +
+  geom_smooth(aes(x = A, y = charging_time), method = "lm", se = FALSE) +
   geom_point(aes(x = cA, y = pA)) +
   scale_y_continuous(n.breaks = 10) + 
   scale_color_discrete(guide = FALSE) +
   theme(plot.title = ggtext::element_markdown()) +
+  coord_cartesian(xlim = c(-1, 1)) +
+  scale_x_continuous(n.breaks = 5) +
+  scale_y_continuous(n.breaks = 10) +
   labs(
-    title = "3^k factorial design",
+    title = "Lithium-ion battery charging DOE",
+    y = "Charging time [h]",
+    x = "A: temperature [°C]",
     subtitle = "Prediction with reduced model")
 ```
-
-We are introducing here response surface plots which is yet another way to visualize the experiment outputs as a function of the inputs. We're doing this with the persp() function from the {rsm} package which provides an extremely fast rendering, easy parametrization and a readable output. To be noted that this function is an extension of the base R persp() consisting from the R point of view in an S3 method for the lm class. This allows to simply provide directly the lm object to the function to obtain the response surface.
 
 ### Perspective plot {#persp}
 
@@ -395,10 +385,13 @@ persp(
   bounds = list(A = c(-1,1), C = c(-1,1)),
   col = viridis(12)[8],
   theta = -40, phi = 20, r = 5,
-  zlab = "Charging Time",
-  main = "Lithium-ion battery\ncharging time test"
+  zlab = "Charging Time [h]",
+  xlabs = c("A: temperature", "B: previous cycles"),
+  main = "Lithium-ion battery\ncharging time DOE"
 )
 ```
+
+We are introducing here response surface plots which is yet another way to visualize the experiment outputs as a function of the inputs. We're doing this with the persp() function from the {rsm} package which provides an extremely fast rendering, easy parametrization and a readable output. To be noted that this function is an extension of the base R persp() consisting from the R point of view in an S3 method for the lm class. This allows to simply provide directly the lm object to the function to obtain the response surface.
 
 Due to the interaction between factors A and C the surface is slightly bent. This is exactly what we observe in the interactions plots of which the one below corresponds to slicing the surface at the min and the max of Power:
 
@@ -427,14 +420,6 @@ m factors 2 levels
 Possible approaches:
 - graphical methods–normal and half-normal probability plots; no formal tests;
 - assume some high-order interactions are zero, and fit a model that excludes them; degrees of freedom go into error, so testing is possible (not recommended)
-
-<div class="marginnote">
-
-```{r echo=FALSE}
-knitr::include_graphics("img/electrical_car_bw.png")
-```
-
-</div>
 
 ```{r}
 battery_charging %>%

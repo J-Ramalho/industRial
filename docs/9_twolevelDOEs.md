@@ -7,7 +7,7 @@ We may be armed with powerful tools to design and analyze experiments and even h
 
 A way to make screening experiments realistic is to limit the number of levels of the factors, the minimum being 2 to have a complete factorial design. Following the notation also presented in the previous case study these designs are called $2^{k}$ designs. Application of linear models and interpretation of anova is subject to the same assumptions as general cases discussed, these being the factors are fixed, the designs are completely randomized, the normality assumptions are satisfied. In particular as there are only 2 levels it is assumed that the response is approximately linear between the factor levels.
 
-In the next Case Studies we continue follow the same general steps:
+In the next case studies we continue follow the same general steps:
 
 * Identify factors
 * Estimate factor effects
@@ -25,11 +25,15 @@ In this first Case Study dedicated to $2^k$ designs we're going to start by expl
 
 <b class="highlight">Case study: PET clothing improvement plan</b>
 
+Consumer demand for recycled materials increases requiring clothing manufacturers to develop new products made with innovative and often more expensive raw materials while keeping historical quality levels.
+
+<img src="img/PET_lamination_bw.jpg" width="100%" />
+
 </div>
 
 ### Factorial design 2 levels
 
-A materials engineer working in the <b class="highlight">winter sports clothing industry</b> has been working in the development of a recyclable PET. Previous tests have shown promising results on tensile strength, one of the main characteristics required from the raw material. The trade offs between performance, costs and recyclability are not obvious to obtain due to lack of experience and specific know-how. Several one at a time comparisions between supplier deliveries have been done but now she wanted to go further and has established together with the raw material supplier factorial design with two factors presented in the output of the next R chunk. Most of the time process recipes at suppliers are kept confidentiel so she only had access to a generic description of the factor levels:
+A materials engineer working in the <b class="highlight">winter sports clothing industry</b> has been working in the development of a recyclable PET. Previous tests have shown promising results on tensile strength, one of the main characteristics required from the raw material. The trade offs between performance, costs and recyclability are not obvious to obtain due to lack of experience and specific know-how. Several one at a time comparisions between supplier deliveries have been done but now she wanted to go further and has established together with the raw material supplier factorial design with two factors presented in the output of the next R chunk. Most of the time process recipes at raw material producer need to are kept confidential for competitive reasons. This makes she only had access to a generic description of the factor levels:
 
 A: bi-axial orientation in production (yes/no)   
 B: nucleating agent level (high/low)
@@ -43,15 +47,23 @@ library(DoE.base)
 ```r
 pet_doe <- fac.design(
   randomize = FALSE,
-  factor.names=list(A=c("-","+"), 
-                    B=c("-","+"),
-                    replicate = c("I", "II", "III"))
+  factor.names = list(
+    A = c("-", "+"), 
+    B = c("-", "+"),
+    replicate = c("I", "II", "III")
+    )
   )
 ```
 
+After a quick check the plan is confirmed to be ok, she sees all combinations of factors at with 3 replicates. She's not so confortable with such a small number of replicates but as there is no protyping tool in the producers plant they used directly an industrial laminator. Fitting trials in production time is most of the time a big challenge not to mention the cost and the waste in materials. She shares the plan in a meeting and a few weeks later receives the numbers from the producers laboratory in a short e-mail with a list of numbers with no units 64.4, 82.8, 41.4...   
+
+Getting back to her contact at the producer she gets a confirmation these are the PET tensile strength values for each of the trials in the same order as the trial plan was provided. She regrets not having given a number to each trial and asked to have a clear reference of each measured value. She again compromises and colates the values to the original tibble in R:
+
 
 ```r
-tensile_strength <- c(64.4,82.8,41.4,71.3,57.5,73.6,43.7,69.0,62.1,73.6,52.9,66.7)
+tensile_strength <- c(
+  64.4,82.8,41.4,71.3,57.5,73.6,43.7,69.0,62.1,73.6,52.9,66.7
+  )
 
 pet_doe <- bind_cols(
   pet_doe,
@@ -74,32 +86,26 @@ pet_doe %>%
 |-  |-  |II        |             57.5|
 |+  |-  |II        |             73.6|
 
+Now she's ready to move ahead by coding properly the factors and input them in the linear model. She's not so used to DOEs with coded factors so she tries three different approaches: a first one with the factors labeled plus/minus, a second one with the factors labeled +1/-1 and a third one with the factors as +1/-1 but numeric. She ends up choosing this last option which seems more natural for forecasting.
+
 ### Coding levels {#coding_levels}
 
-Factors as +/-
-
-In this first model we're using a design where the inputs levels have been defined as plus and minus, sometimes also called high and low. The actual naming is not important, what is critical is to ensure that those input parameters are coded as factors. 
+#### Factors as +/-
 
 
 ```r
-pet_fct <- pet_doe %>%
-  mutate(across(c(A,B), as_factor))
+pet_plusminus <- pet_doe
+pet_plusminus$A <- relevel(pet_plusminus$A, ref = "+")
+pet_plusminus$B <- relevel(pet_plusminus$B, ref = "+")
 ```
 
-Another detail is to put the higher level as the reference otherwise we will get inverted signs in the lm output:
+For the first model the materials engineer made a copy of the original dataset and left the input variables as they were generated which is as factors and with the labels "plus" and "minus". After some playing with data she found necessary to put the "plus" as the reference otherwise she gets inverted signs in the lm output. 
+
+Another detail she needed to take care was the setup of the contrasts. As the design is ortogonal and she wanted the contrasts to add up to zero she had to precise by assigning `contr.sum` to the factor. First she checked the original definition of the contrasts:
 
 
 ```r
-pet_fct$A <- relevel(pet_fct$A, ref="+")
-pet_fct$B <- relevel(pet_fct$B, ref="+")
-```
-
-
-and one final step is need which is the setup of the contrasts. As our design is ortogonal and we want the contrasts to add up to zero we have to indicate that on the factor so that the coefficients of the linear model are correctly calculated. The current definition of the contrasts is:
-
-
-```r
-contrasts(pet_fct$A)
+contrasts(pet_plusminus$A)
 ```
 
 ```
@@ -108,13 +114,13 @@ contrasts(pet_fct$A)
 - 1
 ```
 
-So we change this with:
+The original/default setting is `contr.treatm` as seen in the corresponding unit and she changed this with:
 
 
 ```r
-contrasts(pet_fct$A) <- "contr.sum"
-contrasts(pet_fct$B) <- "contr.sum"
-contrasts(pet_fct$A)
+contrasts(pet_plusminus$A) <- "contr.sum"
+contrasts(pet_plusminus$B) <- "contr.sum"
+contrasts(pet_plusminus$A)
 ```
 
 ```
@@ -124,7 +130,7 @@ contrasts(pet_fct$A)
 ```
 
 ```r
-contrasts(pet_fct$A)
+contrasts(pet_plusminus$B)
 ```
 
 ```
@@ -133,21 +139,21 @@ contrasts(pet_fct$A)
 -   -1
 ```
 
-Now we can run our linear model:
+Having confirmed that the sum of the contrast is zero she establishes the linear model and makes a prediction to check the output:
 
 
 ```r
-pet_ctr_lm <- lm(
+pet_plusminus_lm <- lm(
   formula = tensile_strength ~ A * B, 
-  data = pet_fct
+  data = pet_plusminus
   )
-summary(pet_ctr_lm)
+summary(pet_plusminus_lm)
 ```
 
 ```
 
 Call:
-lm.default(formula = tensile_strength ~ A * B, data = pet_fct)
+lm.default(formula = tensile_strength ~ A * B, data = pet_plusminus)
 
 Residuals:
    Min     1Q Median     3Q    Max 
@@ -167,15 +173,8 @@ Multiple R-squared:  0.903,	Adjusted R-squared:  0.867
 F-statistic: 24.8 on 3 and 8 DF,  p-value: 0.000209
 ```
 
-We can observe in the output that the p value of the effects is the same in the lm and in the the aov functions. This confirms that the contrasts have been correctly specified with contr.sum
-
-Note that we've had to adjust the contrasts in the lm function with contr.sum which applies to cases where the sum of the contrasts is zero (the R default is contr.treatment which applies to cases where the levels are coded as 0 and 1).
-
-and now going to apply a prediction:
-
-
 ```r
-predict(pet_ctr_lm, newdata = list(A = "+", B = "+"))
+predict(pet_plusminus_lm, newdata = list(A = "+", B = "+"))
 ```
 
 ```
@@ -183,36 +182,46 @@ predict(pet_ctr_lm, newdata = list(A = "+", B = "+"))
 69 
 ```
 
-Factors as +/- 1
-
-In this example we convert the levels to factors still using the +/-1 notation. This will also be helpfull to apply what are called the Yates tables.
+#### Factors as +/- 1
 
 
 ```r
 coded <- function(x) { ifelse(x == x[1], -1, 1) }
+
+pet_doe <- pet_doe %>% mutate(cA = coded(A), cB = coded(B))
+pet_plusminus1 <- pet_doe %>% mutate(across(c(cA, cB), as_factor))
+pet_plusminus1$cA <- relevel(pet_plusminus1$cA, ref = "1")
+pet_plusminus1$cB <- relevel(pet_plusminus1$cB, ref = "1")
+
+pet_plusminus1 %>%
+  head(3) %>%
+  kable(align = "c")
 ```
 
-We again convert them to factors and put the upper level as the reference. Regarding the contrasts we show a simpler and more direct approach now by defining them directly in the lm() function.
+
+
+| A | B | replicate | tensile_strength | cA | cB |
+|:-:|:-:|:---------:|:----------------:|:--:|:--:|
+| - | - |     I     |       64.4       | -1 | -1 |
+| + | - |     I     |       82.8       | 1  | -1 |
+| - | + |     I     |       41.4       | -1 | 1  |
+
+The second approach she tries is to convert the levels to +1/-1 still leaving them coded as factors. This notation is easier for her as it corresponds to a common way she sees in the Yates tables. Again she had to relevel the factors to get the max as reference in order to get the same coefficients on the linear model. Regarding the contrasts she goes for the simpler and more direct approach now by defining them directly in the lm() function.
 
 
 ```r
-pet_fct <- pet_fct %>% mutate(cA = coded(A), cB = coded(B))
-pet_fct2 <- pet_fct %>% mutate(across(c(cA, cB), as_factor))
-pet_fct2$cA <- relevel(pet_fct2$cA, ref = "1")
-pet_fct2$cB <- relevel(pet_fct2$cB, ref = "1")
-
-pet_ctr2_lm <- lm(
+pet_plusminus1_lm <- lm(
   formula = tensile_strength ~ cA * cB, 
-  data = pet_fct2,
+  data = pet_plusminus1,
   contrasts = list(cA = "contr.sum", cB = "contr.sum")
   )
-summary(pet_ctr2_lm)
+summary(pet_plusminus1_lm)
 ```
 
 ```
 
 Call:
-lm.default(formula = tensile_strength ~ cA * cB, data = pet_fct2, 
+lm.default(formula = tensile_strength ~ cA * cB, data = pet_plusminus1, 
     contrasts = list(cA = "contr.sum", cB = "contr.sum"))
 
 Residuals:
@@ -233,17 +242,8 @@ Multiple R-squared:  0.903,	Adjusted R-squared:  0.867
 F-statistic: 24.8 on 3 and 8 DF,  p-value: 0.000209
 ```
 
-Note that a coefficient in a regression equation is the change in the response when the corresponding variable changes by +1. Special attention to the + and - needs to be taken with the R output.
-
-As A or B changes from its low level to its high level, the coded variable changes by 1 − (−1) = +2, so the change in the response is twice the regression coefficient.
-
-So the effects and interaction(s) from their minumum to their maximum correspond to  twice the values in the “Estimate” column. These regression coefficients are often called effects and interactions, even though they differ from the definitions used in the designs themeselves.
-
-Checking now with coded factors:
-
-
 ```r
-predict(pet_ctr2_lm, newdata = list(cA = "1", cB = "1"))
+predict(pet_plusminus1_lm, newdata = list(cA = "1", cB = "1"))
 ```
 
 ```
@@ -251,13 +251,15 @@ predict(pet_ctr2_lm, newdata = list(cA = "1", cB = "1"))
 69 
 ```
 
-Factors as +/- 1 numeric
+Note that a coefficient in a regression equation is the change in the response when the corresponding variable changes by +1. Special attention to the + and - needs to be taken with the R output. As A or B changes from its low level to its high level, the coded variable changes by 1 − (−1) = +2, so the change in the response is twice the regression coefficient.
 
-In this example we're going to code the levels with +1/-1 but we're going use the numeric coding:
+So the effects and interaction(s) from their minumum to their maximum correspond to  twice the values in the “Estimate” column. These regression coefficients are often called effects and interactions, even though they differ from the definitions used in the designs themeselves.
+
+#### Factors as +/- 1 numeric
 
 
 ```r
-pet_num <- pet_fct %>% mutate(cA = coded(A), cB = coded(B))
+pet_num <- pet_doe %>% mutate(cA = coded(A), cB = coded(B))
 pet_num_lm <- lm(
   formula = tensile_strength ~ cA * cB, 
   data = pet_num
@@ -288,9 +290,6 @@ Multiple R-squared:  0.903,	Adjusted R-squared:  0.867
 F-statistic: 24.8 on 3 and 8 DF,  p-value: 0.000209
 ```
 
-In this case we did not define any contrasts. Looking into the lm We can see we've obtained exactly the same outputs.
-
-
 ```r
 predict(pet_num_lm, newdata = list(cA = 1, cB = 1))
 ```
@@ -300,13 +299,13 @@ predict(pet_num_lm, newdata = list(cA = 1, cB = 1))
 69 
 ```
 
-As the inputs are coded as numeric this behaves just like the first simple linear model we've seen in the Case Study on One Factor with Multiple levels. In particular when we feed the predictions function with numeric values.
+Finaly the materials engineer coded the levels with +1/-1 but left the variables with type numeric. In this case she did not define any contrasts. Looking into the lm and prediction she confirms having obtained exactly the same outputs.
 
-This is very intuitive as it corresponds to the original units of the experiments (also called natural or engineering units). On the other hand coding the design variables provides another advange: generally, the engineering units are not directly comparable while coded variables are very effective for determining the relative size of factor effects.
+As the inputs are coded as numeric this behaves just like the predictions with the first linear model studied in our book. Note that we feed the predictions function with numeric values. This is very intuitive as it corresponds to the original units of the experiments (also called natural or engineering units). On the other hand coding the design variables provides another advange: generally, the engineering units are not directly comparable while coded variables are very effective for determining the relative size of factor effects.
 
-We can see that these three ways of coding the variable levels lead to equivalent results both in lm and prediction. Our preference goes to use numeric values as it is more intuitive and allows for easier prediction between the fixed levels. 
+Coding the design factors has the benefit of enabling a direct comparison of the effect sizes and we can see that these three ways of coding the variable levels lead to equivalent results both in lm and prediction. Her preference goes to using numeric values as it is more intuitive and allows for easier prediction between the fixed levels. 
 
-And now in order to better understand the coding of factors in this unit, we're going to establish a simple regression plot of our data:
+In order to better visualize the coding of factors she established a simple regression plot of the data. Note that she had to extract the data from the S3 doe object, which we've done with using unclass() and then as_tibble()
 
 
 ```r
@@ -325,11 +324,9 @@ pet_num %>%
   facet_wrap(vars(variable))
 ```
 
-<img src="9_twolevelDOEs_files/figure-html/unnamed-chunk-16-1.png" width="100%" />
+<img src="9_twolevelDOEs_files/figure-html/unnamed-chunk-12-1.png" width="100%" />
 
-Note that we had to extract the data from the S3 doe object, which we've done with using unclass() and then as_tibble()
-
-The intercept passes at 27.5 as seen on the lm summary. We're going now to put the B factor at its maximum and replot:
+From the `lm()` summary she remembers that the intercept passes at 27.5 and she replorts now to putting the B factor at its maximum:
 
 
 ```r
@@ -351,28 +348,24 @@ pet_num %>%
   facet_wrap(vars(variable))
 ```
 
-<img src="9_twolevelDOEs_files/figure-html/unnamed-chunk-17-1.png" width="100%" />
+<img src="9_twolevelDOEs_files/figure-html/unnamed-chunk-13-1.png" width="100%" />
 
-As seen on the plot the output of our prediction is 69 corresponding the high level of A when B is at 1. To be precise we need to multiply all the coefficients by the levels of the factors as : 63.250 + 9.583x(+1) - 5.750x(+1) + 1.917
+The plot confirms that the output of the prediction is 69 corresponding to the max level of A when B is also at the max. Mathematically she confirms this result by multiplying all the linear regression coefficients by the levels of the factors as : $63.250 + 9.583 \times (+1) - 5.750 \times (+1) + 1.917 = 69$
 
 ### Interaction plots with SE {#plotMeans}
-
-Here we're making a step further in the representation of interaction plots, we're adding error bars to the means. There are many ways to do this and we're providing a simple approach with the function plotMeans from the package RcmdrMisc.
 
 
 ```r
 library(RcmdrMisc)
 ```
 
-We select standard error as argument for the error.bars argument.
-
 
 ```r
 par(mfrow = c(1,1), bty = "l")
-plotMeans(response = pet_fct$tensile_strength,
-          factor1 = pet_fct$A,
+plotMeans(response = pet_doe$tensile_strength,
+          factor1 = pet_doe$A,
           xlab = "A: bi-axial orientation in production (yes/no)",
-          factor2 = pet_fct$B,
+          factor2 = pet_doe$B,
           legend.lab = "B: nucleating agent (high/low)",
           ylab = "Tensile Strenght [Mpa]",
           error.bars = "se",
@@ -381,10 +374,11 @@ plotMeans(response = pet_fct$tensile_strength,
           main = "The PET clothing improvement plan")
 ```
 
-<img src="9_twolevelDOEs_files/figure-html/unnamed-chunk-19-1.png" width="100%" />
+<img src="9_twolevelDOEs_files/figure-html/unnamed-chunk-15-1.png" width="100%" />
 
-A: bi-axial orientation in production (yes/no)   
-B: nucleating agent level (high/low)
+Now she want to get quickly an interaction plot but including error bars. Unfortunately the base R `interaction.plot()` doesn't provide it and the `ggplot2()` made it to long. With a quick check on Stackoverflow she discovered this simple approach with the function `plotMeans()` from the package {RcmdrMisc} and she gets the plot dine with standard error as argument for the `error.bars` argument.
+
+As expected she confirms that both treatments provide an visible effect on Tensile strenght and that there is no interaction between them.
 
 <div class="marginnote>
 
@@ -610,7 +604,7 @@ battery_charging %>%
     subtitle = "Prediction with reduced model")
 ```
 
-<img src="9_twolevelDOEs_files/figure-html/unnamed-chunk-30-1.png" width="100%" />
+<img src="9_twolevelDOEs_files/figure-html/unnamed-chunk-26-1.png" width="100%" />
 
 We are introducing here response surface plots which is yet another way to visualize the experiment outputs as a function of the inputs. We're doing this with the persp() function from the {rsm} package which provides an extremely fast rendering, easy parametrization and a readable output. To be noted that this function is an extension of the base R persp() consisting from the R point of view in an S3 method for the lm class. This allows to simply provide directly the lm object to the function to obtain the response surface.
 
@@ -634,7 +628,7 @@ persp(
 )
 ```
 
-<img src="9_twolevelDOEs_files/figure-html/unnamed-chunk-32-1.png" width="100%" />
+<img src="9_twolevelDOEs_files/figure-html/unnamed-chunk-28-1.png" width="100%" />
 
 Due to the interaction between factors A and C the surface is slightly bent. This is exactly what we observe in the interactions plots of which the one below corresponds to slicing the surface at the min and the max of Power:
 
@@ -653,7 +647,7 @@ interaction.plot(x.factor = battery_charging$C,
                  main = "Lithium-ion battery\ncharging time test")
 ```
 
-<img src="9_twolevelDOEs_files/figure-html/unnamed-chunk-33-1.png" width="100%" />
+<img src="9_twolevelDOEs_files/figure-html/unnamed-chunk-29-1.png" width="100%" />
 
 Just like in the surface plot we can see here in the interaction plot that the response of yield on gap is different depending on the level of power. When power is high it decreases and when power is low it increases. As a reminder this is what is called an interaction between these two factors.
 
@@ -759,7 +753,7 @@ main_effects_plot <- qqPlot(
   )
 ```
 
-<img src="9_twolevelDOEs_files/figure-html/unnamed-chunk-38-1.png" width="100%" />
+<img src="9_twolevelDOEs_files/figure-html/unnamed-chunk-34-1.png" width="100%" />
 
 In plot we can see that the effects that have the highest influence on the output are the effects A, C and D and their interactions. We can still confirm these observations with a calculation of the percentage contribution of each effect as follows:
 
@@ -843,7 +837,7 @@ par(mfrow = c(2,2))
 plot(battery_red_lm3)
 ```
 
-<img src="9_twolevelDOEs_files/figure-html/unnamed-chunk-41-1.png" width="100%" />
+<img src="9_twolevelDOEs_files/figure-html/unnamed-chunk-37-1.png" width="100%" />
 
 We can now establish the main effects and interaction plots and conclude on the optimal settings to maximize the output: A and D should be on the max and C on the min.
 

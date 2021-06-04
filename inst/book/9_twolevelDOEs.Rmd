@@ -246,11 +246,11 @@ As expected she confirms that both treatments provide an visible effect on Tensi
 
 ### Adjusted R-squared {#adj_Rsquare}
 
-<div class="marginnote>
+<div class="marginnote">
 
 <b class="highlight">Case study: lithium-ion battery charging time</b>
 
-The global transition to full electrical car is well underway. The challenge of authonomy has been brought to acceptable levels with the deployment of charging stations but engineering teams still face complex problems such as the charging time. At a pioneering manufacturer another DOE is underway to get it optimized.
+The global transition to full electrical car is well underway and there's a global trend in legislating towards the end of fossil fuel cars. The challenge of authonomy has been brought to acceptable levels with the extensive deployment of electric charging stations but engineering teams still face complex problems such as the charging time. At a pioneering manufacturer another DOE is underway to get it optimized.
 
 ```{r echo=FALSE}
 knitr::include_graphics("img/electrical_car_bw.png")
@@ -267,34 +267,33 @@ battery_lm <- lm(
 summary(battery_lm)
 ```
 
-The R-squared was introduced in the linear models unit as a way to assess the quality of the model fit. A potential problem with this statistic is that it always increases as factors are added to the model, even if these factors are not significant. This can be overcome by using the adjusted R-squared which is obtained by dividing the Sums of Squares by the degrees of freedom, and is adjusted for the size of the model, that is the number of factors. Both indicators are part of the `summary()` output of the `lm()` function as we could just see in the previous chunk.
+The R-squared was introduced in the linear models unit as a way to assess the quality of the model fit. A potential problem with this statistic is that it always increases as factors are added to the model, even if these factors are not significant. This can be overcomed by using the adjusted R-squared which is obtained by dividing the Sums of Squares by the degrees of freedom, and is adjusted for the size of the model, that is the number of factors. Both indicators are part of the `summary()` output of the `lm()` function applied on the `charging_time` dataset as we could just see in the previous chunk. Below we're comparing both indicators.
 
-A consulting company specialized in data science is supporting a global manufacturer of electrical car batteries to further optimize a <b class="highlight">lithium-ion battery charging time</b>.
+A consulting company specialized in data science is supporting a global manufacturer of electrical car batteries to further optimize a <b class="highlight">lithium-ion battery charging time</b>. The latest DOE consisted of 3 input factors as follows:
 
-A - temperature (-1 = -10, +1 = 40)
-B - previous cycles (within warranty) (-1 = 10'000, +1 = 0)
-C - voltage (-1 = )
-D - 
+A - temperature (-1 = -10°C, +1 = 40°C)
+B - voltage (-1 = 120V, +1 = 220V)
+C - age (-1 = 10'000 cycles, +1 = 0 cycles)   
+Z - charging time [h]
 
-response - charging time [h]
+The model can now be passed to the `aov()` function for an assessment of the significance of the different factors:
 
 ```{r}
 battery_aov <- aov(battery_lm)
 summary(battery_aov)
 ```
 
-The main effects of Gap and Power are highly significant (both have very small P-values). The AC interaction is also highly significant; thus, there is a strong interaction between Gap and Power.
-
+The main effects of temperature and age are significant as is their interaction. Voltage has no influence on the output. An updated model is prepared considering these observations and removing the factor B.
 
 ```{r}
 battery_reduced_lm <- lm(
-  formula = charging_time ~ A + C + A:C, 
+  formula = charging_time ~ A * C, 
   data = battery_charging
   )
 summary(battery_reduced_lm)
 ```
 
-Besides the base summary() function, R squared and adjusted R squared can also be easily retrieved with the glance function from the {broom} package. We're extracting them here for the complete and for reduced model:
+Besides the base `summary()` function, R squared and adjusted R squared can also be easily retrieved with the glance function from the `{broom}` package. We're extracting them here for the complete and for reduced model:
 
 ```{r}
 glance(battery_lm)[1:2] %>%
@@ -302,13 +301,9 @@ glance(battery_lm)[1:2] %>%
             .id = "model")
 ```
 
-Adjusted R² has improved. Removing the nonsignificant terms from the full model has produced a final model that is likely to function more effectively as a predictor of new data.
+Although R-squared has decreased the adjusted R-squared has slightly improved showing that removing the nonsignificant terms has resulted in a better fit. The changes are small and further work is still required but the principle is clear that the model fit is improving and will better forecast the output for new data.
 
 ### Coding inputs {#coding_inputs}
-
-Now that we have model often we will want to predict the response at a certainly specific level between the coded factor levels of $\pm$ 1.
-
-To do that we need to convert that specific the natural value into a coded value. Lets calculate the coded value for the factor A (gap) of which the natural value is nA = 0.9, between the natural levels of nA = 0.8 and nA = 1.2. We choose to do this for a fixed level of C of 1, corresponding to its maximum of 325W.
 
 ```{r}
 natural2coded <- function(xA, lA, hA) {(xA - (lA + hA) / 2) / ((hA -  lA) / 2)}
@@ -316,15 +311,15 @@ natural2coded <- function(xA, lA, hA) {(xA - (lA + hA) / 2) / ((hA -  lA) / 2)}
 
 ```{r}
 # Converting natural value xA into coded value cA:
-lA <- 0.8
-hA <- 1.2
-xA <- 0.9
+lA <- -10
+hA <- 40
+nA <- 22
 
-cA <- natural2coded(xA, lA, hA)
+cA <- natural2coded(nA, lA, hA)
 cA
 ```
 
-To be noted that the opposite conversion looks like:
+The consulting company proposed itself to provide a tool to predict the charging time for new batteries. They had been doing lots of the DOEs and based on the last one they've realised they believe to be in a position to calculate the response at a certainly specific level between the coded factor levels of $\pm$ 1. To do that they needed to convert natural values into coded values. They've given as an example a calculation of the charging time for a temperature of which the natural value is nA = 22 [°C] which is between the natural levels of lA = -10 and hA = 40 [°C]. This temperature coded corresponds to a value of `r cA` °C as presented in the previous chunk. To be noted that the opposite conversion would look like:
 
 ```{r}
 coded2natural <- function(cA, lA, hA) {cA * ((hA - lA) / 2) + ((lA + hA)/2)} 
@@ -332,9 +327,8 @@ coded2natural <- function(cA, lA, hA) {cA * ((hA - lA) / 2) + ((lA + hA)/2)}
 
 ```{r}
 # Converting back the coded value cA into its natural value xA
-lA <- 0.8
-hA <- 1.2
-cA <- -0.5
+lA <- -10
+hA <- 40
 
 nA <- coded2natural(cA, lA, hA)
 nA
@@ -342,7 +336,6 @@ nA
 
 ### Coded prediction {#coded_prediction}
 
-And now we can feed our linear model and make predictions:
 
 ```{r}
 battery_new <- tibble(A = cA, C = 1)
@@ -350,7 +343,7 @@ pA <- predict(battery_reduced_lm, battery_new)
 pA
 ```
 
-We can visualize this outcome as follows:
+They've choosen to do this prediction for a fixed level of C of 1, corresponding to a completely new battery (maximum of the factor C at of 0 cycles) and the `predict()` function with those values and the reduced model. We can visualize the outcome as follows:
 
 ```{r}
 battery_charging %>%
@@ -362,13 +355,14 @@ battery_charging %>%
   scale_y_continuous(n.breaks = 10) + 
   scale_color_discrete(guide = FALSE) +
   theme(plot.title = ggtext::element_markdown()) +
+  geom_hline(yintercept = pA, linetype = 2) +
   coord_cartesian(xlim = c(-1, 1)) +
   scale_x_continuous(n.breaks = 5) +
-  scale_y_continuous(n.breaks = 10) +
+  scale_y_continuous(n.breaks = 20) +
   labs(
     title = "Lithium-ion battery charging DOE",
     y = "Charging time [h]",
-    x = "A: temperature [°C]",
+    x = "A: temperature (-1 = -10°C, +1 = 40°C)",
     subtitle = "Prediction with reduced model")
 ```
 
@@ -386,14 +380,16 @@ persp(
   col = viridis(12)[8],
   theta = -40, phi = 20, r = 5,
   zlab = "Charging Time [h]",
-  xlabs = c("A: temperature", "B: previous cycles"),
+  xlabs = c(
+    "A: Temperature \n(+1 = 40°C, -1 = -10°C)", 
+    "C: Age \n(-1 = 10'000 cycles, +1 = 0 cycles)"),
   main = "Lithium-ion battery\ncharging time DOE"
 )
 ```
 
-We are introducing here response surface plots which is yet another way to visualize the experiment outputs as a function of the inputs. We're doing this with the persp() function from the {rsm} package which provides an extremely fast rendering, easy parametrization and a readable output. To be noted that this function is an extension of the base R persp() consisting from the R point of view in an S3 method for the lm class. This allows to simply provide directly the lm object to the function to obtain the response surface.
+Here they went further introducing here response surface plots which is yet another way to visualize the experiment outputs as a function of the inputs. The've done this with the `persp()` function from the `{rsm}` package which provides an extremely fast rendering, easy parametrization and a readable output. To be noted that this function is an extension of the base R `persp()` consisting from the R point of view in an S3 method for the lm class. This allows to simply provide directly the lm object to the function to obtain the response surface.
 
-Due to the interaction between factors A and C the surface is slightly bent. This is exactly what we observe in the interactions plots of which the one below corresponds to slicing the surface at the min and the max of Power:
+Due to the interaction between factors A and C the surface is bent. This is exactly what we observe in the interactions plots of which the one below corresponds to slicing the surface at the min and the max of Power:
 
 ```{r}
 interaction.plot(x.factor = battery_charging$C, 
@@ -401,31 +397,17 @@ interaction.plot(x.factor = battery_charging$C,
                  fun = mean,
                  response = battery_charging$charging_time,
                  legend = TRUE,
-                 xlab = "C",
-                 trace.label = "A",
-                 lwd = 2,
-                 col = c(viridis(12)[10], col = viridis(12)[6]),
+                 xlab = "C: Age \n(-1 = 10'000 cycles, +1 = 0 cycles)",
+                 trace.label = "A: Temperature \n(+1 = 40°C, -1 = -10°C)",
+                 lwd = 2, lty = c(2,1),
+                 col = viridis(12)[8],
                  ylab = "Charging Time",
                  main = "Lithium-ion battery\ncharging time test")
 ```
 
-Just like in the surface plot we can see here in the interaction plot that the response of yield on gap is different depending on the level of power. When power is high it decreases and when power is low it increases. As a reminder this is what is called an interaction between these two factors.
+Just like in the surface plot we can see here in the interaction plot that the response of charging time on age is very different depending on the level of temperature. When temperature is at its max the charging time is almost independent of age but at the minumum of temperature the charging time depends a lot on the age. All this make a lot of sense to everyone involved but its good to confirm it with results and to get the details of how much these variations are numerically. As a reminder this is what is called an interaction between these two factors.
 
-## Single replicate designs
-
-**The lithium-ion battery charging time test (cont.)**
-
-m factors 2 levels 
-
-Possible approaches:
-- graphical methods–normal and half-normal probability plots; no formal tests;
-- assume some high-order interactions are zero, and fit a model that excludes them; degrees of freedom go into error, so testing is possible (not recommended)
-
-```{r}
-battery_charging %>%
-  filter((Replicate == 1)) %>%
-  head()
-```
+### Single replicate {#single_replicate}
 
 ```{r}
 battery_lm3 <- lm(
@@ -433,6 +415,26 @@ battery_lm3 <- lm(
   data = battery_charging %>% filter(Replicate == 1))
 summary(battery_lm3)
 ```
+
+In the R&D offices of the manufacturer of electrical car batteries there is some satisfaction with the report delivered by the data science consulting company. Although sceptical with how far they can go with models, the head of battery engineering has finaly acknowledged that there are several benefits coming from this work. Now a bit late he would like to know by thursday (after tomorrow) what is the effect of terminals material which in his view will have a high impact on the final delivered cost of the assembled battery. Unfortunately this information was only captured in the 1st replicate in the variable coded as D as we can see in the dataset tail:
+
+```{r}
+tail(battery_charging) %>%
+  kable()
+```
+
+As a reminder below the DOE variables are: 
+
+A - temperature (-1 = -10°C, +1 = 40°C)   
+B - voltage (-1 = 120V, +1 = 220V)   
+C - age (-1 = 10'000 cycles, +1 = 0 cycles)    
+D - terminal (-1 = lead based, +1 = zinc based)   
+Z - charging time [h]   
+
+A specialist in DOEs from the consulting company explains that in such a short time there are only two possible approaches:
+- graphical methods–normal and half-normal probability plots; no formal tests;  
+- assume some high-order interactions are zero, and fit a model that excludes them; degrees of freedom go into error, so testing is possible (not recommended)
+
 
 We can see that being a single replicate design no statistics have been calculated for the effects in the model. A recommended approach in this case is to look into the normal probability plot of the model effects. 
 

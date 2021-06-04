@@ -51,7 +51,8 @@ Two level designs,[Coding levels](#coding_levels),`stats::relevel`,pet_doe,The P
 ,[Coding inputs](#coding_inputs),,,,
 ,[Coding prediction](#coded_prediction),,,,
 ,[Perspective plot](#persp),`graphics::persp`,,,
-Single replicate designs,[Effects normal plot](#qqPlot),`car::qqPlot`,,,
+,[Single replicate](#single_replicate),,,,
+,[Effects normal plot](#qqPlot),`car::qqPlot`,,,
 ,[Effects contribution table](#effects_contribution),`broom::tidy`,,,
 SPC,,,,,
 Xbar-R charts,[Mean chart](#xbar_chart),`qcc::qcc`,syringe_diameter,The syringe injection molding process,Medical devices

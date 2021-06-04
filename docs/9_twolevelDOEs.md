@@ -251,7 +251,7 @@ predict(pet_plusminus1_lm, newdata = list(cA = "1", cB = "1"))
 69 
 ```
 
-Note that a coefficient in a regression equation is the change in the response when the corresponding variable changes by +1. Special attention to the + and - needs to be taken with the R output. As A or B changes from its low level to its high level, the coded variable changes by 1 − (−1) = +2, so the change in the response is twice the regression coefficient.
+Note that a coefficient in a regression equation is the change in the response when the corresponding variable changes by +1. Special attention to the + and - needs to be taken with the R output. As A or B changes from its high level to its low level, the coded variable changes by 1 − (−1) = +2, so the change in the response from the min to the max is twice the regression coefficient.
 
 So the effects and interaction(s) from their minumum to their maximum correspond to  twice the values in the “Estimate” column. These regression coefficients are often called effects and interactions, even though they differ from the definitions used in the designs themeselves.
 
@@ -321,7 +321,14 @@ pet_num %>%
   geom_point(aes(x = level, y = tensile_strength)) +
   geom_smooth(aes(x = level, y = tensile_strength), 
               method = "lm", se = FALSE, fullrange = TRUE) +
-  facet_wrap(vars(variable))
+  coord_cartesian(xlim = c(-1.5, 1.5), ylim = c(30, 90)) +
+  scale_y_continuous(n.breaks = 10) +
+  facet_wrap(vars(variable)) +
+  labs(
+    title = "PET tensile strenght improvement DOE",
+    y = "Tensile strenght [MPa]",
+    x = "Coded levels"
+  )
 ```
 
 <img src="9_twolevelDOEs_files/figure-html/unnamed-chunk-12-1.png" width="100%" />
@@ -343,9 +350,14 @@ pet_num %>%
   geom_point(aes(x = level, y = tensile_strength)) +
   geom_smooth(aes(x = level, y = tensile_strength), 
               method = "lm", se = FALSE, fullrange = TRUE) +
-  coord_cartesian(xlim = c(-2, 2)) +
+  coord_cartesian(xlim = c(-1.5, 1.5), ylim = c(30, 90)) +
   scale_y_continuous(n.breaks = 10) +
-  facet_wrap(vars(variable))
+  facet_wrap(vars(variable)) +
+  labs(
+    title = "PET tensile strenght improvement DOE",
+    y = "Tensile strenght [MPa]",
+    x = "Coded levels"
+  )
 ```
 
 <img src="9_twolevelDOEs_files/figure-html/unnamed-chunk-13-1.png" width="100%" />
@@ -380,34 +392,17 @@ Now she want to get quickly an interaction plot but including error bars. Unfort
 
 As expected she confirms that both treatments provide an visible effect on Tensile strenght and that there is no interaction between them.
 
-<div class="marginnote>
+### Adjusted R-squared {#adj_Rsquare}
+
+<div class="marginnote">
 
 <b class="highlight">Case study: lithium-ion battery charging time</b>
 
+The global transition to full electrical car is well underway and there's a global trend in legislating towards the end of fossil fuel cars. The challenge of authonomy has been brought to acceptable levels with the extensive deployment of electric charging stations but engineering teams still face complex problems such as the charging time. At a pioneering manufacturer another DOE is underway to get it optimized.
+
+<img src="img/electrical_car_bw.png" width="100%" />
+
 </div>
-
-A - temperature 
-B - previous cycles (within warranty)
-C - voltage
-response - charging time [h]
-
-
-```r
-battery_charging %>%
-  head() %>%
-  kable()
-```
-
-
-
-|  A|  B|  C|  D| Replicate| charging_time|
-|--:|--:|--:|--:|---------:|-------------:|
-| -1| -1| -1| -1|         1|          5.50|
-|  1| -1| -1| -1|         1|          6.69|
-| -1|  1| -1| -1|         1|          6.33|
-|  1|  1| -1| -1|         1|          6.42|
-| -1| -1|  1| -1|         1|         10.37|
-|  1| -1|  1| -1|         1|          7.49|
 
 
 ```r
@@ -425,25 +420,36 @@ lm.default(formula = charging_time ~ A * B * C, data = battery_charging)
 
 Residuals:
    Min     1Q Median     3Q    Max 
--2.095 -1.002 -0.529  0.929  2.982 
+-2.595 -1.076 -0.450  0.965  4.155 
 
 Coefficients:
             Estimate Std. Error t value Pr(>|t|)    
-(Intercept)   7.4116     0.2654   27.92  < 2e-16 ***
-A             0.3147     0.2654    1.19  0.24737    
-B             0.0684     0.2654    0.26  0.79872    
-C             1.0403     0.2654    3.92  0.00065 ***
-A:B          -0.0872     0.2654   -0.33  0.74539    
-A:C          -0.8091     0.2654   -3.05  0.00553 ** 
-B:C           0.0259     0.2654    0.10  0.92296    
-A:B:C         0.0328     0.2654    0.12  0.90264    
+(Intercept)    6.787      0.325   20.89   <2e-16 ***
+A              0.940      0.325    2.89   0.0080 ** 
+B             -0.182      0.325   -0.56   0.5813    
+C              1.040      0.325    3.20   0.0038 ** 
+A:B            0.163      0.325    0.50   0.6208    
+A:C           -0.809      0.325   -2.49   0.0201 *  
+B:C           -0.349      0.325   -1.07   0.2932    
+A:B:C          0.408      0.325    1.26   0.2214    
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
-Residual standard error: 1.5 on 24 degrees of freedom
-Multiple R-squared:  0.522,	Adjusted R-squared:  0.383 
-F-statistic: 3.75 on 7 and 24 DF,  p-value: 0.00696
+Residual standard error: 1.84 on 24 degrees of freedom
+Multiple R-squared:  0.54,	Adjusted R-squared:  0.405 
+F-statistic: 4.02 on 7 and 24 DF,  p-value: 0.00481
 ```
+
+The R-squared was introduced in the linear models unit as a way to assess the quality of the model fit. A potential problem with this statistic is that it always increases as factors are added to the model, even if these factors are not significant. This can be overcomed by using the adjusted R-squared which is obtained by dividing the Sums of Squares by the degrees of freedom, and is adjusted for the size of the model, that is the number of factors. Both indicators are part of the `summary()` output of the `lm()` function applied on the `charging_time` dataset as we could just see in the previous chunk. Below we're comparing both indicators.
+
+A consulting company specialized in data science is supporting a global manufacturer of electrical car batteries to further optimize a <b class="highlight">lithium-ion battery charging time</b>. The latest DOE consisted of 3 input factors as follows:
+
+A - temperature (-1 = -10°C, +1 = 40°C)
+B - voltage (-1 = 120V, +1 = 220V)
+C - age (-1 = 10'000 cycles, +1 = 0 cycles)   
+Z - charging time [h]
+
+The model can now be passed to the `aov()` function for an assessment of the significance of the different factors:
 
 
 ```r
@@ -452,29 +458,25 @@ summary(battery_aov)
 ```
 
 ```
-            Df Sum Sq Mean Sq F value  Pr(>F)    
-A            1    3.2     3.2    1.41 0.24737    
-B            1    0.1     0.1    0.07 0.79872    
-C            1   34.6    34.6   15.36 0.00065 ***
-A:B          1    0.2     0.2    0.11 0.74539    
-A:C          1   20.9    20.9    9.29 0.00553 ** 
-B:C          1    0.0     0.0    0.01 0.92296    
-A:B:C        1    0.0     0.0    0.02 0.90264    
-Residuals   24   54.1     2.3                    
+            Df Sum Sq Mean Sq F value Pr(>F)   
+A            1   28.3    28.3    8.37 0.0080 **
+B            1    1.1     1.1    0.31 0.5813   
+C            1   34.6    34.6   10.26 0.0038 **
+A:B          1    0.8     0.8    0.25 0.6208   
+A:C          1   20.9    20.9    6.20 0.0201 * 
+B:C          1    3.9     3.9    1.15 0.2932   
+A:B:C        1    5.3     5.3    1.58 0.2214   
+Residuals   24   81.0     3.4                  
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ```
 
-The main effects of Gap and Power are highly significant (both have very small P-values). The AC interaction is also highly significant; thus, there is a strong interaction between Gap and Power.
-
-### Adjusted R-squared {#adj_Rsquare}
-
-The ordinary R^2 is 0.9661 and it measures the proportion of total variability explained by the model. A potential problem with this statistic is that it always increases as factors are added to the model, even if these factors are not significant. The adjusted R^2 is obtained by dividing the Sums of Squares by the degrees of freedom, and is adjusted for the size of the model, that is the number of factors.
+The main effects of temperature and age are significant as is their interaction. Voltage has no influence on the output. An updated model is prepared considering these observations and removing the factor B.
 
 
 ```r
 battery_reduced_lm <- lm(
-  formula = charging_time ~ A + C + A:C, 
+  formula = charging_time ~ A * C, 
   data = battery_charging
   )
 summary(battery_reduced_lm)
@@ -483,27 +485,27 @@ summary(battery_reduced_lm)
 ```
 
 Call:
-lm.default(formula = charging_time ~ A + C + A:C, data = battery_charging)
+lm.default(formula = charging_time ~ A * C, data = battery_charging)
 
 Residuals:
    Min     1Q Median     3Q    Max 
--2.146 -0.995 -0.458  0.865  2.905 
+-3.696 -1.062 -0.483  0.952  3.054 
 
 Coefficients:
             Estimate Std. Error t value Pr(>|t|)    
-(Intercept)    7.412      0.247   30.04  < 2e-16 ***
-A              0.315      0.247    1.28  0.21266    
-C              1.040      0.247    4.22  0.00023 ***
-A:C           -0.809      0.247   -3.28  0.00279 ** 
+(Intercept)    6.787      0.321   21.16   <2e-16 ***
+A              0.940      0.321    2.93   0.0067 ** 
+C              1.040      0.321    3.24   0.0030 ** 
+A:C           -0.809      0.321   -2.52   0.0176 *  
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
-Residual standard error: 1.4 on 28 degrees of freedom
-Multiple R-squared:  0.519,	Adjusted R-squared:  0.467 
-F-statistic: 10.1 on 3 and 28 DF,  p-value: 0.000116
+Residual standard error: 1.81 on 28 degrees of freedom
+Multiple R-squared:  0.476,	Adjusted R-squared:  0.42 
+F-statistic: 8.49 on 3 and 28 DF,  p-value: 0.000361
 ```
 
-Besides the base summary() function, R squared and adjusted R squared can also be easily retrieved with the glance function from the {broom} package. We're extracting them here for the complete and for reduced model:
+Besides the base `summary()` function, R squared and adjusted R squared can also be easily retrieved with the glance function from the `{broom}` package. We're extracting them here for the complete and for reduced model:
 
 
 ```r
@@ -516,17 +518,13 @@ glance(battery_lm)[1:2] %>%
 # A tibble: 2 x 3
   model r.squared adj.r.squared
   <chr>     <dbl>         <dbl>
-1 1         0.522         0.383
-2 2         0.519         0.467
+1 1         0.540         0.405
+2 2         0.476         0.420
 ```
 
-Adjusted R² has improved. Removing the nonsignificant terms from the full model has produced a final model that is likely to function more effectively as a predictor of new data.
+Although R-squared has decreased the adjusted R-squared has slightly improved showing that removing the nonsignificant terms has resulted in a better fit. The changes are small and further work is still required but the principle is clear that the model fit is improving and will better forecast the output for new data.
 
 ### Coding inputs {#coding_inputs}
-
-Now that we have model often we will want to predict the response at a certainly specific level between the coded factor levels of $\pm$ 1.
-
-To do that we need to convert that specific the natural value into a coded value. Lets calculate the coded value for the factor A (gap) of which the natural value is nA = 0.9, between the natural levels of nA = 0.8 and nA = 1.2. We choose to do this for a fixed level of C of 1, corresponding to its maximum of 325W.
 
 
 ```r
@@ -536,19 +534,19 @@ natural2coded <- function(xA, lA, hA) {(xA - (lA + hA) / 2) / ((hA -  lA) / 2)}
 
 ```r
 # Converting natural value xA into coded value cA:
-lA <- 0.8
-hA <- 1.2
-xA <- 0.9
+lA <- -10
+hA <- 40
+nA <- 22
 
-cA <- natural2coded(xA, lA, hA)
+cA <- natural2coded(nA, lA, hA)
 cA
 ```
 
 ```
-[1] -0.5
+[1] 0.28
 ```
 
-To be noted that the opposite conversion looks like:
+The consulting company proposed itself to provide a tool to predict the charging time for new batteries. They had been doing lots of the DOEs and based on the last one they've realised they believe to be in a position to calculate the response at a certainly specific level between the coded factor levels of $\pm$ 1. To do that they needed to convert natural values into coded values. They've given as an example a calculation of the charging time for a temperature of which the natural value is nA = 22 [°C] which is between the natural levels of lA = -10 and hA = 40 [°C]. This temperature coded corresponds to a value of 0.28 °C as presented in the previous chunk. To be noted that the opposite conversion would look like:
 
 
 ```r
@@ -558,21 +556,19 @@ coded2natural <- function(cA, lA, hA) {cA * ((hA - lA) / 2) + ((lA + hA)/2)}
 
 ```r
 # Converting back the coded value cA into its natural value xA
-lA <- 0.8
-hA <- 1.2
-cA <- -0.5
+lA <- -10
+hA <- 40
 
 nA <- coded2natural(cA, lA, hA)
 nA
 ```
 
 ```
-[1] 0.9
+[1] 22
 ```
 
 ### Coded prediction {#coded_prediction}
 
-And now we can feed our linear model and make predictions:
 
 
 ```r
@@ -583,30 +579,34 @@ pA
 
 ```
      1 
-8.6991 
+7.8634 
 ```
 
-We can visualize this outcome as follows:
+They've choosen to do this prediction for a fixed level of C of 1, corresponding to a completely new battery (maximum of the factor C at of 0 cycles) and the `predict()` function with those values and the reduced model. We can visualize the outcome as follows:
 
 
 ```r
 battery_charging %>%
   filter(C == 1) %>%
   ggplot() +
-  geom_point(aes(x = A, y = charging_time, color = as_factor(C))) +
-  geom_smooth(aes(x = A, y = charging_time), method = "lm") +
+  # geom_point(aes(x = A, y = charging_time, color = as_factor(C))) +
+  geom_smooth(aes(x = A, y = charging_time), method = "lm", se = FALSE) +
   geom_point(aes(x = cA, y = pA)) +
   scale_y_continuous(n.breaks = 10) + 
   scale_color_discrete(guide = FALSE) +
   theme(plot.title = ggtext::element_markdown()) +
+  geom_hline(yintercept = pA, linetype = 2) +
+  coord_cartesian(xlim = c(-1, 1)) +
+  scale_x_continuous(n.breaks = 5) +
+  scale_y_continuous(n.breaks = 20) +
   labs(
-    title = "3^k factorial design",
+    title = "Lithium-ion battery charging DOE",
+    y = "Charging time [h]",
+    x = "A: temperature (-1 = -10°C, +1 = 40°C)",
     subtitle = "Prediction with reduced model")
 ```
 
 <img src="9_twolevelDOEs_files/figure-html/unnamed-chunk-26-1.png" width="100%" />
-
-We are introducing here response surface plots which is yet another way to visualize the experiment outputs as a function of the inputs. We're doing this with the persp() function from the {rsm} package which provides an extremely fast rendering, easy parametrization and a readable output. To be noted that this function is an extension of the base R persp() consisting from the R point of view in an S3 method for the lm class. This allows to simply provide directly the lm object to the function to obtain the response surface.
 
 ### Perspective plot {#persp}
 
@@ -623,14 +623,19 @@ persp(
   bounds = list(A = c(-1,1), C = c(-1,1)),
   col = viridis(12)[8],
   theta = -40, phi = 20, r = 5,
-  zlab = "Charging Time",
-  main = "Lithium-ion battery\ncharging time test"
+  zlab = "Charging Time [h]",
+  xlabs = c(
+    "A: Temperature \n(+1 = 40°C, -1 = -10°C)", 
+    "C: Age \n(-1 = 10'000 cycles, +1 = 0 cycles)"),
+  main = "Lithium-ion battery\ncharging time DOE"
 )
 ```
 
 <img src="9_twolevelDOEs_files/figure-html/unnamed-chunk-28-1.png" width="100%" />
 
-Due to the interaction between factors A and C the surface is slightly bent. This is exactly what we observe in the interactions plots of which the one below corresponds to slicing the surface at the min and the max of Power:
+Here they went further introducing here response surface plots which is yet another way to visualize the experiment outputs as a function of the inputs. The've done this with the `persp()` function from the `{rsm}` package which provides an extremely fast rendering, easy parametrization and a readable output. To be noted that this function is an extension of the base R `persp()` consisting from the R point of view in an S3 method for the lm class. This allows to simply provide directly the lm object to the function to obtain the response surface.
+
+Due to the interaction between factors A and C the surface is bent. This is exactly what we observe in the interactions plots of which the one below corresponds to slicing the surface at the min and the max of Power:
 
 
 ```r
@@ -639,52 +644,19 @@ interaction.plot(x.factor = battery_charging$C,
                  fun = mean,
                  response = battery_charging$charging_time,
                  legend = TRUE,
-                 xlab = "C",
-                 trace.label = "A",
-                 lwd = 2,
-                 col = c(viridis(12)[10], col = viridis(12)[6]),
+                 xlab = "C: Age \n(-1 = 10'000 cycles, +1 = 0 cycles)",
+                 trace.label = "A: Temperature \n(+1 = 40°C, -1 = -10°C)",
+                 lwd = 2, lty = c(2,1),
+                 col = viridis(12)[8],
                  ylab = "Charging Time",
                  main = "Lithium-ion battery\ncharging time test")
 ```
 
 <img src="9_twolevelDOEs_files/figure-html/unnamed-chunk-29-1.png" width="100%" />
 
-Just like in the surface plot we can see here in the interaction plot that the response of yield on gap is different depending on the level of power. When power is high it decreases and when power is low it increases. As a reminder this is what is called an interaction between these two factors.
+Just like in the surface plot we can see here in the interaction plot that the response of charging time on age is very different depending on the level of temperature. When temperature is at its max the charging time is almost independent of age but at the minumum of temperature the charging time depends a lot on the age. All this make a lot of sense to everyone involved but its good to confirm it with results and to get the details of how much these variations are numerically. As a reminder this is what is called an interaction between these two factors.
 
-## Single replicate designs
-
-**The lithium-ion battery charging time test (cont.)**
-
-m factors 2 levels 
-
-Possible approaches:
-- graphical methods–normal and half-normal probability plots; no formal tests;
-- assume some high-order interactions are zero, and fit a model that excludes them; degrees of freedom go into error, so testing is possible (not recommended)
-
-<div class="marginnote">
-
-<img src="img/electrical_car_bw.png" width="100%" />
-
-</div>
-
-
-```r
-battery_charging %>%
-  filter((Replicate == 1)) %>%
-  head()
-```
-
-```
-# A tibble: 6 x 6
-      A     B     C     D Replicate charging_time
-  <dbl> <dbl> <dbl> <dbl>     <dbl>         <dbl>
-1    -1    -1    -1    -1         1          5.5 
-2     1    -1    -1    -1         1          6.69
-3    -1     1    -1    -1         1          6.33
-4     1     1    -1    -1         1          6.42
-5    -1    -1     1    -1         1         10.4 
-6     1    -1     1    -1         1          7.49
-```
+### Single replicate {#single_replicate}
 
 
 ```r
@@ -705,27 +677,59 @@ ALL 16 residuals are 0: no residual degrees of freedom!
 
 Coefficients:
             Estimate Std. Error t value Pr(>|t|)
-(Intercept)   7.7606         NA      NA       NA
-A            -0.5081         NA      NA       NA
-B             0.0369         NA      NA       NA
-C             1.5306         NA      NA       NA
-D             0.1556         NA      NA       NA
-A:B          -0.1244         NA      NA       NA
-A:C          -0.7681         NA      NA       NA
-B:C          -0.0106         NA      NA       NA
-A:D           0.1244         NA      NA       NA
-B:D          -0.0556         NA      NA       NA
-C:D           0.1606         NA      NA       NA
-A:B:C         0.0281         NA      NA       NA
-A:B:D         0.0856         NA      NA       NA
-A:C:D         0.1844         NA      NA       NA
-B:C:D         0.0369         NA      NA       NA
-A:B:C:D      -0.0369         NA      NA       NA
+(Intercept)   7.1356         NA      NA       NA
+A             0.1169         NA      NA       NA
+B            -0.3381         NA      NA       NA
+C             1.4056         NA      NA       NA
+D             0.0306         NA      NA       NA
+A:B           0.2506         NA      NA       NA
+A:C          -0.6431         NA      NA       NA
+B:C          -0.3856         NA      NA       NA
+A:D           0.2494         NA      NA       NA
+B:D          -0.4306         NA      NA       NA
+C:D          -0.4644         NA      NA       NA
+A:B:C         0.4031         NA      NA       NA
+A:B:D         0.4606         NA      NA       NA
+A:C:D         0.8094         NA      NA       NA
+B:C:D        -0.3381         NA      NA       NA
+A:B:C:D       0.3381         NA      NA       NA
 
 Residual standard error: NaN on 0 degrees of freedom
 Multiple R-squared:     1,	Adjusted R-squared:   NaN 
 F-statistic:  NaN on 15 and 0 DF,  p-value: NA
 ```
+
+In the R&D offices of the manufacturer of electrical car batteries there is some satisfaction with the report delivered by the data science consulting company. Although sceptical with how far they can go with models, the head of battery engineering has finaly acknowledged that there are several benefits coming from this work. Now a bit late he would like to know by thursday (after tomorrow) what is the effect of terminals material which in his view will have a high impact on the final delivered cost of the assembled battery. Unfortunately this information was only captured in the 1st replicate in the variable coded as D as we can see in the dataset tail:
+
+
+```r
+tail(battery_charging) %>%
+  kable()
+```
+
+
+
+|  A|  B|  C|  D| Replicate| charging_time|
+|--:|--:|--:|--:|---------:|-------------:|
+| -1|  1| -1| NA|         2|           4.5|
+|  1|  1| -1| NA|         2|          10.4|
+| -1| -1|  1| NA|         2|           7.5|
+|  1| -1|  1| NA|         2|           8.6|
+| -1|  1|  1| NA|         2|           7.0|
+|  1|  1|  1| NA|         2|           9.6|
+
+As a reminder below the DOE variables are: 
+
+A - temperature (-1 = -10°C, +1 = 40°C)   
+B - voltage (-1 = 120V, +1 = 220V)   
+C - age (-1 = 10'000 cycles, +1 = 0 cycles)    
+D - terminal (-1 = lead based, +1 = zinc based)   
+Z - charging time [h]   
+
+A specialist in DOEs from the consulting company explains that in such a short time there are only two possible approaches:
+- graphical methods–normal and half-normal probability plots; no formal tests;  
+- assume some high-order interactions are zero, and fit a model that excludes them; degrees of freedom go into error, so testing is possible (not recommended)
+
 
 We can see that being a single replicate design no statistics have been calculated for the effects in the model. A recommended approach in this case is to look into the normal probability plot of the model effects. 
 
@@ -753,7 +757,7 @@ main_effects_plot <- qqPlot(
   )
 ```
 
-<img src="9_twolevelDOEs_files/figure-html/unnamed-chunk-34-1.png" width="100%" />
+<img src="9_twolevelDOEs_files/figure-html/unnamed-chunk-33-1.png" width="100%" />
 
 In plot we can see that the effects that have the highest influence on the output are the effects A, C and D and their interactions. We can still confirm these observations with a calculation of the percentage contribution of each effect as follows:
 
@@ -781,14 +785,14 @@ battery_lm_tidy3 %>%
 
 |term  | effect_estimate| effect_contribution_perc|
 |:-----|---------------:|------------------------:|
-|C     |        -3.06125|                   182.35|
-|A:C   |         1.53625|                    91.51|
-|A     |         1.01625|                    60.54|
-|A:C:D |        -0.36875|                    21.97|
-|C:D   |        -0.32125|                    19.14|
-|D     |        -0.31125|                    18.54|
-|A:B   |         0.24875|                    14.82|
-|A:D   |        -0.24875|                    14.82|
+|C     |        -2.81125|                    95.99|
+|A:C:D |        -1.61875|                    55.27|
+|A:C   |         1.28625|                    43.92|
+|C:D   |         0.92875|                    31.71|
+|A:B:D |        -0.92125|                    31.46|
+|B:D   |         0.86125|                    29.41|
+|A:B:C |        -0.80625|                    27.53|
+|B:C   |         0.77125|                    26.33|
 
 Reduced model
 
@@ -809,20 +813,20 @@ lm.default(formula = charging_time ~ A + C + A:C, data = battery_charging)
 
 Residuals:
    Min     1Q Median     3Q    Max 
--2.146 -0.995 -0.458  0.865  2.905 
+-3.696 -1.062 -0.483  0.952  3.054 
 
 Coefficients:
             Estimate Std. Error t value Pr(>|t|)    
-(Intercept)    7.412      0.247   30.04  < 2e-16 ***
-A              0.315      0.247    1.28  0.21266    
-C              1.040      0.247    4.22  0.00023 ***
-A:C           -0.809      0.247   -3.28  0.00279 ** 
+(Intercept)    6.787      0.321   21.16   <2e-16 ***
+A              0.940      0.321    2.93   0.0067 ** 
+C              1.040      0.321    3.24   0.0030 ** 
+A:C           -0.809      0.321   -2.52   0.0176 *  
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
-Residual standard error: 1.4 on 28 degrees of freedom
-Multiple R-squared:  0.519,	Adjusted R-squared:  0.467 
-F-statistic: 10.1 on 3 and 28 DF,  p-value: 0.000116
+Residual standard error: 1.81 on 28 degrees of freedom
+Multiple R-squared:  0.476,	Adjusted R-squared:  0.42 
+F-statistic: 8.49 on 3 and 28 DF,  p-value: 0.000361
 ```
 
 We can now see that we've regained degrees of freedom and obtained a sort of hidden replication allowing to calculate statistics and error terms on the model.
@@ -837,7 +841,7 @@ par(mfrow = c(2,2))
 plot(battery_red_lm3)
 ```
 
-<img src="9_twolevelDOEs_files/figure-html/unnamed-chunk-37-1.png" width="100%" />
+<img src="9_twolevelDOEs_files/figure-html/unnamed-chunk-36-1.png" width="100%" />
 
 We can now establish the main effects and interaction plots and conclude on the optimal settings to maximize the output: A and D should be on the max and C on the min.
 

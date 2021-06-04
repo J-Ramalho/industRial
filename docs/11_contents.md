@@ -328,7 +328,13 @@
    <td style="text-align:left;background-color: white !important;">  </td>
   </tr>
   <tr>
-   <td style="text-align:left;background-color: white !important;"> Single replicate designs </td>
+   <td style="text-align:left;background-color: white !important;">  </td>
+   <td style="text-align:left;background-color: white !important;"> [Single replicate](#single_replicate) </td>
+   <td style="text-align:left;background-color: white !important;">  </td>
+   <td style="text-align:left;background-color: white !important;">  </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;background-color: white !important;">  </td>
    <td style="text-align:left;background-color: white !important;"> [Effects normal plot](#qqPlot) </td>
    <td style="text-align:left;background-color: white !important;"> `car::qqPlot` </td>
    <td style="text-align:left;background-color: white !important;">  </td>
@@ -400,10 +406,10 @@
    <td style="text-align:left;background-color: white !important;">  </td>
   </tr>
   <tr>
-   <td style="text-align:left;background-color: white !important;">  </td>
-   <td style="text-align:left;background-color: white !important;"> [Moving range chart](#chart_IMR) </td>
-   <td style="text-align:left;background-color: white !important;"> `industRial::chart_IMR` </td>
-   <td style="text-align:left;background-color: white !important;">  </td>
+   <td style="text-align:left;">  </td>
+   <td style="text-align:left;"> [Moving range chart](#chart_IMR) </td>
+   <td style="text-align:left;"> `industRial::chart_IMR` </td>
+   <td style="text-align:left;">  </td>
   </tr>
   <tr>
    <td style="text-align:left;">  </td>

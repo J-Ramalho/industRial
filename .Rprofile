@@ -6,7 +6,10 @@
 
 # Load packages:
 ds_pkgs <- c(
-  "tidyverse",
+  "dplyr",
+  "purrr",
+  "stringr",
+  "forcats",
   "scales",
   "janitor",
   "knitr",

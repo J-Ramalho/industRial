@@ -273,7 +273,7 @@ A consulting company specialized in data science is supporting a global manufact
 
 A - temperature (-1 = -10°C, +1 = 40°C)
 B - voltage (-1 = 120V, +1 = 220V)
-C - age (-1 = 10'000 cycles, +1 = 0 cycles)   
+C - age (-1 = 10'000 cycles, +1 = 0 cycles)  
 Z - charging time [h]
 
 The model can now be passed to the `aov()` function for an assessment of the significance of the different factors:
@@ -301,7 +301,7 @@ glance(battery_lm)[1:2] %>%
             .id = "model")
 ```
 
-Although R-squared has decreased the adjusted R-squared has slightly improved showing that removing the nonsignificant terms has resulted in a better fit. The changes are small and further work is still required but the principle is clear that the model fit is improving and will better forecast the output for new data.
+Although R-squared has decreased the adjusted R-squared has slightly improved showing that removing the non significant terms has resulted in a better fit. The changes are small and further work is still required but the principle is clear that the model fit is improving and will better forecast the output for new data.
 
 ### Coding inputs {#coding_inputs}
 
@@ -410,35 +410,28 @@ Just like in the surface plot we can see here in the interaction plot that the r
 ### Single replicate {#single_replicate}
 
 ```{r}
-battery_lm3 <- lm(
+battery_sr_lm <- lm(
   formula = charging_time ~ A * B * C * D, 
   data = battery_charging %>% filter(Replicate == 1))
-summary(battery_lm3)
+summary(battery_sr_lm)
 ```
 
-In the R&D offices of the manufacturer of electrical car batteries there is some satisfaction with the report delivered by the data science consulting company. Although sceptical with how far they can go with models, the head of battery engineering has finaly acknowledged that there are several benefits coming from this work. Now a bit late he would like to know by thursday (after tomorrow) what is the effect of terminals material which in his view will have a high impact on the final delivered cost of the assembled battery. Unfortunately this information was only captured in the 1st replicate in the variable coded as D as we can see in the dataset tail:
+In the R&D offices of the manufacturer of electrical car batteries there is some satisfaction with the report delivered by the data science consulting company. Although initially skeptical the head of battery engineering has finally acknowledged that there are several benefits coming from this work. Now, he makes a last moment request: he would like to know by thursday (after tomorrow) what is the effect of the terminals material. In his view this will for sure have a high impact on the final delivered cost of the assembled battery. Unfortunately data on terminals material was only captured in the 1st replicate and not on the second. We can see in the original data the variable coded as D by checking the `tail()`:
 
 ```{r}
 tail(battery_charging) %>%
   kable()
 ```
 
-As a reminder below the DOE variables are: 
+As a reminder below the DOE variables, including D are: 
 
 A - temperature (-1 = -10°C, +1 = 40°C)   
 B - voltage (-1 = 120V, +1 = 220V)   
 C - age (-1 = 10'000 cycles, +1 = 0 cycles)    
-D - terminal (-1 = lead based, +1 = zinc based)   
+D - terminal (-1 = lead based, +1 = zinc based)     
 Z - charging time [h]   
 
-A specialist in DOEs from the consulting company explains that in such a short time there are only two possible approaches:
-- graphical methods–normal and half-normal probability plots; no formal tests;  
-- assume some high-order interactions are zero, and fit a model that excludes them; degrees of freedom go into error, so testing is possible (not recommended)
-
-
-We can see that being a single replicate design no statistics have been calculated for the effects in the model. A recommended approach in this case is to look into the normal probability plot of the model effects. 
-
-Here we are going to prepare this plot with the function qqPlot() from the {car} package:
+As there is no time to collect new data, a specialist in DOEs from the consulting company suggests exploiting the the single replicate data using a graphical method - the normal probability plot - to identify the main effects that are important in the model. He demonstrates how to achieve this with  the function qqPlot() from the {car} package:
 
 ### Effects normal plot {#qqPlot}
 
@@ -447,16 +440,19 @@ library(car)
 ```
 
 ```{r}
-battery_eff3 <- battery_lm3$coefficients[2:16]
-battery_eff_names2 <- names((battery_lm3$coefficients)[2:16])
+battery_sr_effects <- battery_sr_lm$coefficients[2:16]
+battery_sr_effects_names <- names((battery_sr_lm$coefficients)[2:16])
+
 main_effects_plot <- qqPlot(
-  battery_eff3, envelope = 0.70, 
+  ylab = "Model effects",
+  battery_sr_effects, 
+  envelope = 0.70, 
   id = list(
     method = "y", n = 5, cex = 1, col = carPalette()[1], location = "lr"), 
     grid = FALSE,
   col = "black",
-  col.lines = "black",
-  main = "Chemical vessel - Normal plot of effects 2"
+  col.lines = viridis::viridis(12)[5],
+  main = "Battery charging DOE\nNormal plot of effects"
   )
 ```
 
@@ -465,25 +461,32 @@ In plot we can see that the effects that have the highest influence on the outpu
 ### Effects contribution table {#effects_contribution}
 
 ```{r}
-battery_lm_tidy3 <- battery_lm3 %>%
+battery_sr_lm_tidy <- battery_sr_lm %>%
   tidy() %>%
   filter(term != "(Intercept)") %>%
   mutate(
-    effect_estimate = -2 * estimate,
-    effect_estimate_sum = sum(effect_estimate), 
-    effect_contribution_perc = abs((effect_estimate/effect_estimate_sum)*100) %>%
-      round(2)
-  )
-battery_lm_tidy3 %>%
-  select(term, effect_estimate, effect_contribution_perc) %>%
-  arrange(desc(effect_contribution_perc)) %>%
-  head(8) %>%
+    effect_estimate = 2 * estimate)
+
+battery_sr_aov <- aov(battery_sr_lm)
+
+battery_sr_aov_tidy <- battery_sr_aov %>% 
+  tidy() %>%
+  mutate(term, sumsq_total = sum(sumsq),
+            effect_contribution_perc = sumsq/sumsq_total*100)
+
+main_effects_table <- battery_sr_lm_tidy %>% 
+  left_join(battery_sr_aov_tidy, by = "term") %>%
+  select(term, estimate, effect_estimate, sumsq, effect_contribution_perc) %>%
+  arrange(desc(effect_contribution_perc))
+
+main_effects_table %>%
+  head(5) %>%
   kable()
 ```
 
-Reduced model
+We could see in the `lm()` output before that no statistics have been calculated for the effects in the model as there is only a single replicate.
 
-Following the previous analysis we are removing the factor B from the model and keeping only the 2nd order interactions assuming the system also respects the sparcity of effects principle.
+### Reduced model
 
 ```{r}
 battery_red_lm3 <- lm(
@@ -491,6 +494,8 @@ battery_red_lm3 <- lm(
   data = battery_charging)
 summary(battery_red_lm3)
 ```
+
+Following the previous analysis we are removing the factor B from the model and keeping only the 2nd order interactions assuming the system also respects the sparcity of effects principle.
 
 We can now see that we've regained degrees of freedom and obtained a sort of hidden replication allowing to calculate statistics and error terms on the model.
 

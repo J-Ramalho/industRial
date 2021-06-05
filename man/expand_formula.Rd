@@ -7,7 +7,7 @@
 expand_formula(formulae)
 }
 \arguments{
-\item{formula}{Takes as input object of class formula, e.g.: Y ~ A * B, see ?formula for 
+\item{formulae}{Takes as input object of class formula, e.g.: Y ~ A * B, see ?formula for 
 syntax details}
 }
 \value{

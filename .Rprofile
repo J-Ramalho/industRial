@@ -1,4 +1,9 @@
 
+# package library
+# jrlibpaths <- c("/home/joao/R/x86_64-pc-linux-gnu-library/4.0", "/usr/local/lib/R/site-library",
+#                 "/usr/lib/R/site-library","/usr/lib/R/library")
+# .libPaths(jrlibpaths)
+
 # Load packages:
 ds_pkgs <- c(
   "tidyverse",
@@ -38,5 +43,7 @@ options(
   width = 69,
   tibble.width = 69
 )
-message("Digits set to: ")
-getOption("digits")
+# Startup messages
+message(paste0("Digits set to: ", getOption("digits")))
+message(paste0("Local library set to: ", .libPaths(jrlibpaths)[1]))
+message(paste0("Consider upgrading library according to ", R.version[["version.string"]]))

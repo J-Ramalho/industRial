@@ -15,7 +15,20 @@
 #' 
 #' @references 
 #' For an example application refer to \url{https://j-ramalho.github.io/industRial/}
-#'  
+#' 
+#' @param var Measured variable
+#' @param part Factor for parts
+#' @param appr Factor for appraisers (operators, machines, ...)
+#' @param data Data frame containing the variables
+#' @param main Main title for the graphic output
+#' @param sub Subtitle for the graphic output (recommended the name of the project)
+#' @param lsl Numeric value of lower specification limit used with USL to calculate Study Variation as \%Tolerance
+#' @param usl Numeric value of upper specification limit used with LSL to calculate Study Variation as \%Tolerance
+#' @param sigma Numeric value for number of std deviations to use in calculating Study Variation
+#' @param alphaLim Limit to take into account interaction
+#' @param errorTerm Which term of the model should be used as error term (for the model with interation)
+#' @param digits Number of decimal digits for output
+#' 
 #' @export
 #' 
 #' @importFrom stats aggregate aov as.formula pf

@@ -19,6 +19,31 @@ ss.rr.plots(
   digits = 4
 )
 }
+\arguments{
+\item{var}{Measured variable}
+
+\item{part}{Factor for parts}
+
+\item{appr}{Factor for appraisers (operators, machines, ...)}
+
+\item{lsl}{Numeric value of lower specification limit used with USL to calculate Study Variation as \%Tolerance}
+
+\item{usl}{Numeric value of upper specification limit used with LSL to calculate Study Variation as \%Tolerance}
+
+\item{sigma}{Numeric value for number of std deviations to use in calculating Study Variation}
+
+\item{data}{Data frame containing the variables}
+
+\item{main}{Main title for the graphic output}
+
+\item{sub}{Subtitle for the graphic output (recommended the name of the project)}
+
+\item{alphaLim}{Limit to take into account interaction}
+
+\item{errorTerm}{Which term of the model should be used as error term (for the model with interation)}
+
+\item{digits}{Number of decimal digits for output}
+}
 \value{
 Generates a list output that can be assigned to a 
 user created variable. The plots can then be accessed with the syntax

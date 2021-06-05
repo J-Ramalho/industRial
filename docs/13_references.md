@@ -30,7 +30,7 @@ devtools::session_info()[[1]]
 ##  collate  French_Switzerland.1252     
 ##  ctype    French_Switzerland.1252     
 ##  tz       Europe/Berlin               
-##  date     2021-06-04
+##  date     2021-06-05
 ```
 
 **Disclaimer**

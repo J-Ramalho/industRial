@@ -24,7 +24,7 @@
 <meta name="author" content="João Ramalho" />
 
 
-<meta name="date" content="2021-06-04" />
+<meta name="date" content="2021-06-05" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -277,6 +277,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#single_replicate"><i class="fa fa-check"></i>Single replicate</a></li>
 <li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#qqPlot"><i class="fa fa-check"></i>Effects normal plot</a></li>
 <li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#effects_contribution"><i class="fa fa-check"></i>Effects contribution table</a></li>
+<li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#reduced-model"><i class="fa fa-check"></i>Reduced model</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="SPC.html"><a href="SPC.html"><i class="fa fa-check"></i>Statistical Process Control</a>
@@ -871,7 +872,7 @@ F-statistic: 66.8 on 3 and 16 DF,  p-value: 2.88e-09</code></pre>
 <div class="sourceCode" id="cb118"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb118-1"><a href="DOE.html#cb118-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(car)</span>
 <span id="cb118-2"><a href="DOE.html#cb118-2" aria-hidden="true" tabindex="-1"></a><span class="fu">durbinWatsonTest</span>(ebike_lm_factor)</span></code></pre></div>
 <pre><code> lag Autocorrelation D-W Statistic p-value
-   1        -0.53433        2.9609   0.104
+   1        -0.53433        2.9609   0.116
  Alternative hypothesis: rho != 0</code></pre>
 <p>As already stated visual observations can most of the times be complemented with a statistical test. In this case we can apply the durbinWatson test from the <code>{car}</code> package (Car stands for Companion to Applied Regression)</p>
 <p>Although the output shows Autocorrelation of -0.53 we have to consider that the p value is slightly higher than 0.05 thus there is not enough significance to say that there is autocorrelation. The result is not a complete clear cut the lab supervisor remains alert for coming verifications.</p>
@@ -2347,7 +2348,7 @@ F-statistic: 8.49 on 3 and 28 DF,  p-value: 0.000361</code></pre>
   &lt;chr&gt;     &lt;dbl&gt;         &lt;dbl&gt;
 1 1         0.540         0.405
 2 2         0.476         0.420</code></pre>
-<p>Although R-squared has decreased the adjusted R-squared has slightly improved showing that removing the nonsignificant terms has resulted in a better fit. The changes are small and further work is still required but the principle is clear that the model fit is improving and will better forecast the output for new data.</p>
+<p>Although R-squared has decreased the adjusted R-squared has slightly improved showing that removing the non significant terms has resulted in a better fit. The changes are small and further work is still required but the principle is clear that the model fit is improving and will better forecast the output for new data.</p>
 </div>
 <div id="coding_inputs" class="section level3">
 <h3>Coding inputs</h3>
@@ -2409,8 +2410,8 @@ F-statistic: 8.49 on 3 and 28 DF,  p-value: 0.000361</code></pre>
 <span id="cb249-6"><a href="DOE.html#cb249-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">theta =</span> <span class="sc">-</span><span class="dv">40</span>, <span class="at">phi =</span> <span class="dv">20</span>, <span class="at">r =</span> <span class="dv">5</span>,</span>
 <span id="cb249-7"><a href="DOE.html#cb249-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">zlab =</span> <span class="st">&quot;Charging Time [h]&quot;</span>,</span>
 <span id="cb249-8"><a href="DOE.html#cb249-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">xlabs =</span> <span class="fu">c</span>(</span>
-<span id="cb249-9"><a href="DOE.html#cb249-9" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;A: Temperature </span><span class="sc">\n</span><span class="st">(+1 = 40°C, -1 = -10°C)&quot;</span>, </span>
-<span id="cb249-10"><a href="DOE.html#cb249-10" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;C: Age </span><span class="sc">\n</span><span class="st">(-1 = 10&#39;000 cycles, +1 = 0 cycles)&quot;</span>),</span>
+<span id="cb249-9"><a href="DOE.html#cb249-9" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;A: Temperature&quot;</span>, </span>
+<span id="cb249-10"><a href="DOE.html#cb249-10" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;C: Age&quot;</span>),</span>
 <span id="cb249-11"><a href="DOE.html#cb249-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">main =</span> <span class="st">&quot;Lithium-ion battery</span><span class="sc">\n</span><span class="st">charging time DOE&quot;</span></span>
 <span id="cb249-12"><a href="DOE.html#cb249-12" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
 <p><img src="9_twolevelDOEs_files/figure-html/unnamed-chunk-28-1.png" width="100%" /></p>
@@ -2432,234 +2433,185 @@ F-statistic: 8.49 on 3 and 28 DF,  p-value: 0.000361</code></pre>
 </div>
 <div id="single_replicate" class="section level3">
 <h3>Single replicate</h3>
-<div class="sourceCode" id="cb251"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb251-1"><a href="DOE.html#cb251-1" aria-hidden="true" tabindex="-1"></a>battery_lm3 <span class="ot">&lt;-</span> <span class="fu">lm</span>(</span>
+<div class="sourceCode" id="cb251"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb251-1"><a href="DOE.html#cb251-1" aria-hidden="true" tabindex="-1"></a>battery_sr_lm <span class="ot">&lt;-</span> <span class="fu">lm</span>(</span>
 <span id="cb251-2"><a href="DOE.html#cb251-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">formula =</span> charging_time <span class="sc">~</span> A <span class="sc">*</span> B <span class="sc">*</span> C <span class="sc">*</span> D, </span>
-<span id="cb251-3"><a href="DOE.html#cb251-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> battery_charging <span class="sc">%&gt;%</span> <span class="fu">filter</span>(Replicate <span class="sc">==</span> <span class="dv">1</span>))</span>
-<span id="cb251-4"><a href="DOE.html#cb251-4" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(battery_lm3)</span></code></pre></div>
+<span id="cb251-3"><a href="DOE.html#cb251-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> battery_charging <span class="sc">%&gt;%</span> <span class="fu">filter</span>(Replicate <span class="sc">==</span> <span class="dv">2</span>))</span>
+<span id="cb251-4"><a href="DOE.html#cb251-4" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(battery_sr_lm)</span></code></pre></div>
 <pre><code>
 Call:
 lm.default(formula = charging_time ~ A * B * C * D, data = battery_charging %&gt;% 
-    filter(Replicate == 1))
+    filter(Replicate == 2))
 
 Residuals:
 ALL 16 residuals are 0: no residual degrees of freedom!
 
 Coefficients:
-            Estimate Std. Error t value Pr(&gt;|t|)
-(Intercept)   7.1356         NA      NA       NA
-A             0.1169         NA      NA       NA
-B            -0.3381         NA      NA       NA
-C             1.4056         NA      NA       NA
-D             0.0306         NA      NA       NA
-A:B           0.2506         NA      NA       NA
-A:C          -0.6431         NA      NA       NA
-B:C          -0.3856         NA      NA       NA
-A:D           0.2494         NA      NA       NA
-B:D          -0.4306         NA      NA       NA
-C:D          -0.4644         NA      NA       NA
-A:B:C         0.4031         NA      NA       NA
-A:B:D         0.4606         NA      NA       NA
-A:C:D         0.8094         NA      NA       NA
-B:C:D        -0.3381         NA      NA       NA
-A:B:C:D       0.3381         NA      NA       NA
+             Estimate Std. Error t value Pr(&gt;|t|)
+(Intercept)  6.44e+00         NA      NA       NA
+A            1.76e+00         NA      NA       NA
+B           -2.50e-02         NA      NA       NA
+C            6.75e-01         NA      NA       NA
+D            1.05e+00         NA      NA       NA
+A:B          7.50e-02         NA      NA       NA
+A:C         -9.75e-01         NA      NA       NA
+B:C         -3.12e-01         NA      NA       NA
+A:D          4.00e-01         NA      NA       NA
+B:D          4.13e-01         NA      NA       NA
+C:D          1.25e-02         NA      NA       NA
+A:B:C        4.12e-01         NA      NA       NA
+A:B:D       -1.13e-01         NA      NA       NA
+A:C:D       -2.63e-01         NA      NA       NA
+B:C:D        5.00e-02         NA      NA       NA
+A:B:C:D      6.94e-18         NA      NA       NA
 
 Residual standard error: NaN on 0 degrees of freedom
 Multiple R-squared:     1,	Adjusted R-squared:   NaN 
 F-statistic:  NaN on 15 and 0 DF,  p-value: NA</code></pre>
-<p>In the R&amp;D offices of the manufacturer of electrical car batteries there is some satisfaction with the report delivered by the data science consulting company. Although sceptical with how far they can go with models, the head of battery engineering has finaly acknowledged that there are several benefits coming from this work. Now a bit late he would like to know by thursday (after tomorrow) what is the effect of terminals material which in his view will have a high impact on the final delivered cost of the assembled battery. Unfortunately this information was only captured in the 1st replicate in the variable coded as D as we can see in the dataset tail:</p>
-<div class="sourceCode" id="cb253"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb253-1"><a href="DOE.html#cb253-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tail</span>(battery_charging) <span class="sc">%&gt;%</span></span>
-<span id="cb253-2"><a href="DOE.html#cb253-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable</span>()</span></code></pre></div>
-<table>
-<thead>
-<tr class="header">
-<th align="right">A</th>
-<th align="right">B</th>
-<th align="right">C</th>
-<th align="right">D</th>
-<th align="right">Replicate</th>
-<th align="right">charging_time</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td align="right">-1</td>
-<td align="right">1</td>
-<td align="right">-1</td>
-<td align="right">NA</td>
-<td align="right">2</td>
-<td align="right">4.5</td>
-</tr>
-<tr class="even">
-<td align="right">1</td>
-<td align="right">1</td>
-<td align="right">-1</td>
-<td align="right">NA</td>
-<td align="right">2</td>
-<td align="right">10.4</td>
-</tr>
-<tr class="odd">
-<td align="right">-1</td>
-<td align="right">-1</td>
-<td align="right">1</td>
-<td align="right">NA</td>
-<td align="right">2</td>
-<td align="right">7.5</td>
-</tr>
-<tr class="even">
-<td align="right">1</td>
-<td align="right">-1</td>
-<td align="right">1</td>
-<td align="right">NA</td>
-<td align="right">2</td>
-<td align="right">8.6</td>
-</tr>
-<tr class="odd">
-<td align="right">-1</td>
-<td align="right">1</td>
-<td align="right">1</td>
-<td align="right">NA</td>
-<td align="right">2</td>
-<td align="right">7.0</td>
-</tr>
-<tr class="even">
-<td align="right">1</td>
-<td align="right">1</td>
-<td align="right">1</td>
-<td align="right">NA</td>
-<td align="right">2</td>
-<td align="right">9.6</td>
-</tr>
-</tbody>
-</table>
-<p>As a reminder below the DOE variables are:</p>
+<p>In the R&amp;D offices of the manufacturer of electrical car batteries there is some satisfaction with the report delivered by the data science consulting company. Although initially skeptical the head of battery engineering has finally acknowledged that there are several benefits coming from this work. Now, he makes a last moment request: he would like to know by thursday (after tomorrow) what is the effect of the terminals material. In his view this will for sure have a high impact on the final delivered cost of the assembled battery. Unfortunately data on terminals material was only captured in the 2nd replicate. We can check that in the original data for example in first two and last two rows. The variable coded as D is missing in the begining:</p>
+<div class="sourceCode" id="cb253"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb253-1"><a href="DOE.html#cb253-1" aria-hidden="true" tabindex="-1"></a>battery_charging[<span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">31</span><span class="sc">:</span><span class="dv">32</span>),]</span></code></pre></div>
+<pre><code># A tibble: 4 x 6
+      A     B     C     D Replicate charging_time
+  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt;         &lt;dbl&gt;
+1    -1    -1    -1    -1        NA          3.5 
+2     1    -1    -1    -1        NA          6.69
+3    -1     1     1     1         2          7   
+4     1     1     1     1         2          9.6 </code></pre>
+<p>As a reminder below the DOE variables, including D are:</p>
 <p>A - temperature (-1 = -10°C, +1 = 40°C)<br />
 B - voltage (-1 = 120V, +1 = 220V)<br />
 C - age (-1 = 10’000 cycles, +1 = 0 cycles)<br />
 D - terminal (-1 = lead based, +1 = zinc based)<br />
 Z - charging time [h]</p>
-<p>A specialist in DOEs from the consulting company explains that in such a short time there are only two possible approaches:
-- graphical methods–normal and half-normal probability plots; no formal tests;<br />
-- assume some high-order interactions are zero, and fit a model that excludes them; degrees of freedom go into error, so testing is possible (not recommended)</p>
-<p>We can see that being a single replicate design no statistics have been calculated for the effects in the model. A recommended approach in this case is to look into the normal probability plot of the model effects.</p>
-<p>Here we are going to prepare this plot with the function qqPlot() from the {car} package:</p>
+<p>As there is no time to collect new data, a specialist in DOEs from the consulting company suggests exploiting the the single replicate data using a graphical method - the normal probability plot - to identify the main effects that are important in the model. He demonstrates how to achieve this with the function qqPlot() from the {car} package:</p>
 </div>
 <div id="qqPlot" class="section level3">
 <h3>Effects normal plot</h3>
-<div class="sourceCode" id="cb254"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb254-1"><a href="DOE.html#cb254-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(car)</span></code></pre></div>
-<div class="sourceCode" id="cb255"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb255-1"><a href="DOE.html#cb255-1" aria-hidden="true" tabindex="-1"></a>battery_eff3 <span class="ot">&lt;-</span> battery_lm3<span class="sc">$</span>coefficients[<span class="dv">2</span><span class="sc">:</span><span class="dv">16</span>]</span>
-<span id="cb255-2"><a href="DOE.html#cb255-2" aria-hidden="true" tabindex="-1"></a>battery_eff_names2 <span class="ot">&lt;-</span> <span class="fu">names</span>((battery_lm3<span class="sc">$</span>coefficients)[<span class="dv">2</span><span class="sc">:</span><span class="dv">16</span>])</span>
-<span id="cb255-3"><a href="DOE.html#cb255-3" aria-hidden="true" tabindex="-1"></a>main_effects_plot <span class="ot">&lt;-</span> <span class="fu">qqPlot</span>(</span>
-<span id="cb255-4"><a href="DOE.html#cb255-4" aria-hidden="true" tabindex="-1"></a>  battery_eff3, <span class="at">envelope =</span> <span class="fl">0.70</span>, </span>
-<span id="cb255-5"><a href="DOE.html#cb255-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">id =</span> <span class="fu">list</span>(</span>
-<span id="cb255-6"><a href="DOE.html#cb255-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">method =</span> <span class="st">&quot;y&quot;</span>, <span class="at">n =</span> <span class="dv">5</span>, <span class="at">cex =</span> <span class="dv">1</span>, <span class="at">col =</span> <span class="fu">carPalette</span>()[<span class="dv">1</span>], <span class="at">location =</span> <span class="st">&quot;lr&quot;</span>), </span>
-<span id="cb255-7"><a href="DOE.html#cb255-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">grid =</span> <span class="cn">FALSE</span>,</span>
-<span id="cb255-8"><a href="DOE.html#cb255-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">col =</span> <span class="st">&quot;black&quot;</span>,</span>
-<span id="cb255-9"><a href="DOE.html#cb255-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">col.lines =</span> <span class="st">&quot;black&quot;</span>,</span>
-<span id="cb255-10"><a href="DOE.html#cb255-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">main =</span> <span class="st">&quot;Chemical vessel - Normal plot of effects 2&quot;</span></span>
-<span id="cb255-11"><a href="DOE.html#cb255-11" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
+<div class="sourceCode" id="cb255"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb255-1"><a href="DOE.html#cb255-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(car)</span></code></pre></div>
+<div class="sourceCode" id="cb256"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb256-1"><a href="DOE.html#cb256-1" aria-hidden="true" tabindex="-1"></a>battery_sr_effects <span class="ot">&lt;-</span> battery_sr_lm<span class="sc">$</span>coefficients[<span class="dv">2</span><span class="sc">:</span><span class="dv">16</span>]</span>
+<span id="cb256-2"><a href="DOE.html#cb256-2" aria-hidden="true" tabindex="-1"></a>battery_sr_effects_names <span class="ot">&lt;-</span> <span class="fu">names</span>((battery_sr_lm<span class="sc">$</span>coefficients)[<span class="dv">2</span><span class="sc">:</span><span class="dv">16</span>])</span>
+<span id="cb256-3"><a href="DOE.html#cb256-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb256-4"><a href="DOE.html#cb256-4" aria-hidden="true" tabindex="-1"></a>main_effects_plot <span class="ot">&lt;-</span> <span class="fu">qqPlot</span>(</span>
+<span id="cb256-5"><a href="DOE.html#cb256-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">ylab =</span> <span class="st">&quot;Model effects&quot;</span>,</span>
+<span id="cb256-6"><a href="DOE.html#cb256-6" aria-hidden="true" tabindex="-1"></a>  battery_sr_effects, </span>
+<span id="cb256-7"><a href="DOE.html#cb256-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">envelope =</span> <span class="fl">0.95</span>, </span>
+<span id="cb256-8"><a href="DOE.html#cb256-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">id =</span> <span class="fu">list</span>(</span>
+<span id="cb256-9"><a href="DOE.html#cb256-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">method =</span> <span class="st">&quot;y&quot;</span>, <span class="at">n =</span> <span class="dv">5</span>, <span class="at">cex =</span> <span class="dv">1</span>, <span class="at">col =</span> <span class="fu">carPalette</span>()[<span class="dv">1</span>], <span class="at">location =</span> <span class="st">&quot;lr&quot;</span>), </span>
+<span id="cb256-10"><a href="DOE.html#cb256-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">grid =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb256-11"><a href="DOE.html#cb256-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">col =</span> <span class="st">&quot;black&quot;</span>,</span>
+<span id="cb256-12"><a href="DOE.html#cb256-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">col.lines =</span> viridis<span class="sc">::</span><span class="fu">viridis</span>(<span class="dv">12</span>)[<span class="dv">5</span>],</span>
+<span id="cb256-13"><a href="DOE.html#cb256-13" aria-hidden="true" tabindex="-1"></a>  <span class="at">main =</span> <span class="st">&quot;Battery charging DOE</span><span class="sc">\n</span><span class="st">Normal plot of effects&quot;</span></span>
+<span id="cb256-14"><a href="DOE.html#cb256-14" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
 <p><img src="9_twolevelDOEs_files/figure-html/unnamed-chunk-33-1.png" width="100%" /></p>
-<p>In plot we can see that the effects that have the highest influence on the output are the effects A, C and D and their interactions. We can still confirm these observations with a calculation of the percentage contribution of each effect as follows:</p>
+<p>In plot we can see that the effects that have the highest influence on the output are the effects A - temperature and D - terminal and their interaction. Its seems the head of engineering had a good intuition. The next step is a confirmation of these observations with a calculation of the percentage contribution of each effect as follows:</p>
 </div>
 <div id="effects_contribution" class="section level3">
 <h3>Effects contribution table</h3>
-<div class="sourceCode" id="cb256"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb256-1"><a href="DOE.html#cb256-1" aria-hidden="true" tabindex="-1"></a>battery_lm_tidy3 <span class="ot">&lt;-</span> battery_lm3 <span class="sc">%&gt;%</span></span>
-<span id="cb256-2"><a href="DOE.html#cb256-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tidy</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb256-3"><a href="DOE.html#cb256-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(term <span class="sc">!=</span> <span class="st">&quot;(Intercept)&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb256-4"><a href="DOE.html#cb256-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
-<span id="cb256-5"><a href="DOE.html#cb256-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">effect_estimate =</span> <span class="sc">-</span><span class="dv">2</span> <span class="sc">*</span> estimate,</span>
-<span id="cb256-6"><a href="DOE.html#cb256-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">effect_estimate_sum =</span> <span class="fu">sum</span>(effect_estimate), </span>
-<span id="cb256-7"><a href="DOE.html#cb256-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">effect_contribution_perc =</span> <span class="fu">abs</span>((effect_estimate<span class="sc">/</span>effect_estimate_sum)<span class="sc">*</span><span class="dv">100</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb256-8"><a href="DOE.html#cb256-8" aria-hidden="true" tabindex="-1"></a>      <span class="fu">round</span>(<span class="dv">2</span>)</span>
-<span id="cb256-9"><a href="DOE.html#cb256-9" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb256-10"><a href="DOE.html#cb256-10" aria-hidden="true" tabindex="-1"></a>battery_lm_tidy3 <span class="sc">%&gt;%</span></span>
-<span id="cb256-11"><a href="DOE.html#cb256-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(term, effect_estimate, effect_contribution_perc) <span class="sc">%&gt;%</span></span>
-<span id="cb256-12"><a href="DOE.html#cb256-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(effect_contribution_perc)) <span class="sc">%&gt;%</span></span>
-<span id="cb256-13"><a href="DOE.html#cb256-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>(<span class="dv">8</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb256-14"><a href="DOE.html#cb256-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb257"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb257-1"><a href="DOE.html#cb257-1" aria-hidden="true" tabindex="-1"></a>battery_sr_lm_tidy <span class="ot">&lt;-</span> battery_sr_lm <span class="sc">%&gt;%</span></span>
+<span id="cb257-2"><a href="DOE.html#cb257-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tidy</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb257-3"><a href="DOE.html#cb257-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(term <span class="sc">!=</span> <span class="st">&quot;(Intercept)&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb257-4"><a href="DOE.html#cb257-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb257-5"><a href="DOE.html#cb257-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">effect_estimate =</span> <span class="dv">2</span> <span class="sc">*</span> estimate)</span>
+<span id="cb257-6"><a href="DOE.html#cb257-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb257-7"><a href="DOE.html#cb257-7" aria-hidden="true" tabindex="-1"></a>battery_sr_aov <span class="ot">&lt;-</span> <span class="fu">aov</span>(battery_sr_lm)</span>
+<span id="cb257-8"><a href="DOE.html#cb257-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb257-9"><a href="DOE.html#cb257-9" aria-hidden="true" tabindex="-1"></a>battery_sr_aov_tidy <span class="ot">&lt;-</span> battery_sr_aov <span class="sc">%&gt;%</span> </span>
+<span id="cb257-10"><a href="DOE.html#cb257-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tidy</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb257-11"><a href="DOE.html#cb257-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(term, <span class="at">sumsq_total =</span> <span class="fu">sum</span>(sumsq),</span>
+<span id="cb257-12"><a href="DOE.html#cb257-12" aria-hidden="true" tabindex="-1"></a>            <span class="at">effect_contribution_perc =</span> sumsq<span class="sc">/</span>sumsq_total<span class="sc">*</span><span class="dv">100</span>)</span>
+<span id="cb257-13"><a href="DOE.html#cb257-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb257-14"><a href="DOE.html#cb257-14" aria-hidden="true" tabindex="-1"></a>main_effects_table <span class="ot">&lt;-</span> battery_sr_lm_tidy <span class="sc">%&gt;%</span> </span>
+<span id="cb257-15"><a href="DOE.html#cb257-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(battery_sr_aov_tidy, <span class="at">by =</span> <span class="st">&quot;term&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb257-16"><a href="DOE.html#cb257-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(term, estimate, effect_estimate, sumsq, effect_contribution_perc) <span class="sc">%&gt;%</span></span>
+<span id="cb257-17"><a href="DOE.html#cb257-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(effect_contribution_perc))</span>
+<span id="cb257-18"><a href="DOE.html#cb257-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb257-19"><a href="DOE.html#cb257-19" aria-hidden="true" tabindex="-1"></a>main_effects_table <span class="sc">%&gt;%</span></span>
+<span id="cb257-20"><a href="DOE.html#cb257-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>(<span class="dv">5</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb257-21"><a href="DOE.html#cb257-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable</span>()</span></code></pre></div>
 <table>
 <thead>
 <tr class="header">
 <th align="left">term</th>
+<th align="right">estimate</th>
 <th align="right">effect_estimate</th>
+<th align="right">sumsq</th>
 <th align="right">effect_contribution_perc</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td align="left">C</td>
-<td align="right">-2.81125</td>
-<td align="right">95.99</td>
+<td align="left">A</td>
+<td align="right">1.7625</td>
+<td align="right">3.525</td>
+<td align="right">49.7025</td>
+<td align="right">49.2799</td>
 </tr>
 <tr class="even">
-<td align="left">A:C:D</td>
-<td align="right">-1.61875</td>
-<td align="right">55.27</td>
+<td align="left">D</td>
+<td align="right">1.0500</td>
+<td align="right">2.100</td>
+<td align="right">17.6400</td>
+<td align="right">17.4900</td>
 </tr>
 <tr class="odd">
 <td align="left">A:C</td>
-<td align="right">1.28625</td>
-<td align="right">43.92</td>
+<td align="right">-0.9750</td>
+<td align="right">-1.950</td>
+<td align="right">15.2100</td>
+<td align="right">15.0807</td>
 </tr>
 <tr class="even">
-<td align="left">C:D</td>
-<td align="right">0.92875</td>
-<td align="right">31.71</td>
+<td align="left">C</td>
+<td align="right">0.6750</td>
+<td align="right">1.350</td>
+<td align="right">7.2900</td>
+<td align="right">7.2280</td>
 </tr>
 <tr class="odd">
-<td align="left">A:B:D</td>
-<td align="right">-0.92125</td>
-<td align="right">31.46</td>
-</tr>
-<tr class="even">
 <td align="left">B:D</td>
-<td align="right">0.86125</td>
-<td align="right">29.41</td>
-</tr>
-<tr class="odd">
-<td align="left">A:B:C</td>
-<td align="right">-0.80625</td>
-<td align="right">27.53</td>
-</tr>
-<tr class="even">
-<td align="left">B:C</td>
-<td align="right">0.77125</td>
-<td align="right">26.33</td>
+<td align="right">0.4125</td>
+<td align="right">0.825</td>
+<td align="right">2.7225</td>
+<td align="right">2.6993</td>
 </tr>
 </tbody>
 </table>
-<p>Reduced model</p>
-<p>Following the previous analysis we are removing the factor B from the model and keeping only the 2nd order interactions assuming the system also respects the sparcity of effects principle.</p>
-<div class="sourceCode" id="cb257"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb257-1"><a href="DOE.html#cb257-1" aria-hidden="true" tabindex="-1"></a>battery_red_lm3 <span class="ot">&lt;-</span> <span class="fu">lm</span>(</span>
-<span id="cb257-2"><a href="DOE.html#cb257-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">formula =</span> charging_time <span class="sc">~</span> A <span class="sc">+</span> C <span class="sc">+</span> A<span class="sc">:</span>C, </span>
-<span id="cb257-3"><a href="DOE.html#cb257-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> battery_charging)</span>
-<span id="cb257-4"><a href="DOE.html#cb257-4" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(battery_red_lm3)</span></code></pre></div>
+<p>We could see in the <code>lm()</code> output before that no statistics have been calculated for the effects in the model as there is only a single replicate.</p>
+</div>
+<div id="reduced-model" class="section level3">
+<h3>Reduced model</h3>
+<div class="sourceCode" id="cb258"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb258-1"><a href="DOE.html#cb258-1" aria-hidden="true" tabindex="-1"></a>battery_red_lm <span class="ot">&lt;-</span> <span class="fu">lm</span>(</span>
+<span id="cb258-2"><a href="DOE.html#cb258-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">formula =</span> charging_time <span class="sc">~</span> A <span class="sc">+</span> D <span class="sc">+</span> A<span class="sc">:</span>C, </span>
+<span id="cb258-3"><a href="DOE.html#cb258-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> battery_charging <span class="sc">%&gt;%</span> <span class="fu">filter</span>(Replicate <span class="sc">==</span> <span class="dv">2</span>))</span>
+<span id="cb258-4"><a href="DOE.html#cb258-4" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(battery_red_lm)</span></code></pre></div>
 <pre><code>
 Call:
-lm.default(formula = charging_time ~ A + C + A:C, data = battery_charging)
+lm.default(formula = charging_time ~ A + D + A:C, data = battery_charging %&gt;% 
+    filter(Replicate == 2))
 
 Residuals:
    Min     1Q Median     3Q    Max 
--3.696 -1.062 -0.483  0.952  3.054 
+-2.450 -0.338  0.163  0.425  2.200 
 
 Coefficients:
             Estimate Std. Error t value Pr(&gt;|t|)    
-(Intercept)    6.787      0.321   21.16   &lt;2e-16 ***
-A              0.940      0.321    2.93   0.0067 ** 
-C              1.040      0.321    3.24   0.0030 ** 
-A:C           -0.809      0.321   -2.52   0.0176 *  
+(Intercept)    6.438      0.309   20.85  8.6e-11 ***
+A              1.763      0.309    5.71  9.8e-05 ***
+D              1.050      0.309    3.40   0.0053 ** 
+A:C           -0.975      0.309   -3.16   0.0083 ** 
 ---
 Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
 
-Residual standard error: 1.81 on 28 degrees of freedom
-Multiple R-squared:  0.476,	Adjusted R-squared:  0.42 
-F-statistic: 8.49 on 3 and 28 DF,  p-value: 0.000361</code></pre>
-<p>We can now see that we’ve regained degrees of freedom and obtained a sort of hidden replication allowing to calculate statistics and error terms on the model.</p>
-<p>Residuals analysis</p>
-<p>Checking the residuals we see the significant effect of the remaining interactions. The residuals are not completely normal but the in the standardized residuals the deviations are contained within 1.2 sd.</p>
-<div class="sourceCode" id="cb259"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb259-1"><a href="DOE.html#cb259-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">2</span>))</span>
-<span id="cb259-2"><a href="DOE.html#cb259-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(battery_red_lm3)</span></code></pre></div>
+Residual standard error: 1.24 on 12 degrees of freedom
+Multiple R-squared:  0.819,	Adjusted R-squared:  0.773 
+F-statistic:   18 on 3 and 12 DF,  p-value: 9.63e-05</code></pre>
+<p>Following theses analysis a new model has been built, including only the effects and interactions with highest contribution. We can now see that we’ve regained degrees of freedom and obtained a sort of hidden replication allowing to calculate statistics and error terms on the model. Checking the residuals the DOE specialist from the consulting company recommends to do another test now with proper replication but choosing only the variables of interest. These residuals show the limitations of this model deviating from normality above <span class="math inline">\(\pm\)</span> 1 standard deviation and showing difference variance at different levels.</p>
+<div class="sourceCode" id="cb260"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb260-1"><a href="DOE.html#cb260-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">3</span>))</span>
+<span id="cb260-2"><a href="DOE.html#cb260-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(battery_red_lm<span class="sc">$</span>residuals)</span>
+<span id="cb260-3"><a href="DOE.html#cb260-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(battery_red_lm, <span class="at">which =</span> <span class="dv">2</span>)</span>
+<span id="cb260-4"><a href="DOE.html#cb260-4" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(battery_red_lm, <span class="at">which =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">5</span>))</span>
+<span id="cb260-5"><a href="DOE.html#cb260-5" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(battery_red_lm, <span class="at">which =</span> <span class="dv">4</span>)</span></code></pre></div>
 <p><img src="9_twolevelDOEs_files/figure-html/unnamed-chunk-36-1.png" width="100%" /></p>
-<p>We can now establish the main effects and interaction plots and conclude on the optimal settings to maximize the output: A and D should be on the max and C on the min.</p>
+<p>In any case from the linear model coefficients we can already see that the selection of terminal material has a significative effect which is of about 60% of the effect of the temperature (1’050/1’763).</p>
 
 </div>
 </div>

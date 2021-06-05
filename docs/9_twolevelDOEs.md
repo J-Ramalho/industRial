@@ -446,7 +446,7 @@ A consulting company specialized in data science is supporting a global manufact
 
 A - temperature (-1 = -10°C, +1 = 40°C)
 B - voltage (-1 = 120V, +1 = 220V)
-C - age (-1 = 10'000 cycles, +1 = 0 cycles)   
+C - age (-1 = 10'000 cycles, +1 = 0 cycles)  
 Z - charging time [h]
 
 The model can now be passed to the `aov()` function for an assessment of the significance of the different factors:
@@ -522,7 +522,7 @@ glance(battery_lm)[1:2] %>%
 2 2         0.476         0.420
 ```
 
-Although R-squared has decreased the adjusted R-squared has slightly improved showing that removing the nonsignificant terms has resulted in a better fit. The changes are small and further work is still required but the principle is clear that the model fit is improving and will better forecast the output for new data.
+Although R-squared has decreased the adjusted R-squared has slightly improved showing that removing the non significant terms has resulted in a better fit. The changes are small and further work is still required but the principle is clear that the model fit is improving and will better forecast the output for new data.
 
 ### Coding inputs {#coding_inputs}
 
@@ -625,8 +625,8 @@ persp(
   theta = -40, phi = 20, r = 5,
   zlab = "Charging Time [h]",
   xlabs = c(
-    "A: Temperature \n(+1 = 40°C, -1 = -10°C)", 
-    "C: Age \n(-1 = 10'000 cycles, +1 = 0 cycles)"),
+    "A: Temperature", 
+    "C: Age"),
   main = "Lithium-ion battery\ncharging time DOE"
 )
 ```
@@ -660,80 +660,71 @@ Just like in the surface plot we can see here in the interaction plot that the r
 
 
 ```r
-battery_lm3 <- lm(
+battery_sr_lm <- lm(
   formula = charging_time ~ A * B * C * D, 
-  data = battery_charging %>% filter(Replicate == 1))
-summary(battery_lm3)
+  data = battery_charging %>% filter(Replicate == 2))
+summary(battery_sr_lm)
 ```
 
 ```
 
 Call:
 lm.default(formula = charging_time ~ A * B * C * D, data = battery_charging %>% 
-    filter(Replicate == 1))
+    filter(Replicate == 2))
 
 Residuals:
 ALL 16 residuals are 0: no residual degrees of freedom!
 
 Coefficients:
-            Estimate Std. Error t value Pr(>|t|)
-(Intercept)   7.1356         NA      NA       NA
-A             0.1169         NA      NA       NA
-B            -0.3381         NA      NA       NA
-C             1.4056         NA      NA       NA
-D             0.0306         NA      NA       NA
-A:B           0.2506         NA      NA       NA
-A:C          -0.6431         NA      NA       NA
-B:C          -0.3856         NA      NA       NA
-A:D           0.2494         NA      NA       NA
-B:D          -0.4306         NA      NA       NA
-C:D          -0.4644         NA      NA       NA
-A:B:C         0.4031         NA      NA       NA
-A:B:D         0.4606         NA      NA       NA
-A:C:D         0.8094         NA      NA       NA
-B:C:D        -0.3381         NA      NA       NA
-A:B:C:D       0.3381         NA      NA       NA
+             Estimate Std. Error t value Pr(>|t|)
+(Intercept)  6.44e+00         NA      NA       NA
+A            1.76e+00         NA      NA       NA
+B           -2.50e-02         NA      NA       NA
+C            6.75e-01         NA      NA       NA
+D            1.05e+00         NA      NA       NA
+A:B          7.50e-02         NA      NA       NA
+A:C         -9.75e-01         NA      NA       NA
+B:C         -3.12e-01         NA      NA       NA
+A:D          4.00e-01         NA      NA       NA
+B:D          4.13e-01         NA      NA       NA
+C:D          1.25e-02         NA      NA       NA
+A:B:C        4.12e-01         NA      NA       NA
+A:B:D       -1.13e-01         NA      NA       NA
+A:C:D       -2.63e-01         NA      NA       NA
+B:C:D        5.00e-02         NA      NA       NA
+A:B:C:D      6.94e-18         NA      NA       NA
 
 Residual standard error: NaN on 0 degrees of freedom
 Multiple R-squared:     1,	Adjusted R-squared:   NaN 
 F-statistic:  NaN on 15 and 0 DF,  p-value: NA
 ```
 
-In the R&D offices of the manufacturer of electrical car batteries there is some satisfaction with the report delivered by the data science consulting company. Although sceptical with how far they can go with models, the head of battery engineering has finaly acknowledged that there are several benefits coming from this work. Now a bit late he would like to know by thursday (after tomorrow) what is the effect of terminals material which in his view will have a high impact on the final delivered cost of the assembled battery. Unfortunately this information was only captured in the 1st replicate in the variable coded as D as we can see in the dataset tail:
+In the R&D offices of the manufacturer of electrical car batteries there is some satisfaction with the report delivered by the data science consulting company. Although initially skeptical the head of battery engineering has finally acknowledged that there are several benefits coming from this work. Now, he makes a last moment request: he would like to know by thursday (after tomorrow) what is the effect of the terminals material. In his view this will for sure have a high impact on the final delivered cost of the assembled battery. Unfortunately data on terminals material was only captured in the 2nd replicate. We can check that in the original data for example in first two and last two rows. The variable coded as D is missing in the begining:
 
 
 ```r
-tail(battery_charging) %>%
-  kable()
+battery_charging[c(1,2,31:32),]
 ```
 
+```
+# A tibble: 4 x 6
+      A     B     C     D Replicate charging_time
+  <dbl> <dbl> <dbl> <dbl>     <dbl>         <dbl>
+1    -1    -1    -1    -1        NA          3.5 
+2     1    -1    -1    -1        NA          6.69
+3    -1     1     1     1         2          7   
+4     1     1     1     1         2          9.6 
+```
 
-
-|  A|  B|  C|  D| Replicate| charging_time|
-|--:|--:|--:|--:|---------:|-------------:|
-| -1|  1| -1| NA|         2|           4.5|
-|  1|  1| -1| NA|         2|          10.4|
-| -1| -1|  1| NA|         2|           7.5|
-|  1| -1|  1| NA|         2|           8.6|
-| -1|  1|  1| NA|         2|           7.0|
-|  1|  1|  1| NA|         2|           9.6|
-
-As a reminder below the DOE variables are: 
+As a reminder below the DOE variables, including D are: 
 
 A - temperature (-1 = -10°C, +1 = 40°C)   
 B - voltage (-1 = 120V, +1 = 220V)   
 C - age (-1 = 10'000 cycles, +1 = 0 cycles)    
-D - terminal (-1 = lead based, +1 = zinc based)   
+D - terminal (-1 = lead based, +1 = zinc based)     
 Z - charging time [h]   
 
-A specialist in DOEs from the consulting company explains that in such a short time there are only two possible approaches:
-- graphical methods–normal and half-normal probability plots; no formal tests;  
-- assume some high-order interactions are zero, and fit a model that excludes them; degrees of freedom go into error, so testing is possible (not recommended)
-
-
-We can see that being a single replicate design no statistics have been calculated for the effects in the model. A recommended approach in this case is to look into the normal probability plot of the model effects. 
-
-Here we are going to prepare this plot with the function qqPlot() from the {car} package:
+As there is no time to collect new data, a specialist in DOEs from the consulting company suggests exploiting the the single replicate data using a graphical method - the normal probability plot - to identify the main effects that are important in the model. He demonstrates how to achieve this with  the function qqPlot() from the {car} package:
 
 ### Effects normal plot {#qqPlot}
 
@@ -744,104 +735,110 @@ library(car)
 
 
 ```r
-battery_eff3 <- battery_lm3$coefficients[2:16]
-battery_eff_names2 <- names((battery_lm3$coefficients)[2:16])
+battery_sr_effects <- battery_sr_lm$coefficients[2:16]
+battery_sr_effects_names <- names((battery_sr_lm$coefficients)[2:16])
+
 main_effects_plot <- qqPlot(
-  battery_eff3, envelope = 0.70, 
+  ylab = "Model effects",
+  battery_sr_effects, 
+  envelope = 0.95, 
   id = list(
     method = "y", n = 5, cex = 1, col = carPalette()[1], location = "lr"), 
     grid = FALSE,
   col = "black",
-  col.lines = "black",
-  main = "Chemical vessel - Normal plot of effects 2"
+  col.lines = viridis::viridis(12)[5],
+  main = "Battery charging DOE\nNormal plot of effects"
   )
 ```
 
 <img src="9_twolevelDOEs_files/figure-html/unnamed-chunk-33-1.png" width="100%" />
 
-In plot we can see that the effects that have the highest influence on the output are the effects A, C and D and their interactions. We can still confirm these observations with a calculation of the percentage contribution of each effect as follows:
+In plot we can see that the effects that have the highest influence on the output are the effects A - temperature and D - terminal and their interaction. Its seems the head of engineering had a good intuition. The next step is a confirmation of these observations with a calculation of the percentage contribution of each effect as follows:
 
 ### Effects contribution table {#effects_contribution}
 
 
 ```r
-battery_lm_tidy3 <- battery_lm3 %>%
+battery_sr_lm_tidy <- battery_sr_lm %>%
   tidy() %>%
   filter(term != "(Intercept)") %>%
   mutate(
-    effect_estimate = -2 * estimate,
-    effect_estimate_sum = sum(effect_estimate), 
-    effect_contribution_perc = abs((effect_estimate/effect_estimate_sum)*100) %>%
-      round(2)
-  )
-battery_lm_tidy3 %>%
-  select(term, effect_estimate, effect_contribution_perc) %>%
-  arrange(desc(effect_contribution_perc)) %>%
-  head(8) %>%
+    effect_estimate = 2 * estimate)
+
+battery_sr_aov <- aov(battery_sr_lm)
+
+battery_sr_aov_tidy <- battery_sr_aov %>% 
+  tidy() %>%
+  mutate(term, sumsq_total = sum(sumsq),
+            effect_contribution_perc = sumsq/sumsq_total*100)
+
+main_effects_table <- battery_sr_lm_tidy %>% 
+  left_join(battery_sr_aov_tidy, by = "term") %>%
+  select(term, estimate, effect_estimate, sumsq, effect_contribution_perc) %>%
+  arrange(desc(effect_contribution_perc))
+
+main_effects_table %>%
+  head(5) %>%
   kable()
 ```
 
 
 
-|term  | effect_estimate| effect_contribution_perc|
-|:-----|---------------:|------------------------:|
-|C     |        -2.81125|                    95.99|
-|A:C:D |        -1.61875|                    55.27|
-|A:C   |         1.28625|                    43.92|
-|C:D   |         0.92875|                    31.71|
-|A:B:D |        -0.92125|                    31.46|
-|B:D   |         0.86125|                    29.41|
-|A:B:C |        -0.80625|                    27.53|
-|B:C   |         0.77125|                    26.33|
+|term | estimate| effect_estimate|   sumsq| effect_contribution_perc|
+|:----|--------:|---------------:|-------:|------------------------:|
+|A    |   1.7625|           3.525| 49.7025|                  49.2799|
+|D    |   1.0500|           2.100| 17.6400|                  17.4900|
+|A:C  |  -0.9750|          -1.950| 15.2100|                  15.0807|
+|C    |   0.6750|           1.350|  7.2900|                   7.2280|
+|B:D  |   0.4125|           0.825|  2.7225|                   2.6993|
 
-Reduced model
+We could see in the `lm()` output before that no statistics have been calculated for the effects in the model as there is only a single replicate.
 
-Following the previous analysis we are removing the factor B from the model and keeping only the 2nd order interactions assuming the system also respects the sparcity of effects principle.
+### Reduced model
 
 
 ```r
-battery_red_lm3 <- lm(
-  formula = charging_time ~ A + C + A:C, 
-  data = battery_charging)
-summary(battery_red_lm3)
+battery_red_lm <- lm(
+  formula = charging_time ~ A + D + A:C, 
+  data = battery_charging %>% filter(Replicate == 2))
+summary(battery_red_lm)
 ```
 
 ```
 
 Call:
-lm.default(formula = charging_time ~ A + C + A:C, data = battery_charging)
+lm.default(formula = charging_time ~ A + D + A:C, data = battery_charging %>% 
+    filter(Replicate == 2))
 
 Residuals:
    Min     1Q Median     3Q    Max 
--3.696 -1.062 -0.483  0.952  3.054 
+-2.450 -0.338  0.163  0.425  2.200 
 
 Coefficients:
             Estimate Std. Error t value Pr(>|t|)    
-(Intercept)    6.787      0.321   21.16   <2e-16 ***
-A              0.940      0.321    2.93   0.0067 ** 
-C              1.040      0.321    3.24   0.0030 ** 
-A:C           -0.809      0.321   -2.52   0.0176 *  
+(Intercept)    6.438      0.309   20.85  8.6e-11 ***
+A              1.763      0.309    5.71  9.8e-05 ***
+D              1.050      0.309    3.40   0.0053 ** 
+A:C           -0.975      0.309   -3.16   0.0083 ** 
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
-Residual standard error: 1.81 on 28 degrees of freedom
-Multiple R-squared:  0.476,	Adjusted R-squared:  0.42 
-F-statistic: 8.49 on 3 and 28 DF,  p-value: 0.000361
+Residual standard error: 1.24 on 12 degrees of freedom
+Multiple R-squared:  0.819,	Adjusted R-squared:  0.773 
+F-statistic:   18 on 3 and 12 DF,  p-value: 9.63e-05
 ```
 
-We can now see that we've regained degrees of freedom and obtained a sort of hidden replication allowing to calculate statistics and error terms on the model.
-
-Residuals analysis
-
-Checking the residuals we see the significant effect of the remaining interactions. The residuals are not completely normal but the in the standardized residuals the deviations are contained within 1.2 sd.
+Following theses analysis a new model has been built, including only the effects and interactions with highest contribution. We can now see that we've regained degrees of freedom and obtained a sort of hidden replication allowing to calculate statistics and error terms on the model. Checking the residuals the DOE specialist from the consulting company recommends to do another test now with proper replication but choosing only the variables of interest. These residuals show the limitations of this model deviating from normality above $\pm$ 1 standard deviation and showing difference variance at different levels. 
 
 
 ```r
-par(mfrow = c(2,2))
-plot(battery_red_lm3)
+par(mfrow = c(2,3))
+plot(battery_red_lm$residuals)
+plot(battery_red_lm, which = 2)
+plot(battery_red_lm, which = c(1, 3, 5))
+plot(battery_red_lm, which = 4)
 ```
 
 <img src="9_twolevelDOEs_files/figure-html/unnamed-chunk-36-1.png" width="100%" />
 
-We can now establish the main effects and interaction plots and conclude on the optimal settings to maximize the output: A and D should be on the max and C on the min.
-
+In any case from the linear model coefficients we can already see that the selection of terminal material has a significative effect which is of about 60% of the effect of the temperature (1'050/1'763).

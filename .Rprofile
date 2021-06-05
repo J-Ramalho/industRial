@@ -48,5 +48,5 @@ options(
 )
 # Startup messages
 message(paste0("Digits set to: ", getOption("digits")))
-message(paste0("Local library set to: ", .libPaths(jrlibpaths)[1]))
-message(paste0("Consider upgrading library according to ", R.version[["version.string"]]))
+# message(paste0("Local library set to: ", .libPaths(jrlibpaths)[1]))
+# message(paste0("Consider upgrading library according to ", R.version[["version.string"]]))

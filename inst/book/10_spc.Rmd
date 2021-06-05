@@ -11,6 +11,8 @@ Keeping the variability of an industrial process under control is one of the mos
 
 <b class="highlight">Syringe injection molding</b>
 
+
+
 ```{r echo=FALSE, out.width="100%"}
 knitr::include_graphics("img/syringe_molding_bw.jpg")
 # sources:

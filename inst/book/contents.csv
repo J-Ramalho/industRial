@@ -43,7 +43,7 @@ Covariance,[Correlation test](#cor.test),`stats::cor.test`,solarcell_fill,The so
 General designs,[Factorial design](#fac.design),`DoE.base::fac.design`,juice_drymatter,The juice production plant,Food
 ,[Main effects plots](#main_effects),,,,
 ,[Interactions plots (custom)](#interaction_plot),`ggplot2::geom_errorbar`,,,
-,[Formula expansion](#formula_expansion),`industRial::formula_expansion`,,
+,[Formula expansion](#formula_expansion),`industRial::formula_expansion`,,,
 ,[Anova 3rd level interactions](#anova_three),,,,
 Two level designs,[Coding levels](#coding_levels),`stats::relevel`,pet_doe,The PET clothing improvement DoE,Clothing
 ,[Interaction plots with SE](#plotMeans),`RcmdrMisc::plotMeans`,,,
@@ -57,7 +57,7 @@ Two level designs,[Coding levels](#coding_levels),`stats::relevel`,pet_doe,The P
 SPC,,,,,
 Xbar-R charts,[Mean chart](#xbar_chart),`qcc::qcc`,syringe_diameter,The syringe injection molding process,Medical devices
 ,[Range chart](#Rchart),`qcc::qcc`,,,
-,[Control limits](#limits.xbar),`qcc::limits.xbar`,,,
+,[Warning limits](#limits.xbar),`qcc::limits.xbar`,,,
 Cpk charts,[Off specification](#off_spec),`industRial::off_spec`,syringe_diameter,The syringe injection molding process,Medical devices
 ,[Process capability](#process_Cpk),`industRial::process_Cpk`,,,
 ,[Sigma conversion table](#sigma_table),,,,

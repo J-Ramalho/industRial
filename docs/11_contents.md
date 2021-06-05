@@ -365,7 +365,7 @@
   </tr>
   <tr>
    <td style="text-align:left;background-color: white !important;">  </td>
-   <td style="text-align:left;background-color: white !important;"> [Control limits](#limits.xbar) </td>
+   <td style="text-align:left;background-color: white !important;"> [Warning limits](#limits.xbar) </td>
    <td style="text-align:left;background-color: white !important;"> `qcc::limits.xbar` </td>
    <td style="text-align:left;background-color: white !important;">  </td>
   </tr>

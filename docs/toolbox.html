@@ -6,12 +6,12 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Toolbox | industRial data science</title>
   <meta name="description" content="Toolbox | industRial data science" />
-  <meta name="generator" content="bookdown 0.20 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Toolbox | industRial data science" />
   <meta property="og:type" content="book" />
   
-  <meta property="og:image" content="img/cover3.png" />
+  <meta property="og:image" content="/img/cover3.png" />
   
   <meta name="github-repo" content="J-Ramalho/industRialds" />
 
@@ -19,7 +19,7 @@
   <meta name="twitter:title" content="Toolbox | industRial data science" />
   
   
-  <meta name="twitter:image" content="img/cover3.png" />
+  <meta name="twitter:image" content="/img/cover3.png" />
 
 <meta name="author" content="João Ramalho" />
 
@@ -33,7 +33,7 @@
   
 <link rel="prev" href="index.html"/>
 <link rel="next" href="tutorials.html"/>
-<script src="libs/header-attrs-2.7/header-attrs.js"></script>
+<script src="libs/header-attrs-2.8/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -51,6 +51,8 @@
 
 
 
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
 <script src="libs/kePrint-0.0.1/kePrint.js"></script>
 <link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
 <!-- Global site tag (gtag.js) - Google Analytics -->
@@ -132,6 +134,29 @@ code span.st { color: #4070a0; } /* String */
 code span.va { color: #19177c; } /* Variable */
 code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
 </style>
 
 <link rel="stylesheet" href="css/industRialds.css" type="text/css" />
@@ -286,11 +311,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li class="chapter" data-level="" data-path="SPC.html"><a href="SPC.html#xbar_chart"><i class="fa fa-check"></i>Mean chart</a></li>
 <li class="chapter" data-level="" data-path="SPC.html"><a href="SPC.html#Rchart"><i class="fa fa-check"></i>Range chart</a></li>
-<li class="chapter" data-level="" data-path="SPC.html"><a href="SPC.html#limits.xbar"><i class="fa fa-check"></i>Control limits</a></li>
+<li class="chapter" data-level="" data-path="SPC.html"><a href="SPC.html#limits.xbar"><i class="fa fa-check"></i>Warning limits</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="SPC.html"><a href="SPC.html#cpk-charts"><i class="fa fa-check"></i>Cpk charts</a>
 <ul>
-<li class="chapter" data-level="" data-path="SPC.html"><a href="SPC.html#off_spec"><i class="fa fa-check"></i>Off specification</a></li>
+<li class="chapter" data-level="" data-path="SPC.html"><a href="SPC.html#off_spec"><i class="fa fa-check"></i>Off spec</a></li>
 <li class="chapter" data-level="" data-path="SPC.html"><a href="SPC.html#process_Cpk"><i class="fa fa-check"></i>Process Capability</a></li>
 <li class="chapter" data-level="" data-path="SPC.html"><a href="SPC.html#sigma_table"><i class="fa fa-check"></i>Sigma conversion table</a></li>
 <li class="chapter" data-level="" data-path="SPC.html"><a href="SPC.html#process.capability"><i class="fa fa-check"></i>Capability chart</a></li>
@@ -397,56 +422,56 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <td align="left">imports</td>
 <td align="left">viridis</td>
 <td align="left">colors</td>
-<td align="left">0.5.1</td>
-<td align="left">R (&gt;= 2.10), viridisLite (&gt;= 0.3.0)</td>
+<td align="left">0.6.1</td>
+<td align="left">R (&gt;= 2.10), viridisLite (&gt;= 0.4.0)</td>
 </tr>
 <tr class="even">
 <td align="left">imports</td>
 <td align="left">readr</td>
 <td align="left">data loading</td>
-<td align="left">1.3.1</td>
+<td align="left">1.4.0</td>
 <td align="left">R (&gt;= 3.1)</td>
 </tr>
 <tr class="odd">
 <td align="left">imports</td>
 <td align="left">dplyr</td>
 <td align="left">data wrangling</td>
-<td align="left">1.0.2</td>
-<td align="left">R (&gt;= 3.2.0)</td>
+<td align="left">1.0.6</td>
+<td align="left">R (&gt;= 3.3.0)</td>
 </tr>
 <tr class="even">
 <td align="left">imports</td>
 <td align="left">forcats</td>
 <td align="left">data wrangling</td>
-<td align="left">0.5.0</td>
+<td align="left">0.5.1</td>
 <td align="left">R (&gt;= 3.2)</td>
 </tr>
 <tr class="odd">
 <td align="left">imports</td>
 <td align="left">janitor</td>
 <td align="left">data wrangling</td>
-<td align="left">2.0.1</td>
+<td align="left">2.1.0</td>
 <td align="left">R (&gt;= 3.1.2)</td>
 </tr>
 <tr class="even">
 <td align="left">imports</td>
 <td align="left">magrittr</td>
 <td align="left">data wrangling</td>
-<td align="left">1.5</td>
+<td align="left">2.0.1</td>
 <td align="left">NA</td>
 </tr>
 <tr class="odd">
 <td align="left">imports</td>
 <td align="left">tibble</td>
 <td align="left">data wrangling</td>
-<td align="left">3.0.3</td>
+<td align="left">3.1.2</td>
 <td align="left">R (&gt;= 3.1.0)</td>
 </tr>
 <tr class="even">
 <td align="left">imports</td>
 <td align="left">tidyr</td>
 <td align="left">data wrangling</td>
-<td align="left">1.1.1</td>
+<td align="left">1.1.3</td>
 <td align="left">R (&gt;= 3.1)</td>
 </tr>
 <tr class="odd">
@@ -460,8 +485,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <td align="left">imports</td>
 <td align="left">glue</td>
 <td align="left">data wrangling</td>
-<td align="left">1.4.1</td>
-<td align="left">R (&gt;= 3.1)</td>
+<td align="left">1.4.2</td>
+<td align="left">R (&gt;= 3.2)</td>
 </tr>
 <tr class="odd">
 <td align="left">imports</td>
@@ -474,14 +499,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <td align="left">imports</td>
 <td align="left">patchwork</td>
 <td align="left">plotting</td>
-<td align="left">1.0.1</td>
+<td align="left">1.1.1</td>
 <td align="left">NA</td>
 </tr>
 <tr class="odd">
 <td align="left">imports</td>
 <td align="left">ggplot2</td>
 <td align="left">plotting</td>
-<td align="left">3.3.2</td>
+<td align="left">3.3.3</td>
 <td align="left">R (&gt;= 3.2)</td>
 </tr>
 <tr class="even">
@@ -495,21 +520,21 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <td align="left">imports</td>
 <td align="left">ggtext</td>
 <td align="left">plotting</td>
-<td align="left">0.1.0</td>
+<td align="left">0.1.1</td>
 <td align="left">R (&gt;= 3.5)</td>
 </tr>
 <tr class="even">
 <td align="left">imports</td>
 <td align="left">broom</td>
 <td align="left">statistics</td>
-<td align="left">0.7.0</td>
+<td align="left">0.7.6</td>
 <td align="left">R (&gt;= 3.1)</td>
 </tr>
 <tr class="odd">
 <td align="left">imports</td>
 <td align="left">stats</td>
 <td align="left">statistics</td>
-<td align="left">4.0.2</td>
+<td align="left">4.1.0</td>
 <td align="left">NA</td>
 </tr>
 <tr class="even">
@@ -565,7 +590,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <td align="left">suggests</td>
 <td align="left">ggraph</td>
 <td align="left">networks</td>
-<td align="left">2.0.3</td>
+<td align="left">2.0.5</td>
 <td align="left">R (&gt;= 2.10), ggplot2 (&gt;= 3.0.0)</td>
 </tr>
 <tr class="even">
@@ -579,28 +604,28 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <td align="left">suggests</td>
 <td align="left">igraph</td>
 <td align="left">networks</td>
-<td align="left">1.2.5</td>
+<td align="left">1.2.6</td>
 <td align="left">methods</td>
 </tr>
 <tr class="even">
 <td align="left">suggests</td>
 <td align="left">ggforce</td>
 <td align="left">networks</td>
-<td align="left">0.3.2</td>
+<td align="left">0.3.3</td>
 <td align="left">ggplot2 (&gt;= 3.0.0), R (&gt;= 3.3.0)</td>
 </tr>
 <tr class="odd">
 <td align="left">suggests</td>
 <td align="left">bookdown</td>
 <td align="left">publishing</td>
-<td align="left">0.20</td>
+<td align="left">0.22</td>
 <td align="left">NA</td>
 </tr>
 <tr class="even">
 <td align="left">suggests</td>
 <td align="left">knitr</td>
 <td align="left">publishing</td>
-<td align="left">1.29</td>
+<td align="left">1.33</td>
 <td align="left">R (&gt;= 3.2.3)</td>
 </tr>
 <tr class="odd">
@@ -614,14 +639,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <td align="left">suggests</td>
 <td align="left">gt</td>
 <td align="left">publishing</td>
-<td align="left">0.2.2</td>
+<td align="left">0.3.0</td>
 <td align="left">R (&gt;= 3.2.0)</td>
 </tr>
 <tr class="odd">
 <td align="left">suggests</td>
 <td align="left">car</td>
 <td align="left">statistics</td>
-<td align="left">3.0-9</td>
+<td align="left">3.0-10</td>
 <td align="left">R (&gt;= 3.5.0), carData (&gt;= 3.0-0)</td>
 </tr>
 <tr class="even">
@@ -644,7 +669,7 @@ purrr::map(ds_pkgs, library, character.only = TRUE)</code></pre>
 <p>We’re highlighting now some specific packages that are used in the book and that bring powerful features in analysis of data from R&amp;D and Operations. Wherever they are required in the book we loaded them explicitly in the text to help tracking where the specific functions come from.</p>
 <div id="six-sigma" class="section level4">
 <h4>six sigma</h4>
-<p><code>{SixSigma}</code> is a complete and robust R package. It provides many well tested functions in the area of quality and process improvement. We’re presenting a full example with the gage r&amp;R function in our MSA Case Study. As many other industrial packages, the <code>{SixSigma}</code> package is from before the <code>{tidyverse}</code> era and its plots have been not been developed with <code>{ggplot2}</code>. This makes integration in newer approaches harder. The data output is still nevertheless fully exploitable and very useful. The package is part of an excellent book with the same name published by <span class="citation"><a href="references.html#ref-Cano2012" role="doc-biblioref">Emilio L. Cano</a> (<a href="references.html#ref-Cano2012" role="doc-biblioref">2012</a>)</span>.</p>
+<p><code>{SixSigma}</code> is a complete and robust R package. It provides many well tested functions in the area of quality and process improvement. We’re presenting a full example with the gage r&amp;R function in our MSA Case Study. As many other industrial packages, the <code>{SixSigma}</code> package is from before the <code>{tidyverse}</code> era and its plots have been not been developed with <code>{ggplot2}</code>. This makes integration in newer approaches harder. The data output is still nevertheless fully exploitable and very useful. The package is part of an excellent book with the same name published by <span class="citation"><a href="#ref-Cano2012" role="doc-biblioref">Emilio L. Cano</a> (<a href="#ref-Cano2012" role="doc-biblioref">2012</a>)</span>.</p>
 </div>
 <div id="qcc" class="section level4">
 <h4>qcc</h4>
@@ -668,7 +693,7 @@ purrr::map(ds_pkgs, library, character.only = TRUE)</code></pre>
 </div>
 <div id="car" class="section level4">
 <h4>car</h4>
-<p>The <code>{car}</code> package which stands for Companion for Applied Regression is also used in many occasions as it contains many useful functions to assess the performance of linear models and anova. This package is combined with a complete book by <span class="citation"><a href="references.html#ref-Fox2019" role="doc-biblioref">Fox and Weisberg</a> (<a href="references.html#ref-Fox2019" role="doc-biblioref">2019</a>)</span>.</p>
+<p>The <code>{car}</code> package which stands for Companion for Applied Regression is also used in many occasions as it contains many useful functions to assess the performance of linear models and anova. This package is combined with a complete book by <span class="citation"><a href="#ref-Fox2019" role="doc-biblioref">Fox and Weisberg</a> (<a href="#ref-Fox2019" role="doc-biblioref">2019</a>)</span>.</p>
 </div>
 <div id="rcmdrmisc" class="section level4">
 <h4>RcmdrMisc</h4>
@@ -912,7 +937,16 @@ library(industRial)</code></pre>
 <p>For each function a help page is available and can be obtained the same way as any other R data sets, themes and functions with <code>?&lt;object&gt;</code> (e.g. ?chart_xbar)</p>
 <p>To go even deeper and get access to all the code, the original book Rmd files are also bundled in the package and can be seen in the book folder. A way to get the exact folder path is:</p>
 <div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="toolbox.html#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">paste0</span>(<span class="fu">.libPaths</span>()[<span class="dv">1</span>], <span class="st">&quot;/industRial/book&quot;</span>)</span></code></pre></div>
-<pre><code>[1] &quot;C:/R/R-4.0.2/jr_library/industRial/book&quot;</code></pre>
+<pre><code>[1] &quot;/home/joao/R/x86_64-pc-linux-gnu-library/4.1/industRial/book&quot;</code></pre>
+</div>
+</div>
+<h3>References</h3>
+<div id="refs" class="references csl-bib-body hanging-indent">
+<div id="ref-Cano2012" class="csl-entry">
+Emilio L. Cano, Andrés Redchuk, Javier M. Moguerza. 2012. <em>Six Sigma with r</em>. 1th ed. Vol. 36. Use r! Springer New York Heidelberg Dordrecht London: Springer.
+</div>
+<div id="ref-Fox2019" class="csl-entry">
+Fox, John, and Sanford Weisberg. 2019. <em>An r Companion to Applied Regression</em>. 3rd edition. Thousand Oaks CA: SAGE publishing.
 </div>
 </div>
             </section>

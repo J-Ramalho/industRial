@@ -5,9 +5,11 @@
 
 Keeping the variability of an industrial process under control is one of the most important objectives in manufacturing. Based on expert knowledge or on detailed functional analysis the product and process parameters that are critical to quality are identified and selected for close follow-up. The most common and effective way for such follow-up is the Statistical Process Control which is done by using control charts.
 
-**The syringe injection molding process**
-
 <div class="marginnote">
+
+<b class="highlight">Case study: Syringe injection molding</b>
+
+Pharmaceutical plastic injection is always a large scale manufacturing process with high speeds and tight specifications. Significant investments in clean rooms, fast automation and skilled operators require a commitment to the long term quality and a culture of excellence.    
 
 <img src="img/syringe_molding_bw.jpg" width="100%" />
 
@@ -15,11 +17,9 @@ Keeping the variability of an industrial process under control is one of the mos
 
 ## xbar-R charts
 
-There are many types of control charts and in this case study we're demonstrating the xbar and R charts. These two charts are often used together and are suited to the control the mean and the variability of a continuous variable.
+There are many types of control charts and in this case study we're demonstrating the xbar and R charts. These two charts are often used together and are suited to the control the mean and the variability of a continuous variable. This case study draws on examples from @Bass2007 and from the `{qcc}` package vignette.
 
-Bamako Lightening is a company that manufactures lamps. The weight of each lamp is critical to the quality of the product. The Production Operator monitors the production process using xbar and R-charts. Samples are taken of six lamps every hour and their means and ranges plotted on control charts. Data is available representing samples taken a period of 25 hours of production.
-
-Looking at the first five lines to confirm and assess the quality of our data for further processing. 
+PH-parts is a <b class="highligh">plastic injection company</b> specialized in high precision pharmaceutical Parts. In their catalog they have a mid-range product that sells in extremely high volumes: vaccination syringes. The inner diameter of the barrel has been identified in failure mode analysis as a critical dimension for the security of the operation. Following the implementation of a statistical process control (SPC) the production operators monitor the production process using xbar and R-charts. The protocol requires 6 samples are taken on an hourly basis and diameters simply typed in an excel file in a laptop by the injection press. A recent excel file with samples taken over a period of 25 hours of production has been loaded in R with the name `syringe_diameter` by the Quality Assistant of the lab.
 
 
 ```r
@@ -38,9 +38,7 @@ head(syringe_diameter) %>%
 |Hour5 |  5.3379|  5.3264|  5.3150|  5.3134|  5.3375|  5.3407|
 |Hour6 |  5.3432|  5.3352|  5.3238|  5.3463|  5.3340|  5.3205|
 
-We see that in this table each line corresponds to a sampling hour and each column corresponds to a sample number. 
-
-We're now going to pass this data to the control chart plotting function qcc(). As this function takes a dataset of observations so we're removing the Hour column with the select function from tidyverse:
+In this table each line corresponds to a sampling hour and each column corresponds to a sample number. We're now going to pass this data to the control chart plotting function `qcc()` from the package with the same name. We choose to copy the dataset to a new one to remove the Hour column with the select function from tidyverse and we take the opportunity to round the values:
 
 
 ```r
@@ -48,10 +46,6 @@ syringe_clean <- syringe_diameter %>%
   select(-Hour) %>%
   mutate(across(starts_with("S"), round, 2))
 ```
-
-Now we load the qcc package that has the required quality control tools:
-
-<b>Calibration run</b>
 
 In order to establish a control chart it is recommended to run a "calibration run". The calibration run is used to calculate the control limits before entering "regular production". Using the first 10 samples we call the qcc() function to make the required calculations.
 
@@ -67,17 +61,13 @@ library(qcc)
 syringe_xbar <- qcc(
   syringe_clean[1:10, ], 
   type = "xbar", 
-  title = "Lamp weight \n xbar chart", 
+  title = "Syringe injection molding\n barrel diameter xbar chart (calibration)", 
   xlab = "Sample group",
   plot = FALSE
   )
 ```
 
-Before we step ahead and simply plot the SPC chart and interpret the results lets look a bit in detail in the calculations done to established the Control Chart. To do this we're going to go in the details of what we've obtained in the previous chunk. 
-
-A first step is to read the begining of the qcc() help file typing ?qcc in the console. It says "Create an object of class 'qcc' to perform statistical process control' (in R technical terms function is a helper that generates an S3 R object). 
-
-The key point here is that this means we can inspect the calculations separately from the plot itself. We can start by confirming the class and the type of the qcc object:
+In the previous chink we've loaded the `{qcc}` package that has the required quality control tools and created a new variable data but before we plot the chart lets look a bit in detail in the calculations done in the background. A first step is to read the begining of the `qcc()` help file typing ?qcc in the console. It says "Create an object of class 'qcc' to perform statistical process control' (in R technical terms function is a helper that generates an S3 R object). The key point here is that this means we can inspect the calculations separately from the plot itself. We can start by confirming the class and the type of the qcc object:
 
 
 ```r
@@ -96,7 +86,7 @@ typeof(syringe_xbar)
 [1] "list"
 ```
 
-It is confirmed it is an object of class qcc with the R type list. Looking into the structure of the list:
+It is confirmed it is an object of class qcc with the type list. Looking into the structure of the list:
 
 
 ```r
@@ -105,7 +95,7 @@ str(syringe_xbar)
 
 ```
 List of 11
- $ call      : language qcc(data = syringe_clean[1:10, ], type = "xbar", plot = FALSE, title = "Lamp weight \n xbar chart",      xlab = "Sample group")
+ $ call      : language qcc(data = syringe_clean[1:10, ], type = "xbar", plot = FALSE, title = "Syringe injection molding\n barrel diamet| __truncated__
  $ type      : chr "xbar"
  $ data.name : chr "syringe_clean[1:10, ]"
  $ data      : num [1:10, 1:6] 5.33 5.32 5.33 5.36 5.34 5.34 5.3 5.32 5.34 5.36 ...
@@ -149,7 +139,7 @@ summary(syringe_xbar)
 ```
 
 Call:
-qcc(data = syringe_clean[1:10, ], type = "xbar", plot = FALSE,     title = "Lamp weight \n xbar chart", xlab = "Sample group")
+qcc(data = syringe_clean[1:10, ], type = "xbar", plot = FALSE,     title = "Syringe injection molding\n barrel diameter xbar chart (calibration)",     xlab = "Sample group")
 
 xbar chart for syringe_clean[1:10, ] 
 
@@ -178,23 +168,19 @@ plot(syringe_xbar)
 
 ### Range chart {#Rchart}
 
-Using the same 10 first samples we also obtain the corresponding R chart:
-
 
 ```r
 syringe_R <- qcc(
   syringe_clean[1:10, ], 
   type = "R", 
-  title = "Lamp weight \n R chart",
+  title = "Syringe injection molding\n barrel diameter R chart (calibration)",
   xlab = "Sample group"
   )
 ```
 
 <img src="10_spc_files/figure-html/unnamed-chunk-12-1.png" width="100%" />
 
-<b>Regular production</b>
-
-Now that the calibration data has been plotted we can consider that the control limits are defined. They can become fixed and reused in new plots for the future production runs. Samples from those future runs can then be assessed against this limits and the control chart rules can be verified (in this example the shewhart rules are used). We now add the remaining data points to our chart by specifying which lines we're refering too in our dataframe in the 'newdata' argument:
+Using the same 10 first samples we also obtained the corresponding R chart. Now that the calibration data has been plotted we can consider that the control limits are defined. They can become fixed and reused in new plots for the future production runs. Samples from those future runs can then be assessed against this limits and the control chart rules can be verified (in this example the shewhart rules are used). We now add the remaining data points to our chart by specifying which lines we're referring too in our dataframe in the 'newdata' argument:
 
 
 ```r
@@ -202,16 +188,14 @@ syringe_xbar <- qcc(
   data = syringe_clean[1:10, ],
   newdata = syringe_clean[11:25,],
   type = "xbar", 
-  title = "Lamp weight \n xbar chart", 
+  title = "Syringe injection molding\n barrel diameter xbar chart (calibration)", 
   xlab = "Sample group"
   )
 ```
 
 <img src="10_spc_files/figure-html/unnamed-chunk-13-1.png" width="100%" />
 
-We can see that the data point corresponding to the average of the measurements of the samplegroup 17 is plotted in red because it is outside of the control limits.
-
-Now we plot the R chart to assess the variability:
+We can see that the data point corresponding to the average of the measurements of the sample group 17 is plotted in red because it is outside of the control limits. Now we plot the R chart to assess the variability:
 
 
 ```r
@@ -219,22 +203,16 @@ syringe_R <- qcc(
   data = syringe_clean[1:10, ],
   newdata = syringe_clean[11:25,], 
   type = "R", 
-  title = "Lamp weight \n R chart",
+  title = "Syringe injection molding\n barrel diameter R chart (calibration)",
   xlab = "Sample group"
   )
 ```
 
 <img src="10_spc_files/figure-html/unnamed-chunk-14-1.png" width="100%" />
 
-In this case all the points are within the previously defined control limits.
+In this case all the points are within the previously defined control limits. More tight controls can be put in place by clearly identifying warning limits in a narrower range than the control limits. These measures need to be accompanied by clear decision criteria and proper training to avoid the typical problem of overreacting and destabilizing the process by introducing unintended special causes of variation.
 
-<b>Warnings and specification limits</b>
-
-More tight controls can be put in place by clearly identifying warning limits in a narrower range than the control limits. These measures need to be accompaigned by clear decision criteria and proper training to avoid the typical problem of overeacting and destabilizing the process by introducing unintented special causes of variation.
-
-### Control limits {#limits.xbar}
-
-We add warning limits in the plot with as follows:
+### Warning limits {#limits.xbar}
 
 
 ```r
@@ -244,19 +222,18 @@ warn.limits <- limits.xbar(
   syringe_xbar$sizes, 
   2
   )
+
 plot(
   syringe_xbar, 
   restore.par = FALSE,
-  title = "Lamp weight \n xbar chart",
+  title = "Syringe injection molding\n barrel diameter xbar chart",
   xlab = "Sample group")
-abline(h = warn.limits, lty = 3, col = "chocolate")
+abline(h = warn.limits, lty = 3, col = viridis(12)[1])
 ```
 
 <img src="10_spc_files/figure-html/unnamed-chunk-15-1.png" width="100%" />
 
-A manufacturing process under control has a variation that is lower than the product specifications and ideally it is centered. Therefore it is usually good practice to follow the control chart rules refering to the process control limits. 
-
-In some cases nevertheless there may be desired or interesting to add the specification limits. This can be done as follows, first we establish the specifications:
+The previous chunk exemplified how to add warning limits in the xbar chart and now we're going to look into specifications. A manufacturing process under control has a variation that is lower than the product specifications and is ideally well centered. Therefore it is usually good practice to follow the control chart rules referring to the process control limits. In some cases Control Charts are even issued without the product specifications but in some cases there may an interest to add the specification limits. To to this we first we establish the specifications:
 
 
 ```r
@@ -266,14 +243,14 @@ spec_tgt <- (spec_max - spec_min) / 2 + spec_min
 specs <- c(spec_min, spec_tgt, spec_max)
 ```
 
-and replot the control chart with visible specification limits and targets:
+and the plot again the control chart with visible specification limits and targets:
 
 
 ```r
 plot(
   syringe_xbar,
   restore.par = FALSE,
-  title = "Lamp weight \n xbar chart",
+  title = "Syringe injection molding\n barrel diameter xbar chart (calibration)",
   xlab = "Sample group",
   ylim = c(specs[1], specs[3])
   )
@@ -282,36 +259,13 @@ abline(h = specs, lty = 3, col = "red")
 
 <img src="10_spc_files/figure-html/unnamed-chunk-17-1.png" width="100%" />
 
-In the previous example we see a situation that happens in practice and that requires action: the data plotted is still within the min max specification limits for this relativelly small number of data points. Furthermore the variation is overall well contained within the process limits. Nevertheless we see it is extremelly off centered when compared with the product specification. A process capability study should help determining the causes for this offcentering and help correcting it.
-
-Adapted from @Bass2007
-
-In this chapter we're going to go more in depth in the study of the manufacturing process variability. We're going to make a comparison between the product specifications and the process variability. We're looking for opportunities to tigthen the product specifications. 
-Tightening a product specification without increasing the cost of a manufacturing cost can be a source of competitive advantage.
+In our case study something has gone severely off track. The barrel diameter was considered under control but now when we added the specification limits we see a situation that sometime happens in practice and that requires action. The data plotted is still within the min max specification limits for this relatively small number of data points and the variation is overall well contained within the process limits but we see it is extremely off centered when compared with the product specification. A process capability study should help determining the causes for this off centering and help correcting it.
 
 ## Cpk charts
 
-### Off specification {#off_spec}
+In order to optimize the manufacturing process, the manufacturing engeering expert is going to assess the capability of the syringe injection diameter. Such details are not straight forward to modify. Should he request a change of some injection mold parts? Or play with process temperatures? Before moving to a process DOE he needs first to understand where he stands. We're going to go more in depth in the study of the manufacturing process and make a comparison between the product specifications and the process variability. We're looking for opportunities to tighten the product specifications. Tightening a product specification without increasing the cost of a manufacturing cost can be a very good source of competitive advantage. The way we are going to do this is by constructing an histogram and a density distribution of this process.
 
-
-```r
-syringe_long <- syringe_diameter %>%
-  pivot_longer(cols = starts_with("Sample"),
-               names_to = "sample",
-               values_to = "value")
-```
-
-**variables**
-
-
-```r
-syringe_mean = syringe_long %>% pull(value) %>% mean()
-syringe_sd = syringe_long %>% pull(value) %>% sd()
-syringe_n <- length(syringe_long)
-theor_n = 1000000
-```
-
-**calculation: probability of being between the limits**
+### Off spec {#off_spec}
 
 
 ```r
@@ -320,27 +274,53 @@ off_spec <- function(UCL, LCL, mean, sd) {
 }
 ```
 
+This simple function `off_spec()` provides a probabilistic calculation of the number of parts that can be out of certain specification limits provided a certain sample mean, standard deviation and specification limits. This function is included in our package `{industRial}` and can accessed any time with `industRial::off_spec`. Now as a first step we're going to calculate process parameters such as mean and standard deviation that we will use with the function. For this we put the data in a long format.
+
+
+```r
+syringe_long <- syringe_diameter %>%
+  pivot_longer(cols = starts_with("Sample"),
+               names_to = "sample",
+               values_to = "value")
+
+syringe_mean = syringe_long %>% pull(value) %>% mean()
+syringe_sd = syringe_long %>% pull(value) %>% sd()
+syringe_n <- length(syringe_long)
+```
+
+and obtain:
+
 
 ```r
 syringe_off_spec <- off_spec(spec_max, spec_min, syringe_mean, syringe_sd)
+syringe_off_spec
 ```
+
+```
+[1] 1.59
+```
+
+For our histogram we also want to obtain data for the density function. This can be calculated using the function `rnorm()` from the `{stats}` package using a reasonably high sample size. Here we use 100'000.
 
 
 ```r
+theor_n = 1000000
 syringe_theor <- rnorm(n = theor_n, mean = syringe_mean, sd = syringe_sd) %>% 
   as_tibble()
 ```
+
+Now we prepare the legend of the chart using the variables created:
 
 
 ```r
 plot_subtitle <- paste(
   "Spec: [", spec_min, ";", spec_max, 
-  "], Proportion off-spec = ",
+  "], Expected off-spec = ",
   signif(syringe_off_spec, digits = 2), "%"
   )
 ```
 
-Note that we deliberately twick the plot colors to make it look like the plots from minitab and from the qcc package. We provide this theme in the book companion package `industRial` with the name theme_qcc. 
+Note that we deliberately tweak the plot colors to make it look like the plots from minitab and from the `{qcc}` package. We provide this theme in the book companion package `industRial` with the name `theme_qcc()`.
 
 
 ```r
@@ -357,15 +337,13 @@ syringe_long %>%
   scale_x_continuous(n.breaks = 10) +
   theme_qcc() +
   labs(
-    title = "Out of specification (Expected)", 
+    title = "Syringe barrel diameter Capability Study", 
     subtitle = {plot_subtitle})
 ```
 
-<img src="10_spc_files/figure-html/unnamed-chunk-24-1.png" width="100%" />
+<img src="10_spc_files/figure-html/unnamed-chunk-23-1.png" width="100%" />
 
-By looking at the histogram of the Bamako lightning dataset we confirm the extreme offcentering of the production. We also see that although there are no measurements beyond the lower specification limit (LSL) it is very likely this will happen soon.
-
-We can also calculate the Cpk
+By looking at the histogram we confirm the extreme off centering of the production. We also see that although there are no measurements beyond the lower specification limit (LSL) in the small sample of 25 values collected initially but in a high volume production the defect rate is very high. Defect rates typical in this industry will be not in the percentage but in the range of the ppm (parts per million).
 
 ### Process Capability {#process_Cpk}
 
@@ -379,6 +357,8 @@ process_Cpk <- function(UCL, LCL, mean, sd) {
 }
 ```
 
+The `process_Cpk()` is another function included in our package with which we can re-use the process variables calculated before to estimate the Cpk index:
+
 
 ```r
 process_Cpk(spec_max, spec_min, syringe_mean, syringe_sd)
@@ -388,7 +368,7 @@ process_Cpk(spec_max, spec_min, syringe_mean, syringe_sd)
 [1] 0.71587
 ```
 
-And convert the percentage out of spec in parts per million. We're not considering the 1.5 shift that sometimes is presented in the literature but rather making a simple direct conversion of the proportion out of spec found before:
+The Quality Management department expects to see Capability Reports in ppm and not in percentage To make such conversion we have to multiply by 10'000. Note that we're not considering the 1.5 shift that sometimes is presented in the literature but rather making a simple direct conversion of the proportion out of spec found before:
 
 
 ```r
@@ -399,9 +379,7 @@ formatC(((syringe_off_spec) * 10000), format = "d", big.mark = "'")
 [1] "15'900"
 ```
 
-The expected population below the LSL is 1,3% which is very high for industry standards. In fact this corresponds to 15'900 parts per million (ppm) whereas a common target would be 1 ppm. Naturally these figures are indicative and they depend of the context criteria such as severity of the problem, cost, difficulty to eliminate the problem and so on. 
-
-We can now establish a simple table using the functions created before, to present the expected percentage that falls within certain limits. To make it useful as a reference table we're putting this limits from $\pm$ 1 to $\pm$ 6 standard deviations
+As mentioned the expected population below the LSL is 1,3% which is very high for industry standards. In fact this corresponds to 15'900 parts per million (ppm) whereas a common target would be 1 ppm. Naturally these figures are indicative and they depend of the context criteria such as severity of the problem, cost, difficulty to eliminate the problem and so on. We are here going to establish a simple reference table using the functions created before, to present the expected percentage that falls within certain limits. To make it useful as a reference table we're putting this limits from $\pm$ 1 to $\pm$ 6 standard deviations
 
 ### Sigma conversion table {#sigma_table}
 
@@ -455,17 +433,19 @@ syringe_cpk <- process.capability(
 )
 ```
 
-<img src="10_spc_files/figure-html/unnamed-chunk-30-1.png" width="100%" />
+<img src="10_spc_files/figure-html/unnamed-chunk-29-1.png" width="100%" />
 
-A fine tuning of the forecast of the number of expected parts out of specification can be done with the parameter std.dev. The input value will be used in the probability distribution function. Different approaches can be considered: calculating the sandard deviation within each subgroup or the standard deviation of the entire population and also correcting the standard deviation dividing by n or by n - 1. In this example we re-use the standard deviation calculated on the entire set of datapoints as the group is small but for a case with more data it would be interesting to used the subgroups that tend to give smaller standard deviations.
+The previous plot shows how to obtain the capability chart and the different statistical variables in a quick and direct way with the `{qcc}` package. A fine tuning of the forecast of the number of expected parts out of specification can be done with the parameter `std.dev`. This input value will be used in the probability distribution function. Different approaches can be considered: calculating the standard deviation within each subgroup or the standard deviation of the entire population and also correcting the standard deviation dividing by n or by n - 1. In this example we re-use the standard deviation calculated on the entire set of datapoints as the group is small but for a case with more data it would be interesting to use the subgroups that tend to give smaller standard deviations.
+
+The Quality Assistant has a much more clear idea where the process stands now. There's a realignment of the process required of at least 0.1 mm. This may be at the limit of the process capability itself not to mention the uncertainty of measurement. Before over reacting he decides to look into the historical data and talk with the operators. Once it becomes clear this is a recurring pattern he will start looking into how to make such adjustment.
 
 ## I-MR charts
 
-In this final chapter we're exploring the development of custom functions for summary statistics and timeseries plotting. All these functions are available on the book companion package `{industRial}` for exploration and further development. They don't pretend to be used as such for real life applications. For that we recommend the functions from the package `{QCC}` presented before. The objective here is to show a workflow and demonstrate some possibilities that the `{tidyverse}` offers to make completely customized functions.
+This final unit of the book requires prior knowledge in creating R functions and reading code from existing R functions. It develops the topic of the development of custom functions for summary statistics and timeseries plotting. These functions are available on the book companion package `{industRial}` for exploration and further development. They don't pretend to be used as such for real life applications as for that we recommend the functions from the package `{qcc}` presented before. In previous cases we're already presented how to modify functions from other packages and here the objective here is to explore the creation of new functions from scratch.
 
-To encourage this exploration we're not presenting here the complete code for each function but propose to check it with the R functionality for function code exploration. We see often the recommendation to read R source code and we can only support it as an excellent way to develop our skilset.
+We're not presenting here the complete code for each function but instead encourage it be checked with the R functionality for function exploration. In R programming books and forums we see often the recommendation to read R source code and we can only support it as an excellent way to develop our skill set.
 
-Lets start with the simple function that calculates the percentage of parts out of specification given the specification limits, the process mean and standard deviation. This function was presented in the previous case study and since it is loaded in memory we can read its content with the R function body():
+Lets start with the simple function `off_spec()` that calculates the percentage of parts out of specification given the specification limits, the process mean and standard deviation. This function was presented in the previous case study and since it is loaded in memory we can read its content with the R function `body()`:
 
 
 ```r
@@ -479,7 +459,7 @@ body(off_spec)
 }
 ```
 
-we can see that it uses simple functions from the package {`stats}`. We can also explicitly request to see the arguments it takes with formals():
+we can see that it uses simple functions from the package {`stats}`. We can also explicitly request to see the arguments it takes with `dput(formals())`:
 
 
 ```r
@@ -511,22 +491,78 @@ we get 2.28% parts out of spec. We'll see this calculation in action in a moment
 
 ### Process statistics {#process_stats}
 
-**The tablet weight control procedure**
-
 
 ```r
 tablet_weight <- tablet_weight %>%
     janitor::clean_names(case = "snake")
+tablet_weight %>%
+  head(3) %>%
+  kable()
 ```
 
-We're now going to use the function process stats to calculate several statistical data for this dataset. As mentionned we encourage the reader to explore the code with body(process_stats) and dput(formals(process_stats)) as there is a wealth of details in how to calculate process control limits, moving ranges and the like.
+
+
+| part_id| weight_target_value| weight_value|
+|-------:|-------------------:|------------:|
+|    1001|                 0.9|      0.84556|
+|    1002|                 0.9|      0.91444|
+|    1003|                 0.9|      0.90111|
+
+We're now going to use the function `process_stats()` to calculate several statistical data for this dataset. This function returs a high number of outputs is large as we can see below:
 
 
 ```r
 weight_statistics_data <- process_stats(tablet_weight, 10)
+names(weight_statistics_data)
 ```
 
-this being done we can now convert this data into an easy readable format for reporting of for a future integration in a shiny app for example. We're exploring the package `{gt}` that has a specific very neat look rather different from the `{kable}` package used in most of the book. 
+```
+ [1] "part_id"             "weight_target_value" "weight_value"       
+ [4] "part_spec_percent"   "spec_min"            "spec_max"           
+ [7] "weight_mean"         "weight_sd"           "weight_out_perc"    
+[10] "Cpk"                 "weight_MR"           "weight_MR_mean"     
+[13] "MR_max"              "R_out_limits"        "I_LCL"              
+[16] "I_UCL"               "weight_out_limits"  
+```
+
+Exploring the details on how the function calculates all the process statistics we have:
+
+
+```r
+body(process_stats)
+```
+
+```
+{
+    process_data <- data %>% dplyr::filter(!is.na(.data$weight_value), 
+        .data$weight_value >= 0) %>% dplyr::group_by(.data$weight_target_value) %>% 
+        dplyr::mutate(part_spec_percent = part_spec_percent, 
+            spec_min = .data$weight_target_value - .data$weight_target_value * 
+                part_spec_percent/100, spec_max = .data$weight_target_value + 
+                .data$weight_target_value * part_spec_percent/100, 
+            weight_mean = mean(.data$weight_value), weight_sd = stats::sd(.data$weight_value))
+    process_data <- process_data %>% dplyr::mutate(weight_out_perc = industRial::off_spec(process_data$spec_max, 
+        process_data$spec_min, process_data$weight_mean, process_data$weight_sd), 
+        Cpk = industRial::process_Cpk(process_data$spec_max, 
+            process_data$spec_min, process_data$weight_mean, 
+            process_data$weight_sd), weight_MR = abs(.data$weight_value - 
+            dplyr::lag(.data$weight_value)))
+    process_data <- process_data %>% dplyr::mutate(weight_MR_mean = mean(process_data$weight_MR, 
+        na.rm = TRUE))
+    process_data <- process_data %>% dplyr::mutate(MR_max = 3.688 * 
+        process_data$weight_MR_mean)
+    process_data <- process_data %>% dplyr::mutate(R_out_limits = dplyr::if_else(condition = process_data$weight_MR > 
+        process_data$MR_max, process_data$weight_MR, NA_real_), 
+        I_LCL = round((process_data$weight_mean - 2.66 * process_data$weight_MR_mean), 
+            2), I_UCL = round((process_data$weight_mean + 2.66 * 
+            process_data$weight_MR_mean), 2))
+    process_data <- process_data %>% dplyr::mutate(weight_out_limits = dplyr::if_else(condition = (.data$weight_value > 
+        process_data$I_UCL | .data$weight_value < process_data$I_LCL), 
+        .data$weight_value, false = NA_real_))
+}
+```
+
+This being done we can now convert this data into an easy readable format for reporting of for a future integration in a shiny app for example. We're exploring now the package `{gt}` that has a specific very neat look rather different from the `{kable}` package that has been the most used until now.  
 
 
 ```r
@@ -534,11 +570,12 @@ process_stats_table(weight_statistics_data)
 ```
 
 ```{=html}
+<div id="hdwksuwalf" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>html {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
 }
 
-#qdruhojclm .gt_table {
+#hdwksuwalf .gt_table {
   display: table;
   border-collapse: collapse;
   margin-left: auto;
@@ -563,7 +600,7 @@ process_stats_table(weight_statistics_data)
   border-left-color: #D3D3D3;
 }
 
-#qdruhojclm .gt_heading {
+#hdwksuwalf .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -575,7 +612,7 @@ process_stats_table(weight_statistics_data)
   border-right-color: #D3D3D3;
 }
 
-#qdruhojclm .gt_title {
+#hdwksuwalf .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -585,7 +622,7 @@ process_stats_table(weight_statistics_data)
   border-bottom-width: 0;
 }
 
-#qdruhojclm .gt_subtitle {
+#hdwksuwalf .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -595,13 +632,13 @@ process_stats_table(weight_statistics_data)
   border-top-width: 0;
 }
 
-#qdruhojclm .gt_bottom_border {
+#hdwksuwalf .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#qdruhojclm .gt_col_headings {
+#hdwksuwalf .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -616,7 +653,7 @@ process_stats_table(weight_statistics_data)
   border-right-color: #D3D3D3;
 }
 
-#qdruhojclm .gt_col_heading {
+#hdwksuwalf .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -636,7 +673,7 @@ process_stats_table(weight_statistics_data)
   overflow-x: hidden;
 }
 
-#qdruhojclm .gt_column_spanner_outer {
+#hdwksuwalf .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -648,15 +685,15 @@ process_stats_table(weight_statistics_data)
   padding-right: 4px;
 }
 
-#qdruhojclm .gt_column_spanner_outer:first-child {
+#hdwksuwalf .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#qdruhojclm .gt_column_spanner_outer:last-child {
+#hdwksuwalf .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#qdruhojclm .gt_column_spanner {
+#hdwksuwalf .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -668,7 +705,7 @@ process_stats_table(weight_statistics_data)
   width: 100%;
 }
 
-#qdruhojclm .gt_group_heading {
+#hdwksuwalf .gt_group_heading {
   padding: 8px;
   color: #333333;
   background-color: #FFFFFF;
@@ -690,7 +727,7 @@ process_stats_table(weight_statistics_data)
   vertical-align: middle;
 }
 
-#qdruhojclm .gt_empty_group_heading {
+#hdwksuwalf .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -705,15 +742,15 @@ process_stats_table(weight_statistics_data)
   vertical-align: middle;
 }
 
-#qdruhojclm .gt_from_md > :first-child {
+#hdwksuwalf .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#qdruhojclm .gt_from_md > :last-child {
+#hdwksuwalf .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#qdruhojclm .gt_row {
+#hdwksuwalf .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -732,7 +769,7 @@ process_stats_table(weight_statistics_data)
   overflow-x: hidden;
 }
 
-#qdruhojclm .gt_stub {
+#hdwksuwalf .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -744,7 +781,7 @@ process_stats_table(weight_statistics_data)
   padding-left: 12px;
 }
 
-#qdruhojclm .gt_summary_row {
+#hdwksuwalf .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -754,7 +791,7 @@ process_stats_table(weight_statistics_data)
   padding-right: 5px;
 }
 
-#qdruhojclm .gt_first_summary_row {
+#hdwksuwalf .gt_first_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -764,7 +801,7 @@ process_stats_table(weight_statistics_data)
   border-top-color: #D3D3D3;
 }
 
-#qdruhojclm .gt_grand_summary_row {
+#hdwksuwalf .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -774,7 +811,7 @@ process_stats_table(weight_statistics_data)
   padding-right: 5px;
 }
 
-#qdruhojclm .gt_first_grand_summary_row {
+#hdwksuwalf .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -784,11 +821,11 @@ process_stats_table(weight_statistics_data)
   border-top-color: #D3D3D3;
 }
 
-#qdruhojclm .gt_striped {
+#hdwksuwalf .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#qdruhojclm .gt_table_body {
+#hdwksuwalf .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -797,7 +834,7 @@ process_stats_table(weight_statistics_data)
   border-bottom-color: #D3D3D3;
 }
 
-#qdruhojclm .gt_footnotes {
+#hdwksuwalf .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -811,13 +848,13 @@ process_stats_table(weight_statistics_data)
   border-right-color: #D3D3D3;
 }
 
-#qdruhojclm .gt_footnote {
+#hdwksuwalf .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding: 4px;
 }
 
-#qdruhojclm .gt_sourcenotes {
+#hdwksuwalf .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -831,53 +868,52 @@ process_stats_table(weight_statistics_data)
   border-right-color: #D3D3D3;
 }
 
-#qdruhojclm .gt_sourcenote {
+#hdwksuwalf .gt_sourcenote {
   font-size: 90%;
   padding: 4px;
 }
 
-#qdruhojclm .gt_left {
+#hdwksuwalf .gt_left {
   text-align: left;
 }
 
-#qdruhojclm .gt_center {
+#hdwksuwalf .gt_center {
   text-align: center;
 }
 
-#qdruhojclm .gt_right {
+#hdwksuwalf .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#qdruhojclm .gt_font_normal {
+#hdwksuwalf .gt_font_normal {
   font-weight: normal;
 }
 
-#qdruhojclm .gt_font_bold {
+#hdwksuwalf .gt_font_bold {
   font-weight: bold;
 }
 
-#qdruhojclm .gt_font_italic {
+#hdwksuwalf .gt_font_italic {
   font-style: italic;
 }
 
-#qdruhojclm .gt_super {
+#hdwksuwalf .gt_super {
   font-size: 65%;
 }
 
-#qdruhojclm .gt_footnote_marks {
+#hdwksuwalf .gt_footnote_marks {
   font-style: italic;
+  font-weight: normal;
   font-size: 65%;
 }
 </style>
-<div id="qdruhojclm" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;"><table class="gt_table">
+<table class="gt_table">
   <thead class="gt_header">
     <tr>
-      <th colspan="3" class="gt_heading gt_title gt_font_normal" style>Process Summary Statistics</th>
+      <th colspan="3" class="gt_heading gt_title gt_font_normal gt_bottom_border" style>Process Summary Statistics</th>
     </tr>
-    <tr>
-      <th colspan="3" class="gt_heading gt_subtitle gt_font_normal gt_bottom_border" style></th>
-    </tr>
+    
   </thead>
   <thead class="gt_col_headings">
     <tr>
@@ -887,50 +923,35 @@ process_stats_table(weight_statistics_data)
     </tr>
   </thead>
   <tbody class="gt_table_body">
-    <tr>
-      <td class="gt_row gt_left">Weight mean</td>
-      <td class="gt_row gt_right">0.94000</td>
-      <td class="gt_row gt_left">g</td>
-    </tr>
-    <tr>
-      <td class="gt_row gt_left">Spec target</td>
-      <td class="gt_row gt_right">0.90000</td>
-      <td class="gt_row gt_left">g</td>
-    </tr>
-    <tr>
-      <td class="gt_row gt_left">Spec min</td>
-      <td class="gt_row gt_right">0.81000</td>
-      <td class="gt_row gt_left">g</td>
-    </tr>
-    <tr>
-      <td class="gt_row gt_left">Spec max</td>
-      <td class="gt_row gt_right">0.99000</td>
-      <td class="gt_row gt_left">g</td>
-    </tr>
-    <tr>
-      <td class="gt_row gt_left" style="font-weight: bold;">Out of spec</td>
-      <td class="gt_row gt_right" style="font-weight: bold;">0.71000</td>
-      <td class="gt_row gt_left" style="font-weight: bold;">%</td>
-    </tr>
-    <tr>
-      <td class="gt_row gt_left" style="font-weight: bold;">Cpk</td>
-      <td class="gt_row gt_right" style="font-weight: bold;">0.81785</td>
-      <td class="gt_row gt_left" style="font-weight: bold;"></td>
-    </tr>
-    <tr>
-      <td class="gt_row gt_left">Sample size</td>
-      <td class="gt_row gt_right">137</td>
-      <td class="gt_row gt_left">parts</td>
-    </tr>
+    <tr><td class="gt_row gt_left">Weight mean</td>
+<td class="gt_row gt_right">0.94000</td>
+<td class="gt_row gt_left">g</td></tr>
+    <tr><td class="gt_row gt_left">Spec target</td>
+<td class="gt_row gt_right">0.90000</td>
+<td class="gt_row gt_left">g</td></tr>
+    <tr><td class="gt_row gt_left">Spec min</td>
+<td class="gt_row gt_right">0.81000</td>
+<td class="gt_row gt_left">g</td></tr>
+    <tr><td class="gt_row gt_left">Spec max</td>
+<td class="gt_row gt_right">0.99000</td>
+<td class="gt_row gt_left">g</td></tr>
+    <tr><td class="gt_row gt_left" style="font-weight: bold;">Out of spec</td>
+<td class="gt_row gt_right" style="font-weight: bold;">0.71000</td>
+<td class="gt_row gt_left" style="font-weight: bold;">%</td></tr>
+    <tr><td class="gt_row gt_left" style="font-weight: bold;">Cpk</td>
+<td class="gt_row gt_right" style="font-weight: bold;">0.81785</td>
+<td class="gt_row gt_left" style="font-weight: bold;"></td></tr>
+    <tr><td class="gt_row gt_left">Sample size</td>
+<td class="gt_row gt_right">137</td>
+<td class="gt_row gt_left">parts</td></tr>
   </tbody>
   
   
-</table></div>
+</table>
+</div>
 ```
 
 ### Individual chart {#chart_I}
-
-The data set being available we're feeding it into the chart_I() function:
 
 
 ```r
@@ -939,9 +960,9 @@ chart_I(weight_statistics_data)
 
 <img src="10_spc_files/figure-html/unnamed-chunk-37-1.png" width="100%" />
 
-### Moving range chart {#chart_IMR}
+Once the data set is available we're feeding it into the chart_I() function. This is another function from the package that can be used as a starting point for explorations in SPC charts. It is built using `{ggplot2}` and another examples can be seen in the tutorials section.
 
-The companion of the I chart is the MR chart, where MR stands for moving range. This chart can be called with:
+### Moving range chart {#chart_IMR}
 
 
 ```r
@@ -950,9 +971,9 @@ chart_IMR(weight_statistics_data)
 
 <img src="10_spc_files/figure-html/unnamed-chunk-38-1.png" width="100%" />
 
-### Capability chart (custom) {#chart_Cpk}
+The companion of the I chart is the MR chart, where MR stands for moving range. 
 
-And a final chart for this session the capability chart:
+### Capability chart (custom) {#chart_Cpk}
 
 
 ```r
@@ -960,5 +981,7 @@ chart_Cpk(weight_statistics_data)
 ```
 
 <img src="10_spc_files/figure-html/unnamed-chunk-39-1.png" width="100%" />
+
+and this final chart presented a process capability histogram obtained with the function `chart_Cpk()`.
 
 

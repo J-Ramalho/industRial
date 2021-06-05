@@ -10,6 +10,8 @@ ds_pkgs <- c(
   "purrr",
   "stringr",
   "forcats",
+  "ggplot2",
+  "tidyr",
   "scales",
   "janitor",
   "knitr",

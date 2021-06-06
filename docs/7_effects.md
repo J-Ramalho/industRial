@@ -354,16 +354,26 @@ Residuals:
 -60.75 -14.63   1.38  17.94  45.25 
 
 Coefficients:
-                                     Estimate Std. Error t value Pr(>|t|)    
-(Intercept)                            134.75      12.99   10.37  6.5e-11 ***
-temperatureT20                         -77.50      18.37   -4.22  0.00025 ***
-temperatureT50                         -77.25      18.37   -4.20  0.00026 ***
-materialchristaline                     21.00      18.37    1.14  0.26311    
-materialmultijunction                    9.25      18.37    0.50  0.61875    
-temperatureT20:materialchristaline      41.50      25.98    1.60  0.12189    
-temperatureT50:materialchristaline     -29.00      25.98   -1.12  0.27424    
-temperatureT20:materialmultijunction    79.25      25.98    3.05  0.00508 ** 
-temperatureT50:materialmultijunction    18.75      25.98    0.72  0.47676    
+                                     Estimate Std. Error t value
+(Intercept)                            134.75      12.99   10.37
+temperatureT20                         -77.50      18.37   -4.22
+temperatureT50                         -77.25      18.37   -4.20
+materialchristaline                     21.00      18.37    1.14
+materialmultijunction                    9.25      18.37    0.50
+temperatureT20:materialchristaline      41.50      25.98    1.60
+temperatureT50:materialchristaline     -29.00      25.98   -1.12
+temperatureT20:materialmultijunction    79.25      25.98    3.05
+temperatureT50:materialmultijunction    18.75      25.98    0.72
+                                     Pr(>|t|)    
+(Intercept)                           6.5e-11 ***
+temperatureT20                        0.00025 ***
+temperatureT50                        0.00026 ***
+materialchristaline                   0.26311    
+materialmultijunction                 0.61875    
+temperatureT20:materialchristaline    0.12189    
+temperatureT50:materialchristaline    0.27424    
+temperatureT20:materialmultijunction  0.00508 ** 
+temperatureT50:materialmultijunction  0.47676    
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 

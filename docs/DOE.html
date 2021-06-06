@@ -24,7 +24,7 @@
 <meta name="author" content="João Ramalho" />
 
 
-<meta name="date" content="2021-06-05" />
+<meta name="date" content="2021-06-06" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -172,7 +172,7 @@ div.csl-indent {
       <nav role="navigation">
 
 <ul class="summary">
-<li><a href="./">industRial data science</a></li>
+<li><a href="./">industRial</a></li>
 
 <li class="divider"></li>
 <li class="part"><span><b>I INTRODUCTION</b></span></li>
@@ -897,7 +897,7 @@ F-statistic: 66.8 on 3 and 16 DF,  p-value: 2.88e-09</code></pre>
 <div class="sourceCode" id="cb118"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb118-1"><a href="DOE.html#cb118-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(car)</span>
 <span id="cb118-2"><a href="DOE.html#cb118-2" aria-hidden="true" tabindex="-1"></a><span class="fu">durbinWatsonTest</span>(ebike_lm_factor)</span></code></pre></div>
 <pre><code> lag Autocorrelation D-W Statistic p-value
-   1        -0.53433        2.9609   0.112
+   1        -0.53433        2.9609   0.088
  Alternative hypothesis: rho != 0</code></pre>
 <p>As already stated visual observations can most of the times be complemented with a statistical test. In this case we can apply the durbinWatson test from the <code>{car}</code> package (Car stands for Companion to Applied Regression)</p>
 <p>Although the output shows Autocorrelation of -0.53 we have to consider that the p value is slightly higher than 0.05 thus there is not enough significance to say that there is autocorrelation. The result is not a complete clear cut the lab supervisor remains alert for coming verifications.</p>
@@ -1408,16 +1408,26 @@ Residuals:
 -60.75 -14.63   1.38  17.94  45.25 
 
 Coefficients:
-                                     Estimate Std. Error t value Pr(&gt;|t|)    
-(Intercept)                            134.75      12.99   10.37  6.5e-11 ***
-temperatureT20                         -77.50      18.37   -4.22  0.00025 ***
-temperatureT50                         -77.25      18.37   -4.20  0.00026 ***
-materialchristaline                     21.00      18.37    1.14  0.26311    
-materialmultijunction                    9.25      18.37    0.50  0.61875    
-temperatureT20:materialchristaline      41.50      25.98    1.60  0.12189    
-temperatureT50:materialchristaline     -29.00      25.98   -1.12  0.27424    
-temperatureT20:materialmultijunction    79.25      25.98    3.05  0.00508 ** 
-temperatureT50:materialmultijunction    18.75      25.98    0.72  0.47676    
+                                     Estimate Std. Error t value
+(Intercept)                            134.75      12.99   10.37
+temperatureT20                         -77.50      18.37   -4.22
+temperatureT50                         -77.25      18.37   -4.20
+materialchristaline                     21.00      18.37    1.14
+materialmultijunction                    9.25      18.37    0.50
+temperatureT20:materialchristaline      41.50      25.98    1.60
+temperatureT50:materialchristaline     -29.00      25.98   -1.12
+temperatureT20:materialmultijunction    79.25      25.98    3.05
+temperatureT50:materialmultijunction    18.75      25.98    0.72
+                                     Pr(&gt;|t|)    
+(Intercept)                           6.5e-11 ***
+temperatureT20                        0.00025 ***
+temperatureT50                        0.00026 ***
+materialchristaline                   0.26311    
+materialmultijunction                 0.61875    
+temperatureT20:materialchristaline    0.12189    
+temperatureT50:materialchristaline    0.27424    
+temperatureT20:materialmultijunction  0.00508 ** 
+temperatureT50:materialmultijunction  0.47676    
 ---
 Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
 
@@ -1929,15 +1939,24 @@ Figure 1: Main
 <span id="cb202-2"><a href="DOE.html#cb202-2" aria-hidden="true" tabindex="-1"></a>  bias <span class="sc">~</span> drymatter_TGT <span class="sc">*</span> speed <span class="sc">*</span> particle_size,</span>
 <span id="cb202-3"><a href="DOE.html#cb202-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> juice_drymatter)</span>
 <span id="cb202-4"><a href="DOE.html#cb202-4" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(juice_drymatter_aov)</span></code></pre></div>
-<pre><code>                                   Df Sum Sq Mean Sq F value Pr(&gt;F)    
-drymatter_TGT                       1  1.315   1.315  486.06 &lt;2e-16 ***
-speed                               1  0.000   0.000    0.00   0.99    
-particle_size                       1  0.624   0.624  230.70 &lt;2e-16 ***
-drymatter_TGT:speed                 1  0.001   0.001    0.27   0.60    
-drymatter_TGT:particle_size         1  0.003   0.003    1.04   0.31    
-speed:particle_size                 1  0.003   0.003    1.19   0.28    
-drymatter_TGT:speed:particle_size   1  0.004   0.004    1.44   0.23    
-Residuals                         100  0.271   0.003                   
+<pre><code>                                   Df Sum Sq Mean Sq F value Pr(&gt;F)
+drymatter_TGT                       1  1.315   1.315  486.06 &lt;2e-16
+speed                               1  0.000   0.000    0.00   0.99
+particle_size                       1  0.624   0.624  230.70 &lt;2e-16
+drymatter_TGT:speed                 1  0.001   0.001    0.27   0.60
+drymatter_TGT:particle_size         1  0.003   0.003    1.04   0.31
+speed:particle_size                 1  0.003   0.003    1.19   0.28
+drymatter_TGT:speed:particle_size   1  0.004   0.004    1.44   0.23
+Residuals                         100  0.271   0.003               
+                                     
+drymatter_TGT                     ***
+speed                                
+particle_size                     ***
+drymatter_TGT:speed                  
+drymatter_TGT:particle_size          
+speed:particle_size                  
+drymatter_TGT:speed:particle_size    
+Residuals                            
 ---
 Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
 <p>Here she simplified things by inputing the formula directly in the aov function without passing by the <code>formula()</code> or <code>lm()</code> functions. The previous observations done on the plots are fully confirmed and now supported with statistical evidence: <code>drymatter target</code> and <code>particle_size</code> significantly affect the bias (p &lt; 0.05); <code>speed</code> has no effect; none of the interactions is significative. This first round of assessment was very clear and successful and she can make bold proposals to the Quality Manager now to look deeper into the links between drymatter target and particle size in that bias. Certainly passing by a discussion again with the product team and a final DOE with more levels to identify or select an optimal operating zone for the measurement method.</p>

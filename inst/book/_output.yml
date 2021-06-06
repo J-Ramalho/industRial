@@ -8,6 +8,6 @@ bookdown::gitbook:
     toc:
       collapse: section
       before: |
-        <li><a href="./">industRial data science</a></li>
+        <li><a href="./">industRial</a></li>
     sharing: no
     download: no

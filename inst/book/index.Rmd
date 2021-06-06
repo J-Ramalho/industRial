@@ -1,6 +1,6 @@
 --- 
 title: "indust<b style='color:#38598CFF'>R</b>ial data science"
-subtitle: Case studies in product development and manufacturing
+subtitle: "<p style='color:#595959'>Case studies in product development and manufacturing</p>"
 author: "João Ramalho"
 date: "`r Sys.Date()`"
 # output: pdf_document

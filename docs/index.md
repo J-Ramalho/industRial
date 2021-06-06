@@ -1,8 +1,8 @@
 --- 
 title: "indust<b style='color:#38598CFF'>R</b>ial data science"
-subtitle: Case studies in product development and manufacturing
+subtitle: "<p style='color:#595959'>Case studies in product development and manufacturing</p>"
 author: "João Ramalho"
-date: "2021-06-05"
+date: "2021-06-06"
 # output: pdf_document
 site: bookdown::bookdown_site
 output:

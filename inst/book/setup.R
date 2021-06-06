@@ -8,14 +8,26 @@ ds_pkgs <- c(
   "industRial",
   "viridis",
   "broom",
-  "patchwork"
+  "patchwork",
+  "scales",
+  "janitor",
+  "knitr",
+  "stats",
+  "usethis",
+  "devtools",
+  "fs"
 )
 purrr::map(ds_pkgs, library, character.only = TRUE)
 
 filter <- dplyr::filter
 select <- dplyr::select
 
-# ggplot options
+# General options
+options(
+  digits = 5,
+  width = 69,
+  tibble.width = 69
+)
 theme_set(industRial::theme_industRial())
 
 # knitr options

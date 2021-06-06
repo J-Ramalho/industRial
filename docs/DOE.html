@@ -897,7 +897,7 @@ F-statistic: 66.8 on 3 and 16 DF,  p-value: 2.88e-09</code></pre>
 <div class="sourceCode" id="cb118"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb118-1"><a href="DOE.html#cb118-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(car)</span>
 <span id="cb118-2"><a href="DOE.html#cb118-2" aria-hidden="true" tabindex="-1"></a><span class="fu">durbinWatsonTest</span>(ebike_lm_factor)</span></code></pre></div>
 <pre><code> lag Autocorrelation D-W Statistic p-value
-   1        -0.53433        2.9609   0.088
+   1        -0.53433        2.9609   0.094
  Alternative hypothesis: rho != 0</code></pre>
 <p>As already stated visual observations can most of the times be complemented with a statistical test. In this case we can apply the durbinWatson test from the <code>{car}</code> package (Car stands for Companion to Applied Regression)</p>
 <p>Although the output shows Autocorrelation of -0.53 we have to consider that the p value is slightly higher than 0.05 thus there is not enough significance to say that there is autocorrelation. The result is not a complete clear cut the lab supervisor remains alert for coming verifications.</p>

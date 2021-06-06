@@ -1,11 +1,11 @@
 Package: industRial
 Type: Package
-Date: 28.05.2021
-Title: Companion to industRial data science book
+Date: 2021-06-04
+Title: Companion to industRial Data Science Book
 Version: 0.1.0
 Authors@R: person("João", "Ramalho", email = "ramalho.joao@protonmail.com", role = c("aut", "cre"))
-Maintainer: The package maintainer <ramalho.joao@protonmail.com>
 Description: Companion package to the book industRial Data Science. Provides data sets and functions to complete the case studies and contains the book original files and exercises.
+URL: https://j-ramalho.github.io/industRial/
 License: GPL (>= 3)
 Encoding: UTF-8
 LazyData: true
@@ -13,18 +13,8 @@ Imports:
     ggplot2,
     stats,
     dplyr,
-    janitor,
-    viridis,
-    broom,
-    patchwork,
-    scales,
-    forcats,
-    stringr,
-    purrr,
     tidyr,
-    tibble,
     magrittr,
-    glue,
     rlang,
     lattice,
     SixSigma
@@ -32,6 +22,16 @@ Depends:
     R (>= 3.5.0)
 RoxygenNote: 7.1.1
 Suggests: 
+    glue,
+    tibble,
+    stringr,
+    scales,
+    purrr,
+    janitor,
+    patchwork,
+    forcats,
+    broom,
+    viridis,
     learnr,
     DoE.base,
     qcc,

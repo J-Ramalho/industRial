@@ -11,4 +11,8 @@ R CMD check succeeded
 There are currently no downstream dependencies for this package.
 (new package, first submission)
 
-
+I get PREPERROR with rhub::check_for_cran() which I understand being related
+with bioconductor: 
+"Error: Bioconductor does not yet build and check packages for R version 4.2; see
+  https://bioconductor.org/install"
+I don't intend to deploy on bioconductor.

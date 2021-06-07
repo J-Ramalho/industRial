@@ -281,6 +281,7 @@ plot(solarcell_factor_lm$residuals)
 plot(solarcell_factor_lm, which = 2)
 plot(solarcell_factor_lm, which = c(1, 3, 5))
 plot(solarcell_factor_lm, which = 4)
+dev.off() 
 ```
 
 As the residuals analysis has been discussed in detail including custom made plots and statistical tests in the linear models unit, the assessment is done here in a summarized manner with a grouped output of all residuals plots. The qq plot presents good adherence to the center line indicating a normal distribution; the residuals versus fit presents a rather symmetrical distribution around zero indicating equality of variances at all levels and; the scale location plot though, shows a center line that is not horizontal which suggests the presence of outliers; in the Residuals versus fit we can effectively sense the Residuals Standard Error of 26.
@@ -338,6 +339,7 @@ plot(solarcell_factor_lm_no_int$residuals)
 plot(solarcell_factor_lm_no_int, which = 2)
 plot(solarcell_factor_lm_no_int, which = c(1, 3, 5))
 plot(solarcell_factor_lm_no_int, which = 4)
+dev.off()
 ```
 
 They see in the Residuals vs Fitted a clear pattern with residuals moving from positive to negative and then again to positive along the fitted values axis which indicates that there is an interaction at play. Another concern comes from the Residuals versus Factor levels where at 10°C some residuals go beyond 2 standard deviations. The model with the interaction is clearly preferred in this case. 

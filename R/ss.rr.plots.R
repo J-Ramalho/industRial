@@ -79,7 +79,6 @@ ss.rr.plots <- function (var,
   a <- nlevels(data[[part]])
   b <- nlevels(data[[appr]])
   n <- nrow(data) / (a * b)
-  options(show.signif.stars = FALSE)
   if (b == 1) {
     modelf <- as.formula(paste(var, "~", part))
     model <- aov(modelf, data = data)

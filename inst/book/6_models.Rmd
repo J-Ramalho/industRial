@@ -183,6 +183,7 @@ Residuals analysis plots obtained with base R plot() function. In this unit each
 ```{r}
 par(mfrow = c(2,2))
 plot(ebike_lm_factor)
+dev.off() 
 ```
 
 </div>

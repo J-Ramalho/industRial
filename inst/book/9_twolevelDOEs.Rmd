@@ -238,6 +238,7 @@ plotMeans(response = pet_doe$tensile_strength,
           col = viridis::viridis(12)[4],
           legend.pos = "bottomright",
           main = "The PET clothing improvement plan")
+dev.off() 
 ```
 
 Now she want to get quickly an interaction plot but including error bars. Unfortunately the base R `interaction.plot()` doesn't provide it and the `ggplot2()` made it to long. With a quick check on Stackoverflow she discovered this simple approach with the function `plotMeans()` from the package {RcmdrMisc} and she gets the plot dine with standard error as argument for the `error.bars` argument.
@@ -502,6 +503,7 @@ plot(battery_red_lm$residuals)
 plot(battery_red_lm, which = 2)
 plot(battery_red_lm, which = c(1, 3, 5))
 plot(battery_red_lm, which = 4)
+dev.off() 
 ```
 
 In any case from the linear model coefficients we can already see that the selection of terminal material has a significative effect which is of about 60% of the effect of the temperature (1'050/1'763).

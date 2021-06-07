@@ -1,11 +1,15 @@
 Package: industRial
 Type: Package
 Date: 2021-06-04
-Title: Companion to industRial Data Science Book
+Title: Data, Functions and Support Materials from the book "industRial data science"
 Version: 0.1.0
-Authors@R: person("João", "Ramalho", email = "ramalho.joao@protonmail.com", role = c("aut", "cre"))
-Description: Companion package to the book industRial Data Science. Provides data sets and functions to complete the case studies and contains the book original files and exercises.
-URL: https://j-ramalho.github.io/industRial/
+Authors@R: person("Joao", "Ramalho", email = "ramalho.joao@protonmail.com", role = c("aut", "cre"))
+Description: Companion package to the book "industRial data science", 
+    J.Ramalho (2021) <https://j-ramalho.github.io/industRial>. 
+    Provides data sets and functions to complete the case studies and contains 
+    the book original Rmd files and tutorials.
+URL: https://github.com/J-Ramalho/industRial
+BugReports: https://github.com/J-Ramalho/industRial/issues
 License: GPL (>= 3)
 Encoding: UTF-8
 LazyData: true

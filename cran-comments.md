@@ -32,4 +32,12 @@ Hope this addresses all your points but let me know if otherwise.
 Best regards,
 Joao Ramalho
 
+## 2021-06-09 General comments
 
+Dear Uwe Ligges,
+thanks for your remarks. I've changed the title to capitals and added trailing
+slashes to the requested url (https://j-ramalho.github.io/industRial/). Hope all
+is ready now but don't hesitate to point out anything else missing.
+Thanks in advance for your revision and approval.
+Kind regards,
+Joao Ramalho

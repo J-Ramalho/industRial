@@ -50,23 +50,23 @@ The column *Download* precises if a package is downloaded automatically when the
 
 |Download |Package    |Domain           |Version |Depends                                       |
 |:--------|:----------|:----------------|:-------|:---------------------------------------------|
-|imports  |viridis    |colors           |0.6.1   |R (>= 2.10), viridisLite (>= 0.4.0)           |
-|imports  |readr      |data loading     |1.4.0   |R (>= 3.1)                                    |
-|imports  |dplyr      |data wrangling   |1.0.6   |R (>= 3.3.0)                                  |
-|imports  |forcats    |data wrangling   |0.5.1   |R (>= 3.2)                                    |
-|imports  |janitor    |data wrangling   |2.1.0   |R (>= 3.1.2)                                  |
-|imports  |magrittr   |data wrangling   |2.0.1   |NA                                            |
-|imports  |tibble     |data wrangling   |3.1.2   |R (>= 3.1.0)                                  |
-|imports  |tidyr      |data wrangling   |1.1.3   |R (>= 3.1)                                    |
+|imports  |viridis    |colors           |0.5.1   |R (>= 2.10), viridisLite (>= 0.3.0)           |
+|imports  |readr      |data loading     |1.3.1   |R (>= 3.1)                                    |
+|imports  |dplyr      |data wrangling   |1.0.2   |R (>= 3.2.0)                                  |
+|imports  |forcats    |data wrangling   |0.5.0   |R (>= 3.2)                                    |
+|imports  |janitor    |data wrangling   |2.0.1   |R (>= 3.1.2)                                  |
+|imports  |magrittr   |data wrangling   |1.5     |NA                                            |
+|imports  |tibble     |data wrangling   |3.0.3   |R (>= 3.1.0)                                  |
+|imports  |tidyr      |data wrangling   |1.1.1   |R (>= 3.1)                                    |
 |imports  |purrr      |data wrangling   |0.3.4   |R (>= 3.2)                                    |
-|imports  |glue       |data wrangling   |1.4.2   |R (>= 3.2)                                    |
+|imports  |glue       |data wrangling   |1.4.1   |R (>= 3.1)                                    |
 |imports  |stringr    |data wrangling   |1.4.0   |R (>= 3.1)                                    |
-|imports  |patchwork  |plotting         |1.1.1   |NA                                            |
-|imports  |ggplot2    |plotting         |3.3.3   |R (>= 3.2)                                    |
+|imports  |patchwork  |plotting         |1.0.1   |NA                                            |
+|imports  |ggplot2    |plotting         |3.3.2   |R (>= 3.2)                                    |
 |imports  |scales     |plotting         |1.1.1   |R (>= 3.2)                                    |
-|imports  |ggtext     |plotting         |0.1.1   |R (>= 3.5)                                    |
-|imports  |broom      |statistics       |0.7.6   |R (>= 3.1)                                    |
-|imports  |stats      |statistics       |4.1.0   |NA                                            |
+|imports  |ggtext     |plotting         |0.1.0   |R (>= 3.5)                                    |
+|imports  |broom      |statistics       |0.7.0   |R (>= 3.1)                                    |
+|imports  |stats      |statistics       |4.0.2   |NA                                            |
 |imports  |skimr      |statistics       |2.1.3   |R (>= 3.1.2)                                  |
 |suggests |qicharts2  |industrial stats |0.7.1   |R (>= 3.0.0)                                  |
 |suggests |qcc        |industrial stats |2.7     |R (>= 3.0)                                    |
@@ -74,15 +74,15 @@ The column *Download* precises if a package is downloaded automatically when the
 |suggests |DoE.base   |industrial stats |1.1-6   |R (>= 2.10), grid, conf.design                |
 |suggests |rsm        |industrial stats |2.10.2  |NA                                            |
 |suggests |agricolae  |industrial stats |1.3-3   |R (>= 2.10)                                   |
-|suggests |ggraph     |networks         |2.0.5   |R (>= 2.10), ggplot2 (>= 3.0.0)               |
+|suggests |ggraph     |networks         |2.0.3   |R (>= 2.10), ggplot2 (>= 3.0.0)               |
 |suggests |tidygraph  |networks         |1.2.0   |NA                                            |
-|suggests |igraph     |networks         |1.2.6   |methods                                       |
-|suggests |ggforce    |networks         |0.3.3   |ggplot2 (>= 3.0.0), R (>= 3.3.0)              |
-|suggests |bookdown   |publishing       |0.22    |NA                                            |
-|suggests |knitr      |publishing       |1.33    |R (>= 3.2.3)                                  |
+|suggests |igraph     |networks         |1.2.5   |methods                                       |
+|suggests |ggforce    |networks         |0.3.2   |ggplot2 (>= 3.0.0), R (>= 3.3.0)              |
+|suggests |bookdown   |publishing       |0.20    |NA                                            |
+|suggests |knitr      |publishing       |1.29    |R (>= 3.2.3)                                  |
 |suggests |kableextra |publishing       |NA      |NA                                            |
-|suggests |gt         |publishing       |0.3.0   |R (>= 3.2.0)                                  |
-|suggests |car        |statistics       |3.0-10  |R (>= 3.5.0), carData (>= 3.0-0)              |
+|suggests |gt         |publishing       |0.2.2   |R (>= 3.2.0)                                  |
+|suggests |car        |statistics       |3.0-9   |R (>= 3.5.0), carData (>= 3.0-0)              |
 |suggests |RcmdrMisc  |statistics       |2.7-1   |R (>= 3.5.0), utils, car (>= 3.0-0), sandwich |
 
 In the book text we don't see the loading instructions for the installed packages over and over again everytime an example is given to avoid repetition (e.g. running `library(dplyr)` before each code chunk). Be sure to load at minimum the packages below before trying any example:
@@ -258,7 +258,7 @@ paste0(.libPaths()[1], "/industRial/book")
 ```
 
 ```
-[1] "/home/joao/R/x86_64-pc-linux-gnu-library/4.1/industRial/book"
+[1] "C:/R/R-4.0.2/jr_library/industRial/book"
 ```
 
 # Tutorials {#tutorials}

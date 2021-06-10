@@ -388,6 +388,15 @@ plotMeans(response = pet_doe$tensile_strength,
 
 <img src="9_twolevelDOEs_files/figure-html/unnamed-chunk-15-1.png" width="100%" />
 
+```r
+dev.off() 
+```
+
+```
+null device 
+          1 
+```
+
 Now she want to get quickly an interaction plot but including error bars. Unfortunately the base R `interaction.plot()` doesn't provide it and the `ggplot2()` made it to long. With a quick check on Stackoverflow she discovered this simple approach with the function `plotMeans()` from the package {RcmdrMisc} and she gets the plot dine with standard error as argument for the `error.bars` argument.
 
 As expected she confirms that both treatments provide an visible effect on Tensile strenght and that there is no interaction between them.
@@ -677,22 +686,22 @@ ALL 16 residuals are 0: no residual degrees of freedom!
 
 Coefficients:
              Estimate Std. Error t value Pr(>|t|)
-(Intercept)  6.44e+00        NaN     NaN      NaN
-A            1.76e+00        NaN     NaN      NaN
-B           -2.50e-02        NaN     NaN      NaN
-C            6.75e-01        NaN     NaN      NaN
-D            1.05e+00        NaN     NaN      NaN
-A:B          7.50e-02        NaN     NaN      NaN
-A:C         -9.75e-01        NaN     NaN      NaN
-B:C         -3.12e-01        NaN     NaN      NaN
-A:D          4.00e-01        NaN     NaN      NaN
-B:D          4.13e-01        NaN     NaN      NaN
-C:D          1.25e-02        NaN     NaN      NaN
-A:B:C        4.12e-01        NaN     NaN      NaN
-A:B:D       -1.13e-01        NaN     NaN      NaN
-A:C:D       -2.63e-01        NaN     NaN      NaN
-B:C:D        5.00e-02        NaN     NaN      NaN
-A:B:C:D      6.94e-18        NaN     NaN      NaN
+(Intercept)  6.44e+00         NA      NA       NA
+A            1.76e+00         NA      NA       NA
+B           -2.50e-02         NA      NA       NA
+C            6.75e-01         NA      NA       NA
+D            1.05e+00         NA      NA       NA
+A:B          7.50e-02         NA      NA       NA
+A:C         -9.75e-01         NA      NA       NA
+B:C         -3.12e-01         NA      NA       NA
+A:D          4.00e-01         NA      NA       NA
+B:D          4.13e-01         NA      NA       NA
+C:D          1.25e-02         NA      NA       NA
+A:B:C        4.12e-01         NA      NA       NA
+A:B:D       -1.13e-01         NA      NA       NA
+A:C:D       -2.63e-01         NA      NA       NA
+B:C:D        5.00e-02         NA      NA       NA
+A:B:C:D      6.94e-18         NA      NA       NA
 
 Residual standard error: NaN on 0 degrees of freedom
 Multiple R-squared:     1,	Adjusted R-squared:   NaN 
@@ -840,5 +849,14 @@ plot(battery_red_lm, which = 4)
 ```
 
 <img src="9_twolevelDOEs_files/figure-html/unnamed-chunk-36-1.png" width="100%" />
+
+```r
+dev.off() 
+```
+
+```
+null device 
+          1 
+```
 
 In any case from the linear model coefficients we can already see that the selection of terminal material has a significative effect which is of about 60% of the effect of the temperature (1'050/1'763).

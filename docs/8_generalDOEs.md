@@ -316,24 +316,15 @@ summary(juice_drymatter_aov)
 ```
 
 ```
-                                   Df Sum Sq Mean Sq F value Pr(>F)
-drymatter_TGT                       1  1.315   1.315  486.06 <2e-16
-speed                               1  0.000   0.000    0.00   0.99
-particle_size                       1  0.624   0.624  230.70 <2e-16
-drymatter_TGT:speed                 1  0.001   0.001    0.27   0.60
-drymatter_TGT:particle_size         1  0.003   0.003    1.04   0.31
-speed:particle_size                 1  0.003   0.003    1.19   0.28
-drymatter_TGT:speed:particle_size   1  0.004   0.004    1.44   0.23
-Residuals                         100  0.271   0.003               
-                                     
-drymatter_TGT                     ***
-speed                                
-particle_size                     ***
-drymatter_TGT:speed                  
-drymatter_TGT:particle_size          
-speed:particle_size                  
-drymatter_TGT:speed:particle_size    
-Residuals                            
+                                   Df Sum Sq Mean Sq F value Pr(>F)    
+drymatter_TGT                       1  1.315   1.315  486.06 <2e-16 ***
+speed                               1  0.000   0.000    0.00   0.99    
+particle_size                       1  0.624   0.624  230.70 <2e-16 ***
+drymatter_TGT:speed                 1  0.001   0.001    0.27   0.60    
+drymatter_TGT:particle_size         1  0.003   0.003    1.04   0.31    
+speed:particle_size                 1  0.003   0.003    1.19   0.28    
+drymatter_TGT:speed:particle_size   1  0.004   0.004    1.44   0.23    
+Residuals                         100  0.271   0.003                   
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ```

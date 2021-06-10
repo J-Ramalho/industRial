@@ -153,8 +153,6 @@ fluidPage(
     ) %>%
     as_tibble()
   })
-
-  observe({print(weight_normal())})
   
   output$capability_chart <- renderPlot({
 

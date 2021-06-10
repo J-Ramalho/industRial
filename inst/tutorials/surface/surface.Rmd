@@ -156,12 +156,6 @@ fluidPage(
     interaction_factors
   })
   
-  observe({
-    print("int factors")
-    print(class(interaction_factors))
-    print(interaction_factors())
-    })
-  
   model <- reactive({
     battery_lm <- lm(
       formula = model_formula(),

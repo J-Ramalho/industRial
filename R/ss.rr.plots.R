@@ -88,7 +88,6 @@ ss.rr.plots <- function (var,
                                                             1:2]), rep(NA, 3)))
     rownames(modelm[[1]])[3] <- "Total"
     cat("One-way ANOVA (single appraiser):\n\n")
-    print(modelm)
     modelrm <- NULL
   }
   else {
@@ -108,9 +107,6 @@ ss.rr.plots <- function (var,
     modelm[[1]] <- rbind(modelm[[1]], c(colSums(modelm[[1]][,
                                                             1:2]), rep(NA, 3)))
     rownames(modelm[[1]])[5] <- "Total"
-    cat("Complete model (with interaction):\n\n")
-    print(modelm)
-    cat("\nalpha for removing interaction:", alphaLim, "\n")
     pint <- modelm[[1]][3, 5]
     if (pint > alphaLim) {
       modelfr <- as.formula(paste(var, "~", part, "+",
@@ -121,8 +117,6 @@ ss.rr.plots <- function (var,
       modelrm[[1]] <- rbind(modelrm[[1]], c(colSums(modelrm[[1]][,
                                                                  1:2]), rep(NA, 3)))
       rownames(modelrm[[1]])[4] <- "Total"
-      cat("\n\nReduced model (without interaction):\n\n")
-      print(modelrm)
     }
     else
       modelrm <- NULL
@@ -198,16 +192,6 @@ ss.rr.plots <- function (var,
       varComp <- varComp[-c(5),]
     }
   }
-  cat(paste("\nGage R&R\n\n"))
-  print(varComp[, 1:2])
-  cat("\n")
-  if (!is.na(usl) && !is.na(lsl)) {
-    print(varComp[, c(1, 3:6)])
-  }
-  else {
-    print(varComp[, 3:5])
-  }
-  cat(paste("\nNumber of Distinct Categories =", ncat, "\n"))
   # .ss.prepCanvas(main, sub)
   vp.plots <-
     grid::viewport(name = "plots", layout = grid::grid.layout(3,
@@ -276,7 +260,6 @@ ss.rr.plots <- function (var,
     horizontal = FALSE,
     main = list("Components of Variation", fontsize = 14)
   )
-  print(plot, newpage = FALSE)
   grid::popViewport()
   vp.varByPart <-
     grid::viewport(
@@ -299,7 +282,6 @@ ss.rr.plots <- function (var,
                  "by", part),
     type = c("p", "a")
   )
-  print(plot, newpage = FALSE)
   grid::popViewport()
   vp.varByAppr <-
     grid::viewport(
@@ -322,7 +304,6 @@ ss.rr.plots <- function (var,
                  "by", appr),
     type = c("p", "a")
   )
-  print(plot, newpage = FALSE)
   grid::popViewport()
   vp.Interact <-
     grid::viewport(
@@ -353,7 +334,6 @@ ss.rr.plots <- function (var,
       adj = 1
     )
   )
-  print(plot, newpage = FALSE)
   grid::popViewport()
   data.xrange <- aggregate(as.formula(paste(var, "~", appr,
                                             "+", part)), data = data, function(x) {
@@ -396,7 +376,6 @@ ss.rr.plots <- function (var,
       lattice::panel.abline(h = lcl, col = "red3")
     }
   )
-  print(plot, newpage = FALSE)
   grid::popViewport()
   vp.ccRange <-
     grid::viewport(
@@ -439,7 +418,6 @@ ss.rr.plots <- function (var,
       lattice::panel.abline(h = rlimits[2], col = "red3")
     }
   )
-  print(plot, newpage = FALSE)
   grid::popViewport()
   invisible(
     list(

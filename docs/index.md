@@ -2,7 +2,7 @@
 title: "indust<b style='color:#38598CFF'>R</b>ial data science"
 subtitle: "<p style='color:#595959'>Case studies in product development and manufacturing</p>"
 author: "João Ramalho"
-date: "2021-06-08"
+date: "2021-06-10"
 # output: pdf_document
 site: bookdown::bookdown_site
 output:

@@ -223,7 +223,7 @@ t.test(
 
 data:  tensile_strength by sample
 t = -2.4, df = 54, p-value = 0.02
-alternative hypothesis: true difference in means is not equal to 0
+alternative hypothesis: true difference in means between group A and group B is not equal to 0
 95 percent confidence interval:
  -1.58500 -0.14072
 sample estimates:

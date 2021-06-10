@@ -41,3 +41,13 @@ is ready now but don't hesitate to point out anything else missing.
 Thanks in advance for your revision and approval.
 Kind regards,
 Joao Ramalho
+
+## 2021-06-10 General comments
+
+Dear Gregor Seyer,
+thanks for your feedback. I've removed all calls to the print() and cat()
+functions. There were mostly a legacy from a function I've taken from an old 
+package and others were left overs from Shiny debugging. I will be more
+attemptive in future submissions. Thanks for your new review.
+Kind regards.
+Joao Ramalho

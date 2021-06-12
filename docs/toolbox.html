@@ -24,7 +24,7 @@
 <meta name="author" content="João Ramalho" />
 
 
-<meta name="date" content="2021-06-10" />
+<meta name="date" content="2021-06-12" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -396,7 +396,9 @@ div.csl-indent {
 <p>Additionally an original package named <code>{industRial}</code> has been developed as a companion package for this book.</p>
 <div id="installation" class="section level3">
 <h3>Installation</h3>
-<p>The companion package to this book can downloaded from github with the following command:</p>
+<p>The companion package to this book can downloaded from CRAN with:</p>
+<pre><code>install.packages(&quot;industRial&quot;)</code></pre>
+<p>A development version is also available from github with:</p>
 <pre><code>devtools::install_github(&quot;J-Ramalho/industRial&quot;)</code></pre>
 <p>The list below identifies which are the remaining packages required to run all the coded of the book examples. Note that it is not required to download them all at once.</p>
 <p>The column <em>Download</em> precises if a package is downloaded automatically when the <code>{industRial}</code> package is downloaded (imports) or if it needs be downloaded manually by the reader (suggests). In technical terms this differentiation corresponds to the DESCRIPTION file and allows for a progressive installation of the required software.</p>
@@ -669,7 +671,7 @@ purrr::map(ds_pkgs, library, character.only = TRUE)</code></pre>
 <p>We’re highlighting now some specific packages that are used in the book and that bring powerful features in analysis of data from R&amp;D and Operations. Wherever they are required in the book we loaded them explicitly in the text to help tracking where the specific functions come from.</p>
 <div id="six-sigma" class="section level4">
 <h4>six sigma</h4>
-<p><code>{SixSigma}</code> is a complete and robust R package. It provides many well tested functions in the area of quality and process improvement. We’re presenting a full example with the gage r&amp;R function in our MSA Case Study. As many other industrial packages, the <code>{SixSigma}</code> package is from before the <code>{tidyverse}</code> era and its plots have been not been developed with <code>{ggplot2}</code>. This makes integration in newer approaches harder. The data output is still nevertheless fully exploitable and very useful. The package is part of an excellent book with the same name published by <span class="citation"><a href="#ref-Cano2012" role="doc-biblioref">Emilio L. Cano</a> (<a href="#ref-Cano2012" role="doc-biblioref">2012</a>)</span>.</p>
+<p><code>{SixSigma}</code> is a complete and robust R package. It provides many well tested functions in the area of quality and process improvement. We’re presenting a full example with the gage r&amp;R function in our MSA Case Study. As many other industrial packages, the <code>{SixSigma}</code> package is from before the <code>{tidyverse}</code> era and its plots have not all been been developed with <code>{ggplot2}</code>. This sometimes makes integration in newer approaches a little bit harder. The data output is still nevertheless fully exploitable and very useful. The package is part of an excellent book with the same name published by <span class="citation"><a href="#ref-Cano2012" role="doc-biblioref">Emilio L. Cano</a> (<a href="#ref-Cano2012" role="doc-biblioref">2012</a>)</span>.</p>
 </div>
 <div id="qcc" class="section level4">
 <h4>qcc</h4>
@@ -719,11 +721,11 @@ purrr::map(ds_pkgs, library, character.only = TRUE)</code></pre>
 <pre><code>devtools::install_github(&quot;J-Ramalho/industRial&quot;)
 library(industRial)</code></pre>
 <p>The primary goal of <code>{industRial}</code> is to make easily available all the data sets from all case studies. We can easily look for a data set by typing <code>industRial::</code> and tab. The complete list can also be obtained with the snippet below:</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="toolbox.html#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="at">package =</span> <span class="st">&quot;industRial&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb4-2"><a href="toolbox.html#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pluck</span>(<span class="st">&quot;results&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb4-3"><a href="toolbox.html#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as_tibble</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb4-4"><a href="toolbox.html#cb4-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(Item, Title) <span class="sc">%&gt;%</span></span>
-<span id="cb4-5"><a href="toolbox.html#cb4-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="toolbox.html#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="at">package =</span> <span class="st">&quot;industRial&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb5-2"><a href="toolbox.html#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pluck</span>(<span class="st">&quot;results&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb5-3"><a href="toolbox.html#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as_tibble</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb5-4"><a href="toolbox.html#cb5-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(Item, Title) <span class="sc">%&gt;%</span></span>
+<span id="cb5-5"><a href="toolbox.html#cb5-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable</span>()</span></code></pre></div>
 <table>
 <colgroup>
 <col width="17%" />
@@ -791,9 +793,9 @@ library(industRial)</code></pre>
 </tbody>
 </table>
 <p>Once the package is loaded the data objects become immediately available in memory and can directly be used in the examples presented or for further exploration. Lets confirm this invoking the first data set:</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="toolbox.html#cb5-1" aria-hidden="true" tabindex="-1"></a>dial_control <span class="sc">%&gt;%</span></span>
-<span id="cb5-2"><a href="toolbox.html#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb5-3"><a href="toolbox.html#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="toolbox.html#cb6-1" aria-hidden="true" tabindex="-1"></a>dial_control <span class="sc">%&gt;%</span></span>
+<span id="cb6-2"><a href="toolbox.html#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb6-3"><a href="toolbox.html#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable</span>()</span></code></pre></div>
 <table>
 <thead>
 <tr class="header">
@@ -850,11 +852,11 @@ library(industRial)</code></pre>
 </tbody>
 </table>
 <p>The dateset can be used and manipulated like any other dataset created in the session or loaded otherwise. For example it can be filtered and assigned to a new variable name:</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="toolbox.html#cb6-1" aria-hidden="true" tabindex="-1"></a>dial_peter <span class="ot">&lt;-</span> dial_control <span class="sc">%&gt;%</span></span>
-<span id="cb6-2"><a href="toolbox.html#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Operator <span class="sc">==</span> <span class="st">&quot;Peter&quot;</span>) </span>
-<span id="cb6-3"><a href="toolbox.html#cb6-3" aria-hidden="true" tabindex="-1"></a>dial_peter <span class="sc">%&gt;%</span></span>
-<span id="cb6-4"><a href="toolbox.html#cb6-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>(<span class="dv">2</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb6-5"><a href="toolbox.html#cb6-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="toolbox.html#cb7-1" aria-hidden="true" tabindex="-1"></a>dial_peter <span class="ot">&lt;-</span> dial_control <span class="sc">%&gt;%</span></span>
+<span id="cb7-2"><a href="toolbox.html#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Operator <span class="sc">==</span> <span class="st">&quot;Peter&quot;</span>) </span>
+<span id="cb7-3"><a href="toolbox.html#cb7-3" aria-hidden="true" tabindex="-1"></a>dial_peter <span class="sc">%&gt;%</span></span>
+<span id="cb7-4"><a href="toolbox.html#cb7-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>(<span class="dv">2</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb7-5"><a href="toolbox.html#cb7-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable</span>()</span></code></pre></div>
 <table>
 <thead>
 <tr class="header">
@@ -888,10 +890,10 @@ library(industRial)</code></pre>
 <p>Besides the data sets the <code>{industRial}</code> package also contains toy functions to plot Statistical Process Control (SPC) charts. The objective here is to showcase how to build such functions and their scope of application is limited to the book case studies. For complete and robust SPC functions we recommend using the <code>{QCC}</code> package also described below.</p>
 <p>Additionally the package contains theme functions to print and customize the aesthetics of spc charts and other charts. These themes are built on top of the <code>{ggplot2}</code> by H.Wickham and <code>{cowplot}</code> package by Claus O.Wilke. The main objective is to give the reader a starting point for customization of charts in this domain.</p>
 <p>A functions can conveniently be accessed on the console with <code>industRial::</code> and then tab. The complete list of themes and functions can be seen with:</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="toolbox.html#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">lsf.str</span>(<span class="st">&quot;package:industRial&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb7-2"><a href="toolbox.html#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unclass</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb7-3"><a href="toolbox.html#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as_tibble</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb7-4"><a href="toolbox.html#cb7-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="toolbox.html#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">lsf.str</span>(<span class="st">&quot;package:industRial&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb8-2"><a href="toolbox.html#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unclass</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb8-3"><a href="toolbox.html#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as_tibble</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb8-4"><a href="toolbox.html#cb8-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable</span>()</span></code></pre></div>
 <table>
 <thead>
 <tr class="header">
@@ -936,7 +938,7 @@ library(industRial)</code></pre>
 </table>
 <p>For each function a help page is available and can be obtained the same way as any other R data sets, themes and functions with <code>?&lt;object&gt;</code> (e.g. ?chart_xbar)</p>
 <p>To go even deeper and get access to all the code, the original book Rmd files are also bundled in the package and can be seen in the book folder. A way to get the exact folder path is:</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="toolbox.html#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">paste0</span>(<span class="fu">.libPaths</span>()[<span class="dv">1</span>], <span class="st">&quot;/industRial/book&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="toolbox.html#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">paste0</span>(<span class="fu">.libPaths</span>()[<span class="dv">1</span>], <span class="st">&quot;/industRial/book&quot;</span>)</span></code></pre></div>
 <pre><code>[1] &quot;/home/joao/R/x86_64-pc-linux-gnu-library/4.1/industRial/book&quot;</code></pre>
 </div>
 </div>

@@ -39,7 +39,12 @@ Additionally an original package named `{industRial}` has been developed as a co
 
 ### Installation {#installation}
 
-The companion package to this book can downloaded from github with the following command:
+The companion package to this book can downloaded from CRAN with:
+
+    install.packages("industRial")
+    
+
+A development version is also available from github with:
 
     devtools::install_github("J-Ramalho/industRial")
 
@@ -99,7 +104,7 @@ We're highlighting now some specific packages that are used in the book and that
 
 #### six sigma
 
-`{SixSigma}` is a complete and robust R package. It provides many well tested functions in the area of quality and process improvement. We're presenting a full example with the gage r&R function in our MSA Case Study. As many other industrial packages, the `{SixSigma}` package is from before the `{tidyverse}` era and its plots have been not been developed with `{ggplot2}`. This makes integration in newer approaches harder. The data output is still nevertheless fully exploitable and very useful. The package is part of an excellent book with the same name published by @Cano2012.
+`{SixSigma}` is a complete and robust R package. It provides many well tested functions in the area of quality and process improvement. We're presenting a full example with the gage r&R function in our MSA Case Study. As many other industrial packages, the `{SixSigma}` package is from before the `{tidyverse}` era and its plots have not all been been developed with `{ggplot2}`. This sometimes makes integration in newer approaches a little bit harder. The data output is still nevertheless fully exploitable and very useful. The package is part of an excellent book with the same name published by @Cano2012.
 
 #### qcc
 

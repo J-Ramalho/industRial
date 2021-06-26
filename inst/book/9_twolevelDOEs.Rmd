@@ -39,7 +39,7 @@ knitr::include_graphics("img/PET_lamination_bw.jpg")
 
 ### Factorial design 2 levels
 
-A materials engineer working in the <b class="highlight">winter sports clothing industry</b> has been working in the development of a recyclable PET. Previous tests have shown promising results on tensile strength, one of the main characteristics required from the raw material. The trade offs between performance, costs and recyclability are not obvious to obtain due to lack of experience and specific know-how. Several one at a time comparisions between supplier deliveries have been done but now she wanted to go further and has established together with the raw material supplier factorial design with two factors presented in the output of the next R chunk. Most of the time process recipes at raw material producer need to are kept confidential for competitive reasons. This makes she only had access to a generic description of the factor levels:
+A materials engineer working in the <b class="highlight">winter sports clothing industry</b> has been working in the development of a recyclable PET. Previous tests have shown promising results on tensile strength, one of the main characteristics required from the raw material. The trade offs between performance, costs and recyclability are not obvious to obtain due to lack of experience and specific know-how. Several one at a time comparisons between supplier deliveries have been done but now she wanted to go further and has established together with the raw material supplier factorial design with two factors presented in the output of the next R chunk. Most of the time process recipes at raw material producer need to are kept confidential for competitive reasons. This makes she only had access to a generic description of the factor levels:
 
 A: bi-axial orientation in production (yes/no)   
 B: nucleating agent level (high/low)
@@ -161,7 +161,7 @@ summary(pet_num_lm)
 predict(pet_num_lm, newdata = list(cA = 1, cB = 1))
 ```
 
-Finaly the materials engineer coded the levels with +1/-1 but left the variables with type numeric. In this case she did not define any contrasts. Looking into the lm and prediction she confirms having obtained exactly the same outputs.
+Finally the materials engineer coded the levels with +1/-1 but left the variables with type numeric. In this case she did not define any contrasts. Looking into the lm and prediction she confirms having obtained exactly the same outputs.
 
 As the inputs are coded as numeric this behaves just like the predictions with the first linear model studied in our book. Note that we feed the predictions function with numeric values. This is very intuitive as it corresponds to the original units of the experiments (also called natural or engineering units). On the other hand coding the design variables provides another advange: generally, the engineering units are not directly comparable while coded variables are very effective for determining the relative size of factor effects.
 
@@ -241,9 +241,55 @@ plotMeans(response = pet_doe$tensile_strength,
 dev.off() 
 ```
 
-Now she want to get quickly an interaction plot but including error bars. Unfortunately the base R `interaction.plot()` doesn't provide it and the `ggplot2()` made it to long. With a quick check on Stackoverflow she discovered this simple approach with the function `plotMeans()` from the package {RcmdrMisc} and she gets the plot dine with standard error as argument for the `error.bars` argument.
+Now she wanted to get quickly an interaction plot but including error bars. Unfortunately the base R `interaction.plot()` doesn't provide it and the `ggplot2()` made it to long. With a quick check on Stackoverflow she discovered this simple approach with the function `plotMeans()` from the package {RcmdrMisc} and she gets the plot dine with standard error as argument for the `error.bars` argument.
 
-As expected she confirms that both treatments provide an visible effect on Tensile strenght and that there is no interaction between them.
+As expected she confirms that both treatments provide an visible effect on Tensile strength and that there is no interaction between them.
+
+### Relative effects plot
+
+A final interesting analysis is the comparison of the effects in relative terms. This is common for main effects and is shortly presented in the plot below:
+
+```{r}
+intercept <- pet_num_lm$coefficients[1]
+
+pet_new_A <- list(cA = c(-1,1), cB = c(0,0))
+pet_predict_A <- predict(pet_num_lm, newdata = pet_new_A)
+
+pet_new_B <- list(cA = c(0,0), cB = c(-1,1))
+pet_predict_B <- predict(pet_num_lm, newdata = pet_new_B)
+
+pet_effects <- tibble(
+  level = c(-1, 1),
+  A = pet_predict_A,
+  B = pet_predict_B
+) %>%
+  pivot_longer(
+    cols = c(A, B),
+    values_to = "tensile_strength",
+    names_to = "factor"
+  ) %>% 
+  mutate(
+    factor_level = str_c(factor, " ", level),
+    tensile_strength_variation = tensile_strength - intercept
+  )
+
+pet_effects %>%
+  ggplot(
+    aes(x = tensile_strength_variation, 
+        y = factor_level, fill = factor)
+    ) +
+  geom_col(position = "dodge2") +
+  scale_x_continuous(n.breaks = 10) +
+  labs(
+    title = "Relative effects plot",
+    subtitle = "Tensile strength variation for factor extremes",
+    y = "Factor / Level",
+    x = "Tensile strenght variation"
+  )
+```
+
+The plot is complementary to the previous analysis and helps us quickly grasp the the factor A (bi-axial orientation in production has a stronger effect 
+than the factor B (nucleating agent level).
 
 ### Adjusted R-squared {#adj_Rsquare}
 
@@ -507,3 +553,5 @@ dev.off()
 ```
 
 In any case from the linear model coefficients we can already see that the selection of terminal material has a significative effect which is of about 60% of the effect of the temperature (1'050/1'763).
+
+

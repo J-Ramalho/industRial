@@ -148,7 +148,7 @@ leveneTest(tensile_strength ~ sample, data = pet_delivery_long)
 
 We had considered the samples to be normaly distributed but we can be more conservative and use the `leveneTest()` function from the `{car}` package. In this case we get a p > 0.05 thus again we see that there is homogeneity of the variances (they do not differ significantly). Further elaborations on the variance can be found under @minitab_variances.
 
-The clothing sports materials engineer has now a view on the samples distribution and homogeity of variances and can apply t.test to compare the sample means. She takes care to specify the `var.equal` argument as TRUE (by default it is FALSE).
+The clothing sports materials engineer has now a view on the samples distribution and homogeneity of variances and can apply t.test to compare the sample means. She takes care to specify the `var.equal` argument as TRUE (by default it is FALSE).
 
 ### t-test two samples
 

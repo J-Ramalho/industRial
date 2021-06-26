@@ -274,3 +274,4 @@ summary(juice_drymatter_aov)
 ```
 
 Here she simplified things by inputing the formula directly in the aov function without passing by the `formula()` or `lm()` functions. The previous observations done on the plots are fully confirmed and now supported with statistical evidence: `drymatter target` and `particle_size` significantly affect the bias (p < 0.05); `speed` has no effect; none of the interactions is significative. This first round of assessment was very clear and successful and she can make bold proposals to the Quality Manager now to look deeper into the links between drymatter target and particle size in that bias. Certainly passing by a discussion again with the product team and a final DOE with more levels to identify or select an optimal operating zone for the measurement method.
+

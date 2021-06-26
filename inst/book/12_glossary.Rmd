@@ -68,22 +68,25 @@ mean is ‘average.’
 **Random Variable:** The probabilistic model for the value of a measurement,
 before the measurement is taken (e.g. Binomial, Poisson, Uniform, Exponential, Normal). It is denoted with latin capitals $X, Y$ and $Z$
 
-**Expectation:** The central value for a random variable. The expectation of the
-random variable X is marked by E($X$).
+**Expectation:** The central value for a random variable. The expectation of the random variable X is marked by E($X$).
 
 **Variance:** The (squared) spread of a random variable. The variance of the
 random variable X is marked by Var($X$).
 
 **Normal Random Variable:** A bell-shaped distribution that is frequently used
-to model a measurement. The distribution is marked with Normal($\mu,\sigma^2$).
+to model a measurement. The distribution is marked with X ~ Normal$(\mu,\sigma^2)$.
 
-**Standard Normal Distribution:** The Normal(0,1). The distribution of stan-
-dardized Normal measurement.
+**Exponential Random Variable:** probability distribution of the time between events (in a Poisson random measurement). It is denoted as X ∼
+Exponential(λ) where λ is a parameter that characterizes the distribution and
+is called the rate of the distribution.
+
+**Uniform Random Variable:** used in order to model measurements that may
+have values in a given interval, with all values in this interval equally likely to occur. Noted as X ∼ Uniform(a, b).
+
+**Standard Normal Distribution:** The Normal(0,1). The distribution of standardized normal measurement.
 
 **Percentile:** Given a percent p · 100% (or a probability p), the value x is the
 percentile of a random variable X if it satisfies the equation P$(X ≤ x) = p$.
-
-**Sampling distribution**
 
 **Random Sample:** The probabilistic model for the values of a measurements
 in the sample, before the measurement is taken.
@@ -111,10 +114,22 @@ distribution of the sample average. States that the distribution of the average 
 </div>
 
 **Expectation of the sample average:** the expectation of the sample mean is
-equal to the theoretical expectation of its components E$(\bar{X})$ = E($X$)
+equal to the theoretical expectation of its components $E(\bar{X}) = E(X)$
 
 **Variance of the sample average:** the variance of the sample average
-is equal to the variance of each of the components, divided by the sample size Var($X$) = Var$(X)/n$
+is equal to the variance of each of the components, divided by the sample size $Var(\bar X) = Var(X)/n$
+
+**Expectation for an uniform distribution:** $E(X) = \frac{a+b}{2}$
+
+**Variance for an uniform distribution:** $Var(X) = \frac{(b-a)^2}{12}$
+
+**Expectation for a normal distribution:** $E(X) = \mu$
+
+**Variance for a normal distribution:** $Var(X) = \sigma^2$
+
+**Expectation for an exponential distribution:** $E(X) = 1/\lambda$
+
+**Variance for an exponential distribution:** $Var(X) = 1\lambda^2$
 
 ### Statistical Inference
 

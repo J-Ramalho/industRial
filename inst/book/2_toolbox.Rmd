@@ -134,7 +134,6 @@ Many functions from the packages discussed before are built on the large and ext
 
 All datasets presented throughout the book are fully anonymized. Once the package is correctly installed it can be loaded in the R session as usual with the library() function.
 
-    devtools::install_github("J-Ramalho/industRial")
     library(industRial)
 
 The primary goal of `{industRial}` is to make easily available all the data sets from all case studies. We can easily look for a data set by typing `industRial::` and tab. The complete list can also be obtained with the snippet below: 

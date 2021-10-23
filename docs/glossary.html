@@ -24,7 +24,7 @@
 <meta name="author" content="João Ramalho" />
 
 
-<meta name="date" content="2021-06-12" />
+<meta name="date" content="2021-10-23" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -295,6 +295,7 @@ div.csl-indent {
 <li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#factorial-design-2-levels"><i class="fa fa-check"></i>Factorial design 2 levels</a></li>
 <li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#coding_levels"><i class="fa fa-check"></i>Coding levels</a></li>
 <li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#plotMeans"><i class="fa fa-check"></i>Interaction plots with SE</a></li>
+<li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#relative-effects-plot"><i class="fa fa-check"></i>Relative effects plot</a></li>
 <li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#adj_Rsquare"><i class="fa fa-check"></i>Adjusted R-squared</a></li>
 <li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#coding_inputs"><i class="fa fa-check"></i>Coding inputs</a></li>
 <li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#coded_prediction"><i class="fa fa-check"></i>Coded prediction</a></li>
@@ -372,7 +373,7 @@ div.csl-indent {
 <h1>Glossary</h1>
 <div id="statistics" class="section level2">
 <h2>Statistics</h2>
-<p>Statistic concepts are picked up and applied throught the Cases Studies on a needed basis. To get a better understanding of how they fit together we are reminding below some definitions coming from <span class="citation"><a href="#ref-Yakir2011" role="doc-biblioref">Yakir</a> (<a href="#ref-Yakir2011" role="doc-biblioref">2011</a>)</span>. For a deep and comprehensive course on statistics we recommend the free online <a href="https://www.khanacademy.org/math/statistics-probability">kahn academy</a> courses.</p>
+<p>Statistic concepts are picked up and applied through the Cases Studies on a needed basis. To get a better understanding of how they fit together we are reminding below some definitions coming from <span class="citation"><a href="#ref-Yakir2011" role="doc-biblioref">Yakir</a> (<a href="#ref-Yakir2011" role="doc-biblioref">2011</a>)</span>. For a deep and comprehensive course on statistics we recommend the free online <a href="https://www.khanacademy.org/math/statistics-probability">kahn academy</a> courses.</p>
 <div id="notation-conventions" class="section level3">
 <h3>Notation conventions</h3>
 <p>The arithmetic mean of a series of values x1, x2, …, xn is often denoted by placing an “overbar” over the symbol, e.g. <span class="math inline">\(\bar{x}\)</span> , pronounced “x bar.”</p>
@@ -407,18 +408,20 @@ mean is ‘average.’</p>
 <div id="probability" class="section level3">
 <h3>Probability</h3>
 <p><strong>Random Variable:</strong> The probabilistic model for the value of a measurement,
-before the measurement is taken (e.g. Binomial, Poisson, Uniform, Exponential, Normal). It is denoted with latin capitals <span class="math inline">\(X, Y\)</span> and <span class="math inline">\(Z\)</span></p>
-<p><strong>Expectation:</strong> The central value for a random variable. The expectation of the
-random variable X is marked by E(<span class="math inline">\(X\)</span>).</p>
+before the measurement is taken (e.g. Binomial, Poisson, Uniform, Exponential, Normal). It is denoted with Latin capitals <span class="math inline">\(X, Y\)</span> and <span class="math inline">\(Z\)</span></p>
+<p><strong>Expectation:</strong> The central value for a random variable. The expectation of the random variable X is marked by E(<span class="math inline">\(X\)</span>).</p>
 <p><strong>Variance:</strong> The (squared) spread of a random variable. The variance of the
 random variable X is marked by Var(<span class="math inline">\(X\)</span>).</p>
 <p><strong>Normal Random Variable:</strong> A bell-shaped distribution that is frequently used
-to model a measurement. The distribution is marked with Normal(<span class="math inline">\(\mu,\sigma^2\)</span>).</p>
-<p><strong>Standard Normal Distribution:</strong> The Normal(0,1). The distribution of stan-
-dardized Normal measurement.</p>
+to model a measurement. The distribution is marked with X ~ Normal<span class="math inline">\((\mu,\sigma^2)\)</span>.</p>
+<p><strong>Exponential Random Variable:</strong> probability distribution of the time between events (in a Poisson random measurement). It is denoted as X ∼
+Exponential(λ) where λ is a parameter that characterizes the distribution and
+is called the rate of the distribution.</p>
+<p><strong>Uniform Random Variable:</strong> used in order to model measurements that may
+have values in a given interval, with all values in this interval equally likely to occur. Noted as X ∼ Uniform(a, b).</p>
+<p><strong>Standard Normal Distribution:</strong> The Normal(0,1). The distribution of standardized normal measurement.</p>
 <p><strong>Percentile:</strong> Given a percent p · 100% (or a probability p), the value x is the
 percentile of a random variable X if it satisfies the equation P<span class="math inline">\((X ≤ x) = p\)</span>.</p>
-<p><strong>Sampling distribution</strong></p>
 <p><strong>Random Sample:</strong> The probabilistic model for the values of a measurements
 in the sample, before the measurement is taken.</p>
 <p><strong>Sampling Distribution:</strong> The distribution of a random sample.</p>
@@ -438,9 +441,15 @@ distribution of the sample average. States that the distribution of the average 
 <p>(note: the central limit theorem is a key notion for understanding industrial measurement and its consequences will be applied in most case studies)</p>
 </div>
 <p><strong>Expectation of the sample average:</strong> the expectation of the sample mean is
-equal to the theoretical expectation of its components E<span class="math inline">\((\bar{X})\)</span> = E(<span class="math inline">\(X\)</span>)</p>
+equal to the theoretical expectation of its components <span class="math inline">\(E(\bar{X}) = E(X)\)</span></p>
 <p><strong>Variance of the sample average:</strong> the variance of the sample average
-is equal to the variance of each of the components, divided by the sample size Var(<span class="math inline">\(X\)</span>) = Var<span class="math inline">\((X)/n\)</span></p>
+is equal to the variance of each of the components, divided by the sample size <span class="math inline">\(Var(\bar X) = Var(X)/n\)</span></p>
+<p><strong>Expectation for an uniform distribution:</strong> <span class="math inline">\(E(X) = \frac{a+b}{2}\)</span></p>
+<p><strong>Variance for an uniform distribution:</strong> <span class="math inline">\(Var(X) = \frac{(b-a)^2}{12}\)</span></p>
+<p><strong>Expectation for a normal distribution:</strong> <span class="math inline">\(E(X) = \mu\)</span></p>
+<p><strong>Variance for a normal distribution:</strong> <span class="math inline">\(Var(X) = \sigma^2\)</span></p>
+<p><strong>Expectation for an exponential distribution:</strong> <span class="math inline">\(E(X) = 1/\lambda\)</span></p>
+<p><strong>Variance for an exponential distribution:</strong> <span class="math inline">\(Var(X) = 1\lambda^2\)</span></p>
 </div>
 <div id="statistical-inference" class="section level3">
 <h3>Statistical Inference</h3>
@@ -459,10 +468,6 @@ the currently accepted hypothesis is the significance level of the test.</p>
 <p><strong>Comparing Samples:</strong> Samples emerge from different populations or under
 different experimental conditions. Statistical inference may be used to
 compare the distributions of the samples to each other.</p>
-<p><strong>Regression:</strong> Relates different variables that are measured on the same sample.
-Regression models are used to describe the effect of one of the variables
-on the distribution of the other one. The former is called the explanatory
-variable and the later is called the response.</p>
 <p><strong>Bias:</strong> The difference between the expectation of the estimator and the value
 of the parameter. An estimator is unbiased if the bias is equal to zero.
 Otherwise, it is biased.</p>
@@ -475,8 +480,7 @@ to the variance.</p>
 contain the parameter value. The confidence level of an observed interval
 indicates that it was constructed using a formula that produces, when
 applied to random samples, such random intervals.</p>
-<p><strong>Null Hypothesis </strong>(<span class="math inline">\(H0\)</span>): A sub-collection that emerges in response to the sit-
-uation when the phenomena is absent. The established scientific theory
+<p><strong>Null Hypothesis </strong>(<span class="math inline">\(H0\)</span>): A sub-collection that emerges in response to the situation when the phenomena is absent. The established scientific theory
 that is being challenged. The hypothesis which is worse to erroneously
 reject.</p>
 <p><strong>Alternative Hypothesis </strong>(<span class="math inline">\(H1\)</span>): A sub-collection that emerges in response to
@@ -490,27 +494,26 @@ null hypothesis is rejected. Otherwise, the null hypothesis is not rejected.</p>
 <p><strong>Type I Error:</strong> The null hypothesis is correct but it is rejected by the test.</p>
 <p><strong>Type II Error:</strong> The alternative hypothesis holds but the null hypothesis is not
 rejected by the test.</p>
-<p><strong>Significance Level:</strong> The probability of a Type I error. The probability, com-
-puted under the null hypothesis, of rejecting the null hypothesis. The
+<p><strong>Significance Level:</strong> The probability of a Type I error. The probability, computed under the null hypothesis, of rejecting the null hypothesis. The
 test is constructed to have a given significance level. A commonly used
 significance level is 5%.</p>
-<p><strong>Statistical Power:</strong> The probability, computed under the alternative hypoth-
-esis, of rejecting the null hypothesis. The statistical power is equal to 1
-minus the probability of a Type II error.</p>
-<p><span class="math inline">\(p\)</span><strong>-value:</strong> A form of a test statistic. It is associated with a specific test statistic
-and a structure of the rejection region. The p-value is equal to the signif-
-icance level of the test in which the observed value of the statistic serves
+<p><strong>Statistical Power:</strong> The probability, computed under the alternative hypothesis, of rejecting the null hypothesis. The statistical power is equal to 1 minus the probability of a Type II error.</p>
+<p><span class="math inline">\(p\)</span><strong>-value:</strong> is the probability of obtaining test results at least as extreme as the results actually observed, under the assumption that the null hypothesis is correct. A very small p-value means that such an extreme observed outcome would be very unlikely under the null hypothesis. A form of a test statistic. It is associated with a specific test statistic and a structure of the rejection region. The p-value is equal to the significance level of the test in which the observed value of the statistic serves
 as the threshold.</p>
 </div>
 <div id="linear-models" class="section level3">
 <h3>Linear models</h3>
+<p><strong>Regression:</strong> Relates different variables that are measured on the same sample.
+Regression models are used to describe the effect of one of the variables
+on the distribution of the other one. The former is called the explanatory
+variable and the later is called the response.</p>
 <p><strong>R-squared:</strong> is the proportion of the variance in the dependent variable that is predictable from the independent variable(s). R-squared gives an indication of the quality of the model and can be calculated with the formula <span class="math inline">\(R^2 = 1 - \frac{VAR(res)}{VAR(y)}\)</span>. In a linear least squares regression with an intercept term and a single explanator, this is also equal to the squared Pearson correlation coefficient of the dependent variable y and explanatory variable x. Is also called Coefficient of Determination.</p>
 <p><strong>Residuals standard error:</strong> an unbiased estimator of the magnitude of a typical residual. Can be calculated with the formula <span class="math inline">\(RSE = \sqrt{\frac{\sum{residuals^2}}{Df}}\)</span> where Df is the number of Degrees of freedom. Sometimes is also called Root Mean Squared Error.</p>
 </div>
 </div>
 <div id="dfss" class="section level2">
 <h2>DFSS</h2>
-<p>One way of summarising the Six Sigma framework is presented below in a step by step approach with definitions. Each steps consists of an analyis of the product development and production process that progressively refines the final product specifications.</p>
+<p>One way of summarizing the Six Sigma framework is presented below in a step by step approach with definitions. Each steps consists of an analysis of the product development and production process that progressively refines the final product specifications.</p>
 <p>For a more detailed description we recommend reviewing the comprehensive Six Sigma certification reference book by <span class="citation"><a href="#ref-Munro2015" role="doc-biblioref">Roderik A.Munro and J.Zrymiak</a> (<a href="#ref-Munro2015" role="doc-biblioref">2015</a>)</span>.</p>
 <div id="voice-of-customer" class="section level3">
 <h3>Voice of Customer</h3>
@@ -545,11 +548,11 @@ Comparison of the variability of a production process with its engineered specif
 <p><strong>total gage r&amp;R:</strong> the sum of the repeatability and the reproducibility variance components.</p>
 <p><strong>part:</strong> The variation that comes from the parts, with 5 levels in this case.</p>
 <p><strong>operator:</strong> The variation that comes from the operators, with 3 levels in this case.</p>
-<p><strong>replicants, n:</strong> number of replications corresponding to the number of times each part is measured by each operator.</p>
+<p><strong>replicates, n:</strong> number of replications corresponding to the number of times each part is measured by each operator.</p>
 <p><strong>repeatability (or error, or residuals):</strong> The variation that is not explained by part, operator, or the operator and part interaction. It represents how much variability is caused by the measurement device (the same operator measures the same part many times, using the same gage). The repeatability can be measured directly from the Anova table from the residual mean squares.</p>
 <p><strong>reproducibility:</strong> how much variation is caused by the differences between operators (different operators measure the same part many times, using the same gage).</p>
-<p><strong>operators:</strong> the operators part of the reproducibility is the operators variation minus the interaction divided by the number of different parts times the replicants (zero if negative).</p>
-<p><strong>parts:operators:</strong> The variation that comes from the operator and part interaction. An interaction exists when an operator measures different parts differently. The interaction part of of the reproducibility is the interaction minus the repeatability divided by the number of replicants (zero if negative).</p>
+<p><strong>operators:</strong> the operators part of the reproducibility is the operators variation minus the interaction divided by the number of different parts times the replicates (zero if negative).</p>
+<p><strong>parts:operators:</strong> The variation that comes from the operator and part interaction. An interaction exists when an operator measures different parts differently. The interaction part of of the reproducibility is the interaction minus the repeatability divided by the number of replicates (zero if negative).</p>
 <p><strong>part-to-part:</strong> the variability due to different parts. Ideally, very little should be due to repeatability and reproducibility. Differences between parts should account for most of the variability (when the %Contribution from part-to-part variation is high, the measurement system can reliably distinguish between parts).</p>
 <p>The sum of the individual variance components equals the total variation.</p>
 <p><strong>Accuracy/Uncertainty:</strong> Combination of precision and trueness. In the ISO 5725 both terms are equivalent.</p>

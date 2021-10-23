@@ -1,7 +1,7 @@
 
 # References {#references}
 
-A good mastership of the vast domain of Industrial Data Science can take several years and can only be obtained by a strong combination of theory and practice. As mentionned in the introduction chapter, our book is focused on the practice and in this bibliography we find some the necessary supporting theory. 
+A good mastership of the vast domain of Industrial Data Science can take several years and can only be obtained by a strong combination of theory and practice. As mentioned in the introduction chapter, our book is focused on the practice and in this bibliography we find some the necessary supporting theory. 
 
 The list below collects websites, books and articles referenced throughout this book. It is a curated set of some of the most relevant works available today in Six Sigma, Statistics, Data Science and programming with R.
 
@@ -22,23 +22,23 @@ devtools::session_info()[[1]]
 
 ```
 ##  setting  value                       
-##  version  R version 4.1.0 (2021-05-18)
-##  os       Ubuntu 20.04.2 LTS          
+##  version  R version 4.1.1 (2021-08-10)
+##  os       Ubuntu 20.04.3 LTS          
 ##  system   x86_64, linux-gnu           
 ##  ui       X11                         
 ##  language (EN)                        
 ##  collate  en_US.UTF-8                 
 ##  ctype    en_US.UTF-8                 
 ##  tz       Europe/Zurich               
-##  date     2021-06-12
+##  date     2021-10-23
 ```
 
 **Disclaimer**
 
 This book presents a variety of software tools and recommended approaches for industrial data analysis. It is incumbent upon the user to execute judgment in their use. The author does not provide any guarantee, expressed or implied, with regard to the general or specific applicability of the software, the range of errors that may be associated with it, or the appropriateness of using them in any subsequent calculation, design, or decision process. The author accepts no responsibility for damages, if any, suffered by any reader or user of this handbook as a result of decisions made or actions taken on information contained therein.
 
-**Licence**
+**License**
 
-This book and its companion package are made available under a GPLv3 licence granting end users the freedom to run, study, share, and modify the software.
+This book and its companion package are made available under a GPLv3 license granting end users the freedom to run, study, share, and modify the software.
 
 

@@ -9,7 +9,7 @@ source(here::here("inst/book/setup.R"))
 
 Quality tools have been grouped under varied names and methodologies being Six Sigma one of the most well known and comprehensives ones. The domain is vast as seen in the many tools collected and described in the Six Sigma book by @Munro2015. For this section we've selected a few cases that strongly support Measurement System Analysis, Design of Experiments and Statistical Process Control. Beside supporting the remaining sections, they also pretend to showcase how R can be used also for other purposes than data wrangling and visualization in the domain of industrial data science, typically to obtain easily reproducible diagrams. 
 
-We start with a case on a dial workshop in the watch making industrial where the pareto chart comes handy. We then move to a dental prosthesis laboratory to see how a simple fishbone diagram can help pinpoint special causes of the measurement variation of an optical device and we finish we two different approaches on how to optimize experiment execution by assess the correlation between the outputs in order to minimize the parameters to measure.
+We start with a case on a dial workshop in the watch making industrial where the Pareto chart comes handy. We then move to a dental prosthesis laboratory to see how a simple fish-bone diagram can help pinpoint special causes of the measurement variation of an optical device and we finish we two different approaches on how to optimize experiment execution by assess the correlation between the outputs in order to minimize the parameters to measure.
 
 ## Pareto analysis
 
@@ -24,7 +24,7 @@ knitr::include_graphics("img/assemblage_cadran_bw.jpg")
 
 </div>
 
-The pareto chart has always proven an effective way of defining priorities and keeping workload under control. It is known for helping focusing on the few important elements that account for most problems. It builds on the well known insight that a few reasons explain or allow to control most of the outcome. This applies particularly well in the technological and industrial context.
+The Pareto chart has always proven an effective way of defining priorities and keeping workload under control. It is known for helping focusing on the few important elements that account for most problems. It builds on the well known insight that a few reasons explain or allow to control most of the outcome. This applies particularly well in the technological and industrial context.
 
 Often in workshop setups the priorities of day are set by the informal discussions between team members. It is important to be sensitive to the last problem observed or the latest request from management but it is also important to look at data, particularly over a period of time. When looking at simple things as counts and frequencies we sometimes get surprised of how different our perception is from the reality shown by the data collected.
 
@@ -45,11 +45,11 @@ head(dial_control) %>%
         booktabs = T)
 ```
 
-We can see that the count includes both the deffect type and the location (the hour in the dial) and that it is traced to the day and operator.
+We can see that the count includes both the defect type and the location (the hour in the dial) and that it is traced to the day and operator.
 
 The team leader promotes a culture of fact based assessment of the quality measurements. Every week the team looks back and observes the weekly counts. When the quantity of data get bigger trends to start becoming apparent. The team can discuss potential actions and prepare reporting to the supplier of the parts (the stamping workshop). It also helps calibrating between operators and agreeing on acceptance criteria and what is and what is not a defect. 
 
-Recently there have been lots of talk about scratched dials and there's a big focus on how to get rid of them. For their weekly review Christophe has prepared a pareto chart in R.
+Recently there have been lots of talk about scratched dials and there's a big focus on how to get rid of them. For their weekly review Christophe has prepared a Pareto chart in R.
 
 ### Pareto chart {#paretochart}
 
@@ -66,8 +66,8 @@ d_type <- dial_control %>% pull(Defect) %>% as.character()
 d_type_p <- paretochart(d_type, 
                            title = "Watch dial Defects",
                            subtitle = "Pareto chart", 
-                           ylab = "Percentage of deffects",
-                           xlab = "Deffect type",
+                           ylab = "Percentage of defects",
+                           xlab = "Defect type",
                            caption = "Source: dial polishing workshop")
 d_type_p + 
   theme_industRial()
@@ -80,10 +80,10 @@ The decides to go deeper in the analysis and Peter says that a potential cause i
 ```{r fig-pareto2}
 d_location <- dial_control %>% pull(Location) %>% as.character()
 d_location_p <- paretochart(d_location, 
-                           title = "Watch dial deffects",
+                           title = "Watch dial defects",
                            subtitle = "Pareto chart", 
-                           ylab = "Percentage of deffects",
-                           xlab = "Deffect location (hour)",
+                           ylab = "Percentage of defects",
+                           xlab = "Defect location (hour)",
                            caption = "Source: Dial workshop")
 d_location_p +
   theme_industRial()
@@ -91,7 +91,7 @@ d_location_p +
 
 Effectively there are many defects at 3h corresponding to the position on the right of the dial (and even more at 4h). Peter's assumption may be right, the team decides to gather in the first polishing workbench and share openly how each of them fixes the dial to try to understand if there is a specific procedure or applied force that creates the defect. 
 
-This example shows how data collecting can be simple and effective. if no one in the team is using R yet, a simple pareto chart could be done more simply with a spreadsheet. What R brings is the possibility to quickly scale up: handling very large and constantly changing files for example and also the possibility to directly and simply produce pdf reports or dynamic web applications to collect and visualize the data.
+This example shows how data collecting can be simple and effective. if no one in the team is using R yet, a simple pareto chart could be done more simply with a spreadsheet. What R brings is the possibility to quickly scale up: handling very large and constantly changing files for example and also the possibility to directly and simply produce PDF reports or dynamic web applications to collect and visualize the data.
 
 To practice and go further in the exploration of pareto charts checkout the tutorials section.
 
@@ -180,7 +180,7 @@ In an industrial setup the cost of experimenting is often very high. With this a
 
 A DOE consists in a series of trials where several inputs are combined together and important outputs are measured (further details can be seen in the DOE chapter). Commonly DOE analysis results linking inputs to outputs are presented with effects plots and interaction plots but before getting it is important to check the correlation between the outputs. Often there groups of outputs move together even if there is no cause and effect relationship between them. We can see this correlation in a tile plot.
 
-A team of experts of a manufacturer of fragrances has listed 23 different output variables of interest for an exploratory <b class="highlight">perfume distillation experiment</b>. Facing such extensive list the Project Manager decided to put the team together a second time to try to set priorities. The approach was to guess the results of the experiment which allowed to go deeper in the technology and to construct an experiment plan in a meaningful way. The experts inputs have been captured in a a two entry table named `perfume_experiement`.
+A team of experts of a manufacturer of fragrances has listed 23 different output variables of interest for an exploratory <b class="highlight">perfume distillation experiment</b>. Facing such extensive list the Project Manager decided to put the team together a second time to try to set priorities. The approach was to guess the results of the experiment which allowed to go deeper in the technology and to construct an experiment plan in a meaningful way. The experts inputs have been captured in a a two entry table named `perfume_experiment`.
 
 ### Matrix {#matrix}
 
@@ -219,11 +219,11 @@ perfume_long %>%
   scale_fill_viridis_d(direction = -1, name = "Correlation\nStrength") +
   geom_tile() + 
   labs(
-    title = "The Perfume destilation experiment",
+    title = "The Perfume distillation experiment",
     subtitle = "Output variables correlation plot ",
     x = "",
     y = "",
-    caption = "Anonymised data"
+    caption = "Anonymous data"
   ) +
   theme_industRial()
 ```
@@ -245,7 +245,7 @@ library(ggraph)
 The first step consists in converting the "Perfume" tibble to a matrix format:
 
 <div class="marginnote">
-The perfume_experiment is originaly coded as a tibble object. 
+The perfume_experiment is originally coded as a tibble object. 
 </div>
 
 ```{r code-asmatrix}

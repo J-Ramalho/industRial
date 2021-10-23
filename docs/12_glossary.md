@@ -4,7 +4,7 @@
 
 ## Statistics
 
-Statistic concepts are picked up and applied throught the Cases Studies on a needed basis. To get a better understanding of how they fit together we are reminding below some definitions coming from @Yakir2011. For a deep and comprehensive course on statistics we recommend the free online [kahn academy](https://www.khanacademy.org/math/statistics-probability) courses.
+Statistic concepts are picked up and applied through the Cases Studies on a needed basis. To get a better understanding of how they fit together we are reminding below some definitions coming from @Yakir2011. For a deep and comprehensive course on statistics we recommend the free online [kahn academy](https://www.khanacademy.org/math/statistics-probability) courses.
 
 ### Notation conventions
 
@@ -60,24 +60,27 @@ mean is ‘average.’
 ### Probability
 
 **Random Variable:** The probabilistic model for the value of a measurement,
-before the measurement is taken (e.g. Binomial, Poisson, Uniform, Exponential, Normal). It is denoted with latin capitals $X, Y$ and $Z$
+before the measurement is taken (e.g. Binomial, Poisson, Uniform, Exponential, Normal). It is denoted with Latin capitals $X, Y$ and $Z$
 
-**Expectation:** The central value for a random variable. The expectation of the
-random variable X is marked by E($X$).
+**Expectation:** The central value for a random variable. The expectation of the random variable X is marked by E($X$).
 
 **Variance:** The (squared) spread of a random variable. The variance of the
 random variable X is marked by Var($X$).
 
 **Normal Random Variable:** A bell-shaped distribution that is frequently used
-to model a measurement. The distribution is marked with Normal($\mu,\sigma^2$).
+to model a measurement. The distribution is marked with X ~ Normal$(\mu,\sigma^2)$.
 
-**Standard Normal Distribution:** The Normal(0,1). The distribution of stan-
-dardized Normal measurement.
+**Exponential Random Variable:** probability distribution of the time between events (in a Poisson random measurement). It is denoted as X ∼
+Exponential(λ) where λ is a parameter that characterizes the distribution and
+is called the rate of the distribution.
+
+**Uniform Random Variable:** used in order to model measurements that may
+have values in a given interval, with all values in this interval equally likely to occur. Noted as X ∼ Uniform(a, b).
+
+**Standard Normal Distribution:** The Normal(0,1). The distribution of standardized normal measurement.
 
 **Percentile:** Given a percent p · 100% (or a probability p), the value x is the
 percentile of a random variable X if it satisfies the equation P$(X ≤ x) = p$.
-
-**Sampling distribution**
 
 **Random Sample:** The probabilistic model for the values of a measurements
 in the sample, before the measurement is taken.
@@ -105,10 +108,22 @@ distribution of the sample average. States that the distribution of the average 
 </div>
 
 **Expectation of the sample average:** the expectation of the sample mean is
-equal to the theoretical expectation of its components E$(\bar{X})$ = E($X$)
+equal to the theoretical expectation of its components $E(\bar{X}) = E(X)$
 
 **Variance of the sample average:** the variance of the sample average
-is equal to the variance of each of the components, divided by the sample size Var($X$) = Var$(X)/n$
+is equal to the variance of each of the components, divided by the sample size $Var(\bar X) = Var(X)/n$
+
+**Expectation for an uniform distribution:** $E(X) = \frac{a+b}{2}$
+
+**Variance for an uniform distribution:** $Var(X) = \frac{(b-a)^2}{12}$
+
+**Expectation for a normal distribution:** $E(X) = \mu$
+
+**Variance for a normal distribution:** $Var(X) = \sigma^2$
+
+**Expectation for an exponential distribution:** $E(X) = 1/\lambda$
+
+**Variance for an exponential distribution:** $Var(X) = 1\lambda^2$
 
 ### Statistical Inference
 
@@ -132,11 +147,6 @@ the currently accepted hypothesis is the significance level of the test.
 different experimental conditions. Statistical inference may be used to
 compare the distributions of the samples to each other.
 
-**Regression:** Relates different variables that are measured on the same sample.
-Regression models are used to describe the effect of one of the variables
-on the distribution of the other one. The former is called the explanatory
-variable and the later is called the response.
-
 **Bias:** The difference between the expectation of the estimator and the value
 of the parameter. An estimator is unbiased if the bias is equal to zero.
 Otherwise, it is biased.
@@ -152,8 +162,7 @@ contain the parameter value. The confidence level of an observed interval
 indicates that it was constructed using a formula that produces, when
 applied to random samples, such random intervals.
 
-**Null Hypothesis **($H0$): A sub-collection that emerges in response to the sit-
-uation when the phenomena is absent. The established scientific theory
+**Null Hypothesis **($H0$): A sub-collection that emerges in response to the situation when the phenomena is absent. The established scientific theory
 that is being challenged. The hypothesis which is worse to erroneously
 reject.
 
@@ -173,21 +182,21 @@ null hypothesis is rejected. Otherwise, the null hypothesis is not rejected.
 **Type II Error:** The alternative hypothesis holds but the null hypothesis is not
 rejected by the test.
 
-**Significance Level:** The probability of a Type I error. The probability, com-
-puted under the null hypothesis, of rejecting the null hypothesis. The
+**Significance Level:** The probability of a Type I error. The probability, computed under the null hypothesis, of rejecting the null hypothesis. The
 test is constructed to have a given significance level. A commonly used
 significance level is 5%.
 
-**Statistical Power:** The probability, computed under the alternative hypoth-
-esis, of rejecting the null hypothesis. The statistical power is equal to 1
-minus the probability of a Type II error.
+**Statistical Power:** The probability, computed under the alternative hypothesis, of rejecting the null hypothesis. The statistical power is equal to 1 minus the probability of a Type II error.
 
-$p$**-value:** A form of a test statistic. It is associated with a specific test statistic
-and a structure of the rejection region. The p-value is equal to the signif-
-icance level of the test in which the observed value of the statistic serves
+$p$**-value:** is the probability of obtaining test results at least as extreme as the results actually observed, under the assumption that the null hypothesis is correct. A very small p-value means that such an extreme observed outcome would be very unlikely under the null hypothesis. A form of a test statistic. It is associated with a specific test statistic and a structure of the rejection region. The p-value is equal to the significance level of the test in which the observed value of the statistic serves
 as the threshold.
 
 ### Linear models
+
+**Regression:** Relates different variables that are measured on the same sample.
+Regression models are used to describe the effect of one of the variables
+on the distribution of the other one. The former is called the explanatory
+variable and the later is called the response.
 
 **R-squared:** is the proportion of the variance in the dependent variable that is predictable from the independent variable(s). R-squared gives an indication of the quality of the model and can be calculated with the formula $R^2 = 1 - \frac{VAR(res)}{VAR(y)}$. In a linear least squares regression with an intercept term and a single explanator, this is also equal to the squared Pearson correlation coefficient of the dependent variable y and explanatory variable x. Is also called Coefficient of Determination.
 
@@ -196,7 +205,7 @@ as the threshold.
 
 ## DFSS
 
-One way of summarising the Six Sigma framework is presented below in a step by step approach with definitions. Each steps consists of an analyis of the product development and production process that progressively refines the final product specifications.
+One way of summarizing the Six Sigma framework is presented below in a step by step approach with definitions. Each steps consists of an analysis of the product development and production process that progressively refines the final product specifications.
 
 For a more detailed description we recommend reviewing the comprehensive Six Sigma certification reference book by @Munro2015.
 
@@ -245,15 +254,15 @@ Variance components assess the amount of variation contributed by each source of
 
 **operator:** The variation that comes from the operators, with 3 levels in this case.
 
-**replicants, n:** number of replications corresponding to the number of times each part is measured by each operator.
+**replicates, n:** number of replications corresponding to the number of times each part is measured by each operator.
 
 **repeatability (or error, or residuals):** The variation that is not explained by part, operator, or the operator and part interaction. It represents how much variability is caused by the measurement device (the same operator measures the same part many times, using the same gage). The repeatability can be measured directly from the Anova table from the residual mean squares.
 
 **reproducibility:** how much variation is caused by the differences between operators (different operators measure the same part many times, using the same gage).
 
-**operators:** the operators part of the reproducibility is the operators variation minus the interaction divided by the number of different parts times the replicants (zero if negative).
+**operators:** the operators part of the reproducibility is the operators variation minus the interaction divided by the number of different parts times the replicates (zero if negative).
 
-**parts:operators:** The variation that comes from the operator and part interaction. An interaction exists when an operator measures different parts differently. The interaction part of of the reproducibility is the interaction minus the repeatability divided by the number of replicants (zero if negative).
+**parts:operators:** The variation that comes from the operator and part interaction. An interaction exists when an operator measures different parts differently. The interaction part of of the reproducibility is the interaction minus the repeatability divided by the number of replicates (zero if negative).
 
 **part-to-part:** the variability due to different parts. Ideally, very little should be due to repeatability and reproducibility. Differences between parts should account for most of the variability (when the %Contribution from part-to-part variation is high, the measurement system can reliably distinguish between parts).
 

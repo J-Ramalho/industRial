@@ -7,7 +7,7 @@
 Many tools exist to do Data Analysis and Statistics with different degrees of power and difficulty such as:
 
 -   Spreadsheets: Excel, Libreoffice, Numbers
--   Proprietary software: Minitab, Mathlab
+-   Proprietary software: Minitab, Matlab
 -   Programming languages: Visual Basic, R, Python, Julia
 -   Databases: sqlite, postgre, mysql, mongodb
 
@@ -21,11 +21,11 @@ This because the algorithms and functions defined to make the calculations can b
 
 R functions and tools can be audited and improved 
 
-Being an open source language, all R libraries and packages added to the basic environment can be audited, adapted and improved. This is very important because when we enter into details every industry has a slight different way of doing things, different naming conventions, different coeficients and so on.
+Being an open source language, all R libraries and packages added to the basic environment can be audited, adapted and improved. This is very important because when we enter into details every industry has a slight different way of doing things, different naming conventions, different coefficients and so on.
 
 R is extensible
 
-R is compatible with most other software on the market and is an excellent "glue" tool allowing for example for data loading from excel files, producing reports in pdf and even building complete dashboards in the form of web pages.
+R is compatible with most other software on the market and is an excellent "glue" tool allowing for example for data loading from excel files, producing reports in PDF and even building complete dashboards in the form of web pages.
 
 Large documentation is available on installing and learning R, starting with the official sites [R-project](https://www.r-project.org/) and [RStudio](https://www.rstudio.com/).
 
@@ -71,7 +71,7 @@ The column *Download* precises if a package is downloaded automatically when the
 |imports  |scales     |plotting         |1.1.1   |R (>= 3.2)                                    |
 |imports  |ggtext     |plotting         |0.1.1   |R (>= 3.5)                                    |
 |imports  |broom      |statistics       |0.7.6   |R (>= 3.1)                                    |
-|imports  |stats      |statistics       |4.1.0   |NA                                            |
+|imports  |stats      |statistics       |4.1.1   |NA                                            |
 |imports  |skimr      |statistics       |2.1.3   |R (>= 3.1.2)                                  |
 |suggests |qicharts2  |industrial stats |0.7.1   |R (>= 3.0.0)                                  |
 |suggests |qcc        |industrial stats |2.7     |R (>= 3.0)                                    |
@@ -90,7 +90,7 @@ The column *Download* precises if a package is downloaded automatically when the
 |suggests |car        |statistics       |3.0-10  |R (>= 3.5.0), carData (>= 3.0-0)              |
 |suggests |RcmdrMisc  |statistics       |2.7-1   |R (>= 3.5.0), utils, car (>= 3.0-0), sandwich |
 
-In the book text we don't see the loading instructions for the installed packages over and over again everytime an example is given to avoid repetition (e.g. running `library(dplyr)` before each code chunk). Be sure to load at minimum the packages below before trying any example:
+In the book text we don't see the loading instructions for the installed packages over and over again every time an example is given to avoid repetition (e.g. running `library(dplyr)` before each code chunk). Be sure to load at minimum the packages below before trying any example:
 
     ds_pkgs <- c("tidyverse", "scales", "janitor", "knitr", "stats", "industRial",
       "viridis", "broom", "patchwork")
@@ -137,11 +137,11 @@ This package by the same author of the `{car}` provides additional miscellaneous
 
 #### broom
 
-The mission of `{broom}` is to *Convert statistical objects into tidy tibbles*. This is quite usefull when we want to reuse the output of the statistical analysis such as the R-squared in data pipelines with `{tidyverse}` packages. It becomes specially handy to obtain printing quality outputs in `{Rmarkdown}` documents with tables rendered with `{kable}` and in `{shiny}` apps. Several examples are present throughtout our book and mostly in the tutorials.
+The mission of `{broom}` is to *Convert statistical objects into tidy tibbles*. This is quite useful when we want to reuse the output of the statistical analysis such as the R-squared in data pipelines with `{tidyverse}` packages. It becomes specially handy to obtain printing quality outputs in `{Rmarkdown}` documents with tables rendered with `{kable}` and in `{shiny}` apps. Several examples are present throughout our book and mostly in the tutorials.
 
 #### skimr {#skimr}
 
-This package comes from [ropensci](https://ropensci.org/) a strong and open community supported by large global organizations such as the NASA. `{skimr}` is an interesting and powerful alternative to the base `summary()` function. Two main features make it a strong candidate for regular utilization: the first is its tight integrated with `{tidyverse}` and `{knitr}` making it possible to integrate it in pipelines, filtering and so on and in Rmarkdown chunks with specific printing arguments; the second is its extensive customization capabilities allowing to add and remove indicators, data types and presentation formats and agregration levels.
+This package comes from [ropensci](https://ropensci.org/) a strong and open community supported by large global organizations such as the NASA. `{skimr}` is an interesting and powerful alternative to the base `summary()` function. Two main features make it a strong candidate for regular utilization: the first is its tight integrated with `{tidyverse}` and `{knitr}` making it possible to integrate it in pipelines, filtering and so on and in Rmarkdown chunks with specific printing arguments; the second is its extensive customization capabilities allowing to add and remove indicators, data types and presentation formats and aggregation levels.
 
 #### stats
 
@@ -149,9 +149,8 @@ Many functions from the packages discussed before are built on the large and ext
 
 ## Datasets {#datasets}
 
-All datasets presented throughout the book are fully anonymized. Once the package is correctly installed it can be loaded in the R session as usual with the library() function.
+All datasets presented throughout the book are fully anonymous. Once the package is correctly installed it can be loaded in the R session as usual with the library() function.
 
-    devtools::install_github("J-Ramalho/industRial")
     library(industRial)
 
 The primary goal of `{industRial}` is to make easily available all the data sets from all case studies. We can easily look for a data set by typing `industRial::` and tab. The complete list can also be obtained with the snippet below: 

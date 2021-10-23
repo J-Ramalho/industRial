@@ -24,7 +24,7 @@
 <meta name="author" content="João Ramalho" />
 
 
-<meta name="date" content="2021-06-12" />
+<meta name="date" content="2021-10-23" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -295,6 +295,7 @@ div.csl-indent {
 <li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#factorial-design-2-levels"><i class="fa fa-check"></i>Factorial design 2 levels</a></li>
 <li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#coding_levels"><i class="fa fa-check"></i>Coding levels</a></li>
 <li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#plotMeans"><i class="fa fa-check"></i>Interaction plots with SE</a></li>
+<li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#relative-effects-plot"><i class="fa fa-check"></i>Relative effects plot</a></li>
 <li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#adj_Rsquare"><i class="fa fa-check"></i>Adjusted R-squared</a></li>
 <li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#coding_inputs"><i class="fa fa-check"></i>Coding inputs</a></li>
 <li class="chapter" data-level="" data-path="DOE.html"><a href="DOE.html#coded_prediction"><i class="fa fa-check"></i>Coded prediction</a></li>
@@ -375,7 +376,7 @@ div.csl-indent {
 <p>Many tools exist to do Data Analysis and Statistics with different degrees of power and difficulty such as:</p>
 <ul>
 <li>Spreadsheets: Excel, Libreoffice, Numbers</li>
-<li>Proprietary software: Minitab, Mathlab</li>
+<li>Proprietary software: Minitab, Matlab</li>
 <li>Programming languages: Visual Basic, R, Python, Julia</li>
 <li>Databases: sqlite, postgre, mysql, mongodb</li>
 </ul>
@@ -384,9 +385,9 @@ div.csl-indent {
 <p>R allows for reproducible research</p>
 <p>This because the algorithms and functions defined to make the calculations can be inspected and all results can be fully reproduced and audited. This is known as reproducible research and is a critical aspect in all areas where a proof is needed such as in equipment validation and product quality reporting.</p>
 <p>R functions and tools can be audited and improved</p>
-<p>Being an open source language, all R libraries and packages added to the basic environment can be audited, adapted and improved. This is very important because when we enter into details every industry has a slight different way of doing things, different naming conventions, different coeficients and so on.</p>
+<p>Being an open source language, all R libraries and packages added to the basic environment can be audited, adapted and improved. This is very important because when we enter into details every industry has a slight different way of doing things, different naming conventions, different coefficients and so on.</p>
 <p>R is extensible</p>
-<p>R is compatible with most other software on the market and is an excellent “glue” tool allowing for example for data loading from excel files, producing reports in pdf and even building complete dashboards in the form of web pages.</p>
+<p>R is compatible with most other software on the market and is an excellent “glue” tool allowing for example for data loading from excel files, producing reports in PDF and even building complete dashboards in the form of web pages.</p>
 <p>Large documentation is available on installing and learning R, starting with the official sites <a href="https://www.r-project.org/">R-project</a> and <a href="https://www.rstudio.com/">RStudio</a>.</p>
 </div>
 <div id="packages" class="section level2">
@@ -536,7 +537,7 @@ div.csl-indent {
 <td align="left">imports</td>
 <td align="left">stats</td>
 <td align="left">statistics</td>
-<td align="left">4.1.0</td>
+<td align="left">4.1.1</td>
 <td align="left">NA</td>
 </tr>
 <tr class="even">
@@ -660,7 +661,7 @@ div.csl-indent {
 </tr>
 </tbody>
 </table>
-<p>In the book text we don’t see the loading instructions for the installed packages over and over again everytime an example is given to avoid repetition (e.g. running <code>library(dplyr)</code> before each code chunk). Be sure to load at minimum the packages below before trying any example:</p>
+<p>In the book text we don’t see the loading instructions for the installed packages over and over again every time an example is given to avoid repetition (e.g. running <code>library(dplyr)</code> before each code chunk). Be sure to load at minimum the packages below before trying any example:</p>
 <pre><code>ds_pkgs &lt;- c(&quot;tidyverse&quot;, &quot;scales&quot;, &quot;janitor&quot;, &quot;knitr&quot;, &quot;stats&quot;, &quot;industRial&quot;,
   &quot;viridis&quot;, &quot;broom&quot;, &quot;patchwork&quot;)
 purrr::map(ds_pkgs, library, character.only = TRUE)</code></pre>
@@ -703,11 +704,11 @@ purrr::map(ds_pkgs, library, character.only = TRUE)</code></pre>
 </div>
 <div id="broom" class="section level4">
 <h4>broom</h4>
-<p>The mission of <code>{broom}</code> is to <em>Convert statistical objects into tidy tibbles</em>. This is quite usefull when we want to reuse the output of the statistical analysis such as the R-squared in data pipelines with <code>{tidyverse}</code> packages. It becomes specially handy to obtain printing quality outputs in <code>{Rmarkdown}</code> documents with tables rendered with <code>{kable}</code> and in <code>{shiny}</code> apps. Several examples are present throughtout our book and mostly in the tutorials.</p>
+<p>The mission of <code>{broom}</code> is to <em>Convert statistical objects into tidy tibbles</em>. This is quite useful when we want to reuse the output of the statistical analysis such as the R-squared in data pipelines with <code>{tidyverse}</code> packages. It becomes specially handy to obtain printing quality outputs in <code>{Rmarkdown}</code> documents with tables rendered with <code>{kable}</code> and in <code>{shiny}</code> apps. Several examples are present throughout our book and mostly in the tutorials.</p>
 </div>
 <div id="skimr" class="section level4">
 <h4>skimr</h4>
-<p>This package comes from <a href="https://ropensci.org/">ropensci</a> a strong and open community supported by large global organizations such as the NASA. <code>{skimr}</code> is an interesting and powerful alternative to the base <code>summary()</code> function. Two main features make it a strong candidate for regular utilization: the first is its tight integrated with <code>{tidyverse}</code> and <code>{knitr}</code> making it possible to integrate it in pipelines, filtering and so on and in Rmarkdown chunks with specific printing arguments; the second is its extensive customization capabilities allowing to add and remove indicators, data types and presentation formats and agregration levels.</p>
+<p>This package comes from <a href="https://ropensci.org/">ropensci</a> a strong and open community supported by large global organizations such as the NASA. <code>{skimr}</code> is an interesting and powerful alternative to the base <code>summary()</code> function. Two main features make it a strong candidate for regular utilization: the first is its tight integrated with <code>{tidyverse}</code> and <code>{knitr}</code> making it possible to integrate it in pipelines, filtering and so on and in Rmarkdown chunks with specific printing arguments; the second is its extensive customization capabilities allowing to add and remove indicators, data types and presentation formats and aggregation levels.</p>
 </div>
 <div id="stats" class="section level4">
 <h4>stats</h4>
@@ -717,9 +718,8 @@ purrr::map(ds_pkgs, library, character.only = TRUE)</code></pre>
 </div>
 <div id="datasets" class="section level2">
 <h2>Datasets</h2>
-<p>All datasets presented throughout the book are fully anonymized. Once the package is correctly installed it can be loaded in the R session as usual with the library() function.</p>
-<pre><code>devtools::install_github(&quot;J-Ramalho/industRial&quot;)
-library(industRial)</code></pre>
+<p>All datasets presented throughout the book are fully anonymous. Once the package is correctly installed it can be loaded in the R session as usual with the library() function.</p>
+<pre><code>library(industRial)</code></pre>
 <p>The primary goal of <code>{industRial}</code> is to make easily available all the data sets from all case studies. We can easily look for a data set by typing <code>industRial::</code> and tab. The complete list can also be obtained with the snippet below:</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="toolbox.html#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="at">package =</span> <span class="st">&quot;industRial&quot;</span>) <span class="sc">%&gt;%</span></span>
 <span id="cb5-2"><a href="toolbox.html#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pluck</span>(<span class="st">&quot;results&quot;</span>) <span class="sc">%&gt;%</span></span>

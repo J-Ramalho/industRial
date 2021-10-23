@@ -31,7 +31,7 @@ knitr::include_graphics("img/syringe_molding_bw.jpg")
 
 There are many types of control charts and in this case study we're demonstrating the xbar and R charts. These two charts are often used together and are suited to the control the mean and the variability of a continuous variable. This case study draws on examples from @Bass2007 and from the `{qcc}` package vignette.
 
-PH-parts is a <b class="highligh">plastic injection company</b> specialized in high precision pharmaceutical Parts. In their catalog they have a mid-range product that sells in extremely high volumes: vaccination syringes. The inner diameter of the barrel has been identified in failure mode analysis as a critical dimension for the security of the operation. Following the implementation of a statistical process control (SPC) the production operators monitor the production process using xbar and R-charts. The protocol requires 6 samples are taken on an hourly basis and diameters simply typed in an excel file in a laptop by the injection press. A recent excel file with samples taken over a period of 25 hours of production has been loaded in R with the name `syringe_diameter` by the Quality Assistant of the lab.
+PH-parts is a <b class="highlight">plastic injection company</b> specialized in high precision pharmaceutical Parts. In their catalog they have a mid-range product that sells in extremely high volumes: vaccination syringes. The inner diameter of the barrel has been identified in failure mode analysis as a critical dimension for the security of the operation. Following the implementation of a statistical process control (SPC) the production operators monitor the production process using xbar and R-charts. The protocol requires 6 samples are taken on an hourly basis and diameters simply typed in an excel file in a laptop by the injection press. A recent excel file with samples taken over a period of 25 hours of production has been loaded in R with the name `syringe_diameter` by the Quality Assistant of the lab.
 
 ```{r}
 head(syringe_diameter) %>%
@@ -64,7 +64,7 @@ syringe_xbar <- qcc(
   )
 ```
 
-In the previous chink we've loaded the `{qcc}` package that has the required quality control tools and created a new variable data but before we plot the chart lets look a bit in detail in the calculations done in the background. A first step is to read the begining of the `qcc()` help file typing ?qcc in the console. It says "Create an object of class 'qcc' to perform statistical process control' (in R technical terms function is a helper that generates an S3 R object). The key point here is that this means we can inspect the calculations separately from the plot itself. We can start by confirming the class and the type of the qcc object:
+In the previous chink we've loaded the `{qcc}` package that has the required quality control tools and created a new variable data but before we plot the chart lets look a bit in detail in the calculations done in the background. A first step is to read the beginning of the `qcc()` help file typing ?qcc in the console. It says "Create an object of class 'qcc' to perform statistical process control' (in R technical terms function is a helper that generates an S3 R object). The key point here is that this means we can inspect the calculations separately from the plot itself. We can start by confirming the class and the type of the qcc object:
 
 ```{r}
 class(syringe_xbar)
@@ -176,7 +176,7 @@ In our case study something has gone severely off track. The barrel diameter was
 
 ## Cpk charts
 
-In order to optimize the manufacturing process, the manufacturing engeering expert is going to assess the capability of the syringe injection diameter. Such details are not straight forward to modify. Should he request a change of some injection mold parts? Or play with process temperatures? Before moving to a process DOE he needs first to understand where he stands. We're going to go more in depth in the study of the manufacturing process and make a comparison between the product specifications and the process variability. We're looking for opportunities to tighten the product specifications. Tightening a product specification without increasing the cost of a manufacturing cost can be a very good source of competitive advantage. The way we are going to do this is by constructing an histogram and a density distribution of this process.
+In order to optimize the manufacturing process, the manufacturing engineering expert is going to assess the capability of the syringe injection diameter. Such details are not straight forward to modify. Should he request a change of some injection mold parts? Or play with process temperatures? Before moving to a process DOE he needs first to understand where he stands. We're going to go more in depth in the study of the manufacturing process and make a comparison between the product specifications and the process variability. We're looking for opportunities to tighten the product specifications. Tightening a product specification without increasing the cost of a manufacturing cost can be a very good source of competitive advantage. The way we are going to do this is by constructing an histogram and a density distribution of this process.
 
 ### Off spec {#off_spec}
 
@@ -363,7 +363,7 @@ tablet_weight %>%
   kable()
 ```
 
-We're now going to use the function `process_stats()` to calculate several statistical data for this dataset. This function returs a high number of outputs is large as we can see below:
+We're now going to use the function `process_stats()` to calculate several statistical data for this dataset. This function returns a high number of outputs is large as we can see below:
 
 ```{r}
 weight_statistics_data <- process_stats(tablet_weight, 10)

@@ -5,7 +5,7 @@ source(here::here("inst/book/setup.R"))
 
 ## Two level designs
 
-We may be armed with powerful tools to design and analyze experiments and even have strong knowledge in the topic we're studying but real life in a laboratory or in a factory has many constraints and a DOE is always the reflection of them. The calculation of the number of trials presented in the previous case shows a very quick explosion of the volume of work and material consumption. Another aspect is that as knowledge progresses and findings are accumulated certain variables which present little influence in the outputs start to be discarded. This is a consequence of the sparcity of effects principle. Data and models constructed in several preliminary DOEs can be consolidated under certain conditions. So the design of a new DOE should take into account the design of the previous one and this regarding not only the variables but even the levels themselves. With all these practical considerations in mind it is possible and common to start with very large screening experiments with for instance 10 inputs and 10 outputs and end up with a narrow optimization experiment with 2 factors with 4 levels to select a fine  operating window.
+We may be armed with powerful tools to design and analyze experiments and even have strong knowledge in the topic we're studying but real life in a laboratory or in a factory has many constraints and a DOE is always the reflection of them. The calculation of the number of trials presented in the previous case shows a very quick explosion of the volume of work and material consumption. Another aspect is that as knowledge progresses and findings are accumulated certain variables which present little influence in the outputs start to be discarded. This is a consequence of the sparsity of effects principle. Data and models constructed in several preliminary DOEs can be consolidated under certain conditions. So the design of a new DOE should take into account the design of the previous one and this regarding not only the variables but even the levels themselves. With all these practical considerations in mind it is possible and common to start with very large screening experiments with for instance 10 inputs and 10 outputs and end up with a narrow optimization experiment with 2 factors with 4 levels to select a fine  operating window.
 
 A way to make screening experiments realistic is to limit the number of levels of the factors, the minimum being 2 to have a complete factorial design. Following the notation also presented in the previous case study these designs are called $2^{k}$ designs. Application of linear models and interpretation of anova is subject to the same assumptions as general cases discussed, these being the factors are fixed, the designs are completely randomized, the normality assumptions are satisfied. In particular as there are only 2 levels it is assumed that the response is approximately linear between the factor levels.
 
@@ -59,9 +59,9 @@ pet_doe <- fac.design(
   )
 ```
 
-After a quick check the plan is confirmed to be ok, she sees all combinations of factors at with 3 replicates. She's not so confortable with such a small number of replicates but as there is no protyping tool in the producers plant they used directly an industrial laminator. Fitting trials in production time is most of the time a big challenge not to mention the cost and the waste in materials. She shares the plan in a meeting and a few weeks later receives the numbers from the producers laboratory in a short e-mail with a list of numbers with no units 64.4, 82.8, 41.4...   
+After a quick check the plan is confirmed to be ok, she sees all combinations of factors at with 3 replicates. She's not so comfortable with such a small number of replicates but as there is no prototyping tool in the producers plant they used directly an industrial laminator. Fitting trials in production time is most of the time a big challenge not to mention the cost and the waste in materials. She shares the plan in a meeting and a few weeks later receives the numbers from the producers laboratory in a short e-mail with a list of numbers with no units 64.4, 82.8, 41.4...   
 
-Getting back to her contact at the producer she gets a confirmation these are the PET tensile strength values for each of the trials in the same order as the trial plan was provided. She regrets not having given a number to each trial and asked to have a clear reference of each measured value. She again compromises and colates the values to the original tibble in R:
+Getting back to her contact at the producer she gets a confirmation these are the PET tensile strength values for each of the trials in the same order as the trial plan was provided. She regrets not having given a number to each trial and asked to have a clear reference of each measured value. She again compromises and collates the values to the original tibble in R:
 
 ```{r}
 tensile_strength <- c(
@@ -92,7 +92,7 @@ pet_plusminus$B <- relevel(pet_plusminus$B, ref = "+")
 
 For the first model the materials engineer made a copy of the original dataset and left the input variables as they were generated which is as factors and with the labels "plus" and "minus". After some playing with data she found necessary to put the "plus" as the reference otherwise she gets inverted signs in the lm output. 
 
-Another detail she needed to take care was the setup of the contrasts. As the design is ortogonal and she wanted the contrasts to add up to zero she had to precise by assigning `contr.sum` to the factor. First she checked the original definition of the contrasts:
+Another detail she needed to take care was the setup of the contrasts. As the design is orthogonal and she wanted the contrasts to add up to zero she had to precise by assigning `contr.sum` to the factor. First she checked the original definition of the contrasts:
 
 ```{r}
 contrasts(pet_plusminus$A)
@@ -147,7 +147,7 @@ predict(pet_plusminus1_lm, newdata = list(cA = "1", cB = "1"))
 
 Note that a coefficient in a regression equation is the change in the response when the corresponding variable changes by +1. Special attention to the + and - needs to be taken with the R output. As A or B changes from its high level to its low level, the coded variable changes by 1 − (−1) = +2, so the change in the response from the min to the max is twice the regression coefficient.
 
-So the effects and interaction(s) from their minumum to their maximum correspond to  twice the values in the “Estimate” column. These regression coefficients are often called effects and interactions, even though they differ from the definitions used in the designs themeselves.
+So the effects and interaction(s) from their minimum to their maximum correspond to  twice the values in the “Estimate” column. These regression coefficients are often called effects and interactions, even though they differ from the definitions used in the designs themselves.
 
 #### Factors as +/- 1 numeric
 
@@ -163,7 +163,7 @@ predict(pet_num_lm, newdata = list(cA = 1, cB = 1))
 
 Finally the materials engineer coded the levels with +1/-1 but left the variables with type numeric. In this case she did not define any contrasts. Looking into the lm and prediction she confirms having obtained exactly the same outputs.
 
-As the inputs are coded as numeric this behaves just like the predictions with the first linear model studied in our book. Note that we feed the predictions function with numeric values. This is very intuitive as it corresponds to the original units of the experiments (also called natural or engineering units). On the other hand coding the design variables provides another advange: generally, the engineering units are not directly comparable while coded variables are very effective for determining the relative size of factor effects.
+As the inputs are coded as numeric this behaves just like the predictions with the first linear model studied in our book. Note that we feed the predictions function with numeric values. This is very intuitive as it corresponds to the original units of the experiments (also called natural or engineering units). On the other hand coding the design variables provides another advantage: generally, the engineering units are not directly comparable while coded variables are very effective for determining the relative size of factor effects.
 
 Coding the design factors has the benefit of enabling a direct comparison of the effect sizes and we can see that these three ways of coding the variable levels lead to equivalent results both in lm and prediction. Her preference goes to using numeric values as it is more intuitive and allows for easier prediction between the fixed levels. 
 
@@ -186,13 +186,13 @@ pet_num %>%
   scale_y_continuous(n.breaks = 10) +
   facet_wrap(vars(variable)) +
   labs(
-    title = "PET tensile strenght improvement DOE",
-    y = "Tensile strenght [MPa]",
+    title = "PET tensile strength improvement DOE",
+    y = "Tensile strength [MPa]",
     x = "Coded levels"
   )
 ```
 
-From the `lm()` summary she remembers that the intercept passes at 27.5 and she replorts now to putting the B factor at its maximum:
+From the `lm()` summary she remembers that the intercept passes at 27.5 and she reports now to putting the B factor at its maximum:
 
 ```{r}
 pet_num %>% 
@@ -212,8 +212,8 @@ pet_num %>%
   scale_y_continuous(n.breaks = 10) +
   facet_wrap(vars(variable)) +
   labs(
-    title = "PET tensile strenght improvement DOE",
-    y = "Tensile strenght [MPa]",
+    title = "PET tensile strength improvement DOE",
+    y = "Tensile strength [MPa]",
     x = "Coded levels"
   )
 ```
@@ -284,11 +284,11 @@ pet_effects %>%
     title = "Relative effects plot",
     subtitle = "Tensile strength variation for factor extremes",
     y = "Factor / Level",
-    x = "Tensile strenght variation"
+    x = "Tensile strength variation"
   )
 ```
 
-The plot is complementary to the previous analysis and helps us quickly grasp the the factor A (bi-axial orientation in production has a stronger effect 
+The plot is complementary to the previous analysis and helps us quickly grasp that the factor A (bi-axial orientation in production has a stronger effect 
 than the factor B (nucleating agent level).
 
 ### Adjusted R-squared {#adj_Rsquare}
@@ -297,7 +297,7 @@ than the factor B (nucleating agent level).
 
 <b class="highlight">Case study: lithium-ion battery charging time</b>
 
-The global transition to full electrical car is well underway and there's a global trend in legislating towards the end of fossil fuel cars. The challenge of authonomy has been brought to acceptable levels with the extensive deployment of electric charging stations but engineering teams still face complex problems such as the charging time. At a pioneering manufacturer another DOE is underway to get it optimized.
+The global transition to full electrical car is well underway and there's a global trend in legislating towards the end of fossil fuel cars. The challenge of autonomy has been brought to acceptable levels with the extensive deployment of electric charging stations but engineering teams still face complex problems such as the charging time. At a pioneering manufacturer another DOE is underway to get it optimized.
 
 ```{r echo=FALSE}
 knitr::include_graphics("img/electrical_car_bw.png")
@@ -314,7 +314,7 @@ battery_lm <- lm(
 summary(battery_lm)
 ```
 
-The R-squared was introduced in the linear models unit as a way to assess the quality of the model fit. A potential problem with this statistic is that it always increases as factors are added to the model, even if these factors are not significant. This can be overcomed by using the adjusted R-squared which is obtained by dividing the Sums of Squares by the degrees of freedom, and is adjusted for the size of the model, that is the number of factors. Both indicators are part of the `summary()` output of the `lm()` function applied on the `charging_time` dataset as we could just see in the previous chunk. Below we're comparing both indicators.
+The R-squared was introduced in the linear models unit as a way to assess the quality of the model fit. A potential problem with this statistic is that it always increases as factors are added to the model, even if these factors are not significant. This can be overcome by using the adjusted R-squared which is obtained by dividing the Sums of Squares by the degrees of freedom, and is adjusted for the size of the model, that is the number of factors. Both indicators are part of the `summary()` output of the `lm()` function applied on the `charging_time` dataset as we could just see in the previous chunk. Below we're comparing both indicators.
 
 A consulting company specialized in data science is supporting a global manufacturer of electrical car batteries to further optimize a <b class="highlight">lithium-ion battery charging time</b>. The latest DOE consisted of 3 input factors as follows:
 
@@ -366,7 +366,7 @@ cA <- natural2coded(nA, lA, hA)
 cA
 ```
 
-The consulting company proposed itself to provide a tool to predict the charging time for new batteries. They had been doing lots of the DOEs and based on the last one they've realised they believe to be in a position to calculate the response at a certainly specific level between the coded factor levels of $\pm$ 1. To do that they needed to convert natural values into coded values. They've given as an example a calculation of the charging time for a temperature of which the natural value is nA = 22 [°C] which is between the natural levels of lA = -10 and hA = 40 [°C]. This temperature coded corresponds to a value of `r cA` °C as presented in the previous chunk. To be noted that the opposite conversion would look like:
+The consulting company proposed itself to provide a tool to predict the charging time for new batteries. They had been doing lots of the DOEs and based on the last one they've realized they believe to be in a position to calculate the response at a certainly specific level between the coded factor levels of $\pm$ 1. To do that they needed to convert natural values into coded values. They've given as an example a calculation of the charging time for a temperature of which the natural value is nA = 22 [°C] which is between the natural levels of lA = -10 and hA = 40 [°C]. This temperature coded corresponds to a value of `r cA` °C as presented in the previous chunk. To be noted that the opposite conversion would look like:
 
 ```{r}
 coded2natural <- function(cA, lA, hA) {cA * ((hA - lA) / 2) + ((lA + hA)/2)} 
@@ -390,7 +390,7 @@ pA <- predict(battery_reduced_lm, battery_new)
 pA
 ```
 
-They've choosen to do this prediction for a fixed level of C of 1, corresponding to a completely new battery (maximum of the factor C at of 0 cycles) and the `predict()` function with those values and the reduced model. We can visualize the outcome as follows:
+They've chosen to do this prediction for a fixed level of C of 1, corresponding to a completely new battery (maximum of the factor C at of 0 cycles) and the `predict()` function with those values and the reduced model. We can visualize the outcome as follows:
 
 ```{r}
 battery_charging %>%
@@ -434,7 +434,7 @@ persp(
 )
 ```
 
-Here they went further introducing here response surface plots which is yet another way to visualize the experiment outputs as a function of the inputs. The've done this with the `persp()` function from the `{rsm}` package which provides an extremely fast rendering, easy parametrization and a readable output. To be noted that this function is an extension of the base R `persp()` consisting from the R point of view in an S3 method for the lm class. This allows to simply provide directly the lm object to the function to obtain the response surface.
+Here they went further introducing here response surface plots which is yet another way to visualize the experiment outputs as a function of the inputs. They've done this with the `persp()` function from the `{rsm}` package which provides an extremely fast rendering, easy parametrization and a readable output. To be noted that this function is an extension of the base R `persp()` consisting from the R point of view in an S3 method for the lm class. This allows to simply provide directly the lm object to the function to obtain the response surface.
 
 Due to the interaction between factors A and C the surface is bent. This is exactly what we observe in the interactions plots of which the one below corresponds to slicing the surface at the min and the max of Power:
 
@@ -452,7 +452,7 @@ interaction.plot(x.factor = battery_charging$C,
                  main = "Lithium-ion battery\ncharging time test")
 ```
 
-Just like in the surface plot we can see here in the interaction plot that the response of charging time on age is very different depending on the level of temperature. When temperature is at its max the charging time is almost independent of age but at the minumum of temperature the charging time depends a lot on the age. All this make a lot of sense to everyone involved but its good to confirm it with results and to get the details of how much these variations are numerically. As a reminder this is what is called an interaction between these two factors.
+Just like in the surface plot we can see here in the interaction plot that the response of charging time on age is very different depending on the level of temperature. When temperature is at its max the charging time is almost independent of age but at the minimum of temperature the charging time depends a lot on the age. All this make a lot of sense to everyone involved but its good to confirm it with results and to get the details of how much these variations are numerically. As a reminder this is what is called an interaction between these two factors.
 
 ### Single replicate {#single_replicate}
 
@@ -463,7 +463,7 @@ battery_sr_lm <- lm(
 summary(battery_sr_lm)
 ```
 
-In the R&D offices of the manufacturer of electrical car batteries there is some satisfaction with the report delivered by the data science consulting company. Although initially skeptical the head of battery engineering has finally acknowledged that there are several benefits coming from this work. Now, he makes a last moment request: he would like to know by thursday (after tomorrow) what is the effect of the terminals material. In his view this will for sure have a high impact on the final delivered cost of the assembled battery. Unfortunately data on terminals material was only captured in the 2nd replicate. We can check that in the original data for example in first two and last two rows. The variable coded as D is missing in the begining:
+In the R&D offices of the manufacturer of electrical car batteries there is some satisfaction with the report delivered by the data science consulting company. Although initially skeptical the head of battery engineering has finally acknowledged that there are several benefits coming from this work. Now, he makes a last moment request: he would like to know by Thursday (after tomorrow) what is the effect of the terminals material. In his view this will for sure have a high impact on the final delivered cost of the assembled battery. Unfortunately data on terminals material was only captured in the 2nd replicate. We can check that in the original data for example in first two and last two rows. The variable coded as D is missing in the beginning:
 
 ```{r}
 battery_charging[c(1,2,31:32),]
@@ -552,6 +552,6 @@ plot(battery_red_lm, which = 4)
 dev.off() 
 ```
 
-In any case from the linear model coefficients we can already see that the selection of terminal material has a significative effect which is of about 60% of the effect of the temperature (1'050/1'763).
+In any case from the linear model coefficients we can already see that the selection of terminal material has a significant effect which is of about 60% of the effect of the temperature (1'050/1'763).
 
 

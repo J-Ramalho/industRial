@@ -23,7 +23,7 @@ The Quality Assurance Head has acquired a fast dry matter content measurement de
 
 A first step after a measurement equipment acquisition is the assessment of the response over the entire measurement range. In particular it is important to verify its linearity and variability and determine the average bias throughout the measurement range. 
 
-In a <b class="highlight">juice production plant</b> the dry matter content for the top seller is around 13% dry matter content. Typical specifications are the Premium fresh apple juice with 12.4 % and the Austrian beetroot juice with 13.2%. Some other specialties may have a higher content up such as the Organic carrot that has 16.3%. After consulting with the Manufacturing Team Leader, the Quality Assurance Head selects checking the equipment in the range of 10 to 20% dry matter content. For the calibration assessment samples are produced at target values set at round numbers (10%, 15% and so on). This data is captured in the `juice_drymatter` dataset of which we're checki
+In a <b class="highlight">juice production plant</b> the dry matter content for the top seller is around 13% dry matter content. Typical specifications are the Premium fresh apple juice with 12.4 % and the Austrian beetroot juice with 13.2%. Some other specialties may have a higher content up such as the Organic carrot that has 16.3%. After consulting with the Manufacturing Team Leader, the Quality Assurance Head selects checking the equipment in the range of 10 to 20% dry matter content. For the calibration assessment samples are produced at target values set at round numbers (10%, 15% and so on). This data is captured in the `juice_drymatter` dataset of which we're checking
 
 
 ```r
@@ -101,7 +101,7 @@ juice_drymatter %>%
 
 <img src="4_msa_files/figure-html/fig-juicebiasplot-1.png" width="100%" style="display: block; margin: auto;" />
 
-This type of plot is usually called *bias plot* and provides a view of how the difference between the measurements obtained with the new device and the reference device compare allong the measuremen range. In the plot generated an additional regression line has been introduced with `geom_smooth` from `{ggplot2}`. There are several ways to assess the linearity. In this case we're going to remain at a visual check only leaving to the Design of Experiments case study a more thourough verification.
+This type of plot is usually called *bias plot* and provides a view of how the difference between the measurements obtained with the new device and the reference device compare along the measurement range. In the plot generated an additional regression line has been introduced with `geom_smooth` from `{ggplot2}`. There are several ways to assess the linearity. In this case we're going to remain at a visual check only leaving to the Design of Experiments case study a more thorough verification.
 
 The linear model appears as well adapted in this case. The first check is the observation that regression line passes close to the averages of each level of the dry matter factor. Nevertheless the slope is rather steep showing a clear increase of the bias (in the negative direction) with the increase in dry matter content.
 
@@ -150,7 +150,7 @@ Modern pharmaceutical tablet presses reach output volumes of up to 1,700,000 tab
 
 </div>
 
-Pharmaceutical production setups combine extreme high volumes with stringent quality demands. In this context many manufacturing plants have inline automatic measurement devices providing automatic data collection to a central database but it is not uncommon to see hand held devices and manual log of measurements in spreadsheets. In an age of machine learning and sophisticated predictive tools this may seem awkward but it is common to see coexisting old and new approaches on the shop floor. A recurring check of measurement devices is the famous gage r&R. r&R stands for reproducibility and Reproductibility which combined give the instrument precision, according to the ISO 5725. In any case automatic or manual the way to assess the measuremen device should follow the same approach.
+Pharmaceutical production setups combine extreme high volumes with stringent quality demands. In this context many manufacturing plants have inline automatic measurement devices providing automatic data collection to a central database but it is not uncommon to see hand held devices and manual log of measurements in spreadsheets. In an age of machine learning and sophisticated predictive tools this may seem awkward but it is common to see coexisting old and new approaches on the shop floor. A recurring check of measurement devices is the famous gage r&R. r&R stands for reproducibility and Reproductibility which combined give the instrument precision, according to the ISO 5725. In any case automatic or manual the way to assess the measurement device should follow the same approach.
 
 In our case we're looking into a pharmaceutical company where a <b class="highlight">tablet compaction process</b> the quality measurement system requires the Production Operator to sample tablets on a regular basis and log the thickness in a spreadsheet on the line. Measurements are done with a micrometer build and acquired specifically for this purpose that has a fixture developed to fit the shape of the tablet. 
 
@@ -367,7 +367,7 @@ plot(tablet_L_rr_plots$plot3)
 
 <img src="4_msa_files/figure-html/fig-tabletPlot2-2.png" width="100%" />
 
-We quickly see the measurements tend to be simetrically distributed around their means and that the means between the different operators are very similar. This confirms the low reproducibility what has been seen in the Variance Components. 
+We quickly see the measurements tend to be symmetrically distributed around their means and that the means between the different operators are very similar. This confirms the low reproducibility what has been seen in the Variance Components. 
 
 
 ```r
@@ -392,7 +392,7 @@ When the gage report was shared with the Production Leader and the Engineering M
 
 We've started the gage assessment by setting the `errorTerm` to 1. This made that factors that were non significant remained visible, in our case this happened with the tablet:operator interaction. Although the `ss.rr` function is always showing zero for non significant factors it may happen that in reality the calculated value is negative.
 
-We refer to page 557 @Montgomery2012 to get guidance on how to adresses this case:
+We refer to page 557 @Montgomery2012 to get guidance on how to address this case:
 
 *note that the P-value for the interaction term [...] is very large, take this as evidence that it really is zero and that there is no interaction effect, and then fit a reduced model of the form that does not include the interaction term. This is a relatively easy approach and one that often works nearly as well as more sophisticated methods.*
 
@@ -462,7 +462,7 @@ Further developments on the gage r&R in the excellent book from Springer by the 
 
 ### Custom functions
 
-The original report generated by the `ss.rr`function has the inconvenient of being generated as a single plot. Another inconvenient is that there is no option in the function to suppress it in case we just want to look at the data output. To present the individual plots presented in this unit the original function code has had to be modified. This possibility to reuse and modify the code from other authors is one of the great benefits of R. This is possible because are is distributed under a license from the Free Software Foundation. Licenses are long are difficult to read but by simply typing ` RShowDoc("GPL-3")` we can already read in the first few lines *you can change the software or use pieces of it in new free programs*. The `{SixSigma}` package itself is also under the same license:
+The original report generated by the `ss.rr`function has the inconvenient of being generated as a single plot. Another inconvenient is that there is no option in the function to suppress it in case we just want to look at the data output. To obtain the individual plots presented in this unit the original function code has had to be modified. This possibility to reuse and modify the code from other authors is one of the great benefits of R. This is possible because packages are is distributed under a license from the Free Software Foundation. Licenses are long are difficult to read but by simply typing ` RShowDoc("GPL-3")` we can already read in the first few lines *you can change the software or use pieces of it in new free programs*. The `{SixSigma}` package itself is also under the same license:
 
 
 ```r
@@ -474,11 +474,11 @@ SixSigmaDescription$License
 [1] "GPL (>= 2)"
 ```
 
-This being all cleared out the `ss.rr` function code can the be obtained in RStudio by selecting the package environment in the environment pane and looking for the function. A more direct approach is by simply typing `ss.rr` on the console. The full code is then revealed and can be copied and modified. For the `{industRial}` package we've copied the code in a new function which we called `ss.rr.plots` that generates as output a list of plots. Each plot can now be plotted individually.
+Now that this is all clarified the `ss.rr` function code can the be obtained in RStudio by selecting the package environment in the environment pane and looking for the function. A more direct approach is by simply typing `ss.rr` on the console. The full code is then revealed and can be copied and modified. For the `{industRial}` package we've copied the code in a new function which we called `ss.rr.plots` that generates as output a list of plots. Each plot can now be plotted individually.
 
 ## Uncertainty {#uncertainty}
 
-In the Pharmaceutical company described in this case study, the final formal Measurement System Analysis reports are issued with a statement on uncertainty. This is a way to combine this various intermediate assessments described before and to communicate the result in a format that can be interpreted by the persons who read measurement results such as Product Development scientists and the R&D management. Different companies adopt more or less sophisticated norms which provide a detailed way of calculating the combined uncertainty that comes from the different assessments performed. In this case study we're presenting a simple summation in quadrature equivalento to the one described by @Bell2001 page 14:
+In the Pharmaceutical company described in this case study, the final formal Measurement System Analysis reports are issued with a statement on uncertainty. This is a way to combine this various intermediate assessments described before and to communicate the result in a format that can be interpreted by the persons who read measurement results such as Product Development scientists and the R&D management. Different companies adopt more or less sophisticated norms which provide a detailed way of calculating the combined uncertainty that comes from the different assessments performed. In this case study we're presenting a simple summation in quadrature equivalent to the one described by @Bell2001 page 14:
 
 $$
 u=\sqrt{u_{man.}^2 + u_{cal.}^2 + u_{repeat.}^2+ u_{reprod.}^2}

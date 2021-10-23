@@ -19,7 +19,7 @@ Pharmaceutical plastic injection is always a large scale manufacturing process w
 
 There are many types of control charts and in this case study we're demonstrating the xbar and R charts. These two charts are often used together and are suited to the control the mean and the variability of a continuous variable. This case study draws on examples from @Bass2007 and from the `{qcc}` package vignette.
 
-PH-parts is a <b class="highligh">plastic injection company</b> specialized in high precision pharmaceutical Parts. In their catalog they have a mid-range product that sells in extremely high volumes: vaccination syringes. The inner diameter of the barrel has been identified in failure mode analysis as a critical dimension for the security of the operation. Following the implementation of a statistical process control (SPC) the production operators monitor the production process using xbar and R-charts. The protocol requires 6 samples are taken on an hourly basis and diameters simply typed in an excel file in a laptop by the injection press. A recent excel file with samples taken over a period of 25 hours of production has been loaded in R with the name `syringe_diameter` by the Quality Assistant of the lab.
+PH-parts is a <b class="highlight">plastic injection company</b> specialized in high precision pharmaceutical Parts. In their catalog they have a mid-range product that sells in extremely high volumes: vaccination syringes. The inner diameter of the barrel has been identified in failure mode analysis as a critical dimension for the security of the operation. Following the implementation of a statistical process control (SPC) the production operators monitor the production process using xbar and R-charts. The protocol requires 6 samples are taken on an hourly basis and diameters simply typed in an excel file in a laptop by the injection press. A recent excel file with samples taken over a period of 25 hours of production has been loaded in R with the name `syringe_diameter` by the Quality Assistant of the lab.
 
 
 ```r
@@ -67,7 +67,7 @@ syringe_xbar <- qcc(
   )
 ```
 
-In the previous chink we've loaded the `{qcc}` package that has the required quality control tools and created a new variable data but before we plot the chart lets look a bit in detail in the calculations done in the background. A first step is to read the begining of the `qcc()` help file typing ?qcc in the console. It says "Create an object of class 'qcc' to perform statistical process control' (in R technical terms function is a helper that generates an S3 R object). The key point here is that this means we can inspect the calculations separately from the plot itself. We can start by confirming the class and the type of the qcc object:
+In the previous chink we've loaded the `{qcc}` package that has the required quality control tools and created a new variable data but before we plot the chart lets look a bit in detail in the calculations done in the background. A first step is to read the beginning of the `qcc()` help file typing ?qcc in the console. It says "Create an object of class 'qcc' to perform statistical process control' (in R technical terms function is a helper that generates an S3 R object). The key point here is that this means we can inspect the calculations separately from the plot itself. We can start by confirming the class and the type of the qcc object:
 
 
 ```r
@@ -263,7 +263,7 @@ In our case study something has gone severely off track. The barrel diameter was
 
 ## Cpk charts
 
-In order to optimize the manufacturing process, the manufacturing engeering expert is going to assess the capability of the syringe injection diameter. Such details are not straight forward to modify. Should he request a change of some injection mold parts? Or play with process temperatures? Before moving to a process DOE he needs first to understand where he stands. We're going to go more in depth in the study of the manufacturing process and make a comparison between the product specifications and the process variability. We're looking for opportunities to tighten the product specifications. Tightening a product specification without increasing the cost of a manufacturing cost can be a very good source of competitive advantage. The way we are going to do this is by constructing an histogram and a density distribution of this process.
+In order to optimize the manufacturing process, the manufacturing engineering expert is going to assess the capability of the syringe injection diameter. Such details are not straight forward to modify. Should he request a change of some injection mold parts? Or play with process temperatures? Before moving to a process DOE he needs first to understand where he stands. We're going to go more in depth in the study of the manufacturing process and make a comparison between the product specifications and the process variability. We're looking for opportunities to tighten the product specifications. Tightening a product specification without increasing the cost of a manufacturing cost can be a very good source of competitive advantage. The way we are going to do this is by constructing an histogram and a density distribution of this process.
 
 ### Off spec {#off_spec}
 
@@ -508,7 +508,7 @@ tablet_weight %>%
 |    1002|                 0.9|      0.91444|
 |    1003|                 0.9|      0.90111|
 
-We're now going to use the function `process_stats()` to calculate several statistical data for this dataset. This function returs a high number of outputs is large as we can see below:
+We're now going to use the function `process_stats()` to calculate several statistical data for this dataset. This function returns a high number of outputs is large as we can see below:
 
 
 ```r
@@ -570,12 +570,12 @@ process_stats_table(weight_statistics_data)
 ```
 
 ```{=html}
-<div id="jntxwastnm" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="jiwsvkghsy" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>html {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
 }
 
-#jntxwastnm .gt_table {
+#jiwsvkghsy .gt_table {
   display: table;
   border-collapse: collapse;
   margin-left: auto;
@@ -600,7 +600,7 @@ process_stats_table(weight_statistics_data)
   border-left-color: #D3D3D3;
 }
 
-#jntxwastnm .gt_heading {
+#jiwsvkghsy .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -612,7 +612,7 @@ process_stats_table(weight_statistics_data)
   border-right-color: #D3D3D3;
 }
 
-#jntxwastnm .gt_title {
+#jiwsvkghsy .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -622,7 +622,7 @@ process_stats_table(weight_statistics_data)
   border-bottom-width: 0;
 }
 
-#jntxwastnm .gt_subtitle {
+#jiwsvkghsy .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -632,13 +632,13 @@ process_stats_table(weight_statistics_data)
   border-top-width: 0;
 }
 
-#jntxwastnm .gt_bottom_border {
+#jiwsvkghsy .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#jntxwastnm .gt_col_headings {
+#jiwsvkghsy .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -653,7 +653,7 @@ process_stats_table(weight_statistics_data)
   border-right-color: #D3D3D3;
 }
 
-#jntxwastnm .gt_col_heading {
+#jiwsvkghsy .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -673,7 +673,7 @@ process_stats_table(weight_statistics_data)
   overflow-x: hidden;
 }
 
-#jntxwastnm .gt_column_spanner_outer {
+#jiwsvkghsy .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -685,15 +685,15 @@ process_stats_table(weight_statistics_data)
   padding-right: 4px;
 }
 
-#jntxwastnm .gt_column_spanner_outer:first-child {
+#jiwsvkghsy .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#jntxwastnm .gt_column_spanner_outer:last-child {
+#jiwsvkghsy .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#jntxwastnm .gt_column_spanner {
+#jiwsvkghsy .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -705,7 +705,7 @@ process_stats_table(weight_statistics_data)
   width: 100%;
 }
 
-#jntxwastnm .gt_group_heading {
+#jiwsvkghsy .gt_group_heading {
   padding: 8px;
   color: #333333;
   background-color: #FFFFFF;
@@ -727,7 +727,7 @@ process_stats_table(weight_statistics_data)
   vertical-align: middle;
 }
 
-#jntxwastnm .gt_empty_group_heading {
+#jiwsvkghsy .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -742,15 +742,15 @@ process_stats_table(weight_statistics_data)
   vertical-align: middle;
 }
 
-#jntxwastnm .gt_from_md > :first-child {
+#jiwsvkghsy .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#jntxwastnm .gt_from_md > :last-child {
+#jiwsvkghsy .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#jntxwastnm .gt_row {
+#jiwsvkghsy .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -769,7 +769,7 @@ process_stats_table(weight_statistics_data)
   overflow-x: hidden;
 }
 
-#jntxwastnm .gt_stub {
+#jiwsvkghsy .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -781,7 +781,7 @@ process_stats_table(weight_statistics_data)
   padding-left: 12px;
 }
 
-#jntxwastnm .gt_summary_row {
+#jiwsvkghsy .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -791,7 +791,7 @@ process_stats_table(weight_statistics_data)
   padding-right: 5px;
 }
 
-#jntxwastnm .gt_first_summary_row {
+#jiwsvkghsy .gt_first_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -801,7 +801,7 @@ process_stats_table(weight_statistics_data)
   border-top-color: #D3D3D3;
 }
 
-#jntxwastnm .gt_grand_summary_row {
+#jiwsvkghsy .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -811,7 +811,7 @@ process_stats_table(weight_statistics_data)
   padding-right: 5px;
 }
 
-#jntxwastnm .gt_first_grand_summary_row {
+#jiwsvkghsy .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -821,11 +821,11 @@ process_stats_table(weight_statistics_data)
   border-top-color: #D3D3D3;
 }
 
-#jntxwastnm .gt_striped {
+#jiwsvkghsy .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#jntxwastnm .gt_table_body {
+#jiwsvkghsy .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -834,7 +834,7 @@ process_stats_table(weight_statistics_data)
   border-bottom-color: #D3D3D3;
 }
 
-#jntxwastnm .gt_footnotes {
+#jiwsvkghsy .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -848,13 +848,13 @@ process_stats_table(weight_statistics_data)
   border-right-color: #D3D3D3;
 }
 
-#jntxwastnm .gt_footnote {
+#jiwsvkghsy .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding: 4px;
 }
 
-#jntxwastnm .gt_sourcenotes {
+#jiwsvkghsy .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -868,41 +868,41 @@ process_stats_table(weight_statistics_data)
   border-right-color: #D3D3D3;
 }
 
-#jntxwastnm .gt_sourcenote {
+#jiwsvkghsy .gt_sourcenote {
   font-size: 90%;
   padding: 4px;
 }
 
-#jntxwastnm .gt_left {
+#jiwsvkghsy .gt_left {
   text-align: left;
 }
 
-#jntxwastnm .gt_center {
+#jiwsvkghsy .gt_center {
   text-align: center;
 }
 
-#jntxwastnm .gt_right {
+#jiwsvkghsy .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#jntxwastnm .gt_font_normal {
+#jiwsvkghsy .gt_font_normal {
   font-weight: normal;
 }
 
-#jntxwastnm .gt_font_bold {
+#jiwsvkghsy .gt_font_bold {
   font-weight: bold;
 }
 
-#jntxwastnm .gt_font_italic {
+#jiwsvkghsy .gt_font_italic {
   font-style: italic;
 }
 
-#jntxwastnm .gt_super {
+#jiwsvkghsy .gt_super {
   font-size: 65%;
 }
 
-#jntxwastnm .gt_footnote_marks {
+#jiwsvkghsy .gt_footnote_marks {
   font-style: italic;
   font-weight: normal;
   font-size: 65%;

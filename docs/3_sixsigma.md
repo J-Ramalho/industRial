@@ -321,7 +321,7 @@ perfum_tbl_graph
 #
 # An undirected simple graph with 7 components
 #
-# Edge Data: 85 x 3 (active)
+# Edge Data: 85 × 3 (active)
    from    to weight
   <int> <int>  <dbl>
 1     1     2    1  
@@ -332,7 +332,7 @@ perfum_tbl_graph
 6     1     8    0.8
 # … with 79 more rows
 #
-# Node Data: 22 x 1
+# Node Data: 22 × 1
   name 
   <chr>
 1 pw   

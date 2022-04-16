@@ -573,7 +573,7 @@ glance(battery_lm)[1:2] %>%
 ```
 
 ```
-# A tibble: 2 x 3
+# A tibble: 2 × 3
   model r.squared adj.r.squared
   <chr>     <dbl>         <dbl>
 1 1         0.540         0.405
@@ -765,7 +765,7 @@ battery_charging[c(1,2,31:32),]
 ```
 
 ```
-# A tibble: 4 x 6
+# A tibble: 4 × 6
       A     B     C     D Replicate charging_time
   <dbl> <dbl> <dbl> <dbl>     <dbl>         <dbl>
 1    -1    -1    -1    -1        NA          3.5 

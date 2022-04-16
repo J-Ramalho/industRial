@@ -22,15 +22,15 @@ devtools::session_info()[[1]]
 
 ```
 ##  setting  value                       
-##  version  R version 4.1.1 (2021-08-10)
-##  os       Ubuntu 20.04.3 LTS          
+##  version  R version 4.1.3 (2022-03-10)
+##  os       Ubuntu 20.04.4 LTS          
 ##  system   x86_64, linux-gnu           
 ##  ui       X11                         
 ##  language (EN)                        
 ##  collate  en_US.UTF-8                 
 ##  ctype    en_US.UTF-8                 
 ##  tz       Europe/Zurich               
-##  date     2021-10-23
+##  date     2022-04-16
 ```
 
 **Disclaimer**

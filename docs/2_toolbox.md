@@ -57,21 +57,21 @@ The column *Download* precises if a package is downloaded automatically when the
 |:--------|:----------|:----------------|:-------|:---------------------------------------------|
 |imports  |viridis    |colors           |0.6.1   |R (>= 2.10), viridisLite (>= 0.4.0)           |
 |imports  |readr      |data loading     |1.4.0   |R (>= 3.1)                                    |
-|imports  |dplyr      |data wrangling   |1.0.6   |R (>= 3.3.0)                                  |
+|imports  |dplyr      |data wrangling   |1.0.7   |R (>= 3.3.0)                                  |
 |imports  |forcats    |data wrangling   |0.5.1   |R (>= 3.2)                                    |
 |imports  |janitor    |data wrangling   |2.1.0   |R (>= 3.1.2)                                  |
 |imports  |magrittr   |data wrangling   |2.0.1   |NA                                            |
-|imports  |tibble     |data wrangling   |3.1.2   |R (>= 3.1.0)                                  |
-|imports  |tidyr      |data wrangling   |1.1.3   |R (>= 3.1)                                    |
+|imports  |tibble     |data wrangling   |3.1.5   |R (>= 3.1.0)                                  |
+|imports  |tidyr      |data wrangling   |1.1.4   |R (>= 3.1)                                    |
 |imports  |purrr      |data wrangling   |0.3.4   |R (>= 3.2)                                    |
 |imports  |glue       |data wrangling   |1.4.2   |R (>= 3.2)                                    |
 |imports  |stringr    |data wrangling   |1.4.0   |R (>= 3.1)                                    |
 |imports  |patchwork  |plotting         |1.1.1   |NA                                            |
-|imports  |ggplot2    |plotting         |3.3.3   |R (>= 3.2)                                    |
+|imports  |ggplot2    |plotting         |3.3.5   |R (>= 3.3)                                    |
 |imports  |scales     |plotting         |1.1.1   |R (>= 3.2)                                    |
 |imports  |ggtext     |plotting         |0.1.1   |R (>= 3.5)                                    |
-|imports  |broom      |statistics       |0.7.6   |R (>= 3.1)                                    |
-|imports  |stats      |statistics       |4.1.1   |NA                                            |
+|imports  |broom      |statistics       |0.7.9   |R (>= 3.1)                                    |
+|imports  |stats      |statistics       |4.1.3   |NA                                            |
 |imports  |skimr      |statistics       |2.1.3   |R (>= 3.1.2)                                  |
 |suggests |qicharts2  |industrial stats |0.7.1   |R (>= 3.0.0)                                  |
 |suggests |qcc        |industrial stats |2.7     |R (>= 3.0)                                    |
